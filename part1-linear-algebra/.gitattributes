@@ -1,0 +1,28 @@
+# 텍스트 파일은 자동 감지, 저장소엔 LF로 정규화 (체크아웃 시 OS에 맞게 변환)
+* text=auto
+
+# 명시적으로 LF 강제 (스크립트·설정·소스)
+*.ts    text eol=lf
+*.js    text eol=lf
+*.vue   text eol=lf
+*.json  text eol=lf
+*.css   text eol=lf
+*.html  text eol=lf
+*.md    text eol=lf
+*.py    text eol=lf
+*.ipynb text eol=lf
+*.txt   text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+
+# 바이너리 (변환 금지)
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.svg   binary
+*.ico   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.pdf   binary

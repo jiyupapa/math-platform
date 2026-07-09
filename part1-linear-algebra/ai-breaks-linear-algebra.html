@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>당신의 AI가 멍청해지는 5가지 순간</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14161c; --card:#1d2129; --edge:rgba(255,255,255,.07);
+    --text:#e8eaf0; --muted:#8b93a3;
+    --sym:#ff6f61;   /* 증상 */
+    --cause:#f5b53d; /* 선형대수 원인 */
+    --fix:#45d6b0;   /* 알아채는 법 */
+    --acc:#7aa7ff;   /* 중립 강조 */
+    --disp:'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+    --mono:'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+    --ko: ui-sans-serif, system-ui, 'Apple SD Gothic Neo', 'Pretendard', 'Malgun Gothic', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:radial-gradient(140% 90% at 50% -10%, #1d2330 0%, var(--bg) 55%);
+    color:var(--text); font-family:var(--ko); line-height:1.6;
+    -webkit-font-smoothing:antialiased; padding:0 20px 80px;
+  }
+  .wrap{max-width:840px; margin:0 auto;}
+
+  /* hero */
+  header{padding:64px 0 40px; border-bottom:1px solid var(--edge);}
+  .eyebrow{font-family:var(--mono); font-size:12px; letter-spacing:.24em;
+    color:var(--cause); text-transform:uppercase; margin-bottom:18px;}
+  h1{font-family:var(--ko); font-weight:800; font-size:clamp(30px,5.2vw,46px);
+    line-height:1.12; letter-spacing:-.02em;}
+  h1 .hl{color:var(--sym);}
+  .lede{color:var(--muted); font-size:clamp(15px,2.4vw,17px); margin-top:18px; max-width:620px;}
+  .lede b{color:var(--text); font-weight:600;}
+
+  /* card */
+  .card{background:var(--card); border:1px solid var(--edge); border-radius:18px;
+    padding:30px clamp(20px,4vw,38px); margin-top:26px; position:relative; overflow:hidden;}
+  .card::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px;
+    background:linear-gradient(var(--cause), transparent);}
+  .cardhead{display:flex; align-items:baseline; gap:14px; margin-bottom:6px;}
+  .num{font-family:var(--mono); font-size:13px; font-weight:600; color:var(--cause);
+    border:1px solid var(--cause); border-radius:7px; padding:2px 8px; flex-shrink:0;}
+  .ctitle{font-family:var(--ko); font-weight:700; font-size:clamp(19px,3.2vw,24px); letter-spacing:-.01em;}
+
+  .block{margin-top:20px;}
+  .tag{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+    display:inline-block; margin-bottom:8px;}
+  .tag.s{color:var(--sym);} .tag.c{color:var(--cause);} .tag.f{color:var(--fix);}
+
+  .console{font-family:var(--mono); font-size:13px; line-height:1.7; color:#cfd6e2;
+    background:#0f1115; border:1px solid var(--edge); border-left:3px solid var(--sym);
+    border-radius:10px; padding:13px 15px; overflow-x:auto; white-space:pre-wrap;}
+  .console .red{color:var(--sym);} .console .dim{color:var(--muted);}
+
+  .block p{font-size:15.5px;} .block p + p{margin-top:10px;}
+  .block b{color:var(--text); font-weight:600;}
+  .cause-txt b{color:var(--cause);}
+  .fix-txt b{color:var(--fix);}
+
+  .fig{margin:16px 0 4px; background:#0f1115; border:1px solid var(--edge);
+    border-radius:12px; padding:18px;}
+  .fig svg{display:block; width:100%; height:auto;}
+  .figcap{font-family:var(--mono); font-size:11.5px; color:var(--muted); margin-top:10px; text-align:center;}
+
+  /* interactive */
+  .ctrls{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:14px;}
+  .seg{display:inline-flex; border:1px solid var(--edge); border-radius:9px; overflow:hidden;}
+  .seg button{font-family:var(--mono); font-size:12.5px; font-weight:600; color:var(--muted);
+    background:transparent; border:none; padding:8px 14px; cursor:pointer; transition:.15s;}
+  .seg button.on{background:rgba(122,167,255,.16); color:var(--acc);}
+  .slabel{font-family:var(--mono); font-size:12px; color:var(--muted); display:flex; align-items:center; gap:10px; flex:1; min-width:200px;}
+  input[type=range]{-webkit-appearance:none; appearance:none; flex:1; height:4px; border-radius:99px;
+    background:linear-gradient(90deg,var(--acc) 0%,var(--acc) var(--p,50%),rgba(255,255,255,.14) var(--p,50%));}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; width:16px; height:16px; border-radius:50%;
+    background:#fff; border:2px solid var(--acc); cursor:pointer;}
+  input[type=range]::-moz-range-thumb{width:16px; height:16px; border-radius:50%; background:#fff; border:2px solid var(--acc); cursor:pointer;}
+  .scoreboard{display:flex; gap:12px; flex-wrap:wrap; margin-top:14px;}
+  .score{flex:1; min-width:150px; background:#0f1115; border:1px solid var(--edge); border-radius:11px; padding:13px 15px;}
+  .score .nm{font-size:13px; color:var(--muted); display:flex; justify-content:space-between; align-items:center;}
+  .score .vl{font-family:var(--mono); font-size:24px; font-weight:600; margin-top:4px;}
+  .badge{font-family:var(--mono); font-size:10px; font-weight:600; padding:2px 7px; border-radius:6px;
+    background:var(--fix); color:#0f1115; letter-spacing:.05em;}
+
+  /* closing */
+  .closing{margin-top:46px; padding-top:40px; border-top:1px solid var(--edge);}
+  .closing h2{font-size:clamp(22px,4vw,30px); font-weight:800; letter-spacing:-.02em; line-height:1.2;}
+  .closing h2 .hl{color:var(--fix);}
+  .quote{border-left:3px solid var(--acc); padding:6px 0 6px 18px; margin:22px 0; font-size:16px; color:#d7dce6;}
+  .closing p{color:var(--muted); font-size:15.5px; margin-top:14px;}
+  .closing p b{color:var(--text); font-weight:600;}
+
+  /* inline "왜?" link inside 알아채는 법 */
+  a.more{color:var(--fix); font-family:var(--mono); font-size:13px; text-decoration:none;
+    border-bottom:1px solid rgba(69,214,176,.45); white-space:nowrap; padding-bottom:1px;}
+  a.more:hover{border-bottom-color:var(--fix);}
+
+  /* deep-dive appendix */
+  .deepdive{margin-top:50px; padding-top:42px; border-top:1px solid var(--edge); scroll-margin-top:24px;}
+  .ddhead{display:flex; align-items:center; gap:13px; flex-wrap:wrap; margin-bottom:6px;}
+  .ddnum{font-family:var(--mono); font-size:11px; font-weight:600; color:var(--fix);
+    border:1px solid var(--fix); border-radius:7px; padding:3px 9px; letter-spacing:.1em; text-transform:uppercase;}
+  .deepdive h2{font-size:clamp(21px,3.8vw,29px); font-weight:800; letter-spacing:-.02em; line-height:1.2; width:100%;}
+  .deepdive h2 .hl{color:var(--fix);}
+  .ddlede{color:var(--muted); font-size:15.5px; margin-top:14px; max-width:640px;}
+  .ddsec{margin-top:32px;}
+  .ddsec h3{font-size:17.5px; font-weight:700; color:var(--text); line-height:1.35;
+    display:flex; gap:10px; align-items:baseline;}
+  .ddsec h3 .qn{font-family:var(--mono); color:var(--fix); font-size:15px; flex-shrink:0;}
+  .ddsec p{font-size:15.5px; color:#cfd4de; margin-top:13px;}
+  .ddsec p + p{margin-top:11px;}
+  .ddsec p b{color:var(--text); font-weight:600;}
+  .ddsec p .g{color:var(--fix); font-weight:600;}
+  .formula{font-family:var(--mono); font-size:14px; color:#e8eaf0; background:#0f1115;
+    border:1px solid var(--edge); border-left:3px solid var(--fix); border-radius:10px;
+    padding:15px 17px; margin:15px 0; overflow-x:auto; white-space:pre-wrap; line-height:1.95;}
+  .formula .dim{color:var(--muted);}
+  .formula .hot{color:var(--fix); font-weight:600;}
+  .ddnote{border-left:3px solid var(--acc); padding:8px 0 8px 18px; margin-top:18px;
+    font-size:15px; color:#d7dce6;}
+  .ddnote b{color:var(--text); font-weight:600;}
+  .backlink{display:inline-block; margin-top:34px; font-family:var(--mono); font-size:13px;
+    color:var(--acc); text-decoration:none; border:1px solid var(--edge); border-radius:8px; padding:8px 15px;}
+  .backlink:hover{background:rgba(122,167,255,.12);}
+
+  a.skip{position:absolute; left:-999px;}
+  button:focus-visible, input:focus-visible{outline:2px solid var(--acc); outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">바이브코딩 동호회 · 0회차 도입</div>
+    <h1>당신이 만든 AI가<br><span class="hl">멍청해지는</span> 5가지 순간</h1>
+    <p class="lede">코드는 분명 돌아가는데 결과가 이상할 때 — 그 안에는 거의 항상 <b>벡터와 행렬</b> 이야기가 숨어 있습니다. 계산은 못 해도 됩니다. <b>무슨 일이 벌어지는지 그림으로만</b> 잡으면, 한나절 헤맬 일이 5분에 끝나요.</p>
+  </header>
+
+  <!-- ───────────── CARD 01 (interactive) ───────────── -->
+  <section class="card" id="card01" style="scroll-margin-top:24px;">
+    <div class="cardhead"><span class="num">01</span>
+      <span class="ctitle">RAG가 엉뚱한 문서를 물어온다</span></div>
+
+    <div class="block">
+      <span class="tag s">증상</span>
+      <div class="console"><span class="dim">질문</span>  "환경영향평가 협의 절차"
+<span class="dim">검색결과 1위</span>  <span class="red">사내_점심메뉴_공지.pdf</span>  (score 0.91)</div>
+    </div>
+
+    <div class="block">
+      <span class="tag c">무슨 일 / 선형대수 원인</span>
+      <p class="cause-txt">검색은 "질문 벡터와 문서 벡터가 <b>얼마나 같은 방향인가</b>"로 순위를 매깁니다. 그런데 점수를 <b>내적(dot product)</b>으로 재면, 방향이 비슷한 정도뿐 아니라 <b>벡터의 길이</b>까지 점수에 섞여요. 길고 장황한 문서가 방향이 좀 어긋나도 점수를 가로채는 거죠.</p>
+      <p>아래에서 직접 확인해보세요. <b>점수 기준</b>을 바꾸고, 무관한 긴 문서(B)의 길이를 늘려보면 됩니다.</p>
+    </div>
+
+    <div class="fig">
+      <svg id="simSvg" viewBox="0 0 480 240" aria-label="질문 벡터와 두 문서 벡터의 유사도 비교">
+        <!-- grid -->
+        <g stroke="rgba(255,255,255,.06)">
+          <line x1="40" y1="40" x2="40" y2="210"/><line x1="40" y1="210" x2="440" y2="210"/>
+        </g>
+        <!-- vectors drawn by JS -->
+        <g id="simVecs"></g>
+      </svg>
+      <div class="ctrls">
+        <div class="seg" role="group" aria-label="점수 기준">
+          <button id="btnDot" class="on">내적 점수</button>
+          <button id="btnCos">코사인 점수</button>
+        </div>
+        <label class="slabel">B 문서 길이
+          <input id="lenB" type="range" min="0.5" max="2.6" step="0.05" value="2.0" style="--p:60%">
+        </label>
+      </div>
+      <div class="scoreboard">
+        <div class="score"><div class="nm"><span>문서 A <span style="color:var(--fix)">· 관련 (짧음)</span></span><span id="badgeA"></span></div><div class="vl" id="scoreA" style="color:var(--fix)">–</div></div>
+        <div class="score"><div class="nm"><span>문서 B <span style="color:var(--sym)">· 무관 (장황)</span></span><span id="badgeB"></span></div><div class="vl" id="scoreB" style="color:var(--sym)">–</div></div>
+      </div>
+      <div class="figcap" id="simCap">내적 기준: 길이가 점수를 오염시켜 무관한 B가 1등이 될 수 있습니다.</div>
+    </div>
+
+    <div class="block">
+      <span class="tag f">알아채는 법</span>
+      <p class="fix-txt">임베딩을 <b>정규화(normalize)</b>했는지, 유사도를 <b>코사인</b>으로 쟀는지 확인하세요. 코사인은 길이를 나눠버려 순수하게 방향만 봅니다. bge-m3 같은 모델은 보통 정규화 임베딩을 권장해요. <a class="more" href="#why-normalize">왜 그럴까? →</a></p>
+    </div>
+  </section>
+
+  <!-- ───────────── CARD 02 ───────────── -->
+  <section class="card">
+    <div class="cardhead"><span class="num">02</span>
+      <span class="ctitle">임베딩 모델을 바꿨더니 검색이 전부 깨진다</span></div>
+
+    <div class="block">
+      <span class="tag s">증상</span>
+      <div class="console"><span class="dim"># 모델만 교체하고 기존 인덱스는 그대로 둠</span>
+검색 결과가 <span class="red">전부 무의미</span>하거나, <span class="red">ValueError: shapes (768,) and (1024,) not aligned</span></div>
+    </div>
+
+    <div class="block">
+      <span class="tag c">무슨 일 / 선형대수 원인</span>
+      <p class="cause-txt">벡터는 "<b>어떤 좌표계 안의 한 점</b>"입니다. 모델이 다르면 차원 수도 다르고(1024 vs 768), 설령 차원이 같아도 <b>축의 의미가 완전히 다른 별개의 지도</b>예요. A모델 지도의 좌표를 B모델 지도에 갖다 대면 거리 계산이 통째로 무의미해집니다.</p>
+    </div>
+
+    <div class="fig">
+      <svg viewBox="0 0 480 180" aria-label="서로 다른 좌표계에서 같은 좌표가 다른 위치를 가리킨다">
+        <g font-family="JetBrains Mono, monospace" font-size="11">
+          <!-- map A -->
+          <g transform="translate(40,20)">
+            <rect width="150" height="130" fill="none" stroke="rgba(122,167,255,.4)" rx="6"/>
+            <text x="6" y="-6" fill="#7aa7ff">모델 A 공간</text>
+            <line x1="0" y1="90" x2="150" y2="90" stroke="rgba(255,255,255,.12)"/>
+            <line x1="50" y1="0" x2="50" y2="130" stroke="rgba(255,255,255,.12)"/>
+            <circle cx="95" cy="45" r="6" fill="#45d6b0"/>
+            <text x="103" y="42" fill="#45d6b0">(3, 5)</text>
+            <text x="20" y="120" fill="#8b93a3">"환경평가"</text>
+          </g>
+          <!-- arrow -->
+          <g transform="translate(205,85)" fill="#f5b53d" stroke="#f5b53d">
+            <line x1="0" y1="0" x2="38" y2="0" stroke-width="1.5"/>
+            <path d="M38,-4 L46,0 L38,4 Z"/>
+            <text x="-6" y="-12" font-size="10" text-anchor="middle">같은 좌표 (3,5)</text>
+          </g>
+          <!-- map B -->
+          <g transform="translate(290,20)">
+            <rect width="150" height="130" fill="none" stroke="rgba(255,111,97,.4)" rx="6"/>
+            <text x="6" y="-6" fill="#ff6f61">모델 B 공간</text>
+            <line x1="0" y1="90" x2="150" y2="90" stroke="rgba(255,255,255,.12)"/>
+            <line x1="50" y1="0" x2="50" y2="130" stroke="rgba(255,255,255,.12)"/>
+            <circle cx="95" cy="45" r="6" fill="#ff6f61"/>
+            <text x="55" y="115" fill="#ff6f61">"오늘 점심?"</text>
+          </g>
+        </g>
+      </svg>
+      <div class="figcap">같은 좌표 (3,5)도 지도가 다르면 전혀 다른 의미를 가리킵니다.</div>
+    </div>
+
+    <div class="block">
+      <span class="tag f">알아채는 법</span>
+      <p class="fix-txt">임베딩 모델을 바꾸면 <b>저장된 모든 문서를 새 모델로 다시 임베딩(re-index)</b>해야 합니다. 차원 수가 안 맞으면 곱셈 자체가 에러 나니 오히려 빨리 알아챌 수 있고, 차원이 우연히 같으면 "조용히 틀리는" 더 위험한 경우예요.</p>
+    </div>
+  </section>
+
+  <!-- ───────────── CARD 03 ───────────── -->
+  <section class="card">
+    <div class="cardhead"><span class="num">03</span>
+      <span class="ctitle">'차원이 안 맞는다' 에러가 난다</span></div>
+
+    <div class="block">
+      <span class="tag s">증상</span>
+      <div class="console"><span class="red">RuntimeError:</span> mat1 and mat2 shapes cannot be
+multiplied (<span class="red">32×768</span> and <span class="red">1024×512</span>)</div>
+    </div>
+
+    <div class="block">
+      <span class="tag c">무슨 일 / 선형대수 원인</span>
+      <p class="cause-txt">입문자가 가장 자주 보는 에러입니다. 그런데 이건 <b>버그가 아니라 규칙</b>이에요. 행렬곱 <b>(m×n)×(n×p)</b>는 <b>안쪽 두 수 n이 같아야만</b> 성립합니다. 768 ≠ 1024 라서 곱셈이 거부된 것뿐이죠. "악수하려면 두 손이 맞물려야 한다"고 생각하면 됩니다.</p>
+    </div>
+
+    <div class="fig">
+      <svg viewBox="0 0 480 130" aria-label="행렬곱 차원 규칙">
+        <g font-family="JetBrains Mono, monospace" font-weight="600">
+          <rect x="50" y="40" width="120" height="50" rx="7" fill="rgba(122,167,255,.14)" stroke="#7aa7ff"/>
+          <text x="110" y="70" font-size="15" fill="#e8eaf0" text-anchor="middle">32 × <tspan fill="#f5b53d">768</tspan></text>
+          <text x="190" y="70" font-size="20" fill="#8b93a3" text-anchor="middle">×</text>
+          <rect x="210" y="40" width="120" height="50" rx="7" fill="rgba(122,167,255,.14)" stroke="#7aa7ff"/>
+          <text x="270" y="70" font-size="15" fill="#e8eaf0" text-anchor="middle"><tspan fill="#ff6f61">1024</tspan> × 512</text>
+          <!-- inner match indicator -->
+          <path d="M110,95 Q190,120 270,95" fill="none" stroke="#ff6f61" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <text x="190" y="125" font-size="11" fill="#ff6f61" text-anchor="middle">안쪽 768 ≠ 1024  →  곱 불가</text>
+          <text x="395" y="58" font-size="11" fill="#8b93a3">결과 모양은</text>
+          <text x="395" y="74" font-size="13" fill="#45d6b0">32 × 512</text>
+          <text x="395" y="90" font-size="10" fill="#8b93a3">(바깥 두 수)</text>
+        </g>
+      </svg>
+      <div class="figcap">에러 메시지의 숫자 네 개 = 두 행렬의 모양. 가운데 두 수가 같은지만 보면 됩니다.</div>
+    </div>
+
+    <div class="block">
+      <span class="tag f">알아채는 법</span>
+      <p class="fix-txt">에러의 네 숫자에서 <b>가운데 둘</b>만 확인하세요. 안 맞으면 어딘가에서 차원이 틀어진 것 — 보통 reshape, transpose, 또는 모델 입출력 차원 불일치입니다. 이 구조를 알면 AI에게 도움을 청할 때도 <b>정확히 어디가 문제인지</b> 짚어줄 수 있어요.</p>
+    </div>
+  </section>
+
+  <!-- ───────────── CARD 04 ───────────── -->
+  <section class="card" id="card04" style="scroll-margin-top:24px;">
+    <div class="cardhead"><span class="num">04</span>
+      <span class="ctitle">양자화했더니 답이 멍청해진다</span></div>
+
+    <div class="block">
+      <span class="tag s">증상</span>
+      <div class="console"><span class="dim"># 풀 모델은 멀쩡한데, 작은 GPU용 Q4 버전은</span>
+가끔 <span class="red">헛소리·반복·맥락 놓침</span></div>
+    </div>
+
+    <div class="block">
+      <span class="tag c">무슨 일 / 선형대수 원인</span>
+      <p class="cause-txt">신경망은 결국 <b>거대한 숫자(가중치) 행렬</b>입니다. 양자화는 메모리를 아끼려고 그 숫자들을 <b>촘촘한 눈금에서 듬성한 눈금으로 반올림</b>하는 일이에요(예: 사실상 무한 단계 → 16단계). 대부분은 괜찮지만, <b>미세한 차이로 갈리던 판단</b>이 뭉개지면서 가끔 어긋납니다.</p>
+    </div>
+
+    <div class="fig">
+      <svg viewBox="0 0 480 120" aria-label="정밀도가 높은 연속 값과 양자화로 계단처럼 뭉개진 값">
+        <defs><linearGradient id="grad" x1="0" x2="1">
+          <stop offset="0" stop-color="#45d6b0"/><stop offset="1" stop-color="#7aa7ff"/></linearGradient></defs>
+        <text x="0" y="14" font-family="JetBrains Mono" font-size="11" fill="#8b93a3">원본 (연속)</text>
+        <rect x="0" y="22" width="480" height="14" rx="4" fill="url(#grad)"/>
+        <text x="0" y="66" font-family="JetBrains Mono" font-size="11" fill="#8b93a3">Q4 양자화 (16단계로 반올림)</text>
+        <g>
+          <!-- 8 visible steps for illustration -->
+          <rect x="0"   y="74" width="60" height="14" fill="#3b6e66"/>
+          <rect x="60"  y="74" width="60" height="14" fill="#3f7a7e"/>
+          <rect x="120" y="74" width="60" height="14" fill="#43788c"/>
+          <rect x="180" y="74" width="60" height="14" fill="#4a76a0"/>
+          <rect x="240" y="74" width="60" height="14" fill="#5273a8"/>
+          <rect x="300" y="74" width="60" height="14" fill="#5a72ad"/>
+          <rect x="360" y="74" width="60" height="14" fill="#6470b3"/>
+          <rect x="420" y="74" width="60" height="14" fill="#6f6fb8"/>
+        </g>
+        <text x="240" y="108" font-family="JetBrains Mono" font-size="11" fill="#f5b53d" text-anchor="middle">매끄럽던 차이가 계단으로 — 대부분 OK, 가끔 치명적</text>
+      </svg>
+      <div class="figcap">수백만 색 사진을 16색 물감통으로 다시 칠하는 셈 — 거의 비슷하지만 미묘한 음영은 사라집니다. 정밀도↓ = 메모리↓ + 품질↓. 무엇이 깎여나가는지 알면 어디까지 타협할지 판단할 수 있습니다.</div>
+    </div>
+
+    <div class="block">
+      <span class="tag f">알아채는 법</span>
+      <p class="fix-txt">품질 ↔ 메모리는 <b>맞바꿈(trade-off)</b>입니다. 너무 멍청하면 한 단계 정밀한 양자화(Q4→Q5→Q8)로 올리고, VRAM이 모자라면 반대로 내립니다. "왜 작은 모델이 더 못하지"가 아니라 "어디를 깎았기에 이런가"로 질문이 바뀌는 게 핵심이에요. <a class="more" href="#quant-names">Q4_K_M 같은 이름은 무슨 뜻? →</a></p>
+    </div>
+  </section>
+
+  <!-- ───────────── CARD 05 ───────────── -->
+  <section class="card">
+    <div class="cardhead"><span class="num">05</span>
+      <span class="ctitle">유사도가 죄다 0.9 이상이라 변별이 안 된다</span></div>
+
+    <div class="block">
+      <span class="tag s">증상</span>
+      <div class="console"><span class="dim">관련 문서</span>   cos = 0.94
+<span class="dim">무관 문서</span>   cos = <span class="red">0.91</span>   <span class="dim"># 차이가 거의 없음 → 순위가 무의미</span></div>
+    </div>
+
+    <div class="block">
+      <span class="tag c">무슨 일 / 선형대수 원인</span>
+      <p class="cause-txt">임베딩 벡터들이 공간 전체에 고루 퍼지지 않고 <b>좁은 원뿔에 몰려 있는</b> 현상(이방성, anisotropy)입니다. 다들 비슷한 방향을 보고 있으니 무엇끼리 재도 코사인이 높게 나와요. 검색이 망한 게 아니라 <b>점수의 기준선이 위로 쏠린</b> 것에 가깝습니다.</p>
+    </div>
+
+    <div class="fig">
+      <svg viewBox="0 0 480 170" aria-label="좁은 원뿔에 몰린 벡터와 고르게 퍼진 벡터 비교">
+        <g stroke-width="2" fill="none">
+          <!-- crammed cone -->
+          <g transform="translate(120,150)">
+            <circle r="3" fill="#8b93a3" stroke="none"/>
+            <line x1="0" y1="0" x2="62" y2="-78" stroke="#ff6f61"/>
+            <line x1="0" y1="0" x2="78" y2="-70" stroke="#ff6f61"/>
+            <line x1="0" y1="0" x2="88" y2="-58" stroke="#ff6f61"/>
+            <line x1="0" y1="0" x2="95" y2="-48" stroke="#ff6f61"/>
+            <text x="20" y="20" font-family="JetBrains Mono" font-size="11" fill="#ff6f61">몰림 → 다 비슷함</text>
+          </g>
+          <!-- spread fan -->
+          <g transform="translate(340,150)">
+            <circle r="3" fill="#8b93a3" stroke="none"/>
+            <line x1="0" y1="0" x2="0" y2="-90" stroke="#45d6b0"/>
+            <line x1="0" y1="0" x2="55" y2="-72" stroke="#45d6b0"/>
+            <line x1="0" y1="0" x2="-55" y2="-72" stroke="#45d6b0"/>
+            <line x1="0" y1="0" x2="84" y2="-32" stroke="#45d6b0"/>
+            <line x1="0" y1="0" x2="-84" y2="-32" stroke="#45d6b0"/>
+            <text x="-30" y="20" font-family="JetBrains Mono" font-size="11" fill="#45d6b0">퍼짐 → 잘 구분됨</text>
+          </g>
+        </g>
+      </svg>
+      <div class="figcap">왼쪽처럼 벡터가 한 방향에 몰리면, 무엇끼리 재도 코사인이 높게 나옵니다.</div>
+    </div>
+
+    <div class="block">
+      <span class="tag f">알아채는 법</span>
+      <p class="fix-txt">절대값(0.9)이 아니라 <b>상대 순위</b>를 보세요. 평균 벡터 빼기·재정규화로 기준선을 펴거나, 1차 검색 위에 <b>reranker</b>를 얹어 미세한 차이를 키웁니다. "다 0.9네"는 검색 실패가 아니라 <b>스케일 문제</b>일 수 있다는 걸 아는 게 먼저예요.</p>
+    </div>
+  </section>
+
+  <!-- ───────────── CLOSING ───────────── -->
+  <section class="closing">
+    <h2>다섯 개의 공통점:<br>버그가 아니라 <span class="hl">벡터·행렬이 원래 그렇게 동작</span>한다는 것</h2>
+    <p>그래서 이 안을 들여다보는 손전등이 있으면 <b>5분</b>, 없으면 <b>한나절</b>입니다. 다섯 사례 어디에도 "행렬을 손으로 곱하라"는 말은 없었어요. 우리에게 필요한 건 계산이 아니라 <b>무슨 일이 벌어지는지에 대한 그림</b>뿐입니다.</p>
+
+    <div class="quote">바이브코딩이 번역기로 외국어를 쓰는 것이라면, 선형대수를 아는 건 그 언어의 <b>문법을 조금 아는 것</b>. 번역기 없이 살 순 없지만, 문법을 알면 번역기가 헛소리할 때 알아채고 더 미묘한 표현을 만들 수 있습니다.</div>
+
+    <p>계산은 컴퓨터(GPU)가 다 합니다. 우리는 <b>벡터=방향, 행렬=변형, 내적=닮음</b> 정도의 직관만 챙기면 돼요. 단위원에서 cos가 움직이는 걸 본 그 정도면, 이미 시작된 겁니다.</p>
+    <p style="color:var(--fix); margin-top:22px; font-weight:600;">다음 시간엔 이 다섯 중 하나를 골라, 직접 열어봅니다.</p>
+  </section>
+
+  <!-- ───────────── DEEP DIVE (footnote for Card 01) ───────────── -->
+  <section class="deepdive" id="why-normalize">
+    <div class="ddhead">
+      <span class="ddnum">덧붙임 · 01번 보충</span>
+      <h2>왜 bge-m3 같은 모델은 <span class="hl">정규화 임베딩</span>을 권장할까</h2>
+    </div>
+    <p class="ddlede">01번 카드에서 "권장한다"고만 하고 넘어간 이야기입니다. 이유는 결국 두 가지로 압축돼요 — 하나는 <b>모델이 학습한 방식</b> 때문이고, 다른 하나는 <b>정규화하면 검색이 자동으로 안전해지기</b> 때문입니다.</p>
+
+    <div class="ddsec">
+      <h3><span class="qn">1.</span><span>그 모델은 처음부터 "방향"만 학습했다 — 길이엔 의미가 없다</span></h3>
+      <p>bge-m3를 비롯한 요즘 검색용 임베딩 모델은 학습할 때 <b>코사인 유사도(방향이 얼마나 닮았나)</b>를 기준으로 훈련됩니다(대조 학습, contrastive learning). "비슷한 뜻의 문장 쌍은 방향을 가깝게 당기고, 무관한 쌍은 방향을 멀리 밀어내는" 식이죠.</p>
+      <p>이 과정에서 모델이 신경 쓰는 건 오직 <b>벡터가 가리키는 방향</b>입니다. 벡터의 <b>길이(크기)는 학습 목표에 아예 들어가지 않아요.</b> 그래서 길이에는 믿을 만한 의미가 거의 담기지 않습니다 — 문장이 길거나 특정 단어가 자주 나오면 덩달아 커지는 <span class="g">부수적인 잡음</span>에 가깝죠.</p>
+      <p>01번 카드에서 본 "장황한 B 문서가 길이로 점수를 가로채는" 사고가 정확히 이 잡음 때문입니다. 그러니 검색에 쓸 때도 <b>길이를 미리 1로 깎아내(정규화) 방향만 남기자</b> — 모델이 <b>학습한 방식</b>과 우리가 <b>검색하는 방식</b>을 일치시키는 겁니다.</p>
+    </div>
+
+    <div class="ddsec">
+      <h3><span class="qn">2.</span><span>정규화하면 "내적 = 코사인"이 된다 — 빠르면서 동시에 안전</span></h3>
+      <p>정규화(normalize)란 <b>방향은 그대로 두고, 길이만 1로 통일하는</b> 것입니다. 짧은 화살표는 늘리고 긴 화살표는 줄여서 — 방향은 손대지 않고 — 모두 똑같은 길이(1)로 맞춰버리는 거죠.</p>
+      <p>왜 이게 마법이 되는지, 01번 카드의 두 점수 방식을 떠올려 보세요. <b>내적 점수</b>는 사실 이런 곱셈으로 이뤄져 있어요:</p>
+      <div class="formula">내적 점수 = (방향이 얼마나 같은가) × (A의 길이) × (B의 길이)</div>
+      <p>여기서 맨 앞의 <b>(방향이 얼마나 같은가)</b>, 이게 바로 <span class="g">코사인 점수</span>예요. 그러니까 내적은 "코사인 점수에 길이 두 개를 곱한 것"인 셈이죠. 01번에서 장황한 B 문서가 점수를 가로챈 건, 바로 이 <b>길이</b>가 곱해지면서 끼어들었기 때문입니다.</p>
+      <p>그런데 정규화해서 <b>두 벡터의 길이를 모두 1</b>로 맞추면, 곱해지던 길이가 둘 다 1이 되어 그냥 사라집니다:</p>
+      <div class="formula">내적 점수 = (방향이 얼마나 같은가) × 1 × 1
+         = <span class="hot">방향이 얼마나 같은가  ( = 코사인 점수 )</span></div>
+      <p>즉 <b>미리 정규화만 해두면, 빠른 내적으로 계산해도 결과가 코사인과 똑같아집니다.</b> 길이가 끼어들 틈이 아예 없어지니까요.</p>
+      <p>이게 실무에서 왜 중요하냐면 — 벡터 데이터베이스(FAISS 등)는 보통 <b>내적</b>을 기본 계산으로 씁니다. 코사인보다 빠르거든요. 정규화된 임베딩을 넣어두면, 그 빠른 내적 검색이 <span class="g">저절로 코사인 검색</span>이 됩니다. 01번 카드의 "길이가 점수를 오염시키는" 함정을, 따로 신경 쓰지 않아도 <b>처음부터 막아버리는</b> 거죠.</p>
+    </div>
+
+    <div class="ddsec">
+      <h3><span class="qn">↳</span><span>한 줄 정리</span></h3>
+      <div class="ddnote">bge-m3가 정규화를 권장하는 건 — <b>①</b> 그 모델이 길이가 아니라 <b>방향</b>에 의미를 담도록 훈련됐고, <b>②</b> 정규화해 두면 <b>빠른 내적 검색이 그대로 코사인 검색</b>이 되어 01번의 함정을 자동으로 피하기 때문입니다.</div>
+      <p style="margin-top:18px; color:var(--muted); font-size:14.5px;"><b style="color:var(--text)">작은 주의:</b> 정규화는 길이 정보를 <b>버리는</b> 일이라, 길이 자체가 의미 있는 드문 경우엔 오히려 손해일 수 있어요. 하지만 의미 검색에서는 길이가 잡음인 경우가 대부분이라 거의 항상 이득입니다.</p>
+    </div>
+
+    <a class="backlink" href="#card01">↑ 01번 카드로 돌아가기</a>
+  </section>
+
+  <!-- ───────────── DEEP DIVE (footnote for Card 04) ───────────── -->
+  <section class="deepdive" id="quant-names">
+    <div class="ddhead">
+      <span class="ddnum">덧붙임 · 04번 보충</span>
+      <h2><span class="hl">Q4_K_M</span> 같은 이름의 글자들은 무슨 뜻일까</h2>
+    </div>
+    <p class="ddlede">양자화 모델을 받으려고 보면 <b>Q4_K_M</b>, <b>Q5_K_S</b>, <b>Q6_K</b>, <b>Q8_0</b> 같은 이름이 잔뜩 나오죠. 앞 숫자(= 비트 수 = 칸 수)는 이미 봤으니, 뒤에 붙는 <b>K, M, S, 0</b> 을 풀어봅니다. 이름은 <b>세 토막</b>으로 끊어 읽으면 끝이에요.</p>
+
+    <div class="formula">Q4 _ K _ M   →   세 토막으로 끊어 읽기
+
+ <span class="hot">Q4</span>  =  평균 비트 수   (숫자가 클수록 칸·색이 많다)
+ <span class="hot">K</span>   =  반올림 방식    (K = 신형·똑똑 / 0·1 = 구형·단순)
+ <span class="hot">M</span>   =  품질 등급      (S → M → L, 뒤로 갈수록 곱고 큼)</div>
+
+    <div class="ddsec">
+      <h3><span class="qn">①</span><span>앞 숫자 (Q4 / Q5 / Q8) — "색을 몇 개나 쓸까"</span></h3>
+      <p>이건 앞에서 본 그대로예요. 04번 카드의 색 비유로 — 가중치를 칠할 <b>물감통이 평균 몇 개냐</b>입니다. Q4는 16색, Q5는 32색, Q8은 256색. <b>숫자가 클수록 곱지만 용량도 커집니다.</b> 이름에서 <span class="g">"얼마나 곱냐"</span>를 정하는 토막이에요.</p>
+    </div>
+
+    <div class="ddsec">
+      <h3><span class="qn">②</span><span>가운데 글자 (_K vs _0 / _1) — "그 색을 어떻게 나눠 칠할까"</span></h3>
+      <p>핵심은 이거예요 — <b>그림의 모든 부분이 똑같이 중요하진 않습니다.</b> 얼굴은 색이 많이 필요하고, 단색 배경은 적어도 되죠. 가운데 글자는 <b>한정된 색 예산을 어떻게 배분하는 방식인가</b>를 뜻합니다.</p>
+      <p><b>_0, _1 = 구형(legacy) 방식.</b> 그림 전체에 <b>색을 균일하게</b> 나눠 칠해요. 단순하지만, 중요한 부분에 색을 더 몰아주지 못해 같은 용량이면 품질이 좀 아쉽습니다.</p>
+      <p><b>_K = 신형 K-양자화.</b> <span class="g">중요한 부분엔 색을 더, 덜 중요한 부분엔 색을 덜</span> 똑똑하게 배분합니다. 그래서 <b>같은 평균 비트 수라도 K가 품질이 더 좋아요.</b> 요즘 받는 모델은 대부분 이 K 계열입니다.</p>
+    </div>
+
+    <div class="ddsec">
+      <h3><span class="qn">③</span><span>뒤 글자 (_S / _M / _L) — "그 똑똑한 배분을 얼마나 후하게"</span></h3>
+      <p>K 방식 안에서도 등급이 나뉩니다. <b>S(Small) · M(Medium) · L(Large)</b> — 중요한 부분에 비싼 색(높은 비트)을 <b>얼마나 아낌없이 남겨두느냐</b>의 차이예요.</p>
+      <p><b>S</b>는 아껴서 더 작게(품질 살짝↓), <b>L</b>은 중요한 곳에 색을 넉넉히 남겨 곱지만 더 큼, <b>M</b>은 그 중간. 그래서 같은 Q4라도 실제 크기는 <b>Q4_K_S &lt; Q4_K_M &lt; Q4_K_L</b> 순입니다. 뒤 글자가 없는 <b>Q6_K·Q8_0</b>는 애초에 비트가 넉넉해 등급을 안 나누기도 해요.</p>
+    </div>
+
+    <div class="ddsec">
+      <h3><span class="qn">↳</span><span>자주 보이는 이름 — 작은 것에서 큰 것 순</span></h3>
+      <div class="formula"> Q3_K_M   더 작게, 품질 뚝 ↓     VRAM이 빠듯할 때 마지막 수단
+ Q4_K_S   Q4_K_M보다 살짝 작게
+ <span class="hot">Q4_K_M   ★ 가성비 표준 — 헷갈리면 이걸 받으세요</span>
+ Q5_K_M   조금 더 곱게, 용량 여유 있을 때
+ Q6_K     거의 원본급, 꽤 큼
+ Q8_0     사실상 원본, 가장 큼 (구형 방식이지만 8비트라 손실 미미)</div>
+      <div class="ddnote">이름은 <b>[ 앞 숫자 = 얼마나 곱냐 ]</b> + <b>[ 가운데 글자 = 그 색을 어떻게 나눠 쓰냐(K=똑똑) ]</b> + <b>[ 뒤 글자 = 그 배분을 얼마나 후하게(S·M·L) ]</b>. 숫자는 양, 글자는 배분 방식입니다.</div>
+      <p style="margin-top:18px; color:var(--muted); font-size:14.5px;"><b style="color:var(--text)">실전 요령:</b> 헷갈리면 <b>Q4_K_M</b>으로 시작하세요. 답이 멍청하면 <b>Q5_K_M → Q6_K</b>로 한 칸씩 올리고(품질↑·용량↑), VRAM에 안 올라가면 <b>Q4_K_S → Q3_K_M</b>으로 내립니다(용량↓·품질↓). 04번 카드의 맞바꿈을 이름 하나로 조절하는 셈이에요.</p>
+    </div>
+
+    <a class="backlink" href="#card04">↑ 04번 카드로 돌아가기</a>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  // ── Card 01 interactive: dot product vs cosine ──
+  var svg = document.getElementById('simSvg');
+  var vecs = document.getElementById('simVecs');
+  var btnDot = document.getElementById('btnDot');
+  var btnCos = document.getElementById('btnCos');
+  var lenB = document.getElementById('lenB');
+  var scoreA = document.getElementById('scoreA');
+  var scoreB = document.getElementById('scoreB');
+  var badgeA = document.getElementById('badgeA');
+  var badgeB = document.getElementById('badgeB');
+  var cap = document.getElementById('simCap');
+
+  var mode = 'dot';
+  var ox = 40, oy = 210, scale = 78; // origin + px per unit
+
+  // fixed geometry (angles from x-axis, degrees)
+  var Q = {ang: 30, len: 1.0, color:'#7aa7ff', label:'질문 Q'};
+  var A = {ang: 42, len: 1.0, color:'#45d6b0', label:'A'};   // close direction, short
+  var B = {ang: 72, len: 2.0, color:'#ff6f61', label:'B'};   // far direction, long
+
+  function rad(d){return d*Math.PI/180;}
+
+  function draw(){
+    B.len = parseFloat(lenB.value);
+    lenB.style.setProperty('--p', ((B.len-0.5)/(2.6-0.5)*100)+'%');
+    vecs.innerHTML = '';
+    [Q,A,B].forEach(function(v){
+      var ex = ox + Math.cos(rad(v.ang))*v.len*scale;
+      var ey = oy - Math.sin(rad(v.ang))*v.len*scale;
+      var line = document.createElementNS('http://www.w3.org/2000/svg','line');
+      line.setAttribute('x1',ox); line.setAttribute('y1',oy);
+      line.setAttribute('x2',ex); line.setAttribute('y2',ey);
+      line.setAttribute('stroke',v.color); line.setAttribute('stroke-width','3');
+      line.setAttribute('stroke-linecap','round');
+      vecs.appendChild(line);
+      var dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      dot.setAttribute('cx',ex); dot.setAttribute('cy',ey); dot.setAttribute('r','5');
+      dot.setAttribute('fill',v.color); vecs.appendChild(dot);
+      var t = document.createElementNS('http://www.w3.org/2000/svg','text');
+      t.setAttribute('x',ex+8); t.setAttribute('y',ey-6);
+      t.setAttribute('fill',v.color); t.setAttribute('font-size','13');
+      t.setAttribute('font-family','JetBrains Mono, monospace');
+      t.setAttribute('font-weight','600'); t.textContent=v.label;
+      vecs.appendChild(t);
+    });
+
+    // scores
+    var cosA = Math.cos(rad(A.ang - Q.ang));
+    var cosB = Math.cos(rad(B.ang - Q.ang));
+    var sA, sB;
+    if(mode==='dot'){ sA = Q.len*A.len*cosA; sB = Q.len*B.len*cosB; }
+    else { sA = cosA; sB = cosB; }
+
+    scoreA.textContent = sA.toFixed(3);
+    scoreB.textContent = sB.toFixed(3);
+    var aWins = sA >= sB;
+    badgeA.innerHTML = aWins ? '<span class="badge">1등</span>' : '';
+    badgeB.innerHTML = !aWins ? '<span class="badge" style="background:var(--sym);color:#0f1115">1등</span>' : '';
+
+    if(mode==='dot'){
+      cap.innerHTML = aWins
+        ? '내적 기준: 지금은 A가 1등이지만, B를 더 늘리면 길이가 점수를 가로챕니다.'
+        : '내적 기준: <b style="color:var(--sym)">무관한 B가 1등을 가로챘습니다</b> — 길이가 방향을 이긴 것.';
+    } else {
+      cap.innerHTML = '코사인 기준: 길이를 나눠버려 <b style="color:var(--fix)">방향이 가까운 A가 안정적으로 1등</b>. B 길이를 바꿔도 흔들리지 않아요.';
+    }
+  }
+
+  function setMode(m){
+    mode = m;
+    btnDot.classList.toggle('on', m==='dot');
+    btnCos.classList.toggle('on', m==='cos');
+    draw();
+  }
+  btnDot.addEventListener('click', function(){setMode('dot');});
+  btnCos.addEventListener('click', function(){setMode('cos');});
+  lenB.addEventListener('input', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

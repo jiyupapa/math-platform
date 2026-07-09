@@ -1,0 +1,19 @@
+# 의존성 / 빌드 산출물 (재생성 가능)
+node_modules/
+dist/
+.vite/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# 로컬 설정 / 에디터
+.claude/settings.local.json
+.obsidian/
+.DS_Store
+*.local
+
+# 로그
+*.log

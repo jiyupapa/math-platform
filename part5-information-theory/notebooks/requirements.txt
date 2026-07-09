@@ -1,0 +1,21 @@
+# 정보이론 실습 노트북 환경
+#
+# 1) 설치 (최초 1회):
+#      python -m venv .venv
+#      .venv\Scripts\Activate.ps1          # Windows PowerShell (cmd: .venv\Scripts\activate)
+#      pip install -r requirements.txt
+#
+# 2) Jupyter 커널 등록 (최초 1회 — 이걸 빼먹으면 노트북이 시스템 Python 으로 실행돼
+#    'No module named ...' 같은 import 오류가 납니다):
+#      python -m ipykernel install --user --name infotheory-venv --display-name "Python (information-theory .venv)"
+#
+# 3) 실행:
+#      jupyter lab
+#      → 노트북에서 Kernel → Change Kernel → "Python (information-theory .venv)" 선택 후 셀 실행
+
+numpy>=2.0
+matplotlib>=3.8
+jupyterlab>=4.5.9   # 4.5.8 이하는 알려진 취약점 (GHSA-vmhf-c436-hxj4)
+ipykernel>=6.29     # venv 를 Jupyter 커널로 등록 (커널 불일치로 인한 import 오류 방지)
+ipywidgets>=8.1     # AI 튜터 채팅창 (tutor.py)
+requests>=2.31      # 로컬 Ollama 호출 (tutor.py)

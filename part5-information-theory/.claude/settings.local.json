@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/STUDY/MATH/part1-linear-algebra/web/src/**)",
+      "Read(//c/STUDY/**)",
+      "Bash(mkdir -p part5-information-theory/web part5-information-theory/notebooks)",
+      "Bash(cp -r part1-linear-algebra/web/index.html part1-linear-algebra/web/package.json part1-linear-algebra/web/package-lock.json part1-linear-algebra/web/tsconfig.json part1-linear-algebra/web/tsconfig.app.json part1-linear-algebra/web/tsconfig.node.json part1-linear-algebra/web/vite.config.ts part5-information-theory/web/)",
+      "Bash(cp -r part1-linear-algebra/web/src part5-information-theory/web/src)",
+      "Bash(cp part1-linear-algebra/notebooks/requirements.txt part1-linear-algebra/notebooks/tutor.py part5-information-theory/notebooks/)",
+      "Bash(cd *)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(python scripts/check_drift.py)",
+      "Bash(python -c ' *)",
+      "Bash(python *)",
+      "Bash(/c/STUDY/MATH/part1-linear-algebra/notebooks/.venv/Scripts/python.exe -m jupyter nbconvert --to notebook --execute --stdout --ExecutePreprocessor.kernel_name=python3 ch04_cross_entropy.ipynb)",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(grep -n '\\\\\\\\pi' *.vue)",
+      "Bash(grep -n '\\\\\\\\sigma' *.vue)",
+      "Bash(grep -n '\\\\\\\\nabla\\\\|\\\\\\\\Pi\\\\|\\\\\\\\mathbb\\\\|\\\\\\\\int' *.vue)"
+    ]
+  }
+}
