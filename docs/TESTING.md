@@ -6,11 +6,15 @@
 > **이 테스트로 확인하려는 것**: 모노레포 전환(공용 컴포넌트를 `@series/ui` 패키지로 분리, provide/inject 결합해제) 후에도
 > ① 타입·빌드가 깨지지 않고 ② 화면·스타일이 정상이고 ③ 퀴즈/진도/복습이 실제로 동작하고 ④ 부별 저장 접두사가 보존됐는가.
 
-셸은 **PowerShell** 기준 (Git Bash 도 동일 명령 사용 가능). 명령은 모두 모노레포 루트에서 실행:
+명령은 모두 모노레포 루트에서 실행:
 
-```powershell
-cd C:\STUDY\MATH_PLATFORM
+```cmd
+cd /d C:\STUDY\MATH_PLATFORM
 ```
+
+> **셸 안내**: 개별 명령(`npm ...`, `python ...`, 단일 `nbconvert`)은 **cmd · PowerShell · Git Bash 어디서나 동일**하다.
+> 셸마다 문법이 다른 건 **여러 항목을 도는 반복문**뿐 — 그 자리에만 `🪟 cmd` / `PowerShell` 두 버전을 나란히 둔다.
+> (cmd 에서는 `cd /d` 로 드라이브까지 이동. PowerShell·Git Bash 는 `cd` 만.)
 
 ---
 
@@ -97,20 +101,19 @@ npm run dev -w apps/part1/web
 모노레포답게 **루트에 공용 venv 하나**를 만들어 모든 부의 노트북을 실행한다. 합집합 명세는 루트 `requirements.txt`.
 (부별 `apps/part*/notebooks/requirements.txt` 는 "그 부가 무엇을 쓰는지" 명세로 남겨둔다 — 참고용.)
 
-### 설정 (최초 1회)
+### 설정 (최초 1회) — cmd·PowerShell 공통
 
-```powershell
-cd C:\STUDY\MATH_PLATFORM
+```cmd
+cd /d C:\STUDY\MATH_PLATFORM
 python -m venv .venv
 .venv\Scripts\python.exe -m pip install -r requirements.txt
 .venv\Scripts\python.exe -m ipykernel install --user --name math-platform --display-name "Python (MATH_PLATFORM)"
 ```
 
-### 무에러 실행 검증 (한 개)
+### 무에러 실행 검증 (한 개) — cmd·PowerShell 공통 (한 줄)
 
-```powershell
-.venv\Scripts\python.exe -m jupyter nbconvert --to notebook --execute --stdout `
-  --ExecutePreprocessor.kernel_name=math-platform apps\part1\notebooks\ch00_sample.ipynb
+```cmd
+.venv\Scripts\python.exe -m jupyter nbconvert --to notebook --execute --stdout --ExecutePreprocessor.kernel_name=math-platform apps\part1\notebooks\ch00_sample.ipynb
 ```
 
 - `--ExecutePreprocessor.kernel_name=math-platform` 를 주면, 노트북에 박힌 옛 부별 커널명과 무관하게 공용 커널로 실행된다.
@@ -118,8 +121,17 @@ python -m venv .venv
 
 ### 전 부 노트북 일괄 검증 (선택)
 
+🪟 **cmd** (한 줄 붙여넣기):
+
+```cmd
+for %p in (part1 part2 part3 part4 part5) do @for %f in (apps\%p\notebooks\*.ipynb) do @echo [%f] & .venv\Scripts\python.exe -m jupyter nbconvert --to notebook --execute --stdout --ExecutePreprocessor.kernel_name=math-platform "%f" >nul && echo   OK || echo   FAIL
+```
+
+> `.bat` 파일로 저장해 쓰려면 `%p`·`%f` 를 `%%p`·`%%f` 로 바꾼다.
+
+**PowerShell**:
+
 ```powershell
-cd C:\STUDY\MATH_PLATFORM
 Get-ChildItem apps\part*\notebooks\*.ipynb | ForEach-Object {
   Write-Host "=== $($_.FullName) ===" -ForegroundColor Cyan
   .venv\Scripts\python.exe -m jupyter nbconvert --to notebook --execute --stdout `
@@ -134,10 +146,23 @@ Get-ChildItem apps\part*\notebooks\*.ipynb | ForEach-Object {
 
 ## 4. 빠른 전체 점검 스크립트
 
-빌드만 한 번에 돌려 통과 여부를 보고 싶을 때 (PowerShell):
+**반복문 필요 없음** — 1절의 이 한 줄이 이미 6앱을 전부 빌드한다(cmd·PowerShell·Git Bash 공통):
+
+```cmd
+npm run build --workspaces --if-present
+```
+
+앱마다 `[앱이름]` 라벨을 찍으며 돌리고 싶을 때만 반복문을 쓴다:
+
+🪟 **cmd** (한 줄 붙여넣기 — `call` 필수: npm 은 `npm.cmd` 라 안 붙이면 첫 앱에서 멈춘다):
+
+```cmd
+for %a in (part1 part2 part3 part4 part5 portal) do @echo [%a] & call npm run build -w apps/%a/web
+```
+
+**PowerShell**:
 
 ```powershell
-cd C:\STUDY\MATH_PLATFORM
 foreach ($a in 'part1','part2','part3','part4','part5','portal') {
   Write-Host "=== $a ===" -ForegroundColor Cyan
   npm run build -w "apps/$a/web"
