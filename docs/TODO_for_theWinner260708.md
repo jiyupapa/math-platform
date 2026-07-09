@@ -2,7 +2,7 @@
 
 > 작성일: 2026-07-08
 > 맥락: 1부 단독 출품으로는 1등이 어렵다는 판단 → 완성된 5부작 전체를 무기로 출품물을 재구성.
-> 관련: 기존 후보 [`TODO_260628.md`](TODO_260628.md) · 제출 명세 [`10_spec.md`](10_spec.md) · 시리즈 로드맵 `C:\STUDY\MATH\README.md`
+> 관련: 기존 후보 [`TODO_260628.md`](hackathon/TODO_260628.md) · 제출 명세 [`10_spec.md`](hackathon/10_spec.md) · 시리즈 로드맵 `C:\STUDY\MATH\README.md`
 
 ---
 

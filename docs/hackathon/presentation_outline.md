@@ -2,7 +2,7 @@
 
 > 작성일: 2026-06-28
 > 용도: 시상식(12.3) 5분 시연 진행표(run sheet). 시간 배분·화면·멘트·리허설 체크.
-> 관련 슬라이드: 도입 [`presentation_pipeline.md`](presentation_pipeline.md) · 마무리 [`presentation_roadmap.md`](presentation_roadmap.md) · 전체 계획 [`00_plan.md`](00_plan.md)
+> 관련 슬라이드: 도입 [`presentation_pipeline.md`](presentation_pipeline.md) · 마무리 [`presentation_roadmap.md`](presentation_roadmap.md) · 전체 계획 [`00_plan.md`](../../apps/part1/docs/00_plan.md)
 
 ---
 

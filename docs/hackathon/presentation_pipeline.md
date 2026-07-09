@@ -2,7 +2,7 @@
 
 > 작성일: 2026-06-28
 > 용도: 발표 앞부분(후킹) 슬라이드. "ChatGPT가 한 문장을 처리하는 모든 단계가 선형대수"임을 한 장으로.
-> 관련: 로드맵 슬라이드 [`presentation_roadmap.md`](presentation_roadmap.md) · 전체 계획 [`00_plan.md`](00_plan.md)
+> 관련: 로드맵 슬라이드 [`presentation_roadmap.md`](presentation_roadmap.md) · 전체 계획 [`00_plan.md`](../../apps/part1/docs/00_plan.md)
 
 ---
 

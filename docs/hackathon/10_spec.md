@@ -122,4 +122,4 @@ ollama pull gemma4:e2b
 
 ---
 
-> 상세 문서: 전체 계획 [`00_plan.md`](00_plan.md) · 효과 측정 지표 [`12_metrics.md`](12_metrics.md) · 작업 이력 [`99_history.md`](99_history.md) · 실행 가이드 [README](../README.md)
+> 상세 문서: 전체 계획 [`00_plan.md`](../../apps/part1/docs/00_plan.md) · 효과 측정 지표 [`12_metrics.md`](12_metrics.md) · 작업 이력 [`99_history.md`](../../apps/part1/docs/99_history.md) · 실행 가이드 [README](../../apps/part1/README.md)
