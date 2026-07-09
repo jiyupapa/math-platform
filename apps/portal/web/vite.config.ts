@@ -11,8 +11,8 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-  // @series/ui 는 소스(.vue) 워크스페이스 패키지 — esbuild 사전번들에서 제외.
+  // @series/ui·@series/tutor 는 소스 워크스페이스 패키지 — esbuild 사전번들에서 제외.
   optimizeDeps: {
-    exclude: ['@series/ui'],
+    exclude: ['@series/ui', '@series/tutor'],
   },
 })
