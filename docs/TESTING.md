@@ -93,19 +93,42 @@ npm run dev -w apps/part1/web
 
 ## 3. 노트북 테스트 (선택)
 
-노트북 `.venv` 는 복사에서 제외됐으므로 테스트하려면 부별로 다시 만든다. 예(part1):
+**부별 venv 는 필요 없다.** 5개 부의 의존성은 거의 동일(공통 6개 + part2 `sympy` + part3 `scipy`)하고 서로 충돌이 없으므로,
+모노레포답게 **루트에 공용 venv 하나**를 만들어 모든 부의 노트북을 실행한다. 합집합 명세는 루트 `requirements.txt`.
+(부별 `apps/part*/notebooks/requirements.txt` 는 "그 부가 무엇을 쓰는지" 명세로 남겨둔다 — 참고용.)
+
+### 설정 (최초 1회)
 
 ```powershell
-cd C:\STUDY\MATH_PLATFORM\apps\part1\notebooks
+cd C:\STUDY\MATH_PLATFORM
 python -m venv .venv
 .venv\Scripts\python.exe -m pip install -r requirements.txt
-# 무에러 실행 검증 (한 개):
-.venv\Scripts\python.exe -m jupyter nbconvert --to notebook --execute --stdout ch00_sample.ipynb
+.venv\Scripts\python.exe -m ipykernel install --user --name math-platform --display-name "Python (MATH_PLATFORM)"
 ```
 
-> part3 는 검증 시 시스템 nbconvert 로 새는 문제가 있어 venv 의 exe 를 직접 호출한다:
-> `.venv\Scripts\jupyter-nbconvert.exe --to notebook --execute --stdout chXX.ipynb`
-> 노트북은 모노레포 전환의 영향을 받지 않으므로(웹만 재구조화됨) 우선순위 낮음.
+### 무에러 실행 검증 (한 개)
+
+```powershell
+.venv\Scripts\python.exe -m jupyter nbconvert --to notebook --execute --stdout `
+  --ExecutePreprocessor.kernel_name=math-platform apps\part1\notebooks\ch00_sample.ipynb
+```
+
+- `--ExecutePreprocessor.kernel_name=math-platform` 를 주면, 노트북에 박힌 옛 부별 커널명과 무관하게 공용 커널로 실행된다.
+- Jupyter Lab 에서 직접 열 때는 **Kernel → Change Kernel → "Python (MATH_PLATFORM)"** 선택.
+
+### 전 부 노트북 일괄 검증 (선택)
+
+```powershell
+cd C:\STUDY\MATH_PLATFORM
+Get-ChildItem apps\part*\notebooks\*.ipynb | ForEach-Object {
+  Write-Host "=== $($_.FullName) ===" -ForegroundColor Cyan
+  .venv\Scripts\python.exe -m jupyter nbconvert --to notebook --execute --stdout `
+    --ExecutePreprocessor.kernel_name=math-platform $_.FullName | Out-Null
+  if ($?) { Write-Host "  OK" -ForegroundColor Green } else { Write-Host "  FAIL" -ForegroundColor Red }
+}
+```
+
+> 노트북 자체는 모노레포 전환의 영향을 받지 않는다(웹만 재구조화됨). 우선순위는 낮음.
 
 ---
 
