@@ -8,6 +8,9 @@
 
 ## 2026-07-09
 
+### 🔧 포털 타입체크 붙임 — 5부와 빌드 표준 통일
+다른 세션 점검에서 포털만 build 가 `vite build`(타입체크 없음)인 게 지적됨 — 트라이얼 스캐폴드라 의도적이었으나, 포털이 곧 진단·추천 엔진(가장 중요한 앱)이 되므로 표준으로 승격. part1 구성을 이식: `tsconfig.json`/`tsconfig.app.json`/`tsconfig.node.json` + `src/vite-env.d.ts`(.vue 선언) 추가, build 를 **`vue-tsc -b && vite build`** 로, devDeps 에 typescript·vue-tsc·@types/node, vite.config 에 `@` alias. 전 6앱 빌드 통과 확인.
+
 ### 📁 전략 docs 일원화 — 플랫폼 레벨 `docs/` 로
 `TODO_260708.md`(출품 전략)를 `apps/part1/docs/` → **`docs/`** 로 이동(플랫폼 전략인데 part1 하위에 묻혀 있던 것). 이 `docs/99_history.md` 신설(플랫폼 이력). 나머지 해커톤 제출물·발표자료(`10_spec`·`11_pitch_deck`·`12_metrics`·`13_demo_script`·`14_*`·`presentation_*`·데모 영상)는 아직 `apps/part1/docs/` 에 있음(전략 §5 "제출물 개정" 때 정리 예정). 원본 `C:\STUDY\MATH` 트리는 얼어붙은 백업 — 손대지 않음.
 
