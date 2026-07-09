@@ -1,8 +1,16 @@
-// 로컬 Ollama 서버와 통신하는 최소 클라이언트.
+// 로컬/원격 Ollama 서버와 통신하는 최소 클라이언트 (시리즈 공용 — @series/tutor).
 // - 로컬 LLM이라 API 키·비용·인터넷이 필요 없다 (오프라인 시연 가능).
 // - gemma4:e2b 같은 thinking 모델은 think:false 로 꺼야 함 (안 끄면 생각만 하다 토큰 소진).
+//
+// 서버 주소는 빌드 시 환경변수 VITE_OLLAMA_URL 로 바꿀 수 있다 (없으면 localhost).
+//   로컬:  (설정 안 함)                        → http://localhost:11434
+//   원격:  VITE_OLLAMA_URL=http://10.0.0.5:11434  (각 앱 .env 또는 빌드 환경)
+// → local↔remote 전환이 코드 수정 없이 설정 변경으로 끝난다. (원격 시 Ollama 서버의 CORS 허용 필요)
 
-const OLLAMA_URL = 'http://localhost:11434'
+// Vite 가 빌드 시 import.meta.env 를 치환. vite/client 타입 의존 없이 안전하게 접근.
+const OLLAMA_URL: string =
+  (import.meta as { env?: Record<string, string | undefined> }).env?.VITE_OLLAMA_URL ??
+  'http://localhost:11434'
 
 export const DEFAULT_MODEL = 'gemma4:e2b'
 

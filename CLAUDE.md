@@ -23,6 +23,7 @@ apps/
   part1/ .. part5/   각 부: web/(Vue 앱) + notebooks/(Jupyter) + docs/
 packages/
   ui/                공용 컴포넌트 단일 소스 (@series/ui)
+  tutor/             AI 튜터 클라이언트 (@series/tutor — 로컬/원격 Ollama)
 docs/TESTING.md      전체 테스트 방법
 requirements.txt     공용 노트북 venv 의존성(5부 합집합)
 ```
@@ -63,7 +64,8 @@ npm run build -w apps/part1/web              # 특정 부만 빌드
 - 소스 `.vue` 패키지라 각 앱 설정에: `vite.config.ts` 의 `optimizeDeps.exclude:['@series/ui']`,
   `style.css` 의 `@source '../../../../packages/ui/src'`(Tailwind 가 패키지 클래스 스캔 — 빠지면 스타일이 조용히 누락).
 - **THEMED(각 앱에 유지)**: `progress`/`review` 스토어, `TutorChat.vue`(튜터 주제), `notebooks/tutor.py`.
-- 아직 부별 중복(향후 패키지화 후보): `lib/ollama.ts` — 원격 Ollama 도입 시 `packages` 로.
+- **AI 튜터 클라이언트 = `packages/tutor`(@series/tutor)** — 로컬/원격 Ollama 전송 계층. 서버 주소는 빌드 환경변수
+  **`VITE_OLLAMA_URL`** 로 바꾼다(미설정 시 `http://localhost:11434`) → 코드 수정 없이 local↔remote 전환. `TutorChat.vue`(각 앱, 주제별)가 소비.
 
 ## 시리즈 설계 철학 (모든 부 공통)
 
