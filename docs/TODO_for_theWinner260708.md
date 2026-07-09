@@ -206,7 +206,8 @@ C:\STUDY\MATH\        (모노레포 git 루트)
 
 - [x] ~~포털 저장소 방식 확정 → 독립 repo~~ → **반전: 모노레포 지금 채택** (플랫폼화 요구 — ①-저장소-반전 절)
 - [x] **모노레포 전환 완료** — `packages/ui`(@series/ui) 추출 + provide/inject 결합해제(`storagePrefixKey`·`reviewApiKey`·`notebookResolverKey`) + 전 5부·포털 전파. 빌드+런타임(headless Chrome)+노트북(60/61) 검증. `check_drift`·CLAUDE.md 정리까지. (이력: `docs/99_history.md`)
-- [ ] 두 seam 마무리: **Ollama URL 설정화(미완)** · 진도 스토어를 API 교체 가능하게(현재 localStorage 직접 — 단 컴포넌트↔스토어 결합은 inject 로 이미 분리됨)
+- [x] **Ollama URL 설정화 완료** — `packages/tutor`(@series/tutor) 추출 + `VITE_OLLAMA_URL` 빌드 env(검증됨). 남은 seam: 진도 스토어를 API 교체 가능하게(현재 localStorage 직접; 컴포넌트↔스토어는 inject 로 이미 분리)
+- [ ] **배포 조립 스크립트 + 호스트 폴백**(상세 방안 논의됨 — 정적 프론트 동일 origin 하위 경로) → 조립본으로 개인화 2층 실검증
 - [ ] 진단 퀴즈 문항 설계(관문 4개 × 2~3문항 + 자신감 자기보고 2~3문항 — ①-상세 표 기준)
 - [ ] 배포 대상 확정(정적 프론트 동일 origin 하위 경로 + 향후 `/api` 백엔드 — 쿠키 인증 위해 same-site 유지)
 - [ ] 챕터별 소요시간 필드를 5부 → 전 시리즈 `chapters.ts` 로 확장 (경로 요약 숫자용)
