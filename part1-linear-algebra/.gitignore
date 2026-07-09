@@ -1,0 +1,27 @@
+# Node / Vite (web)
+node_modules/
+dist/
+*.tsbuildinfo
+.vite/
+
+# Python (notebooks)
+.venv/
+venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+
+# Local env
+.env
+.env.local
+
+# 개인 파일 (프로젝트와 무관 — 실수 커밋 방지)
+해커톤일정.png
+
+# Claude Code local settings (machine-specific)
+.claude/settings.local.json

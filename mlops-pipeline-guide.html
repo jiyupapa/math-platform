@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>머신러닝 파이프라인 개발 가이드 · MLOps 라이프사이클</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"/>
+<style>
+  :root{
+    --bg:#0e141a;
+    --surface:#151e26;
+    --surface-2:#1b2731;
+    --raised:#21303b;
+    --line:#2a3a46;
+    --line-soft:#1f2c35;
+    --text:#e7eef3;
+    --muted:#8ca0ad;
+    --faint:#5e7079;
+    --amber:#eaa54a;
+    --amber-soft:rgba(234,165,74,.13);
+    --teal:#46c8be;
+    --teal-soft:rgba(70,200,190,.12);
+    --rust:#df725a;
+    --rust-soft:rgba(223,114,90,.12);
+    --display:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,monospace;
+    --grotesk:"Space Grotesk","Pretendard Variable",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--display);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(900px 500px at 85% -8%, rgba(234,165,74,.06), transparent 60%),
+      radial-gradient(800px 600px at 0% 110%, rgba(70,200,190,.05), transparent 55%);
+    background-attachment:fixed;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* ---------- masthead ---------- */
+  header.mast{padding:64px 0 30px}
+  .eyebrow{
+    font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--amber);display:flex;align-items:center;gap:10px;margin-bottom:20px;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--amber);display:inline-block}
+  h1.title{
+    font-family:var(--display);font-weight:800;letter-spacing:-.02em;
+    font-size:clamp(2rem,5.2vw,3.4rem);line-height:1.08;
+  }
+  h1.title em{font-style:normal;color:var(--amber)}
+  .sub{color:var(--muted);font-size:clamp(1rem,2vw,1.18rem);max-width:62ch;margin-top:16px}
+  .meta{
+    font-family:var(--mono);font-size:12px;color:var(--faint);margin-top:24px;
+    display:flex;flex-wrap:wrap;gap:8px 18px;border-top:1px solid var(--line-soft);padding-top:16px;
+  }
+  .meta b{color:var(--muted);font-weight:500}
+
+  /* ---------- pipeline map (signature) ---------- */
+  section.map-sec{padding:18px 0 6px}
+  .sec-label{
+    font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--faint);margin-bottom:18px;
+  }
+  .pipeline{
+    display:flex;align-items:stretch;gap:0;position:relative;
+  }
+  .stage-node{
+    flex:1 1 0;min-width:0;position:relative;display:flex;flex-direction:column;align-items:center;
+    background:transparent;border:0;cursor:pointer;padding:0;font-family:var(--display);color:inherit;
+  }
+  .node-box{
+    width:100%;border:1px solid var(--line);background:var(--surface);
+    border-radius:13px;padding:16px 12px 15px;text-align:center;transition:all .28s cubic-bezier(.2,.7,.3,1);
+    position:relative;overflow:hidden;
+  }
+  .node-box::after{
+    content:"";position:absolute;inset:0;background:var(--amber-soft);opacity:0;transition:opacity .28s;
+  }
+  .stage-node:hover .node-box{border-color:var(--amber);transform:translateY(-3px)}
+  .stage-node[aria-selected="true"] .node-box{
+    border-color:var(--amber);background:var(--surface-2);
+    box-shadow:0 0 0 1px var(--amber), 0 14px 34px -18px rgba(234,165,74,.55);
+  }
+  .stage-node[aria-selected="true"] .node-box::after{opacity:1}
+  .node-code{font-family:var(--grotesk);font-weight:700;font-size:13px;color:var(--amber);letter-spacing:.05em;position:relative;z-index:1}
+  .node-kr{font-weight:700;font-size:15px;margin-top:7px;letter-spacing:-.01em;position:relative;z-index:1}
+  .node-en{font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:4px;letter-spacing:.04em;position:relative;z-index:1}
+  .connector{
+    flex:0 0 30px;align-self:center;height:2px;position:relative;margin-top:-22px;
+    background:var(--line);border-radius:2px;
+  }
+  .connector .dot{
+    position:absolute;top:50%;left:0;width:6px;height:6px;border-radius:50%;
+    background:var(--amber);transform:translate(-50%,-50%);
+    box-shadow:0 0 8px var(--amber);
+    animation:flow 2.4s linear infinite;
+  }
+  @keyframes flow{0%{left:0;opacity:0}12%{opacity:1}88%{opacity:1}100%{left:100%;opacity:0}}
+  .connector:nth-of-type(4) .dot{animation-delay:.6s}
+  .connector:nth-of-type(6) .dot{animation-delay:1.2s}
+  .connector:nth-of-type(8) .dot{animation-delay:1.8s}
+
+  .loopback{
+    margin-top:14px;display:flex;align-items:center;gap:12px;
+    border:1px dashed var(--teal);border-radius:11px;padding:11px 16px;background:var(--teal-soft);
+    font-size:13.5px;color:var(--text);
+  }
+  .loopback .ico{color:var(--teal);font-family:var(--mono);font-size:15px;flex:0 0 auto}
+  .loopback b{color:var(--teal);font-weight:600}
+  .loopback span.note{color:var(--muted);font-size:12.5px}
+
+  /* ---------- detail panel ---------- */
+  section.detail{padding:34px 0 10px}
+  .panel{
+    border:1px solid var(--line);border-radius:18px;background:
+      linear-gradient(180deg,var(--surface-2),var(--surface));
+    overflow:hidden;
+  }
+  .panel-head{
+    display:flex;align-items:flex-start;gap:18px;padding:26px 30px 22px;
+    border-bottom:1px solid var(--line-soft);position:relative;
+  }
+  .panel-head::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--amber)}
+  .ph-num{
+    font-family:var(--grotesk);font-weight:700;font-size:clamp(2.4rem,6vw,3.6rem);
+    color:var(--amber);line-height:.9;flex:0 0 auto;opacity:.9;
+  }
+  .ph-text h2{font-weight:800;font-size:clamp(1.35rem,3vw,1.7rem);letter-spacing:-.02em}
+  .ph-text .en{font-family:var(--mono);font-size:12px;color:var(--faint);margin-top:3px;letter-spacing:.05em}
+  .ph-text .purpose{color:var(--muted);font-size:15px;margin-top:11px;max-width:64ch}
+
+  .activities{
+    display:flex;flex-wrap:wrap;gap:8px;padding:18px 30px;border-bottom:1px solid var(--line-soft);
+    background:rgba(0,0,0,.12);
+  }
+  .activities .lbl{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.12em;text-transform:uppercase;align-self:center;margin-right:4px}
+  .chip{
+    font-family:var(--mono);font-size:12px;padding:5px 11px;border-radius:7px;
+    background:var(--raised);border:1px solid var(--line);color:var(--text);
+  }
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:0}
+  .col{padding:24px 30px}
+  .col.best{border-right:1px solid var(--line-soft)}
+  .col h3{
+    font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+    display:flex;align-items:center;gap:9px;margin-bottom:16px;
+  }
+  .col.best h3{color:var(--teal)}
+  .col.anti h3{color:var(--rust)}
+  .col h3 .tag{
+    width:18px;height:18px;border-radius:5px;display:grid;place-items:center;font-size:12px;font-weight:700;
+  }
+  .col.best h3 .tag{background:var(--teal-soft);color:var(--teal)}
+  .col.anti h3 .tag{background:var(--rust-soft);color:var(--rust)}
+  ul.list{list-style:none;display:flex;flex-direction:column;gap:13px}
+  ul.list li{display:flex;gap:11px;font-size:14.5px;line-height:1.55;color:#d4dee5}
+  ul.list li::before{
+    content:"";flex:0 0 auto;width:7px;height:7px;border-radius:2px;margin-top:8px;
+  }
+  .col.best li::before{background:var(--teal)}
+  .col.anti li::before{background:var(--rust);border-radius:50%}
+  ul.list li b{color:var(--text);font-weight:600}
+
+  .tools{padding:20px 30px 26px;border-top:1px solid var(--line-soft);background:rgba(0,0,0,.12)}
+  .tools .lbl{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+  .tool-list{display:flex;flex-wrap:wrap;gap:8px}
+  .tool{
+    font-family:var(--mono);font-size:12.5px;padding:6px 12px;border-radius:7px;
+    border:1px solid var(--line);color:var(--muted);background:var(--surface);transition:.2s;
+  }
+  .tool:hover{color:var(--amber);border-color:var(--amber)}
+
+  /* ---------- maturity ---------- */
+  section.maturity{padding:48px 0 10px}
+  .mat-head{margin-bottom:22px}
+  .mat-head h2{font-weight:800;font-size:clamp(1.4rem,3vw,1.9rem);letter-spacing:-.02em}
+  .mat-head p{color:var(--muted);font-size:15px;margin-top:8px;max-width:64ch}
+  .mat-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+  .mat-tab{
+    font-family:var(--mono);font-size:13px;padding:11px 18px;border-radius:10px;cursor:pointer;
+    border:1px solid var(--line);background:var(--surface);color:var(--muted);transition:.22s;
+    display:flex;align-items:center;gap:10px;
+  }
+  .mat-tab .lv{font-family:var(--grotesk);font-weight:700;color:var(--faint)}
+  .mat-tab:hover{border-color:var(--teal);color:var(--text)}
+  .mat-tab[aria-selected="true"]{background:var(--teal-soft);border-color:var(--teal);color:var(--text)}
+  .mat-tab[aria-selected="true"] .lv{color:var(--teal)}
+  .mat-body{
+    border:1px solid var(--line);border-radius:16px;padding:26px 30px;background:var(--surface-2);
+  }
+  .mat-body h3{font-size:1.2rem;font-weight:700;margin-bottom:6px}
+  .mat-body .mb-sub{font-family:var(--mono);font-size:12px;color:var(--teal);letter-spacing:.05em;margin-bottom:16px}
+  .mat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .mat-cell .ml{font-family:var(--mono);font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.1em;margin-bottom:7px}
+  .mat-cell p{font-size:14px;color:#d4dee5;line-height:1.55}
+
+  /* ---------- cross-cutting ---------- */
+  section.cross{padding:48px 0 10px}
+  .cross h2{font-weight:800;font-size:clamp(1.4rem,3vw,1.9rem);letter-spacing:-.02em;margin-bottom:6px}
+  .cross > .wrap > p, .cross .cap{color:var(--muted);font-size:15px;margin-bottom:24px;max-width:64ch}
+  .cc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .cc-card{
+    border:1px solid var(--line);border-radius:14px;padding:22px 24px;background:var(--surface);
+    transition:.24s;
+  }
+  .cc-card:hover{border-color:var(--amber);background:var(--surface-2)}
+  .cc-card .cc-h{display:flex;align-items:center;gap:11px;margin-bottom:11px}
+  .cc-card .cc-ico{
+    font-family:var(--mono);font-size:13px;width:30px;height:30px;border-radius:8px;display:grid;place-items:center;
+    background:var(--amber-soft);color:var(--amber);font-weight:700;flex:0 0 auto;
+  }
+  .cc-card h4{font-size:1.05rem;font-weight:700}
+  .cc-card p{font-size:14px;color:#cdd8df;line-height:1.55}
+  .cc-card .cc-tools{font-family:var(--mono);font-size:12px;color:var(--faint);margin-top:11px}
+
+  footer{padding:54px 0 70px;margin-top:30px;border-top:1px solid var(--line-soft)}
+  footer p{font-family:var(--mono);font-size:12px;color:var(--faint);line-height:1.8}
+  footer p b{color:var(--muted);font-weight:500}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:760px){
+    .pipeline{flex-direction:column;gap:0}
+    .stage-node{width:100%}
+    .connector{flex:0 0 26px;width:2px;height:26px;margin:0 auto;align-self:center;margin-top:0}
+    .connector .dot{left:50%;top:0;animation:flowv 2.4s linear infinite}
+    @keyframes flowv{0%{top:0;opacity:0}12%{opacity:1}88%{opacity:1}100%{top:100%;opacity:0}}
+    .cols{grid-template-columns:1fr}
+    .col.best{border-right:0;border-bottom:1px solid var(--line-soft)}
+    .mat-grid{grid-template-columns:1fr}
+    .cc-grid{grid-template-columns:1fr}
+    .panel-head{flex-direction:column;gap:10px;padding:22px 22px 18px}
+    .col,.activities,.tools{padding-left:22px;padding-right:22px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto}
+  }
+  :focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:6px}
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="wrap">
+    <div class="eyebrow">MLOps · 라이프사이클 운영 가이드</div>
+    <h1 class="title">머신러닝 <em>파이프라인</em><br>개발 가이드</h1>
+    <p class="sub">데이터 수집부터 모니터링·재학습까지, ML 시스템 전체 라이프사이클의 베스트 프랙티스와 흔한 안티패턴을 한눈에. ML 파이프라인은 직선이 아니라 <strong style="color:var(--text)">순환</strong>입니다.</p>
+    <div class="meta">
+      <span><b>범위</b> 5단계 라이프사이클</span>
+      <span><b>관점</b> 범용 MLOps</span>
+      <span><b>구성</b> 베스트 프랙티스 · 안티패턴 · 도구</span>
+      <span><b>참조</b> Google MLOps 성숙도 모델</span>
+    </div>
+  </div>
+</header>
+
+<section class="map-sec">
+  <div class="wrap">
+    <div class="sec-label">파이프라인 맵 — 단계를 선택하세요</div>
+    <div class="pipeline" id="pipeline" role="tablist" aria-label="ML 라이프사이클 단계"></div>
+    <div class="loopback">
+      <span class="ico">↺</span>
+      <div>
+        <b>피드백 루프</b> · 모니터링에서 감지된 드리프트·성능 저하는 다시 <span class="note">수집·전처리·학습 단계로 되돌아가 재학습을 트리거합니다. 이 순환이 끊기면 모델은 조용히 낡아갑니다.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="detail">
+  <div class="wrap">
+    <div class="panel" role="tabpanel" id="detailPanel" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="maturity">
+  <div class="wrap">
+    <div class="mat-head">
+      <h2>MLOps 성숙도 모델</h2>
+      <p>같은 5단계라도 자동화 수준에 따라 운영 난이도와 갱신 속도가 완전히 달라집니다. 우리 팀이 지금 어디에 있는지부터 진단하세요.</p>
+    </div>
+    <div class="mat-tabs" id="matTabs" role="tablist" aria-label="MLOps 성숙도 단계"></div>
+    <div class="mat-body" id="matBody" role="tabpanel" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="cross">
+  <div class="wrap">
+    <h2>모든 단계를 관통하는 교차 관심사</h2>
+    <p class="cap">아래 다섯 가지는 특정 단계의 일이 아니라 파이프라인 전체에 깔리는 토대입니다. 단계별 베스트 프랙티스가 무너지는 대부분의 원인이 여기에 있습니다.</p>
+    <div class="cc-grid" id="ccGrid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>
+      <b>설계 원칙</b> · 재현성(코드·데이터·환경 고정) → 자동화(파이프라인화) → 관측(모니터링·계보) → 순환(재학습)<br>
+      <b>핵심 한 줄</b> · "노트북에서 됐다"는 시작일 뿐, 프로덕션은 학습·전처리·환경이 모두 봉인되고 되돌아올 수 있을 때 비로소 끝납니다.<br>
+      <b>다음 단계</b> · 팀의 성숙도를 진단하고, 가장 약한 교차 관심사 하나부터 자동화하세요.
+    </p>
+  </div>
+</footer>
+
+<script>
+/* ---------------- data ---------------- */
+const STAGES = [
+  {
+    code:"01", kr:"데이터 수집", en:"INGESTION",
+    purpose:"원천 데이터를 안정적·재현 가능하게 확보하고 버전을 고정한다. 파이프라인의 신뢰는 여기서 시작된다.",
+    activities:["소스 연결(배치/스트림)","스키마 계약 검증","원천 적재","데이터 버전 관리","계보 메타데이터 기록"],
+    best:[
+      "<b>원천(raw) 데이터는 불변</b>으로 보관한다 — 재처리할 때 항상 동일한 출발점을 보장.",
+      "<b>스키마 계약</b>을 적재 시점에 검증해 깨진 데이터를 학습 단계 이전에 차단.",
+      "데이터도 코드처럼 <b>버전 관리</b>한다(DVC, lakeFS, Delta time-travel).",
+      "적재는 <b>멱등(idempotent)</b>하게 — 재시도·중복 실행에도 안전하도록.",
+      "출처·수집시각·스키마버전을 함께 기록해 <b>계보(lineage)의 출발점</b>을 만든다."
+    ],
+    anti:[
+      "원천을 곧바로 <b>덮어쓰기</b> → 과거 시점 재현이 영영 불가능.",
+      "검증 없이 적재 → 문제는 항상 가장 비싼 <b>학습·서빙 단계</b>에서 터진다.",
+      "\"데이터는 DB에 있으니 버전은 필요 없다\"는 착각.",
+      "수집 메타데이터를 안 남겨 나중에 <b>왜 이 값인지</b> 추적 불가."
+    ],
+    tools:["Airbyte","Kafka","Debezium(CDC)","DVC","lakeFS","Delta Lake","Great Expectations"]
+  },
+  {
+    code:"02", kr:"전처리 · 피처", en:"PREPROCESSING",
+    purpose:"학습과 서빙에 동일하게 적용되는 재현 가능한 변환을 만든다. train-serve skew와 데이터 누수를 막는 단계.",
+    activities:["정제·결측 처리","피처 엔지니어링","train/val/test 분할","피처 스토어 등록","분포 검증"],
+    best:[
+      "학습/서빙이 <b>동일한 변환 로직</b>을 공유 → train-serve skew 방지(피처 스토어 또는 공통 코드).",
+      "분할 <b>이후</b>에 통계를 산출 — 스케일러·인코더는 <b>train에만 fit</b>해 누수 차단.",
+      "데이터 검증·프로파일링을 자동화(Great Expectations, TFDV)해 분포 이상을 조기 탐지.",
+      "전처리를 <b>파이프라인 코드</b>로(파라미터·시드 고정) — 노트북 수작업 금지.",
+      "피처 정의를 <b>단일 출처</b>로 관리해 중복·불일치를 제거."
+    ],
+    anti:[
+      "전체 데이터로 스케일링한 뒤 분할 → 전형적인 <b>데이터 누수</b>.",
+      "타깃에서 파생된 <b>미래 정보</b>를 피처에 포함(라벨 누수).",
+      "노트북에서 손으로 전처리 → 서빙에서 재현 불가, <b>skew 발생</b>.",
+      "피처를 각 모델이 제각기 재정의 → 불일치와 중복 연산."
+    ],
+    tools:["Feast","Tecton","Polars / Pandas","scikit-learn Pipeline","Spark","Great Expectations","TFDV"]
+  },
+  {
+    code:"03", kr:"학습 · 실험", en:"TRAINING",
+    purpose:"추적 가능하고 재현 가능한 실험으로, 비즈니스 지표와 연결된 검증된 모델을 만든다.",
+    activities:["실험 추적","하이퍼파라미터 탐색","평가·검증","모델 레지스트리 등록","승격(staging→prod)"],
+    best:[
+      "모든 실험을 <b>추적</b>한다 — 코드 커밋·데이터 버전·파라미터·메트릭·아티팩트(MLflow, W&B).",
+      "<b>재현성 3종 세트</b>: 코드·데이터·환경을 모두 고정(시드, 컨테이너, 의존성 lock).",
+      "평가를 <b>비즈니스 지표</b>와 연결하고, <b>슬라이스별 성능</b>(취약 구간·공정성)을 확인.",
+      "검증을 통과한 모델만 <b>레지스트리</b>에 등록하고 단계적으로 승격.",
+      "하이퍼파라미터 탐색을 <b>자동화</b>(Optuna)해 수동 튜닝의 기록 누락을 방지."
+    ],
+    anti:[
+      "\"내 노트북에서는 됨\" — <b>환경 미고정</b>으로 재현 실패.",
+      "단일 정확도 숫자만 보고 배포를 결정.",
+      "<b>테스트셋으로 반복 튜닝</b> → 테스트셋 오염, 과대평가.",
+      "어떤 데이터로 학습했는지 모르는 모델을 프로덕션에 투입."
+    ],
+    tools:["MLflow","Weights & Biases","Optuna","Ray Train","모델 레지스트리","DVC"]
+  },
+  {
+    code:"04", kr:"배포 · 서빙", en:"DEPLOYMENT",
+    purpose:"검증된 모델을 안전하게 프로덕션 트래픽에 연결한다. 항상 되돌릴 수 있어야 한다.",
+    activities:["모델 패키징","서빙 패턴 선택","점진 배포","CI/CD·CT","롤백 경로 설계"],
+    best:[
+      "서빙 패턴을 요건에 맞게 — <b>온라인(실시간) / 배치 / 스트림</b>의 지연·처리량 트레이드오프 고려.",
+      "<b>점진 배포</b>(섀도 → 카나리 → 블루-그린)로 위험을 격리하고 즉시 롤백 가능하게.",
+      "모델 패키징을 표준화(<b>컨테이너·ONNX·GGUF</b>)해 환경 의존성을 봉인.",
+      "<b>ML용 CI/CD(CT 포함)</b> — 데이터·모델 테스트를 배포 파이프라인 안에 넣는다.",
+      "전처리 코드를 서빙에 <b>동일하게 탑재</b>해 skew를 원천 차단."
+    ],
+    anti:[
+      "전량 즉시 교체(<b>빅뱅 배포</b>) → 장애 시 전면 영향.",
+      "모델만 배포하고 <b>전처리는 따로</b> → train-serve skew.",
+      "<b>롤백 경로</b>를 설계하지 않아 사고 시 복구 지연.",
+      "수동으로 모델 파일 복사 — 무엇이 배포됐는지 추적 불가."
+    ],
+    tools:["Docker / K8s","BentoML","KServe","Seldon","Triton","FastAPI","GitHub Actions / GitLab CI"]
+  },
+  {
+    code:"05", kr:"모니터링 · 피드백", en:"MONITORING",
+    purpose:"운영 중 성능 저하를 감지하고 재학습 루프를 돌린다. 여기서 1단계로 되돌아가며 순환이 완성된다.",
+    activities:["드리프트 탐지","성능·운영 지표","실측 라벨 수집","알림","재학습 트리거"],
+    best:[
+      "<b>3계층 모니터링</b> — 운영(지연·에러·처리량) · 모델(예측분포·정확도) · 데이터(드리프트).",
+      "<b>입력 드리프트</b>와 <b>개념 드리프트</b>(라벨 관계 변화)를 분리해 감시.",
+      "<b>실측 라벨 수집</b> 파이프라인을 구축 — 지연된 정답으로 실제 성능을 측정.",
+      "임계치 기반 <b>자동 재학습 트리거</b> 또는 사람 승인 게이트를 둔다.",
+      "예측·입력을 <b>로깅</b>해 사후 디버깅·감사(거버넌스)를 가능하게."
+    ],
+    anti:[
+      "배포 후 방치 → <b>조용한 성능 저하</b>(silent degradation).",
+      "정확도만 보고 <b>입력 드리프트</b>는 보지 않음.",
+      "<b>라벨 수집 없이</b> \"잘 되겠지\"로 운영.",
+      "알림만 쌓이고 <b>재학습 경로</b>가 없어 루프가 끊김."
+    ],
+    tools:["Evidently","NannyML","WhyLabs / Arize","Prometheus + Grafana","로그 파이프라인"]
+  }
+];
+
+const MATURITY = [
+  {
+    lv:"Level 0", name:"수동 프로세스", sub:"Manual process",
+    cells:[
+      {l:"빌드·배포", t:"노트북 중심 수작업. 데이터 과학자가 모델을 만들어 운영팀에 수동으로 넘긴다."},
+      {l:"재학습", t:"드물게, 모델이 눈에 띄게 망가졌을 때만. 트리거가 사람의 직감이다."},
+      {l:"모니터링", t:"거의 없음. 성능 저하를 사용자 불만으로 뒤늦게 알게 된다."}
+    ]
+  },
+  {
+    lv:"Level 1", name:"ML 파이프라인 자동화", sub:"ML pipeline automation",
+    cells:[
+      {l:"빌드·배포", t:"학습 파이프라인이 자동화됨. 같은 파이프라인이 개발·운영에서 동일하게 재현된다."},
+      {l:"재학습", t:"새 데이터·드리프트 신호에 따라 자동 재학습(CT, Continuous Training)."},
+      {l:"모니터링", t:"피처·메타데이터 스토어 도입, 데이터·모델 검증이 파이프라인에 내장."}
+    ]
+  },
+  {
+    lv:"Level 2", name:"CI/CD 파이프라인 자동화", sub:"CI/CD pipeline automation",
+    cells:[
+      {l:"빌드·배포", t:"파이프라인 자체를 자동으로 빌드·테스트·배포. 실험 → 프로덕션이 빠르고 안정적."},
+      {l:"재학습", t:"여러 파이프라인이 자동 트리거·오케스트레이션되어 지속적으로 갱신."},
+      {l:"모니터링", t:"전 단계 관측·계보·자동 롤백이 통합. 운영 신뢰도가 가장 높은 단계."}
+    ]
+  }
+];
+
+const CROSS = [
+  {ico:"⟲", h:"재현성", p:"코드·데이터·환경을 모두 고정해 언제든 같은 결과를 재현. MLOps의 모든 신뢰가 여기서 출발한다.", tools:"Git · DVC · 컨테이너 · 의존성 lock"},
+  {ico:"⇉", h:"오케스트레이션", p:"단계들을 DAG로 엮어 의존성·재시도·스케줄을 코드로 관리. 수작업 연결을 제거한다.", tools:"Airflow · Kubeflow · Dagster · Prefect · Argo"},
+  {ico:"⌖", h:"거버넌스 · 계보", p:"데이터→피처→모델→예측까지 추적. 모델 카드와 감사 로그로 \"왜 이 결정\"을 설명 가능하게.", tools:"OpenLineage · 모델 레지스트리 · Model Card"},
+  {ico:"✓", h:"테스트", p:"코드만이 아니라 데이터·피처 로직·모델 행동·인프라까지 테스트 대상이다.", tools:"데이터 테스트 · 행동 테스트 · 스모크 테스트"},
+  {ico:"∞", h:"자동화 (CI/CD/CT)", p:"통합·배포에 더해 재학습(CT)까지 파이프라인으로. 사람의 개입을 게이트로만 남긴다.", tools:"CI · CD · Continuous Training"}
+];
+
+/* ---------------- render: pipeline ---------------- */
+const pipeline = document.getElementById("pipeline");
+let active = 0;
+
+STAGES.forEach((s,i)=>{
+  if(i>0){
+    const c = document.createElement("div");
+    c.className="connector";
+    c.innerHTML='<span class="dot"></span>';
+    pipeline.appendChild(c);
+  }
+  const node = document.createElement("button");
+  node.className="stage-node";
+  node.setAttribute("role","tab");
+  node.id="tab-"+i;
+  node.setAttribute("aria-controls","detailPanel");
+  node.setAttribute("aria-selected", i===0?"true":"false");
+  node.tabIndex = i===0?0:-1;
+  node.innerHTML='<div class="node-box"><div class="node-code">'+s.code+'</div><div class="node-kr">'+s.kr+'</div><div class="node-en">'+s.en+'</div></div>';
+  node.addEventListener("click",()=>select(i));
+  node.addEventListener("keydown",e=>{
+    if(e.key==="ArrowRight"||e.key==="ArrowDown"){e.preventDefault();select((i+1)%STAGES.length,true);}
+    if(e.key==="ArrowLeft"||e.key==="ArrowUp"){e.preventDefault();select((i-1+STAGES.length)%STAGES.length,true);}
+  });
+  pipeline.appendChild(node);
+});
+
+function select(i, focus){
+  active=i;
+  document.querySelectorAll(".stage-node").forEach((n,idx)=>{
+    const on = idx===i;
+    n.setAttribute("aria-selected", on?"true":"false");
+    n.tabIndex = on?0:-1;
+    if(on && focus) n.focus();
+  });
+  renderDetail(STAGES[i]);
+}
+
+function renderDetail(s){
+  const li = arr => arr.map(x=>"<li>"+x+"</li>").join("");
+  const chips = arr => arr.map(x=>'<span class="chip">'+x+'</span>').join("");
+  const tools = arr => arr.map(x=>'<span class="tool">'+x+'</span>').join("");
+  document.getElementById("detailPanel").innerHTML =
+  '<div class="panel-head">'+
+    '<div class="ph-num">'+s.code+'</div>'+
+    '<div class="ph-text"><h2>'+s.kr+'</h2><div class="en">'+s.en+'</div><p class="purpose">'+s.purpose+'</p></div>'+
+  '</div>'+
+  '<div class="activities"><span class="lbl">핵심 활동</span>'+chips(s.activities)+'</div>'+
+  '<div class="cols">'+
+    '<div class="col best"><h3><span class="tag">✓</span>베스트 프랙티스</h3><ul class="list">'+li(s.best)+'</ul></div>'+
+    '<div class="col anti"><h3><span class="tag">!</span>안티패턴 · 흔한 실수</h3><ul class="list">'+li(s.anti)+'</ul></div>'+
+  '</div>'+
+  '<div class="tools"><div class="lbl">대표 도구</div><div class="tool-list">'+tools(s.tools)+'</div></div>';
+}
+
+/* ---------------- render: maturity ---------------- */
+const matTabs = document.getElementById("matTabs");
+let matActive = 0;
+MATURITY.forEach((m,i)=>{
+  const b=document.createElement("button");
+  b.className="mat-tab";
+  b.setAttribute("role","tab");
+  b.setAttribute("aria-selected", i===0?"true":"false");
+  b.tabIndex = i===0?0:-1;
+  b.innerHTML='<span class="lv">'+m.lv+'</span><span>'+m.name+'</span>';
+  b.addEventListener("click",()=>selectMat(i));
+  b.addEventListener("keydown",e=>{
+    if(e.key==="ArrowRight"){e.preventDefault();selectMat((i+1)%MATURITY.length,true);}
+    if(e.key==="ArrowLeft"){e.preventDefault();selectMat((i-1+MATURITY.length)%MATURITY.length,true);}
+  });
+  matTabs.appendChild(b);
+});
+function selectMat(i,focus){
+  matActive=i;
+  document.querySelectorAll(".mat-tab").forEach((t,idx)=>{
+    const on=idx===i;
+    t.setAttribute("aria-selected",on?"true":"false");
+    t.tabIndex=on?0:-1;
+    if(on&&focus)t.focus();
+  });
+  const m=MATURITY[i];
+  document.getElementById("matBody").innerHTML=
+    '<h3>'+m.lv+' — '+m.name+'</h3><div class="mb-sub">'+m.sub+'</div>'+
+    '<div class="mat-grid">'+m.cells.map(c=>'<div class="mat-cell"><div class="ml">'+c.l+'</div><p>'+c.t+'</p></div>').join("")+'</div>';
+}
+
+/* ---------------- render: cross-cutting ---------------- */
+document.getElementById("ccGrid").innerHTML = CROSS.map(c=>
+  '<div class="cc-card"><div class="cc-h"><span class="cc-ico">'+c.ico+'</span><h4>'+c.h+'</h4></div><p>'+c.p+'</p><div class="cc-tools">'+c.tools+'</div></div>'
+).join("");
+
+/* init */
+renderDetail(STAGES[0]);
+selectMat(0);
+</script>
+</body>
+</html>
