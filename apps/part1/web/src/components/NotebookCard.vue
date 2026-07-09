@@ -5,7 +5,7 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { chapters } from '@/data/chapters'
-import ConceptCard from './ConceptCard.vue'
+import { ConceptCard } from '@series/ui'
 
 const route = useRoute()
 const notebook = computed(() => {

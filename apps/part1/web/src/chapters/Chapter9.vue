@@ -1,8 +1,8 @@
 <script setup lang="ts">
 // Phase 9 · 기저·차원·계수(rank) — "벡터들이 진짜 몇 차원어치 정보인가"
 import { ref, computed } from 'vue'
-import ConceptCard from '@/components/ConceptCard.vue'
-import MathBlock from '@/components/MathBlock.vue'
+import { ConceptCard } from '@series/ui'
+import { MathBlock } from '@series/ui'
 import VectorCanvas, { type Vec } from '@/components/VectorCanvas.vue'
 import Quiz from '@/components/Quiz.vue'
 import StepQuiz from '@/components/StepQuiz.vue'

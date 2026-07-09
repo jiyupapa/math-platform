@@ -1,8 +1,8 @@
 <script setup lang="ts">
 // Phase 11 · 특이값분해(SVD) — ML에서 가장 중요한 분해
 import { ref, computed } from 'vue'
-import ConceptCard from '@/components/ConceptCard.vue'
-import MathBlock from '@/components/MathBlock.vue'
+import { ConceptCard } from '@series/ui'
+import { MathBlock } from '@series/ui'
 import Quiz from '@/components/Quiz.vue'
 import StepQuiz from '@/components/StepQuiz.vue'
 import QuizSet from '@/components/QuizSet.vue'

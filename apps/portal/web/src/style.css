@@ -1,4 +1,6 @@
 @import 'tailwindcss';
+/* 공용 패키지(@series/ui) 클래스도 Tailwind 스캔 대상에 포함 (필수). */
+@source '../../../../packages/ui/src';
 @import 'katex/dist/katex.min.css';
 
 :root {

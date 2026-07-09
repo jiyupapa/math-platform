@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // Phase 4 · 연립방정식과 가우스 소거법
-import ConceptCard from '@/components/ConceptCard.vue'
-import MathBlock from '@/components/MathBlock.vue'
+import { ConceptCard } from '@series/ui'
+import { MathBlock } from '@series/ui'
 import LinearSystem2D from '@/components/LinearSystem2D.vue'
 import Quiz from '@/components/Quiz.vue'
 import StepQuiz from '@/components/StepQuiz.vue'

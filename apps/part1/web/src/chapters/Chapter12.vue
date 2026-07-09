@@ -1,8 +1,8 @@
 <script setup lang="ts">
 // Phase 12 · 그래디언트와 행렬미분 — AI '학습'의 심장 (마지막 챕터)
 import { ref, computed, onUnmounted } from 'vue'
-import ConceptCard from '@/components/ConceptCard.vue'
-import MathBlock from '@/components/MathBlock.vue'
+import { ConceptCard } from '@series/ui'
+import { MathBlock } from '@series/ui'
 import Quiz from '@/components/Quiz.vue'
 import StepQuiz from '@/components/StepQuiz.vue'
 import QuizSet from '@/components/QuizSet.vue'

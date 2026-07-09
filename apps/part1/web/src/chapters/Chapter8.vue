@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // Phase 8 · 응용 (PCA) + 마무리
-import ConceptCard from '@/components/ConceptCard.vue'
-import MathBlock from '@/components/MathBlock.vue'
+import { ConceptCard } from '@series/ui'
+import { MathBlock } from '@series/ui'
 import PCADemo from '@/components/PCADemo.vue'
 import Quiz from '@/components/Quiz.vue'
 import StepQuiz from '@/components/StepQuiz.vue'

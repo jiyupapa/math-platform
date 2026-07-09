@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // Phase 7 · 고유값과 고유벡터
-import ConceptCard from '@/components/ConceptCard.vue'
-import MathBlock from '@/components/MathBlock.vue'
+import { ConceptCard } from '@series/ui'
+import { MathBlock } from '@series/ui'
 import EigenDemo from '@/components/EigenDemo.vue'
 import Quiz from '@/components/Quiz.vue'
 import StepQuiz from '@/components/StepQuiz.vue'
