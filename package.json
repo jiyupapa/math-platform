@@ -6,5 +6,9 @@
   "workspaces": [
     "apps/*/web",
     "packages/*"
-  ]
+  ],
+  "scripts": {
+    "deploy:build": "node scripts/build-deploy.mjs",
+    "deploy:serve": "node scripts/serve-deploy.mjs"
+  }
 }
