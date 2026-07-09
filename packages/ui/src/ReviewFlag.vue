@@ -1,9 +1,11 @@
 <script setup lang="ts">
 // 섹션 제목 옆에 두는 '복습에 추가' 북마크 토글. id 는 앵커 역할도 한다.
-import { useReviewStore } from '@/stores/review'
+// 복습 저장은 앱이 reviewApiKey 로 주입한 구현(자기 review 스토어)에 위임한다.
+import { inject } from 'vue'
+import { reviewApiKey } from './injection'
 
 const props = defineProps<{ id: string; chapter: string; label: string }>()
-const review = useReviewStore()
+const review = inject(reviewApiKey, { isFlagged: () => false, toggle: () => {} })
 </script>
 
 <template>

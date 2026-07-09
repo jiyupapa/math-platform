@@ -7,8 +7,9 @@
 //   <QuizSet title="연습 문제" @completed="progress.markDone('ch1')">
 //     <Quiz ... /> <Quiz ... /> ...
 //   </QuizSet>
-import { reactive, computed, provide, watch } from 'vue'
+import { reactive, computed, provide, watch, inject } from 'vue'
 import { quizGroupKey, type QuizGroup } from './quizGroup'
+import { storagePrefixKey } from './injection'
 
 const props = withDefaults(defineProps<{ title?: string }>(), { title: '연습 문제' })
 const emit = defineEmits<{ completed: [] }>()
@@ -18,7 +19,9 @@ const solved = reactive(new Set<string>())
 
 // 풀이 현황을 localStorage 에 저장 — 새로고침·이탈 후에도 푼 문제가 유지된다.
 // 키는 세트 제목(챕터마다 고유)이고, 값은 맞힌 문제의 uid(질문 문자열) 배열.
-const storageKey = `la-quizset-v1:${props.title}`
+// 접두사(la/diff/stat/tf/it)는 앱이 storagePrefixKey 로 주입 — 부별 진도 격리.
+const storagePrefix = inject(storagePrefixKey, 'la')
+const storageKey = `${storagePrefix}-quizset-v1:${props.title}`
 function loadPersisted(): Set<string> {
   try {
     const raw = localStorage.getItem(storageKey)

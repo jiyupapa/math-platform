@@ -2,16 +2,17 @@
 // 각 챕터에 대응하는 Python 노트북 안내 카드.
 // 현재 챕터를 route 로 찾아 chapters.ts 의 notebook 필드를 자동으로 읽어 표시한다.
 // (항상 보이는 카드 — 퀴즈 완료 여부와 무관. 노트북은 선택 학습, 웹만으로도 완주 가능)
-import { computed } from 'vue'
+import { computed, inject } from 'vue'
 import { useRoute } from 'vue-router'
-import { chapters } from '@/data/chapters'
-import { ConceptCard } from '@series/ui'
+import ConceptCard from './ConceptCard.vue'
+import { notebookResolverKey } from './injection'
 
 const route = useRoute()
+// 현재 slug → 노트북 파일명 매핑은 앱이 chapters 데이터로 주입한다.
+const resolveNotebook = inject(notebookResolverKey, () => null)
 const notebook = computed(() => {
   const m = /^\/ch\/([\w-]+)$/.exec(route.path)
-  const slug = m ? m[1] : null
-  return chapters.find((c) => c.slug === slug)?.notebook ?? null
+  return resolveNotebook(m ? m[1] : null)
 })
 </script>
 
