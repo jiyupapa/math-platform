@@ -107,7 +107,7 @@
 > **현재 상태(2026-07-09 — 확정)**: 사용자가 **플랫폼 방향을 확정** → **모노레포 채택 확정.**
 > 결정을 가른 질문 "인증·유저 관리를 갖춘 실제 플랫폼인가?"에 **예**로 답함 (해커톤 후에도 여러 사용자가 로그인해 쓰고 본인이 운영하는 서비스로 키운다).
 > 여전히 **타임라인 분리**: 구조(모노레포)는 지금, 백엔드(인증·유저·서버)는 필요할 때, **해커톤 데모(12월)는 정적+localStorage+local Ollama 버전 그대로.** 지금은 구조 재배치이지 플랫폼 기능 구현이 아님.
-> **코드·저장소·git 미변경** — 실행 착수는 아래 실행계획 + 사용자 승인 후.
+> **진행: 모노레포 전환 완료 (2026-07-09)** — 작업 루트 `C:\STUDY\MATH_PLATFORM`(원본 `C:\STUDY\MATH` 는 얼어붙은 백업). npm workspaces + `apps/part1..5` + `apps/portal` + `packages/ui`(@series/ui). 빌드·런타임(headless Chrome)·노트북 3중 검증 통과. 상세 이력은 `docs/99_history.md`.
 > 근거: 아래 "①-저장소-localStorage"(문제 C = 구조적 천장) + "①-저장소-반전(근거)".
 
 **반전 트리거 — 사용자가 제시한 "바뀔 수 있는 부분" 4가지:**
@@ -205,8 +205,8 @@ C:\STUDY\MATH\        (모노레포 git 루트)
 ## 다음 행동
 
 - [x] ~~포털 저장소 방식 확정 → 독립 repo~~ → **반전: 모노레포 지금 채택** (플랫폼화 요구 — ①-저장소-반전 절)
-- [ ] **모노레포 전환 트라이얼**: `packages/shared` 추출 → 1부 + part0-portal 만 연결 → 빌드+눈 검증(Tailwind `@source`) → 나머지 4개 전파. 원격은 아카이브(무손실)
-- [ ] 두 seam 삽입: Ollama URL 설정화 · 진도 접근을 스토어 인터페이스 뒤로 (미래 백엔드 대비)
+- [x] **모노레포 전환 완료** — `packages/ui`(@series/ui) 추출 + provide/inject 결합해제(`storagePrefixKey`·`reviewApiKey`·`notebookResolverKey`) + 전 5부·포털 전파. 빌드+런타임(headless Chrome)+노트북(60/61) 검증. `check_drift`·CLAUDE.md 정리까지. (이력: `docs/99_history.md`)
+- [ ] 두 seam 마무리: **Ollama URL 설정화(미완)** · 진도 스토어를 API 교체 가능하게(현재 localStorage 직접 — 단 컴포넌트↔스토어 결합은 inject 로 이미 분리됨)
 - [ ] 진단 퀴즈 문항 설계(관문 4개 × 2~3문항 + 자신감 자기보고 2~3문항 — ①-상세 표 기준)
 - [ ] 배포 대상 확정(정적 프론트 동일 origin 하위 경로 + 향후 `/api` 백엔드 — 쿠키 인증 위해 same-site 유지)
 - [ ] 챕터별 소요시간 필드를 5부 → 전 시리즈 `chapters.ts` 로 확장 (경로 요약 숫자용)
