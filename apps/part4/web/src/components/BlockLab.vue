@@ -5,7 +5,7 @@
 //   - 잔차만          → 값이 폭발
 //   - 층정규화 있음   → 안정적으로 유지 → 깊게 쌓을 수 있음
 import { ref, computed } from 'vue'
-import ChartView from './ChartView.vue'
+import { ChartView } from '@series/ui'
 
 const layers = ref(8)
 const residual = ref(true)

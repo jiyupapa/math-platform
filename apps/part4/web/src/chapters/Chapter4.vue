@@ -1,15 +1,15 @@
 <script setup lang="ts">
 // Phase 4 — 위치 인코딩. 임베딩에 "몇 번째 단어인지" 순서 정보를 더한다.
-import ConceptCard from '@/components/ConceptCard.vue'
-import DetailsCard from '@/components/DetailsCard.vue'
-import MathBlock from '@/components/MathBlock.vue'
-import ChartView from '@/components/ChartView.vue'
+import { ConceptCard } from '@series/ui'
+import { DetailsCard } from '@series/ui'
+import { MathBlock } from '@series/ui'
+import { ChartView } from '@series/ui'
 import PositionLab from '@/components/PositionLab.vue'
-import Quiz from '@/components/Quiz.vue'
-import StepQuiz from '@/components/StepQuiz.vue'
-import QuizSet from '@/components/QuizSet.vue'
-import NotebookCard from '@/components/NotebookCard.vue'
-import ReviewFlag from '@/components/ReviewFlag.vue'
+import { Quiz } from '@series/ui'
+import { StepQuiz } from '@series/ui'
+import { QuizSet } from '@series/ui'
+import { NotebookCard } from '@series/ui'
+import { ReviewFlag } from '@series/ui'
 import { useProgressStore } from '@/stores/progress'
 
 const progress = useProgressStore()

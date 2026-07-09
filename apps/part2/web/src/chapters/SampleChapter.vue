@@ -2,13 +2,13 @@
 // Phase 0 샘플 챕터 — 공통 컴포넌트 + 미분 전용 시각화(TangentExplorer)를 모두 사용해
 // "한 챕터의 완성형"을 보여준다. 실제 Phase 1~10 챕터도 이 구조를 그대로 따른다.
 import { computed } from 'vue'
-import ConceptCard from '@/components/ConceptCard.vue'
-import MathBlock from '@/components/MathBlock.vue'
-import ChartView from '@/components/ChartView.vue'
+import { ConceptCard } from '@series/ui'
+import { MathBlock } from '@series/ui'
+import { ChartView } from '@series/ui'
 import TangentExplorer from '@/components/TangentExplorer.vue'
-import Quiz from '@/components/Quiz.vue'
-import StepQuiz from '@/components/StepQuiz.vue'
-import QuizSet from '@/components/QuizSet.vue'
+import { Quiz } from '@series/ui'
+import { StepQuiz } from '@series/ui'
+import { QuizSet } from '@series/ui'
 import { useProgressStore } from '@/stores/progress'
 
 const progress = useProgressStore()

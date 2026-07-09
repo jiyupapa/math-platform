@@ -11,4 +11,9 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  // @series/ui 는 소스(.vue) 형태의 워크스페이스 패키지 — esbuild 사전번들 대상에서 제외해
+  // vue 플러그인이 .vue 를 직접 변환하도록 한다.
+  optimizeDeps: {
+    exclude: ['@series/ui'],
+  },
 })

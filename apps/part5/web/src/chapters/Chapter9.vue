@@ -1,15 +1,15 @@
 <script setup lang="ts">
 // Phase 9 · 문맥의 가치 — 조건부 엔트로피 H(X|Y) 와 상호정보량 I(X;Y)
 // 표준 구성: 개념 설명 + 인터랙티브 시각화 + 미니체크 + 10문제 세트 + 노트북 안내
-import ConceptCard from '@/components/ConceptCard.vue'
-import DetailsCard from '@/components/DetailsCard.vue'
-import MathBlock from '@/components/MathBlock.vue'
+import { ConceptCard } from '@series/ui'
+import { DetailsCard } from '@series/ui'
+import { MathBlock } from '@series/ui'
 import InfoVenn from '@/components/InfoVenn.vue'
-import Quiz from '@/components/Quiz.vue'
-import StepQuiz from '@/components/StepQuiz.vue'
-import QuizSet from '@/components/QuizSet.vue'
-import NotebookCard from '@/components/NotebookCard.vue'
-import ReviewFlag from '@/components/ReviewFlag.vue'
+import { Quiz } from '@series/ui'
+import { StepQuiz } from '@series/ui'
+import { QuizSet } from '@series/ui'
+import { NotebookCard } from '@series/ui'
+import { ReviewFlag } from '@series/ui'
 import { useProgressStore } from '@/stores/progress'
 
 const progress = useProgressStore()

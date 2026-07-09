@@ -3,7 +3,7 @@
 // 지수 n 슬라이더를 움직이면, 미분 결과 수식이 즉시 바뀌고 "지수가 앞으로 내려와 계수가 되고
 // 지수는 1 줄어든다"는 패턴을 강조해서 보여준다. 아래 작은 그래프로 x^n 의 모양 변화도 확인.
 import { ref, computed } from 'vue'
-import MathBlock from './MathBlock.vue'
+import { MathBlock } from '@series/ui'
 
 const props = withDefaults(defineProps<{ maxN?: number; size?: number }>(), {
   maxN: 5,

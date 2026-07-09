@@ -1,13 +1,13 @@
 <script setup lang="ts">
 // Phase 1 · 데이터를 한눈에 — 평균·중앙값·최빈값
-import ConceptCard from '@/components/ConceptCard.vue'
-import MathBlock from '@/components/MathBlock.vue'
+import { ConceptCard } from '@series/ui'
+import { MathBlock } from '@series/ui'
 import MeanMedianExplorer from '@/components/MeanMedianExplorer.vue'
 import HistogramBuilder from '@/components/HistogramBuilder.vue'
-import Quiz from '@/components/Quiz.vue'
-import StepQuiz from '@/components/StepQuiz.vue'
-import QuizSet from '@/components/QuizSet.vue'
-import ReviewFlag from '@/components/ReviewFlag.vue'
+import { Quiz } from '@series/ui'
+import { StepQuiz } from '@series/ui'
+import { QuizSet } from '@series/ui'
+import { ReviewFlag } from '@series/ui'
 import { useProgressStore } from '@/stores/progress'
 
 const progress = useProgressStore()

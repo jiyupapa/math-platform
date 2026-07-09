@@ -1,14 +1,14 @@
 <script setup lang="ts">
 // Phase 11 (심화) — 학습. 무작위 가중치가 '다음 단어 맞히기'로 똑똑해지는 과정: 손실 + 경사하강.
 import { ref, computed } from 'vue'
-import ConceptCard from '@/components/ConceptCard.vue'
-import DetailsCard from '@/components/DetailsCard.vue'
-import MathBlock from '@/components/MathBlock.vue'
+import { ConceptCard } from '@series/ui'
+import { DetailsCard } from '@series/ui'
+import { MathBlock } from '@series/ui'
 import GradientDescentLab from '@/components/GradientDescentLab.vue'
-import Quiz from '@/components/Quiz.vue'
-import QuizSet from '@/components/QuizSet.vue'
-import NotebookCard from '@/components/NotebookCard.vue'
-import ReviewFlag from '@/components/ReviewFlag.vue'
+import { Quiz } from '@series/ui'
+import { QuizSet } from '@series/ui'
+import { NotebookCard } from '@series/ui'
+import { ReviewFlag } from '@series/ui'
 import { RouterLink } from 'vue-router'
 import { useProgressStore } from '@/stores/progress'
 
