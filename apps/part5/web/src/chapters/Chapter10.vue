@@ -1,13 +1,13 @@
 <script setup lang="ts">
 // Phase 10 · 🎓 캡스톤 — 손실함수를 갈아 끼우다 (시리즈 대단원)
 // 캡스톤 본편은 노트북(ch10_capstone.ipynb) — 웹은 여정 정리 + 실험 안내 + 종합 문제.
-import ConceptCard from '@/components/ConceptCard.vue'
-import MathBlock from '@/components/MathBlock.vue'
-import Quiz from '@/components/Quiz.vue'
-import StepQuiz from '@/components/StepQuiz.vue'
-import QuizSet from '@/components/QuizSet.vue'
-import NotebookCard from '@/components/NotebookCard.vue'
-import ReviewFlag from '@/components/ReviewFlag.vue'
+import { ConceptCard } from '@series/ui'
+import { MathBlock } from '@series/ui'
+import { Quiz } from '@series/ui'
+import { StepQuiz } from '@series/ui'
+import { QuizSet } from '@series/ui'
+import { NotebookCard } from '@series/ui'
+import { ReviewFlag } from '@series/ui'
 import { useProgressStore } from '@/stores/progress'
 
 const progress = useProgressStore()

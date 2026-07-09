@@ -1,14 +1,14 @@
 <script setup lang="ts">
 // Phase 2 — 토큰화. 파이프라인의 첫 칸: 글을 토큰(조각)으로 쪼개 숫자 ID 로.
 import { computed } from 'vue'
-import ConceptCard from '@/components/ConceptCard.vue'
-import DetailsCard from '@/components/DetailsCard.vue'
-import ChartView from '@/components/ChartView.vue'
+import { ConceptCard } from '@series/ui'
+import { DetailsCard } from '@series/ui'
+import { ChartView } from '@series/ui'
 import TokenizerLab from '@/components/TokenizerLab.vue'
-import Quiz from '@/components/Quiz.vue'
-import QuizSet from '@/components/QuizSet.vue'
-import NotebookCard from '@/components/NotebookCard.vue'
-import ReviewFlag from '@/components/ReviewFlag.vue'
+import { Quiz } from '@series/ui'
+import { QuizSet } from '@series/ui'
+import { NotebookCard } from '@series/ui'
+import { ReviewFlag } from '@series/ui'
 import { tokenize } from '@/utils/tokenizer'
 import { useProgressStore } from '@/stores/progress'
 

@@ -1,13 +1,13 @@
 <script setup lang="ts">
 // Phase 10 · 상관관계와 회귀 — 머신러닝의 시작 (시리즈 종착점)
-import ConceptCard from '@/components/ConceptCard.vue'
-import MathBlock from '@/components/MathBlock.vue'
-import ChartView from '@/components/ChartView.vue'
+import { ConceptCard } from '@series/ui'
+import { MathBlock } from '@series/ui'
+import { ChartView } from '@series/ui'
 import RegressionExplorer from '@/components/RegressionExplorer.vue'
-import Quiz from '@/components/Quiz.vue'
-import StepQuiz from '@/components/StepQuiz.vue'
-import QuizSet from '@/components/QuizSet.vue'
-import ReviewFlag from '@/components/ReviewFlag.vue'
+import { Quiz } from '@series/ui'
+import { StepQuiz } from '@series/ui'
+import { QuizSet } from '@series/ui'
+import { ReviewFlag } from '@series/ui'
 import { useProgressStore } from '@/stores/progress'
 
 const progress = useProgressStore()

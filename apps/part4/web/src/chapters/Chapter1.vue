@@ -2,14 +2,14 @@
 // Phase 1 — 트랜스포머 큰 그림. "LLM은 다음 단어 맞히기 게임"이라는 전체 흐름을 조망한다.
 // 세부(토큰화·임베딩·어텐션…)는 ch2~10에서 확대. 여기선 "무엇을 하는지"만 새가 내려다보듯.
 import { ref } from 'vue'
-import ConceptCard from '@/components/ConceptCard.vue'
-import DetailsCard from '@/components/DetailsCard.vue'
+import { ConceptCard } from '@series/ui'
+import { DetailsCard } from '@series/ui'
 import NextWordGame from '@/components/NextWordGame.vue'
 import TransformerMap from '@/components/TransformerMap.vue'
-import Quiz from '@/components/Quiz.vue'
-import QuizSet from '@/components/QuizSet.vue'
-import NotebookCard from '@/components/NotebookCard.vue'
-import ReviewFlag from '@/components/ReviewFlag.vue'
+import { Quiz } from '@series/ui'
+import { QuizSet } from '@series/ui'
+import { NotebookCard } from '@series/ui'
+import { ReviewFlag } from '@series/ui'
 import { useProgressStore } from '@/stores/progress'
 
 const progress = useProgressStore()

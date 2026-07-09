@@ -1,13 +1,13 @@
 <script setup lang="ts">
 // Phase 12 (심화·마지막) — 샘플링. 학습된 모델이 확률에서 다음 단어를 실제로 고르는 방법.
-import ConceptCard from '@/components/ConceptCard.vue'
-import DetailsCard from '@/components/DetailsCard.vue'
-import MathBlock from '@/components/MathBlock.vue'
+import { ConceptCard } from '@series/ui'
+import { DetailsCard } from '@series/ui'
+import { MathBlock } from '@series/ui'
 import SamplingLab from '@/components/SamplingLab.vue'
-import Quiz from '@/components/Quiz.vue'
-import QuizSet from '@/components/QuizSet.vue'
-import NotebookCard from '@/components/NotebookCard.vue'
-import ReviewFlag from '@/components/ReviewFlag.vue'
+import { Quiz } from '@series/ui'
+import { QuizSet } from '@series/ui'
+import { NotebookCard } from '@series/ui'
+import { ReviewFlag } from '@series/ui'
 import { RouterLink } from 'vue-router'
 import { useProgressStore } from '@/stores/progress'
 

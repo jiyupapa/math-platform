@@ -1,14 +1,14 @@
 <script setup lang="ts">
 // Phase 10 — 🎯 전체 조립 (궁극 목표). ch2~9의 모든 조각을 한 흐름으로 잇고, 반복으로 문장을 생성한다.
 import { ref } from 'vue'
-import ConceptCard from '@/components/ConceptCard.vue'
-import DetailsCard from '@/components/DetailsCard.vue'
+import { ConceptCard } from '@series/ui'
+import { DetailsCard } from '@series/ui'
 import PipelineLab from '@/components/PipelineLab.vue'
 import NextWordGame from '@/components/NextWordGame.vue'
-import Quiz from '@/components/Quiz.vue'
-import QuizSet from '@/components/QuizSet.vue'
-import NotebookCard from '@/components/NotebookCard.vue'
-import ReviewFlag from '@/components/ReviewFlag.vue'
+import { Quiz } from '@series/ui'
+import { QuizSet } from '@series/ui'
+import { NotebookCard } from '@series/ui'
+import { ReviewFlag } from '@series/ui'
 import { RouterLink } from 'vue-router'
 import { useProgressStore } from '@/stores/progress'
 
