@@ -12,7 +12,7 @@
 **선형대수학 인터랙티브 학습 프로그램**입니다. 수학에 겁먹은 분(수포자)을 위해 만들었습니다.
 단순 수학 학습이 아니라, **선형대수를 통해 AI를 이해하는 토대**를 쌓는 것이 최종 목표입니다.
 
-🔗 저장소: https://github.com/jiyupapa/part1-linear-algebra
+> 이 앱은 **MATH_PLATFORM 모노레포**의 1부(`apps/part1`)입니다. 시리즈 전체 개요는 저장소 루트 `README.md` 참고.
 
 > 전체 계획과 Phase 로드맵은 [`docs/00_plan.md`](docs/00_plan.md) 참고.
 
