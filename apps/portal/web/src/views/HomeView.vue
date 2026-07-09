@@ -2,12 +2,14 @@
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { pathSteps, totalChapters, totalHours, type StepRole } from '../data/curriculum'
-import { loadDiagnosis, clearDiagnosis, confidenceAvg } from '../data/useDiagnosis'
+import { loadDiagnosis, loadBaseline, clearDiagnosis, confidenceAvg } from '../data/useDiagnosis'
 import { recommend, type StepStatus } from '../data/recommend'
 import { readAllProgress } from '../data/useProgress'
 import { explainTemplate } from '../data/explain'
+import { diagnosisMetrics } from '../data/metrics'
 import TutorExplain from '../components/TutorExplain.vue'
 import StatChips from '../components/StatChips.vue'
+import ImprovementCard from '../components/ImprovementCard.vue'
 
 // 역할별 색 (토대/조립/본체/조련/심화)
 const roleStyle: Record<StepRole, { tag: string; dot: string; ring: string }> = {
@@ -34,6 +36,15 @@ const rec = computed(() => {
   return d ? recommend(d.answers, confidenceAvg(d.confidence)) : null
 })
 const explanation = computed(() => (rec.value ? explainTemplate(rec.value) : ''))
+
+// 향상도 — 최초 진단(기준선) 대비 최신 진단. 최초 1회뿐이면(savedAt 동일) 아직 향상도 없음.
+const baseline = ref(loadBaseline())
+const improvement = computed(() => {
+  const b = baseline.value
+  const c = diagnosis.value
+  if (!b || !c || b.savedAt === c.savedAt) return null
+  return { before: diagnosisMetrics(b), after: diagnosisMetrics(c) }
+})
 
 // pathSteps 와 rec.plan 은 같은 배열을 map 한 것이라 인덱스가 1:1 대응한다.
 const rows = computed(() =>
@@ -109,6 +120,14 @@ function reset() {
           <RouterLink to="/diagnose" class="font-medium text-indigo-600 hover:underline">다시 진단하기</RouterLink>
           <span class="text-slate-300">·</span>
           <button type="button" class="font-medium text-slate-500 hover:underline" @click="reset">전체 경로 보기</button>
+        </div>
+
+        <!-- 향상도 (학습 전↔후) -->
+        <div class="mx-auto mt-4 max-w-lg">
+          <ImprovementCard v-if="improvement" :before="improvement.before" :after="improvement.after" />
+          <p v-else class="rounded-xl bg-slate-100 p-3 text-left text-sm text-slate-500">
+            📈 학습을 진행한 뒤 <strong>다시 진단하기</strong>를 누르면, 학습 전과 비교한 향상도가 여기 나타납니다.
+          </p>
         </div>
       </template>
     </section>
