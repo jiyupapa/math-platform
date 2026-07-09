@@ -5,7 +5,7 @@ import { ref, computed, nextTick, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { chapters } from '@/data/chapters'
 import { contextFor, curriculumIndex } from '@/data/tutorContext'
-import { DEFAULT_MODEL, listModels, streamChat, type ChatMessage } from '@/lib/ollama'
+import { DEFAULT_MODEL, listModels, streamChat, type ChatMessage } from '@series/tutor'
 
 interface UiMessage {
   role: 'user' | 'assistant'

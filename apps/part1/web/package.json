@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@series/ui": "*",
+    "@series/tutor": "*",
     "chart.js": "^4.4.7",
     "katex": "^0.16.11",
     "pinia": "^2.3.0",
