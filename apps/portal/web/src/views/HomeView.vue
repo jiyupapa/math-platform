@@ -7,6 +7,7 @@ import { recommend, type StepStatus } from '../data/recommend'
 import { readAllProgress } from '../data/useProgress'
 import { explainTemplate } from '../data/explain'
 import TutorExplain from '../components/TutorExplain.vue'
+import StatChips from '../components/StatChips.vue'
 
 // 역할별 색 (토대/조립/본체/조련/심화)
 const roleStyle: Record<StepRole, { tag: string; dot: string; ring: string }> = {
@@ -111,6 +112,9 @@ function reset() {
         </div>
       </template>
     </section>
+
+    <!-- 스탯 칩 (숫자 한 장) -->
+    <StatChips class="mb-8" />
 
     <!-- 다음 목적지 (2층) -->
     <section v-if="nextStop" class="mb-6">
