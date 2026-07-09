@@ -1,9 +1,9 @@
 <script setup lang="ts">
 // Phase 2 · 벡터 연산 (덧셈 · 스칼라배 · 내적)
 import { ref, computed } from 'vue'
-import ConceptCard from '@/components/ConceptCard.vue'
-import MathBlock from '@/components/MathBlock.vue'
-import ChartView from '@/components/ChartView.vue'
+import { ConceptCard } from '@series/ui'
+import { MathBlock } from '@series/ui'
+import { ChartView } from '@series/ui'
 import VectorCanvas, { type Vec } from '@/components/VectorCanvas.vue'
 import Quiz from '@/components/Quiz.vue'
 import StepQuiz from '@/components/StepQuiz.vue'

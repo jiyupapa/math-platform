@@ -14,7 +14,7 @@
 //     ]"
 //     explanation="..." difficulty="medium" />
 import { ref, computed, onMounted, inject } from 'vue'
-import MathBlock from './MathBlock.vue'
+import { MathBlock } from '@series/ui'
 import { quizGroupKey, type QuizGroup } from './quizGroup'
 
 interface Step {

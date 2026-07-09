@@ -1,8 +1,8 @@
 <script setup lang="ts">
 // Phase 10 · 직교성과 투영 — "가장 가까운 답"을 찾는 원리 (최소제곱)
 import { ref, computed } from 'vue'
-import ConceptCard from '@/components/ConceptCard.vue'
-import MathBlock from '@/components/MathBlock.vue'
+import { ConceptCard } from '@series/ui'
+import { MathBlock } from '@series/ui'
 import VectorCanvas, { type Vec } from '@/components/VectorCanvas.vue'
 import Quiz from '@/components/Quiz.vue'
 import StepQuiz from '@/components/StepQuiz.vue'

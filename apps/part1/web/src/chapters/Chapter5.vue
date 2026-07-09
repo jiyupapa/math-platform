@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // Phase 5 · 선형변환 — 행렬이 공간(격자)을 바꾸는 함수
-import ConceptCard from '@/components/ConceptCard.vue'
-import MathBlock from '@/components/MathBlock.vue'
+import { ConceptCard } from '@series/ui'
+import { MathBlock } from '@series/ui'
 import GridTransform from '@/components/GridTransform.vue'
 import ImageTransform from '@/components/ImageTransform.vue'
 import Quiz from '@/components/Quiz.vue'

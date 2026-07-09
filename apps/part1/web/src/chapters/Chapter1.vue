@@ -2,9 +2,9 @@
 // Phase 1 · 좌표와 벡터란 무엇인가
 // 표준 구성: 개념 설명 + 새 기호 설명 + 인터랙티브 시각화 + 차트 + 미니체크 + 10문제 세트 + 노트북 안내
 import { ref, computed } from 'vue'
-import ConceptCard from '@/components/ConceptCard.vue'
-import MathBlock from '@/components/MathBlock.vue'
-import ChartView from '@/components/ChartView.vue'
+import { ConceptCard } from '@series/ui'
+import { MathBlock } from '@series/ui'
+import { ChartView } from '@series/ui'
 import VectorCanvas, { type Vec } from '@/components/VectorCanvas.vue'
 import Quiz from '@/components/Quiz.vue'
 import QuizSet from '@/components/QuizSet.vue'

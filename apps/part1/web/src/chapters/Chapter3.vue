@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // Phase 3 · 행렬과 행렬 연산
-import ConceptCard from '@/components/ConceptCard.vue'
-import MathBlock from '@/components/MathBlock.vue'
+import { ConceptCard } from '@series/ui'
+import { MathBlock } from '@series/ui'
 import MatrixMultiply from '@/components/MatrixMultiply.vue'
 import Quiz from '@/components/Quiz.vue'
 import StepQuiz from '@/components/StepQuiz.vue'
