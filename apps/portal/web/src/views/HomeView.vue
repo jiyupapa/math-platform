@@ -4,6 +4,9 @@ import { RouterLink } from 'vue-router'
 import { pathSteps, totalChapters, totalHours, type StepRole } from '../data/curriculum'
 import { loadDiagnosis, clearDiagnosis, confidenceAvg } from '../data/useDiagnosis'
 import { recommend, type StepStatus } from '../data/recommend'
+import { readAllProgress } from '../data/useProgress'
+import { explainTemplate } from '../data/explain'
+import TutorExplain from '../components/TutorExplain.vue'
 
 // 역할별 색 (토대/조립/본체/조련/심화)
 const roleStyle: Record<StepRole, { tag: string; dot: string; ring: string }> = {
@@ -23,11 +26,13 @@ const statusStyle: Record<StepStatus, { label: string; badge: string; dim: boole
   선택: { label: '선택', badge: 'bg-slate-100 text-slate-500', dim: true, strike: false },
 }
 
+const progress = readAllProgress() // 2층 — 각 부 진도(같은 origin 배포본에서 통합)
 const diagnosis = ref(loadDiagnosis())
 const rec = computed(() => {
   const d = diagnosis.value
   return d ? recommend(d.answers, confidenceAvg(d.confidence)) : null
 })
+const explanation = computed(() => (rec.value ? explainTemplate(rec.value) : ''))
 
 // pathSteps 와 rec.plan 은 같은 배열을 map 한 것이라 인덱스가 1:1 대응한다.
 const rows = computed(() =>
@@ -36,8 +41,21 @@ const rows = computed(() =>
     href: step.comingSoon ? null : `/part${step.part}/`,
     status: rec.value ? rec.value.plan[i].status : null,
     note: rec.value ? rec.value.plan[i].note : undefined,
+    prog: progress[step.part] ?? null,
   })),
 )
+
+// 다음 목적지 — 활성(필수/빠른복습, 진단 전엔 전부) 단계 중 아직 완료 안 된 첫 단계
+const nextStop = computed(() => {
+  for (const r of rows.value) {
+    if (r.step.comingSoon) continue
+    const active = r.status === null || r.status === '필수' || r.status === '빠른복습'
+    if (!active) continue
+    if (!r.prog || r.prog.percent < 100) return r
+  }
+  return null
+})
+const anyProgress = computed(() => Object.values(progress).some((p) => p.completed > 0))
 
 const hours = (m: number) => Math.round((m / 60) * 10) / 10
 
@@ -76,18 +94,15 @@ function reset() {
         <p class="mt-2 text-xs text-slate-400">5분 진단 후, 아래 지도에서 당신에게 필요한 단계만 남습니다.</p>
       </template>
 
-      <!-- 진단 후: 개인화 요약 -->
+      <!-- 진단 후: 개인화 요약 + 강사 설명 -->
       <template v-else>
-        <div class="mx-auto mb-4 max-w-lg rounded-2xl bg-indigo-600 p-5 text-white shadow-sm">
+        <div class="mx-auto mb-4 max-w-lg rounded-2xl bg-indigo-600 p-5 text-left text-white shadow-sm">
           <p class="text-sm font-medium text-indigo-100">AI 강사가 당신에게 맞춘 경로</p>
-          <p class="mt-1 text-2xl font-bold">
-            {{ rec.activeChapters }}챕터 · 예상 {{ hours(rec.activeMinutes) }}시간
-          </p>
-          <p class="mt-1 text-sm text-indigo-100">
-            전체 핵심 {{ totalChapters }}챕터({{ totalHours }}시간) 중
-            <template v-if="rec.skippedSteps"> {{ rec.skippedSteps }}개 단계를 이미 아는 것으로 접었어요.</template>
-            <template v-else> 아래 지도대로 차근차근 가면 됩니다.</template>
-          </p>
+          <p class="mt-1 text-2xl font-bold">{{ rec.activeChapters }}챕터 · 예상 {{ hours(rec.activeMinutes) }}시간</p>
+          <p class="mt-2 text-sm text-indigo-50">{{ explanation }}</p>
+          <div class="mt-1">
+            <TutorExplain :summary="explanation" />
+          </div>
         </div>
         <div class="flex items-center justify-center gap-3 text-sm">
           <RouterLink to="/diagnose" class="font-medium text-indigo-600 hover:underline">다시 진단하기</RouterLink>
@@ -95,6 +110,24 @@ function reset() {
           <button type="button" class="font-medium text-slate-500 hover:underline" @click="reset">전체 경로 보기</button>
         </div>
       </template>
+    </section>
+
+    <!-- 다음 목적지 (2층) -->
+    <section v-if="nextStop" class="mb-6">
+      <component
+        :is="nextStop.href ? 'a' : 'div'"
+        :href="nextStop.href ?? undefined"
+        class="flex items-center justify-between gap-3 rounded-xl bg-white p-4 shadow-sm ring-1 ring-indigo-200 transition hover:ring-2"
+      >
+        <div>
+          <p class="text-xs font-semibold text-indigo-600">{{ anyProgress ? '이어서 학습' : '여기서 시작' }}</p>
+          <p class="font-semibold text-slate-900">{{ nextStop.step.title }}</p>
+          <p v-if="nextStop.prog && nextStop.prog.completed > 0" class="text-xs text-slate-400">
+            이 부 진도 {{ nextStop.prog.completed }}/{{ nextStop.prog.total }}
+          </p>
+        </div>
+        <span class="shrink-0 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white">가기 →</span>
+      </component>
     </section>
 
     <!-- Path map -->
@@ -120,12 +153,13 @@ function reset() {
           >
             <div class="mb-1 flex flex-wrap items-center gap-2">
               <span class="rounded px-2 py-0.5 text-xs font-semibold" :class="roleStyle[row.step.role].tag">{{ row.step.role }}</span>
-              <span
-                v-if="row.status"
-                class="rounded px-2 py-0.5 text-xs font-semibold"
-                :class="statusStyle[row.status].badge"
-              >{{ statusStyle[row.status].label }}</span>
+              <span v-if="row.status" class="rounded px-2 py-0.5 text-xs font-semibold" :class="statusStyle[row.status].badge">
+                {{ statusStyle[row.status].label }}
+              </span>
               <span v-if="row.step.part === 4 && !row.status" class="rounded bg-indigo-600 px-2 py-0.5 text-xs font-semibold text-white">🎯 정점</span>
+              <span v-if="row.prog && row.prog.completed > 0" class="rounded bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-700">
+                진도 {{ row.prog.completed }}/{{ row.prog.total }}
+              </span>
             </div>
             <h3 class="font-semibold text-slate-900" :class="{ 'line-through': row.status && statusStyle[row.status].strike }">
               {{ row.step.title }}
@@ -143,7 +177,7 @@ function reset() {
         </li>
       </ol>
       <p class="mt-6 text-center text-xs text-slate-400">
-        각 카드를 누르면 해당 부의 학습 앱으로 이동합니다. (6부는 준비 중)
+        각 카드를 누르면 해당 부의 학습 앱으로 이동합니다. 진도는 배포본(같은 주소)에서 각 부와 통합됩니다.
       </p>
     </section>
   </main>
