@@ -142,6 +142,23 @@ Get-ChildItem apps\part*\notebooks\*.ipynb | ForEach-Object {
 
 > 노트북 자체는 모노레포 전환의 영향을 받지 않는다(웹만 재구조화됨). 우선순위는 낮음.
 
+### 예외: 별도 의존성이 필요한 노트북
+
+- **`apps/part1/notebooks/수포자를_위한_선형대수학.ipynb`** — ch01~13 시리즈와 별개인 **독립 데모 노트북**으로,
+  실제 문장 임베딩에 `sentence-transformers`(→ `torch` 까지 딸려옴, 수백 MB~GB)가 필요하다. 공용 `requirements.txt` 에는 **일부러 넣지 않았다**(무겁고 시리즈 학습엔 불필요).
+  이 노트북만 돌려보려면 별도 설치:
+
+  ```cmd
+  .venv\Scripts\python.exe -m pip install sentence-transformers
+  ```
+
+- 그 외 60개 노트북(ch* 시리즈)은 루트 `requirements.txt` 만으로 전부 무에러 실행됨(2026-07-09 검증).
+
+### 검증 이력 (2026-07-09)
+
+전 61개 노트북 실행 결과 **60 통과** + 위 데모 1개(별도 의존성). `ch08_pca.ipynb` 는 이때 발견된 잠복 버그를 수정:
+대칭 공분산행렬에 `np.linalg.eig`(복소수 반환) 대신 **`np.linalg.eigh`**(실수 보장) 사용 — matplotlib 최신 버전의 `plt.arrow` 에서 나던 `hypot` TypeError 해소.
+
 ---
 
 ## 4. 빠른 전체 점검 스크립트
