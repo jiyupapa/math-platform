@@ -1,29 +1,18 @@
 <script setup lang="ts">
-// 모노레포 트라이얼 포털 — 공용 패키지 @series/ui 를 소비해 구조·Tailwind·KaTeX 를 검증한다.
-import { ConceptCard, MathBlock } from '@series/ui'
+// 통합 포털(part0) — 진단·경로 추천 허브. @series/ui 공용 패키지를 소비.
+import { RouterView, RouterLink } from 'vue-router'
 </script>
 
 <template>
-  <main class="mx-auto max-w-2xl p-8">
-    <h1 class="mb-2 text-2xl font-bold text-indigo-700">수포자 사관학교 — 포털</h1>
-    <p class="mb-6 text-slate-600">
-      모노레포 트라이얼: 이 포털은 <code>@series/ui</code> 공용 패키지를 소비합니다.
-    </p>
-
-    <ConceptCard tone="goal" title="구조 검증">
-      <p>
-        이 카드(<strong>ConceptCard</strong>)는 <code>packages/ui</code> 에서 왔습니다.
-        배경·테두리 색이 보이면 Tailwind <code>@source</code> 스캔이 정상 작동한 것입니다.
-      </p>
-    </ConceptCard>
-
-    <ConceptCard tone="ai" title="AI 연결 카드 톤">
-      <p>같은 패키지의 <code>tone="ai"</code> 변형입니다.</p>
-    </ConceptCard>
-
-    <p class="mt-6 mb-2 text-slate-600">
-      아래 수식(<strong>MathBlock</strong>, KaTeX)도 패키지에서 렌더됩니다:
-    </p>
-    <MathBlock expr="e^{i\pi} + 1 = 0" />
-  </main>
+  <div class="min-h-screen bg-slate-50">
+    <header class="border-b border-slate-200 bg-white/80 backdrop-blur">
+      <div class="mx-auto flex max-w-3xl items-center justify-between px-5 py-3">
+        <RouterLink to="/" class="font-bold text-indigo-700">수포자 사관학교</RouterLink>
+        <RouterLink to="/diagnose" class="text-sm font-medium text-indigo-600 hover:underline">
+          경로 진단
+        </RouterLink>
+      </div>
+    </header>
+    <RouterView />
+  </div>
 </template>
