@@ -9,8 +9,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 기원: 원래 1부(선형대수)만 회사 해커톤 출품 목적이었고, 5부작으로 확장된 뒤 이 모노레포로 통합됐다.
 (과거엔 부마다 **독립 저장소 + 공용 컴포넌트 5벌 복제**였고 1부가 "골든 카피" 기준이었다 — 지금은
-`packages/ui` 공유 패키지가 그 역할을 대체해 **복제·드리프트가 사라졌다**.) **최우선 목적은 사용자 본인의
-수학·AI 지식을 채우는 것이며, 해커톤 등 외부 평가는 부차적이다.**
+`packages/ui` 공유 패키지가 그 역할을 대체해 **복제·드리프트가 사라졌다**.) **최우선 목적은 ① 사내 해커톤
+1등과 ② 사용자 본인의 수학·AI 지식을 채우는 것, 두 가지다.**
 
 > **특정 부 안에서 작업할 때는 그 부의 `apps/partN/CLAUDE.md` 가 우선이다** — 콘텐츠 규칙·함정이 거기 있다.
 > 이 파일은 부를 가로지르는(모노레포 구조·공용 패키지) 사항만 담는다.
@@ -53,7 +53,8 @@ npm run build -w apps/part1/web              # 특정 부만 빌드
 
 ## 공용 컴포넌트 — `packages/ui` (@series/ui)
 
-공용 컴포넌트(`MathBlock`·`ConceptCard`·`DetailsCard`·`ChartView`·`NotebookCard`·`ReviewFlag`·`Quiz`·`StepQuiz`·`QuizSet`·`quizGroup`)는
+공용 컴포넌트(`MathBlock`·`ConceptCard`·`DetailsCard`·`ChartView`·`NotebookCard`·`ReviewFlag`·`Quiz`·`StepQuiz`·`QuizSet`)와
+QuizSet↔StepQuiz 그룹 계약(`quizGroupKey`/`QuizGroup` — `quizGroup.ts`)은
 **`packages/ui` 한 곳에만 있다.** 앱은 `import { Quiz } from '@series/ui'` 로 소비.
 
 - **한 번 고치면 전 부에 반영** — 복제·전파·드리프트 점검 없음(옛 골든카피/`check_drift.py` 체제는 폐기).
@@ -61,7 +62,7 @@ npm run build -w apps/part1/web              # 특정 부만 빌드
   - `storagePrefixKey` — QuizSet 저장 접두사. part1=`la` part2=`diff` part3=`stat` part4=`tf` part5=`it`. **바꾸면 사용자 진도가 끊긴다.**
   - `reviewApiKey` — ReviewFlag ↔ 각 앱 `review` 스토어.
   - `notebookResolverKey` — NotebookCard ↔ 각 앱 `chapters`(part1·4·5만).
-- 소스 `.vue` 패키지라 각 앱 설정에: `vite.config.ts` 의 `optimizeDeps.exclude:['@series/ui']`,
+- 소스 `.vue` 패키지라 각 앱 설정에: `vite.config.ts` 의 `optimizeDeps.exclude`(part1~5=`['@series/ui', '@series/tutor']`, tutor 안 쓰는 portal=`['@series/ui']`),
   `style.css` 의 `@source '../../../../packages/ui/src'`(Tailwind 가 패키지 클래스 스캔 — 빠지면 스타일이 조용히 누락).
 - **THEMED(각 앱에 유지)**: `progress`/`review` 스토어, `TutorChat.vue`(튜터 주제), `notebooks/tutor.py`.
 - **AI 튜터 클라이언트 = `packages/tutor`(@series/tutor)** — 로컬/원격 Ollama 전송 계층. 서버 주소는 빌드 환경변수
