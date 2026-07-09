@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## 프로젝트 정체성
 
 수포자(수학 포기자, 단 개발자)를 위한 **확률과 통계 인터랙티브 학습 프로그램** — 시리즈 3부.
-(1부 선형대수 `C:\STUDY\MATH\part1-linear-algebra` · 2부 미분 `C:\STUDY\MATH\part2-differentiation`)
+(1부 선형대수 `apps/part1` · 2부 미분 `apps/part2`)
 
 **최종 목표: 확률·통계를 통해 AI 기반지식을 갖추는 것** — AI 는 확률로 예측하고(소프트맥스·다음 단어 확률)
 데이터로 배운다(표본·손실·회귀)는 것을 직관적으로 이해하는 것이 목적이다.
@@ -42,7 +42,7 @@ npm run build -w apps/part3/web   # vue-tsc 타입체크 + vite 빌드 — 변�
 - `web/src/data/tutorContext.json` — **AI 튜터 챕터 맥락의 단일 소스**. 웹(`tutorContext.ts` 래퍼)과
   노트북(`notebooks/tutor.py`)이 함께 읽는다. 새 챕터를 만들면 여기에도 맥락 추가.
 - `notebooks/tutor.py` — 노트북용 AI 튜터(로컬 Ollama). `chat('chN')` = 플로팅 채팅 위젯,
-  `ask()` = 원샷 질문, `explain()` = 직전 실행 셀 코드 설명. 웹 `TutorChat.vue`·`lib/ollama.ts` 와
+  `ask()` = 원샷 질문, `explain()` = 직전 실행 셀 코드 설명. 웹 `TutorChat.vue`·`@series/tutor`(`packages/tutor`의 `ollama.ts`) 와
   로직을 맞춘 이식판이므로 한쪽을 고치면 다른 쪽도 확인할 것.
 
 재사용 컴포넌트 — **공용(`ConceptCard`·`MathBlock`·`ChartView`·`Quiz`·`StepQuiz`·`QuizSet`·`quizGroup`)은 `packages/ui`(@series/ui) 에 있다**(수정은 거기서). 확률통계 전용 시각화만 `web/src/components/` 에 있다. 아래는 역할 설명:

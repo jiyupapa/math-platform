@@ -37,7 +37,7 @@ npm run build -w apps/part5/web   # vue-tsc 타입체크 + vite 빌드 — 변�
 - `web/src/router/index.ts` — 챕터마다 **명시적 라우트** `/ch/chN → @/chapters/ChapterN.vue`. 콘텐츠 없는 챕터는 catch-all `/ch/:slug → ComingSoonView.vue` 로 빠진다.
 - `web/src/stores/progress.ts` — Pinia 스토어, 완료 챕터를 localStorage 에 저장. 챕터는 끝의 `QuizSet @completed` 에서 `progress.markDone(slug)` 를 호출해 완료 처리.
 - `web/src/data/tutorContext.json` — **AI 튜터 챕터 맥락의 단일 소스**. 웹(`tutorContext.ts` 래퍼)과 노트북(`notebooks/tutor.py`)이 함께 읽는다. 새 챕터를 만들면 여기에도 맥락 추가.
-- `notebooks/tutor.py` — 노트북용 AI 튜터(로컬 Ollama). `chat('chN')` = 플로팅 채팅 위젯, `ask()` = 원샷 질문, `explain()` = 직전 실행 셀 코드 설명. 웹 `TutorChat.vue`·`lib/ollama.ts` 와 로직을 맞춘 이식판이므로 한쪽을 고치면 다른 쪽도 확인할 것.
+- `notebooks/tutor.py` — 노트북용 AI 튜터(로컬 Ollama). `chat('chN')` = 플로팅 채팅 위젯, `ask()` = 원샷 질문, `explain()` = 직전 실행 셀 코드 설명. 웹 `TutorChat.vue`·`@series/tutor`(`packages/tutor`의 `ollama.ts`) 와 로직을 맞춘 이식판이므로 한쪽을 고치면 다른 쪽도 확인할 것.
 
 재사용 컴포넌트 — **공용(`ConceptCard`·`DetailsCard`·`MathBlock`·`ChartView`·`Quiz`·`StepQuiz`·`QuizSet`·`quizGroup`)은 `packages/ui`(@series/ui) 에 있다**(수정은 거기서). `TwentyQuestions` 등 이 부 전용만 `web/src/components/` 에 있다. 아래는 역할 설명:
 - `ConceptCard.vue` — 설명 카드. `tone` = note/tip/warn/goal/ai (**ai = 챕터 필수 "🤖 AI 연결" 카드**).

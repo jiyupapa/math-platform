@@ -23,7 +23,7 @@
 터미널에서 아래를 **한 줄씩** 붙여넣고 Enter (첫 줄의 경로는 이 폴더 위치에 맞게):
 
 ```powershell
-cd C:\STUDY\MATH\part3-probstat\notebooks    # ① 노트북 폴더로 이동
+cd C:\STUDY\MATH_PLATFORM\apps\part3\notebooks    # ① 노트북 폴더로 이동
 python -m venv .venv                        # ② 전용 작업 공간 만들기 (최초 1회만)
 .venv\Scripts\Activate.ps1                  # ③ 작업 공간 켜기 (줄 앞에 (.venv)가 붙으면 성공)
 pip install -r requirements.txt             # ④ 필요한 도구 설치 (최초 1회만, 몇 분 걸려요)
@@ -73,7 +73,7 @@ jupyter lab
 ②④는 최초 1회용이므로, 다음부터는 세 줄이면 됩니다:
 
 ```powershell
-cd C:\STUDY\MATH\part3-probstat\notebooks
+cd C:\STUDY\MATH_PLATFORM\apps\part3\notebooks
 .venv\Scripts\Activate.ps1
 jupyter lab
 ```

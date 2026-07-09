@@ -61,7 +61,7 @@ npm run build -w apps/part2/web   # vue-tsc 타입체크 + vite 프로덕션 빌
 
 ### Quiz 집계 메커니즘 (provide/inject)
 
-`QuizSet`(부모)와 `Quiz`/`StepQuiz`(자식)는 `quizGroupKey`(InjectionKey)로 연결된다 (`components/quizGroup.ts`):
+`QuizSet`(부모)와 `Quiz`/`StepQuiz`(자식)는 `quizGroupKey`(InjectionKey)로 연결된다 (`packages/ui`의 `quizGroup.ts` — `@series/ui`):
 
 - 각 Quiz는 `onMounted`에 `group.register(uid)`, 정답 시 `group.report(uid)` 호출. `uid`는 `props.question` 문자열 → **한 QuizSet 안에서 question 텍스트가 중복되면 집계가 깨진다.**
 - 모든 등록 문제가 풀리면 `QuizSet`이 `completed` 이벤트 발생 → 챕터가 `@completed="progress.markDone('slug')"`로 진도 처리.

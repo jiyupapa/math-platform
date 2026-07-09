@@ -33,7 +33,7 @@ LLM이 *"다음 단어를 확률로 고르는 기계"*이며 그 핵심 부품�
 - 공용 계산 로직은 `web/src/utils/` 에 (예: `softmax.ts`). 웹·노트북이 같은 결과를 내는지 확인.
 
 ## AI 튜터 (챗봇) — 시리즈 공통 기능
-- 웹: `components/TutorChat.vue`(우하단 플로팅 🤖) + `lib/ollama.ts`(로컬 Ollama 클라이언트).
+- 웹: `components/TutorChat.vue`(우하단 플로팅 🤖) + `@series/tutor`(`packages/tutor`의 `ollama.ts` — 로컬/원격 Ollama 클라이언트).
   노트북: `notebooks/tutor.py`(`chat/ask/explain`), 각 노트북 맨 위에 튜터 셀.
 - **맥락 단일 소스**: `web/src/data/tutorContext.json`(`contexts`/`curriculumIndex`/`fallback`) — 웹·노트북 공유.
   각 context 는 `[N장 제목]` 으로 시작(노트북이 제목 추출). 새 챕터 추가 시 여기에 맥락 한 항목 추가.
