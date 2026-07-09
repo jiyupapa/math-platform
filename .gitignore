@@ -17,3 +17,6 @@ __pycache__/
 
 # 로그
 *.log
+
+# TypeScript 빌드 캐시
+*.tsbuildinfo
