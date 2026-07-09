@@ -11,37 +11,22 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 두 갈래로 학습한다: 웹 앱(`web/`, 직관·인터랙션) + Python 노트북(`notebooks/`, 실제 계산). 각 챕터는 둘이 1:1 대응한다.
 
-## 시리즈 공용 컴포넌트 — 1부가 표준(골든 카피)
+## 공용 컴포넌트 — 모노레포 `packages/ui`
 
-이 저장소의 `web/` 스캐폴딩과 공용 컴포넌트는 `C:\STUDY\MATH\part1-linear-algebra` (1부)를 복제한 것이다.
-- 공용 파일(`Quiz`/`StepQuiz`/`QuizSet`/`quizGroup`·`MathBlock`·`ConceptCard`·`DetailsCard`·`NotebookCard`·`ChartView`·`ReviewFlag`·`TutorChat`·`tutor.py`·`progress`/`review` 스토어)은 **1부가 기준** — 여기서 임의로 고치지 말고, 고쳐야 하면 1부에 반영 후 전파한다.
-- 드리프트 점검: `python ..\part1-linear-algebra\scripts\check_drift.py` (EXACT 불일치 시 exit 1).
-- 부별 설정: localStorage 접두사 **`it-`** (progress/review/QuizSet — 바꾸면 사용자 진도가 끊긴다), 튜터 프롬프트 주제(정보이론).
-- 이 부의 전용 시각화(`TwentyQuestions` 등 `docs/00_plan.md` 6절의 9종)는 공용이 아니므로 자유롭게 작성.
+이 부는 모노레포 `C:\STUDY\MATH_PLATFORM` 의 `apps/part5` 이다. 공용 컴포넌트(`Quiz`/`StepQuiz`/`QuizSet`/`quizGroup`·`MathBlock`·`ConceptCard`·`DetailsCard`·`NotebookCard`·`ChartView`·`ReviewFlag`)는 **`packages/ui`(@series/ui) 한 곳**에 있다. `import { Quiz } from '@series/ui'` 로 소비하며, **거기서 한 번 고치면 전 부에 반영**된다(옛 "1부=골든카피 → 전파" 및 `check_drift.py` 체제는 폐기됨).
+- 상세·주입 계약(`storagePrefixKey` 등)은 루트 `CLAUDE.md` 참조.
+- THEMED(이 부에 유지): `progress`/`review` 스토어(접두사 **`it`** — 바꾸면 진도 끊김), `TutorChat`(정보이론 주제), `notebooks/tutor.py`.
+- 이 부의 전용 시각화(`TwentyQuestions` 등 `docs/00_plan.md` 6절의 9종)는 공용이 아니므로 `web/src/components/` 에 자유롭게 작성.
 
 ## 명령어
 
-웹 앱 (반드시 `web/` 에서 실행):
+모노레포이므로 `npm install` 은 **루트에서 1회**. 이 부만 다룰 때(루트에서 실행):
 ```bash
-cd web
-npm install
-npm run dev      # 개발 서버 http://localhost:5173 (HMR)
-npm run build    # vue-tsc 타입체크 + vite 빌드 — 변경 후 이걸로 검증
-npm run preview  # 빌드 결과 미리보기 http://localhost:4173
+npm run dev   -w apps/part5/web   # 개발 서버 (HMR)
+npm run build -w apps/part5/web   # vue-tsc 타입체크 + vite 빌드 — 변경 후 이걸로 검증
 ```
-- 테스트·린트 설정은 없음. **검증 수단은 `npm run build`** (vue-tsc가 타입/템플릿 오류를 잡음). `tsconfig.app.json` 은 `noUnusedLocals`/`noUnusedParameters` 가 켜져 있어 미사용 변수도 에러다.
-
-노트북 (`notebooks/`, venv 사용):
-```bash
-cd notebooks
-python -m venv .venv
-.venv\Scripts\Activate.ps1        # PowerShell
-pip install -r requirements.txt   # numpy, matplotlib, jupyterlab — 신규 수학 패키지 불필요
-python -m ipykernel install --user --name infotheory-venv --display-name "Python (information-theory .venv)"
-jupyter lab
-# 노트북 무에러 실행 검증:
-.venv\Scripts\python.exe -m jupyter nbconvert --to notebook --execute --stdout chXX.ipynb
-```
+- 테스트·린트 설정은 없음. **검증 수단은 `npm run build`** (vue-tsc가 타입/템플릿 오류를 잡음). `noUnusedLocals`/`noUnusedParameters` 가 켜져 있어 미사용 변수도 에러다.
+- 노트북: **루트 공용 venv 하나**(`.venv`, 커널 `math-platform`) 사용. 설치·실행·검증은 루트 `docs/TESTING.md` 3절.
 
 ## 아키텍처
 
@@ -54,7 +39,7 @@ jupyter lab
 - `web/src/data/tutorContext.json` — **AI 튜터 챕터 맥락의 단일 소스**. 웹(`tutorContext.ts` 래퍼)과 노트북(`notebooks/tutor.py`)이 함께 읽는다. 새 챕터를 만들면 여기에도 맥락 추가.
 - `notebooks/tutor.py` — 노트북용 AI 튜터(로컬 Ollama). `chat('chN')` = 플로팅 채팅 위젯, `ask()` = 원샷 질문, `explain()` = 직전 실행 셀 코드 설명. 웹 `TutorChat.vue`·`lib/ollama.ts` 와 로직을 맞춘 이식판이므로 한쪽을 고치면 다른 쪽도 확인할 것.
 
-재사용 컴포넌트 (`web/src/components/`):
+재사용 컴포넌트 — **공용(`ConceptCard`·`DetailsCard`·`MathBlock`·`ChartView`·`Quiz`·`StepQuiz`·`QuizSet`·`quizGroup`)은 `packages/ui`(@series/ui) 에 있다**(수정은 거기서). `TwentyQuestions` 등 이 부 전용만 `web/src/components/` 에 있다. 아래는 역할 설명:
 - `ConceptCard.vue` — 설명 카드. `tone` = note/tip/warn/goal/ai (**ai = 챕터 필수 "🤖 AI 연결" 카드**).
 - `DetailsCard.vue` — 접었다 펴는 "더 깊이" 카드. 심화 곁가지(bit/nat 밑 변환, 0·log 0 관례, 최대우도 등)는 본문 대신 여기로 격리.
 - `MathBlock.vue` — KaTeX 수식. `inline` 또는 블록.
@@ -84,7 +69,7 @@ jupyter lab
 - **노트북 한글 폰트**: Matplotlib 기본 폰트엔 한글이 없어 깨진다. 그래프 쓰는 노트북은 import 직후 `plt.rcParams['font.family']='Malgun Gothic'` + `plt.rcParams['axes.unicode_minus']=False` 필수.
 - **Malgun Gothic 에 없는 수학 글리프**: matplotlib 라벨·제목에 `≈`(U+2248) · `−`(U+2212) · `‖`(U+2016) 를 쓰면 UserWarning + 네모 출력. 그래프 문자열에서는 `약`/`-`(ASCII)/`||` 로 치환할 것 (print 콘솔 출력에는 써도 됨).
 - **.ipynb 편집은 `NotebookEdit`** 도구로만 (Read 선행 필수). 손으로 JSON을 쓸 때는 코드 셀마다 `"execution_count": null` 과 `"id"` 가 **둘 다** 있어야 한다. 작성 후 `nbconvert --execute` 로 무에러를 검증할 것.
-- Bash 도구의 작업 디렉토리가 유지되므로, `npm` 명령 전 `cd web` 을 확인할 것 (notebooks 에서 실행하면 ENOENT).
+- 모노레포이므로 `npm` 은 **루트에서 `-w apps/part5/web`** 로 실행한다(옛날처럼 각 부 `web/` 로 `cd` 하지 않는다). Bash 작업 디렉토리는 유지되니 루트인지 확인.
 
 ## 스택
 

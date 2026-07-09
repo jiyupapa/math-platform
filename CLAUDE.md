@@ -2,58 +2,68 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## 이 디렉토리의 정체
+## 이 저장소의 정체
 
-"수포자를 위한 AI 수학 시리즈"의 **우산 디렉토리**. 루트 자체는 git 저장소가 아니고,
-`part1` ~ `part5` 각각이 **독립 git 저장소**이며 각자 자기 `CLAUDE.md` 를 갖고 있다.
+"수포자를 위한 AI 수학 시리즈"를 하나로 묶은 **모노레포**(npm workspaces). 5개 부의 웹 앱 + 통합 포털 +
+공용 컴포넌트 패키지가 한 git 저장소 안에 있다.
 
-기원: 원래 1부(선형대수)만 회사 해커톤 출품 목적으로 만들어졌고, 이후 시리즈로 확장되었다.
-1부가 공용 컴포넌트의 표준(골든 카피)인 것은 이 때문 — 가장 먼저 만들어져 검증되었고,
-나머지 부들이 그 스캐폴딩을 복제했다. **현재 최우선 목적은 사용자 본인의 수학·AI 지식을
-채우는 것이며, 해커톤 등 외부 평가는 부차적이다.**
+기원: 원래 1부(선형대수)만 회사 해커톤 출품 목적이었고, 5부작으로 확장된 뒤 이 모노레포로 통합됐다.
+(과거엔 부마다 **독립 저장소 + 공용 컴포넌트 5벌 복제**였고 1부가 "골든 카피" 기준이었다 — 지금은
+`packages/ui` 공유 패키지가 그 역할을 대체해 **복제·드리프트가 사라졌다**.) **최우선 목적은 사용자 본인의
+수학·AI 지식을 채우는 것이며, 해커톤 등 외부 평가는 부차적이다.**
 
-> **특정 부 안에서 작업할 때는 그 부의 `CLAUDE.md` 가 우선이다** — 명령어·아키텍처·콘텐츠
-> 규칙·함정이 거기에 상세히 있다. 이 파일은 부를 가로지르는 사항만 담는다.
+> **특정 부 안에서 작업할 때는 그 부의 `apps/partN/CLAUDE.md` 가 우선이다** — 콘텐츠 규칙·함정이 거기 있다.
+> 이 파일은 부를 가로지르는(모노레포 구조·공용 패키지) 사항만 담는다.
 
-| 폴더 | 내용 |
-|---|---|
-| `part1-linear-algebra` | 1부 선형대수 — **시리즈 공용 컴포넌트의 표준(골든 카피)** |
-| `part2-differentiation` | 2부 미분 |
-| `part3-probstat` | 3부 확률통계 |
-| `part4-transformer` | 4부 트랜스포머 — 시리즈의 정점 |
-| `part5-information-theory` | 5부 정보이론 |
-| *(예정)* `part6-llm-taming` | 6부 LLM 조련 — 챕터 구성안은 루트 `README.md` 로드맵 참조 |
-| `선형대수학_자료` | 참고 자료(PDF 등), 코드 아님 |
+## 구조
 
-시리즈 전체 커리큘럼·추천 학습 경로(1→2→3→4→5 순서가 아님)·부 간 연결 지점은 루트 `README.md` 에 있다.
-
-## 모든 부 공통 구조
-
-각 부는 동일한 이중 구조: **웹 앱**(`web/`, Vue 3 + TS + Vite + Pinia + KaTeX + Tailwind v4)
-+ **Jupyter 노트북**(`notebooks/`, NumPy). 웹 챕터와 노트북은 1:1 대응.
-
-공통 명령어 (각 부의 해당 디렉토리에서):
-
-```bash
-# web/ 에서 — 테스트·린트 없음. 검증 수단은 npm run build (vue-tsc 타입체크 포함)
-npm run dev
-npm run build
-
-# notebooks/ 에서 (부별 .venv 사용) — 노트북 무에러 검증:
-.venv\Scripts\python.exe -m jupyter nbconvert --to notebook --execute --stdout chXX.ipynb
+```
+apps/
+  portal/            통합 포털(part0 — 진단·학습경로 추천). packages/ui 소비
+  part1/ .. part5/   각 부: web/(Vue 앱) + notebooks/(Jupyter) + docs/
+packages/
+  ui/                공용 컴포넌트 단일 소스 (@series/ui)
+docs/TESTING.md      전체 테스트 방법
+requirements.txt     공용 노트북 venv 의존성(5부 합집합)
 ```
 
-## 공용 컴포넌트 규칙 — 1부가 표준
+| 부 | 폴더 | 주제 |
+|---|---|---|
+| 포털 | `apps/portal` | 진단·경로 추천 허브 |
+| 1부 | `apps/part1` | 선형대수 |
+| 2부 | `apps/part2` | 미분 |
+| 3부 | `apps/part3` | 확률통계 |
+| 4부 | `apps/part4` | 트랜스포머 — 시리즈의 정점 |
+| 5부 | `apps/part5` | 정보이론 |
+| *(예정)* 6부 | `apps/part6` | LLM 조련 (루트 `README.md` 로드맵) |
 
-공용 파일(`Quiz`/`StepQuiz`/`QuizSet`/`quizGroup` · `MathBlock` · `ConceptCard` · `DetailsCard` ·
-`NotebookCard` · `ChartView` · `ReviewFlag` · `TutorChat` · `lib/ollama.ts` · `notebooks/tutor.py` ·
-`progress`/`review` 스토어)은 **1부가 기준 사본**이다.
+시리즈 커리큘럼·추천 학습 경로(1→2→3→4→5 순서가 아님)·부 간 연결은 루트 `README.md`.
 
-- 2~5부에서 공용 파일을 임의로 고치지 않는다. 고쳐야 하면 **1부에 먼저 반영 → 각 부에 전파**.
-- 드리프트 점검: `python part1-linear-algebra/scripts/check_drift.py` (EXACT 불일치 시 exit 1).
-- 공용 파일에는 특정 부 주제의 예시·문구를 넣지 않는다(주제 중립). 부별 설정은 THEMED 파일에만:
-  localStorage 접두사 `la`/`diff`/`stat`/`tf`/`it` (바꾸면 사용자 진도가 끊긴다), 튜터 프롬프트 주제.
-- 새 부를 추가하면 `check_drift.py` 의 `PARTS` 에 (디렉토리명, 접두사) 등록.
+## 명령어 (npm workspaces — 루트에서 실행)
+
+```bash
+npm install                                  # 최초 1회 (전 워크스페이스 링크)
+npm run build --workspaces --if-present      # 전 앱 빌드 = 검증 (테스트·린트 없음)
+npm run dev   -w apps/part1/web              # 특정 부 개발 서버
+npm run build -w apps/part1/web              # 특정 부만 빌드
+```
+- 검증 수단은 `npm run build`(vue-tsc 타입체크 포함). `noUnusedLocals`/`noUnusedParameters` 가 켜져 있어 미사용 변수도 에러.
+- 노트북: **루트 공용 venv 하나**(`.venv`, 커널 `math-platform`). 설치·실행·검증은 `docs/TESTING.md` 3절.
+
+## 공용 컴포넌트 — `packages/ui` (@series/ui)
+
+공용 컴포넌트(`MathBlock`·`ConceptCard`·`DetailsCard`·`ChartView`·`NotebookCard`·`ReviewFlag`·`Quiz`·`StepQuiz`·`QuizSet`·`quizGroup`)는
+**`packages/ui` 한 곳에만 있다.** 앱은 `import { Quiz } from '@series/ui'` 로 소비.
+
+- **한 번 고치면 전 부에 반영** — 복제·전파·드리프트 점검 없음(옛 골든카피/`check_drift.py` 체제는 폐기).
+- 패키지는 **주제 중립** 유지. 앱전용 결합은 **provide/inject** 로 분리 — 각 앱 `main.ts` 가 주입:
+  - `storagePrefixKey` — QuizSet 저장 접두사. part1=`la` part2=`diff` part3=`stat` part4=`tf` part5=`it`. **바꾸면 사용자 진도가 끊긴다.**
+  - `reviewApiKey` — ReviewFlag ↔ 각 앱 `review` 스토어.
+  - `notebookResolverKey` — NotebookCard ↔ 각 앱 `chapters`(part1·4·5만).
+- 소스 `.vue` 패키지라 각 앱 설정에: `vite.config.ts` 의 `optimizeDeps.exclude:['@series/ui']`,
+  `style.css` 의 `@source '../../../../packages/ui/src'`(Tailwind 가 패키지 클래스 스캔 — 빠지면 스타일이 조용히 누락).
+- **THEMED(각 앱에 유지)**: `progress`/`review` 스토어, `TutorChat.vue`(튜터 주제), `notebooks/tutor.py`.
+- 아직 부별 중복(향후 패키지화 후보): `lib/ollama.ts` — 원격 Ollama 도입 시 `packages` 로.
 
 ## 시리즈 설계 철학 (모든 부 공통)
 

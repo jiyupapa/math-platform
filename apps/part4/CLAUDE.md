@@ -26,6 +26,7 @@ LLM이 *"다음 단어를 확률로 고르는 기계"*이며 그 핵심 부품�
 5. `npm run build` 로 검증 → `docs/99_history.md` 에 이력 한 줄.
 
 ## 재사용 컴포넌트 (재발명 금지 — 먼저 이걸 쓴다)
+**공용 컴포넌트는 모노레포 `packages/ui`(@series/ui) 에 있다** — `import { Quiz } from '@series/ui'`. 수정은 거기서(옛 "1부 복제·전파" 폐기 — 루트 `CLAUDE.md` 참조). 트랜스포머 전용 랩(`SoftmaxLab` 등)만 `web/src/components/` 에.
 - `ConceptCard`(note/tip/warn/goal/ai) · `DetailsCard`(접는 "더 깊이 알아보기") · `MathBlock`(KaTeX)
 - `ChartView`(vue-chartjs) · `Quiz`/`StepQuiz` · `QuizSet`(집계→진도) · `ReviewFlag`(섹션 복습)
 - 챕터별 인터랙티브는 새로 만들되(예: `SoftmaxLab`), `v-model` 로 상태를 챕터와 공유하는 패턴을 따른다.
@@ -41,7 +42,7 @@ LLM이 *"다음 단어를 확률로 고르는 기계"*이며 그 핵심 부품�
 
 ## 운영
 - 스택: Vue 3 + TS + Vite + Vue Router + Pinia + KaTeX + vue-chartjs + Tailwind v4 / Jupyter + NumPy (+ Ollama 튜터).
-- 진도·복습은 Pinia + localStorage(`tf-progress-v1`, `tf-review-v1`).
-- 변경 후 반드시 `npm run build`(필요 시 노트북 `nbconvert --execute`)로 검증.
+- 진도·복습은 Pinia + localStorage(`tf-progress-v1`, `tf-review-v1`). 접두사 `tf` 는 각 앱 `main.ts` 가 `storagePrefixKey` 로 주입(공용 QuizSet 이 사용).
+- 모노레포: `npm install` 은 루트 1회, 이 부 빌드는 `npm run build -w apps/part4/web`(루트에서). 변경 후 반드시 이걸로 검증. 노트북은 루트 공용 venv — 루트 `docs/TESTING.md` 3절.
 - KaTeX 수식을 `:steps`/`:hints` 같은 **JS 표현식 속성**에 넣을 땐 백슬래시 이스케이프 주의(`'\\div'`),
   정적 `expr="..."` 속성은 단일 백슬래시(`expr="\div"`). 속성 안 중첩 따옴표는 「」 등으로 회피.

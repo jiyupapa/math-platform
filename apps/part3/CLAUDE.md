@@ -17,28 +17,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 명령어
 
-웹 앱 (반드시 `web/` 에서 실행):
+모노레포이므로 `npm install` 은 **루트에서 1회**. 이 부만 다룰 때(루트에서 실행):
 ```bash
-cd web
-npm install
-npm run dev      # 개발 서버 http://localhost:5173 (HMR)
-npm run build    # vue-tsc 타입체크 + vite 빌드 — 변경 후 이걸로 검증
-npm run preview  # 빌드 결과 미리보기 http://localhost:4173
+npm run dev   -w apps/part3/web   # 개발 서버 (HMR)
+npm run build -w apps/part3/web   # vue-tsc 타입체크 + vite 빌드 — 변경 후 이걸로 검증
 ```
-- 테스트·린트 설정은 없음. **검증 수단은 `npm run build`** (vue-tsc가 타입/템플릿 오류를 잡음).
-  `tsconfig.app.json` 은 `noUnusedLocals`/`noUnusedParameters` 가 켜져 있어 미사용 변수도 에러다.
-
-노트북 (`notebooks/`, venv 사용):
-```bash
-cd notebooks
-python -m venv .venv
-.venv\Scripts\Activate.ps1        # PowerShell
-pip install -r requirements.txt   # numpy, matplotlib, scipy, jupyterlab
-jupyter lab
-# 노트북 무에러 실행 검증 (반드시 venv 의 exe 를 직접 호출 — python -m jupyter 는
-# PATH 의 시스템 nbconvert 로 새서 'No module named scipy' 류 오탐이 난다):
-.venv\Scripts\jupyter-nbconvert.exe --to notebook --execute --stdout chXX.ipynb
-```
+- 테스트·린트 설정은 없음. **검증 수단은 `npm run build`** (vue-tsc가 타입/템플릿 오류를 잡음). `noUnusedLocals`/`noUnusedParameters` 가 켜져 있어 미사용 변수도 에러다.
+- 노트북: **루트 공용 venv 하나**(`.venv`, scipy 포함). 검증 시 **반드시 venv 의 python 을 직접 호출** — 시스템 PATH 의 nbconvert 로 새면 `No module named scipy` 오탐이 난다:
+  `.venv\Scripts\python.exe -m jupyter nbconvert --to notebook --execute --stdout --ExecutePreprocessor.kernel_name=math-platform apps\part3\notebooks\chXX.ipynb`. 상세는 루트 `docs/TESTING.md` 3절.
 
 ## 아키텍처
 
@@ -59,7 +45,7 @@ jupyter lab
   `ask()` = 원샷 질문, `explain()` = 직전 실행 셀 코드 설명. 웹 `TutorChat.vue`·`lib/ollama.ts` 와
   로직을 맞춘 이식판이므로 한쪽을 고치면 다른 쪽도 확인할 것.
 
-재사용 컴포넌트 (`web/src/components/`):
+재사용 컴포넌트 — **공용(`ConceptCard`·`MathBlock`·`ChartView`·`Quiz`·`StepQuiz`·`QuizSet`·`quizGroup`)은 `packages/ui`(@series/ui) 에 있다**(수정은 거기서). 확률통계 전용 시각화만 `web/src/components/` 에 있다. 아래는 역할 설명:
 - `ConceptCard.vue` — 설명 카드. `tone` = note/tip/warn/goal.
 - `MathBlock.vue` — KaTeX 수식. `inline` 또는 블록.
 - `ChartView.vue` — vue-chartjs 래퍼. `type` = bar/line/scatter. 필요한 Chart.js 모듈만 등록됨.
@@ -105,7 +91,7 @@ jupyter lab
   "execution_count is a required property"로 실패). 작성 후 `nbconvert --execute` 로 무에러를 검증할 것.
 - **노트북 난수**: 시뮬레이션 셀은 `rng = np.random.default_rng(42)` 처럼 시드를 고정해
   본문 설명과 출력 숫자가 일치하게 한다.
-- Bash 도구의 작업 디렉토리가 유지되므로, `npm` 명령 전 `cd web` 을 확인할 것 (notebooks 에서 실행하면 ENOENT).
+- 모노레포이므로 `npm` 은 **루트에서 `-w apps/part3/web`** 로 실행한다(옛날처럼 각 부 `web/` 로 `cd` 하지 않는다). Bash 작업 디렉토리는 유지되니 루트인지 확인.
 
 ## 스택
 

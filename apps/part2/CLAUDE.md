@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 수포자(개발자 대상)를 위한 **미분 학습 웹앱**. 최종 종착점은 미분 지식으로 AI 기반(경사하강법·역전파)을 직관적으로 이해하는 것. 모든 챕터가 Phase 0(접선 맛보기) → Phase 10(역전파 직관)으로 배열되어 있다. 전체 커리큘럼·Phase 계획은 `docs/00_plan.md`에 있다 (단일 기획 문서, 작업 전 반드시 참조).
 
-`C:\STUDY\MATH\part1-linear-algebra`의 web 스캐폴딩과 검증된 공통 컴포넌트를 복제 후 미분에 맞게 수정한 구조. 컴포넌트는 거의 완성되어 있고, 실제 작업의 핵심은 **미분 전용 시각화**와 **콘텐츠(챕터)**이다.
+모노레포 `C:\STUDY\MATH_PLATFORM` 의 `apps/part2` 이다. 공용 컴포넌트는 `packages/ui`(@series/ui) 에서 소비하며 **수정은 거기서**(옛 "1부 복제·전파" 체제는 폐기 — 루트 `CLAUDE.md` 참조). 실제 작업의 핵심은 **미분 전용 시각화**와 **콘텐츠(챕터)**이다.
 
 ## 작업 이력 기록 (필수)
 
@@ -14,21 +14,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 명령어
 
-작업 디렉터리는 `web/` (Vite 프로젝트). 노트북은 `notebooks/`.
+모노레포 npm workspaces. `npm install` 은 **루트에서 1회**. 이 부만 다룰 때(루트에서 실행):
 
 ```bash
-# web/ 에서
-npm run dev        # 개발 서버
-npm run build      # vue-tsc 타입체크 + vite 프로덕션 빌드 (타입 에러도 빌드 실패 처리)
-npm run preview    # 빌드 결과 미리보기
-
-# notebooks/ 에서 (Windows)
-python -m venv .venv && .venv\Scripts\activate
-pip install -r requirements.txt   # numpy, matplotlib, sympy, jupyterlab
-jupyter lab
+npm run dev   -w apps/part2/web   # 개발 서버
+npm run build -w apps/part2/web   # vue-tsc 타입체크 + vite 프로덕션 빌드 (타입 에러도 빌드 실패)
 ```
 
 테스트 러너는 없다. 검증은 `npm run build`(타입체크 포함) 통과 + dev 서버 동작 확인으로 한다.
+노트북은 **루트 공용 venv 하나**(`.venv`, 커널 `math-platform`) 사용 — 설치·검증은 루트 `docs/TESTING.md` 3절.
 
 ## 아키텍처
 
@@ -51,7 +45,9 @@ jupyter lab
 - 문제 유형 3종: 객관식(`mc`) + 참/거짓(`truefalse`) + 숫자입력(`numeric`) — 모두 `Quiz` 컴포넌트.
 - 문제 구성: 본문 중간 **미니체크** + 챕터 끝 **난이도별(easy/medium/hard) 10문제 세트**(`QuizSet`).
 
-### 공통 컴포넌트 (web/src/components/)
+### 공통 컴포넌트
+
+**공용(`MathBlock`·`ChartView`·`ConceptCard`·`Quiz`·`StepQuiz`·`QuizSet`·`quizGroup`)은 `packages/ui`(@series/ui) 에 있다**(수정은 거기서). `TangentExplorer` 등 미분 전용만 `web/src/components/` 에 있다. 아래는 역할 설명:
 
 | 컴포넌트 | 역할 |
 |---------|------|
