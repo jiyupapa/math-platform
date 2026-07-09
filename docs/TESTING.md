@@ -1,0 +1,147 @@
+# 전체 테스트 수행 방법 — MATH_PLATFORM 모노레포
+
+> 대상: `C:\STUDY\MATH_PLATFORM` (npm workspaces 모노레포). 5개 부(`apps/part1..5`) + 포털(`apps/portal`) + 공용 패키지(`packages/ui`).
+> 원본 `C:\STUDY\MATH` 는 손대지 않은 백업. 문제가 생기면 이 폴더를 지우고 원본에서 다시 시작해도 무손실.
+>
+> **이 테스트로 확인하려는 것**: 모노레포 전환(공용 컴포넌트를 `@series/ui` 패키지로 분리, provide/inject 결합해제) 후에도
+> ① 타입·빌드가 깨지지 않고 ② 화면·스타일이 정상이고 ③ 퀴즈/진도/복습이 실제로 동작하고 ④ 부별 저장 접두사가 보존됐는가.
+
+셸은 **PowerShell** 기준 (Git Bash 도 동일 명령 사용 가능). 명령은 모두 모노레포 루트에서 실행:
+
+```powershell
+cd C:\STUDY\MATH_PLATFORM
+```
+
+---
+
+## 0. 사전 준비
+
+- **Node.js** (npm 포함). 확인: `node -v` / `npm -v` (개발 시 npm 11.x, Node 20+ 권장).
+- **Ollama** (선택) — AI 튜터 챗봇용. 없어도 학습·테스트에 지장 없음(튜터 자리에 설치 안내만 뜸).
+- 최초 1회 의존성 설치:
+
+```powershell
+npm install
+```
+
+> 워크스페이스라 루트에서 한 번 설치하면 6개 앱 + 패키지가 모두 링크된다. `@series/ui` 는 `node_modules/@series/ui` 심링크로 연결됨.
+
+---
+
+## 1. 빌드 테스트 (타입체크 + 프로덕션 빌드)
+
+**이 프로젝트의 1차 검증 수단.** 각 앱의 `build` 는 `vue-tsc -b`(타입체크) + `vite build`(번들)이며,
+`tsconfig` 에 `noUnusedLocals`/`noUnusedParameters` 가 켜져 있어 **미사용 변수·타입 오류·템플릿 오류를 전부 잡는다.**
+
+### 전 앱 한 번에
+
+```powershell
+npm run build --workspaces --if-present
+```
+
+- 6개 앱 전부 `built in ...` 이 뜨면 통과. (`packages/ui` 는 build 스크립트가 없어 자동 건너뜀.)
+- 하나라도 `error TS...` 또는 `Cannot find module` 이 뜨면 실패 → 5절 참고.
+
+### 개별 앱만
+
+```powershell
+npm run build -w apps/part1/web      # part1 (선형대수)
+npm run build -w apps/part4/web      # part4 (트랜스포머)
+npm run build -w apps/portal/web     # 포털
+```
+
+---
+
+## 2. 런타임 스모크 테스트 (dev 서버) — 가장 중요
+
+빌드 통과는 "타입·구조 OK"까지만 보증한다. **inject 결합해제와 Tailwind 스타일이 런타임에도 맞는지**는 실제 구동으로 확인한다.
+
+### 2-1. 앱 띄우기
+
+```powershell
+npm run dev -w apps/part1/web
+```
+
+- 브라우저에서 안내된 주소(보통 http://localhost:5173) 열기.
+- 다른 부/포털도 같은 방식: `npm run dev -w apps/part4/web`, `npm run dev -w apps/portal/web`.
+- 여러 개를 동시에 띄우면 포트가 5173, 5174… 로 자동 증가.
+
+### 2-2. 확인 체크리스트 (전환에서 바뀐 부분 위주)
+
+한 부(예: **part1**)를 열고 아래를 확인. 이게 통과하면 공용 패키지 소비가 런타임에도 정상이라는 뜻:
+
+| # | 확인 항목 | 무엇을 검증하나 |
+|---|---|---|
+| 1 | **수식이 보인다** (챕터 본문의 KaTeX 수식) | `MathBlock` 패키지 소비 + KaTeX |
+| 2 | **설명 카드에 배경·테두리 색이 있다** (ConceptCard: 파랑/초록/보라 등) | Tailwind `@source` 가 패키지 클래스를 생성했는가 (색이 없고 흰 네모면 실패) |
+| 3 | **차트가 그려진다** (차트 쓰는 챕터) | `ChartView` (chart.js) 패키지 소비 |
+| 4 | **미니 퀴즈·문제 세트 풀이가 채점된다**, 세트를 다 풀면 완료 표시 | `Quiz`/`StepQuiz`/`QuizSet` + provide/inject 집계 |
+| 5 | **새로고침 후에도 푼 문제·진도가 유지된다** | `QuizSet` 의 `storagePrefixKey` 주입 (저장 키 `la-quizset-v1:*`) |
+| 6 | **섹션 제목 옆 "☆ 복습에 추가" 를 누르면 ★ 로 바뀌고, 새로고침 후 유지** | `ReviewFlag` 의 `reviewApiKey` 주입 (스토어 결합해제) |
+| 7 | **"🐍 Python 노트북으로도 해보기" 카드가 챕터에 뜬다** (part1·4·5) | `NotebookCard` 의 `notebookResolverKey` 주입 |
+| 8 | **AI 튜터(우하단 🤖)** — Ollama 실행 중이면 답변, 아니면 설치 안내 | 튜터(부별 유지분) |
+
+**포털**(`apps/portal/web`)은 트라이얼 스캐폴드라, 카드 2장 + 수식 한 줄이 색·수식과 함께 보이면 "포털이 패키지를 소비한다"가 확인된 것.
+
+### 2-3. ⚠️ dev 서버의 origin 주의 (개인화 2층 관련)
+
+각 부를 따로 `npm run dev` 하면 포트가 달라 **서로 다른 origin** 이 된다 → 브라우저 localStorage 가 분리되어,
+"포털이 다른 부의 진도를 읽는" 기능(개인화 2층)은 **dev 에서는 재현되지 않는다.** 그건 정상이며,
+동일 origin 하위 경로로 **배포(빌드)한 뒤**에만 확인 가능하다. 각 부 자체의 진도 저장(체크리스트 5·6)은 dev 에서도 정상 동작한다.
+
+---
+
+## 3. 노트북 테스트 (선택)
+
+노트북 `.venv` 는 복사에서 제외됐으므로 테스트하려면 부별로 다시 만든다. 예(part1):
+
+```powershell
+cd C:\STUDY\MATH_PLATFORM\apps\part1\notebooks
+python -m venv .venv
+.venv\Scripts\python.exe -m pip install -r requirements.txt
+# 무에러 실행 검증 (한 개):
+.venv\Scripts\python.exe -m jupyter nbconvert --to notebook --execute --stdout ch00_sample.ipynb
+```
+
+> part3 는 검증 시 시스템 nbconvert 로 새는 문제가 있어 venv 의 exe 를 직접 호출한다:
+> `.venv\Scripts\jupyter-nbconvert.exe --to notebook --execute --stdout chXX.ipynb`
+> 노트북은 모노레포 전환의 영향을 받지 않으므로(웹만 재구조화됨) 우선순위 낮음.
+
+---
+
+## 4. 빠른 전체 점검 스크립트
+
+빌드만 한 번에 돌려 통과 여부를 보고 싶을 때 (PowerShell):
+
+```powershell
+cd C:\STUDY\MATH_PLATFORM
+foreach ($a in 'part1','part2','part3','part4','part5','portal') {
+  Write-Host "=== $a ===" -ForegroundColor Cyan
+  npm run build -w "apps/$a/web"
+}
+```
+
+각 앱 끝에 `built in ...` 이 뜨면 성공.
+
+---
+
+## 5. 문제 해결
+
+- **카드/버튼에 색이 없다 (흰 네모)** — Tailwind `@source` 누락. 각 부 `web/src/style.css` 에
+  `@source '../../../../packages/ui/src';` 줄이 있어야 한다. **이 실패는 `npm run build` 가 못 잡는다**(타입은 통과, 스타일만 누락) → 반드시 눈으로 확인.
+- **`Cannot find module '@series/ui'`** — 루트에서 `npm install` 을 다시 실행(워크스페이스 링크 재생성).
+- **`Failed to resolve ... .vue`** 또는 패키지 컴포넌트가 안 뜸 — 해당 앱 `vite.config.ts` 에
+  `optimizeDeps: { exclude: ['@series/ui'] }` 가 있는지 확인.
+- **진도/복습이 새로고침 후 사라진다** — 각 부 `web/src/main.ts` 의 `app.provide(storagePrefixKey, '...')`
+  와 `reviewApiKey` 주입이 있는지 확인. 접두사는 부마다 고정: part1=`la`, part2=`diff`, part3=`stat`, part4=`tf`, part5=`it`. **바꾸면 기존 진도가 끊긴다.**
+- **타입 에러 `... is declared but never used`** — `noUnusedLocals` 규칙. 미사용 import/변수 제거.
+
+---
+
+## 부록: 현재 상태
+
+- 구조: `apps/part1..5` + `apps/portal` + `packages/ui`(공용 11종: MathBlock·ConceptCard·DetailsCard·ChartView·NotebookCard·ReviewFlag·Quiz·StepQuiz·QuizSet·quizGroup + injection).
+- 결합해제 주입 계약: `storagePrefixKey`(QuizSet 접두사) · `reviewApiKey`(ReviewFlag) · `notebookResolverKey`(NotebookCard).
+- 검증됨(빌드): 전 5부 + 포털 `vue-tsc + vite` 통과, Tailwind `@source` 로 패키지 클래스 생성 전 부 확인.
+- 미검증(이 문서의 2절이 그 확인 절차): 런타임 동작(퀴즈·진도·복습·튜터).
+- 커밋 되돌림 지점: `b3e3a00`(baseline) → `71c1aff`(trial) → `deaed16`(패키지 완성) → `b0ee776`(2~5부 전파).
