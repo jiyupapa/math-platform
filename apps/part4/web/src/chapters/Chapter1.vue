@@ -53,12 +53,20 @@ function onSetComplete() {
 
     <NextWordGame v-model="sentence" />
 
-    <ConceptCard tone="note" title="새 용어: 자기회귀 (autoregressive)">
-      <ul class="list-disc space-y-1 pl-5 text-sm">
-        <li><b>이름</b>: 자기회귀 (autoregressive, 오토리그레시브)</li>
-        <li><b>읽는 법</b>: "자기회귀" / "오토리그레시브"</li>
-        <li><b>뜻</b>: <b>자기가 방금 만든 단어를 다시 입력으로 되먹여</b> 다음 단어를 만드는 방식.
-          "자기(auto) + 되돌아감(regressive)". LLM이 글을 쓰는 기본 원리입니다.</li>
+    <ConceptCard tone="note" title="새 용어: 언어 모델링 / 자기회귀">
+      <ul class="list-disc space-y-2 pl-5 text-sm">
+        <li>
+          <b>언어 모델링</b> (language modeling) — 읽는 법: 언어 모델링, 랭귀지 모델링.
+          뜻: 지금 해 본 <b>"다음 단어 맞히기" 과제의 정식 이름</b>입니다. 이 과제를 배운 모델이
+          <b>언어 모델</b>(language model, <b>LM</b>)이고, 아주 크게 키운 것이 바로
+          <b>LLM</b>(Large Language Model, 대형 언어 모델) — 이 과정 내내 "게임"이라 부르되,
+          밖에서 말할 땐 이 이름을 쓰세요.
+        </li>
+        <li>
+          <b>자기회귀</b> (autoregressive) — 읽는 법: 자기회귀, 오토리그레시브.
+          뜻: <b>자기가 방금 만든 단어를 다시 입력으로 되먹여</b> 다음 단어를 만드는 방식.
+          "자기(auto) + 되돌아감(regressive)". LLM이 글을 쓰는 기본 원리입니다.
+        </li>
       </ul>
     </ConceptCard>
 
