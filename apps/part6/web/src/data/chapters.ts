@@ -34,7 +34,7 @@ export const chapters: ChapterMeta[] = [
   { slug: 'ch1', phase: 1, title: '큰 그림 — 사전학습에서 비서까지', summary: '사전학습 → SFT → 선호 학습, 3단 파이프라인 지도', minutes: 35, notebook: 'ch01_big_picture.ipynb' },
   { slug: 'ch2', phase: 2, title: '이어쓰기 기계의 한계', summary: '베이스 모델이 지시를 못 따르는 이유, 프롬프트 흉내의 한계', minutes: 35, notebook: 'ch02_limits.ipynb' },
   { slug: 'ch3', phase: 3, title: 'SFT — 시범 보여주기 (핵심)', summary: '지시-응답 데이터로 미세조정 — 결국 같은 크로스 엔트로피 학습', minutes: 45, notebook: 'ch03_sft.ipynb' },
-  { slug: 'ch4', phase: 4, title: '사람의 취향을 숫자로 — 선호 데이터와 보상 모델 (핵심)', summary: 'A/B 선호 쌍, Bradley-Terry 직관, 보상 모델 학습', minutes: 45, comingSoon: true },
+  { slug: 'ch4', phase: 4, title: '사람의 취향을 숫자로 — 선호 데이터와 보상 모델 (핵심)', summary: 'A/B 선호 쌍, Bradley-Terry 직관, 보상 모델 학습', minutes: 45, notebook: 'ch04_reward_model.ipynb' },
   { slug: 'ch5', phase: 5, title: '보상으로 배우기 — 강화학습 최소 직관', summary: '행동·보상·정책 — 보상을 높이는 방향으로의 경사 이동', minutes: 40, comingSoon: true },
   { slug: 'ch6', phase: 6, title: 'RLHF (핵심) — KL 목줄', summary: '보상 최대화 + KL 페널티 — 원본에서 멀어지지 않게 묶는 이유', minutes: 45, comingSoon: true },
   { slug: 'ch7', phase: 7, title: 'DPO — 보상 모델 없이 조련하기', summary: '선호 쌍에서 바로 배우는 지름길, RLHF 와의 득실 비교', minutes: 40, comingSoon: true },

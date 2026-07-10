@@ -26,6 +26,11 @@ const routes: RouteRecordRaw[] = [
     name: 'ch3',
     component: () => import('@/chapters/Chapter3.vue'),
   },
+  {
+    path: '/ch/ch4',
+    name: 'ch4',
+    component: () => import('@/chapters/Chapter4.vue'),
+  },
   // 예정 챕터(comingSoon)는 안내 페이지로 모음
   {
     path: '/ch/:slug',
