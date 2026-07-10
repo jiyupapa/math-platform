@@ -39,7 +39,7 @@ export const chapters: ChapterMeta[] = [
   { slug: 'ch6', phase: 6, title: 'RLHF (핵심) — KL 목줄', summary: '보상 최대화 + KL 페널티 — 원본에서 멀어지지 않게 묶는 이유', minutes: 45, notebook: 'ch06_rlhf.ipynb' },
   { slug: 'ch7', phase: 7, title: 'DPO — 보상 모델 없이 조련하기', summary: '선호 쌍에서 바로 배우는 지름길, RLHF 와의 득실 비교', minutes: 40, notebook: 'ch07_dpo.ipynb' },
   { slug: 'ch8', phase: 8, title: 'LoRA — 살짝만 조련하기', summary: '거대 행렬을 얼리고 저차원 행렬 두 장만 학습하는 직관', minutes: 40, notebook: 'ch08_lora.ipynb' },
-  { slug: 'ch9', phase: 9, title: '조련 성적표 — 평가와 부작용', summary: '벤치마크, LLM 심판, 과잉 조련(아첨·망각)의 징후', minutes: 35, comingSoon: true },
+  { slug: 'ch9', phase: 9, title: '조련 성적표 — 평가와 부작용', summary: '벤치마크, LLM 심판, 과잉 조련(아첨·망각)의 징후', minutes: 35, notebook: 'ch09_eval.ipynb' },
   { slug: 'ch10', phase: 10, title: '🎯 캡스톤 — 나만의 챗봇 조련', summary: '미니 파이프라인 전체 조립: SFT → 보상 → DPO 시뮬레이션', minutes: 50, comingSoon: true },
 ]
 
