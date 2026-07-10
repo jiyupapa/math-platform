@@ -62,7 +62,10 @@ const progress = useProgressStore()
             <span class="font-medium">
               {{ ch.title }}
               <span v-if="ch.comingSoon" class="text-xs text-slate-400">(예정)</span>
-              <span v-else-if="ch.advanced" class="ml-1 rounded-full bg-violet-100 px-2 py-0.5 text-[11px] font-normal text-violet-600">심화</span>
+              <template v-else>
+                <span v-if="ch.advanced" class="ml-1 rounded-full bg-violet-100 px-2 py-0.5 text-[11px] font-normal text-violet-600">심화</span>
+                <span v-if="ch.minutes" class="ml-1 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-normal text-slate-500">약 {{ ch.minutes }}분</span>
+              </template>
             </span>
             <span class="block text-sm text-slate-500">{{ ch.summary }}</span>
           </span>
