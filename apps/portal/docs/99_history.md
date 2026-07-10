@@ -1,0 +1,55 @@
+# 작업 이력 (99_history)
+
+> 최신 작업이 맨 위. 의미 있는 작업을 마칠 때마다 추가한다.
+> (2026-07-10 소급 작성 — 포털 신설 이후의 커밋 이력 기반)
+
+---
+
+## 2026-07-10 — 학습 전후 향상도 그래프 (전략 ③ 마무리)
+
+- `data/useDiagnosis.ts`: 최초 진단을 `hub-baseline-v1` 기준선으로 별도 보관 — 재진단해도 유지.
+- `data/metrics.ts`: 진단 1회 요약 지표(정답 수·통과 관문 수·자신감 평균).
+- `components/ImprovementCard.vue`: 정답·관문·자신감을 전(회색)→후(초록) 막대 + 델타로 비교.
+- `HomeView`: 재진단이 있으면 향상도 카드, 없으면 "학습 후 다시 진단" 안내.
+- 검증: 기준선 고정 + 지표/델타 9개 단언 통과, vue-tsc 빌드.
+- 전략 ③(자가진단·배포·스탯 칩) 중 스탯 칩·향상도 완료. **배포 URL/QR 은 호스트 결정 대기.**
+
+## 2026-07-09 — 스탯 칩: 실측 "숫자 한 장" (전략 ③ 일부)
+
+- `data/stats.ts`: 실측값 4종 — **54 학습챕터**(12+10+10+12+10) · **700+ 자동채점 문항**(Quiz 693 + StepQuiz 97 = 790) · **61 실습 노트북**(ipynb 전수, TESTING.md 일치) · **운영비 ₩0**(로컬 Ollama). 전략 문서의 아스피레이셔널 수치(60+/400+)를 실측으로 교체.
+- `components/StatChips.vue`: 반응형 4칸 스탯 타일 — HomeView 히어로 아래 배치.
+
+## 2026-07-09 — 진단·추천 엔진 Phase 3: 2층 진도 읽기 + 3층 설명
+
+- **2층(개인화 진도)**: `data/useProgress.ts` — 각 부 `{prefix}-progress-v1` 을 읽어 part별 완료/총/퍼센트 산출(샘플 제외·상한 클램프). HomeView 지도 카드에 "진도 X/Y" 배지 + "다음 목적지"(활성·미완료 첫 단계) 카드.
+  ⚠️ localStorage 는 origin 단위 — 조립본(`deploy:serve`, 같은 origin)에서만 통합 표시된다.
+- **3층(추천 설명)**: `data/explain.ts` — 규칙 기반 강사 말투 템플릿(항상 동작). `components/TutorExplain.vue` — 로컬 Ollama 가 재설명(@series/tutor 스트리밍), 미실행/오류 시 조용히 템플릿 폴백. **결정은 규칙이, LLM 은 설명만 담당.**
+- 포털에 `@series/tutor` 의존성 + `optimizeDeps.exclude` 추가.
+- 검증: 리더·템플릿 8개 단언 통과, 전 6앱 빌드+조립 통과. 크로스-origin 진도 읽기는 `deploy:serve` 로 수동 확인 필요.
+
+## 2026-07-09 — 진단·추천 엔진 Phase 2: 진단 문항 + 규칙 엔진 + 지도 개인화
+
+- `data/diagnostic.ts`: 관문 4개(vector/prob/calculus/log) × 3문항(총 12, 수포자 눈높이, 정답 위치 분산) + 자신감 자기보고 2문항.
+- `data/recommend.ts`: 규칙 엔진 — 관문 정답률 ≥0.6 통과 → 해당 단계 건너뛰기(2부는 빠른복습), 자신감 평균 ≤2.5 면 건너뛰기를 빠른복습으로 완화, log 실패 시 5부에 복습 note. 활성 챕터·시간 재계산. (13개 단언 통과)
+- `data/useDiagnosis.ts`: 결과를 `hub-diagnosis-v1` 로 저장/조회 — 전략 ③의 '학습 전' 값 겸용.
+- `DiagnoseView`: 문항 폼(진행바·선택 하이라이트) → 저장 후 Home 으로.
+- `HomeView`: 진단 결과가 있으면 지도 개인화(단계별 상태 배지·접기·"N챕터·M시간" 요약, 다시 진단/전체 보기), 없으면 전체 지도.
+- 전 6앱 빌드 + deploy 조립 통과.
+
+## 2026-07-09 — 진단·추천 엔진 Phase 1: 학습 경로 지도
+
+- 포털을 트라이얼 스캐폴드에서 **실제 허브**로 전환 (전략 티어2 ① 착수, MVP 우선).
+- `data/curriculum.ts`: 8단계 비선형 경로 그래프(루트 README 의 추천 경로를 구조화) — 실제 챕터 수·시간, 역할(토대/조립/본체/조련/심화)·관문(vector/prob/calculus/log) 메타.
+- router + App 셸 + `HomeView`: 전체 경로 지도(역할별 색, 4부 🎯정점 배지, 각 부 `/partN/` 링크, 핵심 45챕터·약 30시간 요약). `DiagnoseView` 는 다음 Phase 안내 스텁.
+- vue-router 의존성 추가. `main.ts` 에 `hub` 저장 접두사 예약.
+
+## 2026-07-09 — 빌드에 타입체크 추가 (5개 부와 동급화)
+
+- build 를 `vite build` 단독 → `vue-tsc -b && vite build` 로 승격.
+- tsconfig 3종 + `src/vite-env.d.ts` 추가, devDeps 에 typescript·vue-tsc·@types/node, vite.config 에 `@` alias.
+- 포털이 진단·추천 엔진(핵심 앱)이 되므로 검증 수단을 표준화.
+
+## 2026-07-09 — 포털 신설 (npm workspaces 모노레포 트라이얼)
+
+- 5개 부를 `apps/part1..5` 로 재배치하면서 `apps/portal` 최소 스캐폴드 신설 — `packages/ui`(@series/ui) 소비 검증용.
+- Tailwind `@source` + vite `optimizeDeps.exclude` 로 소스 패키지 소비 설정.
