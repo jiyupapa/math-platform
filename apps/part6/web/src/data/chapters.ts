@@ -29,7 +29,7 @@ export const chapters: ChapterMeta[] = [
     title: '워밍업 — 같은 모델, 다른 대답',
     summary: '베이스 모델 vs 챗 모델의 응답을 나란히 비교하는 맛보기',
     minutes: 10,
-    comingSoon: true,
+    notebook: 'ch00_sample.ipynb',
   },
   { slug: 'ch1', phase: 1, title: '큰 그림 — 사전학습에서 비서까지', summary: '사전학습 → SFT → 선호 학습, 3단 파이프라인 지도', minutes: 35, comingSoon: true },
   { slug: 'ch2', phase: 2, title: '이어쓰기 기계의 한계', summary: '베이스 모델이 지시를 못 따르는 이유, 프롬프트 흉내의 한계', minutes: 35, comingSoon: true },
