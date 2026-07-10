@@ -33,8 +33,8 @@ const latestPhase = computed(() =>
       <RouterLink to="/" class="block" @click="emit('close')">
         <h1 class="text-lg font-bold leading-tight">수포자를 위한<br />LLM 조련</h1>
       </RouterLink>
-      <!-- 진도 표시 -->
-      <div class="mt-4">
+      <!-- 진도 표시 (본 챕터가 하나라도 공개된 뒤에만) -->
+      <div v-if="progress.totalCount > 0" class="mt-4">
         <div class="mb-1 flex justify-between text-xs text-slate-500">
           <span>학습 진도</span>
           <span>{{ progress.completedCount }}/{{ progress.totalCount }}</span>

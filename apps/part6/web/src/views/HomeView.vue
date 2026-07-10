@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { chapters, availableChapters } from '@/data/chapters'
+import { chapters, availableChapters, progressChapters } from '@/data/chapters'
 import { useProgressStore } from '@/stores/progress'
 
 const progress = useProgressStore()
-// 콘텐츠가 하나라도 공개되면 제작 중 안내를 진도 박스로 자연 교체
-const building = availableChapters.length === 0
+// 본 챕터(1장~)가 공개되면 제작 중 안내를 진도 박스로 자연 교체
+const building = progressChapters.length === 0
+// 워밍업(샘플)이 공개됐으면 제작 중 안내에 CTA 를 단다
+const sampleReady = availableChapters.some((c) => c.slug === 'sample')
 </script>
 
 <template>
@@ -18,13 +20,20 @@ const building = availableChapters.length === 0
       여기서 1부의 저차원 행렬(LoRA), 3부의 확률(보상 모델), 5부의 KL 발산(목줄)이 전부 되돌아옵니다.
     </p>
 
-    <!-- 제작 중 안내 (첫 챕터 공개 시 진도 박스로 교체됨) -->
+    <!-- 제작 중 안내 (본 챕터 공개 시 진도 박스로 교체됨) -->
     <div v-if="building" class="mb-8 rounded-xl border border-amber-200 bg-amber-50 p-5">
       <p class="font-medium text-amber-900">🚧 6부는 지금 만드는 중입니다</p>
       <p class="mt-1 text-sm text-amber-700">
         아래 목차는 확정된 로드맵입니다. 챕터가 공개되면 (예정) 표시가 사라지고 바로 학습할 수 있어요.
         1~5부를 먼저 마치고 오면 모든 챕터가 "아는 수학의 재회"로 읽힙니다.
       </p>
+      <RouterLink
+        v-if="sampleReady && !progress.isDone('sample')"
+        to="/ch/sample"
+        class="mt-4 block rounded-lg bg-indigo-600 px-4 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-indigo-500"
+      >
+        🚀 워밍업은 공개됐어요 — 같은 모델, 다른 대답 체험하기 →
+      </RouterLink>
     </div>
     <div v-else class="mb-8 rounded-xl border border-indigo-100 bg-indigo-50 p-5">
       <div class="mb-1 flex items-center justify-between text-sm">
