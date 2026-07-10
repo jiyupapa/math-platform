@@ -42,7 +42,7 @@ function safeJoin(base, urlPath) {
 }
 
 function fallbackFor(pathname) {
-  const m = pathname.match(/^\/(part[1-5])(\/|$)/)
+  const m = pathname.match(/^\/(part[1-6])(\/|$)/)
   return m ? join(deployDir, m[1], 'index.html') : join(deployDir, 'index.html')
 }
 
