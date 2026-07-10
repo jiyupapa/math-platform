@@ -20,7 +20,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```
 apps/
-  portal/            통합 포털(part0 — 진단·학습경로 추천). packages/ui 소비
+  portal/            통합 포털(part0 — 진단·학습경로 추천): web/ + docs/. packages/ui·tutor 소비
   part1/ .. part5/   각 부: web/(Vue 앱) + notebooks/(Jupyter) + docs/
 packages/
   ui/                공용 컴포넌트 단일 소스 (@series/ui)
@@ -60,14 +60,17 @@ QuizSet↔StepQuiz 그룹 계약(`quizGroupKey`/`QuizGroup` — `quizGroup.ts`)�
 
 - **한 번 고치면 전 부에 반영** — 복제·전파·드리프트 점검 없음(옛 골든카피/`check_drift.py` 체제는 폐기).
 - 패키지는 **주제 중립** 유지. 앱전용 결합은 **provide/inject** 로 분리 — 각 앱 `main.ts` 가 주입:
-  - `storagePrefixKey` — QuizSet 저장 접두사. part1=`la` part2=`diff` part3=`stat` part4=`tf` part5=`it`. **바꾸면 사용자 진도가 끊긴다.**
+  - `storagePrefixKey` — QuizSet 저장 접두사. part1=`la` part2=`diff` part3=`stat` part4=`tf` part5=`it` portal=`hub`.
+    **바꾸면 사용자 진도가 끊긴다.** 포털은 진단 결과 저장(`hub-diagnosis-v1`·`hub-baseline-v1`)에 쓰고,
+    각 부 진도(`{prefix}-progress-v1`)를 읽어 지도에 표시하므로 부 접두사 변경은 포털 연동도 깨뜨린다.
   - `reviewApiKey` — ReviewFlag ↔ 각 앱 `review` 스토어.
   - `notebookResolverKey` — NotebookCard ↔ 각 앱 `chapters`(part1·4·5만).
-- 소스 `.vue` 패키지라 각 앱 설정에: `vite.config.ts` 의 `optimizeDeps.exclude`(part1~5=`['@series/ui', '@series/tutor']`, tutor 안 쓰는 portal=`['@series/ui']`),
+- 소스 `.vue` 패키지라 각 앱 설정에: `vite.config.ts` 의 `optimizeDeps.exclude`(전 6앱 = `['@series/ui', '@series/tutor']`),
   `style.css` 의 `@source '../../../../packages/ui/src'`(Tailwind 가 패키지 클래스 스캔 — 빠지면 스타일이 조용히 누락).
 - **THEMED(각 앱에 유지)**: `progress`/`review` 스토어, `TutorChat.vue`(튜터 주제), `notebooks/tutor.py`.
 - **AI 튜터 클라이언트 = `packages/tutor`(@series/tutor)** — 로컬/원격 Ollama 전송 계층. 서버 주소는 빌드 환경변수
-  **`VITE_OLLAMA_URL`** 로 바꾼다(미설정 시 `http://localhost:11434`) → 코드 수정 없이 local↔remote 전환. `TutorChat.vue`(각 앱, 주제별)가 소비.
+  **`VITE_OLLAMA_URL`** 로 바꾼다(미설정 시 `http://localhost:11434`) → 코드 수정 없이 local↔remote 전환.
+  소비처: `TutorChat.vue`(각 부, 주제별) + 포털 `TutorExplain.vue`(추천 설명 재구술 — Ollama 미실행 시 규칙 템플릿 폴백).
 
 ## 시리즈 설계 철학 (모든 부 공통)
 
@@ -76,4 +79,4 @@ QuizSet↔StepQuiz 그룹 계약(`quizGroupKey`/`QuizGroup` — `quizGroup.ts`)�
 3. 각 챕터에 AI 연결 카드(`ConceptCard tone="ai"`) 필수 — 그 개념이 LLM 어디에 쓰이는지.
 4. 문제 표준: 본문 미니체크 2~3개 + 챕터 끝 10문제 `QuizSet`(완료 시 진도 처리). 계산형은 `StepQuiz`.
 5. 웹 챕터 ↔ 노트북 1:1, 같은 예제.
-6. 의미 있는 작업 후 각 부의 `docs/99_history.md` 맨 위에 이력 추가.
+6. 의미 있는 작업 후 해당 앱(포털 포함)의 `docs/99_history.md` 맨 위에 이력 추가.
