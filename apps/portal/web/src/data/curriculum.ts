@@ -3,9 +3,10 @@
 // 진단 결과에 따라 각 단계를 '이미 앎/보류/빠른복습'으로 접는 개인화(recommend.ts, 다음 단계)의 대상이 된다.
 //
 // 챕터 수·소요시간:
-//   part1·part5 는 각 앱 chapters.ts 의 실제 minutes 합.
-//   part2·3·4 는 minutes 필드가 없어 챕터당 ~40분으로 추정(estimate=true 로 표시).
+//   전 5부 chapters.ts 의 minutes 실값 합 (2026-07-10 부터 part2·3·4 에도 필드 존재).
+//   estimate=true 는 6부(예정, 콘텐츠 없음)만 남음.
 //   포털은 별도 앱이라 각 부 chapters.ts 를 직접 import 하지 않고 여기서 관리한다(향후 공용 패키지화 가능).
+//   ⚠️ 각 부 minutes 를 바꾸면 여기 합계도 갱신할 것.
 
 export type PartId = 1 | 2 | 3 | 4 | 5 | 6
 
@@ -52,22 +53,22 @@ export const pathSteps: PathStep[] = [
   },
   {
     order: 2, part: 3, title: '3부 전반 — 확률의 언어', scope: 'ch1~7',
-    chapterCount: 7, minutes: 280, estimate: true, role: '토대', gate: 'prob',
+    chapterCount: 7, minutes: 280, role: '토대', gate: 'prob',
     gain: 'LLM = 다음 단어를 확률로 고르는 기계',
   },
   {
     order: 3, part: 4, title: '4부 추론편 — LLM이 글을 쓰는 법', scope: 'ch1~10, 12',
-    chapterCount: 11, minutes: 440, estimate: true, role: '조립',
+    chapterCount: 11, minutes: 450, role: '조립',
     gain: '시리즈의 보상 지점 — 어텐션·확률이 실제로 쓰인다',
   },
   {
     order: 4, part: 2, title: '2부 전체 — 미분', scope: 'ch1~10',
-    chapterCount: 10, minutes: 400, estimate: true, role: '토대', gate: 'calculus', compressOnly: true,
+    chapterCount: 10, minutes: 400, role: '토대', gate: 'calculus', compressOnly: true,
     gain: '모델이 학습하는 원리 — 경사하강·역전파',
   },
   {
     order: 5, part: 4, title: '4부 학습편 — 손실과 경사하강', scope: 'ch11',
-    chapterCount: 1, minutes: 40, estimate: true, role: '조립',
+    chapterCount: 1, minutes: 45, role: '조립',
     gain: '2부 미분이 트랜스포머 학습에 그대로 꽂힌다',
   },
   {
@@ -82,7 +83,7 @@ export const pathSteps: PathStep[] = [
   },
   {
     order: 8, part: 1, title: '(선택) 후반 심화 — 1부·3부', scope: '1부 ch7~12 · 3부 ch8~10',
-    chapterCount: 9, minutes: 380, estimate: true, role: '심화', optional: true,
+    chapterCount: 9, minutes: 375, role: '심화', optional: true,
     gain: '고유값·SVD·PCA·검정·회귀 — 교양·심화',
   },
 ]
