@@ -21,7 +21,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```
 apps/
   portal/            통합 포털(part0 — 진단·학습경로 추천): web/ + docs/. packages/ui·tutor 소비
-  part1/ .. part5/   각 부: web/(Vue 앱) + notebooks/(Jupyter) + docs/
+  part1/ .. part6/   각 부: web/(Vue 앱) + notebooks/(Jupyter) + docs/ (part6 는 스캐폴드 — notebooks 는 챕터와 함께)
 packages/
   ui/                공용 컴포넌트 단일 소스 (@series/ui)
   tutor/             AI 튜터 클라이언트 (@series/tutor — 로컬/원격 Ollama)
@@ -37,7 +37,7 @@ requirements.txt     공용 노트북 venv 의존성(5부 합집합)
 | 3부 | `apps/part3` | 확률통계 |
 | 4부 | `apps/part4` | 트랜스포머 — 시리즈의 정점 |
 | 5부 | `apps/part5` | 정보이론 |
-| *(예정)* 6부 | `apps/part6` | LLM 조련 (루트 `README.md` 로드맵) |
+| 6부 | `apps/part6` | LLM 조련 — 스캐폴드만, 콘텐츠 제작 중 (로드맵: 루트 `README.md`) |
 
 시리즈 커리큘럼·추천 학습 경로(1→2→3→4→5 순서가 아님)·부 간 연결은 루트 `README.md`.
 
@@ -60,12 +60,12 @@ QuizSet↔StepQuiz 그룹 계약(`quizGroupKey`/`QuizGroup` — `quizGroup.ts`)�
 
 - **한 번 고치면 전 부에 반영** — 복제·전파·드리프트 점검 없음(옛 골든카피/`check_drift.py` 체제는 폐기).
 - 패키지는 **주제 중립** 유지. 앱전용 결합은 **provide/inject** 로 분리 — 각 앱 `main.ts` 가 주입:
-  - `storagePrefixKey` — QuizSet 저장 접두사. part1=`la` part2=`diff` part3=`stat` part4=`tf` part5=`it` portal=`hub`.
+  - `storagePrefixKey` — QuizSet 저장 접두사. part1=`la` part2=`diff` part3=`stat` part4=`tf` part5=`it` part6=`tame` portal=`hub`.
     **바꾸면 사용자 진도가 끊긴다.** 포털은 진단 결과 저장(`hub-diagnosis-v1`·`hub-baseline-v1`)에 쓰고,
     각 부 진도(`{prefix}-progress-v1`)를 읽어 지도에 표시하므로 부 접두사 변경은 포털 연동도 깨뜨린다.
   - `reviewApiKey` — ReviewFlag ↔ 각 앱 `review` 스토어.
   - `notebookResolverKey` — NotebookCard ↔ 각 앱 `chapters`(part1·4·5만).
-- 소스 `.vue` 패키지라 각 앱 설정에: `vite.config.ts` 의 `optimizeDeps.exclude`(전 6앱 = `['@series/ui', '@series/tutor']`),
+- 소스 `.vue` 패키지라 각 앱 설정에: `vite.config.ts` 의 `optimizeDeps.exclude`(전 7앱 = `['@series/ui', '@series/tutor']`),
   `style.css` 의 `@source '../../../../packages/ui/src'`(Tailwind 가 패키지 클래스 스캔 — 빠지면 스타일이 조용히 누락).
 - **THEMED(각 앱에 유지)**: `progress`/`review` 스토어, `TutorChat.vue`(튜터 주제), `notebooks/tutor.py`.
 - **AI 튜터 클라이언트 = `packages/tutor`(@series/tutor)** — 로컬/원격 Ollama 전송 계층. 서버 주소는 빌드 환경변수

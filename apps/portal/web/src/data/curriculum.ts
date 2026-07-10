@@ -77,8 +77,8 @@ export const pathSteps: PathStep[] = [
     gain: '손실함수·퍼플렉시티·temperature의 본체',
   },
   {
-    order: 7, part: 6, title: '6부 전체 — LLM 조련', scope: '예정',
-    chapterCount: 10, minutes: 400, estimate: true, role: '조련', comingSoon: true,
+    order: 7, part: 6, title: '6부 전체 — LLM 조련', scope: '제작 중',
+    chapterCount: 10, minutes: 410, estimate: true, role: '조련', comingSoon: true,
     gain: 'GPT가 ChatGPT가 되기까지 — SFT·RLHF·DPO',
   },
   {
