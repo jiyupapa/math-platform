@@ -105,6 +105,30 @@ const JOURNEY = [
       <p class="mt-1 text-sm text-indigo-600">크로스 엔트로피가 채점하고 · 시그모이드가 취향을 확률로 바꾸고 · KL이 목줄을 잡고 · 경사하강이 민다</p>
     </div>
 
+    <h2 class="mt-8 mb-2 text-xl font-bold">밖에서 말할 때 — 용어 치환표</h2>
+    <p class="leading-relaxed text-slate-700">
+      "조련"은 이 과정의 <b>비유어</b>였습니다. 동료·문서·논문 앞에서는 실무 용어로 바꿔 말하세요 —
+      비유는 이해를 위한 사다리였고, 이제 진짜 이름으로 대화할 차례입니다.
+    </p>
+    <div class="my-4 overflow-x-auto">
+      <table class="w-full min-w-[26rem] text-sm">
+        <thead>
+          <tr class="border-b border-slate-200 text-left text-slate-500">
+            <th class="py-2 pr-3">이 과정의 말</th>
+            <th class="py-2">실무·논문의 말</th>
+          </tr>
+        </thead>
+        <tbody class="text-slate-700">
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">조련 (전체 과정)</td><td class="py-2"><b>사후 학습</b>(post-training) · <b>파인튜닝</b>(fine-tuning) · <b>정렬</b>(alignment)</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">시범 보여주기</td><td class="py-2"><b>SFT</b> · 지시 조정(instruction tuning)</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">취향 다듬기 (선호 학습)</td><td class="py-2"><b>선호 최적화</b>(preference optimization) — RLHF·DPO 계열</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">심판</td><td class="py-2"><b>보상 모델</b>(reward model)</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">목줄</td><td class="py-2"><b>KL 페널티</b>(KL penalty) · KL 정규화</td></tr>
+          <tr><td class="py-2 pr-3">살짝만 조련</td><td class="py-2"><b>LoRA</b> — PEFT(파라미터 효율적 파인튜닝)의 대표</td></tr>
+        </tbody>
+      </table>
+    </div>
+
     <DetailsCard title="➕ 더 깊이: 시리즈 전체를 여섯 줄로">
       <b>1부</b> 단어가 벡터가 되고, 변환이 행렬곱이 된다 ·
       <b>2부</b> 배움이란 기울기를 따라 내려가는 것 ·
