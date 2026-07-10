@@ -36,7 +36,7 @@ export const chapters: ChapterMeta[] = [
   { slug: 'ch3', phase: 3, title: 'SFT — 시범 보여주기 (핵심)', summary: '지시-응답 데이터로 미세조정 — 결국 같은 크로스 엔트로피 학습', minutes: 45, notebook: 'ch03_sft.ipynb' },
   { slug: 'ch4', phase: 4, title: '사람의 취향을 숫자로 — 선호 데이터와 보상 모델 (핵심)', summary: 'A/B 선호 쌍, Bradley-Terry 직관, 보상 모델 학습', minutes: 45, notebook: 'ch04_reward_model.ipynb' },
   { slug: 'ch5', phase: 5, title: '보상으로 배우기 — 강화학습 최소 직관', summary: '행동·보상·정책 — 보상을 높이는 방향으로의 경사 이동', minutes: 40, notebook: 'ch05_rl_intuition.ipynb' },
-  { slug: 'ch6', phase: 6, title: 'RLHF (핵심) — KL 목줄', summary: '보상 최대화 + KL 페널티 — 원본에서 멀어지지 않게 묶는 이유', minutes: 45, comingSoon: true },
+  { slug: 'ch6', phase: 6, title: 'RLHF (핵심) — KL 목줄', summary: '보상 최대화 + KL 페널티 — 원본에서 멀어지지 않게 묶는 이유', minutes: 45, notebook: 'ch06_rlhf.ipynb' },
   { slug: 'ch7', phase: 7, title: 'DPO — 보상 모델 없이 조련하기', summary: '선호 쌍에서 바로 배우는 지름길, RLHF 와의 득실 비교', minutes: 40, comingSoon: true },
   { slug: 'ch8', phase: 8, title: 'LoRA — 살짝만 조련하기', summary: '거대 행렬을 얼리고 저차원 행렬 두 장만 학습하는 직관', minutes: 40, comingSoon: true },
   { slug: 'ch9', phase: 9, title: '조련 성적표 — 평가와 부작용', summary: '벤치마크, LLM 심판, 과잉 조련(아첨·망각)의 징후', minutes: 35, comingSoon: true },
