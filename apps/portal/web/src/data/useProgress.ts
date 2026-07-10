@@ -26,6 +26,7 @@ export const PART_META: PartMeta[] = [
   { part: 3, prefix: 'stat', label: '3부 확률통계', essential: range(1, 7), advanced: range(8, 10) },
   { part: 4, prefix: 'tf', label: '4부 트랜스포머', essential: range(1, 12), advanced: [] },
   { part: 5, prefix: 'it', label: '5부 정보이론', essential: range(1, 10), advanced: [] },
+  { part: 6, prefix: 'tame', label: '6부 LLM 조련', essential: range(1, 10), advanced: [] },
 ]
 
 export interface PartProgress {

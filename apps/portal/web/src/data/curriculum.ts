@@ -3,8 +3,7 @@
 // 진단 결과에 따라 각 단계를 '이미 앎/보류/빠른복습'으로 접는 개인화(recommend.ts, 다음 단계)의 대상이 된다.
 //
 // 챕터 수·소요시간:
-//   전 5부 chapters.ts 의 minutes 실값 합 (2026-07-10 부터 part2·3·4 에도 필드 존재).
-//   estimate=true 는 6부(예정, 콘텐츠 없음)만 남음.
+//   전 6부 chapters.ts 의 minutes 실값 합 (6부는 2026-07-11 전 챕터 공개 완료).
 //   포털은 별도 앱이라 각 부 chapters.ts 를 직접 import 하지 않고 여기서 관리한다(향후 공용 패키지화 가능).
 //   ⚠️ 각 부 minutes 를 바꾸면 여기 합계도 갱신할 것.
 
@@ -77,8 +76,8 @@ export const pathSteps: PathStep[] = [
     gain: '손실함수·퍼플렉시티·temperature의 본체',
   },
   {
-    order: 7, part: 6, title: '6부 전체 — LLM 조련', scope: '제작 중',
-    chapterCount: 10, minutes: 410, estimate: true, role: '조련', comingSoon: true,
+    order: 7, part: 6, title: '6부 전체 — LLM 조련', scope: 'ch1~10',
+    chapterCount: 10, minutes: 410, role: '조련',
     gain: 'GPT가 ChatGPT가 되기까지 — SFT·RLHF·DPO',
   },
   {
