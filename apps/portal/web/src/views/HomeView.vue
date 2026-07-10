@@ -5,6 +5,7 @@ import { pathSteps, totalChapters, totalHours, type StepRole } from '../data/cur
 import { loadDiagnosis, loadBaseline, clearDiagnosis, confidenceAvg } from '../data/useDiagnosis'
 import { recommend, type StepStatus } from '../data/recommend'
 import { readAllProgress } from '../data/useProgress'
+import { readInsights } from '../data/insights'
 import { explainTemplate } from '../data/explain'
 import { diagnosisMetrics } from '../data/metrics'
 import TutorExplain from '../components/TutorExplain.vue'
@@ -30,6 +31,7 @@ const statusStyle: Record<StepStatus, { label: string; badge: string; dim: boole
 }
 
 const progress = readAllProgress() // 2층 — 각 부 진도(같은 origin 배포본에서 통합)
+const insights = readInsights() // 2층 고도화 — 복습 먼저 · 심화 해금
 const diagnosis = ref(loadDiagnosis())
 const rec = computed(() => {
   const d = diagnosis.value
@@ -151,6 +153,37 @@ function reset() {
         </div>
         <span class="shrink-0 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white">가기 →</span>
       </component>
+    </section>
+
+    <!-- 인사이트: 복습 먼저 · 심화 해금 (2층 고도화) -->
+    <section v-if="insights.length" class="mb-6 space-y-3">
+      <a
+        v-for="ins in insights"
+        :key="ins.type + ins.part"
+        :href="ins.href"
+        class="flex items-center justify-between gap-3 rounded-xl p-4 shadow-sm ring-1 transition hover:ring-2"
+        :class="ins.type === 'review' ? 'bg-amber-50 ring-amber-200' : 'bg-violet-50 ring-violet-200'"
+      >
+        <div>
+          <template v-if="ins.type === 'review'">
+            <p class="text-xs font-semibold text-amber-700">복습 먼저</p>
+            <p class="font-semibold text-slate-900">{{ ins.partLabel }}에 복습 표시 {{ ins.count }}개가 남아 있어요</p>
+            <p class="text-xs text-slate-500">
+              {{ ins.preview.join(' · ') }}<template v-if="ins.count > ins.preview.length"> 외 {{ ins.count - ins.preview.length }}개</template>
+              — 다음 챕터 전에 짚고 가면 좋아요
+            </p>
+          </template>
+          <template v-else>
+            <p class="text-xs font-semibold text-violet-700">심화 해금 🔓</p>
+            <p class="font-semibold text-slate-900">{{ ins.partLabel }} 필수 트랙 완주! 심화 {{ ins.remaining }}챕터가 열렸어요</p>
+            <p class="text-xs text-slate-500">필수는 아니지만, 지금 가장 잘 이해할 수 있는 상태예요</p>
+          </template>
+        </div>
+        <span
+          class="shrink-0 rounded-lg px-4 py-2 text-sm font-semibold text-white"
+          :class="ins.type === 'review' ? 'bg-amber-500' : 'bg-violet-500'"
+        >{{ ins.type === 'review' ? '복습하러' : '보러 가기' }} →</span>
+      </a>
     </section>
 
     <!-- Path map -->
