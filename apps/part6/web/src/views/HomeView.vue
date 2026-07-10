@@ -46,6 +46,18 @@ const sampleReady = availableChapters.some((c) => c.slug === 'sample')
           :style="{ width: progress.percent + '%' }"
         />
       </div>
+      <!-- 처음 방문자를 위한 시작 안내 -->
+      <template v-if="progress.completedCount === 0 && sampleReady && !progress.isDone('sample')">
+        <RouterLink
+          to="/ch/sample"
+          class="mt-4 block rounded-lg bg-indigo-600 px-4 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-indigo-500"
+        >
+          🚀 처음이신가요? 워밍업(같은 모델, 다른 대답)부터 시작하세요 →
+        </RouterLink>
+        <p class="mt-2 text-center text-xs text-indigo-400">
+          1~5부를 먼저 마치고 오면 모든 챕터가 "아는 수학의 재회"로 읽힙니다.
+        </p>
+      </template>
     </div>
 
     <h2 class="mb-4 text-lg font-semibold">목차</h2>

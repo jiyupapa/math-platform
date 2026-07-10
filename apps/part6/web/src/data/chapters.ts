@@ -31,7 +31,7 @@ export const chapters: ChapterMeta[] = [
     minutes: 10,
     notebook: 'ch00_sample.ipynb',
   },
-  { slug: 'ch1', phase: 1, title: '큰 그림 — 사전학습에서 비서까지', summary: '사전학습 → SFT → 선호 학습, 3단 파이프라인 지도', minutes: 35, comingSoon: true },
+  { slug: 'ch1', phase: 1, title: '큰 그림 — 사전학습에서 비서까지', summary: '사전학습 → SFT → 선호 학습, 3단 파이프라인 지도', minutes: 35, notebook: 'ch01_big_picture.ipynb' },
   { slug: 'ch2', phase: 2, title: '이어쓰기 기계의 한계', summary: '베이스 모델이 지시를 못 따르는 이유, 프롬프트 흉내의 한계', minutes: 35, comingSoon: true },
   { slug: 'ch3', phase: 3, title: 'SFT — 시범 보여주기 (핵심)', summary: '지시-응답 데이터로 미세조정 — 결국 같은 크로스 엔트로피 학습', minutes: 45, comingSoon: true },
   { slug: 'ch4', phase: 4, title: '사람의 취향을 숫자로 — 선호 데이터와 보상 모델 (핵심)', summary: 'A/B 선호 쌍, Bradley-Terry 직관, 보상 모델 학습', minutes: 45, comingSoon: true },
