@@ -35,7 +35,7 @@ export const chapters: ChapterMeta[] = [
   },
   { slug: 'ch1', phase: 1, title: '큰 그림 — 안개 낀 산과 여행자', summary: '손실 지형(loss landscape) 지도: 골짜기·평원·절벽, 훈련 = 지형 위의 여행', minutes: 35, notebook: 'ch01_landscape.ipynb' },
   { slug: 'ch2', phase: 2, title: '보폭의 과학 — 학습률 (핵심)', summary: '작으면 기어가고 크면 폭발 — 발산 경계의 수학과 lr 고르기 실전 감각', minutes: 45, notebook: 'ch02_lr.ipynb' },
-  { slug: 'ch3', phase: 3, title: '흔들리는 나침반 — 미니배치 SGD', summary: '기울기는 표본 추정치 — 배치 크기와 노이즈(또 1/√B), 노이즈의 순기능', minutes: 40, comingSoon: true },
+  { slug: 'ch3', phase: 3, title: '흔들리는 나침반 — 미니배치 SGD', summary: '기울기는 표본 추정치 — 배치 크기와 노이즈(또 1/√B), 노이즈의 순기능', minutes: 40, notebook: 'ch03_sgd.ipynb' },
   { slug: 'ch4', phase: 4, title: '관성으로 달리기 — 모멘텀', summary: '좁은 골짜기의 지그재그 문제 → 속도 누적, 지수이동평균(EMA)', minutes: 40, comingSoon: true },
   { slug: 'ch5', phase: 5, title: '축마다 다른 보폭 — Adam (핵심)', summary: '타원 골짜기(축별 스케일 불균형) → 적응적 보폭 — β₁·β₂·ε의 정체', minutes: 45, comingSoon: true },
   { slug: 'ch6', phase: 6, title: '여행 일정표 — 학습률 스케줄', summary: '워밍업·코사인 감쇠·스텝 감쇠 — 왜 초반은 조심스럽게, 후반은 미세하게', minutes: 40, comingSoon: true },
