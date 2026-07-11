@@ -3,7 +3,7 @@
 // 진단 결과에 따라 각 단계를 '이미 앎/보류/빠른복습'으로 접는 개인화(recommend.ts, 다음 단계)의 대상이 된다.
 //
 // 챕터 수·소요시간:
-//   전 6부 chapters.ts 의 minutes 실값 합 (6부는 2026-07-11 전 챕터 공개 완료).
+//   각 부 chapters.ts 의 minutes 실값 합 (6·7부 2026-07-11, 8부 2026-07-12 전 챕터 공개 완료).
 //   포털은 별도 앱이라 각 부 chapters.ts 를 직접 import 하지 않고 여기서 관리한다(향후 공용 패키지화 가능).
 //   ⚠️ 각 부 minutes 를 바꾸면 여기 합계도 갱신할 것.
 
@@ -91,8 +91,8 @@ export const pathSteps: PathStep[] = [
     gain: 'RAG의 수학 — 1부 전반만 마치면 언제든 진입 가능',
   },
   {
-    order: 10, part: 8, title: '(선택·심화) 8부 — 최적화', scope: 'ch1~11 · 제작 중(1~10장 공개)',
-    chapterCount: 11, minutes: 460, estimate: true, role: '심화', optional: true,
+    order: 10, part: 8, title: '(선택·심화) 8부 — 최적화', scope: 'ch1~11',
+    chapterCount: 11, minutes: 460, role: '심화', optional: true,
     gain: '학습을 지배하는 다이얼 — 파인튜닝 설정 완독 (2부 직후 진입 가능)',
   },
 ]
