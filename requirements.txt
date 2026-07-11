@@ -15,6 +15,7 @@ numpy>=2.0
 matplotlib>=3.8
 scipy>=1.13          # part3(확률통계) — 확률분포·검정
 sympy>=1.13          # part2(미분) — 기호 미분·검증
+scikit-learn>=1.4    # part7(임베딩 기하학) — ch5 t-SNE 실행 실습
 jupyterlab>=4.5.9    # 4.5.8 이하는 알려진 취약점 (GHSA-vmhf-c436-hxj4)
 ipykernel>=6.29      # venv 를 Jupyter 커널로 등록
 ipywidgets>=8.1      # AI 튜터 채팅창 (tutor.py)
