@@ -135,14 +135,43 @@ function onSetComplete() {
       <p class="mt-1 text-sm text-indigo-600">조련이 원본에서 멀어지지 않게 묶는 목줄 — 시리즈 로드맵의 그 문장이 이 수식입니다.</p>
     </div>
 
-    <DetailsCard title="➕ 더 깊이: KL의 방향, 그리고 PPO라는 이름">
+    <DetailsCard title="➕ 더 깊이: KL의 방향 — 왜 D(π‖π_ref)인가">
       5부 6장에서 KL 은 <b>비대칭</b>이라고 배웠죠 — D(π‖π<sub>ref</sub>)는 앞자리(π)가
       확신하는 곳 위주로 잽니다. 즉 "지금 정책이 자주 내는 답이 원본에서 벗어났는가"를 재는
       방향이라, 정책이 이상한 답을 <b>자주 내기 시작하는 순간</b> 벌점이 커져요 — 목줄로 딱 맞는
-      방향입니다. 실무에서 이 목적함수를 안정적으로 최적화하는 알고리즘의 이름이
-      <b>PPO</b>(Proximal Policy Optimization)이고, InstructGPT·ChatGPT 가 쓴 조립이 정확히
-      "SFT → 보상 모델 → PPO + KL 페널티"였습니다. PPO 내부의 세부 수식은 이 과정의 범위
-      밖이지만, 목적이 <b>r − β·KL</b> 이라는 뼈대는 지금 그대로예요.
+      방향입니다. 반대 방향 D(π<sub>ref</sub>‖π)였다면 "원본이 하던 말을 전부 유지하라"에
+      가까워져 조련 자체가 어려워집니다.
+    </DetailsCard>
+
+    <DetailsCard title="➕ 더 깊이: PPO — 조심스러운 걸음의 기술">
+      <p class="mb-2">
+        실무에서 이 목적함수(r − β·KL)를 최적화하는 표준 알고리즘이 <b>PPO</b>(Proximal Policy
+        Optimization — 읽는 법: 피피오, "가까이 머무는 정책 최적화")입니다. InstructGPT·ChatGPT 의
+        조립이 정확히 "SFT → 보상 모델 → PPO + KL 페널티"였어요. 이름의 <b>Proximal(가까이)</b>이
+        핵심 아이디어를 그대로 말해 줍니다:
+      </p>
+      <ul class="mb-2 list-disc space-y-1 pl-5 text-sm">
+        <li>
+          5장의 정책 경사에는 함정이 있습니다 — 방금 뽑은 샘플들로 계산한 "좋은 방향"은
+          <b>지금 정책 기준</b>의 이야기예요. 한 걸음을 너무 크게 디디면 정책이 확 바뀌어서
+          그 방향 자체가 <b>낡은 정보</b>가 됩니다. 어제의 지도로 오늘의 길을 걷는 셈이죠.
+        </li>
+        <li>
+          그래서 PPO 는 갱신할 때 새 정책과 옛 정책의 <b>확률 비율</b> π<sub>new</sub>/π<sub>old</sub> 가
+          1±ε(보통 ±0.2) 범위를 벗어나면 그 너머의 이득을 <b>잘라 버립니다</b> — 이것이
+          <b>클리핑</b>(clipping). "한 번에 크게 좋아지려 하지 말고, 확실한 만큼만 조금씩"이라는
+          안전장치예요.
+        </li>
+        <li>
+          역할 구분 — <b>KL 목줄</b>은 "여행 전체에서 원본과 멀어지지 마"(<b>도착지</b> 제한),
+          <b>PPO 클리핑</b>은 "한 걸음을 너무 크게 딛지 마"(<b>보폭</b> 제한).
+          서로 다른 것을 지키는 상호보완적 두 안전장치입니다.
+        </li>
+      </ul>
+      <p class="text-sm">
+        클리핑의 정확한 수식까지는 이 과정의 범위 밖이지만 이 세 줄이 PPO 논문의 심장이고,
+        실무 라이브러리(TRL 등)의 <code>clip_range</code> 설정이 바로 저 ε 입니다.
+      </p>
     </DetailsCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">4. 그런데… 부품이 너무 많다</h2>
