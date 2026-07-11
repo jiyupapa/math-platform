@@ -7,7 +7,7 @@
 import { computed } from 'vue'
 
 const props = defineProps<{
-  /** 대상 부 번호 (1~6) */
+  /** 대상 부 번호 */
   part: number | string
   /** 대상 챕터 슬러그 (예: 'ch6'). 생략하면 그 부의 홈 */
   ch?: string
