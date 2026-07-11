@@ -17,8 +17,8 @@ const chapter = computed(() => chapters.find((c) => c.slug === route.params.slug
       {{ chapter ? `Phase ${chapter.phase} · ${chapter.summary}` : '곧 만나요!' }}
     </p>
     <p class="mb-8 text-sm text-slate-400">
-      7부는 지금 만드는 중입니다. 목차의 로드맵은 확정돼 있고, 챕터가 공개되면 바로 여기서 학습할 수 있어요.
-      그동안 1부 전반(벡터·내적)을 먼저 다지는 것을 추천합니다.
+      8부의 모든 챕터가 공개돼 있어요 — 이 주소에 해당하는 챕터를 찾지 못했습니다.
+      목차에서 원하는 챕터를 골라 주세요.
     </p>
     <RouterLink
       to="/"
