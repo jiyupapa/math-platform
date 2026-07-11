@@ -9,7 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 (RAG·의미 검색·벡터 DB)의 수학을 직접 조작하며 이해하게 한다.
 도달점은 **10장(캡스톤 — 사내 FAQ 검색봇 조립)**. 핵심 한 줄: **"의미는 위치다 — 가까움을 계산하는 법."**
 
-> **상태: 콘텐츠 제작 중 (3/11 — 워밍업·1~2장 공개, 첫 묶음 완결)** — 앱 셸·목차·스토어·튜터 완성, ch3~10은 comingSoon.
+> **상태: 콘텐츠 제작 중 (4/11 — 워밍업·1~3장 공개)** — 앱 셸·목차·스토어·튜터 완성, ch4~10은 comingSoon.
 > 챕터 구성·회수하는 수학 매핑은 루트 `README.md` "7부 챕터 구성안" 표가 정본.
 
 ## 공용 컴포넌트 — 모노레포 `packages/ui`
