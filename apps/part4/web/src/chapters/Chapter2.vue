@@ -166,9 +166,34 @@ function onSetComplete() {
         <li>말뭉치에서 <b>가장 자주 붙어 나오는 두 조각</b>을 찾아 <b>하나로 합친다</b>.</li>
         <li>이걸 원하는 사전 크기가 될 때까지 <b>반복</b>. 자주 나오는 덩어리일수록 하나의 토큰이 됩니다.</li>
       </ul>
+      <p class="mb-2 text-sm">
+        말로만 들으면 추상적이니, 미니 말뭉치 <b>"바나나 바나나 나나"</b>로 직접 돌려 봅시다.
+        (병합 규칙은 단 하나 — <b>가장 자주 붙어 나오는 쌍부터 합친다</b>, 그래서 "탐욕(greedy)"
+        알고리즘이라 부릅니다.)
+      </p>
+      <div class="mb-2 overflow-x-auto rounded-lg bg-white px-4 py-3">
+        <table class="w-full min-w-[24rem] text-sm text-slate-600">
+          <thead>
+            <tr class="border-b border-slate-200 text-left text-slate-400">
+              <th class="py-1 pr-3">라운드</th><th class="py-1 pr-3">현재 조각들</th><th class="py-1 pr-3">가장 잦은 쌍</th><th class="py-1">병합 결과</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-slate-100"><td class="py-1.5 pr-3">시작</td><td class="py-1.5 pr-3 font-mono">바·나·나 / 바·나·나 / 나·나</td><td class="py-1.5 pr-3">(나,나) — 3회</td><td class="py-1.5">새 토큰 <b>"나나"</b></td></tr>
+            <tr class="border-b border-slate-100"><td class="py-1.5 pr-3">1</td><td class="py-1.5 pr-3 font-mono">바·나나 / 바·나나 / 나나</td><td class="py-1.5 pr-3">(바,나나) — 2회</td><td class="py-1.5">새 토큰 <b>"바나나"</b></td></tr>
+            <tr><td class="py-1.5 pr-3">2</td><td class="py-1.5 pr-3 font-mono">바나나 / 바나나 / 나나</td><td class="py-1.5 pr-3">더 없음</td><td class="py-1.5">사전 완성: 낱글자 + 나나 + 바나나</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mb-2 text-sm">
+        완성된 사전으로 <b>처음 보는 단어</b>도 처리됩니다 — "바나다"는 사전에 통째로 없지만
+        <b>바 + 나 + 다</b> 세 조각으로 쪼개져 [UNK] 없이 살아남아요. 자주 본 "바나나"는 1토큰,
+        처음 보는 "바나다"는 3토큰 — <b>흔한 건 짧게, 드문 건 잘게</b>가 이렇게 실현됩니다.
+      </p>
       <div class="rounded-lg bg-white px-4 py-3 text-sm text-slate-600">
         🎯 <b>결과</b>: "the", "ing", "은/는" 처럼 <b>자주 나오는 조각</b>은 통째 토큰이 되고,
-        드문 단어는 그 조각들로 쪼개집니다 — 흔한 건 짧게, 드문 건 잘게.
+        드문 단어는 그 조각들로 쪼개집니다. 실제 GPT 계열의 사전(수만~수십만 토큰)도 정확히
+        이 반복을 수만 번 돌려 만든 것 — 노트북에서 10줄짜리 미니 BPE 를 직접 돌려 봅니다.
       </div>
     </DetailsCard>
 
