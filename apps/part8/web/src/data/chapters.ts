@@ -38,7 +38,7 @@ export const chapters: ChapterMeta[] = [
   { slug: 'ch3', phase: 3, title: '흔들리는 나침반 — 미니배치 SGD', summary: '기울기는 표본 추정치 — 배치 크기와 노이즈(또 1/√B), 노이즈의 순기능', minutes: 40, notebook: 'ch03_sgd.ipynb' },
   { slug: 'ch4', phase: 4, title: '관성으로 달리기 — 모멘텀', summary: '좁은 골짜기의 지그재그 문제 → 속도 누적, 지수이동평균(EMA)', minutes: 40, notebook: 'ch04_momentum.ipynb' },
   { slug: 'ch5', phase: 5, title: '축마다 다른 보폭 — Adam (핵심)', summary: '타원 골짜기(축별 스케일 불균형) → 적응적 보폭 — β₁·β₂·ε의 정체', minutes: 45, notebook: 'ch05_adam.ipynb' },
-  { slug: 'ch6', phase: 6, title: '여행 일정표 — 학습률 스케줄', summary: '워밍업·코사인 감쇠·스텝 감쇠 — 왜 초반은 조심스럽게, 후반은 미세하게', minutes: 40, comingSoon: true },
+  { slug: 'ch6', phase: 6, title: '여행 일정표 — 학습률 스케줄', summary: '워밍업·코사인 감쇠·스텝 감쇠 — 왜 초반은 조심스럽게, 후반은 미세하게', minutes: 40, notebook: 'ch06_schedule.ipynb' },
   { slug: 'ch7', phase: 7, title: '과적합 — 통째로 외운 학생 (핵심)', summary: '훈련 손실↓ 검증 손실↑ 갈라짐 — 일반화 = 표본 밖 성능', minutes: 45, comingSoon: true },
   { slug: 'ch8', phase: 8, title: '안전장치들 — 정규화', summary: 'weight decay(원점 목줄)·드롭아웃·조기 종료 — KL 목줄(6부)의 형제들', minutes: 40, comingSoon: true },
   { slug: 'ch9', phase: 9, title: '훈련 일지 판독법 — 손실 곡선 읽기', summary: '곡선의 4대 증상(스파이크·평원·계단·벌어짐) 진단과 처방, gradient clipping', minutes: 40, comingSoon: true },
