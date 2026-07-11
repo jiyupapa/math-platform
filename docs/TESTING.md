@@ -1,6 +1,6 @@
 # 전체 테스트 수행 방법 — MATH_PLATFORM 모노레포
 
-> 대상: `C:\STUDY\MATH_PLATFORM` (npm workspaces 모노레포). 5개 부(`apps/part1..5`) + 포털(`apps/portal`) + 공용 패키지(`packages/ui`·`packages/tutor`).
+> 대상: `C:\STUDY\MATH_PLATFORM` (npm workspaces 모노레포). 8개 부(`apps/part1..8`) + 포털(`apps/portal`) + 공용 패키지(`packages/ui`·`packages/tutor`).
 > 원본 `C:\STUDY\MATH` 는 손대지 않은 백업. 문제가 생기면 이 폴더를 지우고 원본에서 다시 시작해도 무손실.
 >
 > **이 테스트로 확인하려는 것**: 모노레포 전환(공용 컴포넌트를 `@series/ui` 패키지로 분리, provide/inject 결합해제) 후에도
@@ -28,7 +28,7 @@ cd /d C:\STUDY\MATH_PLATFORM
 npm install
 ```
 
-> 워크스페이스라 루트에서 한 번 설치하면 6개 앱 + 패키지가 모두 링크된다. `@series/ui` 는 `node_modules/@series/ui` 심링크로 연결됨.
+> 워크스페이스라 루트에서 한 번 설치하면 9개 앱 + 패키지가 모두 링크된다. `@series/ui` 는 `node_modules/@series/ui` 심링크로 연결됨.
 
 ---
 
@@ -43,7 +43,7 @@ npm install
 npm run build --workspaces --if-present
 ```
 
-- 6개 앱 전부 `built in ...` 이 뜨면 통과. (`packages/ui` 는 build 스크립트가 없어 자동 건너뜀.)
+- 9개 앱 전부 `built in ...` 이 뜨면 통과. (`packages/ui` 는 build 스크립트가 없어 자동 건너뜀.)
 - 하나라도 `error TS...` 또는 `Cannot find module` 이 뜨면 실패 → 5절 참고.
 
 ### 개별 앱만
@@ -82,10 +82,11 @@ npm run dev -w apps/part1/web
 | 4 | **미니 퀴즈·문제 세트 풀이가 채점된다**, 세트를 다 풀면 완료 표시 | `Quiz`/`StepQuiz`/`QuizSet` + provide/inject 집계 |
 | 5 | **새로고침 후에도 푼 문제·진도가 유지된다** | `QuizSet` 의 `storagePrefixKey` 주입 (저장 키 `la-quizset-v1:*`) |
 | 6 | **섹션 제목 옆 "☆ 복습에 추가" 를 누르면 ★ 로 바뀌고, 새로고침 후 유지** | `ReviewFlag` 의 `reviewApiKey` 주입 (스토어 결합해제) |
-| 7 | **"🐍 Python 노트북으로도 해보기" 카드가 챕터에 뜬다** (part1·4·5) | `NotebookCard` 의 `notebookResolverKey` 주입 |
+| 7 | **"🐍 Python 노트북으로도 해보기" 카드가 챕터에 뜬다** (part1·4·5·6·7·8) | `NotebookCard` 의 `notebookResolverKey` 주입 |
 | 8 | **AI 튜터(우하단 🤖)** — Ollama 실행 중이면 답변, 아니면 설치 안내 | 튜터(부별 유지분) |
 
-**포털**(`apps/portal/web`)은 트라이얼 스캐폴드라, 카드 2장 + 수식 한 줄이 색·수식과 함께 보이면 "포털이 패키지를 소비한다"가 확인된 것.
+**포털**(`apps/portal/web`)은 진단(3분) → 경로 지도 → 추천 설명까지 돌면 정상 — 각 부 진도 연동(개인화 2층)은
+같은 origin 배포 조립본(`npm run deploy:serve`)에서만 확인된다(2-3절 참고).
 
 ### 2-3. ⚠️ dev 서버의 origin 주의 (개인화 2층 관련)
 
@@ -97,7 +98,7 @@ npm run dev -w apps/part1/web
 
 ## 3. 노트북 테스트 (선택)
 
-**부별 venv 는 필요 없다.** 5개 부의 의존성은 거의 동일(공통 6개 + part2 `sympy` + part3 `scipy`)하고 서로 충돌이 없으므로,
+**부별 venv 는 필요 없다.** 8개 부의 의존성은 거의 동일(공통 6개 + part2 `sympy` + part3 `scipy` + part7 `scikit-learn`)하고 서로 충돌이 없으므로,
 모노레포답게 **루트에 공용 venv 하나**를 만들어 모든 부의 노트북을 실행한다. 합집합 명세는 루트 `requirements.txt`.
 (부별 `apps/part*/notebooks/requirements.txt` 는 "그 부가 무엇을 쓰는지" 명세로 남겨둔다 — 참고용.)
 
@@ -124,7 +125,7 @@ python -m venv .venv
 🪟 **cmd** (한 줄 붙여넣기):
 
 ```cmd
-for %p in (part1 part2 part3 part4 part5) do @for %f in (apps\%p\notebooks\*.ipynb) do @echo [%f] & .venv\Scripts\python.exe -m jupyter nbconvert --to notebook --execute --stdout --ExecutePreprocessor.kernel_name=math-platform "%f" >nul && echo   OK || echo   FAIL
+for %p in (part1 part2 part3 part4 part5 part6 part7 part8) do @for %f in (apps\%p\notebooks\*.ipynb) do @echo [%f] & .venv\Scripts\python.exe -m jupyter nbconvert --to notebook --execute --stdout --ExecutePreprocessor.kernel_name=math-platform "%f" >nul && echo   OK || echo   FAIL
 ```
 
 > `.bat` 파일로 저장해 쓰려면 `%p`·`%f` 를 `%%p`·`%%f` 로 바꾼다.
@@ -152,7 +153,8 @@ Get-ChildItem apps\part*\notebooks\*.ipynb | ForEach-Object {
   .venv\Scripts\python.exe -m pip install sentence-transformers
   ```
 
-- 그 외 60개 노트북(ch* 시리즈)은 루트 `requirements.txt` 만으로 전부 무에러 실행됨(2026-07-09 검증).
+- 그 외 ch* 시리즈 노트북(2026-07-12 현재 95개)은 루트 `requirements.txt` 만으로 전부 무에러 실행됨 —
+  6~8부 노트북은 챕터 제작 시점마다 nbconvert 로 검증했다(각 부 `docs/99_history.md` 참조).
 
 ### 검증 이력 (2026-07-09)
 
@@ -174,13 +176,13 @@ npm run build --workspaces --if-present
 🪟 **cmd** (한 줄 붙여넣기 — `call` 필수: npm 은 `npm.cmd` 라 안 붙이면 첫 앱에서 멈춘다):
 
 ```cmd
-for %a in (part1 part2 part3 part4 part5 portal) do @echo [%a] & call npm run build -w apps/%a/web
+for %a in (part1 part2 part3 part4 part5 part6 part7 part8 portal) do @echo [%a] & call npm run build -w apps/%a/web
 ```
 
 **PowerShell**:
 
 ```powershell
-foreach ($a in 'part1','part2','part3','part4','part5','portal') {
+foreach ($a in 'part1','part2','part3','part4','part5','part6','part7','part8','portal') {
   Write-Host "=== $a ===" -ForegroundColor Cyan
   npm run build -w "apps/$a/web"
 }
@@ -196,17 +198,18 @@ foreach ($a in 'part1','part2','part3','part4','part5','portal') {
   `@source '../../../../packages/ui/src';` 줄이 있어야 한다. **이 실패는 `npm run build` 가 못 잡는다**(타입은 통과, 스타일만 누락) → 반드시 눈으로 확인.
 - **`Cannot find module '@series/ui'`** — 루트에서 `npm install` 을 다시 실행(워크스페이스 링크 재생성).
 - **`Failed to resolve ... .vue`** 또는 패키지 컴포넌트가 안 뜸 — 해당 앱 `vite.config.ts` 에
-  `optimizeDeps: { exclude: [...] }` 가 있는지 확인 (part1~5=`['@series/ui', '@series/tutor']`, portal=`['@series/ui']`).
+  `optimizeDeps: { exclude: [...] }` 가 있는지 확인 (전 8부 + 포털 = `['@series/ui', '@series/tutor']`).
 - **진도/복습이 새로고침 후 사라진다** — 각 부 `web/src/main.ts` 의 `app.provide(storagePrefixKey, '...')`
-  와 `reviewApiKey` 주입이 있는지 확인. 접두사는 부마다 고정: part1=`la`, part2=`diff`, part3=`stat`, part4=`tf`, part5=`it`. **바꾸면 기존 진도가 끊긴다.**
+  와 `reviewApiKey` 주입이 있는지 확인. 접두사는 부마다 고정: part1=`la`, part2=`diff`, part3=`stat`, part4=`tf`, part5=`it`,
+  part6=`tame`, part7=`emb`, part8=`opt`, portal=`hub`. **바꾸면 기존 진도가 끊긴다(포털 연동 포함).**
 - **타입 에러 `... is declared but never used`** — `noUnusedLocals` 규칙. 미사용 import/변수 제거.
 
 ---
 
 ## 부록: 현재 상태
 
-- 구조: `apps/part1..6` + `apps/portal` + `packages/ui`(공용 컴포넌트 10종: MathBlock·ConceptCard·DetailsCard·ChartView·NotebookCard·ReviewFlag·PartLink·Quiz·StepQuiz·QuizSet + quizGroup 그룹계약 + injection) + `packages/tutor`(AI 튜터 Ollama 클라이언트).
+- 구조: `apps/part1..8` + `apps/portal` + `packages/ui`(공용 컴포넌트 10종: MathBlock·ConceptCard·DetailsCard·ChartView·NotebookCard·ReviewFlag·PartLink·Quiz·StepQuiz·QuizSet + quizGroup 그룹계약 + injection) + `packages/tutor`(AI 튜터 Ollama 클라이언트).
 - 결합해제 주입 계약: `storagePrefixKey`(QuizSet 접두사) · `reviewApiKey`(ReviewFlag) · `notebookResolverKey`(NotebookCard).
-- 검증됨(빌드): 전 5부 + 포털 `vue-tsc + vite` 통과, Tailwind `@source` 로 패키지 클래스 생성 전 부 확인.
+- 검증됨(빌드): 전 8부 + 포털 `vue-tsc + vite` 통과, Tailwind `@source` 로 패키지 클래스 생성 전 부 확인.
 - 미검증(이 문서의 2절이 그 확인 절차): 런타임 동작(퀴즈·진도·복습·튜터).
 - 커밋 되돌림 지점: `b3e3a00`(baseline) → `71c1aff`(trial) → `deaed16`(패키지 완성) → `b0ee776`(2~5부 전파).

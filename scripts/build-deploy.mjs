@@ -60,7 +60,7 @@ console.log('\n▶ deploy/_redirects 작성 (정적 호스트용 SPA 폴백)')
 console.log(`
 ✅ 조립 완료 → deploy/
    로컬 확인:  npm run deploy:serve
-   → http://localhost:4173 에서 포털(/) + 각 부(/part1 … /part5)가 한 origin 으로 뜬다.
+   → http://localhost:4173 에서 포털(/) + 각 부(/part1 … /part8)가 한 origin 으로 뜬다.
      이 상태에서만 "포털이 다른 부 진도를 읽는" 개인화 2층을 실검증할 수 있다.
 
    실제 배포: deploy/ 폴더를 그대로 정적 호스트에 올리면 된다(_redirects 포함).
