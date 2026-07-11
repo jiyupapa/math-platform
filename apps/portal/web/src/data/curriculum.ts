@@ -86,7 +86,7 @@ export const pathSteps: PathStep[] = [
     gain: '고유값·SVD·PCA·검정·회귀 — 교양·심화',
   },
   {
-    order: 9, part: 7, title: '(선택·실용) 7부 — 임베딩 기하학', scope: 'ch1~10 · 제작 중(1~6장 공개)',
+    order: 9, part: 7, title: '(선택·실용) 7부 — 임베딩 기하학', scope: 'ch1~10 · 제작 중(1~7장 공개)',
     chapterCount: 10, minutes: 420, estimate: true, role: '실용', optional: true,
     gain: 'RAG의 수학 — 1부 전반만 마치면 언제든 진입 가능',
   },
