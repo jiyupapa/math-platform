@@ -4,6 +4,17 @@
 
 ---
 
+## 2026-07-11 — ch2 BPE 상세 보강 (압축 점검 후속)
+
+- "분량은 상세 우선" 방침의 소급 적용 — 아이디어 3줄로만 있던 BPE 카드에 **단계별 병합
+  시연 표** 추가: 말뭉치 "바나나 바나나 나나"에서 (나,나) 3회 병합 → (바,나나) 2회 병합 →
+  사전 완성, 처음 보는 "바나다"가 [UNK] 없이 3조각으로 처리되는 것까지.
+- `ch02_tokenization.ipynb` 7절 신설: 미니 BPE 구현(pair_counts·apply_merge·탐욕 병합 루프 +
+  학습된 규칙으로 bpe_encode) — 병합 순서·1토큰·OOV 처리 assert 3개. nbconvert 무에러.
+- TODO_NEXT_STEP_260711 ⑥(BPE 탐욕 알고리즘 카드 소재)의 소화. 빌드 통과.
+
+---
+
 ## 2026-07-08 — 디렉토리명 표준화: transformer-project → part4-transformer
 
 시리즈 4개 저장소 순번 접두 통일(part1~4). 이 저장소 rename에 따라 docs/00_plan·notebooks/README·settings.local.json 의 절대경로·자기참조 갱신. 웹(@/ 상대경로)·localStorage 접두사(tf-)·git 무영향. 이 저장소는 venv 없음(노트북 시스템 커널 사용).
