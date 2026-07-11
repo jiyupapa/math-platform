@@ -36,7 +36,7 @@ export const chapters: ChapterMeta[] = [
   { slug: 'ch3', phase: 3, title: '임베딩 공간 탐험', summary: '의미의 방향과 벡터 연산(왕−남자+여자), 의미 클러스터', minutes: 40, notebook: 'ch03_space.ipynb' },
   { slug: 'ch4', phase: 4, title: '고차원의 저주 (핵심)', summary: '차원이 높으면 아무 벡터나 거의 직교 — 그런데도 임베딩이 작동하는 이유', minutes: 45, notebook: 'ch04_highdim.ipynb' },
   { slug: 'ch5', phase: 5, title: '지도 그리기 — 차원 축소', summary: 'PCA 재회 + t-SNE·UMAP 감각 — 2D 지도는 왜곡을 동반한다', minutes: 40, notebook: 'ch05_dimreduce.ipynb' },
-  { slug: 'ch6', phase: 6, title: '이웃 찾기 — kNN에서 벡터 DB까지', summary: '전수조사의 비용 → 근사 최근접 이웃(ANN), 벡터 DB의 정체', minutes: 40, comingSoon: true },
+  { slug: 'ch6', phase: 6, title: '이웃 찾기 — kNN에서 벡터 DB까지', summary: '전수조사의 비용 → 근사 최근접 이웃(ANN), 벡터 DB의 정체', minutes: 40, notebook: 'ch06_ann.ipynb' },
   { slug: 'ch7', phase: 7, title: '청킹과 검색 품질', summary: '문서 쪼개기 트레이드오프, top-k·임계값, recall@k 채점', minutes: 40, comingSoon: true },
   { slug: 'ch8', phase: 8, title: 'RAG 조립 (핵심) — 검색이 프롬프트가 되기까지', summary: '파이프라인 전체 + 실패 모드, RAG vs 파인튜닝 선택 기준', minutes: 45, comingSoon: true },
   { slug: 'ch9', phase: 9, title: '임베딩은 어떻게 배우나 — 대조 학습', summary: '"짝은 가깝게, 남은 멀게" — 그리고 또 −log 손실', minutes: 40, comingSoon: true },
