@@ -4,3 +4,4 @@ ipywidgets
 requests
 numpy
 matplotlib
+scikit-learn   # ch5 — 진짜 t-SNE 실행 실습
