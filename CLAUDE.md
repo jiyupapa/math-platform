@@ -21,7 +21,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```
 apps/
   portal/            통합 포털(part0 — 진단·학습경로 추천): web/ + docs/. packages/ui·tutor 소비
-  part1/ .. part7/   각 부: web/(Vue 앱) + notebooks/(Jupyter) + docs/
+  part1/ .. part8/   각 부: web/(Vue 앱) + notebooks/(Jupyter) + docs/ (part8 은 스캐폴드 — notebooks 는 챕터와 함께)
 packages/
   ui/                공용 컴포넌트 단일 소스 (@series/ui)
   tutor/             AI 튜터 클라이언트 (@series/tutor — 로컬/원격 Ollama)
@@ -39,6 +39,7 @@ requirements.txt     공용 노트북 venv 의존성(5부 합집합)
 | 5부 | `apps/part5` | 정보이론 |
 | 6부 | `apps/part6` | LLM 조련 — 피날레 (전 11챕터 공개, 2026-07-11 완결) |
 | 7부 | `apps/part7` | 임베딩 기하학(RAG의 수학) — 실용 확장 트랙 (전 11챕터 공개, 2026-07-11 완결) |
+| 8부 | `apps/part8` | 최적화(학습의 다이얼) — 이론 심화 트랙, 스캐폴드만·콘텐츠 제작 중 (로드맵: 루트 `README.md`) |
 
 시리즈 커리큘럼·추천 학습 경로(1→2→3→4→5 순서가 아님)·부 간 연결은 루트 `README.md`.
 
@@ -61,7 +62,7 @@ QuizSet↔StepQuiz 그룹 계약(`quizGroupKey`/`QuizGroup` — `quizGroup.ts`)�
 
 - **한 번 고치면 전 부에 반영** — 복제·전파·드리프트 점검 없음(옛 골든카피/`check_drift.py` 체제는 폐기).
 - 패키지는 **주제 중립** 유지. 앱전용 결합은 **provide/inject** 로 분리 — 각 앱 `main.ts` 가 주입:
-  - `storagePrefixKey` — QuizSet 저장 접두사. part1=`la` part2=`diff` part3=`stat` part4=`tf` part5=`it` part6=`tame` part7=`emb` portal=`hub`.
+  - `storagePrefixKey` — QuizSet 저장 접두사. part1=`la` part2=`diff` part3=`stat` part4=`tf` part5=`it` part6=`tame` part7=`emb` part8=`opt` portal=`hub`.
     **바꾸면 사용자 진도가 끊긴다.** 포털은 진단 결과 저장(`hub-diagnosis-v1`·`hub-baseline-v1`)에 쓰고,
     각 부 진도(`{prefix}-progress-v1`)를 읽어 지도에 표시하므로 부 접두사 변경은 포털 연동도 깨뜨린다.
   - `reviewApiKey` — ReviewFlag ↔ 각 앱 `review` 스토어.

@@ -7,7 +7,7 @@
 //   포털은 별도 앱이라 각 부 chapters.ts 를 직접 import 하지 않고 여기서 관리한다(향후 공용 패키지화 가능).
 //   ⚠️ 각 부 minutes 를 바꾸면 여기 합계도 갱신할 것.
 
-export type PartId = 1 | 2 | 3 | 4 | 5 | 6 | 7
+export type PartId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
 
 /** 역할 묶음 — 토대(1·2·3) → 조립(4) → 본체(5) → 조련(6), 실용(7)·심화는 선택 분기 */
 export type StepRole = '토대' | '조립' | '본체' | '조련' | '심화' | '실용'
@@ -89,6 +89,11 @@ export const pathSteps: PathStep[] = [
     order: 9, part: 7, title: '(선택·실용) 7부 — 임베딩 기하학', scope: 'ch1~10',
     chapterCount: 10, minutes: 420, role: '실용', optional: true,
     gain: 'RAG의 수학 — 1부 전반만 마치면 언제든 진입 가능',
+  },
+  {
+    order: 10, part: 8, title: '(선택·심화) 8부 — 최적화', scope: '제작 중',
+    chapterCount: 11, minutes: 460, estimate: true, role: '심화', optional: true, comingSoon: true,
+    gain: '학습을 지배하는 다이얼 — 파인튜닝 설정 완독 (2부 직후 진입 가능)',
   },
 ]
 

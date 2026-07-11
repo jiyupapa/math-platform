@@ -24,6 +24,7 @@ const APPS = [
   { name: 'part5',  base: '/part5/', dest: 'part5' },
   { name: 'part6',  base: '/part6/', dest: 'part6' },
   { name: 'part7',  base: '/part7/', dest: 'part7' },
+  { name: 'part8',  base: '/part8/', dest: 'part8' },
 ]
 
 console.log('▶ deploy/ 초기화')
