@@ -6,6 +6,11 @@ import HomeView from '@/views/HomeView.vue'
 const routes: RouteRecordRaw[] = [
   { path: '/', name: 'home', component: HomeView },
   { path: '/review', name: 'review', component: () => import('@/views/ReviewView.vue') },
+  {
+    path: '/ch/sample',
+    name: 'sample',
+    component: () => import('@/chapters/SampleChapter.vue'),
+  },
   // 예정 챕터(comingSoon)는 안내 페이지로 모음
   {
     path: '/ch/:slug',

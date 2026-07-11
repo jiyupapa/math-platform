@@ -1,0 +1,6 @@
+# 7부 노트북이 쓰는 패키지 명세 (참고용 — 실제 설치·실행은 루트 공용 venv: docs/TESTING.md 3절)
+jupyterlab
+ipywidgets
+requests
+numpy
+matplotlib
