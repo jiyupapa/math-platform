@@ -19,6 +19,7 @@ const roleStyle: Record<StepRole, { tag: string; dot: string; ring: string }> = 
   본체: { tag: 'bg-violet-100 text-violet-700', dot: 'bg-violet-500', ring: 'ring-violet-200' },
   조련: { tag: 'bg-amber-100 text-amber-700', dot: 'bg-amber-500', ring: 'ring-amber-200' },
   심화: { tag: 'bg-slate-100 text-slate-600', dot: 'bg-slate-400', ring: 'ring-slate-200' },
+  실용: { tag: 'bg-teal-100 text-teal-700', dot: 'bg-teal-500', ring: 'ring-teal-200' },
 }
 
 // 진단 상태별 배지/스타일

@@ -7,10 +7,10 @@
 //   포털은 별도 앱이라 각 부 chapters.ts 를 직접 import 하지 않고 여기서 관리한다(향후 공용 패키지화 가능).
 //   ⚠️ 각 부 minutes 를 바꾸면 여기 합계도 갱신할 것.
 
-export type PartId = 1 | 2 | 3 | 4 | 5 | 6
+export type PartId = 1 | 2 | 3 | 4 | 5 | 6 | 7
 
-/** 역할 묶음 — 토대(1·2·3) → 조립(4) → 본체(5) → 조련(6) */
-export type StepRole = '토대' | '조립' | '본체' | '조련' | '심화'
+/** 역할 묶음 — 토대(1·2·3) → 조립(4) → 본체(5) → 조련(6), 실용(7)·심화는 선택 분기 */
+export type StepRole = '토대' | '조립' | '본체' | '조련' | '심화' | '실용'
 
 /** 진단 관문 — 통과 시 해당 단계를 접거나 복습 모드로 (recommend.ts 가 사용) */
 export type GateId = 'vector' | 'prob' | 'calculus' | 'log'
@@ -84,6 +84,11 @@ export const pathSteps: PathStep[] = [
     order: 8, part: 1, title: '(선택) 후반 심화 — 1부·3부', scope: '1부 ch7~12 · 3부 ch8~10',
     chapterCount: 9, minutes: 375, role: '심화', optional: true,
     gain: '고유값·SVD·PCA·검정·회귀 — 교양·심화',
+  },
+  {
+    order: 9, part: 7, title: '(선택·실용) 7부 — 임베딩 기하학', scope: '제작 중',
+    chapterCount: 10, minutes: 420, estimate: true, role: '실용', optional: true, comingSoon: true,
+    gain: 'RAG의 수학 — 1부 전반만 마치면 언제든 진입 가능',
   },
 ]
 
