@@ -40,7 +40,7 @@ export const chapters: ChapterMeta[] = [
   { slug: 'ch5', phase: 5, title: '축마다 다른 보폭 — Adam (핵심)', summary: '타원 골짜기(축별 스케일 불균형) → 적응적 보폭 — β₁·β₂·ε의 정체', minutes: 45, notebook: 'ch05_adam.ipynb' },
   { slug: 'ch6', phase: 6, title: '여행 일정표 — 학습률 스케줄', summary: '워밍업·코사인 감쇠·스텝 감쇠 — 왜 초반은 조심스럽게, 후반은 미세하게', minutes: 40, notebook: 'ch06_schedule.ipynb' },
   { slug: 'ch7', phase: 7, title: '과적합 — 통째로 외운 학생 (핵심)', summary: '훈련 손실↓ 검증 손실↑ 갈라짐 — 일반화 = 표본 밖 성능', minutes: 45, notebook: 'ch07_overfit.ipynb' },
-  { slug: 'ch8', phase: 8, title: '안전장치들 — 정규화', summary: 'weight decay(원점 목줄)·드롭아웃·조기 종료 — KL 목줄(6부)의 형제들', minutes: 40, comingSoon: true },
+  { slug: 'ch8', phase: 8, title: '안전장치들 — 정규화', summary: 'weight decay(원점 목줄)·드롭아웃·조기 종료 — KL 목줄(6부)의 형제들', minutes: 40, notebook: 'ch08_regularize.ipynb' },
   { slug: 'ch9', phase: 9, title: '훈련 일지 판독법 — 손실 곡선 읽기', summary: '곡선의 4대 증상(스파이크·평원·계단·벌어짐) 진단과 처방, gradient clipping', minutes: 40, comingSoon: true },
   { slug: 'ch10', phase: 10, title: '지형의 함정들 — 안장점과 평원', summary: '고차원에선 국소최소보다 안장점 — 그런데도 SGD가 통하는 이유', minutes: 40, comingSoon: true },
   { slug: 'ch11', phase: 11, title: '🎯 캡스톤 — 파인튜닝 설정 완독', summary: '미니 훈련 튜너(다이얼 전 조합 실험) + 실제 config 한 줄씩 완독 → 졸업', minutes: 50, comingSoon: true },

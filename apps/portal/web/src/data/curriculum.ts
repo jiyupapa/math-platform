@@ -91,7 +91,7 @@ export const pathSteps: PathStep[] = [
     gain: 'RAG의 수학 — 1부 전반만 마치면 언제든 진입 가능',
   },
   {
-    order: 10, part: 8, title: '(선택·심화) 8부 — 최적화', scope: 'ch1~11 · 제작 중(1~7장 공개)',
+    order: 10, part: 8, title: '(선택·심화) 8부 — 최적화', scope: 'ch1~11 · 제작 중(1~8장 공개)',
     chapterCount: 11, minutes: 460, estimate: true, role: '심화', optional: true,
     gain: '학습을 지배하는 다이얼 — 파인튜닝 설정 완독 (2부 직후 진입 가능)',
   },
