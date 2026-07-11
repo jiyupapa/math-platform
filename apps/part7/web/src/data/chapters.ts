@@ -34,7 +34,7 @@ export const chapters: ChapterMeta[] = [
   { slug: 'ch1', phase: 1, title: '큰 그림 — 검색의 진화와 RAG', summary: '키워드 검색의 한계 → 의미 검색 → RAG 파이프라인 지도', minutes: 35, notebook: 'ch01_rag_map.ipynb' },
   { slug: 'ch2', phase: 2, title: '가까움의 수학 — 코사인 유사도 (핵심)', summary: '유클리드 거리 vs 각도 — 길이가 점수를 오염시키는 문제와 정규화', minutes: 45, notebook: 'ch02_cosine.ipynb' },
   { slug: 'ch3', phase: 3, title: '임베딩 공간 탐험', summary: '의미의 방향과 벡터 연산(왕−남자+여자), 의미 클러스터', minutes: 40, notebook: 'ch03_space.ipynb' },
-  { slug: 'ch4', phase: 4, title: '고차원의 저주 (핵심)', summary: '차원이 높으면 아무 벡터나 거의 직교 — 그런데도 임베딩이 작동하는 이유', minutes: 45, comingSoon: true },
+  { slug: 'ch4', phase: 4, title: '고차원의 저주 (핵심)', summary: '차원이 높으면 아무 벡터나 거의 직교 — 그런데도 임베딩이 작동하는 이유', minutes: 45, notebook: 'ch04_highdim.ipynb' },
   { slug: 'ch5', phase: 5, title: '지도 그리기 — 차원 축소', summary: 'PCA 재회 + t-SNE·UMAP 감각 — 2D 지도는 왜곡을 동반한다', minutes: 40, comingSoon: true },
   { slug: 'ch6', phase: 6, title: '이웃 찾기 — kNN에서 벡터 DB까지', summary: '전수조사의 비용 → 근사 최근접 이웃(ANN), 벡터 DB의 정체', minutes: 40, comingSoon: true },
   { slug: 'ch7', phase: 7, title: '청킹과 검색 품질', summary: '문서 쪼개기 트레이드오프, top-k·임계값, recall@k 채점', minutes: 40, comingSoon: true },
