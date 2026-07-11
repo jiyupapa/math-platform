@@ -31,7 +31,7 @@ export const chapters: ChapterMeta[] = [
     title: '워밍업 — 같은 모델, 세 개의 운명',
     summary: '학습률 하나로 갈리는 성공·기어가기·폭발 — "수학 바깥의 다이얼"을 목격',
     minutes: 10,
-    comingSoon: true,
+    notebook: 'ch00_sample.ipynb',
   },
   { slug: 'ch1', phase: 1, title: '큰 그림 — 안개 낀 산과 여행자', summary: '손실 지형(loss landscape) 지도: 골짜기·평원·절벽, 훈련 = 지형 위의 여행', minutes: 35, comingSoon: true },
   { slug: 'ch2', phase: 2, title: '보폭의 과학 — 학습률 (핵심)', summary: '작으면 기어가고 크면 폭발 — 발산 경계의 수학과 lr 고르기 실전 감각', minutes: 45, comingSoon: true },
