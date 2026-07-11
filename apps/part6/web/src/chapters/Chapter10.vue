@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 10장 — 🎯 캡스톤: 나만의 챗봇 조련. 시리즈 대단원 — 본편은 노트북(전 파이프라인 조립),
 // 웹은 여정 정리 + 조련 시뮬레이션 + 졸업 시험.
-import { ConceptCard } from '@series/ui'
+import { ConceptCard, PartLink } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { StepQuiz } from '@series/ui'
@@ -247,7 +247,8 @@ const JOURNEY = [
         열어 보면 대개 아는 조각들의 재조립이니까.
       </p>
       <p class="mt-3 text-sm text-emerald-700">
-        더 가고 싶다면 — 1부 후반 심화(고유값·SVD·PCA)와 3부 심화(검정·회귀)가
+        더 가고 싶다면 — <PartLink :part="1" ch="ch7">1부 후반 심화</PartLink>(고유값·SVD·PCA)와
+        <PartLink :part="3" ch="ch8">3부 심화</PartLink>(검정·회귀)가
         "선택"으로 남아 있습니다. 이제 전부 아는 수학의 이웃이에요.
       </p>
       <RouterLink

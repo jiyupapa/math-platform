@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 8장 — LoRA: 살짝만 조련하기. 회수하는 수학: 1부 9장(rank) · 11장(SVD 감각).
 // 1부 후반(심화)을 건너뛴 학습자를 위해 rank 최소 직관을 이 장에 자체 포함한다(로드맵 요구).
-import { ConceptCard } from '@series/ui'
+import { ConceptCard, PartLink } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -133,8 +133,8 @@ function onSetComplete() {
     </DetailsCard>
 
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 1부 9장 rank · 11장 SVD">
-      <b>1부 9장</b>: rank — "데이터가 진짜 몇 차원어치 정보인가"가 조련 변화분의 성질로 재등장.
-      <b>1부 11장</b>: SVD — "행렬을 중요한 방향 몇 개로 근사한다"는 감각이 LoRA 의 설계 사상
+      <b><PartLink :part="1" ch="ch9">1부 9장</PartLink></b>: rank — "데이터가 진짜 몇 차원어치 정보인가"가 조련 변화분의 성질로 재등장.
+      <b><PartLink :part="1" ch="ch11">1부 11장</PartLink></b>: SVD — "행렬을 중요한 방향 몇 개로 근사한다"는 감각이 LoRA 의 설계 사상
       그대로입니다(실제 LoRA 논문의 출발점이 ΔW 의 낮은 유효 rank 관찰이었어요).
       1부 후반을 아직 안 봤다면 — 이 장을 마친 지금이 가장 잘 읽히는 타이밍입니다.
     </ConceptCard>

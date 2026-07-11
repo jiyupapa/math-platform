@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 6장 — RLHF (핵심) — KL 목줄. 시리즈 하이라이트: 5부 6장의 KL 발산이 주인공으로 귀환.
-import { ConceptCard } from '@series/ui'
+import { ConceptCard, PartLink } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -156,7 +156,7 @@ function onSetComplete() {
 
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 5부 6장 KL 발산 (시리즈의 정점 연결)">
       루트 로드맵에서 예고했던 연결이 바로 이것입니다 —
-      <b>"5부 6장 KL 발산 → 6부 RLHF: 조련이 원본에서 멀어지지 않게 묶는 목줄."</b>
+      <b>"<PartLink :part="5" ch="ch6">5부 6장</PartLink> KL 발산 → 6부 RLHF: 조련이 원본에서 멀어지지 않게 묶는 목줄."</b>
       RLHF 페널티(지금), DPO 의 뼈대(7장), 그리고 5부에서 본 지식 증류까지 —
       "두 분포의 다름을 재는 자" 하나가 현대 AI 조련의 안전장치 전부를 떠받치고 있어요.
     </ConceptCard>
