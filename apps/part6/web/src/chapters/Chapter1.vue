@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 1장 — 큰 그림: 사전학습에서 비서까지. 6부 전체의 지도를 그리는 챕터.
-import { ConceptCard } from '@series/ui'
+import { ConceptCard, PartLink } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -137,8 +137,8 @@ function onSetComplete() {
     </DetailsCard>
 
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 이 장은 지도, 수학은 다음 장부터">
-      1단계 사전학습의 수학은 이미 배웠습니다 — <b>4부 11장</b>(손실과 경사하강)과
-      <b>5부 6장</b>(학습 = 분포 흉내내기)이 그것이에요. 6부의 새 내용은 2·3단계입니다:
+      1단계 사전학습의 수학은 이미 배웠습니다 — <b><PartLink :part="4" ch="ch11">4부 11장</PartLink></b>(손실과 경사하강)과
+      <b><PartLink :part="5" ch="ch6">5부 6장</PartLink></b>(학습 = 분포 흉내내기)이 그것이에요. 6부의 새 내용은 2·3단계입니다:
       SFT 에서 5부의 크로스 엔트로피가(3장), 선호 학습에서 3부의 확률과 5부의 KL 이(4~7장) 되돌아옵니다.
       지도를 쥐었으니, 다음 장부터 한 칸씩 엽니다.
     </ConceptCard>

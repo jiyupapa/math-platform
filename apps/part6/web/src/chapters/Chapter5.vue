@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 5장 — 보상으로 배우기: 강화학습 최소 직관.
 // 회수하는 수학: 2부 9장(경사하강 — 방향만 반대) · 3부 5장(기댓값).
-import { ConceptCard } from '@series/ui'
+import { ConceptCard, PartLink } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -133,8 +133,8 @@ function onSetComplete() {
     </DetailsCard>
 
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 2부 9장 · 3부 5장">
-      <b>3부 5장</b>: 기댓값 E — 강화학습의 목표 함수(E[보상])로 재등장.
-      <b>2부 9장</b>: 경사 이동 — 손실 대신 보상을 놓고 방향만 뒤집으면 정책 경사.
+      <b><PartLink :part="3" ch="ch5">3부 5장</PartLink></b>: 기댓값 E — 강화학습의 목표 함수(E[보상])로 재등장.
+      <b><PartLink :part="2" ch="ch9">2부 9장</PartLink></b>: 경사 이동 — 손실 대신 보상을 놓고 방향만 뒤집으면 정책 경사.
       ChatGPT 를 만든 강화학습의 뼈대가, 확률의 평균과 언덕 오르기라는
       두 개의 아는 도구로 만들어져 있었습니다.
     </ConceptCard>

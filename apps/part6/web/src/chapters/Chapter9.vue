@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 9장 — 조련 성적표: 평가와 부작용. 회수하는 수학: 3부 8장(신뢰구간)·9장(가설검정)·10장(상관).
 // 3부 심화 트랙(선택)의 회수처가 되는 장.
-import { ConceptCard } from '@series/ui'
+import { ConceptCard, PartLink } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { StepQuiz } from '@series/ui'
@@ -129,8 +129,8 @@ function onSetComplete() {
 
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 3부 8~10장 (심화 트랙의 회수처)">
       1~7장을 달리는 동안 "선택"으로 밀려 있던 3부 심화가 여기서 전부 일합니다.
-      <b>8장 신뢰구간</b>: 점수의 ± / <b>9장 가설검정</b>: 차이가 우연인가 진짜인가 /
-      <b>10장 상관</b>: 벤치마크 점수 ↔ 실사용 만족의 관계. 그리고 <b>4장(6부)의 Elo</b>가
+      <b><PartLink :part="3" ch="ch8">8장 신뢰구간</PartLink></b>: 점수의 ± / <b><PartLink :part="3" ch="ch9">9장 가설검정</PartLink></b>: 차이가 우연인가 진짜인가 /
+      <b><PartLink :part="3" ch="ch10">10장 상관</PartLink></b>: 벤치마크 점수 ↔ 실사용 만족의 관계. 그리고 <b>4장(6부)의 Elo</b>가
       사람 평가(Chatbot Arena)의 뼈대로 재등장했죠. 평가는 통계 문해력의 실전입니다.
     </ConceptCard>
 

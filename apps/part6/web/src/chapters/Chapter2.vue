@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 2장 — 이어쓰기 기계의 한계: 조련 없이(퓨샷) 버텨 보고, 무너지는 지점을 정확히 본다.
 // 회수하는 수학: 4부 9장(출력층 = 다음 단어 확률분포) · 5부 7장(퍼플렉시티 = 실질 갈래 수).
-import { ConceptCard } from '@series/ui'
+import { ConceptCard, PartLink } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -127,8 +127,8 @@ function onSetComplete() {
 
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 4부 9장 · 5부 7장">
       이 장의 두 기둥이 모두 복습이었습니다.
-      <b>4부 9장</b>: 모델의 출력 = 다음 단어의 확률분포 — 지시를 못 따르는 이유이자 퓨샷이 먹히는 이유.
-      <b>5부 7장</b>: 퍼플렉시티 = 실질 갈래 수 — 예시가 쌓일수록 갈래가 좁혀져 형식이 안정되는 원리.
+      <b><PartLink :part="4" ch="ch9">4부 9장</PartLink></b>: 모델의 출력 = 다음 단어의 확률분포 — 지시를 못 따르는 이유이자 퓨샷이 먹히는 이유.
+      <b><PartLink :part="5" ch="ch7">5부 7장</PartLink></b>: 퍼플렉시티 = 실질 갈래 수 — 예시가 쌓일수록 갈래가 좁혀져 형식이 안정되는 원리.
       다음 장부터는 드디어 <b>가중치를 바꾸는</b> 진짜 조련 — 거기서 5부 4장(크로스 엔트로피)이 돌아옵니다.
     </ConceptCard>
 

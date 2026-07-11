@@ -8,6 +8,7 @@ export { default as DetailsCard } from './DetailsCard.vue'
 export { default as ChartView } from './ChartView.vue'
 export { default as NotebookCard } from './NotebookCard.vue'
 export { default as ReviewFlag } from './ReviewFlag.vue'
+export { default as PartLink } from './PartLink.vue'
 
 // 문제(자동채점) 패밀리
 export { default as Quiz } from './Quiz.vue'

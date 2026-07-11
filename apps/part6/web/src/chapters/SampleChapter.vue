@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // Phase 0 워밍업 챕터 — 6부 전체가 풀 문제("이어쓰기 기계 → 비서")를 몸으로 먼저 느낀다.
 // 실제 Phase 1~10 챕터도 이 구조를 그대로 따른다.
-import { ConceptCard } from '@series/ui'
+import { ConceptCard, PartLink } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -122,7 +122,7 @@ function onSetComplete() {
     </DetailsCard>
 
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 4부 전체">
-      이 챕터의 실험은 4부의 결론 위에 서 있습니다. 4부에서 우리는
+      이 챕터의 실험은 <PartLink :part="4">4부</PartLink>의 결론 위에 서 있습니다. 4부에서 우리는
       <b>"LLM = 다음 단어를 확률로 고르는 기계"</b>를 직접 조립했죠.
       베이스 모델이 바로 그 기계의 순수한 모습입니다. 6부의 질문은 하나예요 —
       <b>"그 기계를 어떻게 비서로 만드는가?"</b> 이 질문의 답이 곧 GPT가 ChatGPT가 된 과정입니다.

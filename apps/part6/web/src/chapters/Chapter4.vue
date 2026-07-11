@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 4장 — 사람의 취향을 숫자로: 선호 데이터와 보상 모델 (핵심).
 // 회수하는 수학: 3부 4장(조건부 확률) · 2부 7장(시그모이드) · −log 손실의 재등장.
-import { ConceptCard } from '@series/ui'
+import { ConceptCard, PartLink } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -131,9 +131,9 @@ function onSetComplete() {
     </DetailsCard>
 
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 3부 4장 · 2부 7장">
-      <b>2부 7장</b>: 시그모이드 σ — 점수 차를 확률로 바꾸는 변환기로 재등장.
-      <b>3부 4장</b>: 조건부 확률 — "점수가 이럴 때 A 가 선택될 확률"이라는 모델링 자체.
-      그리고 <b>5부 4장의 −log</b> 가 손실로 세 번째 등장(사전학습·SFT에 이어).
+      <b><PartLink :part="2" ch="ch7">2부 7장</PartLink></b>: 시그모이드 σ — 점수 차를 확률로 바꾸는 변환기로 재등장.
+      <b><PartLink :part="3" ch="ch4">3부 4장</PartLink></b>: 조건부 확률 — "점수가 이럴 때 A 가 선택될 확률"이라는 모델링 자체.
+      그리고 <b><PartLink :part="5" ch="ch4">5부 4장</PartLink>의 −log</b> 가 손실로 세 번째 등장(사전학습·SFT에 이어).
       수식이 다 아는 얼굴이라는 것 — 그게 이 장이 "핵심"인데도 무섭지 않은 이유입니다.
     </ConceptCard>
 

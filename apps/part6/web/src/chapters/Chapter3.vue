@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 3장 — SFT: 시범 보여주기 (핵심). 조련의 첫 단계가 새 수학이 아니라
 // 5부 4장 크로스 엔트로피 + 4부 11장 경사하강의 재사용임을 확인한다.
-import { ConceptCard } from '@series/ui'
+import { ConceptCard, PartLink } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -129,8 +129,8 @@ function onSetComplete() {
     </DetailsCard>
 
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 5부 4장 · 4부 11장">
-      이 장의 전부가 재회였습니다. <b>5부 4장</b>: 크로스 엔트로피 −log q(정답) — SFT 의 채점기.
-      <b>4부 11장</b>: 손실 → 기울기 → 가중치 갱신 루프 — SFT 의 엔진.
+      이 장의 전부가 재회였습니다. <b><PartLink :part="5" ch="ch4">5부 4장</PartLink></b>: 크로스 엔트로피 −log q(정답) — SFT 의 채점기.
+      <b><PartLink :part="4" ch="ch11">4부 11장</PartLink></b>: 손실 → 기울기 → 가중치 갱신 루프 — SFT 의 엔진.
       ChatGPT 를 만든 첫 조련 단계가, 여러분이 이미 아는 두 조각의 조립이라는 것 —
       이게 이 시리즈가 "아는 수학의 재회"라고 말한 이유입니다.
     </ConceptCard>

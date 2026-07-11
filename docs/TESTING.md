@@ -205,7 +205,7 @@ foreach ($a in 'part1','part2','part3','part4','part5','portal') {
 
 ## 부록: 현재 상태
 
-- 구조: `apps/part1..5` + `apps/portal` + `packages/ui`(공용 컴포넌트 9종: MathBlock·ConceptCard·DetailsCard·ChartView·NotebookCard·ReviewFlag·Quiz·StepQuiz·QuizSet + quizGroup 그룹계약 + injection) + `packages/tutor`(AI 튜터 Ollama 클라이언트).
+- 구조: `apps/part1..6` + `apps/portal` + `packages/ui`(공용 컴포넌트 10종: MathBlock·ConceptCard·DetailsCard·ChartView·NotebookCard·ReviewFlag·PartLink·Quiz·StepQuiz·QuizSet + quizGroup 그룹계약 + injection) + `packages/tutor`(AI 튜터 Ollama 클라이언트).
 - 결합해제 주입 계약: `storagePrefixKey`(QuizSet 접두사) · `reviewApiKey`(ReviewFlag) · `notebookResolverKey`(NotebookCard).
 - 검증됨(빌드): 전 5부 + 포털 `vue-tsc + vite` 통과, Tailwind `@source` 로 패키지 클래스 생성 전 부 확인.
 - 미검증(이 문서의 2절이 그 확인 절차): 런타임 동작(퀴즈·진도·복습·튜터).
