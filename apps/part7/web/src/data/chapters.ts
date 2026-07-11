@@ -40,7 +40,7 @@ export const chapters: ChapterMeta[] = [
   { slug: 'ch7', phase: 7, title: '청킹과 검색 품질', summary: '문서 쪼개기 트레이드오프, top-k·임계값, recall@k 채점', minutes: 40, notebook: 'ch07_chunking.ipynb' },
   { slug: 'ch8', phase: 8, title: 'RAG 조립 (핵심) — 검색이 프롬프트가 되기까지', summary: '파이프라인 전체 + 실패 모드, RAG vs 파인튜닝 선택 기준', minutes: 45, notebook: 'ch08_rag_assembly.ipynb' },
   { slug: 'ch9', phase: 9, title: '임베딩은 어떻게 배우나 — 대조 학습', summary: '"짝은 가깝게, 남은 멀게" — 그리고 또 −log 손실', minutes: 40, notebook: 'ch09_contrastive.ipynb' },
-  { slug: 'ch10', phase: 10, title: '🎯 캡스톤 — 사내 FAQ 검색봇', summary: '미니 RAG 전체 조립: 임베딩 → 코사인 → top-k → 답변', minutes: 50, comingSoon: true },
+  { slug: 'ch10', phase: 10, title: '🎯 캡스톤 — 사내 FAQ 검색봇', summary: '미니 RAG 전체 조립: 임베딩 → 코사인 → top-k → 답변', minutes: 50, notebook: 'ch10_capstone.ipynb' },
 ]
 
 export const availableChapters = chapters.filter((c) => !c.comingSoon)
