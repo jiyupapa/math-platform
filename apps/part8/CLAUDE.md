@@ -11,7 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 `weight_decay` 가 전부 읽히고 손실 곡선을 보고 무엇을 고칠지 아는 상태. **6부(조련)의 실전 짝꿍.**
 핵심 한 줄: **"학습은 안개 낀 산을 내려가는 여행이다 — 보폭·관성·일정표가 도착지를 정한다."**
 
-> **상태: 콘텐츠 제작 중 (5/12 — 워밍업·1~4장 공개)** — 앱 셸·목차·스토어·튜터 완성, ch5~11은 comingSoon.
+> **상태: 콘텐츠 제작 중 (6/12 — 워밍업·1~5장 공개, 두 번째 묶음 완결)** — 앱 셸·목차·스토어·튜터 완성, ch6~11은 comingSoon.
 > 챕터 구성·회수하는 수학 매핑은 루트 `README.md` "8부 챕터 구성안" 표가 정본.
 
 ## 공용 컴포넌트 — 모노레포 `packages/ui`
