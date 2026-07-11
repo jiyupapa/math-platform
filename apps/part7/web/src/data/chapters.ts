@@ -29,7 +29,7 @@ export const chapters: ChapterMeta[] = [
     title: '워밍업 — 비슷한 문장 찾기',
     summary: '사람은 어떻게 "비슷하다"를 아나 — 의미를 지도 위 위치로 보는 첫 경험',
     minutes: 10,
-    comingSoon: true,
+    notebook: 'ch00_sample.ipynb',
   },
   { slug: 'ch1', phase: 1, title: '큰 그림 — 검색의 진화와 RAG', summary: '키워드 검색의 한계 → 의미 검색 → RAG 파이프라인 지도', minutes: 35, comingSoon: true },
   { slug: 'ch2', phase: 2, title: '가까움의 수학 — 코사인 유사도 (핵심)', summary: '유클리드 거리 vs 각도 — 길이가 점수를 오염시키는 문제와 정규화', minutes: 45, comingSoon: true },
