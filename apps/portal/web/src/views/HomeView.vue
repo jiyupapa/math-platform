@@ -191,7 +191,12 @@ function reset() {
 
     <!-- Path map -->
     <section>
-      <h2 class="mb-5 text-lg font-bold text-slate-800">학습 경로 지도</h2>
+      <div class="mb-5 flex items-baseline justify-between">
+        <h2 class="text-lg font-bold text-slate-800">학습 경로 지도</h2>
+        <RouterLink to="/map" class="text-sm font-medium text-indigo-600 hover:underline">
+          전체 구조도 보기 →
+        </RouterLink>
+      </div>
       <ol class="relative space-y-3 border-l-2 border-slate-200 pl-6">
         <li v-for="row in rows" :key="row.step.order" class="relative">
           <span
