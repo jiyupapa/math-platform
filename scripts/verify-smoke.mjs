@@ -59,9 +59,9 @@ await visit('/', '포털 홈')
 await visit('/diagnose', '포털 진단')
 await visit('/map', '포털 학습 구조도')
 
-// 각 부 — 홈 + 전 공개 챕터
+// 각 부 — 홈 + 전 공개 챕터 (10부 = 제작 중이어도 홈은 검사)
 let totalChapters = 0
-for (let p = 1; p <= 9; p++) {
+for (let p = 1; p <= 10; p++) {
   const slugs = slugsOf(p)
   totalChapters += slugs.length
   await visit(`/part${p}/`, `part${p} 홈 (${slugs.length}챕터)`)
@@ -70,5 +70,5 @@ for (let p = 1; p <= 9; p++) {
 }
 
 await browser.close()
-console.log(`\n결과: ${pass} 통과 / ${fails.length} 실패 — 페이지 ${pass + fails.length}개 (챕터 ${totalChapters} + 홈 10 + 포털 진단·구조도 2)`)
+console.log(`\n결과: ${pass} 통과 / ${fails.length} 실패 — 페이지 ${pass + fails.length}개 (챕터 ${totalChapters} + 홈 11 + 포털 진단·구조도 2)`)
 process.exit(fails.length === 0 ? 0 : 1)
