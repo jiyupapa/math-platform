@@ -173,7 +173,8 @@ function onSetComplete() {
 
     <ConceptCard tone="warn" title="압축의 한계 — 공짜 점심은 없다">
       그렇다면 아무리 머리를 굴려도, 글자당 평균 비트를
-      <b>평균 놀람</b> <MathBlock inline expr="\textstyle\sum p \cdot \log_2 \frac{1}{p}" /> 아래로는
+      <b>평균 놀람</b> <MathBlock inline expr="\textstyle\sum p \cdot \log_2 \frac{1}{p}" /> (여기서
+      <MathBlock inline expr="\textstyle\sum" /> 는 "모든 경우를 <b>다 더하라</b>"는 기호 — 3장에서 정식으로 소개해요) 아래로는
       줄일 수 없다는 뜻입니다 — 각 글자가 실어 나르는 놀람만큼의 비트는 반드시 필요하니까요.
       섀넌이 증명한 이 <b>넘을 수 없는 바닥</b>에는 이름이 있습니다.
       다음 챕터의 주인공, <b>엔트로피</b>입니다.
