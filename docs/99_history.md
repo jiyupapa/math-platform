@@ -18,6 +18,8 @@
 - **`scripts/build-pitch-deck.py`** — python-pptx 로 10장 16:9 덱 생성(발표자 노트 = 말 노트
   포함, 한글 글꼴 ea 지정). 검증은 PowerPoint COM 으로 전 장 PNG 렌더 → 육안 확인(상자 겹침
   1건 발견·수정). 이후 수정은 pptx 직접 편집이 아니라 **스크립트 수정 → 재실행**이 정본.
+- **`scripts/render-deck.ps1`** — 덱 전 장을 PNG 로 렌더해 `docs/hackathon/slides/`(slide01~10)
+  에 저장(리허설·검토용 스냅숏, PowerPoint COM). 덱 재생성 후 이걸로 렌더도 갱신.
 - 잔여: 슬라이드 ⑨ QR — 배포 호스트 확정 후 점선 자리에 삽입.
 
 ### 📦 해커톤 제출물 4종 개정 — "선형대수 강의" → "수포자 사관학교" 플랫폼 프레임
