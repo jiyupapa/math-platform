@@ -125,7 +125,7 @@ python -m venv .venv
 🪟 **cmd** (한 줄 붙여넣기):
 
 ```cmd
-for %p in (part1 part2 part3 part4 part5 part6 part7 part8) do @for %f in (apps\%p\notebooks\*.ipynb) do @echo [%f] & .venv\Scripts\python.exe -m jupyter nbconvert --to notebook --execute --stdout --ExecutePreprocessor.kernel_name=math-platform "%f" >nul && echo   OK || echo   FAIL
+for %p in (part1 part2 part3 part4 part5 part6 part7 part8 part9) do @for %f in (apps\%p\notebooks\*.ipynb) do @echo [%f] & .venv\Scripts\python.exe -m jupyter nbconvert --to notebook --execute --stdout --ExecutePreprocessor.kernel_name=math-platform "%f" >nul && echo   OK || echo   FAIL
 ```
 
 > `.bat` 파일로 저장해 쓰려면 `%p`·`%f` 를 `%%p`·`%%f` 로 바꾼다.
@@ -154,7 +154,7 @@ Get-ChildItem apps\part*\notebooks\*.ipynb | ForEach-Object {
   ```
 
 - 그 외 ch* 시리즈 노트북(2026-07-12 현재 95개)은 루트 `requirements.txt` 만으로 전부 무에러 실행됨 —
-  6~8부 노트북은 챕터 제작 시점마다 nbconvert 로 검증했다(각 부 `docs/99_history.md` 참조).
+  6~9부 노트북은 챕터 제작 시점마다 nbconvert 로 검증했다(각 부 `docs/99_history.md` 참조).
 
 ### 검증 이력 (2026-07-09)
 

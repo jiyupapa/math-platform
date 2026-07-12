@@ -21,7 +21,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```
 apps/
   portal/            통합 포털(part0 — 진단·학습경로 추천): web/ + docs/. packages/ui·tutor 소비
-  part1/ .. part9/   각 부: web/(Vue 앱) + notebooks/(Jupyter) + docs/ (part9 는 스캐폴드 — notebooks 는 챕터와 함께)
+  part1/ .. part9/   각 부: web/(Vue 앱) + notebooks/(Jupyter) + docs/
 packages/
   ui/                공용 컴포넌트 단일 소스 (@series/ui)
   tutor/             AI 튜터 클라이언트 (@series/tutor — 로컬/원격 Ollama)
@@ -40,7 +40,7 @@ requirements.txt     공용 노트북 venv 의존성(5부 합집합)
 | 6부 | `apps/part6` | LLM 조련 — 피날레 (전 11챕터 공개, 2026-07-11 완결) |
 | 7부 | `apps/part7` | 임베딩 기하학(RAG의 수학) — 실용 확장 트랙 (전 11챕터 공개, 2026-07-11 완결) |
 | 8부 | `apps/part8` | 최적화(학습의 다이얼) — 이론 심화 트랙 (전 12챕터 공개, 2026-07-12 완결) |
-| 9부 | `apps/part9` | 수치 계산(내 PC에서 도는 AI의 수학) — 실용 확장 트랙 2탄, 스캐폴드만·콘텐츠 제작 중 (로드맵: 루트 `README.md`) |
+| 9부 | `apps/part9` | 수치 계산(내 PC에서 도는 AI의 수학) — 실용 확장 트랙 2탄 (전 12챕터 공개, 2026-07-12 완결) |
 
 시리즈 커리큘럼·추천 학습 경로(1→2→3→4→5 순서가 아님)·부 간 연결은 루트 `README.md`.
 
