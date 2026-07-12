@@ -80,7 +80,8 @@ export const edges: BoardEdge[] = [
   { from: 'step6', to: 'step7', kind: 'flow' },
   { from: 'step7', to: 'finish', kind: 'flow' },
   { from: 'step1', to: 'step9', kind: 'entry' },
-  { from: 'step1', to: 'step8', kind: 'entry' },
+  // S8 진입은 S1+S2 둘 다 필요하지만, 같은 지점으로 들어가는 점선 두 가닥이 겹치면
+  // 실선처럼 보여 한 가닥(더 늦은 선수인 S2)만 그린다 — 두 조건은 prereqText 에 명시.
   { from: 'step2', to: 'step8', kind: 'entry' },
   { from: 'step4', to: 'step10', kind: 'entry' },
   { from: 'step4', to: 'step11', kind: 'entry' },

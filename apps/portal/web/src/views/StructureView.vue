@@ -155,12 +155,18 @@ watch(mode, () => void remeasure())
 
 // ── 선택 + URL 동기화 (?node=step3) ──────────────────────────────────────────
 const selected = ref<string | null>(null)
+const detailEl = ref<HTMLElement | null>(null)
 onMounted(() => {
   const q = route.query.node
   if (typeof q === 'string' && nodes.some((n) => n.id === q)) selected.value = q
 })
-watch(selected, (id) => {
+watch(selected, async (id) => {
   void router.replace({ query: id ? { node: id } : {} })
+  // 보드가 화면을 다 차지하면 아래 상세 패널이 안 보인다 — 선택 시 시야로 끌어온다
+  if (id) {
+    await nextTick()
+    detailEl.value?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+  }
 })
 const detail = computed(() => {
   if (!selected.value) return null
@@ -337,7 +343,7 @@ const legend: { tone: Tone; label: string }[] = [
     </div>
 
     <!-- 상세 패널 -->
-    <section v-if="detail" class="mt-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+    <section v-if="detail" ref="detailEl" class="mt-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
       <div class="flex flex-wrap items-start justify-between gap-3">
         <div>
           <div class="mb-1 flex items-center gap-2">
