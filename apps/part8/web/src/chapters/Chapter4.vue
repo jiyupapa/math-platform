@@ -43,7 +43,8 @@ function onSetComplete() {
     </p>
     <MathBlock expr="v \leftarrow \beta\, v + \nabla L, \qquad w \leftarrow w - lr \cdot v" />
     <p class="leading-relaxed text-slate-700">
-      읽는 법: "새 속도 = 옛 속도의 β배 + 이번 기울기, 그리고 속도만큼 이동".
+      읽는 법: "새 속도 = 옛 속도의 β배 + 이번 기울기, 그리고 속도만큼 이동" — 여기서
+      <MathBlock inline expr="\nabla L" /> 의 <b>∇</b>는 "<b>나블라</b>"라고 읽는 <b>기울기 벡터</b> 기호입니다(2부 9장).
       β(베타)는 <b>기억 다이얼</b>이에요 — 0이면 기억 없음(= 그냥 GD), 0.9면 옛 속도의 90%를
       유지합니다. 이 한 줄이 좁은 골짜기에서 무엇을 바꾸는지, 경주로 확인해 보세요.
     </p>

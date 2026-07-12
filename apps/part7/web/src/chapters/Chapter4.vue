@@ -181,7 +181,7 @@ function onSetComplete() {
       <!-- 보통 -->
       <StepQuiz
         difficulty="medium"
-        question="400차원 임베딩에서 질문과 어떤 문서의 코사인이 0.6이 나왔습니다. 이 신호가 얼마나 강한지 재 봅시다."
+        question="400차원 임베딩에서 질문과 어떤 문서의 코사인이 0.6이 나왔습니다. 무작위였다면 코사인은 0 근처에 폭 σ(시그마=표준편차)로 흩어지죠 — 이 신호가 몇 σ짜리인지 재 봅시다."
         :steps="[
           { lhs: '\\sqrt{400}', answer: 20 },
           { lhs: '\\sigma = 1/\\sqrt{400}', answer: 0.05 },
