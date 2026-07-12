@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 이 저장소의 정체
 
-"수포자를 위한 AI 수학 시리즈"를 하나로 묶은 **모노레포**(npm workspaces). 5개 부의 웹 앱 + 통합 포털 +
+"수포자를 위한 AI 수학 시리즈"를 하나로 묶은 **모노레포**(npm workspaces). 9개 부의 웹 앱 + 통합 포털 +
 공용 컴포넌트 패키지가 한 git 저장소 안에 있다.
 
 기원: 원래 1부(선형대수)만 회사 해커톤 출품 목적이었고, 5부작으로 확장된 뒤 이 모노레포로 통합됐다.
@@ -26,7 +26,7 @@ packages/
   ui/                공용 컴포넌트 단일 소스 (@series/ui)
   tutor/             AI 튜터 클라이언트 (@series/tutor — 로컬/원격 Ollama)
 docs/TESTING.md      전체 테스트 방법
-requirements.txt     공용 노트북 venv 의존성(5부 합집합)
+requirements.txt     공용 노트북 venv 의존성(전 부 합집합)
 ```
 
 | 부 | 폴더 | 주제 |
