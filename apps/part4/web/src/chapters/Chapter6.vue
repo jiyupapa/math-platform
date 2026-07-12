@@ -80,7 +80,10 @@ function onSetComplete() {
       여기서 대문자 <MathBlock inline expr="Q" /> 는 <b>벡터 전체</b>, 소문자 <MathBlock inline expr="q_1" /> 은
       그 벡터의 <b>첫 번째 숫자</b>예요(<MathBlock inline expr="q_2" /> 는 둘째). 같은 자리끼리 곱해 더하는 거죠.
     </p>
-    <p class="leading-relaxed text-slate-700">그리고 전체 어텐션은 한 줄로 이렇게 씁니다:</p>
+    <p class="leading-relaxed text-slate-700">
+      이제 문장 전체로 확장할게요 — <b>Q·K·V 각각은 단어 하나의 벡터가 아니라, 문장 속 모든 단어의
+      Query·Key·Value 벡터를 세로로 쌓은 묶음(행렬)</b>입니다. 그러면 전체 어텐션이 한 줄로 이렇게 써져요:
+    </p>
     <MathBlock expr="\text{Attention}(Q,K,V) = \text{softmax}\!\left(\dfrac{Q K^\top}{\sqrt{d}}\right) V" />
     <ConceptCard tone="note" title="공식 뜯어 읽기 (처음 보는 작은 기호까지)">
       <ul class="list-disc space-y-1.5 pl-5 text-sm">
