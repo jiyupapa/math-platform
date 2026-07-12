@@ -38,7 +38,7 @@ function onSetComplete() {
     <p class="leading-relaxed text-slate-700">
       아보가드로 수 602,214,076,000,000,000,000,000 을 그대로 적는 과학자는 없죠 —
       <b>6.02 × 10²³</b> 처럼 "유효숫자 × 10의 몇 제곱"으로 적습니다
-      (<b><PartLink :part="2" ch="ch7">2부 7장</PartLink></b>의 지수가 여기서 일해요).
+      (<b>2부 7장</b>의 지수가 여기서 일해요).
       부동소수점은 이 <b>과학적 표기법의 2진판</b>입니다:
     </p>
     <MathBlock expr="x = (-1)^{s} \times 1.m \times 2^{\,e-127}" />

@@ -24,8 +24,7 @@ function onSetComplete() {
     <p class="mb-2 leading-relaxed text-slate-600">
       9장까지의 질문이 "얼마나 <b>줄일 수 있나</b>"였다면, 오늘은 "얼마나 <b>잃었나</b>"입니다.
       Q4_K_M 을 받을까 Q8_0 을 받을까 — 감이 아니라 숫자가 필요하죠. 그 자는 이미 배웠습니다:
-      <b><PartLink :part="5" ch="ch7">5부 7장</PartLink>의 퍼플렉시티</b>가 양자화의
-      성적표가 되어 돌아옵니다.
+      <b>5부 7장의 퍼플렉시티</b>가 양자화의 성적표가 되어 돌아옵니다.
     </p>
 
     <ConceptCard tone="goal" title="이 챕터의 목표">
@@ -43,9 +42,8 @@ function onSetComplete() {
     </p>
     <MathBlock expr="H(p_{\mathrm{fp}},\, p_q) \;=\; H(p_{\mathrm{fp}}) \;+\; D_{\mathrm{KL}}(p_{\mathrm{fp}} \,\|\, p_q)" />
     <p class="leading-relaxed text-slate-700">
-      <b><PartLink :part="5" ch="ch4">5부 4장</PartLink></b>의 분해식 그대로 — 열화분이
-      정확히 <b>KL 발산(틀린 지도로 부호화한 초과 비트, <PartLink :part="5" ch="ch5">5부
-      5장</PartLink>)</b>이라서, 열화는 절대 음수가 될 수 없습니다. 양자화 = "지도를 거칠게
+      <b>5부 4장</b>의 분해식 그대로 — 열화분이 정확히 <b>KL 발산(틀린 지도로 부호화한
+      초과 비트, 5부 5장)</b>이라서, 열화는 절대 음수가 될 수 없습니다. 양자화 = "지도를 거칠게
       다시 그리기"이니, 초과 비트가 그 비용인 거죠. 직접 재 봅시다.
     </p>
 

@@ -70,7 +70,7 @@ function onSetComplete() {
       <b>분업</b>합니다: 개수가 수십억이라 무거운 것(가중치·활성값 저장, 행렬곱)은 반쪽 자로,
       <b>티끌이 쌓이는 곳 — 누적기, master weights, 옵티마이저 상태 — 는 fp32 로.</b>
       이 분업의 이름이 <b>혼합 정밀도</b>(mixed precision)이고,
-      <b><PartLink :part="4" ch="ch11">4부 11장</PartLink></b>의 학습 루프에 겹쳐 그리면:
+      <b>4부 11장</b>의 학습 루프에 겹쳐 그리면:
       forward/backward 는 반쪽 자 구간, 가중치 갱신은 fp32 구간입니다.
     </p>
 
