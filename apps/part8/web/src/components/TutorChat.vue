@@ -178,7 +178,7 @@ function segments(text: string): Segment[] {
   let idx = 0
   for (const m of text.matchAll(/(\d{1,2})장/g)) {
     const n = Number(m[1])
-    if (n < 1 || n > 10 || m.index === undefined) continue
+    if (n < 1 || n > 11 || m.index === undefined) continue
     if (m.index > idx) out.push({ text: text.slice(idx, m.index) })
     out.push({ text: m[0], link: `/ch/ch${n}` })
     idx = m.index + m[0].length
