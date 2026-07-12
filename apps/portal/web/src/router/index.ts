@@ -13,7 +13,11 @@ const router = createRouter({
   // BASE_URL 을 따라 배포 base(루트 / 또는 하위 경로)에 맞춰 동작
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
-  scrollBehavior() {
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) return savedPosition
+    // 같은 화면에서 쿼리만 바뀌는 경우(구조도 ?node= 선택 등)는 스크롤 위치 유지 —
+    // top:0 을 돌려주면 노드를 누를 때마다 화면이 맨 위로 튄다.
+    if (to.path === from.path) return false
     return { top: 0 }
   },
 })
