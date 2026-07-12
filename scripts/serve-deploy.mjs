@@ -42,7 +42,7 @@ function safeJoin(base, urlPath) {
 }
 
 function fallbackFor(pathname) {
-  const m = pathname.match(/^\/(part[1-9])(\/|$)/)
+  const m = pathname.match(/^\/(part\d+)(\/|$)/)
   return m ? join(deployDir, m[1], 'index.html') : join(deployDir, 'index.html')
 }
 
@@ -73,6 +73,6 @@ createServer((req, res) => {
 }).listen(PORT, () => {
   console.log(
     `\n  deploy/ 서빙 중 →  http://localhost:${PORT}\n` +
-      `  포털(/) · 1부(/part1) … 9부(/part9) 가 한 origin.  Ctrl+C 로 종료.\n`,
+      `  포털(/) · 1부(/part1) … 10부(/part10) 가 한 origin.  Ctrl+C 로 종료.\n`,
   )
 })

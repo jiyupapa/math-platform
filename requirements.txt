@@ -1,4 +1,4 @@
-# MATH_PLATFORM — 공용 노트북 환경 (9개 부 전체의 requirements 합집합)
+# MATH_PLATFORM — 공용 노트북 환경 (10개 부 전체의 requirements 합집합)
 #
 # 모노레포이므로 부별 venv 대신 루트에 venv 하나만 만든다.
 # 부별 명세는 apps/part*/notebooks/requirements.txt 에 그대로 남아 있음(참고용).
