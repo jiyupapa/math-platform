@@ -7,10 +7,10 @@
 //   포털은 별도 앱이라 각 부 chapters.ts 를 직접 import 하지 않고 여기서 관리한다(향후 공용 패키지화 가능).
 //   ⚠️ 각 부 minutes 를 바꾸면 여기 합계도 갱신할 것.
 
-export type PartId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+export type PartId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
 
-/** 역할 묶음 — 토대(1·2·3) → 조립(4) → 본체(5) → 조련(6), 실용(7)·심화는 선택 분기 */
-export type StepRole = '토대' | '조립' | '본체' | '조련' | '심화' | '실용'
+/** 역할 묶음 — 토대(1·2·3) → 조립(4) → 본체(5) → 조련(6), 실용(7·9)·심화(8)·평가(10)는 선택 분기 */
+export type StepRole = '토대' | '조립' | '본체' | '조련' | '심화' | '실용' | '평가'
 
 /** 진단 관문 — 통과 시 해당 단계를 접거나 복습 모드로 (recommend.ts 가 사용) */
 export type GateId = 'vector' | 'prob' | 'calculus' | 'log'
@@ -117,6 +117,12 @@ export const pathSteps: PathStep[] = [
     chapterCount: 11, segments: [{ part: 9, slugs: ch(1, 11) }],
     minutes: 460, role: '실용', optional: true,
     gain: '7B는 왜 4GB인가 — 비트·부동소수점·양자화·GGUF, 내 PC에 맞는 모델 고르기',
+  },
+  {
+    order: 12, part: 10, title: '(선택·평가) 10부 — 스케일링 법칙과 평가의 통계', scope: 'ch1~10',
+    chapterCount: 10, segments: [{ part: 10, slugs: ch(1, 10) }],
+    minutes: 400, role: '평가', optional: true,
+    gain: '키우면 얼마나 좋아지나(멱법칙·Chinchilla) + 그 점수를 믿어도 되나(오차범위·검정) — 3부 전반 뒤 언제든',
   },
 ]
 

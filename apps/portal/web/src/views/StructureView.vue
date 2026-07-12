@@ -25,6 +25,7 @@ const recOf = (order: number) => rec?.plan[order - 1] ?? null
 const optionalChapters = pathSteps
   .filter((s) => s.optional)
   .reduce((n, s) => n + s.chapterCount, 0)
+const optionalTracks = pathSteps.filter((s) => s.optional).length
 
 // ── 노드 상태 (참조 구조도의 완료/현재/대기 문법) ────────────────────────────
 type Tone = 'done' | 'current' | 'active' | 'review' | 'known' | 'wait' | 'optional'
@@ -231,7 +232,7 @@ const legend: { tone: Tone; label: string }[] = [
       <span><b class="text-slate-900">{{ nodes.length }}</b> 단계 노드</span>
       <span><b class="text-slate-900">{{ columns.length }}</b> 학습 국면</span>
       <span>필수 <b class="text-slate-900">{{ totalChapters }}</b>챕터 ≈ <b class="text-slate-900">{{ totalHours }}</b>시간</span>
-      <span>선택 분기 4트랙 <b class="text-slate-900">{{ optionalChapters }}</b>챕터</span>
+      <span>선택 분기 {{ optionalTracks }}트랙 <b class="text-slate-900">{{ optionalChapters }}</b>챕터</span>
       <span v-if="rec" class="font-medium text-indigo-700">
         당신의 경로: {{ rec.activeChapters }}챕터 · 약 {{ hoursOf(rec.activeMinutes) }}시간
       </span>

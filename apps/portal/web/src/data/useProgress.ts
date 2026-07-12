@@ -30,6 +30,7 @@ export const PART_META: PartMeta[] = [
   { part: 7, prefix: 'emb', label: '7부 임베딩 기하학', essential: range(1, 10), advanced: [] },
   { part: 8, prefix: 'opt', label: '8부 최적화', essential: range(1, 11), advanced: [] },
   { part: 9, prefix: 'num', label: '9부 수치 계산', essential: range(1, 11), advanced: [] },
+  { part: 10, prefix: 'scale', label: '10부 스케일링·평가', essential: range(1, 10), advanced: [] },
 ]
 
 export interface PartProgress {

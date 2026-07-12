@@ -10,7 +10,7 @@ export interface BoardColumn {
 }
 
 export interface BoardLane {
-  id: 'core' | 'deep' | 'prac'
+  id: 'core' | 'deep' | 'prac' | 'eval'
   title: string
   /** 선택 트랙 레인 — "핵심 흐름" 모드에서 숨김 */
   optional?: boolean
@@ -51,6 +51,7 @@ export const lanes: BoardLane[] = [
   { id: 'core', title: '필수 경로' },
   { id: 'deep', title: '선택 · 심화', optional: true },
   { id: 'prac', title: '선택 · 실용', optional: true },
+  { id: 'eval', title: '선택 · 평가', optional: true },
 ]
 
 export const nodes: BoardNode[] = [
@@ -67,6 +68,7 @@ export const nodes: BoardNode[] = [
   { id: 'step10', col: 'c7', lane: 'deep', stepOrder: 10, prereqText: '4단계(2부 미분) 직후 언제든 — 6부를 봤다면 더 잘 읽힘' },
   { id: 'step9', col: 'c7', lane: 'prac', stepOrder: 9, prereqText: '1단계(1부 전반)만 마치면 언제든 — 진입 장벽 최저' },
   { id: 'step11', col: 'c7', lane: 'prac', stepOrder: 11, prereqText: '4단계(2부) 이후 권장(핵심은 2부 7장 log 감각) — 6부 뒤 재방문하면 완성' },
+  { id: 'step12', col: 'c7', lane: 'eval', stepOrder: 12, prereqText: '2단계(3부 전반)만 마치면 언제든 — 통계 심화(3부 8~10장)는 자체 회수, 6부 9장 뒤 재방문 가치 최대' },
 ]
 
 export const edges: BoardEdge[] = [
@@ -85,4 +87,5 @@ export const edges: BoardEdge[] = [
   { from: 'step2', to: 'step8', kind: 'entry' },
   { from: 'step4', to: 'step10', kind: 'entry' },
   { from: 'step4', to: 'step11', kind: 'entry' },
+  { from: 'step2', to: 'step12', kind: 'entry' },
 ]
