@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// 6장 — RLHF (핵심) — KL 목줄. 시리즈 하이라이트: 5부 6장의 KL 발산이 주인공으로 귀환.
+// 6장 — RLHF (핵심) — KL 목줄. 시리즈 하이라이트: 5부 5장의 KL 발산이 주인공으로 귀환.
 import { ConceptCard, PartLink } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
@@ -24,7 +24,7 @@ function onSetComplete() {
     <p class="mb-2 leading-relaxed text-slate-600">
       재료가 다 모였습니다 — 정책(조련 중인 모델), 심판(보상 모델), 학습 규칙(점수 쫓기).
       이번 장에서 전부 조립합니다. 이 조립품의 이름이 <b>RLHF</b> — GPT 를 ChatGPT 로
-      만든 바로 그 방법이에요. 그리고 조립의 마지막 부품에서, 5부 6장의 <b>KL 발산</b>이
+      만든 바로 그 방법이에요. 그리고 조립의 마지막 부품에서, 5부 5장의 <b>KL 발산</b>이
       시리즈 전체의 주인공으로 돌아옵니다.
     </p>
 
@@ -71,7 +71,7 @@ function onSetComplete() {
     <p class="leading-relaxed text-slate-700">
       해법은 "점수를 쫓되, <b>원본에서 너무 멀어지면 벌점</b>"입니다.
       그러려면 <b>"멀어진 정도"를 재는 자</b>가 필요한데… 우리는 이미 갖고 있어요.
-      5부 6장에서 배운 <b>KL 발산</b> — 두 확률분포가 얼마나 다른지 재는 바로 그 자입니다.
+      5부 5장에서 배운 <b>KL 발산</b> — 두 확률분포가 얼마나 다른지 재는 바로 그 자입니다.
       정책도 참조 모델도 결국 확률분포(4부)니까요. 그래서 RLHF 의 진짜 목적함수는:
     </p>
     <MathBlock expr="\text{목적} = r \;-\; \beta \cdot D_{KL}\!\left(\pi \,\|\, \pi_{\text{ref}}\right)" />
@@ -89,7 +89,7 @@ function onSetComplete() {
         </li>
         <li>
           <b>KL 페널티</b> (KL penalty) — 읽는 법: 케이엘 페널티.
-          뜻: D<sub>KL</sub>(π‖π<sub>ref</sub>) 에 비례해 깎는 벌점. 5부 6장의 "초과 비트"가 벌금 고지서가 된 것.
+          뜻: D<sub>KL</sub>(π‖π<sub>ref</sub>) 에 비례해 깎는 벌점. 5부 5장의 "초과 비트"가 벌금 고지서가 된 것.
         </li>
         <li>
           <b>β</b> (베타) — 읽는 법: 베타.
@@ -103,7 +103,7 @@ function onSetComplete() {
       question="RLHF 에서 KL 발산이 재는 것은?"
       :choices="['지금 정책(π)이 참조 모델(π_ref)에서 얼마나 멀어졌나', '답변의 길이', '보상 모델의 정확도', 'GPU 사용량']"
       :answer="0"
-      :hints="['KL 은 두 확률분포 사이의 다름을 재는 자였죠(5부 6장).']"
+      :hints="['KL 은 두 확률분포 사이의 다름을 재는 자였죠(5부 5장).']"
       explanation="정책과 참조 모델 — 둘 다 확률분포라 KL 로 거리를 잴 수 있습니다. 멀어진 만큼 벌점."
     />
 
@@ -136,7 +136,7 @@ function onSetComplete() {
     </div>
 
     <DetailsCard title="➕ 더 깊이: KL의 방향 — 왜 D(π‖π_ref)인가">
-      5부 6장에서 KL 은 <b>비대칭</b>이라고 배웠죠 — D(π‖π<sub>ref</sub>)는 앞자리(π)가
+      5부 5장에서 KL 은 <b>비대칭</b>이라고 배웠죠 — D(π‖π<sub>ref</sub>)는 앞자리(π)가
       확신하는 곳 위주로 잽니다. 즉 "지금 정책이 자주 내는 답이 원본에서 벗어났는가"를 재는
       방향이라, 정책이 이상한 답을 <b>자주 내기 시작하는 순간</b> 벌점이 커져요 — 목줄로 딱 맞는
       방향입니다. 반대 방향 D(π<sub>ref</sub>‖π)였다면 "원본이 하던 말을 전부 유지하라"에
@@ -183,9 +183,9 @@ function onSetComplete() {
       수식 안에 그대로 살아 있습니다.
     </p>
 
-    <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 5부 6장 KL 발산 (시리즈의 정점 연결)">
+    <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 5부 5장 KL 발산 (시리즈의 정점 연결)">
       루트 로드맵에서 예고했던 연결이 바로 이것입니다 —
-      <b>"<PartLink :part="5" ch="ch6">5부 6장</PartLink> KL 발산 → 6부 RLHF: 조련이 원본에서 멀어지지 않게 묶는 목줄."</b>
+      <b>"<PartLink :part="5" ch="ch5">5부 5장</PartLink> KL 발산 → 6부 RLHF: 조련이 원본에서 멀어지지 않게 묶는 목줄."</b>
       RLHF 페널티(지금), DPO 의 뼈대(7장), 그리고 5부에서 본 지식 증류까지 —
       "두 분포의 다름을 재는 자" 하나가 현대 AI 조련의 안전장치 전부를 떠받치고 있어요.
     </ConceptCard>
@@ -258,12 +258,12 @@ function onSetComplete() {
         question="RLHF 목적함수에서 KL 페널티가 5부에서 배운 KL의 어떤 직관과 이어지나요?"
         :choices="['두 분포의 다름을 재는 자 — 초과 비트가 벌금 고지서가 된 것', '압축의 한계 — 엔트로피의 바닥', '갈래 수를 되돌리는 2^H', '온도에 따른 분포 변형']"
         :answer="0"
-        explanation="D(p‖q) = 초과 비트(5부 6장). RLHF에서는 '원본에서 벗어난 정도'를 재는 자로 재사용되고, β를 곱해 벌점이 됩니다."
+        explanation="D(p‖q) = 초과 비트(5부 5장). RLHF에서는 '원본에서 벗어난 정도'를 재는 자로 재사용되고, β를 곱해 벌점이 됩니다."
       />
       <!-- 어려움 -->
       <Quiz
         difficulty="hard"
-        question="KL(π‖π_ref) 방향(π가 앞)이 목줄로 알맞은 이유는? (5부 6장의 비대칭 회수)"
+        question="KL(π‖π_ref) 방향(π가 앞)이 목줄로 알맞은 이유는? (5부 5장의 비대칭 회수)"
         :choices="['앞자리(π)가 자주 내는 답 위주로 재므로, 정책이 이상한 답을 자주 내는 순간 벌점이 커져서', 'KL은 대칭이라 방향이 무관해서', 'π_ref가 앞이면 계산이 불가능해서', '방향은 관례일 뿐 의미가 없어서']"
         :answer="0"
         :hints="['D(p‖q)는 p의 봉우리 위주로 잰다고 했죠.']"

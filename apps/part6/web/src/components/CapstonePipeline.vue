@@ -115,7 +115,7 @@ const finalStyle = computed(() => (picked.value === null ? '' : CANDIDATES[picke
     <!-- 단계 3: DPO 완료 -->
     <template v-else>
       <p class="mb-1 text-sm font-bold text-slate-800">④ DPO — 당신의 선호를 가중치에 새기기</p>
-      <p class="mb-2 text-xs text-slate-400">🔧 사용한 수학: −log σ(숨은 점수 마진) + KL 목줄 내장 (ch6~7 · 5부 6장)</p>
+      <p class="mb-2 text-xs text-slate-400">🔧 사용한 수학: −log σ(숨은 점수 마진) + KL 목줄 내장 (ch6~7 · 5부 5장)</p>
       <div class="rounded-lg border border-emerald-200 bg-emerald-50 p-3">
         <p class="mb-1 text-[11px] font-semibold text-emerald-500">💬 조련 완료 — 당신의 챗봇의 응답 ({{ finalStyle }})</p>
         <p class="text-sm leading-relaxed text-slate-800">{{ finalAnswer }}</p>

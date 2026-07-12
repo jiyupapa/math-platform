@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 7장 — DPO: 보상 모델 없이 조련하기. RLHF 수식을 접으면 나오는 지름길.
-// 회수하는 수학: 5부 6장(KL — 수식에 내장) · 2부 7장(시그모이드) · 4장 Bradley-Terry 재사용.
+// 회수하는 수학: 5부 5장(KL — 수식에 내장) · 2부 7장(시그모이드) · 4장 Bradley-Terry 재사용.
 import { ConceptCard, PartLink } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
@@ -142,8 +142,8 @@ function onSetComplete() {
       동전의 양면"이라는 감각만 가져가면 충분해요.
     </DetailsCard>
 
-    <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 5부 6장 · 2부 7장">
-      <b><PartLink :part="5" ch="ch6">5부 6장</PartLink></b>: KL 목줄 — 사라진 게 아니라 숨은 점수의 β·log(π/π<sub>ref</sub>) 안으로 접혀 들어감.
+    <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 5부 5장 · 2부 7장">
+      <b><PartLink :part="5" ch="ch5">5부 5장</PartLink></b>: KL 목줄 — 사라진 게 아니라 숨은 점수의 β·log(π/π<sub>ref</sub>) 안으로 접혀 들어감.
       <b><PartLink :part="2" ch="ch7">2부 7장</PartLink></b>: 시그모이드 — 4장 Bradley-Terry 그대로 재사용.
       그리고 <b>−log(정답 확률)</b> 이 사전학습·SFT·보상 모델에 이어 <b>네 번째로 등장</b>했습니다.
       이 시리즈의 결론이 미리 보이죠 — 조련의 수학은 결국 몇 개의 부품이 계속 재조립되는 것.

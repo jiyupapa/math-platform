@@ -239,7 +239,7 @@ function onSetComplete() {
         </li>
         <li>
           "데이터가 많을수록 AI 가 좋아진다"의 통계적 근거도 같은 원리 — 표본이 클수록
-          추정(학습)의 오차가 <MathBlock inline expr="\sqrt{n}" /> 꼴로 줄어듭니다.
+          추정(학습)의 오차가 <MathBlock inline expr="1/\sqrt{n}" /> 꼴로 줄어듭니다.
         </li>
       </ul>
     </ConceptCard>

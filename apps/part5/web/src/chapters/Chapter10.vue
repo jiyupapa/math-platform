@@ -37,7 +37,7 @@ function onSetComplete() {
     <h1 class="mb-4 text-3xl font-bold">🎓 캡스톤 — 손실함수를 갈아 끼우다</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       마지막 챕터입니다. 새 개념은 없어요 — 지금까지 만든 도구 전부를 들고
-      <b>두 개의 실험</b>을 완수합니다. 1부에서 시작된 5부작 시리즈의 복선이
+      <b>두 개의 실험</b>을 완수합니다. 1부에서 시작된 시리즈의 복선이
       여기서 전부 회수됩니다.
     </p>
 

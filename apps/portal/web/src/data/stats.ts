@@ -10,7 +10,7 @@ export interface Stat {
 }
 
 export const stats: Stat[] = [
-  { value: '85', label: '학습 챕터', sub: '8부작 · 선형대수→LLM 조련→최적화' },
+  { value: '85', label: '학습 챕터', sub: '8부 완결·9부 제작 중 · 선형대수→LLM 조련→최적화' },
   { value: '1,000+', label: '자동채점 문항', sub: '즉시 채점 + 단계별 해설' },
   { value: '95', label: '실습 노트북', sub: '웹 챕터 ↔ Jupyter 1:1' },
   { value: '₩0', label: '운영비', sub: '로컬 AI 튜터 · 오프라인' },

@@ -238,7 +238,7 @@ function onSetComplete() {
       <p class="font-semibold text-emerald-800">5장 완료 — 정답 없이 배우는 법을 얻었어요!</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 6장 — 재료를 전부 조립하는 RLHF. 그리고 폭주를 막는 KL 목줄에서
-        5부 6장의 KL 발산이 주인공으로 돌아옵니다.
+        5부 5장의 KL 발산이 주인공으로 돌아옵니다.
       </p>
       <RouterLink
         to="/ch/ch6"
