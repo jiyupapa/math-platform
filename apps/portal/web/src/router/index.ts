@@ -5,6 +5,8 @@ const routes: RouteRecordRaw[] = [
   { path: '/', name: 'home', component: HomeView },
   // 진단 화면은 다음 단계에서 구현 — 지금은 안내 스텁
   { path: '/diagnose', name: 'diagnose', component: () => import('../views/DiagnoseView.vue') },
+  // 학습 구조도 — 스윔레인 보드 (?node= 딥링크)
+  { path: '/map', name: 'map', component: () => import('../views/StructureView.vue') },
 ]
 
 const router = createRouter({

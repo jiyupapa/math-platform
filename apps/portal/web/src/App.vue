@@ -8,9 +8,14 @@ import { RouterView, RouterLink } from 'vue-router'
     <header class="border-b border-slate-200 bg-white/80 backdrop-blur">
       <div class="mx-auto flex max-w-3xl items-center justify-between px-5 py-3">
         <RouterLink to="/" class="font-bold text-indigo-700">수포자 사관학교</RouterLink>
-        <RouterLink to="/diagnose" class="text-sm font-medium text-indigo-600 hover:underline">
-          경로 진단
-        </RouterLink>
+        <nav class="flex items-center gap-4">
+          <RouterLink to="/map" class="text-sm font-medium text-slate-600 hover:text-indigo-600 hover:underline">
+            학습 구조도
+          </RouterLink>
+          <RouterLink to="/diagnose" class="text-sm font-medium text-indigo-600 hover:underline">
+            경로 진단
+          </RouterLink>
+        </nav>
       </div>
     </header>
     <RouterView />
