@@ -29,8 +29,7 @@ function onSetComplete() {
     </p>
 
     <ConceptCard tone="goal" title="이 챕터의 목표">
-      ① <b><PartLink :part="4" ch="ch9">4부 9장</PartLink></b>의 softmax 를 그대로 계산하면
-      왜 터지는지, ② 답을 바꾸지 않고 살리는 <b>max 빼기</b>(이동 불변성)의 원리,
+      ① <b>4부 9장</b>의 softmax 를 그대로 계산하면 왜 터지는지, ② 답을 바꾸지 않고 살리는 <b>max 빼기</b>(이동 불변성)의 원리,
       ③ 그리고 확률의 곱을 log 의 합으로 바꾸는 <b>log-sum-exp</b> — LLM 이 훈련·평가 내내
       확률이 아닌 <b>log 확률</b>로 일하는 이유를 손에 넣습니다.
     </ConceptCard>
@@ -92,7 +91,7 @@ function onSetComplete() {
         <li>
           <b>log 확률</b> (log-probability) — 읽는 법: 로그 프로버빌리티. 뜻: 확률 대신 그
           log 를 갖고 다니는 것 — 곱셈이 덧셈이 되고 언더플로가 사라집니다. 훈련 loss(−log p,
-          <b><PartLink :part="5" ch="ch4">5부 4장</PartLink></b>)가 애초에 이 세계의 값.
+          <b>5부 4장</b>)가 애초에 이 세계의 값.
         </li>
       </ul>
     </ConceptCard>

@@ -17,8 +17,8 @@ const chapter = computed(() => chapters.find((c) => c.slug === route.params.slug
       {{ chapter ? `Phase ${chapter.phase} · ${chapter.summary}` : '곧 만나요!' }}
     </p>
     <p class="mb-8 text-sm text-slate-400">
-      9부는 지금 만드는 중입니다. 목차의 로드맵은 확정돼 있고, 챕터가 공개되면 바로 여기서 학습할 수 있어요.
-      그동안 2부 7장(지수·로그)이나 5부 1~2장(비트·압축)을 다지고 오면 더 잘 읽힙니다.
+      존재하지 않는 챕터 주소예요. 9부는 전 챕터(워밍업 + 1~11장) 공개 완료 —
+      목차에서 골라 바로 학습할 수 있습니다.
     </p>
     <RouterLink
       to="/"

@@ -105,14 +105,23 @@ const GLOSSARY = [
       </table>
     </div>
 
+    <p class="mt-6 mb-1 text-sm font-semibold text-slate-500">🔎 잠깐 확인!</p>
+    <Quiz
+      question="모델 카드의 'weights stored in bf16' 한 줄을 9부의 비유로 옮기면?"
+      :choices="['반쪽 자 — 자 길이는 fp32와 같게(지수 8비트) 유지한 2바이트 칸에 담았다', '가중치를 16개의 블록으로 잘랐다', '눈금 없는 자를 썼다', '16진수로 저장했다']"
+      :answer="0"
+      :hints="['치환표에서 반쪽 자 행을 보세요 — bf16의 철학은 눈금과 자 길이 중 어느 쪽?']"
+      explanation="7장의 그 갈림길 — bf16은 자 길이(범위)를 지킨 반쪽 자입니다. 치환표가 있으면 실무 문서의 어느 문장이든 그림으로 되읽을 수 있어요."
+    />
+
     <DetailsCard title="➕ 더 깊이: GQA — KV 다이어트, 그리고 훈련의 몸무게">
       정산기의 KV 공식은 고전(멀티헤드 그대로) 기준입니다 — 최근 모델들은 <b>GQA</b>(grouped-query
       attention)로 여러 쿼리 헤드가 K·V 를 <b>공유</b>하게 해 KV 캐시를 4~8분의 1로 줄여요
       (같은 8GB 로 훨씬 긴 문맥이 도는 이유). 반대 방향의 몸무게도 이제 읽힙니다 — <b>훈련</b>은
       7장에서 본 대로 파라미터당 ≈16바이트(fp16 사본 + fp32 원본 + Adam 의 m·v + gradient)라
       7B 훈련에 ≈105GB — <b>추론(4GB)의 25배</b>. "파인튜닝은 클라우드, 추론은 내 PC"라는
-      실무 구도의 산수가 이것입니다(살짝만 조련하는 LoRA — <PartLink :part="6" ch="ch8">6부
-      8장</PartLink> — 가 사랑받는 이유이기도).
+      실무 구도의 산수가 이것입니다(살짝만 조련하는 LoRA — <b>6부 8장</b> — 가 사랑받는
+      이유이기도).
     </DetailsCard>
 
     <ConceptCard tone="ai" title="🤖 AI 연결 — 지금 이 튜터가 오늘의 수학입니다">

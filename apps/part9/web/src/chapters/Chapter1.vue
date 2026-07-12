@@ -43,7 +43,7 @@ const ITINERARY = [
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. "7B"의 B — 뭐가 70억 개라는 걸까</h2>
     <p class="leading-relaxed text-slate-700">
-      <b><PartLink :part="4" ch="ch10">4부 10장</PartLink></b>에서 GPT 를 조립하며 봤듯,
+      <b>4부 10장</b>에서 GPT 를 조립하며 봤듯,
       모델의 실체는 <b>숫자가 가득한 행렬(표)들의 묶음</b>입니다 — 단어장(임베딩 표),
       블록마다 들어 있는 어텐션의 Q·K·V·O 행렬, 그리고 FFN 의 "넓혔다 좁히기" 행렬 두 장.
       그 표들에 든 숫자 하나하나가 <b>파라미터</b>(가중치)이고, 7B는 그 개수가 약 70억이라는
