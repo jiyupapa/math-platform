@@ -180,8 +180,10 @@ function onSetComplete() {
     <h2 class="mt-8 mb-2 text-xl font-bold">6. 여론조사 읽는 법 — ±3.1%p 직접 계산</h2>
     <ReviewFlag id="ch8-s6" chapter="ch8" label="6. 여론조사 오차범위 계산" />
     <p class="leading-relaxed text-slate-700">
-      지지율 같은 비율 조사에서 비율의 표준오차는 <MathBlock inline expr="\sqrt{p(1-p)/n}" /> 입니다
-      (5장 이항분포의 흔들림에서 나오는 값이에요). 조사기관은 가장 오차가 커지는
+      지지율 같은 비율 조사에서 비율의 표준오차는 <MathBlock inline expr="\sqrt{p(1-p)/n}" /> 입니다.
+      5장에서 <b>성공 횟수의 분산이 <MathBlock inline expr="np(1-p)" /></b> 였죠 — 이걸 비율(전체
+      <MathBlock inline expr="n" /> 으로 나눈 몫)의 흔들림으로 옮기면 분산이 <MathBlock inline expr="p(1-p)/n" /> 이
+      되고, 그 제곱근이 표준오차예요. 조사기관은 가장 오차가 커지는
       <MathBlock inline expr="p = 0.5" /> 로 놓고 계산합니다. 뉴스 단골 숫자 n=1,000 을 넣어
       직접 구해 보세요:
     </p>

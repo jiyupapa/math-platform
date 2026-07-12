@@ -100,9 +100,10 @@ function onSetComplete() {
       그래서 "겹치기" 대신 <b>"한없이 가까이 보내기"</b>라는 우회로가 필요해요. 그게 극한입니다.
     </ConceptCard>
 
-    <ConceptCard tone="note" title="새 용어 — 순간변화율">
+    <ConceptCard tone="note" title="새 용어 — 순간변화율 / 접선">
       <b>순간변화율(instantaneous rate of change)</b>: 바로 그 <b>한 점</b>에서의 변화율.
-      기하학적으로는 그 점 <b>접선의 기울기</b>이고, 이것이 곧 <b>미분값</b>입니다.
+      기하학적으로는 그 점 <b>접선</b>(곡선에 그 점에서 살짝 닿기만 하는 직선 — 할선의 두 점을 한없이
+      가까이 붙였을 때의 극한이에요)<b>의 기울기</b>이고, 이것이 곧 <b>미분값</b>입니다.
     </ConceptCard>
 
     <!-- 3. 극한 -->
