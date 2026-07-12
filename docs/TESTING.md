@@ -176,13 +176,13 @@ npm run build --workspaces --if-present
 🪟 **cmd** (한 줄 붙여넣기 — `call` 필수: npm 은 `npm.cmd` 라 안 붙이면 첫 앱에서 멈춘다):
 
 ```cmd
-for %a in (part1 part2 part3 part4 part5 part6 part7 part8 portal) do @echo [%a] & call npm run build -w apps/%a/web
+for %a in (part1 part2 part3 part4 part5 part6 part7 part8 part9 portal) do @echo [%a] & call npm run build -w apps/%a/web
 ```
 
 **PowerShell**:
 
 ```powershell
-foreach ($a in 'part1','part2','part3','part4','part5','part6','part7','part8','portal') {
+foreach ($a in 'part1','part2','part3','part4','part5','part6','part7','part8','part9','portal') {
   Write-Host "=== $a ===" -ForegroundColor Cyan
   npm run build -w "apps/$a/web"
 }
@@ -198,18 +198,18 @@ foreach ($a in 'part1','part2','part3','part4','part5','part6','part7','part8','
   `@source '../../../../packages/ui/src';` 줄이 있어야 한다. **이 실패는 `npm run build` 가 못 잡는다**(타입은 통과, 스타일만 누락) → 반드시 눈으로 확인.
 - **`Cannot find module '@series/ui'`** — 루트에서 `npm install` 을 다시 실행(워크스페이스 링크 재생성).
 - **`Failed to resolve ... .vue`** 또는 패키지 컴포넌트가 안 뜸 — 해당 앱 `vite.config.ts` 에
-  `optimizeDeps: { exclude: [...] }` 가 있는지 확인 (전 8부 + 포털 = `['@series/ui', '@series/tutor']`).
+  `optimizeDeps: { exclude: [...] }` 가 있는지 확인 (전 9부 + 포털 = `['@series/ui', '@series/tutor']`).
 - **진도/복습이 새로고침 후 사라진다** — 각 부 `web/src/main.ts` 의 `app.provide(storagePrefixKey, '...')`
   와 `reviewApiKey` 주입이 있는지 확인. 접두사는 부마다 고정: part1=`la`, part2=`diff`, part3=`stat`, part4=`tf`, part5=`it`,
-  part6=`tame`, part7=`emb`, part8=`opt`, portal=`hub`. **바꾸면 기존 진도가 끊긴다(포털 연동 포함).**
+  part6=`tame`, part7=`emb`, part8=`opt`, part9=`num`, portal=`hub`. **바꾸면 기존 진도가 끊긴다(포털 연동 포함).**
 - **타입 에러 `... is declared but never used`** — `noUnusedLocals` 규칙. 미사용 import/변수 제거.
 
 ---
 
 ## 부록: 현재 상태
 
-- 구조: `apps/part1..8` + `apps/portal` + `packages/ui`(공용 컴포넌트 10종: MathBlock·ConceptCard·DetailsCard·ChartView·NotebookCard·ReviewFlag·PartLink·Quiz·StepQuiz·QuizSet + quizGroup 그룹계약 + injection) + `packages/tutor`(AI 튜터 Ollama 클라이언트).
+- 구조: `apps/part1..9` + `apps/portal` + `packages/ui`(공용 컴포넌트 10종: MathBlock·ConceptCard·DetailsCard·ChartView·NotebookCard·ReviewFlag·PartLink·Quiz·StepQuiz·QuizSet + quizGroup 그룹계약 + injection) + `packages/tutor`(AI 튜터 Ollama 클라이언트).
 - 결합해제 주입 계약: `storagePrefixKey`(QuizSet 접두사) · `reviewApiKey`(ReviewFlag) · `notebookResolverKey`(NotebookCard).
-- 검증됨(빌드): 전 8부 + 포털 `vue-tsc + vite` 통과, Tailwind `@source` 로 패키지 클래스 생성 전 부 확인.
+- 검증됨(빌드): 전 9부 + 포털 `vue-tsc + vite` 통과, Tailwind `@source` 로 패키지 클래스 생성 전 부 확인.
 - 미검증(이 문서의 2절이 그 확인 절차): 런타임 동작(퀴즈·진도·복습·튜터).
 - 커밋 되돌림 지점: `b3e3a00`(baseline) → `71c1aff`(trial) → `deaed16`(패키지 완성) → `b0ee776`(2~5부 전파).
