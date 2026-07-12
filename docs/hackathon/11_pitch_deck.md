@@ -3,7 +3,8 @@
 > ✅ **pptx 갱신 완료 (2026-07-12)** — 이 구성안 기준으로 `11_pitch_deck.pptx` 를 플랫폼 프레임
 > 10장으로 재생성했다(발표자 노트 포함). 내용을 고치려면 **`scripts/build-pitch-deck.py` 를 수정
 > 후 재실행**(pptx 직접 편집보다 이쪽이 정본 — 사용법은 스크립트 헤더). 임베드된 실물 스크린샷은
-> `assets/`(재촬영은 `scripts/shoot-deck-assets.mjs`). 잔여: 슬라이드 ⑨ QR(호스트 확정 후).
+> `assets/`(재촬영은 `scripts/shoot-deck-assets.mjs`). **리허설용 슬라이드 렌더는 `slides/`**
+> (slide01~10.png — 덱 재생성 후 `scripts/render-deck.ps1` 로 갱신). 잔여: 슬라이드 ⑨ QR(호스트 확정 후).
 > 청중 = **비전문가 임원**(11.5~11.21 심사), 테마 = "AI 강사 추천".
 > 원칙: 슬라이드는 그림·숫자, 말은 이야기 — 수식 0장.
 
