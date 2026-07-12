@@ -26,6 +26,9 @@ export interface PathStep {
   scope: string
   /** 이 단계의 챕터 수 */
   chapterCount: number
+  /** 진도 계산용 — 이 단계가 실제로 다루는 (부, 챕터 슬러그). 부를 쪼갠 단계·여러 부에 걸친
+   *  심화 단계를 정확히 반영한다. scope/chapterCount 를 바꾸면 함께 갱신할 것. */
+  segments: { part: PartId; slugs: string[] }[]
   /** 예상 소요시간(분) */
   minutes: number
   /** minutes 가 추정치면 true */
@@ -44,60 +47,75 @@ export interface PathStep {
   comingSoon?: boolean
 }
 
+// 진도 계산용 슬러그 헬퍼 (ch{from} … ch{to})
+const ch = (from: number, to: number): string[] =>
+  Array.from({ length: to - from + 1 }, (_, i) => `ch${from + i}`)
+
 export const pathSteps: PathStep[] = [
   {
     order: 1, part: 1, title: '1부 전반 — 벡터·행렬', scope: 'ch1~6',
-    chapterCount: 6, minutes: 260, role: '토대', gate: 'vector',
+    chapterCount: 6, segments: [{ part: 1, slugs: ch(1, 6) }],
+    minutes: 260, role: '토대', gate: 'vector',
     gain: '단어가 벡터가 되고, 행렬곱이 변환이다',
   },
   {
     order: 2, part: 3, title: '3부 전반 — 확률의 언어', scope: 'ch1~7',
-    chapterCount: 7, minutes: 280, role: '토대', gate: 'prob',
+    chapterCount: 7, segments: [{ part: 3, slugs: ch(1, 7) }],
+    minutes: 280, role: '토대', gate: 'prob',
     gain: 'LLM = 다음 단어를 확률로 고르는 기계',
   },
   {
     order: 3, part: 4, title: '4부 추론편 — LLM이 글을 쓰는 법', scope: 'ch1~10, 12',
-    chapterCount: 11, minutes: 450, role: '조립',
+    chapterCount: 11, segments: [{ part: 4, slugs: [...ch(1, 10), 'ch12'] }],
+    minutes: 450, role: '조립',
     gain: '시리즈의 보상 지점 — 어텐션·확률이 실제로 쓰인다',
   },
   {
     order: 4, part: 2, title: '2부 전체 — 미분', scope: 'ch1~10',
-    chapterCount: 10, minutes: 400, role: '토대', gate: 'calculus', compressOnly: true,
+    chapterCount: 10, segments: [{ part: 2, slugs: ch(1, 10) }],
+    minutes: 400, role: '토대', gate: 'calculus', compressOnly: true,
     gain: '모델이 학습하는 원리 — 경사하강·역전파',
   },
   {
     order: 5, part: 4, title: '4부 학습편 — 손실과 경사하강', scope: 'ch11',
-    chapterCount: 1, minutes: 45, role: '조립',
+    chapterCount: 1, segments: [{ part: 4, slugs: ['ch11'] }],
+    minutes: 45, role: '조립',
     gain: '2부 미분이 트랜스포머 학습에 그대로 꽂힌다',
   },
   {
     order: 6, part: 5, title: '5부 전체 — 정보이론', scope: 'ch1~10',
-    chapterCount: 10, minutes: 395, role: '본체', gate: 'log',
+    chapterCount: 10, segments: [{ part: 5, slugs: ch(1, 10) }],
+    minutes: 395, role: '본체', gate: 'log',
     gain: '손실함수·퍼플렉시티·temperature의 본체',
   },
   {
     order: 7, part: 6, title: '6부 전체 — LLM 조련', scope: 'ch1~10',
-    chapterCount: 10, minutes: 410, role: '조련',
+    chapterCount: 10, segments: [{ part: 6, slugs: ch(1, 10) }],
+    minutes: 410, role: '조련',
     gain: 'GPT가 ChatGPT가 되기까지 — SFT·RLHF·DPO',
   },
   {
     order: 8, part: 1, title: '(선택) 후반 심화 — 1부·3부', scope: '1부 ch7~12 · 3부 ch8~10',
-    chapterCount: 9, minutes: 375, role: '심화', optional: true,
+    chapterCount: 9, segments: [{ part: 1, slugs: ch(7, 12) }, { part: 3, slugs: ch(8, 10) }],
+    minutes: 375, role: '심화', optional: true,
     gain: '고유값·SVD·PCA·검정·회귀 — 교양·심화',
   },
   {
     order: 9, part: 7, title: '(선택·실용) 7부 — 임베딩 기하학', scope: 'ch1~10',
-    chapterCount: 10, minutes: 420, role: '실용', optional: true,
+    chapterCount: 10, segments: [{ part: 7, slugs: ch(1, 10) }],
+    minutes: 420, role: '실용', optional: true,
     gain: 'RAG의 수학 — 1부 전반만 마치면 언제든 진입 가능',
   },
   {
     order: 10, part: 8, title: '(선택·심화) 8부 — 최적화', scope: 'ch1~11',
-    chapterCount: 11, minutes: 460, role: '심화', optional: true,
+    chapterCount: 11, segments: [{ part: 8, slugs: ch(1, 11) }],
+    minutes: 460, role: '심화', optional: true,
     gain: '학습을 지배하는 다이얼 — 파인튜닝 설정 완독 (2부 직후 진입 가능)',
   },
   {
     order: 11, part: 9, title: '(선택·실용) 9부 — 수치 계산', scope: '제작 중',
-    chapterCount: 11, minutes: 455, estimate: true, role: '실용', optional: true, comingSoon: true,
+    chapterCount: 11, segments: [{ part: 9, slugs: ch(1, 11) }],
+    minutes: 455, estimate: true, role: '실용', optional: true, comingSoon: true,
     gain: '7B는 왜 4GB인가 — 비트·부동소수점·양자화·GGUF, 내 PC에 맞는 모델 고르기',
   },
 ]

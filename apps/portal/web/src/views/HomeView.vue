@@ -4,7 +4,7 @@ import { RouterLink } from 'vue-router'
 import { pathSteps, totalChapters, totalHours, type StepRole } from '../data/curriculum'
 import { loadDiagnosis, loadBaseline, clearDiagnosis, confidenceAvg } from '../data/useDiagnosis'
 import { recommend, type StepStatus } from '../data/recommend'
-import { readAllProgress } from '../data/useProgress'
+import { readAllProgress, readStepProgress } from '../data/useProgress'
 import { readInsights } from '../data/insights'
 import { explainTemplate } from '../data/explain'
 import { diagnosisMetrics } from '../data/metrics'
@@ -32,6 +32,8 @@ const statusStyle: Record<StepStatus, { label: string; badge: string; dim: boole
 }
 
 const progress = readAllProgress() // 2층 — 각 부 진도(같은 origin 배포본에서 통합)
+// 단계별 진도 — 부를 쪼갠 단계·여러 부에 걸친 심화 단계를 실제 챕터 슬러그로 계산(부 전체 진도 아님)
+const stepProg = new Map(pathSteps.map((s) => [s.order, readStepProgress(s.segments)]))
 const insights = readInsights() // 2층 고도화 — 복습 먼저 · 심화 해금
 const diagnosis = ref(loadDiagnosis())
 const rec = computed(() => {
@@ -56,7 +58,7 @@ const rows = computed(() =>
     href: step.comingSoon ? null : `/part${step.part}/`,
     status: rec.value ? rec.value.plan[i].status : null,
     note: rec.value ? rec.value.plan[i].note : undefined,
-    prog: progress[step.part] ?? null,
+    prog: stepProg.get(step.order) ?? null,
   })),
 )
 
@@ -149,7 +151,7 @@ function reset() {
           <p class="text-xs font-semibold text-indigo-600">{{ anyProgress ? '이어서 학습' : '여기서 시작' }}</p>
           <p class="font-semibold text-slate-900">{{ nextStop.step.title }}</p>
           <p v-if="nextStop.prog && nextStop.prog.completed > 0" class="text-xs text-slate-400">
-            이 부 진도 {{ nextStop.prog.completed }}/{{ nextStop.prog.total }}
+            이 단계 진도 {{ nextStop.prog.completed }}/{{ nextStop.prog.total }}
           </p>
         </div>
         <span class="shrink-0 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white">가기 →</span>

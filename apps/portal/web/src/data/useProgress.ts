@@ -71,6 +71,26 @@ export function readAllProgress(): Record<number, PartProgress> {
   return out
 }
 
+/** 한 단계가 실제로 다루는 (부, 슬러그)만의 진도 — 부를 쪼갠 단계(4부 추론/학습편)·여러 부에
+ *  걸친 심화 단계(1부·3부 후반)를 실제 완료 챕터로 정확히 계산한다. */
+export function readStepProgress(segments: { part: number; slugs: string[] }[]): PartProgress {
+  let completed = 0
+  let total = 0
+  for (const seg of segments) {
+    total += seg.slugs.length
+    const meta = PART_META.find((m) => m.part === seg.part)
+    if (!meta) continue
+    const done = readCompletedSlugs(meta)
+    completed += seg.slugs.filter((s) => done.has(s)).length
+  }
+  return {
+    part: segments[0]?.part ?? 0,
+    completed,
+    total,
+    percent: total === 0 ? 0 : Math.round((completed / total) * 100),
+  }
+}
+
 export interface ReviewBookmark {
   id: string
   chapter: string
