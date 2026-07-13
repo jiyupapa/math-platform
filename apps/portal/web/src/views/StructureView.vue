@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// 학습 구조도 — 스윔레인 보드 (열 = 학습 국면, 행 = 트랙, 노드 = 경로 단계).
+// 학습 구조도 — 피봇 보드 (행 = 학습 국면 위→아래, 열 = 트랙 왼→오, 노드 = 경로 단계).
 // 상태는 실데이터에서: 진도(2층 useProgress) + 진단(recommend 규칙 엔진).
 // 노드 클릭 → 하단 상세 패널, URL ?node= 동기화 (공유 가능한 딥링크).
 import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue'
@@ -104,6 +104,14 @@ const viewOf = (id: string) => nodeView.value.find((v) => v.node.id === id)!
 // ── 보기 모드 (전체 구조도 / 핵심 흐름) ──────────────────────────────────────
 const mode = ref<'full' | 'core'>('full')
 const visibleLanes = computed(() => lanes.filter((l) => mode.value === 'full' || !l.optional))
+// 그리드 열 = 레인 축(핵심 흐름 모드에선 core 하나). minmax(0,..) + 카드 flex-1 로 창 폭에 맞춰 줄어들어
+// 가로 스크롤이 생기지 않는다. core 레인은 1.5fr 로 넓게 잡아 병렬 토대(S1·S2)가 나란히 들어간다.
+const gridCols = computed(
+  () =>
+    `108px ${visibleLanes.value
+      .map((l) => (l.id === 'core' ? 'minmax(0, 1.5fr)' : 'minmax(0, 1fr)'))
+      .join(' ')}`,
+)
 const hiddenNodeIds = computed(() => {
   const shown = new Set(visibleLanes.value.map((l) => l.id))
   return new Set(nodes.filter((n) => !shown.has(n.lane)).map((n) => n.id))
@@ -119,27 +127,28 @@ function setNodeEl(id: string, el: unknown) {
   else delete nodeEls[id]
 }
 const svgSize = ref({ w: 0, h: 0 })
-const paths = ref<{ d: string; kind: 'flow' | 'entry' }[]>([])
+const paths = ref<{ d: string; kind: 'flow' | 'entry'; from: string; to: string }[]>([])
 
 function measure() {
   const board = boardEl.value
   if (!board) return
   const base = board.getBoundingClientRect()
-  const pos: Record<string, { l: number; r: number; cy: number }> = {}
+  const pos: Record<string, { t: number; b: number; cx: number }> = {}
   for (const [id, el] of Object.entries(nodeEls)) {
     if (hiddenNodeIds.value.has(id)) continue
     const r = el.getBoundingClientRect()
-    pos[id] = { l: r.left - base.left, r: r.right - base.left, cy: r.top - base.top + r.height / 2 }
+    pos[id] = { t: r.top - base.top, b: r.bottom - base.top, cx: r.left - base.left + r.width / 2 }
   }
   svgSize.value = { w: board.scrollWidth, h: board.scrollHeight }
+  // 국면이 세로축 — 흐름은 위→아래. 출발 노드 아래에서 행 사이 여백(my)까지 내려가
+  // 도착 열(cx)로 가로 이동한 뒤 도착 노드 위로 진입. entry(선택 분기)는 색·점선으로만 구분한다.
   paths.value = edges
     .filter((e) => pos[e.from] && pos[e.to])
     .map((e) => {
       const a = pos[e.from]
       const b = pos[e.to]
-      // entry(분기)는 출발 직후 내려가 빈 레인을 따라 이동 — 노드 위를 덜 가로지른다
-      const mx = e.kind === 'entry' ? a.r + 22 : a.r + (b.l - a.r) / 2
-      return { d: `M ${a.r} ${a.cy} L ${mx} ${a.cy} L ${mx} ${b.cy} L ${b.l - 3} ${b.cy}`, kind: e.kind }
+      const my = a.b + (b.t - a.b) / 2
+      return { d: `M ${a.cx} ${a.b} L ${a.cx} ${my} L ${b.cx} ${my} L ${b.cx} ${b.t - 3}`, kind: e.kind, from: e.from, to: e.to }
     })
 }
 
@@ -156,18 +165,23 @@ watch(mode, () => void remeasure())
 
 // ── 선택 + URL 동기화 (?node=step3) ──────────────────────────────────────────
 const selected = ref<string | null>(null)
-const detailEl = ref<HTMLElement | null>(null)
+// 선택 노드에 연결된 간선을 강조(인디고) + 나머지는 흐리게. active 를 뒤로 정렬해 SVG 상 위에 그린다.
+const renderPaths = computed(() => {
+  const sel = selected.value
+  return paths.value
+    .map((p) => {
+      const on = !!sel && (p.from === sel || p.to === sel)
+      return { ...p, active: on, dim: !!sel && !on }
+    })
+    .sort((a, b) => Number(a.active) - Number(b.active))
+})
 onMounted(() => {
   const q = route.query.node
   if (typeof q === 'string' && nodes.some((n) => n.id === q)) selected.value = q
 })
-watch(selected, async (id) => {
+watch(selected, (id) => {
+  // URL 동기화만 — 상세 패널로 스크롤 포커스는 옮기지 않는다(선택 시 지도에서 시선 유지).
   void router.replace({ query: id ? { node: id } : {} })
-  // 보드가 화면을 다 차지하면 아래 상세 패널이 안 보인다 — 선택 시 시야로 끌어온다
-  if (id) {
-    await nextTick()
-    detailEl.value?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
-  }
 })
 const detail = computed(() => {
   if (!selected.value) return null
@@ -204,7 +218,7 @@ const legend: { tone: Tone; label: string }[] = [
       <div>
         <h1 class="text-2xl font-bold text-slate-900">학습 구조도</h1>
         <p class="mt-1 text-sm text-slate-500">
-          열은 학습 국면, 행은 트랙 — 필수 경로는 실선, 선택 분기는 점선으로 진입합니다.
+          세로는 학습 국면(위→아래), 가로는 트랙 — 필수 경로는 실선, 선택 분기는 점선으로 진입합니다.
           노드를 누르면 아래에 상세가 열립니다.
         </p>
       </div>
@@ -259,7 +273,7 @@ const legend: { tone: Tone; label: string }[] = [
 
     <!-- 보드 -->
     <div class="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
-      <div ref="boardEl" class="relative min-w-[1120px] p-4">
+      <div ref="boardEl" class="relative p-4">
         <svg
           class="pointer-events-none absolute left-0 top-0"
           :width="svgSize.w"
@@ -273,50 +287,53 @@ const legend: { tone: Tone; label: string }[] = [
             <marker id="arrow-entry" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
               <path d="M0,0.8 L7.2,4 L0,7.2 Z" fill="#14b8a6" />
             </marker>
+            <marker id="arrow-active" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+              <path d="M0,0.8 L7.2,4 L0,7.2 Z" fill="#6366f1" />
+            </marker>
           </defs>
           <path
-            v-for="(p, i) in paths"
-            :key="i"
+            v-for="p in renderPaths"
+            :key="p.from + '-' + p.to"
             :d="p.d"
             fill="none"
-            :stroke="p.kind === 'flow' ? '#94a3b8' : '#14b8a6'"
-            :stroke-width="1.5"
+            :stroke="p.active ? '#6366f1' : p.kind === 'flow' ? '#94a3b8' : '#14b8a6'"
+            :stroke-width="p.active ? 2.5 : 1.5"
             :stroke-dasharray="p.kind === 'entry' ? '5 4' : undefined"
-            :marker-end="`url(#arrow-${p.kind})`"
-            :opacity="p.kind === 'entry' ? 0.85 : 1"
+            :marker-end="`url(#arrow-${p.active ? 'active' : p.kind})`"
+            :opacity="p.dim ? 0.25 : p.kind === 'entry' && !p.active ? 0.85 : 1"
           />
         </svg>
 
-        <div
-          class="grid gap-0"
-          :style="{ gridTemplateColumns: `92px repeat(${columns.length}, minmax(118px, 1fr))` }"
-        >
-          <!-- 헤더 행 -->
+        <div class="grid gap-0" :style="{ gridTemplateColumns: gridCols }">
+          <!-- 헤더 행: 모서리 + 레인(열) 헤더 -->
           <div class="border-b border-slate-200 pb-2 text-[11px] font-medium text-slate-400">
-            레인 ↓ · 국면 →
+            국면 ↓ · 레인 →
           </div>
-          <div v-for="c in columns" :key="c.id" class="border-b border-l border-slate-100 px-2 pb-2">
-            <p class="text-[11px] font-semibold text-slate-400">{{ c.id.toUpperCase() }}</p>
-            <p class="text-sm font-bold text-slate-800">{{ c.title }}</p>
-            <p class="text-[11px] text-slate-400">{{ c.sub }}</p>
+          <div
+            v-for="lane in visibleLanes"
+            :key="lane.id"
+            class="border-b border-l border-slate-100 px-2 pb-2"
+          >
+            <p class="text-center text-sm font-bold text-slate-800">{{ lane.title }}</p>
           </div>
 
-          <!-- 레인 행 -->
-          <template v-for="lane in visibleLanes" :key="lane.id">
-            <div class="border-b border-slate-100 py-3 pr-2 text-xs font-semibold text-slate-500">
-              {{ lane.title }}
+          <!-- 국면(행) — 왼쪽 라벨 + 레인별 셀 -->
+          <template v-for="c in columns" :key="c.id">
+            <div class="flex flex-col border-b border-slate-100 pt-3 pr-2">
+              <p class="text-sm font-bold text-slate-700">{{ c.title }}</p>
+              <p class="text-[11px] leading-tight text-slate-400">{{ c.sub }}</p>
             </div>
             <div
-              v-for="c in columns"
-              :key="lane.id + c.id"
-              class="min-h-[104px] space-y-2 border-b border-l border-slate-100 p-2"
+              v-for="lane in visibleLanes"
+              :key="c.id + lane.id"
+              class="flex min-h-[120px] flex-wrap content-start justify-center gap-2 border-b border-l border-slate-100 p-2"
             >
               <button
                 v-for="n in cellNodes(lane.id, c.id)"
                 :key="n.id"
                 :ref="(el) => setNodeEl(n.id, el)"
                 type="button"
-                class="block w-full rounded-lg border p-2 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow"
+                class="min-w-0 max-w-[132px] flex-1 rounded-lg border px-2 py-1.5 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow"
                 :class="[viewOf(n.id).style.card, selected === n.id ? 'outline outline-2 outline-indigo-500' : '']"
                 @click="selected = selected === n.id ? null : n.id"
               >
@@ -326,7 +343,7 @@ const legend: { tone: Tone; label: string }[] = [
                     {{ viewOf(n.id).state.badge }}
                   </span>
                 </div>
-                <p class="mt-1 text-[13px] font-bold leading-snug" :class="viewOf(n.id).style.title">
+                <p class="mt-0.5 text-[13px] font-bold leading-tight" :class="viewOf(n.id).style.title">
                   {{ viewOf(n.id).title }}
                 </p>
                 <p class="mt-0.5 truncate text-[11px] text-slate-400">{{ viewOf(n.id).meta }}</p>
@@ -344,7 +361,7 @@ const legend: { tone: Tone; label: string }[] = [
     </div>
 
     <!-- 상세 패널 -->
-    <section v-if="detail" ref="detailEl" class="mt-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+    <section v-if="detail" class="mt-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
       <div class="flex flex-wrap items-start justify-between gap-3">
         <div>
           <div class="mb-1 flex items-center gap-2">

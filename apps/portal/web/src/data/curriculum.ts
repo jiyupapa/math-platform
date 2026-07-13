@@ -1,22 +1,22 @@
-// 시리즈 12단계 비선형 학습 경로 — 포털이 소유하는 "경로 지도"의 단일 소스.
+// 시리즈 13단계 비선형 학습 경로 — 포털이 소유하는 "경로 지도"의 단일 소스.
 // 루트 README 의 추천 경로(1→2→3→4→5 순서가 아님)를 구조화한 것.
 // 진단 결과에 따라 각 단계를 '이미 앎/보류/빠른복습'으로 접는 개인화(recommend.ts, 다음 단계)의 대상이 된다.
 //
 // 챕터 수·소요시간:
-//   각 부 chapters.ts 의 minutes 실값 합 (6·7부 2026-07-11, 8·9부 2026-07-12, 10부 2026-07-13 전 챕터 공개 완료).
+//   각 부 chapters.ts 의 minutes 실값 합 (6·7부 2026-07-11, 8·9부 2026-07-12, 10·11부 2026-07-13 전 챕터 공개 완료).
 //   포털은 별도 앱이라 각 부 chapters.ts 를 직접 import 하지 않고 여기서 관리한다(향후 공용 패키지화 가능).
 //   ⚠️ 각 부 minutes 를 바꾸면 여기 합계도 갱신할 것.
 
-export type PartId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
+export type PartId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11
 
-/** 역할 묶음 — 토대(1·2·3) → 조립(4) → 본체(5) → 조련(6), 실용(7·9)·심화(8)·평가(10)는 선택 분기 */
-export type StepRole = '토대' | '조립' | '본체' | '조련' | '심화' | '실용' | '평가'
+/** 역할 묶음 — 토대(1·2·3) → 조립(4) → 본체(5) → 조련(6), 실용(7·9)·심화(8)·평가(10)·전략(11)은 선택 분기 */
+export type StepRole = '토대' | '조립' | '본체' | '조련' | '심화' | '실용' | '평가' | '전략'
 
 /** 진단 관문 — 통과 시 해당 단계를 접거나 복습 모드로 (recommend.ts 가 사용) */
 export type GateId = 'vector' | 'prob' | 'calculus' | 'log'
 
 export interface PathStep {
-  /** 경로상 순번 (1~12) */
+  /** 경로상 순번 (1~13) */
   order: number
   /** 링크 대상 앱(/part{part}/). comingSoon 단계는 링크 비활성 */
   part: PartId
@@ -123,6 +123,12 @@ export const pathSteps: PathStep[] = [
     chapterCount: 10, segments: [{ part: 10, slugs: ch(1, 10) }],
     minutes: 400, role: '평가', optional: true,
     gain: '키우면 얼마나 좋아지나(멱법칙·Chinchilla) + 그 점수를 믿어도 되나(오차범위·검정) — 3부 전반 뒤 언제든',
+  },
+  {
+    order: 13, part: 11, title: '(선택·전략) 11부 — 에이전트와 추론의 수학', scope: 'ch1~12',
+    chapterCount: 12, segments: [{ part: 11, slugs: ch(1, 12) }],
+    minutes: 460, role: '전략', optional: true,
+    gain: 'AI에게 일을 맡겨도 되나 — 사슬·재시도·검수(베이즈)·pass@k 로 도입 판단, 3부 전반 뒤 언제든(10부 6장 먼저면 더 좋음)',
   },
 ]
 

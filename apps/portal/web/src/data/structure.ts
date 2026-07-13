@@ -1,7 +1,8 @@
-// 학습 구조도(스윔레인 보드) 배치 데이터 — /map (StructureView) 전용.
-// 참조 형식: 열(게이트) = 학습 국면, 행(레인) = 트랙, 셀 = 단계 노드, 실선 = 필수 흐름,
-// 점선 = 선택 분기 진입. 노드 = curriculum.ts pathSteps(12단계) + 특수 노드(진단·완주).
-// 진입 조건 정본: 루트 README "추천 학습 경로" — 7부는 1단계 직후, 8·9부는 4단계(2부) 이후.
+// 학습 구조도(피봇 보드) 배치 데이터 — /map (StructureView) 전용.
+// 배치: 행(위→아래) = 학습 국면, 열(왼→오) = 트랙(레인), 셀 = 단계 노드,
+// 실선 = 필수 흐름(세로 진행), 점선 = 선택 분기 진입(가로→세로). 노드 = curriculum.ts pathSteps(13단계) + 특수 노드(진단·완주).
+// 선택 모듈(8~13)은 "해금되는 국면 행"에 배치 — 진입 조건 정본: 루트 README "추천 학습 경로" + 각 노드 prereqText.
+//   S8·S9·S12 = 1·2단계(토대 I) 직후 → 조립 I(c2) 행 · S10·S11·S13 = 4단계 또는 2단계 직후 → 조립 II(c4) 행.
 
 export interface BoardColumn {
   id: string
@@ -36,6 +37,7 @@ export interface BoardEdge {
   kind: 'flow' | 'entry'
 }
 
+// 국면(피벗 후 세로 행으로 렌더 — 위→아래 진행)
 export const columns: BoardColumn[] = [
   { id: 'c0', title: '진단', sub: '출발점 측정' },
   { id: 'c1', title: '토대 I', sub: '벡터 · 확률' },
@@ -44,14 +46,15 @@ export const columns: BoardColumn[] = [
   { id: 'c4', title: '조립 II', sub: '학습 원리' },
   { id: 'c5', title: '본체', sub: '정보이론' },
   { id: 'c6', title: '조련', sub: '사후 학습' },
-  { id: 'c7', title: '확장 · 완주', sub: '선택 분기' },
+  { id: 'c7', title: '완주', sub: '핵심 경로 완성' },
 ]
 
+// 트랙(피벗 후 가로 열로 렌더 — 왼쪽 필수, 오른쪽으로 선택)
 export const lanes: BoardLane[] = [
   { id: 'core', title: '필수 경로' },
   { id: 'deep', title: '선택 · 심화', optional: true },
   { id: 'prac', title: '선택 · 실용', optional: true },
-  { id: 'eval', title: '선택 · 평가', optional: true },
+  { id: 'eval', title: '선택 · 평가·전략', optional: true },
 ]
 
 export const nodes: BoardNode[] = [
@@ -64,11 +67,13 @@ export const nodes: BoardNode[] = [
   { id: 'step6', col: 'c5', lane: 'core', stepOrder: 6 },
   { id: 'step7', col: 'c6', lane: 'core', stepOrder: 7 },
   { id: 'finish', col: 'c7', lane: 'core', title: '🎓 핵심 경로 완주', sub: 'ChatGPT의 원리를 아는 사람' },
-  { id: 'step8', col: 'c7', lane: 'deep', stepOrder: 8, prereqText: '1단계(1부 전반) + 2단계(3부 전반)를 마치면 언제든' },
-  { id: 'step10', col: 'c7', lane: 'deep', stepOrder: 10, prereqText: '4단계(2부 미분) 직후 언제든 — 6부를 봤다면 더 잘 읽힘' },
-  { id: 'step9', col: 'c7', lane: 'prac', stepOrder: 9, prereqText: '1단계(1부 전반)만 마치면 언제든 — 진입 장벽 최저' },
-  { id: 'step11', col: 'c7', lane: 'prac', stepOrder: 11, prereqText: '4단계(2부) 이후 권장(핵심은 2부 7장 log 감각) — 6부 뒤 재방문하면 완성' },
-  { id: 'step12', col: 'c7', lane: 'eval', stepOrder: 12, prereqText: '2단계(3부 전반)만 마치면 언제든 — 통계 심화(3부 8~10장)는 자체 회수, 6부 9장 뒤 재방문 가치 최대' },
+  // 선택 모듈 — 해금되는 국면 행에 배치(진입 점선이 짧은 가로 hop 이 된다)
+  { id: 'step8', col: 'c2', lane: 'deep', stepOrder: 8, prereqText: '1단계(1부 전반) + 2단계(3부 전반)를 마치면 언제든' },
+  { id: 'step10', col: 'c4', lane: 'deep', stepOrder: 10, prereqText: '4단계(2부 미분) 직후 언제든 — 6부를 봤다면 더 잘 읽힘' },
+  { id: 'step9', col: 'c2', lane: 'prac', stepOrder: 9, prereqText: '1단계(1부 전반)만 마치면 언제든 — 진입 장벽 최저' },
+  { id: 'step11', col: 'c4', lane: 'prac', stepOrder: 11, prereqText: '4단계(2부) 이후 권장(핵심은 2부 7장 log 감각) — 6부 뒤 재방문하면 완성' },
+  { id: 'step12', col: 'c2', lane: 'eval', stepOrder: 12, prereqText: '2단계(3부 전반)만 마치면 언제든 — 통계 심화(3부 8~10장)는 자체 회수, 6부 9장 뒤 재방문 가치 최대' },
+  { id: 'step13', col: 'c4', lane: 'eval', stepOrder: 13, prereqText: '2단계(3부 전반)만 마치면 언제든 — 조건부 확률(3부 4장)은 자체 회수, 10부 6장(오차범위)을 먼저 보면 성적표·캡스톤이 더 잘 읽힘' },
 ]
 
 export const edges: BoardEdge[] = [
@@ -88,4 +93,5 @@ export const edges: BoardEdge[] = [
   { from: 'step4', to: 'step10', kind: 'entry' },
   { from: 'step4', to: 'step11', kind: 'entry' },
   { from: 'step2', to: 'step12', kind: 'entry' },
+  { from: 'step2', to: 'step13', kind: 'entry' },
 ]

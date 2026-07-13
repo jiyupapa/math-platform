@@ -1,5 +1,5 @@
 // scripts/verify-smoke.mjs
-// 전 부 스모크 E2E — 포털(홈·진단·구조도) + 10개 부의 모든 공개 챕터 라우트가 렌더되고 콘솔 에러가 없는지.
+// 전 부 스모크 E2E — 포털(홈·진단·구조도) + 11개 부의 모든 공개 챕터 라우트가 렌더되고 콘솔 에러가 없는지.
 // 콘텐츠 정정 후 회귀 안전망 (각 부 chapters.ts 에서 슬러그를 동적으로 읽는다).
 //
 // 사용법:
@@ -59,9 +59,9 @@ await visit('/', '포털 홈')
 await visit('/diagnose', '포털 진단')
 await visit('/map', '포털 학습 구조도')
 
-// 각 부 — 홈 + 전 공개 챕터 (전 10부 완결 — comingSoon 챕터가 생기면 자동 제외)
+// 각 부 — 홈 + 전 공개 챕터 (comingSoon 챕터는 자동 제외 — 제작 중인 부는 홈+공개분만 검사)
 let totalChapters = 0
-for (let p = 1; p <= 10; p++) {
+for (let p = 1; p <= 11; p++) {
   const slugs = slugsOf(p)
   totalChapters += slugs.length
   await visit(`/part${p}/`, `part${p} 홈 (${slugs.length}챕터)`)
@@ -70,5 +70,5 @@ for (let p = 1; p <= 10; p++) {
 }
 
 await browser.close()
-console.log(`\n결과: ${pass} 통과 / ${fails.length} 실패 — 페이지 ${pass + fails.length}개 (챕터 ${totalChapters} + 홈 11 + 포털 진단·구조도 2)`)
+console.log(`\n결과: ${pass} 통과 / ${fails.length} 실패 — 페이지 ${pass + fails.length}개 (챕터 ${totalChapters} + 홈 12 + 포털 진단·구조도 2)`)
 process.exit(fails.length === 0 ? 0 : 1)
