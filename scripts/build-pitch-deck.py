@@ -195,7 +195,7 @@ notes(s, '발표 운영: 전체 5분이면 슬라이드 ④·⑤는 슬라이드
 
 # ═════════════════════════════ ② 문제 ═════════════════════════════
 s = new_slide()
-chrome(s, 2, '문제', '전 직원이 AI 를 쓰는데, 아무도 원리를 모른다')
+chrome(s, 2, '문제', '전 직원이 AI 를 쓰는데, 원리를 아는 사람은?')
 tf = box(s, Inches(0.9), Inches(1.75), Inches(5.7), Inches(3.4))
 para(tf, [('직원 대부분이 매일 AI 를 씁니다.', {'bold': True, 'color': INK})], size=15, first=True, line=1.3)
 para(tf, '그러나 내부 원리를 아는 사람은 극소수 — 격차의 원인은 수학입니다.',
@@ -277,9 +277,8 @@ tf = box(s, Inches(7.05), Inches(4.42), Inches(5.4), Inches(1.9))
 para(tf, '② 경로가 다시 그려지고, 이유가 화면에 나옵니다', size=12.5, color=INK, bold=True, first=True)
 para(tf, '실측 예시 — 벡터·확률은 기억, 미분·log 는 리셋된 직장인: 106챕터 중 55챕터 · 31.9시간 경로로 압축, 아는 단계는 "빠른 복습"으로 접힘.',
      size=11.5, color=BODY, space_before=5, line=1.3)
-para(tf, '청중이 직접 진단 → 그 자리에서 "그 사람의 지도"가 됩니다 (와우 포인트 1).',
-     size=11.5, color=INDIGO, bold=True, space_before=5, line=1.3)
-notes(s, '시연에서 청중이 직접 진단 — "왜 이 경로냐"는 질문에 화면의 근거(관문 통과/미통과)로 답한다. 결정은 규칙이므로 같은 답이 항상 재현된다.')
+notes(s, '시연에서 청중이 직접 진단 — 그 자리에서 "그 사람의 지도"가 되는 순간이 와우 포인트 1. '
+         '"왜 이 경로냐"는 질문에 화면의 근거(관문 통과/미통과)로 답한다. 결정은 규칙이므로 같은 답이 항상 재현된다.')
 
 # ═════════════════════════════ ⑤ 데모 2 — 라이브 투어 ═════════════════════════════
 s = new_slide()
@@ -306,10 +305,10 @@ c = card(s, x, y + Inches(0.05), CW, CH - Inches(0.1), fill=INDIGO, line_c=None)
 tf = c.text_frame
 tf.margin_left = tf.margin_right = Inches(0.2)
 tf.vertical_anchor = MSO_ANCHOR.MIDDLE
-para(tf, '발표에선 청중 문장으로 라이브', size=13, color=WHITE, bold=True, first=True, line=1.25)
-para(tf, '다섯 화면이 1·3·5부 수학과 1:1 — 커리큘럼이 곧 ChatGPT 해부도입니다 (와우 포인트 2).',
+para(tf, '당신의 문장으로 라이브 시연', size=13, color=WHITE, bold=True, first=True, line=1.25)
+para(tf, '다섯 화면이 1·3·5부 수학과 1:1 — 커리큘럼이 곧 ChatGPT 해부도입니다.',
      size=12, color=RGBColor.from_string('E0E7FF'), space_before=8, line=1.3)
-notes(s, '말 노트: "청중 문장으로 라이브 시연" — 토큰화(ch2) → 임베딩(ch3) → 어텐션(ch6) → 확률(ch9) → temperature(ch12). '
+notes(s, '말 노트: "청중 문장으로 라이브 시연"이 와우 포인트 2 — 토큰화(ch2) → 임베딩(ch3) → 어텐션(ch6) → 확률(ch9) → temperature(ch12). '
          '각 컷이 1·3·5부 수학과 1:1. 5분 발표에선 이 슬라이드 대신 실물 시연.')
 
 # ═════════════════════════════ ⑥ 완전 로컬 ═════════════════════════════
