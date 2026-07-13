@@ -1,5 +1,5 @@
 // scripts/verify-smoke.mjs
-// 전 부 스모크 E2E — 포털(홈·진단·구조도) + 9개 부의 모든 공개 챕터 라우트가 렌더되고 콘솔 에러가 없는지.
+// 전 부 스모크 E2E — 포털(홈·진단·구조도) + 10개 부의 모든 공개 챕터 라우트가 렌더되고 콘솔 에러가 없는지.
 // 콘텐츠 정정 후 회귀 안전망 (각 부 chapters.ts 에서 슬러그를 동적으로 읽는다).
 //
 // 사용법:
@@ -59,7 +59,7 @@ await visit('/', '포털 홈')
 await visit('/diagnose', '포털 진단')
 await visit('/map', '포털 학습 구조도')
 
-// 각 부 — 홈 + 전 공개 챕터 (10부 = 제작 중이어도 홈은 검사)
+// 각 부 — 홈 + 전 공개 챕터 (전 10부 완결 — comingSoon 챕터가 생기면 자동 제외)
 let totalChapters = 0
 for (let p = 1; p <= 10; p++) {
   const slugs = slugsOf(p)

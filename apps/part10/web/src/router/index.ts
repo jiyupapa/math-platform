@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 
-// 챕터 본문은 동적 import (코드 스플리팅). 챕터 공개 시 catch-all 위에 라우트를 추가한다.
+// 챕터 본문은 동적 import (코드 스플리팅). 전 11챕터 공개 완료(2026-07-13) —
+// catch-all 은 잘못된 주소 안내용으로만 남아 있다.
 const routes: RouteRecordRaw[] = [
   { path: '/', name: 'home', component: HomeView },
   { path: '/review', name: 'review', component: () => import('@/views/ReviewView.vue') },

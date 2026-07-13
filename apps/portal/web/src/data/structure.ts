@@ -1,6 +1,6 @@
 // 학습 구조도(스윔레인 보드) 배치 데이터 — /map (StructureView) 전용.
 // 참조 형식: 열(게이트) = 학습 국면, 행(레인) = 트랙, 셀 = 단계 노드, 실선 = 필수 흐름,
-// 점선 = 선택 분기 진입. 노드 = curriculum.ts pathSteps(11단계) + 특수 노드(진단·완주).
+// 점선 = 선택 분기 진입. 노드 = curriculum.ts pathSteps(12단계) + 특수 노드(진단·완주).
 // 진입 조건 정본: 루트 README "추천 학습 경로" — 7부는 1단계 직후, 8·9부는 4단계(2부) 이후.
 
 export interface BoardColumn {
