@@ -6,7 +6,7 @@
     chat('ch1', floating=False)          # 셀 출력 안에 바로 열기
 
     from tutor import ask, explain
-    ask('0.1이 왜 정확히 안 담겨요?', chapter='sample')  # 위젯 없이 한 번 묻고 답 받기
+    ask('2점 차이가 왜 소음일 수 있어요?', chapter='sample')  # 위젯 없이 한 번 묻고 답 받기
     explain('ch3')                        # 직전에 실행한 코드 셀을 튜터가 설명
 
 - 로컬 Ollama(http://localhost:11434)를 쓰므로 API 키·비용·인터넷이 필요 없다.
@@ -291,9 +291,9 @@ _EMPTY_HTML = (
 # 첫 화면의 추천 질문 — 웹(TutorChat.vue)과 동일. 클릭하면 그대로 전송된다.
 _SUGGESTIONS = [
     '방금 나온 개념을 더 쉬운 비유로 설명해 주세요',
-    '0.1이 컴퓨터에 정확히 안 담기는 이유가 뭐예요?',
-    'fp16이랑 bf16은 뭐가 달라요?',
-    '양자화가 몇 장에 나오는지 까먹었어요',
+    '멱법칙이 뭐고, 왜 로그-로그에서 직선이 돼요?',
+    '벤치마크 2점 차이는 얼마나 믿을 수 있어요?',
+    'Chinchilla가 몇 장에 나오는지 까먹었어요',
 ]
 
 # 플로팅 모드용 스타일 + 위젯을 document.body 로 옮기는 스크립트.
@@ -375,7 +375,7 @@ button.tutor-suggest:hover, .tutor-suggest button:hover {
 
 
 def chat(chapter: str | None = None, model: str | None = None, floating: bool = True) -> None:
-    """AI 튜터 채팅창을 띄운다. chapter: 'ch1'~'ch11' 또는 'sample'.
+    """AI 튜터 채팅창을 띄운다. chapter: 'ch1'~'ch10' 또는 'sample'.
 
     floating=True(기본)면 웹앱처럼 화면 오른쪽 아래에 🤖 버튼으로 떠 있고
     (클릭으로 열고 닫기, 스크롤해도 유지), False 면 셀 출력 안에 바로 열린다.

@@ -180,10 +180,10 @@ para(tf, '수포자 사관학교', size=47, color=WHITE, bold=True, space_before
 para(tf, 'AI 를 가르치는 AI 강사', size=21, color=RGBColor.from_string('C7D2FE'), bold=True, space_before=6)
 para(tf, '"수학을 포기했던 직원도, ChatGPT 의 내부까지."', size=14.5,
      color=RGBColor.from_string('E2E8F0'), space_before=22, line=1.25)
-para(tf, '진단 5분 → 개인 경로 → 9부작 교실 + 로컬 AI 튜터', size=13,
+para(tf, '진단 5분 → 개인 경로 → 10부작 교실 + 로컬 AI 튜터', size=13,
      color=RGBColor.from_string('94A3B8'), space_before=10)
 tf = box(s, Inches(0.95), Inches(6.55), Inches(5.6), Inches(0.4))
-para(tf, '9부작 96챕터  ·  완전 로컬 ₩0  ·  브라우저만으로', size=12,
+para(tf, '10부작 106챕터  ·  완전 로컬 ₩0  ·  브라우저만으로', size=12,
      color=RGBColor.from_string('818CF8'), bold=True, first=True)
 pic_fit(s, ASSETS / 'home_hero.png', Inches(6.75), Inches(1.35), Inches(5.9), Inches(4.8),
         border=RGBColor.from_string('334155'))
@@ -241,7 +241,7 @@ chrome(s, 3, '해법', '강사처럼 — 진단하고, 경로를 짜고, 옆에�
 cols = [
     ('① 진단 — 5분', '12문항 · 관문 4개', '벡터 · 확률 · 미분 · log 감각을 관문 단위로 측정. 시험이 아니라 경로 설계용.'),
     ('② 개인 경로 — 규칙 엔진', '결정은 규칙이', '통과한 관문의 단계는 접고(빠른 복습), 부족한 수학은 쓰이기 직전에 배치. 근거가 화면에 나옵니다.'),
-    ('③ 교실 + 튜터', '9부작 96챕터 · 로컬 LLM', '조작하는 실험실 → 자동채점 문제 → 막히면 지금 보는 챕터를 아는 AI 튜터에게 질문.'),
+    ('③ 교실 + 튜터', '10부작 106챕터 · 로컬 LLM', '조작하는 실험실 → 자동채점 문제 → 막히면 지금 보는 챕터를 아는 AI 튜터에게 질문.'),
 ]
 for i, (t1, t2, body_txt) in enumerate(cols):
     cx = Inches(0.9 + i * 4.03)
@@ -275,7 +275,7 @@ arrow(s, Inches(6.5), Inches(3.3), Inches(0.45), Inches(0.4))
 pic_fit(s, ASSETS / 'summary_card.png', Inches(7.05), Inches(1.95), Inches(5.4), Inches(2.35), border=None)
 tf = box(s, Inches(7.05), Inches(4.42), Inches(5.4), Inches(1.9))
 para(tf, '② 경로가 다시 그려지고, 이유가 화면에 나옵니다', size=12.5, color=INK, bold=True, first=True)
-para(tf, '실측 예시 — 벡터·확률은 기억, 미분·log 는 리셋된 직장인: 96챕터 중 55챕터 · 31.9시간 경로로 압축, 아는 단계는 "빠른 복습"으로 접힘.',
+para(tf, '실측 예시 — 벡터·확률은 기억, 미분·log 는 리셋된 직장인: 106챕터 중 55챕터 · 31.9시간 경로로 압축, 아는 단계는 "빠른 복습"으로 접힘.',
      size=11.5, color=BODY, space_before=5, line=1.3)
 para(tf, '심사위원이 직접 진단 → 그 자리에서 "그 사람의 지도"가 됩니다 (와우 포인트 1).',
      size=11.5, color=INDIGO, bold=True, space_before=5, line=1.3)
@@ -344,9 +344,9 @@ notes(s, '오프라인 시연이 곧 보안 답변: 질문·데이터가 외부�
 s = new_slide()
 chrome(s, 7, '숫자 한 장 — 전 항목 전수 실측', '규모 · 비용 · 실측 성능')
 stats = [
-    ('96', '학습 챕터', '9부작 완결 — 선형대수→LLM 조련→수치 계산'),
-    ('1,300+', '자동채점 문항', '즉시 채점 + 단계별 힌트·해설'),
-    ('107', '실습 노트북', '웹 챕터 ↔ Jupyter 1:1 — 전수 무에러 실행'),
+    ('106', '학습 챕터', '10부작 완결 — 선형대수→LLM 조련→스케일링·평가'),
+    ('1,400+', '자동채점 문항', '즉시 채점 + 단계별 힌트·해설'),
+    ('118', '실습 노트북', '웹 챕터 ↔ Jupyter 1:1 — 전수 무에러 실행'),
     ('₩0', '운영비', '로컬 AI 튜터 · 정적 웹 · 오프라인'),
 ]
 for i, (n, t, d) in enumerate(stats):
@@ -373,7 +373,7 @@ for i, (t, d) in enumerate(row2):
     para(tf, d, size=11, color=MUTED, space_before=5, line=1.3)
 tf = box(s, Inches(0.9), Inches(6.25), Inches(11.5), Inches(0.4))
 para(tf, '산출 근거·측정 방법은 12_metrics.md — 전 항목 재측정 가능', size=11, color=MUTED, first=True)
-notes(s, '전 항목 전수 실측(2026-07-12 기준). 96챕터·1,300+ 문항·107 노트북은 코드에서 직접 집계, '
+notes(s, '전 항목 전수 실측(2026-07-13 기준). 106챕터·1,400+ 문항·118 노트북은 코드에서 직접 집계, '
          '튜터 성능은 1부에서 실측(전 부 동일 인프라).')
 
 # ═════════════════════════════ ⑧ 품질 ═════════════════════════════
@@ -381,7 +381,7 @@ s = new_slide()
 chrome(s, 8, '품질', '수포자 페르소나 검수 + 자동 검증 3종')
 rows = [
     ('① 페르소나 검수', '"중학 수학까지만 기억하는 성인"으로 전 챕터 통독 — 이탈 위험 40여 건을 찾아 전량 수정, 전 부 "학습 적합" 판정.'),
-    ('② 자동 검증 3종', '전 10앱 타입체크·빌드  /  노트북 107권 무에러 실행  /  브라우저 E2E — 전 페이지 스모크 117 항목 + 개인화 통합 16항목.'),
+    ('② 자동 검증 3종', '전 11앱 타입체크·빌드  /  노트북 118권 무에러 실행  /  브라우저 E2E — 전 페이지 스모크 129 항목 + 개인화 통합 16항목.'),
     ('③ 회귀 안전망', '검증 스크립트를 저장소에 영속화 — 콘텐츠를 고칠 때마다 전체를 다시 돌려 깨짐을 자동으로 잡습니다.'),
 ]
 for i, (t, d) in enumerate(rows):

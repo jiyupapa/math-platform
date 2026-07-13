@@ -53,10 +53,10 @@ const sampleReady = availableChapters.some((c) => c.slug === 'sample')
           to="/ch/sample"
           class="mt-4 block rounded-lg bg-indigo-600 px-4 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-indigo-500"
         >
-          🚀 처음이신가요? 워밍업(0.1 + 0.2는 0.3이 아니다)부터 시작하세요 →
+          🚀 처음이신가요? 워밍업(2점 차이의 진실)부터 시작하세요 →
         </RouterLink>
         <p class="mt-2 text-center text-xs text-indigo-400">
-          이진법부터 자체 포함 — 2부 7장(지수·로그)을 봤다면 준비 완료입니다.
+          신뢰구간·p값도 자체 포함 — 3부 전반(확률 기초)과 2부 7장(로그 감각)을 봤다면 준비 완료입니다.
         </p>
       </template>
     </div>
