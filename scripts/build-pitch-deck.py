@@ -405,7 +405,7 @@ chrome(s, 9, '도입', '오늘 바로 시작할 수 있습니다')
 scen = [
     ('신입 온보딩', '진단으로 각자 출발점부터 — 배경이 달라도 같은 목적지(4부 트랜스포머)에 도착.'),
     ('전사 AI 리터러시', '핵심 경로 55챕터 ≈ 37시간, 진단으로 개인별 단축 — 완주 기준이 명확한 사내 과정.'),
-    ('실무 직결 트랙', '7부 RAG(사내 챗봇의 수학) · 9부 수치 계산(사내 PC 로컬 모델 선택 가이드).'),
+    ('실무 직결 트랙', '7부 RAG(사내 챗봇의 수학) · 9부 수치 계산(로컬 모델 선택) · 10부 평가 통계("새 모델이 2점 높대요" 도입 판단).'),
 ]
 for i, (t, d) in enumerate(scen):
     c = card(s, Inches(0.9), Inches(1.85 + i * 1.42), Inches(7.3), Inches(1.22), fill=WHITE)
@@ -450,7 +450,7 @@ for i, (t, d) in enumerate(road):
     if i < 2:
         arrow(s, Inches(0.9 + i * 4.03 + 3.6), Inches(2.68), Inches(0.38), Inches(0.34))
 tf = box(s, Inches(0.9), Inches(4.05), Inches(11.5), Inches(0.4))
-para(tf, '콘텐츠 확장 후보 — 10부 "스케일링 법칙과 평가의 통계" (구성안 준비됨, 수요 발생 시 착수)',
+para(tf, '콘텐츠 확장 — 10부 "스케일링 법칙과 평가의 통계" 완결·편입(2026-07-13), 다음 후보: 확산 모델의 수학(조건부)',
      size=11.5, color=MUTED, first=True)
 c = card(s, Inches(0.9), Inches(4.75), Inches(11.55), Inches(1.75), fill=INDIGO, line_c=None)
 tf = c.text_frame

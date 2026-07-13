@@ -153,8 +153,9 @@ Get-ChildItem apps\part*\notebooks\*.ipynb | ForEach-Object {
   .venv\Scripts\python.exe -m pip install sentence-transformers
   ```
 
-- 그 외 ch* 시리즈 노트북(2026-07-12 현재 95개)은 루트 `requirements.txt` 만으로 전부 무에러 실행됨 —
-  6~9부 노트북은 챕터 제작 시점마다 nbconvert 로 검증했다(각 부 `docs/99_history.md` 참조).
+- 그 외 ch* 시리즈 노트북(2026-07-13 현재 117개)은 루트 `requirements.txt` 만으로 전부 무에러 실행됨 —
+  6~10부 노트북은 챕터 제작 시점마다 nbconvert 로 검증했다(각 부 `docs/99_history.md` 참조).
+  10부 11권은 완결 이튿날 정합성 감사에서 일괄 재검증(2026-07-13).
 
 ### 검증 이력 (2026-07-09)
 
