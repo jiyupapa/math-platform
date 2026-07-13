@@ -1,0 +1,6 @@
+# 셸 스크립트는 LF 유지 — CRLF 면 Unix(WSL/macOS/Linux)에서 shebang 이 깨진다.
+*.sh text eol=lf
+
+# Windows 배치는 CRLF 유지 — cmd.exe 의 goto/label 탐색이 LF-only 에서 불안정.
+*.cmd text eol=crlf
+*.bat text eol=crlf
