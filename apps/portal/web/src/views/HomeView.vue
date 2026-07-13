@@ -12,7 +12,7 @@ import TutorExplain from '../components/TutorExplain.vue'
 import StatChips from '../components/StatChips.vue'
 import ImprovementCard from '../components/ImprovementCard.vue'
 
-// 역할별 색 (토대/조립/본체/조련/심화)
+// 역할별 색 (토대/조립/본체/조련/심화/실용/평가/전략)
 const roleStyle: Record<StepRole, { tag: string; dot: string; ring: string }> = {
   토대: { tag: 'bg-sky-100 text-sky-700', dot: 'bg-sky-500', ring: 'ring-sky-200' },
   조립: { tag: 'bg-emerald-100 text-emerald-700', dot: 'bg-emerald-500', ring: 'ring-emerald-200' },
@@ -21,6 +21,7 @@ const roleStyle: Record<StepRole, { tag: string; dot: string; ring: string }> = 
   심화: { tag: 'bg-slate-100 text-slate-600', dot: 'bg-slate-400', ring: 'ring-slate-200' },
   실용: { tag: 'bg-teal-100 text-teal-700', dot: 'bg-teal-500', ring: 'ring-teal-200' },
   평가: { tag: 'bg-rose-100 text-rose-700', dot: 'bg-rose-500', ring: 'ring-rose-200' },
+  전략: { tag: 'bg-cyan-100 text-cyan-700', dot: 'bg-cyan-500', ring: 'ring-cyan-200' },
 }
 
 // 진단 상태별 배지/스타일

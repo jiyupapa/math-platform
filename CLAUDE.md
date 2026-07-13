@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 이 저장소의 정체
 
-"수포자를 위한 AI 수학 시리즈"를 하나로 묶은 **모노레포**(npm workspaces). 10개 부의 웹 앱 + 통합 포털 +
+"수포자를 위한 AI 수학 시리즈"를 하나로 묶은 **모노레포**(npm workspaces). 11개 부의 웹 앱 + 통합 포털 +
 공용 컴포넌트 패키지가 한 git 저장소 안에 있다.
 
 기원: 원래 1부(선형대수)만 회사 해커톤 출품 목적이었고, 5부작으로 확장된 뒤 이 모노레포로 통합됐다.
@@ -18,32 +18,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 구조
 
-```
-apps/
-  portal/            통합 포털(part0 — 진단·학습경로 추천): web/ + docs/. packages/ui·tutor 소비
-  part1/ .. part10/  각 부: web/(Vue 앱) + notebooks/(Jupyter) + docs/
-packages/
-  ui/                공용 컴포넌트 단일 소스 (@series/ui)
-  tutor/             AI 튜터 클라이언트 (@series/tutor — 로컬/원격 Ollama)
-docs/TESTING.md      전체 테스트 방법
-requirements.txt     공용 노트북 venv 의존성(전 부 합집합)
-```
-
-| 부 | 폴더 | 주제 |
-|---|---|---|
-| 포털 | `apps/portal` | 진단·경로 추천 허브 |
-| 1부 | `apps/part1` | 선형대수 |
-| 2부 | `apps/part2` | 미분 |
-| 3부 | `apps/part3` | 확률통계 |
-| 4부 | `apps/part4` | 트랜스포머 — 시리즈의 정점 |
-| 5부 | `apps/part5` | 정보이론 |
-| 6부 | `apps/part6` | LLM 조련 — 피날레 (전 11챕터 공개, 2026-07-11 완결) |
-| 7부 | `apps/part7` | 임베딩 기하학(RAG의 수학) — 실용 확장 트랙 (전 11챕터 공개, 2026-07-11 완결) |
-| 8부 | `apps/part8` | 최적화(학습의 다이얼) — 이론 심화 트랙 (전 12챕터 공개, 2026-07-12 완결) |
-| 9부 | `apps/part9` | 수치 계산(내 PC에서 도는 AI의 수학) — 실용 확장 트랙 2탄 (전 12챕터 공개, 2026-07-12 완결) |
-| 10부 | `apps/part10` | 스케일링 법칙과 평가의 통계 — 평가·전략 트랙 (전 11챕터 공개, 2026-07-13 완결) |
-
-시리즈 커리큘럼·추천 학습 경로(1→2→3→4→5 순서가 아님)·부 간 연결은 루트 `README.md`.
+배치는 `ls`로: `apps/`(portal + part1..N — 각각 web/·notebooks/·docs/), `packages/`(ui·tutor).
+부 목록·주제·완결 상태·시리즈 커리큘럼·추천 학습 경로(1→2→3→4→5 순서가 아님)·부 간 연결은
+루트 `README.md` 가 정본.
 
 ## 명령어 (npm workspaces — 루트에서 실행)
 
@@ -64,12 +41,12 @@ QuizSet↔StepQuiz 그룹 계약(`quizGroupKey`/`QuizGroup` — `quizGroup.ts`)�
 
 - **한 번 고치면 전 부에 반영** — 복제·전파·드리프트 점검 없음(옛 골든카피/`check_drift.py` 체제는 폐기).
 - 패키지는 **주제 중립** 유지. 앱전용 결합은 **provide/inject** 로 분리 — 각 앱 `main.ts` 가 주입:
-  - `storagePrefixKey` — QuizSet 저장 접두사. part1=`la` part2=`diff` part3=`stat` part4=`tf` part5=`it` part6=`tame` part7=`emb` part8=`opt` part9=`num` part10=`scale` portal=`hub`.
+  - `storagePrefixKey` — QuizSet 저장 접두사. part1=`la` part2=`diff` part3=`stat` part4=`tf` part5=`it` part6=`tame` part7=`emb` part8=`opt` part9=`num` part10=`scale` part11=`agent` portal=`hub`.
     **바꾸면 사용자 진도가 끊긴다.** 포털은 진단 결과 저장(`hub-diagnosis-v1`·`hub-baseline-v1`)에 쓰고,
     각 부 진도(`{prefix}-progress-v1`)를 읽어 지도에 표시하므로 부 접두사 변경은 포털 연동도 깨뜨린다.
   - `reviewApiKey` — ReviewFlag ↔ 각 앱 `review` 스토어.
   - `notebookResolverKey` — NotebookCard ↔ 각 앱 `chapters`(part1·4·5·6·7·8·9·10).
-- 소스 `.vue` 패키지라 각 앱 설정에: `vite.config.ts` 의 `optimizeDeps.exclude`(전 11앱 = `['@series/ui', '@series/tutor']`),
+- 소스 `.vue` 패키지라 각 앱 설정에: `vite.config.ts` 의 `optimizeDeps.exclude`(전 12앱 = `['@series/ui', '@series/tutor']`),
   `style.css` 의 `@source '../../../../packages/ui/src'`(Tailwind 가 패키지 클래스 스캔 — 빠지면 스타일이 조용히 누락).
 - **THEMED(각 앱에 유지)**: `progress`/`review` 스토어, `TutorChat.vue`(튜터 주제), `notebooks/tutor.py`.
 - **AI 튜터 클라이언트 = `packages/tutor`(@series/tutor)** — 로컬/원격 Ollama 전송 계층. 서버 주소는 빌드 환경변수
