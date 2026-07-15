@@ -59,7 +59,7 @@ async function ensureIndex() {
       ],
       threshold: 0.4,
       ignoreLocation: true, // 한국어: 위치 무관 부분일치
-      minMatchCharLength: 1,
+      minMatchCharLength: 2, // 1글자 노이즈(예: '학'→학습률…) 차단, 2글자+ 부분일치는 유지
     })
     loaded.value = true
   } catch {
