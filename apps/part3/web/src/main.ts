@@ -3,7 +3,7 @@ import { createPinia } from 'pinia'
 import './style.css'
 import App from './App.vue'
 import router from './router'
-import { storagePrefixKey, reviewApiKey } from '@series/ui'
+import { storagePrefixKey, reviewApiKey, searchIndexKey } from '@series/ui'
 import { useReviewStore } from '@/stores/review'
 
 const pinia = createPinia()
@@ -18,5 +18,7 @@ app.provide(reviewApiKey, {
   isFlagged: (id: string) => review.isFlagged(id),
   toggle: (item: { id: string; chapter: string; label: string }) => review.toggle(item),
 })
+// 통합검색 인덱스 URL — 자기 BASE_URL 기준(=자기 public). SearchPalette 가 fetch.
+app.provide(searchIndexKey, import.meta.env.BASE_URL + 'search-index.json')
 
 app.mount('#app')

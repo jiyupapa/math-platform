@@ -5,6 +5,21 @@
 
 ---
 
+## 2026-07-14 — 통합검색(⌘K 팔레트) 신설 — 전 부 장·개념 크로스검색
+
+- **공용 컴포넌트 `SearchPalette`**(`packages/ui`) 신설 — ⌘K/Ctrl+K 커맨드 팔레트, 엔진 **Fuse.js**
+  (한국어 부분일치: `ignoreLocation`). 결과 클릭 → `/partN/ch/<slug>` 이동(PartLink 규약, 조립 배포본 전용).
+  주입 키 `searchIndexKey` 추가(`injection.ts`) — 각 앱 `main.ts` 가 `BASE_URL + 'search-index.json'` 주입.
+- **인덱스 생성기 `scripts/build-search-index.mjs`** — 전 부 `chapters.ts`(챕터 129) + 큐레이션
+  `scripts/search-concepts.json`(개념 68종 → 위치별 97 엔트리) → **총 226 항목**을 각 앱 `public/` 에
+  결정적 출력. 개념 레이어가 **비유어↔실무어**를 이어줌(예: "조련"·"파인튜닝" → 6부, "고무줄 자" → 9부).
+- **배선**: 12개 앱 전부 `main.ts`(주입)·`App.vue`(마운트 + 상단 🔎 버튼, 포털은 헤더 "🔎 검색") 수정.
+  `postinstall`·`deploy:build` 가 인덱스 자동 생성(gitignore 처리 — 재생성 산출물).
+- 검증: `npm run deploy:build`(12앱 vue-tsc 통과·조립 완료), Fuse 질의 시뮬로 매칭·딥링크 확인
+  (코사인·KL 발산·조련·베이즈·양자화·pass@k 등 전부 정확). 설계 노트: `docs/todo_통합검색_260713_pm11.md`.
+
+---
+
 ## 2026-07-13 — 11부 편입 + 완결 수치 재실측 (13단계·전략 레인)
 
 - `curriculum.ts`: **13단계 "(선택·전략) 11부 — 에이전트와 추론의 수학"** 신설(ch1~12, 460분) —

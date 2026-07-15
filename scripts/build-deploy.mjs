@@ -30,7 +30,10 @@ const APPS = [
   { name: 'part11', base: '/part11/', dest: 'part11' },
 ]
 
-console.log('▶ deploy/ 초기화')
+console.log('▶ 통합검색 인덱스 생성 (각 앱 public/search-index.json)')
+execSync('node scripts/build-search-index.mjs', { cwd: root, stdio: 'inherit' })
+
+console.log('\n▶ deploy/ 초기화')
 rmSync(deployDir, { recursive: true, force: true })
 mkdirSync(deployDir, { recursive: true })
 

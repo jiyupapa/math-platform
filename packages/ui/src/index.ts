@@ -9,6 +9,7 @@ export { default as ChartView } from './ChartView.vue'
 export { default as NotebookCard } from './NotebookCard.vue'
 export { default as ReviewFlag } from './ReviewFlag.vue'
 export { default as PartLink } from './PartLink.vue'
+export { default as SearchPalette } from './SearchPalette.vue'
 
 // 문제(자동채점) 패밀리
 export { default as Quiz } from './Quiz.vue'
@@ -21,6 +22,7 @@ export {
   storagePrefixKey,
   reviewApiKey,
   notebookResolverKey,
+  searchIndexKey,
   type ReviewApi,
   type NotebookResolver,
 } from './injection'
