@@ -4,6 +4,9 @@ dist/
 deploy/
 .vite/
 
+# 통합검색 인덱스 (scripts/build-search-index.mjs 로 재생성 — postinstall·deploy:build 가 자동 생성)
+apps/*/web/public/search-index.json
+
 # Python
 .venv/
 __pycache__/

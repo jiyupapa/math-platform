@@ -8,6 +8,8 @@
     "packages/*"
   ],
   "scripts": {
+    "search:index": "node scripts/build-search-index.mjs",
+    "postinstall": "node scripts/build-search-index.mjs",
     "deploy:build": "node scripts/build-deploy.mjs",
     "deploy:serve": "node scripts/serve-deploy.mjs"
   }

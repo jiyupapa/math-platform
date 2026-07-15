@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import AppSidebar from '@/components/AppSidebar.vue'
 import TutorChat from '@/components/TutorChat.vue'
+import { SearchPalette } from '@series/ui'
 import { ref } from 'vue'
 
 const sidebarOpen = ref(false)
+function openSearch() {
+  window.dispatchEvent(new Event('open-search'))
+}
 </script>
 
 <template>
@@ -24,6 +28,14 @@ const sidebarOpen = ref(false)
           ☰
         </button>
         <span class="font-semibold">수포자를 위한 확률과 통계</span>
+        <button
+          type="button"
+          class="ml-auto rounded-md p-2 hover:bg-slate-100"
+          aria-label="통합검색 (Ctrl+K)"
+          @click="openSearch"
+        >
+          🔎
+        </button>
       </header>
 
       <main class="mx-auto w-full max-w-5xl flex-1 px-5 py-8 lg:px-12 xl:px-16">
@@ -35,5 +47,8 @@ const sidebarOpen = ref(false)
 
     <!-- AI 튜터 (로컬 Ollama) — 모든 페이지에서 플로팅 -->
     <TutorChat />
+
+    <!-- 통합검색 팔레트 (⌘K / Ctrl+K · 상단 🔎) -->
+    <SearchPalette />
   </div>
 </template>

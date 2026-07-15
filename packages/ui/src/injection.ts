@@ -17,3 +17,7 @@ export const reviewApiKey: InjectionKey<ReviewApi> = Symbol('reviewApi')
 // 현재 챕터 slug → 노트북 파일명 해석기. 앱이 chapters 데이터로 구현해 주입. NotebookCard 가 사용.
 export type NotebookResolver = (slug: string | null) => string | null
 export const notebookResolverKey: InjectionKey<NotebookResolver> = Symbol('notebookResolver')
+
+// 통합검색 인덱스(search-index.json) URL. 각 앱이 자기 BASE_URL 기준 경로로 주입. SearchPalette 가 사용.
+// 미주입 시 컴포넌트가 BASE_URL 기준 기본값('<base>search-index.json')으로 폴백한다.
+export const searchIndexKey: InjectionKey<string> = Symbol('searchIndexUrl')
