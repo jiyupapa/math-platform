@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import { storagePrefixKey, searchIndexKey } from '@series/ui'
+import { initAuth } from '@series/store'
 import App from './App.vue'
 import router from './router'
 import './style.css'
@@ -10,4 +11,6 @@ app.use(router)
 app.provide(storagePrefixKey, 'hub')
 // 통합검색 인덱스 URL — 자기 BASE_URL 기준(=자기 public). SearchPalette 가 fetch.
 app.provide(searchIndexKey, import.meta.env.BASE_URL + 'search-index.json')
+// Supabase 세션 복원 (env 미설정 시 no-op — 앱은 localStorage 만 사용, 현재 동작 불변)
+void initAuth()
 app.mount('#app')
