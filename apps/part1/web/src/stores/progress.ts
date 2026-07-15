@@ -1,9 +1,11 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import { registerProgressSync, pushProgressAdd, pushProgressRemove } from '@series/store'
 import { progressChapters } from '@/data/chapters'
 
 // 학습 진도 스토어. 완료한 챕터 슬러그를 localStorage 에 저장한다.
 const STORAGE_KEY = 'la-progress-v1'
+const PART = 1 // Supabase progress 테이블의 part 값 (이 부 = 1부)
 
 function load(): string[] {
   try {
@@ -27,6 +29,15 @@ export const useProgressStore = defineStore('progress', () => {
     }
   }
 
+  // 로그인 시 원격 진도와 합집합 병합 + 이후 변경 원격 반영 (백엔드 미설정이면 no-op)
+  registerProgressSync(PART, {
+    get: () => completed.value,
+    set: (slugs) => {
+      completed.value = slugs
+      persist()
+    },
+  })
+
   function isDone(slug: string): boolean {
     return completed.value.includes(slug)
   }
@@ -35,12 +46,14 @@ export const useProgressStore = defineStore('progress', () => {
     if (!completed.value.includes(slug)) {
       completed.value.push(slug)
       persist()
+      pushProgressAdd(PART, slug)
     }
   }
 
   function reset(slug: string) {
     completed.value = completed.value.filter((s) => s !== slug)
     persist()
+    pushProgressRemove(PART, slug)
   }
 
   // 진도 대상 챕터와 교집합만 센다 — 샘플 챕터나 이름이 바뀐 옛 slug 가 남아 있어도 진도에 안 잡히게.

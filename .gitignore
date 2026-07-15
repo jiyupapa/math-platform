@@ -12,6 +12,9 @@ apps/*/web/public/search-index.json
 .env.local
 .env.*.local
 
+# 임시 검증 스크립트 (scratch-*.mjs 등) — 커밋 제외
+scratch-*
+
 # Python
 .venv/
 __pycache__/

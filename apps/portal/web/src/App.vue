@@ -2,6 +2,7 @@
 // 통합 포털(part0) — 진단·경로 추천 허브. @series/ui 공용 패키지를 소비.
 import { RouterView, RouterLink } from 'vue-router'
 import { SearchPalette } from '@series/ui'
+import { AuthPanel } from '@series/store'
 
 function openSearch() {
   window.dispatchEvent(new Event('open-search'))
@@ -27,6 +28,7 @@ function openSearch() {
           <RouterLink to="/diagnose" class="text-sm font-medium text-indigo-600 hover:underline">
             경로 진단
           </RouterLink>
+          <AuthPanel />
         </nav>
       </div>
     </header>

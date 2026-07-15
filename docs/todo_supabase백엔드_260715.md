@@ -198,7 +198,7 @@ create policy own on kv       for all using (auth.uid()=user_id) with check (aut
 |---|---|---|---|
 | **P0** ✅ | Supabase 콘솔 설정은 사용자, DB는 저장소(`supabase/schema.sql`·`README.md`·`.env.example`) | ❌ | 코드 0 |
 | **P1** ✅ | `@series/store` 스캐폴드(클라이언트·인증·`SyncedStorage`, env 게이팅) + 포털 배선 — **동작 불변**(포털 빌드 통과) | ❌ | 낮음 |
-| **P2** | 스토어 12벌 `SyncedStorage` 어댑터화 + 포털 Auth UI(가입/로그인) + 로그인 시 sync(§8) | ❌(확인 OFF) | 중 |
+| **P2** 진행 | 코어 완료·**실 Supabase E2E 검증**(sync 엔진 + 포털 Auth UI + part1 진도/복습). 남음: 2~11부 전파(part1 과 동일 패턴) | ❌(확인 OFF) | 중 |
 | **P3** | 포털 2층 DB 읽기 + 도입 대시보드 | ❌ | 중 |
 | P4(선택) | Realtime 탭간 동기화 / 나중에 매직링크·확인메일 업그레이드 | (그때) | 낮음 |
 
