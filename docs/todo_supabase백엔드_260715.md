@@ -196,11 +196,15 @@ create policy own on kv       for all using (auth.uid()=user_id) with check (aut
 
 | 단계 | 내용 | 메일 필요? | 리스크 |
 |---|---|---|---|
-| **P0** | Supabase 프로젝트 + 콘솔 설정(Email·**Confirm OFF**·signup ON) + SQL(§5·§6) | ❌ | 코드 0 |
-| **P1** | `@series/store` 스캐폴드 + 스토어 12벌 어댑터화 — **동작 불변(로컬 전용) 검증** | ❌ | 낮음 |
-| **P2** | 포털 Auth UI(가입/로그인) + 로그인 시 sync(§8) | ❌(확인 OFF) | 중 |
+| **P0** ✅ | Supabase 콘솔 설정은 사용자, DB는 저장소(`supabase/schema.sql`·`README.md`·`.env.example`) | ❌ | 코드 0 |
+| **P1** ✅ | `@series/store` 스캐폴드(클라이언트·인증·`SyncedStorage`, env 게이팅) + 포털 배선 — **동작 불변**(포털 빌드 통과) | ❌ | 낮음 |
+| **P2** | 스토어 12벌 `SyncedStorage` 어댑터화 + 포털 Auth UI(가입/로그인) + 로그인 시 sync(§8) | ❌(확인 OFF) | 중 |
 | **P3** | 포털 2층 DB 읽기 + 도입 대시보드 | ❌ | 중 |
 | P4(선택) | Realtime 탭간 동기화 / 나중에 매직링크·확인메일 업그레이드 | (그때) | 낮음 |
+
+> **P1 메모(P2에서 처리)**: 현재 `@supabase/supabase-js`가 정적 import라 포털 번들 +약215KB(gzip +56KB)—
+> 백엔드 OFF여도 실림. 12앱 확산 전 **supabase-js 를 동적 import(로그인 개시 시 lazy-load)**로 바꿔
+> 비로그인·미설정 상태 비용을 0에 가깝게 유지할 것. (P1 스캐폴드는 포털 한정이라 지금은 영향 작음.)
 
 ---
 
