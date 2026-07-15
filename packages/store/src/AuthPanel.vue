@@ -1,0 +1,174 @@
+<script setup lang="ts">
+// 진도 크로스기기 저장용 로그인 위젯 (경로 B: 이메일+비밀번호). 백엔드 미설정 시 아무것도 안 그림.
+// 자체 완결 스타일(scoped) — Tailwind @source 의존 없음.
+import { ref } from 'vue'
+import { currentUser, signIn, signUp, signOut, isAllowedEmail } from './auth'
+import { isBackendEnabled } from './supabase'
+
+const enabled = isBackendEnabled()
+const open = ref(false)
+const mode = ref<'login' | 'signup'>('login')
+const email = ref('')
+const password = ref('')
+const error = ref('')
+const busy = ref(false)
+
+async function submit() {
+  error.value = ''
+  if (!isAllowedEmail(email.value)) {
+    error.value = '@solideos.com 계정만 사용할 수 있어요'
+    return
+  }
+  if (password.value.length < 6) {
+    error.value = '비밀번호는 6자 이상이어야 해요'
+    return
+  }
+  busy.value = true
+  try {
+    const { error: e } =
+      mode.value === 'signup'
+        ? await signUp(email.value, password.value)
+        : await signIn(email.value, password.value)
+    if (e) {
+      error.value = e.message
+      return
+    }
+    open.value = false
+    email.value = ''
+    password.value = ''
+  } catch (ex) {
+    error.value = ex instanceof Error ? ex.message : String(ex)
+  } finally {
+    busy.value = false
+  }
+}
+</script>
+
+<template>
+  <div v-if="enabled" class="ap">
+    <template v-if="currentUser">
+      <span class="ap-who" :title="currentUser.email">{{ currentUser.email }}</span>
+      <button class="ap-link" type="button" @click="signOut()">로그아웃</button>
+    </template>
+    <template v-else>
+      <button class="ap-link" type="button" @click="open = !open">진도 지키기</button>
+      <div v-if="open" class="ap-pop">
+        <div class="ap-tabs">
+          <button type="button" :class="{ on: mode === 'login' }" @click="mode = 'login'">로그인</button>
+          <button type="button" :class="{ on: mode === 'signup' }" @click="mode = 'signup'">가입</button>
+        </div>
+        <input v-model="email" type="email" placeholder="이메일 (@solideos.com)" autocomplete="email" />
+        <input
+          v-model="password"
+          type="password"
+          placeholder="비밀번호 (6자 이상)"
+          autocomplete="current-password"
+          @keyup.enter="submit"
+        />
+        <p v-if="error" class="ap-err">{{ error }}</p>
+        <button class="ap-go" type="button" :disabled="busy" @click="submit">
+          {{ busy ? '처리 중…' : mode === 'signup' ? '가입하고 진도 지키기' : '로그인' }}
+        </button>
+        <p class="ap-note">다른 기기·브라우저에서도 진도가 이어져요.</p>
+      </div>
+    </template>
+  </div>
+</template>
+
+<style scoped>
+.ap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.ap-who {
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  color: #475569;
+}
+.ap-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: #4f46e5;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.ap-link:hover {
+  text-decoration: underline;
+}
+.ap-pop {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 60;
+  width: 260px;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ap-tabs {
+  display: flex;
+  gap: 4px;
+}
+.ap-tabs button {
+  flex: 1;
+  padding: 6px;
+  font-size: 13px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #64748b;
+  cursor: pointer;
+}
+.ap-tabs button.on {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+  color: #4f46e5;
+  font-weight: 600;
+}
+.ap-pop input {
+  padding: 8px 10px;
+  font-size: 13px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  outline: none;
+}
+.ap-pop input:focus {
+  border-color: #a5b4fc;
+}
+.ap-err {
+  margin: 0;
+  font-size: 12px;
+  color: #dc2626;
+}
+.ap-go {
+  padding: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  background: #4f46e5;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.ap-go:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.ap-note {
+  margin: 0;
+  font-size: 11px;
+  color: #94a3b8;
+  text-align: center;
+}
+</style>
