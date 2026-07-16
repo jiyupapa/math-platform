@@ -23,6 +23,9 @@ Supabase 대시보드 → **Authentication**:
 
 `schema.sql`은 재실행 안전(idempotent)이라 여러 번 돌려도 됨.
 
+> **P3 도입 대시보드**: `schema.sql`에 `adoption_stats()` 집계 함수(security definer·익명 집계만)가 포함됨.
+> 이미 P0를 돌린 뒤라면 `schema.sql`을 **한 번 더 Run**하면 이 함수가 배포된다 → 포털 `/adoption`(로그인 시 헤더 "도입 현황")에서 집계가 뜬다.
+
 ### ③ 접속 정보 확보
 - [ ] Project Settings → API 에서 **Project URL**·**anon public key** 복사 → `../.env.example` 참고해 각 앱 `.env` 에 (P1/P2 때)
 - [ ] `service_role` key는 **절대 노출·커밋 금지** (이 프로젝트는 안 씀)

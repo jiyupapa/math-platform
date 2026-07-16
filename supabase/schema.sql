@@ -71,3 +71,34 @@ create policy own on public.reviews  for all
   using (auth.uid() = user_id) with check (auth.uid() = user_id);
 create policy own on public.kv       for all
   using (auth.uid() = user_id) with check (auth.uid() = user_id);
+
+-- ─────────────────────────────────────────────────────────────
+-- 4) 도입 대시보드용 집계 (P3)
+--    RLS 는 본인 행만 읽게 하므로, 전체 집계는 security definer 함수로만 노출한다.
+--    ⚠️ 개인 식별 정보(PII) 없이 "익명 집계 수치"만 반환한다. 로그인 사용자(authenticated)만 호출 가능.
+--    관리자 전용으로 좁히려면 함수 앞에 이메일 화이트리스트 검사를 넣으면 된다(주석 참고).
+-- ─────────────────────────────────────────────────────────────
+create or replace function public.adoption_stats()
+returns jsonb
+language sql
+security definer
+set search_path = public
+as $$
+  -- 관리자 전용으로 좁히려면(선택): 아래 두 줄을 함수 본문 위에 plpgsql 로 옮겨 검사.
+  --   if (auth.jwt() ->> 'email') <> all (array['admin@solideos.com']) then raise exception '권한 없음'; end if;
+  select jsonb_build_object(
+    'total_users', (select count(distinct user_id) from progress),
+    'total_completions', (select count(*) from progress),
+    'per_part', coalesce((
+      select jsonb_agg(jsonb_build_object('part', part, 'users', users, 'completions', completions) order by part)
+      from (select part, count(distinct user_id) as users, count(*) as completions from progress group by part) a
+    ), '[]'::jsonb),
+    'per_chapter', coalesce((
+      select jsonb_agg(jsonb_build_object('part', part, 'slug', slug, 'users', users))
+      from (select part, slug, count(distinct user_id) as users from progress group by part, slug) b
+    ), '[]'::jsonb)
+  );
+$$;
+
+revoke all on function public.adoption_stats() from public, anon;
+grant execute on function public.adoption_stats() to authenticated;

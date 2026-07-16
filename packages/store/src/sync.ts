@@ -6,6 +6,20 @@ import { watch } from 'vue'
 import { supabase } from './supabase'
 import { currentUser } from './auth'
 
+// ── 도입 대시보드 집계 (P3) — security definer RPC(익명 집계만) ──
+export interface AdoptionStats {
+  total_users: number
+  total_completions: number
+  per_part: { part: number; users: number; completions: number }[]
+  per_chapter: { part: number; slug: string; users: number }[]
+}
+export async function fetchAdoptionStats(): Promise<AdoptionStats | null> {
+  if (!supabase || !currentUser.value) return null
+  const { data, error } = await supabase.rpc('adoption_stats')
+  if (error || !data) return null
+  return data as AdoptionStats
+}
+
 // ── 진도 (part 별 완료 슬러그) ─────────────────────────────
 async function pullProgress(part: number): Promise<string[]> {
   if (!supabase || !currentUser.value) return []
