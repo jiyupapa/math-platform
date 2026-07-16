@@ -1,9 +1,11 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import { registerProgressSync } from '@series/store'
 import { progressChapters } from '@/data/chapters'
 
 // 학습 진도 스토어. 완료한 챕터 슬러그를 localStorage 에 저장한다.
 const STORAGE_KEY = 'opt-progress-v1'
+const PART = 8 // Supabase progress 테이블의 part 값
 
 function load(): string[] {
   try {
@@ -18,6 +20,15 @@ function load(): string[] {
 
 export const useProgressStore = defineStore('progress', () => {
   const completed = ref<string[]>(load())
+
+  // 로그인 시 원격 진도와 병합 + 이후 변경 원격 반영 (백엔드 미설정이면 no-op)
+  registerProgressSync(PART, {
+    get: () => completed.value,
+    set: (slugs) => {
+      completed.value = slugs
+      persist()
+    },
+  })
 
   function persist() {
     try {

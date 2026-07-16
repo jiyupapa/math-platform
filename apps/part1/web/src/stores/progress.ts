@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { registerProgressSync, pushProgressAdd, pushProgressRemove } from '@series/store'
+import { registerProgressSync } from '@series/store'
 import { progressChapters } from '@/data/chapters'
 
 // 학습 진도 스토어. 완료한 챕터 슬러그를 localStorage 에 저장한다.
@@ -46,14 +46,12 @@ export const useProgressStore = defineStore('progress', () => {
     if (!completed.value.includes(slug)) {
       completed.value.push(slug)
       persist()
-      pushProgressAdd(PART, slug)
     }
   }
 
   function reset(slug: string) {
     completed.value = completed.value.filter((s) => s !== slug)
     persist()
-    pushProgressRemove(PART, slug)
   }
 
   // 진도 대상 챕터와 교집합만 센다 — 샘플 챕터나 이름이 바뀐 옛 slug 가 남아 있어도 진도에 안 잡히게.
