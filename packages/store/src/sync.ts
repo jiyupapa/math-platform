@@ -20,6 +20,14 @@ export async function fetchAdoptionStats(): Promise<AdoptionStats | null> {
   return data as AdoptionStats
 }
 
+// 개인 2층 — 로그인한 나 자신의 전체 진도(전 부). RLS 로 본인 행만 반환된다.
+export async function fetchMyProgress(): Promise<{ part: number; slug: string }[]> {
+  if (!supabase || !currentUser.value) return []
+  const { data, error } = await supabase.from('progress').select('part, slug')
+  if (error || !data) return []
+  return data as { part: number; slug: string }[]
+}
+
 // ── 진도 (part 별 완료 슬러그) ─────────────────────────────
 async function pullProgress(part: number): Promise<string[]> {
   if (!supabase || !currentUser.value) return []
