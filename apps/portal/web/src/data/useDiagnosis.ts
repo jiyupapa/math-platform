@@ -1,6 +1,8 @@
 // 진단 결과 저장/조회 — 포털 접두사 hub-* 사용(각 부 la-/tf- 와 구분).
 // - hub-diagnosis-v1 : 최신 진단(경로 추천에 사용).
 // - hub-baseline-v1  : 최초 진단('학습 전' 기준선). 재진단해도 유지 → 향상도(전↔후) 비교의 앵커.
+import { kvSet } from '@series/store'
+
 const KEY = 'hub-diagnosis-v1'
 const BASELINE_KEY = 'hub-baseline-v1'
 
@@ -33,8 +35,12 @@ export function loadBaseline(): Diagnosis | null {
 export function saveDiagnosis(d: Diagnosis): void {
   try {
     localStorage.setItem(KEY, JSON.stringify(d))
+    void kvSet(KEY, d) // 로그인 상태면 DB(kv)에도 — 다른 기기에서 맞춤 경로 복원
     // 최초 1회만 기준선으로 별도 보관 (이후 재진단해도 덮어쓰지 않음)
-    if (!localStorage.getItem(BASELINE_KEY)) localStorage.setItem(BASELINE_KEY, JSON.stringify(d))
+    if (!localStorage.getItem(BASELINE_KEY)) {
+      localStorage.setItem(BASELINE_KEY, JSON.stringify(d))
+      void kvSet(BASELINE_KEY, d)
+    }
   } catch {
     /* localStorage 사용 불가 환경 무시 */
   }
