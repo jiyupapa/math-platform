@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
+import { AuthPanel } from '@series/store'
 import { chapters, availableChapters } from '@/data/chapters'
 import { useProgressStore } from '@/stores/progress'
 import { useReviewStore } from '@/stores/review'
@@ -61,6 +62,11 @@ const latestPhase = computed(() =>
           {{ review.count }}
         </span>
       </RouterLink>
+
+      <!-- 로그인 — 진도 크로스기기 저장 (백엔드 미설정 시 표시 안 됨) -->
+      <div class="mt-4">
+        <AuthPanel />
+      </div>
     </div>
 
     <nav class="flex-1 overflow-y-auto px-3 py-4">

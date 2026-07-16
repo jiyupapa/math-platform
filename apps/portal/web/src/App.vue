@@ -28,7 +28,7 @@ function openSearch() {
           <RouterLink to="/diagnose" class="text-sm font-medium text-indigo-600 hover:underline">
             경로 진단
           </RouterLink>
-          <AuthPanel />
+          <AuthPanel align="right" />
         </nav>
       </div>
     </header>
