@@ -1,8 +1,10 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import { registerReviewSync } from '@series/store'
 
 // 복습 표시 스토어 — '복습 필요'로 체크한 섹션을 localStorage 에 저장한다.
 const STORAGE_KEY = 'tf-review-v1'
+const PART = 4 // Supabase reviews 테이블의 part 값
 
 export interface ReviewItem {
   /** 섹션 고유 id (앵커로도 사용). 예: 'ch2-s4' */
@@ -24,6 +26,15 @@ function load(): ReviewItem[] {
 
 export const useReviewStore = defineStore('review', () => {
   const items = ref<ReviewItem[]>(load())
+
+  // 로그인 시 원격 복습과 병합 + 이후 변경 원격 반영 (백엔드 미설정이면 no-op)
+  registerReviewSync(PART, {
+    get: () => items.value,
+    set: (v) => {
+      items.value = v
+      persist()
+    },
+  })
 
   function persist() {
     try {

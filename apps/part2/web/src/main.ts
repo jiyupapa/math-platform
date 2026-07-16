@@ -4,6 +4,7 @@ import './style.css'
 import App from './App.vue'
 import router from './router'
 import { storagePrefixKey, reviewApiKey, searchIndexKey } from '@series/ui'
+import { initAuth } from '@series/store'
 import { useReviewStore } from '@/stores/review'
 
 const pinia = createPinia()
@@ -21,4 +22,6 @@ app.provide(reviewApiKey, {
 // 통합검색 인덱스 URL — 자기 BASE_URL 기준(=자기 public). SearchPalette 가 fetch.
 app.provide(searchIndexKey, import.meta.env.BASE_URL + 'search-index.json')
 
+// Supabase 세션 복원 (env 미설정 시 no-op — 로그인 시 진도 동기화)
+void initAuth()
 app.mount('#app')

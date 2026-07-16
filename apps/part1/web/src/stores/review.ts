@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { registerReviewSync, pushReviewAdd, pushReviewRemove } from '@series/store'
+import { registerReviewSync } from '@series/store'
 
 // 복습 표시 스토어 — '복습 필요'로 체크한 섹션을 localStorage 에 저장한다.
 const STORAGE_KEY = 'la-review-v1'
@@ -60,25 +60,17 @@ export const useReviewStore = defineStore('review', () => {
 
   function toggle(item: ReviewItem) {
     const idx = items.value.findIndex((i) => i.id === item.id)
-    if (idx >= 0) {
-      items.value.splice(idx, 1)
-      persist()
-      pushReviewRemove(PART, item.id)
-    } else {
-      items.value.push(item)
-      persist()
-      pushReviewAdd(PART, item)
-    }
+    if (idx >= 0) items.value.splice(idx, 1)
+    else items.value.push(item)
+    persist()
   }
 
   function remove(id: string) {
     items.value = items.value.filter((i) => i.id !== id)
     persist()
-    pushReviewRemove(PART, id)
   }
 
   function clear() {
-    for (const i of items.value) pushReviewRemove(PART, i.id)
     items.value = []
     persist()
   }
