@@ -4,4 +4,4 @@
 export { supabase, isBackendEnabled } from './supabase'
 export { currentUser, initAuth, signUp, signIn, signOut, isAllowedEmail } from './auth'
 export { default as AuthPanel } from './AuthPanel.vue'
-export { registerProgressSync, registerReviewSync } from './sync'
+export { registerProgressSync, registerReviewSync, fetchAdoptionStats, type AdoptionStats } from './sync'

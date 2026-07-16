@@ -199,7 +199,7 @@ create policy own on kv       for all using (auth.uid()=user_id) with check (aut
 | **P0** ✅ | Supabase 콘솔 설정은 사용자, DB는 저장소(`supabase/schema.sql`·`README.md`·`.env.example`) | ❌ | 코드 0 |
 | **P1** ✅ | `@series/store` 스캐폴드(클라이언트·인증·`SyncedStorage`, env 게이팅) + 포털 배선 — **동작 불변**(포털 빌드 통과) | ❌ | 낮음 |
 | **P2** ✅ | **전 12부** 진도·복습 동기화(watch 기반, 스토어는 register 1줄) + 포털 Auth UI. 실 Supabase E2E 7/7(part1·part5 크로스기기 push/pull·도메인 잠금). 로그인 UI 는 포털만(세션은 같은 origin 공유) | ❌(확인 OFF) | 중 |
-| **P3** | 포털 2층 DB 읽기 + 도입 대시보드 | ❌ | 중 |
+| **P3** ✅(대시보드) | **도입 대시보드** — `adoption_stats` RPC(security definer·익명 집계) + 포털 `/adoption`(KPI·부별 완주율·이탈 펀넬). 모킹 데이터로 레이아웃 검증. ※실데이터엔 `schema.sql` 재실행(함수 배포) 필요. (개인 2층-DB-읽기는 별도 항목) | ❌ | 중 |
 | P4(선택) | Realtime 탭간 동기화 / 나중에 매직링크·확인메일 업그레이드 | (그때) | 낮음 |
 
 > **P1 메모(P2에서 처리)**: 현재 `@supabase/supabase-js`가 정적 import라 포털 번들 +약215KB(gzip +56KB)—
