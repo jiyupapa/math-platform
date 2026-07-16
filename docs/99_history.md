@@ -6,6 +6,36 @@
 
 ---
 
+## 2026-07-16
+
+### 🔐 Supabase 백엔드 도입 — 진도·복습·진단 크로스기기 저장 (P0~P3 + 폴리시)
+localStorage 의 구조적 천장(문제 C/F — 캐시삭제·다른 기기 시 진도 소멸, `TODO_260708.md`)을
+Supabase 로 해결. **로컬 우선 + 선택 로그인** — 비로그인은 지금과 100% 동일(순수 localStorage,
+서버로 아무것도 안 나감), 로그인해야만 동기화. env(`VITE_SUPABASE_*`) 미설정 시 백엔드 완전 OFF
+(`VITE_OLLAMA_URL` 과 같은 게이팅). 설계·결정: `docs/todo_supabase백엔드_260715.md`,
+설정 가이드: `docs/supabase_설정가이드_260715.md`, DB 정본: `supabase/schema.sql`.
+
+- **인증 = 경로 B** (이메일+비밀번호 · Supabase "Confirm email" OFF → 메일 발송 0). 사내 메일이
+  삼성 브리티메일이라 SMTP 불명 → 메일을 안 쓰는 경로로 확정. **`@solideos.com` 도메인 잠금**은
+  `auth.users` BEFORE INSERT 트리거로 서버 강제(클라 사전검증은 UX용).
+- **P0** `supabase/schema.sql`: `progress`·`reviews`·`kv` 테이블 + RLS(본인 행만) + 도메인 트리거
+  (idempotent, SQL Editor/CLI 실행). **P1** `packages/store`(@series/store) 스캐폴드 — env 게이팅.
+- **P2** 전 12부 `progress`/`review` 스토어를 **watch 기반 동기화**(스토어는 `register*Sync` 1줄,
+  mutation 미변경)에 연동. 로그인 순간 합집합 병합(무손실). 로그인 UI(`AuthPanel`)는 포털 헤더 +
+  각 부 사이드바(align 프롭으로 좌/우 팝오버).
+- **P3** 도입 대시보드 — `adoption_stats()` security definer RPC(익명 집계만·anon 차단) + 포털
+  `/adoption`(KPI·부별 완주율·챕터별 이탈 펀넬). **개인 2층-DB-읽기** — 로그인 시 포털이 내 진도를
+  DB 에서 하이드레이션 → 새 기기서도 지도/홈이 각 부 방문 없이 즉시 반영(`<RouterView :key>` 리마운트).
+- **폴리시** — **supabase-js lazy-load**(동적 import·별도 청크 ~216KB, 세션 있을 때/로그인 시에만
+  로드 → 비로그인 방문자는 안 받음) · **진단결과(kv) 동기화**(`hub-diagnosis-v1` 등을 kv 로, 다른 기기서
+  맞춤 경로 복원).
+- **검증**: 각 단계 실 Supabase E2E(headless Edge + supabase-js). 최종 **조립 배포본 전체 흐름 13/13** —
+  도메인 잠금·anon 차단·비로그인 청크 미로드·로그인·진도/진단 DB push·기기 B 복원·대시보드·로그아웃.
+  전 12부 빌드(vue-tsc) 통과. 커밋 범위 `dba4354`(P0)…`69417d2`(폴리시). **콘솔 작업**(프로젝트 생성·
+  Confirm OFF·`schema.sql` 실행)은 사용자 수행.
+
+---
+
 ## 2026-07-13
 
 ### 🎬 발표 산출물 11부 반영 재생성 — 106·1,400+·118·129·12단계 → 118·1,600+·131·143·13단계
