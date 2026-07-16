@@ -5,6 +5,8 @@ import { ref } from 'vue'
 import { currentUser, signIn, signUp, signOut, isAllowedEmail } from './auth'
 import { isBackendEnabled } from './supabase'
 
+// 팝오버 정렬: 기본 좌측(사이드바) · 헤더 우측 배치는 align="right"
+const props = withDefaults(defineProps<{ align?: 'left' | 'right' }>(), { align: 'left' })
 const enabled = isBackendEnabled()
 const open = ref(false)
 const mode = ref<'login' | 'signup'>('login')
@@ -52,7 +54,7 @@ async function submit() {
     </template>
     <template v-else>
       <button class="ap-link" type="button" @click="open = !open">진도 지키기</button>
-      <div v-if="open" class="ap-pop">
+      <div v-if="open" class="ap-pop" :class="{ 'ap-pop-right': props.align === 'right' }">
         <div class="ap-tabs">
           <button type="button" :class="{ on: mode === 'login' }" @click="mode = 'login'">로그인</button>
           <button type="button" :class="{ on: mode === 'signup' }" @click="mode = 'signup'">가입</button>
@@ -104,7 +106,7 @@ async function submit() {
 .ap-pop {
   position: absolute;
   top: calc(100% + 8px);
-  right: 0;
+  left: 0;
   z-index: 60;
   width: 260px;
   padding: 12px;
@@ -115,6 +117,10 @@ async function submit() {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+.ap-pop-right {
+  left: auto;
+  right: 0;
 }
 .ap-tabs {
   display: flex;
