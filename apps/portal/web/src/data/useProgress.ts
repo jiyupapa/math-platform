@@ -5,6 +5,9 @@
 // ⚠️ localStorage 는 origin 단위라, 이 읽기는 11개 부 + 포털이 "같은 origin 하위 경로"로
 //    배포됐을 때만 실제로 동작한다(npm run deploy:build → deploy:serve). dev 단독 실행 시엔 빈 값.
 
+import { ref, watch } from 'vue'
+import { currentUser, fetchMyProgress } from '@series/store'
+
 const range = (from: number, to: number): string[] =>
   Array.from({ length: to - from + 1 }, (_, i) => `ch${from + i}`)
 
@@ -116,4 +119,40 @@ export function readReviewBookmarks(meta: PartMeta): ReviewBookmark[] {
   } catch {
     return []
   }
+}
+
+// ── 개인 2층 DB 하이드레이션 ─────────────────────────────────────────────────
+// 로그인 시 내 진도(전 부)를 Supabase 에서 읽어 각 부 localStorage 키를 채운다(합집합, 무손실).
+// 그러면 새 기기·첫 로그인에서도 포털 지도/홈이 내 크로스기기 진도를 각 부 방문 없이 바로 보여준다.
+// 백엔드 미설정·비로그인이면 no-op → 지금까지처럼 localStorage 만.
+// progressVersion 을 올려 App.vue 의 <RouterView :key> 가 뷰를 리마운트 → 재계산하게 한다.
+export const progressVersion = ref(0)
+
+async function hydrateFromDB(): Promise<void> {
+  const rows = await fetchMyProgress()
+  const byPart = new Map<number, string[]>()
+  for (const r of rows) {
+    const arr = byPart.get(r.part) ?? []
+    arr.push(r.slug)
+    byPart.set(r.part, arr)
+  }
+  for (const meta of PART_META) {
+    const dbSlugs = byPart.get(meta.part)
+    if (!dbSlugs || !dbSlugs.length) continue
+    const merged = Array.from(new Set([...readStringArray(`${meta.prefix}-progress-v1`), ...dbSlugs]))
+    try {
+      localStorage.setItem(`${meta.prefix}-progress-v1`, JSON.stringify(merged))
+    } catch {
+      /* localStorage 불가 무시 */
+    }
+  }
+  progressVersion.value++
+}
+
+let hydrationStarted = false
+/** App.vue 에서 1회 호출 — 로그인 시 DB→localStorage 하이드레이션을 구독한다. */
+export function startPortalHydration(): void {
+  if (hydrationStarted) return
+  hydrationStarted = true
+  watch(currentUser, (u) => { if (u) void hydrateFromDB() }, { immediate: true })
 }

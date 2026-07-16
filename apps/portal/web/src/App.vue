@@ -3,6 +3,10 @@
 import { RouterView, RouterLink } from 'vue-router'
 import { SearchPalette } from '@series/ui'
 import { AuthPanel, currentUser } from '@series/store'
+import { startPortalHydration, progressVersion } from './data/useProgress'
+
+// 개인 2층 — 로그인 시 내 진도를 DB 에서 읽어 지도/홈이 즉시 반영되게 한다.
+startPortalHydration()
 
 function openSearch() {
   window.dispatchEvent(new Event('open-search'))
@@ -39,7 +43,8 @@ function openSearch() {
         </nav>
       </div>
     </header>
-    <RouterView />
+    <!-- 로그인 후 DB 하이드레이션이 끝나면 progressVersion 이 올라 뷰가 리마운트(진도 재계산)된다 -->
+    <RouterView :key="progressVersion" />
 
     <!-- 통합검색 팔레트 (⌘K / Ctrl+K · 상단 🔎 검색) -->
     <SearchPalette />
