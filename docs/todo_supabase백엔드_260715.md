@@ -202,9 +202,12 @@ create policy own on kv       for all using (auth.uid()=user_id) with check (aut
 | **P3** ✅ | **도입 대시보드**(`adoption_stats` RPC 익명 집계 + 포털 `/adoption` KPI·완주율·이탈 펀넬, 실 Supabase 검증) **+ 개인 2층-DB-읽기**(로그인 시 포털이 내 진도를 DB 에서 하이드레이션 → 새 기기서도 지도/홈 즉시 반영, 실 Supabase 검증) | ❌ | 중 |
 | P4(선택) | Realtime 탭간 동기화 / 나중에 매직링크·확인메일 업그레이드 | (그때) | 낮음 |
 
-> **P1 메모(P2에서 처리)**: 현재 `@supabase/supabase-js`가 정적 import라 포털 번들 +약215KB(gzip +56KB)—
-> 백엔드 OFF여도 실림. 12앱 확산 전 **supabase-js 를 동적 import(로그인 개시 시 lazy-load)**로 바꿔
-> 비로그인·미설정 상태 비용을 0에 가깝게 유지할 것. (P1 스캐폴드는 포털 한정이라 지금은 영향 작음.)
+> **폴리시 완료(2026-07-16)**:
+> - **supabase-js lazy-load** ✅ — 동적 import 로 별도 청크(~216KB) 분리. 세션 토큰이 있을 때/로그인
+>   클릭 시에만 로드 → 비로그인·미설정 방문자는 안 받음. `getSupabase()` 1회 로드·캐시, auth/sync async 화.
+>   실검증: 비로그인 청크 미로드 → 로그인 시 로드.
+> - **진단결과(kv) 동기화** ✅ — `kvGet`/`kvSet` + `kv` 테이블(P0 배포분 재사용, 추가 SQL 없음).
+>   진단 저장 시 DB 반영, 로그인 시 하이드레이션 → 다른 기기에서 맞춤 경로 복원. 실검증 완료.
 
 ---
 

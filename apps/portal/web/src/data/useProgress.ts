@@ -6,7 +6,7 @@
 //    배포됐을 때만 실제로 동작한다(npm run deploy:build → deploy:serve). dev 단독 실행 시엔 빈 값.
 
 import { ref, watch } from 'vue'
-import { currentUser, fetchMyProgress } from '@series/store'
+import { currentUser, fetchMyProgress, kvGet, kvSet } from '@series/store'
 
 const range = (from: number, to: number): string[] =>
   Array.from({ length: to - from + 1 }, (_, i) => `ch${from + i}`)
@@ -144,6 +144,26 @@ async function hydrateFromDB(): Promise<void> {
       localStorage.setItem(`${meta.prefix}-progress-v1`, JSON.stringify(merged))
     } catch {
       /* localStorage 불가 무시 */
+    }
+  }
+  // 진단결과(kv) — 로컬 있으면 DB 에 올리고, 없으면 DB 에서 복원(새 기기에서 맞춤 경로).
+  for (const key of ['hub-diagnosis-v1', 'hub-baseline-v1']) {
+    const localRaw = localStorage.getItem(key)
+    if (localRaw) {
+      try {
+        void kvSet(key, JSON.parse(localRaw))
+      } catch {
+        /* 손상값 무시 */
+      }
+    } else {
+      const val = await kvGet(key)
+      if (val != null) {
+        try {
+          localStorage.setItem(key, JSON.stringify(val))
+        } catch {
+          /* localStorage 불가 무시 */
+        }
+      }
     }
   }
   progressVersion.value++
