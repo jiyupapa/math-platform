@@ -102,3 +102,48 @@ $$;
 
 revoke all on function public.adoption_stats() from public, anon;
 grant execute on function public.adoption_stats() to authenticated;
+
+-- ─────────────────────────────────────────────────────────────
+-- 5) 협업 주석 (메모 + 질문) — 항목별 · 공유(로그인 전원 열람)
+--    진도/복습/kv 와 달리 "본인 행만"이 아니다: 읽기는 로그인 전원, 쓰기·수정·삭제만 본인.
+--    ⚠️ 남의 눈에 보이는 층 — 작성자(author_name)가 함께 노출된다.
+--    설계: docs/todo_협업주석_260716.md
+-- ─────────────────────────────────────────────────────────────
+create table if not exists public.annotations (
+  id          uuid        primary key default gen_random_uuid(),
+  user_id     uuid        not null references auth.users on delete cascade,
+  author_name text        not null,                 -- 표시용(이메일 앞부분) — 공유라 필요
+  part        smallint    not null,
+  chapter     text        not null,                 -- 예: 'ch6'
+  item_id     text        not null,                 -- 앵커 id, 예: 'ch6-s2'
+  kind        text        not null default 'note',  -- 'note' | 'question'
+  body        text        not null,
+  ai_answer   text,                                 -- AI 답변(질문일 때, 사용자가 저장 시)
+  resolved    boolean     not null default false,
+  created_at  timestamptz not null default now(),
+  updated_at  timestamptz not null default now(),
+  constraint annotations_kind_chk check (kind in ('note', 'question')),
+  constraint annotations_body_chk check (char_length(body) between 1 and 2000)
+);
+
+-- 항목별 조회(패널 열 때) · 미해결 질문 큐(P3 관리자 뷰)
+create index if not exists annotations_item_idx  on public.annotations (part, chapter, item_id);
+create index if not exists annotations_queue_idx on public.annotations (kind, resolved) where kind = 'question';
+
+alter table public.annotations enable row level security;
+
+drop policy if exists read_all  on public.annotations;
+drop policy if exists write_own on public.annotations;
+drop policy if exists edit_own  on public.annotations;
+drop policy if exists del_own   on public.annotations;
+
+-- 읽기 = 로그인 전원(공유) · 쓰기/수정/삭제 = 본인만.
+-- 관리자 삭제(모더레이션)는 P3 에서 정책에 이메일 화이트리스트 or 를 더한다(설계노트 §7).
+create policy read_all  on public.annotations for select to authenticated
+  using (true);
+create policy write_own on public.annotations for insert to authenticated
+  with check (auth.uid() = user_id);
+create policy edit_own  on public.annotations for update to authenticated
+  using (auth.uid() = user_id) with check (auth.uid() = user_id);
+create policy del_own   on public.annotations for delete to authenticated
+  using (auth.uid() = user_id);

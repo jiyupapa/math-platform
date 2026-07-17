@@ -13,3 +13,12 @@ export {
   kvSet,
   type AdoptionStats,
 } from './sync'
+// 협업 주석(메모·질문) — 공유 층. 설계: docs/todo_협업주석_260716.md
+export {
+  useChapterAnnotations,
+  saveAiAnswer,
+  authorName,
+  type Annotation,
+  type AnnotationKind,
+  type ChapterAnnotations,
+} from './annotations'
