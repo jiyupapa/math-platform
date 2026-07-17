@@ -104,15 +104,17 @@ revoke all on function public.adoption_stats() from public, anon;
 grant execute on function public.adoption_stats() to authenticated;
 
 -- ─────────────────────────────────────────────────────────────
--- 5) 협업 주석 (메모 + 질문) — 항목별 · 공유(로그인 전원 열람)
+-- 5) 협업 주석 (메모 + 질문) — 항목별 · 공유(로그인 전원 열람) · **익명**
 --    진도/복습/kv 와 달리 "본인 행만"이 아니다: 읽기는 로그인 전원, 쓰기·수정·삭제만 본인.
---    ⚠️ 남의 눈에 보이는 층 — 작성자(author_name)가 함께 노출된다.
---    설계: docs/todo_협업주석_260716.md
+--    **작성자 이름을 저장하지 않는다** — 수포자가 "이런 것도 모르나" 눈치 안 보고 묻게 하려는 것.
+--    화면에서 가리기만 하면 read_all 이라 동료가 API 로 이름을 그대로 읽는다 → 컬럼 자체를 없앤다.
+--    남는 것은 user_id(불투명 UUID) 뿐 — RLS(본인만 수정/삭제)에 필요하고, 이름 매핑은
+--    auth.users 를 볼 수 있는 관리자(대시보드)만 가능하다. 즉 동료에겐 익명, 운영자에겐 추적 가능.
+--    설계: docs/todo_협업주석_260716.md §10
 -- ─────────────────────────────────────────────────────────────
 create table if not exists public.annotations (
   id          uuid        primary key default gen_random_uuid(),
   user_id     uuid        not null references auth.users on delete cascade,
-  author_name text        not null,                 -- 표시용(이메일 앞부분) — 공유라 필요
   part        smallint    not null,
   chapter     text        not null,                 -- 예: 'ch6'
   item_id     text        not null,                 -- 앵커 id, 예: 'ch6-s2'
@@ -125,6 +127,10 @@ create table if not exists public.annotations (
   constraint annotations_kind_chk check (kind in ('note', 'question')),
   constraint annotations_body_chk check (char_length(body) between 1 and 2000)
 );
+
+-- 익명화 — 이미 author_name 이 있는 기존 배포분에서 컬럼을 제거한다(신규 설치엔 애초에 없음).
+-- ⚠️ 기존에 쌓인 작성자 이름은 이 시점에 사라진다(되돌릴 수 없음). 익명 전환의 핵심 단계.
+alter table public.annotations drop column if exists author_name;
 
 -- 항목별 조회(패널 열 때) · 미해결 질문 큐(P3 관리자 뷰)
 create index if not exists annotations_item_idx  on public.annotations (part, chapter, item_id);

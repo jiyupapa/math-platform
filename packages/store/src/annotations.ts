@@ -1,6 +1,8 @@
 // 항목별 협업 주석(메모·질문) — 공유 층. 읽기=로그인 전원, 쓰기/수정/삭제=본인.
-// 진도·복습(본인 행만)과 달리 남에게 보인다 → 작성자 이름이 함께 저장·노출된다.
-// 설계: docs/todo_협업주석_260716.md · DB: supabase/schema.sql §5
+// **익명** — 작성자 이름을 아예 저장하지 않는다(수포자가 눈치 안 보고 묻게 하려는 것).
+// 화면에서 가리기만 하면 read_all 이라 동료가 API 로 이름을 읽는다 → DB 컬럼 자체가 없다.
+// user_id 는 남지만 불투명 UUID 라 동료는 사람과 못 잇는다(본인 글 판별·RLS 에 필요).
+// 설계: docs/todo_협업주석_260716.md §10 · DB: supabase/schema.sql §5
 import { effectScope, ref, watch, type Ref } from 'vue'
 import { getSupabase } from './supabase'
 import { currentUser } from './auth'
@@ -9,8 +11,8 @@ export type AnnotationKind = 'note' | 'question'
 
 export interface Annotation {
   id: string
+  /** 불투명 UUID — 화면에 절대 표시하지 않는다. 본인 글 판별(수정/삭제 노출)에만 쓴다. */
   user_id: string
-  author_name: string
   part: number
   chapter: string
   item_id: string
@@ -23,12 +25,7 @@ export interface Annotation {
 }
 
 const COLS =
-  'id, user_id, author_name, part, chapter, item_id, kind, body, ai_answer, resolved, created_at, updated_at'
-
-// 표시용 작성자 이름 — 이메일 앞부분(공유 층이라 "누가 썼나"가 보여야 한다).
-export function authorName(): string {
-  return currentUser.value?.email?.split('@')[0] || '익명'
-}
+  'id, user_id, part, chapter, item_id, kind, body, ai_answer, resolved, created_at, updated_at'
 
 export interface ChapterAnnotations {
   /** 이 챕터의 모든 주석 (작성순) */
@@ -91,15 +88,7 @@ export function useChapterAnnotations(part: number, chapter: string): ChapterAnn
     error.value = ''
     const { data, error: e } = await sb
       .from('annotations')
-      .insert({
-        user_id: currentUser.value.id,
-        author_name: authorName(),
-        part,
-        chapter,
-        item_id: itemId,
-        kind,
-        body,
-      })
+      .insert({ user_id: currentUser.value.id, part, chapter, item_id: itemId, kind, body })
       .select(COLS)
       .single()
     if (e || !data) {

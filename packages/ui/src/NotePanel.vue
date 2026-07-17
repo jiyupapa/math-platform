@@ -3,7 +3,7 @@
 // 자체 완결 scoped 스타일(AuthPanel 방식) — Tailwind @source 의존 없음.
 // 설계: docs/todo_협업주석_260716.md · 읽기=로그인 전원(공유), 쓰기=본인.
 import { computed, ref } from 'vue'
-import { currentUser, useChapterAnnotations, type AnnotationKind } from '@series/store'
+import { currentUser, useChapterAnnotations, type Annotation, type AnnotationKind } from '@series/store'
 import { dispatchNoteAsk } from './noteAsk'
 
 const props = defineProps<{ part: number; chapter: string; itemId: string; label: string }>()
@@ -11,6 +11,9 @@ defineEmits<{ close: [] }>()
 
 const store = useChapterAnnotations(props.part, props.chapter)
 const list = computed(() => store.itemsFor(props.itemId))
+
+// 본인 글 판별 — 내 화면에서만 계산된다(user_id 는 불투명 UUID 라 남의 신원은 알 수 없다).
+const isMine = (a: Annotation) => !!currentUser.value && a.user_id === currentUser.value.id
 
 const body = ref('')
 const kind = ref<AnnotationKind>('note')
@@ -72,7 +75,7 @@ function when(iso: string): string {
     <!-- 비로그인: 공유 층이라 열람·작성 모두 로그인 필요 -->
     <p v-if="!currentUser" class="np-empty">
       로그인하면 이 부분에 <b>메모</b>를 남기고 <b>질문</b>할 수 있어요.<br />
-      동료가 남긴 메모도 함께 보여요.
+      동료가 남긴 메모도 함께 보여요 — 모두 <b>익명</b>이에요.
     </p>
 
     <template v-else>
@@ -81,9 +84,10 @@ function when(iso: string): string {
 
       <ul v-else class="np-list">
         <li v-for="a in list" :key="a.id" class="np-item">
+          <!-- 작성자는 표시하지 않는다(익명). '내 글' 은 본인 화면에서만 계산돼 남에겐 안 보인다. -->
           <div class="np-meta">
             <span class="np-kind" :class="a.kind">{{ a.kind === 'question' ? '질문' : '메모' }}</span>
-            <span class="np-author">{{ a.author_name }}</span>
+            <span v-if="isMine(a)" class="np-mine">내 글</span>
             <span class="np-time">{{ when(a.created_at) }}</span>
             <span v-if="a.kind === 'question' && a.resolved" class="np-done">해결됨</span>
           </div>
@@ -111,7 +115,7 @@ function when(iso: string): string {
             >
               🤖 AI에게 묻기
             </button>
-            <template v-if="currentUser && a.user_id === currentUser.id">
+            <template v-if="isMine(a)">
               <button class="np-link" type="button" @click="startEdit(a.id, a.body)">수정</button>
               <button class="np-link np-del" type="button" @click="remove(a.id)">삭제</button>
             </template>
@@ -134,14 +138,14 @@ function when(iso: string): string {
           :placeholder="
             kind === 'question'
               ? '이 부분에서 막힌 점을 물어보세요 — AI가 바로 답해요'
-              : '이 부분에 남길 메모 (동료에게도 보여요)'
+              : '이 부분에 남길 메모 (익명으로 동료에게도 보여요)'
           "
         ></textarea>
         <p v-if="store.error.value" class="np-err">{{ store.error.value }}</p>
         <button class="np-go" type="button" :disabled="busy || !body.trim()" @click="submit">
           {{ busy ? '저장 중…' : kind === 'question' ? '질문하고 AI에게 묻기' : '메모 남기기' }}
         </button>
-        <p class="np-note">이름({{ currentUser.email?.split('@')[0] }})과 함께 동료에게 공개돼요.</p>
+        <p class="np-note">익명으로 남습니다 — 이름은 표시되지 않아요.</p>
       </div>
     </template>
   </div>
@@ -232,9 +236,12 @@ function when(iso: string): string {
   background: #fef3c7;
   color: #b45309;
 }
-.np-author {
+.np-mine {
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: #64748b;
   font-weight: 600;
-  color: #475569;
 }
 .np-done {
   padding: 1px 6px;
