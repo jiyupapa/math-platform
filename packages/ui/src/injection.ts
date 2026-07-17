@@ -21,3 +21,8 @@ export const notebookResolverKey: InjectionKey<NotebookResolver> = Symbol('noteb
 // 통합검색 인덱스(search-index.json) URL. 각 앱이 자기 BASE_URL 기준 경로로 주입. SearchPalette 가 사용.
 // 미주입 시 컴포넌트가 BASE_URL 기준 기본값('<base>search-index.json')으로 폴백한다.
 export const searchIndexKey: InjectionKey<string> = Symbol('searchIndexUrl')
+
+// 이 앱의 부 번호 (Supabase annotations.part). NoteMarker 가 사용.
+// **주입한 부에서만 협업 주석이 켜진다** — 미주입이면 NoteMarker 는 아무것도 그리지 않는다.
+// 얇은 슬라이스 게이트: 지금은 part1 만 주입한다(설계: docs/todo_협업주석_260716.md §8).
+export const partNumberKey: InjectionKey<number> = Symbol('partNumber')

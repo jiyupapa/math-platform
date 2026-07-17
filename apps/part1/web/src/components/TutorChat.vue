@@ -1,11 +1,13 @@
 <script setup lang="ts">
 // AI 튜터 챗봇 — 로컬 Ollama LLM 사용 (API 키·비용·인터넷 불필요, 오프라인 시연 가능).
 // 현재 보고 있는 챕터의 맥락을 시스템 프롬프트에 주입해, 본문과 일치하는 답을 하도록 유도한다.
-import { ref, computed, nextTick, onUnmounted } from 'vue'
+import { ref, computed, nextTick, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { chapters } from '@/data/chapters'
 import { contextFor, curriculumIndex } from '@/data/tutorContext'
 import { DEFAULT_MODEL, listModels, streamChat, type ChatMessage } from '@series/tutor'
+import { NOTE_ASK_EVENT, type NoteAskDetail } from '@series/ui'
+import { saveAiAnswer } from '@series/store'
 
 interface UiMessage {
   role: 'user' | 'assistant'
@@ -92,6 +94,8 @@ async function send() {
   const q = input.value.trim()
   if (!q || busy.value || serverOk.value !== true) return
   input.value = ''
+  // 새 질문이 오면 직전 답변의 '메모에 저장' 제안은 더 이상 유효하지 않다(마지막 답변이 바뀐다).
+  noteAsk.value = null
   messages.value.push({ role: 'user', content: q })
   messages.value.push({ role: 'assistant', content: '' })
   busy.value = true
@@ -147,10 +151,44 @@ function stop() {
 }
 
 function clearChat() {
-  if (!busy.value) messages.value = []
+  if (!busy.value) {
+    messages.value = []
+    noteAsk.value = null
+  }
 }
 
-onUnmounted(() => aborter?.abort())
+// ── 협업 주석 연동 — NotePanel 의 '🤖 AI에게 묻기' (window CustomEvent) ──
+// 질문 주석을 항목 맥락과 함께 받아 바로 튜터에게 묻고, 사용자가 원할 때만 답변을 주석에 저장한다.
+// (매번 자동 저장하지 않는 이유: 로컬 모델 답이 틀릴 수 있는데 공유 층이라 동료에게도 보인다.)
+const noteAsk = ref<{ id: string; saved: boolean } | null>(null)
+
+async function onNoteAsk(e: Event) {
+  const d = (e as CustomEvent<NoteAskDetail>).detail
+  if (!d || busy.value) return
+  open.value = true
+  if (serverOk.value === null) await checkServer()
+  if (serverOk.value !== true) return // Ollama 미실행 안내가 패널에 이미 보인다
+  input.value = `「${d.context}」 부분에서 질문이 있어요: ${d.question}`
+  await send()
+  const last = messages.value[messages.value.length - 1]
+  if (last?.role === 'assistant' && last.content.trim()) {
+    noteAsk.value = { id: d.annotationId, saved: false }
+  }
+}
+
+async function saveNoteAnswer() {
+  const n = noteAsk.value
+  if (!n || busy.value) return
+  const last = messages.value[messages.value.length - 1]
+  if (!last || last.role !== 'assistant') return
+  if (await saveAiAnswer(n.id, fmt(last.content))) noteAsk.value = { id: n.id, saved: true }
+}
+
+onMounted(() => window.addEventListener(NOTE_ASK_EVENT, onNoteAsk as EventListener))
+onUnmounted(() => {
+  aborter?.abort()
+  window.removeEventListener(NOTE_ASK_EVENT, onNoteAsk as EventListener)
+})
 
 const suggestions = [
   '방금 나온 개념을 더 쉬운 비유로 설명해 주세요',
@@ -276,6 +314,22 @@ function segments(text: string): Segment[] {
 
       <!-- 입력 -->
       <div class="border-t border-slate-100 p-3">
+        <!-- 주석에서 넘어온 질문의 답 — 사용자가 누를 때만 그 메모에 저장(동료에게도 보이므로) -->
+        <div
+          v-if="noteAsk && !busy"
+          class="mb-2 flex items-center justify-between gap-2 rounded-lg border border-indigo-100 bg-indigo-50 px-2.5 py-1.5 text-[11px]"
+        >
+          <span class="text-indigo-700">
+            {{ noteAsk.saved ? '메모에 저장했어요 — 동료도 볼 수 있어요.' : '이 답변을 메모에 남길까요?' }}
+          </span>
+          <button
+            v-if="!noteAsk.saved"
+            class="flex-none rounded-md bg-indigo-600 px-2 py-1 font-medium text-white hover:bg-indigo-500"
+            @click="saveNoteAnswer"
+          >
+            메모에 저장
+          </button>
+        </div>
         <div class="flex gap-2">
           <input
             v-model="input"

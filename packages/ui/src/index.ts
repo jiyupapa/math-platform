@@ -11,6 +11,12 @@ export { default as ReviewFlag } from './ReviewFlag.vue'
 export { default as PartLink } from './PartLink.vue'
 export { default as SearchPalette } from './SearchPalette.vue'
 
+// 협업 주석 — ReviewFlag 가 섹션마다 NoteMarker 를 얹으므로 앱이 직접 쓸 일은 아직 없다.
+// (임의 항목으로 넓힐 때 콘텐츠가 NoteMarker 를 직접 배치한다.)
+export { default as NoteMarker } from './NoteMarker.vue'
+export { default as NotePanel } from './NotePanel.vue'
+export { NOTE_ASK_EVENT, dispatchNoteAsk, type NoteAskDetail } from './noteAsk'
+
 // 문제(자동채점) 패밀리
 export { default as Quiz } from './Quiz.vue'
 export { default as StepQuiz } from './StepQuiz.vue'
@@ -23,6 +29,7 @@ export {
   reviewApiKey,
   notebookResolverKey,
   searchIndexKey,
+  partNumberKey,
   type ReviewApi,
   type NotebookResolver,
 } from './injection'
