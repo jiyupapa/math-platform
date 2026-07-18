@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 10장 — 지형의 함정들: 안장점과 평원. 고차원 임계점은 거의 다 안장점 — 그런데도 SGD가 통하는 이유.
 // 회수하는 수학: 7부 4장(고차원 직관 뒤집힘) · 7부 5장(2D 슬라이스) · 1부 7장(고유값 = 방향별 곡률) · 3장(노이즈 순기능).
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -38,6 +38,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 기울기 0의 세 얼굴 — 임계점</h2>
+    <ReviewFlag id="ch10-s1" chapter="ch10" label="1. 기울기 0의 세 얼굴 — 임계점" />
     <p class="leading-relaxed text-slate-700">
       기울기가 정확히 0인 곳을 <b>임계점</b>이라 부릅니다. 골짜기 바닥(모든 방향이 위로 굽음)일
       수도, 산꼭대기(모든 방향이 아래로)일 수도 있지만 — 제3의 얼굴이 있어요. 말안장을
@@ -77,6 +78,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 동전 세기 — 왜 고차원엔 안장점 천지인가</h2>
+    <ReviewFlag id="ch10-s2" chapter="ch10" label="2. 동전 세기 — 왜 고차원엔 안장점 천지인가" />
     <p class="leading-relaxed text-slate-700">
       임계점에서 방향마다 <b>위로 굽었나(+) 아래로 굽었나(−)</b>를 따질 수 있습니다 — 2장의
       곡률이 방향마다 하나씩 있는 셈이죠(이 방향별 곡률의 실무 이름이 1부 7장의 <b>고유값</b>입니다).
@@ -133,6 +135,7 @@ function onSetComplete() {
       슬라이스 방향에 따라 골짜기처럼 보일 수도 있어요. 그림은 지도이지 영토가 아닙니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch10-ai" chapter="ch10" label="🤖 AI 연결 — 회수하는 수학: 7부 4장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 7부 4장">
       <b><PartLink :part="7" ch="ch4">7부 4장</PartLink></b>에서 "고차원에서는 아무 두 벡터나 거의
       직교"라는 직관 뒤집힘을 배웠죠 — 오늘 그 뒤집힘의 최적화 버전을 봤습니다. 이로써 그림이

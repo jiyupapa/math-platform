@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 7장 — 생각의 길이: 추론 시점 컴퓨트. 2막(전략과 자원) 개막 —
 // 같은 예산을 "길게 하나"와 "짧게 여럿 + 다수결"에 배분하는 수학.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -34,6 +34,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 무대 — 두 상사의 지시</h2>
+    <ReviewFlag id="ch7-s1" chapter="ch7" label="1. 무대 — 두 상사의 지시" />
     <p class="leading-relaxed text-slate-700">
       까다로운 문제 하나가 AI 일꾼에게 갑니다. 상사 A는 말합니다 — <b>"시간을 줄 테니
       풀이를 길게, 차근차근 써 가면서 고민해."</b> 상사 B는 다르게 말합니다 —
@@ -65,6 +66,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 이름표 달기 — 생각도 계산이다</h2>
+    <ReviewFlag id="ch7-s2" chapter="ch7" label="2. 이름표 달기 — 생각도 계산이다" />
 
     <ConceptCard tone="note" title="새 용어: 추론 시점 컴퓨트 / 추론 사슬 / 직렬·병렬 스케일링">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
@@ -96,6 +98,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 손으로 계산 — 예산 10k, 셋이 투표하면</h2>
+    <ReviewFlag id="ch7-s3" chapter="ch7" label="3. 손으로 계산 — 예산 10k, 셋이 투표하면" />
     <p class="mb-2 leading-relaxed text-slate-700">
       어려운 문제에 예산 10,000토큰. 셋이 투표하면 풀이 하나는 10,000÷3 ≈ <b>3,333토큰</b>이고,
       이 길이에서 모형의 정답률은 <b>p ≈ 0.60</b>입니다. 다수결(과반 2표 이상)의 정답률을
@@ -125,6 +128,7 @@ function onSetComplete() {
       읽는 눈은 10부, 에이전트 버전은 11장).
     </DetailsCard>
 
+    <ReviewFlag id="ch7-ai" chapter="ch7" label="🤖 AI 연결 — '생각 시간'이 상품이 된 이유" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — '생각 시간'이 상품이 된 이유">
       요즘 추론 모델(reasoning model)들의 요금표에는 "생각 토큰"이 따로 있습니다 — 오늘
       배운 수학이 그대로 상품이 된 것이죠. 배경에는 10부의 이야기가 있습니다: 훈련 컴퓨트를

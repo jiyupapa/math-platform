@@ -69,7 +69,8 @@ function onSetComplete() {
       이 두 선을 기준으로 "어디에 있는지"를 숫자 두 개로 정확히 말할 수 있습니다.
     </p>
 
-    <ConceptCard tone="note" title="새 용어 — 축과 원점">
+    <!-- anchor-id = 협업 주석 임의 항목 앵커(P0) — 네이밍 정본 {chapter}-{type}-{slug} -->
+    <ConceptCard tone="note" title="새 용어 — 축과 원점" anchor-id="ch1-concept-axes">
       <ul class="list-disc space-y-1 pl-5">
         <li><b>x축 (가로축)</b>: 좌우 방향 기준선. 오른쪽이 +, 왼쪽이 −</li>
         <li><b>y축 (세로축)</b>: 위아래 방향 기준선. 위가 +, 아래가 −</li>
@@ -115,6 +116,7 @@ function onSetComplete() {
       question="순서쌍 (2, 3) 과 (3, 2) 는 같은 점을 나타낸다."
       type="truefalse"
       :answer="1"
+      anchor-id="ch1-quiz-ordered-pair"
       explanation="거짓입니다. 순서가 다르면 다른 점이에요. (2,3)은 가로 2, 세로 3 / (3,2)는 가로 3, 세로 2."
     />
 

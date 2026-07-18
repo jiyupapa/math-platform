@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 5장 — 보상으로 배우기: 강화학습 최소 직관.
 // 회수하는 수학: 2부 9장(경사하강 — 방향만 반대) · 3부 5장(기댓값).
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -36,6 +36,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 시범과 점수는 다르다</h2>
+    <ReviewFlag id="ch5-s1" chapter="ch5" label="1. 시범과 점수는 다르다" />
     <p class="leading-relaxed text-slate-700">
       자전거 타기를 배울 때를 떠올려 보세요. SFT 는 <b>아빠가 대신 타는 걸 구경</b>하는 것과
       같습니다(시범 → 흉내). 하지만 결국은 직접 타 봐야 해요 — 넘어지면 아프고(낮은 보상),
@@ -73,6 +74,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 목표는 기대 보상 — 3부의 기댓값이 돌아온다</h2>
+    <ReviewFlag id="ch5-s2" chapter="ch5" label="2. 목표는 기대 보상 — 3부의 기댓값이 돌아온다" />
     <p class="leading-relaxed text-slate-700">
       정책은 확률분포라서 매번 다른 답이 나옵니다. 그럼 무엇을 높여야 할까요?
       한 번의 점수가 아니라 <b>평균 점수</b> — 3부 5장에서 배운 기댓값입니다:
@@ -93,6 +95,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 갱신 규칙 — 경사하강, 방향만 반대</h2>
+    <ReviewFlag id="ch5-s3" chapter="ch5" label="3. 갱신 규칙 — 경사하강, 방향만 반대" />
     <p class="leading-relaxed text-slate-700">
       실험의 갱신 규칙은 단순했습니다: <b>시도한 답변의 확률을 보상의 부호·크기만큼
       올리거나 내린다</b>. 이걸 정책 경사(policy gradient)라고 부르는데, 정체는
@@ -115,6 +118,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">4. 위험한 조합 — 점수만 쫓으면 생기는 일</h2>
+    <ReviewFlag id="ch5-s4" chapter="ch5" label="4. 위험한 조합 — 점수만 쫓으면 생기는 일" />
     <p class="leading-relaxed text-slate-700">
       여기까지 오면 재료가 다 모였습니다: 정책(조련 중인 LLM) + 심판(보상 모델) + 학습 규칙(점수 쫓기).
       그런데 4장의 경고를 기억하세요 — <b>심판도 모델이라 빈틈이 있습니다</b>.
@@ -133,6 +137,7 @@ function onSetComplete() {
       <b>그 그룹의 평균과 비교</b>한다"는 이 아이디어의 변형입니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch5-ai" chapter="ch5" label="🤖 AI 연결 — 회수하는 수학: 2부 9장 · 3부 5장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 2부 9장 · 3부 5장">
       <b><PartLink :part="3" ch="ch5">3부 5장</PartLink></b>: 기댓값 E — 강화학습의 목표 함수(E[보상])로 재등장.
       <b><PartLink :part="2" ch="ch9">2부 9장</PartLink></b>: 경사 이동 — 손실 대신 보상을 놓고 방향만 뒤집으면 정책 경사.

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 8장 — 기출 유출: 오염(contamination)과 벤치마크의 수명. 소음(6·7장) 다음의 적 — 편향.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { StepQuiz } from '@series/ui'
@@ -34,6 +34,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 무대 — 시험 문제가 교과서에 실려 있었다면</h2>
+    <ReviewFlag id="ch8-s1" chapter="ch8" label="1. 무대 — 시험 문제가 교과서에 실려 있었다면" />
     <p class="leading-relaxed text-slate-700">
       어떻게 유출될까요? 대개 <b>일부러가 아닙니다.</b> 6부 3장에서 봤듯 LLM의 훈련 데이터는
       웹에서 옵니다 — 그런데 공개 벤치마크의 문제와 정답, 해설 블로그, 깃허브의 평가 코드가
@@ -63,6 +64,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 이름표 달기 — 오염의 언어</h2>
+    <ReviewFlag id="ch8-s2" chapter="ch8" label="2. 이름표 달기 — 오염의 언어" />
 
     <ConceptCard tone="note" title="새 용어: 오염 / 홀드아웃 / 벤치마크 수명">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
@@ -108,6 +110,7 @@ function onSetComplete() {
       독해 문제에서 점수가 뚝 떨어지는 모델들이 보고됐죠).
     </DetailsCard>
 
+    <ReviewFlag id="ch8-ai" chapter="ch8" label="🤖 AI 연결 — 점수 급등의 의심 목록 4종 (캡스톤 체크리스트 3호)" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 점수 급등의 의심 목록 4종 (캡스톤 체크리스트 3호)">
       "점수 도약" 발표를 보면 이 넷을 확인하세요 — ① <b>불균형 급등</b>: 특정 벤치마크만
       튀고 유사 과제는 제자리인가? ② <b>변형 취약</b>: 문제를 살짝 바꾼 시험(또는 신선한

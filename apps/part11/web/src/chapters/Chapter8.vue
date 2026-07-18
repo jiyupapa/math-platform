@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 8장 — 갈림길 지도: 탐색과 계획. 트리·분기 계수·지수 폭발, 탐욕 vs 빔 vs 되추적.
 // 핵심 수치(SearchLab·노트북과 일치): 탐욕 15 / 빔2 18 / 빔3 27 / 전수 37, 방문 9/15/21/39.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -36,6 +36,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 무대 — 좋아 보이는 쪽으로만 가면</h2>
+    <ReviewFlag id="ch8-s1" chapter="ch8" label="1. 무대 — 좋아 보이는 쪽으로만 가면" />
     <p class="leading-relaxed text-slate-700">
       에이전트 앞에 갈림길이 있습니다. 세 갈래(A·B·C) 각각에 "지금까지의 점수"가 붙어 있고,
       각 갈래는 또 세 갈래로 갈라져 3단계 깊이까지 이어집니다 — 끝까지 가면 총점이 정해지죠.
@@ -64,6 +65,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 세 용어에 이름표 달기</h2>
+    <ReviewFlag id="ch8-s2" chapter="ch8" label="2. 세 용어에 이름표 달기" />
     <ConceptCard tone="note" title="새 용어: 탐색 트리 / 분기 계수 / 빔 서치">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
         <li>
@@ -93,6 +95,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 왜 전수 탐색은 대개 불가능한가 — 지수 폭발</h2>
+    <ReviewFlag id="ch8-s3" chapter="ch8" label="3. 왜 전수 탐색은 대개 불가능한가 — 지수 폭발" />
     <p class="leading-relaxed text-slate-700">
       랩의 트리는 3단계라 경로가 3³ = 27개뿐이었습니다. 그런데 갈림이 <b>깊어지면</b> 경로 수는
       더하기가 아니라 <b>곱하기</b>로 늘어요 — 분기 계수 b, 깊이 d일 때:
@@ -130,6 +133,7 @@ function onSetComplete() {
       계획의 전부입니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch8-ai" chapter="ch8" label="🤖 AI 연결 — LLM은 매 단어에서 갈림길을 만난다" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — LLM은 매 단어에서 갈림길을 만난다">
       사실 LLM은 <b>단어 하나를 뽑을 때마다</b> 어휘 수만 갈래(5만 개도 넘는)의 갈림길에
       섭니다 — <b><PartLink :part="4" ch="ch12">4부 12장</PartLink></b>의 샘플링(temperature·

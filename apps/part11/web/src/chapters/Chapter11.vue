@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 11장 — 에이전트의 성적표. pass@k 정식 정의(비편향 추정)·성적표의 오차범위·궤적 평가·다중 비교.
 // 핵심 수치(전부 해석적 검증): pass@5(n=10,c=4)=97.6% / pass@1=40% / 소박 92.2% / 20건 90% ±21.9%p
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -36,6 +36,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 무대 — “성공률 97%”의 정체</h2>
+    <ReviewFlag id="ch11-s1" chapter="ch11" label="1. 무대 — 「성공률 97%」의 정체" />
     <p class="leading-relaxed text-slate-700">
       어느 코딩 에이전트 제품 소개에 큼직하게 적혀 있습니다 — <b>“pass@5 = 97%”</b>.
       대단해 보이죠. 그런데 두 가지를 물어야 합니다. 첫째, pass@5의 <b>5</b>는 무슨 뜻일까요?
@@ -66,6 +67,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. pass@k를 정확히 세는 법 — 비편향 추정</h2>
+    <ReviewFlag id="ch11-s2" chapter="ch11" label="2. pass@k를 정확히 세는 법 — 비편향 추정" />
     <p class="leading-relaxed text-slate-700">
       한 문제를 <b>n번</b> 시도해 <b>c번</b> 성공했다고 합시다. 여기서 <b>k개를 뽑아</b>
       한 번이라도 성공할 확률(pass@k)을 어떻게 셀까요? 소박하게는 pass@1 = c/n으로 실력을
@@ -126,6 +128,7 @@ function onSetComplete() {
       “몇 개 중 고른 결과인가”를 물어야 합니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch11-ai" chapter="ch11" label="🤖 AI 연결 — 데모 영상과 성적표는 다른 것" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 데모 영상과 성적표는 다른 것">
       코딩 에이전트 벤치마크가 <b>pass@1과 pass@5를 나란히</b> 싣는 건 오늘 배운 이유 때문입니다 —
       pass@1은 한 방 실력, pass@k는 다시 뽑기를 허용한 실력이라 둘 다 봐야 정직하죠. 그리고

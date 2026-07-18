@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 4장 — 다시 뽑기: 재시도와 Best-of-N. 곱셈의 저주(워밍업·2장)를 되살리는 첫 번째 길.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -34,6 +34,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 무대 — 실패한 일꾼에게 기회를 한 번 더</h2>
+    <ReviewFlag id="ch4-s1" chapter="ch4" label="1. 무대 — 실패한 일꾼에게 기회를 한 번 더" />
     <p class="leading-relaxed text-slate-700">
       워밍업의 그 10단계 보고서 — 한 번 시키면 성공률 35%였죠. 팀장님은 포기하는 대신
       이렇게 말합니다. <b>"안 됐으면 다시 시켜."</b> 두 번 시키면? 세 번은? 다섯 번은?
@@ -63,6 +64,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 오늘의 발견에 이름표 달기</h2>
+    <ReviewFlag id="ch4-s2" chapter="ch4" label="2. 오늘의 발견에 이름표 달기" />
 
     <ConceptCard tone="note" title="새 용어: 재시도 / Best-of-N / 기하분포">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
@@ -109,6 +111,7 @@ function onSetComplete() {
       필요합니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch4-ai" chapter="ch4" label="🤖 AI 연결 — pass@k라는 이름의 어원이 바로 이 수학" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — pass@k라는 이름의 어원이 바로 이 수학">
       코딩 벤치마크 성적표에 적힌 <b>pass@5 = 88%</b> 같은 표기가 정확히 오늘의 공식입니다 —
       "5번 뽑으면 한 번이라도 통과할 확률"(정식 정의와 측정법은 11장 성적표에서). 추론 모델이

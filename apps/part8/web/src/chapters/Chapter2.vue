@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 2장 — 보폭의 과학: 학습률 (핵심). 발산 경계 2/c 의 수학과 lr 고르기 실전 감각.
 // 회수하는 수학: 2부 9장 경사하강 · 2부 3장 미분계수(기울기의 변화율 = 곡률 감각).
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -36,6 +36,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 골짜기의 성격 — 곡률</h2>
+    <ReviewFlag id="ch2-s1" chapter="ch2" label="1. 골짜기의 성격 — 곡률" />
     <p class="leading-relaxed text-slate-700">
       먼저 골짜기에 성격을 부여합시다. 같은 깊이라도 <b>좁고 가파른</b> 골짜기와 <b>넓고 완만한</b>
       골짜기가 있죠 — 이 차이를 재는 숫자가 <b>곡률</b>(기울기가 얼마나 빨리 변하는가,
@@ -71,6 +72,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 속도의 과학 — 왜 lr = 1/c 가 특별한가</h2>
+    <ReviewFlag id="ch2-s2" chapter="ch2" label="2. 속도의 과학 — 왜 lr = 1/c 가 특별한가" />
     <p class="leading-relaxed text-slate-700">
       수축 인자는 폭발만 가르는 게 아니라 <b>속도</b>도 가릅니다. 인자가 0.9면 오차가 10%씩,
       0.5면 절반씩 줄어요 — 스무 스텝이면 0.9²⁰ ≈ 12% 남는 것과 0.5²⁰ ≈ 백만분의 일의 차이입니다.
@@ -132,6 +134,7 @@ function onSetComplete() {
       여행 단계마다 바꾸는 <b>6장 스케줄</b>(워밍업·감쇠)이 필요해져요.
     </DetailsCard>
 
+    <ReviewFlag id="ch2-ai" chapter="ch2" label="🤖 AI 연결 — 회수하는 수학: 2부 9장 · 2부 3장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 2부 9장 · 2부 3장">
       한 스텝의 공식은 <b><PartLink :part="2" ch="ch9">2부 9장</PartLink></b>의 경사하강 그대로이고,
       오늘 새로 잰 것은 <b><PartLink :part="2" ch="ch3">2부 3장</PartLink></b>의 감각 — 기울기(미분계수)가

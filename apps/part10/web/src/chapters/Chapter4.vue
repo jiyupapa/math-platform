@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 4장 — 몸집과 밥의 황금비 (Chinchilla): 예산 고정 배분 곡선의 최저점. 필수 소주제 ②.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -34,6 +34,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 무대 — 몸집이 깡패이던 시절</h2>
+    <ReviewFlag id="ch4-s1" chapter="ch4" label="1. 무대 — 몸집이 깡패이던 시절" />
     <p class="leading-relaxed text-slate-700">
       GPT-3(175B)가 나오던 시절의 공식은 단순했습니다 — <b>클수록 좋다.</b> 그래서 다들
       예산이 생기면 몸집(N)부터 키웠죠. 175B 모델에 먹인 데이터는 300B 토큰,
@@ -63,6 +64,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 계산으로 — 왜 하필 그 지점인가</h2>
+    <ReviewFlag id="ch4-s2" chapter="ch4" label="2. 계산으로 — 왜 하필 그 지점인가" />
     <p class="leading-relaxed text-slate-700">
       3장의 법칙을 N축과 D축에 하나씩 적으면 손실은 이렇게 생겼습니다
       (친칠라의 관측을 재현하도록 고른 단순화 상수 — E=1.69, A=32,000, B=A·√20):
@@ -120,6 +122,7 @@ function onSetComplete() {
       이깁니다. 황금비는 "훈련 예산만 최적화할 때"의 답인 거죠.
     </DetailsCard>
 
+    <ReviewFlag id="ch4-ai" chapter="ch4" label="🤖 AI 연결 — 발표 스펙에서 비율부터 계산하는 눈" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 발표 스펙에서 비율부터 계산하는 눈">
       이제 "파라미터 70B, 토큰 2조" 같은 발표를 보면 자동으로 나눗셈이 될 겁니다 —
       2T/70B ≈ 29토큰/파라미터, 황금비 근처군. 반대로 비율이 한 자리면 과체격(왜 이렇게

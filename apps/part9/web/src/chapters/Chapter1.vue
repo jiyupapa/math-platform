@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // ch1 — 큰 그림: 숫자의 몸무게. "모델 = 수십억 개의 실수"에서 출발해
 // 파일 크기 = 개수 × 칸 크기 계산법과 9부 전체 여정표를 편다.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -42,6 +42,7 @@ const ITINERARY = [
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. "7B"의 B — 뭐가 70억 개라는 걸까</h2>
+    <ReviewFlag id="ch1-s1" chapter="ch1" label="1. 「7B」의 B — 뭐가 70억 개라는 걸까" />
     <p class="leading-relaxed text-slate-700">
       <b>4부 10장</b>에서 GPT 를 조립하며 봤듯,
       모델의 실체는 <b>숫자가 가득한 행렬(표)들의 묶음</b>입니다 — 단어장(임베딩 표),
@@ -70,6 +71,7 @@ const ITINERARY = [
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 오늘의 용어 이름표</h2>
+    <ReviewFlag id="ch1-s2" chapter="ch1" label="2. 오늘의 용어 이름표" />
 
     <ConceptCard tone="note" title="새 용어: 파라미터 / B / 체크포인트">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
@@ -100,6 +102,7 @@ const ITINERARY = [
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 9부 여정표 — 저장 · 계산 · 압축</h2>
+    <ReviewFlag id="ch1-s3" chapter="ch1" label="3. 9부 여정표 — 저장 · 계산 · 압축" />
     <p class="mb-3 leading-relaxed text-slate-700">
       오늘 "개수"를 세었으니, 남은 질문은 전부 <b>칸</b> 이야기입니다.
       칸은 어떻게 생겼고(저장), 칸에 담긴 채 계산하면 무슨 사고가 나며(계산),
@@ -124,6 +127,7 @@ const ITINERARY = [
       스티커 등) 때문인데, 그 영수증은 9장에서 한 줄씩 정산합니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch1-ai" chapter="ch1" label="🤖 AI 연결 — 회수하는 수학: 4부 10장 · 6부 8장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 4부 10장 · 6부 8장">
       부품별 저울의 공식은 <b><PartLink :part="4" ch="ch10">4부 10장</PartLink></b>에서 조립한
       구조(임베딩 → 블록 × L → 출력)를 숫자 개수로 다시 읽은 것입니다. 그리고 파라미터 세기는

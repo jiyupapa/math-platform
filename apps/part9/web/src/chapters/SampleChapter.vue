@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // Phase 0 워밍업 챕터 — 9부 전체가 풀 문제("숫자를 담는 칸은 유한하다")를 몸으로 먼저 느낀다.
 // 실제 Phase 1~11 챕터도 이 구조를 그대로 따른다.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -33,6 +33,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 무대 — 계산기를 의심해 본 적 있나요</h2>
+    <ReviewFlag id="sample-s1" chapter="sample" label="1. 무대 — 계산기를 의심해 본 적 있나요" />
     <p class="leading-relaxed text-slate-700">
       수포자에게도 계산기만큼은 믿음의 영역이죠 — <b>숫자를 넣으면 정확한 답이 나온다.</b>
       그런데 시리즈 내내 다뤄 온 AI 의 숫자들(임베딩·가중치·확률)을 계산하는 기계가,
@@ -61,6 +62,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 오늘의 발견에 이름표 달기</h2>
+    <ReviewFlag id="sample-s2" chapter="sample" label="2. 오늘의 발견에 이름표 달기" />
     <p class="leading-relaxed text-slate-700">
       방금 목격한 현상들에는 전부 공식 이름이 있습니다. 9부 내내 쓸 첫 이름표 세 개만
       먼저 달아 두죠 — 자세한 해부는 각 장에서 합니다.
@@ -105,6 +107,7 @@ function onSetComplete() {
       뜻입니다 — 칸을 줄일수록 오차는 커지고 파일은 가벼워지는 거래, 그 수학이 8~11장입니다.
     </DetailsCard>
 
+    <ReviewFlag id="sample-ai" chapter="sample" label="🤖 AI 연결 — 시리즈의 모든 숫자가 이 칸에 산다" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 시리즈의 모든 숫자가 이 칸에 산다">
       <b><PartLink :part="4" ch="ch10">4부 10장</PartLink></b>에서 조립한 GPT 의 실체는 결국
       수십억 개의 숫자였죠 — 그 숫자 <b>하나하나가 오늘 본 유한한 칸</b>에 담겨 있습니다.

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 1장 — 큰 그림: 사전학습에서 비서까지. 6부 전체의 지도를 그리는 챕터.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -32,6 +32,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 비유 하나 — 요리사 키우기</h2>
+    <ReviewFlag id="ch1-s1" chapter="ch1" label="1. 비유 하나 — 요리사 키우기" />
     <p class="leading-relaxed text-slate-700">
       식당에서 일할 요리사를 키운다고 해 봅시다. 순서는 이렇습니다.
     </p>
@@ -64,6 +65,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 세 단계에 이름표 달기</h2>
+    <ReviewFlag id="ch1-s2" chapter="ch1" label="2. 세 단계에 이름표 달기" />
 
     <ConceptCard tone="note" title="새 용어: 파이프라인의 세 단계">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
@@ -102,6 +104,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 이 지도에서 우리의 여정</h2>
+    <ReviewFlag id="ch1-s3" chapter="ch1" label="3. 이 지도에서 우리의 여정" />
     <p class="leading-relaxed text-slate-700">
       이제 남은 9개 장이 이 지도의 어디에 있는지 표시해 둡시다.
       길을 잃을 때마다 여기로 돌아오면 됩니다.
@@ -136,6 +139,7 @@ function onSetComplete() {
       Ollama 에서 받는 모델들이 대부분 instruct 계열인 이유이기도 합니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch1-ai" chapter="ch1" label="🤖 AI 연결 — 회수하는 수학: 이 장은 지도, 수학은 다음 장부터" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 이 장은 지도, 수학은 다음 장부터">
       1단계 사전학습의 수학은 이미 배웠습니다 — <b><PartLink :part="4" ch="ch11">4부 11장</PartLink></b>(손실과 경사하강)과
       <b><PartLink :part="5" ch="ch6">5부 6장</PartLink></b>(학습 = 분포 흉내내기)이 그것이에요. 6부의 새 내용은 2·3단계입니다:

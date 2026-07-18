@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 11장 — 🎯 캡스톤: 파인튜닝 설정 완독. 미니 조련 튜너(12조합 그리드) + 진짜 config 한 줄씩 완독 → 졸업.
 // 회수하는 수학: 8부 전체 + 6부 3장(SFT 설정 직결) — 전 시리즈의 종착역.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -37,6 +37,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 졸업 시험 ① — 미니 조련 튜너</h2>
+    <ReviewFlag id="ch11-s1" chapter="ch11" label="1. 졸업 시험 ① — 미니 조련 튜너" />
     <p class="leading-relaxed text-slate-700">
       무대는 7~8장의 그 문제 그대로입니다 — 노이즈 낀 기울기(3장), 암기 가능한 용량(7장),
       3,000스텝. 당신에게 다이얼 셋이 주어집니다: <b>보폭</b>(2장), <b>일정표</b>(6장),
@@ -75,6 +76,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 졸업 시험 ② — 설정 파일 완독</h2>
+    <ReviewFlag id="ch11-s2" chapter="ch11" label="2. 졸업 시험 ② — 설정 파일 완독" />
     <p class="leading-relaxed text-slate-700">
       6부 3장에서 SFT를 배울 때 설정 파일을 스쳐 지나가며 약속했었죠 — 언젠가 전부 읽히게
       될 거라고. 그날이 오늘입니다. 위 실험 ②의 12줄을 전부 클릭해 완독하세요. 참고로 훈련의
@@ -126,6 +128,7 @@ function onSetComplete() {
       키우는 제3의 다이얼). 다음 여정의 재료입니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch11-ai" chapter="ch11" label="🤖 AI 연결 — 회수하는 수학: 6부 3장, 그리고 시리즈 전체" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 6부 3장, 그리고 시리즈 전체">
       <b><PartLink :part="6" ch="ch3">6부 3장</PartLink></b>의 SFT 설정 파일 — 그때는 lr 한 줄도
       낯설었지만 이제 12줄 전부가 말을 겁니다: 보폭(2장), 나침반(3장), 관성과 축별 자(4·5장),

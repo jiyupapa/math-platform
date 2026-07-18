@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // Phase 0 워밍업 챕터 — 8부 전체가 풀 문제("학습의 성패를 가르는 다이얼")를 몸으로 먼저 느낀다.
 // 실제 Phase 1~11 챕터도 이 구조를 그대로 따른다.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -33,6 +33,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 무대 — 2부에서 배운 그 골짜기</h2>
+    <ReviewFlag id="sample-s1" chapter="sample" label="1. 무대 — 2부에서 배운 그 골짜기" />
     <p class="leading-relaxed text-slate-700">
       2부 9장에서 배운 학습의 원리를 한 줄로 되살리면 — <b>손실이라는 골짜기에서, 기울기의
       반대 방향으로 한 걸음씩 내려간다</b>(경사하강)였죠. 공식도 한 줄이었습니다:
@@ -61,6 +62,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 다이얼에 이름표 달기</h2>
+    <ReviewFlag id="sample-s2" chapter="sample" label="2. 다이얼에 이름표 달기" />
     <p class="leading-relaxed text-slate-700">
       방금 돌린 다이얼이 이 과정 전체의 첫 주인공입니다. 그리고 이런 다이얼들을 부르는
       총칭이 따로 있어요 — 모델이 <b>스스로 배우는 값</b>(가중치)과 달리, <b>사람이 훈련 전에
@@ -104,6 +106,7 @@ function onSetComplete() {
       저 파일의 <b>모든 줄이 읽히고</b>, 손실 곡선을 보고 어느 줄을 고칠지 판단하게 됩니다.
     </DetailsCard>
 
+    <ReviewFlag id="sample-ai" chapter="sample" label="🤖 AI 연결 — 회수하는 수학: 2부 9장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 2부 9장">
       오늘의 무대는 <b><PartLink :part="2" ch="ch9">2부 9장</PartLink></b>의 경사하강 그대로입니다 —
       "새 위치 = 지금 위치 − 보폭 × 기울기"라는 한 줄 공식에서, 2부가 <b>기울기</b>를 맡았다면

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // ch11 — 🎯 캡스톤: 7B는 왜 4GB인가. 워밍업의 질문에 스스로 답하는 졸업 시험 —
 // 영수증 완독 + KV 캐시 정산(필수 소주제) + 용어 치환표(비유→실무 총회수).
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -54,6 +54,7 @@ const GLOSSARY = [
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 영수증 완독 — 그리고 실행의 물류</h2>
+    <ReviewFlag id="ch11-s1" chapter="ch11" label="1. 영수증 완독 — 그리고 실행의 물류" />
     <p class="leading-relaxed text-slate-700">
       계산은 두 단계입니다. <b>파일</b>: 파라미터 수(1장 공식) × 실효 비트(3~9장) ÷ 8.
       <b>실행</b>: 거기에 <b>KV 캐시</b>를 더해야 해요 — 어텐션이 지금까지의 모든 토큰의
@@ -82,6 +83,7 @@ const GLOSSARY = [
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 용어 치환표 — 비유를 실무 언어로 총회수</h2>
+    <ReviewFlag id="ch11-s2" chapter="ch11" label="2. 용어 치환표 — 비유를 실무 언어로 총회수" />
     <p class="mb-3 leading-relaxed text-slate-700">
       9부 내내 쓴 비유들의 실무 이름표를 한 표로 — 이제 모델 카드·기술 문서에서 오른쪽
       용어를 만나면, 왼쪽의 그림이 떠오를 겁니다.
@@ -124,6 +126,7 @@ const GLOSSARY = [
       이유이기도).
     </DetailsCard>
 
+    <ReviewFlag id="ch11-ai" chapter="ch11" label="🤖 AI 연결 — 지금 이 튜터가 오늘의 수학입니다" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 지금 이 튜터가 오늘의 수학입니다">
       시리즈 내내 오른쪽 아래에서 눌러 온 🤖 버튼 — 그 로컬 튜터의 실체가 정확히 오늘 완독한
       <b>양자화 GGUF 파일</b>입니다(Ollama 로 내려받은 q4 계열). 비용 0·데이터 유출 0 으로

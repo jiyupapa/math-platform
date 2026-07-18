@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // ch7 — 반쪽 자: fp16·bf16과 혼합 정밀도 (핵심). 16비트를 나누는 두 철학과
 // "저장은 반쪽, 누적은 fp32"(필수 소주제), loss scaling 까지.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -35,6 +35,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 갈림길 — 눈금이냐, 자 길이냐</h2>
+    <ReviewFlag id="ch7-s1" chapter="ch7" label="1. 갈림길 — 눈금이냐, 자 길이냐" />
     <p class="leading-relaxed text-slate-700">
       3장의 구조 그대로입니다 — 지수 비트는 <b>자의 길이</b>(범위), 가수 비트는 <b>눈금의
       촘촘함</b>(정밀도). 16비트에서 부호 1을 떼면 15비트가 남는데:
@@ -64,6 +65,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 혼합 정밀도 — 반쪽 자와 fp32 의 분업</h2>
+    <ReviewFlag id="ch7-s2" chapter="ch7" label="2. 혼합 정밀도 — 반쪽 자와 fp32 의 분업" />
     <p class="leading-relaxed text-slate-700">
       실험 ②가 보여준 것: 반쪽 자로 <b>쌓는 것</b>은 위험합니다 — fp16 의 1 근처 눈금은
       0.001 급이라, 4장의 흡수가 아주 평범한 크기(0.0001!)에서 일어나요. 그래서 실전은
@@ -113,6 +115,7 @@ function onSetComplete() {
       다음 장(양자화)부터예요.
     </DetailsCard>
 
+    <ReviewFlag id="ch7-ai" chapter="ch7" label="🤖 AI 연결 — 회수하는 수학: 8부 9장 · 4부 11장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 8부 9장 · 4부 11장">
       <b><PartLink :part="8" ch="ch9">8부 9장</PartLink></b>의 훈련 사고 목록에 오늘 지식이
       합류합니다 — 손실 스파이크에 gradient clipping 이 있다면, fp16 오버플로·소실에는

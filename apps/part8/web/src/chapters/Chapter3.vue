@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 3장 — 흔들리는 나침반: 미니배치 SGD. 기울기 = 표본 추정치(σ/√B), 노이즈의 순기능.
 // 회수하는 수학: 3부 5장 기댓값 · 3부 7장 큰 수의 법칙 (시리즈 네 번째 1/√n).
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -37,6 +37,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 나침반의 정체 — 평균, 그리고 표본</h2>
+    <ReviewFlag id="ch3-s1" chapter="ch3" label="1. 나침반의 정체 — 평균, 그리고 표본" />
     <p class="leading-relaxed text-slate-700">
       손실은 데이터별 손실의 평균이라, 기울기도 <b>데이터별 기울기의 평균</b>입니다.
       데이터 하나하나는 저마다 조금씩 다른 방향을 가리켜요("이 문장 기준으론 이쪽!") —
@@ -65,6 +66,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 이름표 달기 — SGD와 그 친구들</h2>
+    <ReviewFlag id="ch3-s2" chapter="ch3" label="2. 이름표 달기 — SGD와 그 친구들" />
 
     <ConceptCard tone="note" title="새 용어: 미니배치·배치 크기 / SGD / 에포크">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
@@ -118,6 +120,7 @@ function onSetComplete() {
       "스텝이 줄었는데 왜 성능이 떨어지지?"라는 실전 사고의 절반이 이 산수를 놓친 데서 나옵니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch3-ai" chapter="ch3" label="🤖 AI 연결 — 회수하는 수학: 3부 5장 · 3부 7장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 3부 5장 · 3부 7장">
       나침반의 과녁(기댓값)은 <b><PartLink :part="3" ch="ch5">3부 5장</PartLink></b>이고, 흔들림의
       공식 σ/√B는 <b><PartLink :part="3" ch="ch7">3부 7장</PartLink></b> 큰 수의 법칙 — 이 시리즈에서

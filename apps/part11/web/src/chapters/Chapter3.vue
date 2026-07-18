@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 3장 — 도구를 드는 손: 도구 호출. "언제 도구를 쓰나"가 분류 결정임을 목격하고,
 // 신뢰도 점수·임계값·놓침/헛발의 저울질과 교정(calibration)의 맛을 본다.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -34,6 +34,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 무대 — 도구함 앞에서 머뭇거리는 일꾼</h2>
+    <ReviewFlag id="ch3-s1" chapter="ch3" label="1. 무대 — 도구함 앞에서 머뭇거리는 일꾼" />
     <p class="leading-relaxed text-slate-700">
       AI 일꾼에게 계산기를 쥐여 줬습니다. 그런데 새로운 고민이 생깁니다 —
       <b>"이 질문, 계산기를 써야 하나?"</b> "1,247 × 38"은 당연히 계산기감이지만,
@@ -63,6 +64,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 오늘의 발견에 이름표 달기</h2>
+    <ReviewFlag id="ch3-s2" chapter="ch3" label="2. 오늘의 발견에 이름표 달기" />
 
     <ConceptCard tone="note" title="새 용어: 라우팅 / 신뢰도 / 임계값 / 놓침·헛발의 정식 이름">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
@@ -91,6 +93,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 점수를 확률처럼 읽어도 될까 — 교정</h2>
+    <ReviewFlag id="ch3-s3" chapter="ch3" label="3. 점수를 확률처럼 읽어도 될까 — 교정" />
     <p class="leading-relaxed text-slate-700">
       랩의 ④를 켜 보세요. 점수 구간별로 <b>실제 계산 문제의 비율</b>을 세어 보면 —
       0.2 미만 구간은 0/8(0%), <b>0.4~0.6 구간은 2/4(50%)</b>, 0.8 이상은 4/4(100%).
@@ -118,6 +121,7 @@ function onSetComplete() {
       무기 — 재시도를 언제 멈출지(4장), 검수를 언제 붙일지(6장) — 가 제대로 작동합니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch3-ai" chapter="ch3" label="🤖 AI 연결 — 함수 호출(function calling)의 정체" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 함수 호출(function calling)의 정체">
       실무 API에서 도구 사용은 이렇게 생겼습니다 — 개발자가 도구 목록(이름·설명·인자 스키마)을
       주면, 모델이 <b>"이 도구를 이 인자로 불러 달라"는 JSON</b>을 출력하고(함수 호출·tool use),

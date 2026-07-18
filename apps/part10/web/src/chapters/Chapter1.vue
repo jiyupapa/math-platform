@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 1장 — 큰 그림: 훈련의 3재료(N·D·C) 지도와 10부 여정표.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { StepQuiz } from '@series/ui'
@@ -33,6 +33,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 무대 — "더 큰 모델"이라는 말의 세 가지 뜻</h2>
+    <ReviewFlag id="ch1-s1" chapter="ch1" label="1. 무대 — 「더 큰 모델」이라는 말의 세 가지 뜻" />
     <p class="leading-relaxed text-slate-700">
       신모델 발표 기사엔 늘 이런 문장이 있습니다 — <i>"파라미터 70B, 학습 토큰 2조 개,
       GPU 수천 장으로 훈련"</i>. 숫자가 셋이나 나오죠. 사실 "모델을 키운다"는 말에는
@@ -61,6 +62,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 이름표 달기 — N · D · C</h2>
+    <ReviewFlag id="ch1-s2" chapter="ch1" label="2. 이름표 달기 — N · D · C" />
 
     <ConceptCard tone="note" title="새 용어: 파라미터 N / 데이터 D / 컴퓨트 C">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
@@ -102,6 +104,7 @@ function onSetComplete() {
     </DetailsCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 10부 여정표 — 성장의 법칙, 그리고 시험의 통계</h2>
+    <ReviewFlag id="ch1-s3" chapter="ch1" label="3. 10부 여정표 — 성장의 법칙, 그리고 시험의 통계" />
     <p class="leading-relaxed text-slate-700">
       좌표축이 생겼으니 지도를 폅니다. 10부는 두 막으로 갑니다 —
       <b>1막(2~5장), 성장의 법칙</b>: 재료를 늘리면 성능이 <b>얼마나</b> 좋아지는지
@@ -112,6 +115,7 @@ function onSetComplete() {
       마지막 <b>10장 캡스톤</b>에서 가상의 신모델 발표를 통째로 팩트체크하며 졸업합니다.
     </p>
 
+    <ReviewFlag id="ch1-ai" chapter="ch1" label="🤖 AI 연결 — 발표 스펙이 문장으로 읽히기 시작한다" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 발표 스펙이 문장으로 읽히기 시작한다">
       이제 "파라미터 70B, 토큰 2조, GPU 수천 장"이 각각 N·D·C로 보이실 겁니다 —
       셋 중 하나만 나와도 나머지가 어림되죠(C≈6ND). N을 세는 공식은

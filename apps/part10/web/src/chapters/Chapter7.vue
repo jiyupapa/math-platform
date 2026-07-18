@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 7장 — 차이가 진짜일까: 쌍대 비교와 p값의 실전 복귀(3부 9장 회수). 필수 소주제 ④.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -35,6 +35,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 발상 — 회색 문항은 증거가 아니다</h2>
+    <ReviewFlag id="ch7-s1" chapter="ch7" label="1. 발상 — 회색 문항은 증거가 아니다" />
     <p class="leading-relaxed text-slate-700">
       같은 시험지로 두 모델을 채점하면 문항은 넷으로 갈립니다 — 둘 다 맞음 / <b>A만 맞음</b> /
       <b>B만 맞음</b> / 둘 다 틀림. 곰곰이 보면 "둘 다" 문항은 우열에 대해 아무 말도 하지
@@ -65,6 +66,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 판정 공식 — 동전에서 얼마나 멀어졌나</h2>
+    <ReviewFlag id="ch7-s2" chapter="ch7" label="2. 판정 공식 — 동전에서 얼마나 멀어졌나" />
     <p class="leading-relaxed text-slate-700">
       불일치가 m = x + y개이고 그중 A가 x번 이겼다면, "실력이 같다"는 가정에서 x는 동전
       m번의 앞면 수입니다. 동전의 출렁임 한 단위(표준오차)는 √m/2 — 그래서 쏠림을
@@ -123,6 +125,7 @@ function onSetComplete() {
       8장(오염)과 함께 캡스톤 체크리스트에 들어갈 함정입니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch7-ai" chapter="ch7" label="🤖 AI 연결 — 모델 대전이 전부 '쌍대'인 이유" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 모델 대전이 전부 '쌍대'인 이유">
       실전 평가가 이 구조를 씁니다 — 두 모델에게 <b>같은 프롬프트</b>를 주고 답변을 나란히
       비교하는 모델 대전(pairwise battle)이 대표적이고, 논문의 모델 비교 표도 같은 문항

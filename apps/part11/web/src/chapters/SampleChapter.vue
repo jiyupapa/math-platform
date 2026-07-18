@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // Phase 0 워밍업 챕터 — 11부 전체가 풀 문제("일의 성공률은 걸음의 곱")를 몸으로 먼저 느낀다.
 // 실제 Phase 1~12 챕터도 이 구조를 그대로 따른다.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -33,6 +33,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 무대 — 팀에 새로 온 AI 일꾼</h2>
+    <ReviewFlag id="sample-s1" chapter="sample" label="1. 무대 — 팀에 새로 온 AI 일꾼" />
     <p class="leading-relaxed text-slate-700">
       팀에 AI 비서가 도입됐습니다. 한 가지씩 시켜 보면 정말 잘합니다 — 자료 검색도, 표 정리도,
       메일 초안도 열에 아홉은 깔끔하죠. 자신감이 붙은 팀장님이 통째로 맡깁니다.
@@ -64,6 +65,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 오늘의 발견에 이름표 달기</h2>
+    <ReviewFlag id="sample-s2" chapter="sample" label="2. 오늘의 발견에 이름표 달기" />
     <p class="leading-relaxed text-slate-700">
       방금 목격한 현상들에는 전부 공식 이름이 있습니다. 11부 내내 쓸 첫 이름표 세 개만
       먼저 달아 두죠 — 자세한 수학은 각 장에서 합니다.
@@ -109,6 +111,7 @@ function onSetComplete() {
       그 균열까지 계산에 넣는 것이 11부의 목표예요.
     </DetailsCard>
 
+    <ReviewFlag id="sample-ai" chapter="sample" label="🤖 AI 연결 — 에이전트 제품에 '사람 확인' 단계가 있는 이유" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 에이전트 제품에 '사람 확인' 단계가 있는 이유">
       코딩 에이전트가 중요한 파일을 지우기 전에 확인을 구하고, 업무 자동화 도구가 "사람 검토"
       단계를 끼워 넣는 건 겸손이 아니라 <b>오늘 본 곱셈의 수학</b> 때문입니다 — 단계가 쌓일수록

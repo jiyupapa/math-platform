@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 9장 — 훈련 일지 판독법: 손실 곡선 읽기. 4대 증상(스파이크·평원·계단·벌어짐) 진단·처방 + gradient clipping.
 // 회수하는 수학: 2~8장 전부(증상 → 어느 장의 다이얼) · 6부 9장(조련 성적표의 eval_loss 곡선) · 1부 2장(클리핑의 노름).
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -37,6 +37,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 증상 도감 — 네 가지 무늬</h2>
+    <ReviewFlag id="ch9-s1" chapter="ch9" label="1. 증상 도감 — 네 가지 무늬" />
     <p class="leading-relaxed text-slate-700">
       아래 네 곡선은 전부 우리가 앞 장들에서 만든 무대(이차 골짜기 SGD, 차수 9 훈련)에서 실제로
       돌린 훈련입니다. 탭을 넘기며 <b>모양 → 원인 → 처방</b>을 하나씩 확인하세요 — 특히 처방
@@ -64,6 +65,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 새 안전핀 — 그래디언트 클리핑</h2>
+    <ReviewFlag id="ch9-s2" chapter="ch9" label="2. 새 안전핀 — 그래디언트 클리핑" />
     <p class="leading-relaxed text-slate-700">
       스파이크의 보험이 <b>그래디언트 클리핑</b>입니다 — 기울기 벡터의 노름(1부의 그 길이!)이
       한계를 넘으면, <b>방향은 그대로 두고 크기만 한계까지 줄입니다</b>:
@@ -126,6 +128,7 @@ function onSetComplete() {
       없게 됩니다(3부의 통제 실험 감각).
     </DetailsCard>
 
+    <ReviewFlag id="ch9-ai" chapter="ch9" label="🤖 AI 연결 — 회수하는 수학: 6부 9장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 6부 9장">
       <b><PartLink :part="6" ch="ch9">6부 9장</PartLink></b>의 조련 성적표에서 eval 점수로 조련의
       성패를 판정했었죠 — 오늘은 그 점수의 <b>시간축 버전</b>(eval_loss 곡선)을 읽었습니다.

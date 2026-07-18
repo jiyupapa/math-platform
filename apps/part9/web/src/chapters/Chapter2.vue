@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // ch2 — 컴퓨터의 손가락: 비트와 이진법. 칸의 재료(비트)로 수를 세는 법과
 // 음수 표현(2의 보수, int8 −128~127)까지 — 8장 양자화 zero-point 의 직접 선수.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -33,6 +33,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 손가락 10개 vs 스위치 2개</h2>
+    <ReviewFlag id="ch2-s1" chapter="ch2" label="1. 손가락 10개 vs 스위치 2개" />
     <p class="leading-relaxed text-slate-700">
       우리가 십진법을 쓰는 건 손가락이 10개라서예요 — 한 자리에 0~9, 열이 차면 윗자리로.
       컴퓨터의 "손가락"은 전기가 흐른다/안 흐른다 <b>두 가지뿐</b>이라, 한 자리에 0과 1만
@@ -62,6 +63,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 음수는 어떻게 담을까 — 시계 산수의 재주</h2>
+    <ReviewFlag id="ch2-s2" chapter="ch2" label="2. 음수는 어떻게 담을까 — 시계 산수의 재주" />
     <p class="leading-relaxed text-slate-700">
       스위치엔 마이너스가 없습니다. 그럼 −1은? 힌트는 <b>시계</b>에 있어요 — 12시간 시계에서
       "3시간 <b>뒤로</b>"와 "9시간 <b>앞으로</b>"는 같은 곳에 도착하죠. 256칸짜리 시계(8비트)에서도
@@ -107,6 +109,7 @@ function onSetComplete() {
       "비트 4개씩 끊어 읽은 숫자들"임을 아는 거죠.
     </DetailsCard>
 
+    <ReviewFlag id="ch2-ai" chapter="ch2" label="🤖 AI 연결 — 회수하는 수학: 5부 1~2장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 5부 1~2장">
       <b><PartLink :part="5" ch="ch1">5부 1장</PartLink></b>에서 비트는 <b>정보의 단위</b>였고
       (놀람의 크기, 스무고개), <b><PartLink :part="5" ch="ch2">5부 2장</PartLink></b>에서는

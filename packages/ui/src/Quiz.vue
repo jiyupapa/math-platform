@@ -14,6 +14,8 @@
 import { ref, computed, onMounted, inject } from 'vue'
 import type { QuizGroup } from './quizGroup'
 import { quizGroupKey } from './quizGroup'
+import NoteMarker from './NoteMarker.vue'
+import { anchorChapter, anchorLabelOf } from './anchor'
 
 type QuizType = 'mc' | 'truefalse' | 'numeric'
 type Difficulty = 'easy' | 'medium' | 'hard'
@@ -30,6 +32,8 @@ const props = withDefaults(
     hints?: string[]
     explanation?: string
     difficulty?: Difficulty
+    /** 협업 주석 앵커(P0, 선택) — {chapter}-quiz-{slug}. 붙이면 문제 머리에 💬 마커 */
+    anchorId?: string
   }>(),
   { type: 'mc', tolerance: 1e-9, hints: () => [] },
 )
@@ -119,6 +123,12 @@ const diffBadge: Record<Difficulty, { label: string; cls: string }> = {
       >
         {{ diffBadge[difficulty].label }}
       </span>
+      <NoteMarker
+        v-if="anchorId"
+        :item-id="anchorId"
+        :chapter="anchorChapter(anchorId)"
+        :label="anchorLabelOf(question)"
+      />
     </div>
     <p class="mb-4 font-medium leading-relaxed">{{ question }}</p>
 

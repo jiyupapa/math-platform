@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 2장 — 가까움의 수학: 코사인 유사도. 7부의 첫 핵심 챕터.
 // 회수하는 수학: 1부 2장 내적 (+ 4부 6장 어텐션 점수도 같은 내적임을 회수).
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -36,6 +36,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 거리의 함정 — 자세히 쓴 죄</h2>
+    <ReviewFlag id="ch2-s1" chapter="ch2" label="1. 거리의 함정 — 자세히 쓴 죄" />
     <p class="leading-relaxed text-slate-700">
       문서를 숫자로 바꾸는 가장 소박한 방법부터 — 주제어가 <b>몇 번 나오는지</b> 세는 겁니다
       (단어 빈도 벡터). 그런데 같은 안내문을 3배 자세히 쓰면 무슨 일이 일어날까요?
@@ -62,6 +63,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 방향으로 재기 — 내적의 재등장</h2>
+    <ReviewFlag id="ch2-s2" chapter="ch2" label="2. 방향으로 재기 — 내적의 재등장" />
     <p class="leading-relaxed text-slate-700">
       각도로 재려면 새 도구가 필요할까요? 아니요 — <b>1부 2장에서 배운 내적</b>이 바로 그 도구입니다.
       기억을 되살리면, 내적은 성분끼리 곱해 더하는 연산이고
@@ -100,6 +102,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 손으로 한 번 — 계산 순서 3단계</h2>
+    <ReviewFlag id="ch2-s3" chapter="ch2" label="3. 손으로 한 번 — 계산 순서 3단계" />
     <p class="leading-relaxed text-slate-700">
       실험 ①의 질문 q = (1, 1)과 문서 B = (6, 6)으로 직접 계산해 보죠. 순서는 늘 같습니다:
       <b>내적 → 길이 두 개 → 나누기</b>.
@@ -111,6 +114,7 @@ function onSetComplete() {
     </ul>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">4. 실무의 지름길 — 정규화</h2>
+    <ReviewFlag id="ch2-s4" chapter="ch2" label="4. 실무의 지름길 — 정규화" />
     <p class="leading-relaxed text-slate-700">
       매번 길이로 나누는 게 번거롭다면, 처음부터 <b>모든 벡터를 길이 1로</b> 만들어 두면 됩니다
       (각 성분을 길이로 나누기). 그러면 분모가 1×1이 되어 — <b>코사인 유사도 = 그냥 내적</b>.
@@ -154,6 +158,7 @@ function onSetComplete() {
       셋 다 같은 순위를 내놓아요. 이 옵션 화면은 6장(벡터 DB)에서 다시 만납니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch2-ai" chapter="ch2" label="🤖 AI 연결 — 회수하는 수학: 1부 2장 · 4부 6장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 1부 2장 · 4부 6장">
       이 장의 심장은 <b><PartLink :part="1" ch="ch2">1부 2장</PartLink></b>의 내적입니다 —
       "방향이 비슷하면 크고, 직교면 0"이라던 그 방향 궁합 측정기가 길이 곱으로 나눠지며

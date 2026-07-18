@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // ch6 — 안전한 확률 계산: log-sum-exp. 5장의 두 사고(exp 폭발·확률 언더플로)가
 // LLM 의 심장(softmax·확률 연쇄)에서 일어나는 것을 막는 업계 표준 구급법.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -35,6 +35,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 환자 — softmax, LLM 의 심장</h2>
+    <ReviewFlag id="ch6-s1" chapter="ch6" label="1. 환자 — softmax, LLM 의 심장" />
     <p class="leading-relaxed text-slate-700">
       4부 9장에서 배운 출력층의 공식 — 로짓(점수) z 를 확률로 바꾸는 softmax 입니다:
     </p>
@@ -65,6 +66,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. log 세계로 이사 — log-sum-exp</h2>
+    <ReviewFlag id="ch6-s2" chapter="ch6" label="2. log 세계로 이사 — log-sum-exp" />
     <p class="leading-relaxed text-slate-700">
       실험 ②의 교훈 — 확률은 곱할수록 언더플로를 향해 갑니다. 해법은 5부에서부터 쓰던 그것,
       <b>log 세계로 이사</b>: 곱은 합이 되고(log(ab) = log a + log b), 10⁻⁶⁰⁰ 같은 극소
@@ -115,6 +117,7 @@ function onSetComplete() {
       전부 이것입니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch6-ai" chapter="ch6" label="🤖 AI 연결 — 회수하는 수학: 4부 9장 · 5부 4장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 4부 9장 · 5부 4장">
       <b><PartLink :part="4" ch="ch9">4부 9장</PartLink></b>의 softmax 공식은 이론편이었고,
       오늘 본 max 빼기 + z − LSE 가 그 공식의 <b>실전 구현체</b>입니다 — GPT 가 매 토큰

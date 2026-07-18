@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // ch9 — 4비트까지: 블록 양자화와 GGUF. 아웃라이어 전쟁의 해법(분단별 채점)과
 // Q4_K_M 문패 완독, "계산 3.3GB vs 실파일 4.1GB" 영수증 정산.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -34,6 +34,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 빌런의 실체 — 분포의 꼬리</h2>
+    <ReviewFlag id="ch9-s1" chapter="ch9" label="1. 빌런의 실체 — 분포의 꼬리" />
     <p class="leading-relaxed text-slate-700">
       8장의 축복은 "가중치가 0 중심 종모양"이었어요. 그런데
       <b>3부 5장</b>에서 배웠듯 분포에는 <b>꼬리</b>가 있습니다 — 드물지만 유난히 큰 값. 실제 LLM 의 가중치·활성값에도 아웃라이어가 실존하고,
@@ -62,6 +63,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 문패 읽는 법 — 용어 이름표</h2>
+    <ReviewFlag id="ch9-s2" chapter="ch9" label="2. 문패 읽는 법 — 용어 이름표" />
 
     <ConceptCard tone="note" title="새 용어: 블록 양자화 / 아웃라이어 / GGUF">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
@@ -101,6 +103,7 @@ function onSetComplete() {
       M 믹스도, 채널 분리도 같은 철학입니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch9-ai" chapter="ch9" label="🤖 AI 연결 — 회수하는 수학: 3부 5장 · 5부 2장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 3부 5장 · 5부 2장">
       아웃라이어의 고향은 <b><PartLink :part="3" ch="ch5">3부 5장</PartLink></b> 분포의
       꼬리이고, "자주 나오는 것에 비트를 아끼고 드문 것에 더 쓴다"는 M 믹스의 철학은

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 2장 — 이어쓰기 기계의 한계: 조련 없이(퓨샷) 버텨 보고, 무너지는 지점을 정확히 본다.
 // 회수하는 수학: 4부 9장(출력층 = 다음 단어 확률분포) · 5부 7장(퍼플렉시티 = 실질 갈래 수).
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -34,6 +34,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 지시를 못 따르는 이유 — 수학 한 줄</h2>
+    <ReviewFlag id="ch2-s1" chapter="ch2" label="1. 지시를 못 따르는 이유 — 수학 한 줄" />
     <p class="leading-relaxed text-slate-700">
       베이스 모델의 정체를 4부 9장에서 배운 그대로 쓰면 이렇습니다:
     </p>
@@ -53,6 +54,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 실험 — 예시로 분포 밀어 보기</h2>
+    <ReviewFlag id="ch2-s2" chapter="ch2" label="2. 실험 — 예시로 분포 밀어 보기" />
 
     <FewShotLab />
 
@@ -73,6 +75,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 무너지는 지점 — 퓨샷의 4가지 한계</h2>
+    <ReviewFlag id="ch2-s3" chapter="ch2" label="3. 무너지는 지점 — 퓨샷의 4가지 한계" />
     <p class="leading-relaxed text-slate-700">
       돌발 실험에서 봤듯, 성공은 절반짜리였습니다. 한계를 정리하면:
     </p>
@@ -125,6 +128,7 @@ function onSetComplete() {
       가중치는 변하지 않아요.
     </DetailsCard>
 
+    <ReviewFlag id="ch2-ai" chapter="ch2" label="🤖 AI 연결 — 회수하는 수학: 4부 9장 · 5부 7장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 4부 9장 · 5부 7장">
       이 장의 두 기둥이 모두 복습이었습니다.
       <b><PartLink :part="4" ch="ch9">4부 9장</PartLink></b>: 모델의 출력 = 다음 단어의 확률분포 — 지시를 못 따르는 이유이자 퓨샷이 먹히는 이유.

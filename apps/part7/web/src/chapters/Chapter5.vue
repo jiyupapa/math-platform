@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 5장 — 지도 그리기: 차원 축소. PCA 재회(1부 8장) + t-SNE·UMAP 지도 읽는 법(왜곡).
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { StepQuiz } from '@series/ui'
@@ -34,6 +34,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 요약의 기술 — 무엇을 버릴 것인가</h2>
+    <ReviewFlag id="ch5-s1" chapter="ch5" label="1. 요약의 기술 — 무엇을 버릴 것인가" />
     <p class="leading-relaxed text-slate-700">
       512차원을 2차원으로 줄이는 건 512쪽짜리 보고서를 두 줄로 요약하는 일입니다 —
       <b>무언가는 반드시 버려집니다.</b> 4장에서 봤듯 고차원의 용량은 2차원과 비교가 안 되니까요.
@@ -61,6 +62,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 이웃을 지키는 지도 — t-SNE와 UMAP</h2>
+    <ReviewFlag id="ch5-s2" chapter="ch5" label="2. 이웃을 지키는 지도 — t-SNE와 UMAP" />
     <p class="leading-relaxed text-slate-700">
       PCA는 <b>전역의 퍼짐</b>을 지키는 선형 투영이라, 수백 차원의 꼬불꼬불한 클러스터 구조가
       뭉개져 보일 때가 있습니다. 그래서 시각화 실무에서는 다른 전략의 지도가 인기예요 —
@@ -121,6 +123,7 @@ function onSetComplete() {
       원 공간에서 하고요(6장).
     </DetailsCard>
 
+    <ReviewFlag id="ch5-ai" chapter="ch5" label="🤖 AI 연결 — 회수하는 수학: 1부 8장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 1부 8장">
       이 장의 심장은 <b><PartLink :part="1" ch="ch8">1부 8장</PartLink></b>의 PCA입니다 —
       "데이터 구름에서 주성분(가장 퍼진 방향) 찾기"가 임베딩 공간을 종이에 펴는 기본 도구가

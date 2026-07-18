@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 4장 — 사람의 취향을 숫자로: 선호 데이터와 보상 모델 (핵심).
 // 회수하는 수학: 3부 4장(조건부 확률) · 2부 7장(시그모이드) · −log 손실의 재등장.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -33,6 +33,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 왜 점수 대신 비교인가</h2>
+    <ReviewFlag id="ch4-s1" chapter="ch4" label="1. 왜 점수 대신 비교인가" />
     <p class="leading-relaxed text-slate-700">
       가장 단순한 방법은 사람에게 답변마다 점수를 매기게 하는 겁니다 — "이 답변은 10점 만점에 몇 점?"
       그런데 이게 잘 안 돼요. 같은 답변에 어떤 사람은 6점, 어떤 사람은 9점을 주고,
@@ -51,6 +52,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 직접 해보기 — 라벨러 체험과 보상 모델</h2>
+    <ReviewFlag id="ch4-s2" chapter="ch4" label="2. 직접 해보기 — 라벨러 체험과 보상 모델" />
     <p class="leading-relaxed text-slate-700">
       아래 실험 ①에서 직접 라벨러가 되어 보세요. 그렇게 모인 선호 쌍으로 훈련하는 것이
       <b>보상 모델</b>입니다 — 답변을 넣으면 점수 r 하나를 뱉는 모델이에요.
@@ -73,6 +75,7 @@ function onSetComplete() {
     <RewardLab />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 점수 차 → 선호 확률: Bradley-Terry</h2>
+    <ReviewFlag id="ch4-s3" chapter="ch4" label="3. 점수 차 → 선호 확률: Bradley-Terry" />
     <p class="leading-relaxed text-slate-700">
       실험 ②에서 만진 것이 <b>Bradley-Terry 모델</b>입니다. 보상 모델이 두 답변에 준 점수가
       r<sub>A</sub>, r<sub>B</sub> 라면, 사람이 A 를 고를 확률을 이렇게 모델링해요:
@@ -95,6 +98,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">4. 학습 — 또 −log 가 나온다</h2>
+    <ReviewFlag id="ch4-s4" chapter="ch4" label="4. 학습 — 또 −log 가 나온다" />
     <p class="leading-relaxed text-slate-700">
       이제 훈련입니다. 사람이 A 를 골랐다면, 모델은 P(A 승)이 컸어야 해요.
       그래서 손실은:
@@ -114,6 +118,7 @@ function onSetComplete() {
     </div>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">5. 숫자가 된 취향, 다음은?</h2>
+    <ReviewFlag id="ch4-s5" chapter="ch4" label="5. 숫자가 된 취향, 다음은?" />
     <p class="leading-relaxed text-slate-700">
       이제 어떤 답변이든 점수를 매길 수 있는 <b>자동 심판</b>이 생겼습니다.
       다음 단계는 자연스럽죠 — 조련 중인 모델이 답변을 만들 때마다 이 심판에게 점수를 받고,
@@ -130,6 +135,7 @@ function onSetComplete() {
       "어느 답이 나은가"라는 비교 데이터에서 실력 점수를 뽑는 문제니까요.
     </DetailsCard>
 
+    <ReviewFlag id="ch4-ai" chapter="ch4" label="🤖 AI 연결 — 회수하는 수학: 3부 4장 · 2부 7장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 3부 4장 · 2부 7장">
       <b><PartLink :part="2" ch="ch7">2부 7장</PartLink></b>: 시그모이드 σ — 점수 차를 확률로 바꾸는 변환기로 재등장.
       <b><PartLink :part="3" ch="ch4">3부 4장</PartLink></b>: 조건부 확률 — "점수가 이럴 때 A 가 선택될 확률"이라는 모델링 자체.

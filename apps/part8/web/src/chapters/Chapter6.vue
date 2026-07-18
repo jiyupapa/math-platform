@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 6장 — 여행 일정표: 학습률 스케줄. 워밍업·코사인 감쇠 — warmup_steps·lr_scheduler의 정체.
 // 회수하는 수학: 6부 3장(SFT 설정 직결) · 2·3·5장(감쇠·서성임·Adam 예열의 근거).
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -36,6 +36,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 마지막 구간의 문제 — 정착</h2>
+    <ReviewFlag id="ch6-s1" chapter="ch6" label="1. 마지막 구간의 문제 — 정착" />
     <p class="leading-relaxed text-slate-700">
       3장에서 나침반이 흔들린다는 걸 배웠죠. 그 흔들림은 여행 내내 있지만, <b>바닥 근처에서
       본색을 드러냅니다</b> — 기울기(진짜 신호)는 0에 가까워지는데 노이즈는 그대로라,
@@ -63,6 +64,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 첫 구간의 문제 — 낯선 출발</h2>
+    <ReviewFlag id="ch6-s2" chapter="ch6" label="2. 첫 구간의 문제 — 낯선 출발" />
     <p class="leading-relaxed text-slate-700">
       반대쪽 끝, 출발 직후도 취약 구간입니다. 이유가 둘이에요 — ① 5장에서 봤듯 Adam 의
       <b>자(v̂, 평소 크기 추정)가 아직 서 있지 않아</b> 나누기가 불안정하고, ② 무작위 초기화로
@@ -128,6 +130,7 @@ function onSetComplete() {
       <b>배치가 클수록 워밍업도 길게</b> 잡는 관행이 있어요 — 큰 보폭일수록 예열이 더 필요하니까요.
     </DetailsCard>
 
+    <ReviewFlag id="ch6-ai" chapter="ch6" label="🤖 AI 연결 — 회수하는 수학: 6부 3장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 6부 3장">
       <b><PartLink :part="6" ch="ch3">6부 3장</PartLink></b>에서 SFT 를 배울 때 설정 파일을 스쳐
       지나갔었죠 — 그때 읽지 못했던 <code>warmup_steps</code>와 <code>lr_scheduler</code> 두 줄이

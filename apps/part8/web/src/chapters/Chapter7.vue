@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 7장 — 과적합: 통째로 외운 학생 (세 번째 핵심). 훈련↓검증↑ 벌어짐 — 일반화 = 표본 밖 성능.
 // 회수하는 수학: 3부 5·7장(표본 — 훈련 데이터는 세상의 일부) · 6부 9장(조련 성적표 held-out 평가).
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -37,6 +37,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 시험은 두 번 본다 — 훈련 오차와 검증 오차</h2>
+    <ReviewFlag id="ch7-s1" chapter="ch7" label="1. 시험은 두 번 본다 — 훈련 오차와 검증 오차" />
     <p class="leading-relaxed text-slate-700">
       3부에서 배운 사실 하나가 여기서 결정적입니다 — <b>훈련 데이터는 세상의 전부가 아니라 표본</b>이에요.
       표본을 잘 맞히는 것과 세상을 잘 맞히는 것은 다른 능력입니다. 그래서 데이터 일부를 <b>봉인해 두고
@@ -80,6 +81,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 벌어짐 — 훈련 일지에 남는 무늬</h2>
+    <ReviewFlag id="ch7-s2" chapter="ch7" label="2. 벌어짐 — 훈련 일지에 남는 무늬" />
     <p class="leading-relaxed text-slate-700">
       실전에서는 차수 슬라이더를 돌리는 게 아니라 <b>훈련 스텝이 흐릅니다</b> — 용량이 큰 모델 하나를
       두고 시간이 갈수록 어떻게 되는지가 진짜 질문이에요. 다행히 경사하강에는 성격이 있습니다:
@@ -135,6 +137,7 @@ function onSetComplete() {
       관측됩니다(현대 딥러닝의 미스터리). U자가 이야기의 끝이 아니라는 것만 기억해 두세요.
     </DetailsCard>
 
+    <ReviewFlag id="ch7-ai" chapter="ch7" label="🤖 AI 연결 — 회수하는 수학: 6부 9장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 6부 9장">
       <b><PartLink :part="6" ch="ch9">6부 9장</PartLink></b>의 조련 성적표에서 "훈련에 안 쓴 데이터로
       평가한다"는 원칙을 봤었죠 — 그 held-out 평가가 바로 오늘의 검증입니다. 실전 장면: SFT 데이터

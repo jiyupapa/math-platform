@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // Phase 0 워밍업 챕터 — 10부 전체가 풀 문제("점수는 실력이 아니라 측정이다")를 몸으로 먼저 느낀다.
 // 실제 Phase 1~10 챕터도 이 구조를 그대로 따른다.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -33,6 +33,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 무대 — 회사 단톡방의 그 기사</h2>
+    <ReviewFlag id="sample-s1" chapter="sample" label="1. 무대 — 회사 단톡방의 그 기사" />
     <p class="leading-relaxed text-slate-700">
       단톡방에 기사가 하나 올라옵니다 — <b>"신모델 B, 벤치마크에서 72점… 기존 모델 A(74점)에
       2점 뒤져."</b> 누군가 답합니다. "그럼 B는 볼 것도 없네요." 정말 볼 것도 없을까요?
@@ -63,6 +64,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 오늘의 발견에 이름표 달기</h2>
+    <ReviewFlag id="sample-s2" chapter="sample" label="2. 오늘의 발견에 이름표 달기" />
     <p class="leading-relaxed text-slate-700">
       방금 목격한 현상들에는 전부 공식 이름이 있습니다. 10부 내내 쓸 첫 이름표 세 개만
       먼저 달아 두죠 — 자세한 수학은 각 장에서 합니다.
@@ -107,6 +109,7 @@ function onSetComplete() {
       1~2점 차이는 오늘 실험이 보여줬듯 소음일 가능성이 큽니다.
     </DetailsCard>
 
+    <ReviewFlag id="sample-ai" chapter="sample" label="🤖 AI 연결 — 리더보드의 순위는 왜 자꾸 출렁일까" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 리더보드의 순위는 왜 자꾸 출렁일까">
       실제 AI 리더보드에서도 오늘 본 일이 매일 벌어집니다 — 같은 모델인데 벤치마크 버전이나
       채점 방식이 조금 바뀌면 순위가 뒤집히고, 신모델 발표 기사의 "2점 향상"이 몇 주 뒤

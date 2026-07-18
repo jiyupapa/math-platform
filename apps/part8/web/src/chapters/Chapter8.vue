@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 8장 — 안전장치들: 정규화. weight decay(원점 목줄)·드롭아웃·조기 종료 — 6부 6장 KL 목줄과 명시 대비.
 // 회수하는 수학: 6부 6장(KL 목줄 — "멀리 못 가게 묶는다"의 두 얼굴) · 1부 2장(노름 = 계수 크기).
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -37,6 +37,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 원점 목줄 — weight decay</h2>
+    <ReviewFlag id="ch8-s1" chapter="ch8" label="1. 원점 목줄 — weight decay" />
     <p class="leading-relaxed text-slate-700">
       아이디어는 한 줄입니다 — 손실에 <b>계수 크기의 벌점</b>을 더해요. 여기서 ‖w‖는 1부에서 배운
       노름, 즉 모든 가중치를 모은 벡터의 길이입니다:
@@ -77,6 +78,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 나머지 두 안전장치 — 그리고 목줄의 두 얼굴</h2>
+    <ReviewFlag id="ch8-s2" chapter="ch8" label="2. 나머지 두 안전장치 — 그리고 목줄의 두 얼굴" />
     <p class="leading-relaxed text-slate-700">
       <b>드롭아웃(dropout)</b>은 신경망용 안전장치입니다 — 훈련 중 매 스텝 뉴런의 일부(예 10%)를
       <b>무작위로 꺼</b> 버려요. 특정 뉴런 몇 개가 담합해 훈련 예문을 통째로 외우는 걸 막습니다 —
@@ -134,6 +136,7 @@ function onSetComplete() {
       <b>검증 데이터로 고릅니다</b>(7장 3분할이 여기서도).
     </DetailsCard>
 
+    <ReviewFlag id="ch8-ai" chapter="ch8" label="🤖 AI 연결 — 회수하는 수학: 6부 6장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 6부 6장">
       <b><PartLink :part="6" ch="ch6">6부 6장</PartLink></b>에서 RLHF의 KL 목줄을 배웠죠 — 보상을
       쫓다 원본 모델에서 너무 멀어지면 벌점. 오늘의 weight decay는 같은 구조의 다른 얼굴입니다 —

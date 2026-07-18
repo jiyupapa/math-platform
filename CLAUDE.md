@@ -46,6 +46,10 @@ QuizSet↔StepQuiz 그룹 계약(`quizGroupKey`/`QuizGroup` — `quizGroup.ts`)�
     각 부 진도(`{prefix}-progress-v1`)를 읽어 지도에 표시하므로 부 접두사 변경은 포털 연동도 깨뜨린다.
   - `reviewApiKey` — ReviewFlag ↔ 각 앱 `review` 스토어.
   - `notebookResolverKey` — NotebookCard ↔ 각 앱 `chapters`(part1·4·5·6·7·8·9·10·11).
+  - `partNumberKey` — **협업 주석(NoteMarker/NotePanel) 게이트**: 부 번호를 주입한 부에서만 💬 마커가
+    렌더된다(현재 part1만). 임의 항목 앵커는 `ConceptCard`·`Quiz`·`StepQuiz`·`MathBlock` 의 `anchorId`
+    prop — 네이밍 정본 `{chapter}-{type}-{slug}` 와 금지사항(자동 인덱스·배포 후 변경 금지)은
+    `packages/ui/src/anchor.ts` 참조. 설계: `docs/todo_협업주석_260716.md`.
 - 소스 `.vue` 패키지라 각 앱 설정에: `vite.config.ts` 의 `optimizeDeps.exclude`(전 12앱 = `['@series/ui', '@series/tutor']`),
   `style.css` 의 `@source '../../../../packages/ui/src'`(Tailwind 가 패키지 클래스 스캔 — 빠지면 스타일이 조용히 누락).
 - **THEMED(각 앱에 유지)**: `progress`/`review` 스토어, `TutorChat.vue`(튜터 주제), `notebooks/tutor.py`.

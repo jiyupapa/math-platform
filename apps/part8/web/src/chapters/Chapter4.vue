@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 4장 — 관성으로 달리기: 모멘텀. 지그재그 문제 → 속도 누적(EMA), 상쇄와 증폭.
 // 회수하는 수학: 1부 2장 벡터 합(상쇄·누적의 정체). Adam(5장)의 첫 번째 부품.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -36,6 +36,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 처방 — 속도를 기억하는 걸음</h2>
+    <ReviewFlag id="ch4-s1" chapter="ch4" label="1. 처방 — 속도를 기억하는 걸음" />
     <p class="leading-relaxed text-slate-700">
       지금까지의 걸음은 <b>기억이 없었습니다</b> — 매 스텝 발밑 기울기만 보고 방향을 정했죠.
       모멘텀은 딱 한 줄을 바꿉니다: 위치를 기울기로 직접 옮기는 대신, <b>속도 v</b>를 두고
@@ -69,6 +70,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 밑의 기계 — 지수이동평균(EMA)</h2>
+    <ReviewFlag id="ch4-s2" chapter="ch4" label="2. 밑의 기계 — 지수이동평균(EMA)" />
     <p class="leading-relaxed text-slate-700">
       v ← β·v + g 를 풀어 쓰면 v = g<sub>지금</sub> + β·g<sub>1걸음 전</sub> + β²·g<sub>2걸음 전</sub> + … —
       <b>최근 것은 크게, 옛것은 지수적으로 잊는 평균</b>입니다. 이런 평균의 이름이
@@ -128,6 +130,7 @@ function onSetComplete() {
       (loss 가 규칙적으로 출렁) β 과대를 의심하세요.
     </DetailsCard>
 
+    <ReviewFlag id="ch4-ai" chapter="ch4" label="🤖 AI 연결 — 회수하는 수학: 1부 2장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 1부 2장">
       상쇄와 증폭의 정체는 <b><PartLink :part="1" ch="ch2">1부 2장</PartLink></b>의 벡터 덧셈입니다 —
       반대 화살표는 지워지고 같은 화살표는 쌓인다는, 시리즈 첫 장들의 그 연산이 훈련 가속의

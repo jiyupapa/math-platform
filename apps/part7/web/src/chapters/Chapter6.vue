@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 6장 — 이웃 찾기: kNN 전수조사의 비용 → 근사 최근접 이웃(ANN) → 벡터 DB의 정체.
 // 새 수학보다 공학의 장 — 밑바닥 수학(내적·클러스터·집중)은 2~4장의 회수.
-import { ConceptCard } from '@series/ui'
+import { ConceptCard, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { StepQuiz } from '@series/ui'
@@ -36,6 +36,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 정직한 방법 — kNN 전수조사</h2>
+    <ReviewFlag id="ch6-s1" chapter="ch6" label="1. 정직한 방법 — kNN 전수조사" />
     <p class="leading-relaxed text-slate-700">
       질문 벡터와 <b>모든</b> 문서 벡터의 유사도(내적)를 재서 가장 가까운 k개를 뽑는 것 —
       <b>k-최근접 이웃</b>(kNN) 검색이라 부릅니다. 항상 진짜 1등을 찾는 완벽히 정확한 방법이고,
@@ -62,6 +63,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 근사의 기술 — ANN</h2>
+    <ReviewFlag id="ch6-s2" chapter="ch6" label="2. 근사의 기술 — ANN" />
     <p class="leading-relaxed text-slate-700">
       실험 ②의 구역 나누기가 실제 기술의 축소판입니다. 이렇게 <b>정확함을 조금 양보하고
       속도를 크게 버는</b> 계열을 <b>근사 최근접 이웃</b>(ANN, Approximate Nearest Neighbor)
@@ -127,6 +129,7 @@ function onSetComplete() {
       <b>권한 관리</b>(임원 문서는 임원에게만)가 실제로 구현되는 자리입니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch6-ai" chapter="ch6" label="🤖 AI 연결 — 회수하는 수학: 이 장은 공학, 수학은 전부 앞 장의 것" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 이 장은 공학, 수학은 전부 앞 장의 것">
       벡터 DB 안에서 도는 수학에 새것은 없습니다 — 점수 계산은 <b>내적</b>(2장, 정규화 덕에 한 방),
       구역 나누기는 <b>클러스터</b>(3장), 근사가 통하는 이유는 <b>신호가 바닥에서 솟는 구조</b>(4장).

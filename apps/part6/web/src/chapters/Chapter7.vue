@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 7장 — DPO: 보상 모델 없이 조련하기. RLHF 수식을 접으면 나오는 지름길.
 // 회수하는 수학: 5부 5장(KL — 수식에 내장) · 2부 7장(시그모이드) · 4장 Bradley-Terry 재사용.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -35,6 +35,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 다리를 건너뛰는 발상</h2>
+    <ReviewFlag id="ch7-s1" chapter="ch7" label="1. 다리를 건너뛰는 발상" />
     <p class="leading-relaxed text-slate-700">
       RLHF 의 경로는 이랬습니다: 선호 쌍 → <b>보상 모델 훈련</b> → <b>RL 루프</b>(생성→채점→갱신).
       DPO 의 질문은 단순해요 — 어차피 출발(선호 쌍)과 도착(더 나은 답을 내는 정책)이
@@ -44,6 +45,7 @@ function onSetComplete() {
     </p>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 숨은 점수 — 정책 안에 이미 심판이 있다</h2>
+    <ReviewFlag id="ch7-s2" chapter="ch7" label="2. 숨은 점수 — 정책 안에 이미 심판이 있다" />
     <p class="leading-relaxed text-slate-700">
       그 소거의 결과가 이 한 줄입니다. 어떤 답변 y 에 대한 모델의 <b>숨은 점수</b>는:
     </p>
@@ -66,6 +68,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 직접 해보기 — 심판 없는 훈련</h2>
+    <ReviewFlag id="ch7-s3" chapter="ch7" label="3. 직접 해보기 — 심판 없는 훈련" />
     <p class="leading-relaxed text-slate-700">
       이제 4장의 Bradley-Terry 손실에 보상 모델 점수 대신 <b>숨은 점수를 그대로 꽂으면</b>
       DPO 손실이 됩니다:
@@ -108,6 +111,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">4. RLHF vs DPO — 득실 비교</h2>
+    <ReviewFlag id="ch7-s4" chapter="ch7" label="4. RLHF vs DPO — 득실 비교" />
     <div class="my-4 overflow-x-auto">
       <table class="w-full min-w-[28rem] text-sm">
         <thead>
@@ -143,6 +147,7 @@ function onSetComplete() {
       동전의 양면"이라는 감각만 가져가면 충분해요.
     </DetailsCard>
 
+    <ReviewFlag id="ch7-ai" chapter="ch7" label="🤖 AI 연결 — 회수하는 수학: 5부 5장 · 2부 7장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 5부 5장 · 2부 7장">
       <b><PartLink :part="5" ch="ch5">5부 5장</PartLink></b>: KL 목줄 — 사라진 게 아니라 숨은 점수의 β·log(π/π<sub>ref</sub>) 안으로 접혀 들어감.
       <b><PartLink :part="2" ch="ch7">2부 7장</PartLink></b>: 시그모이드 — 4장 Bradley-Terry 그대로 재사용.

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 9장 — 임베딩은 어떻게 배우나: 대조 학습 ("짝은 가깝게, 남은 멀게" + 또 −log).
 // 회수하는 수학: 5부 4장 크로스 엔트로피 · 6부 4장 보상 모델(쌍 학습) · 2부 9장 경사하강.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -37,6 +37,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 목표 선언 — 좋은 지도의 조건은 하나</h2>
+    <ReviewFlag id="ch9-s1" chapter="ch9" label="1. 목표 선언 — 좋은 지도의 조건은 하나" />
     <p class="leading-relaxed text-slate-700">
       7부 내내 지도에 요구한 것은 단 하나였습니다 — <b>가까움 = 비슷함</b>. 이걸 학습 목표로
       뒤집으면: <b>관련 있는 쌍은 가깝게, 무관한 쌍은 멀게</b> 좌표를 옮겨라.
@@ -65,6 +66,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 목표를 손실로 — 또 너였구나, −log</h2>
+    <ReviewFlag id="ch9-s2" chapter="ch9" label="2. 목표를 손실로 — 또 너였구나, −log" />
     <p class="leading-relaxed text-slate-700">
       "짝은 가깝게"를 미분 가능한 숫자로 바꿔야 경사하강(2부 9장)이 밀 수 있습니다.
       만드는 법은 6부에서 본 요리 그대로예요 — 질문과 후보 문서들의 유사도를
@@ -89,6 +91,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 세 번째 재회 — 이 가족의 계보</h2>
+    <ReviewFlag id="ch9-s3" chapter="ch9" label="3. 세 번째 재회 — 이 가족의 계보" />
     <p class="leading-relaxed text-slate-700">
       이 시리즈에서 −log 손실을 만난 곳을 세어 보면 — <b>5부 4장</b>(다음 토큰의 크로스 엔트로피),
       <b>6부 4장</b>(보상 모델: 선호 쌍 비교), 그리고 오늘(임베딩: 문서 고르기).
@@ -140,6 +143,7 @@ function onSetComplete() {
       대조 학습으로 훈련된 기성품입니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch9-ai" chapter="ch9" label="🤖 AI 연결 — 회수하는 수학: 5부 4장 · 6부 4장 · 2부 9장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 5부 4장 · 6부 4장 · 2부 9장">
       이 장은 시리즈 수학의 삼중 회수입니다 — 손실의 얼굴은
       <b><PartLink :part="5" ch="ch4">5부 4장</PartLink></b>(크로스 엔트로피: 정답에 준 확률에 −log)이고,

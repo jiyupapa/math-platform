@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 5장 — 축마다 다른 보폭: Adam (핵심). 모멘텀(β₁) + RMS(β₂) 조립, β₁·β₂·ε의 정체.
 // 회수하는 수학: 4장 EMA(두 개 돌린다) · 1부 1장 좌표축(축마다 다른 자).
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -36,6 +36,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 아이디어 — 평소 크기로 나누기</h2>
+    <ReviewFlag id="ch5-s1" chapter="ch5" label="1. 아이디어 — 평소 크기로 나누기" />
     <p class="leading-relaxed text-slate-700">
       관찰 하나에서 출발합니다: 가파른 축은 기울기가 <b>늘 큽니다</b>(곡률이 크니까), 완만한 축은
       늘 작아요. 그렇다면 — 축마다 기울기의 평소 크기를 추적해 두고, 걸을 때 <b>그 크기로 나눠</b>
@@ -65,6 +66,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 조립 — Adam의 세 줄</h2>
+    <ReviewFlag id="ch5-s2" chapter="ch5" label="2. 조립 — Adam의 세 줄" />
     <p class="leading-relaxed text-slate-700">
       이제 부품 두 개를 한 기계로 조립합니다. 4장의 모멘텀(방향의 EMA)과 오늘의 RMS(크기의 EMA):
     </p>
@@ -132,6 +134,7 @@ function onSetComplete() {
       ④ 실무 이름 <b>AdamW</b>: Adam + weight decay 결합 방식의 개선 — 정규화(8장)에서 정체를 밝힙니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch5-ai" chapter="ch5" label="🤖 AI 연결 — 회수하는 수학: 4장 EMA × 2 · 1부 1장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 4장 EMA × 2 · 1부 1장">
       Adam 에 새 수학은 없습니다 — 4장의 <b>EMA 를 두 개</b>(방향 m, 크기 v) 돌리고 나눗셈
       하나를 얹은 조립품이에요. 그리고 "축마다 다른 자"라는 발상은

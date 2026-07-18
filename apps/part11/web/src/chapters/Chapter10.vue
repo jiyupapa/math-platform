@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 10장 — 기억의 경제학: 컨텍스트 예산. 유한한 책상(컨텍스트 윈도) 위 냅색 게임.
 // 핵심 수치(ContextLab·노트북 전수 탐색과 일치): 예산 8,000 / 시작 9,600(과적재) / 최적 요약+A+B+E1+E2 = 88점.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -36,6 +36,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 무대 — 책상이 넘친다</h2>
+    <ReviewFlag id="ch10-s1" chapter="ch10" label="1. 무대 — 책상이 넘친다" />
     <p class="leading-relaxed text-slate-700">
       에이전트에게 사무 업무를 맡겼습니다. 시스템 규칙, 과업 설명, 지금까지의 작업 기록(궤적),
       참고 문서 몇 개, 모범 예시… 도움이 될 것 같아 전부 책상에 올려두는 게 인지상정이죠.
@@ -66,6 +67,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 이름표 달기 — 배낭·압축·검색</h2>
+    <ReviewFlag id="ch10-s2" chapter="ch10" label="2. 이름표 달기 — 배낭·압축·검색" />
     <p class="leading-relaxed text-slate-700">
       방금 푼 문제는 사실 아주 유명한 수학 문제입니다. <b>정해진 크기의 배낭</b>에 <b>값어치가
       다른 물건들</b>을 담아 <b>총 값어치를 최대로</b> 하는 것 — 배낭 문제(knapsack)죠. 그리고
@@ -128,6 +130,7 @@ function onSetComplete() {
       올린 뒤, 필요하면 서고에서 원본을 다시 검색합니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch10-ai" chapter="ch10" label="🤖 AI 연결 — 단기 기억과 장기 서고" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 단기 기억과 장기 서고">
       실무 에이전트의 메모리는 정확히 이 구조입니다 — <b>단기 기억</b>은 지금 책상에 올린
       컨텍스트 윈도, <b>장기 기억</b>은 벡터 서고에 넣어 두고 필요할 때 꺼내 오는

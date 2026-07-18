@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // ch5 — 자의 끝: 오버플로·언더플로·NaN. 3장에서 비워 둔 특별석(지수 전부 0/전부 1)의
 // 입주민들 — 8부 9장 손실 스파이크·NaN 붕괴의 하드웨어 층.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -35,6 +35,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 자의 양쪽 끝 — 얼마나 멀리 있나</h2>
+    <ReviewFlag id="ch5-s1" chapter="ch5" label="1. 자의 양쪽 끝 — 얼마나 멀리 있나" />
     <p class="leading-relaxed text-slate-700">
       3장 해부에서 지수 8비트는 창문을 2⁻¹²⁶ 부터 2¹²⁷ 까지 옮길 수 있었죠. 그래서 fp32 가
       담는 가장 큰 수는 약 <b>3.4×10³⁸</b>, 가장 작은 정규 수는 약 <b>1.2×10⁻³⁸</b> 입니다.
@@ -62,6 +63,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 사고들에 이름표 달기</h2>
+    <ReviewFlag id="ch5-s2" chapter="ch5" label="2. 사고들에 이름표 달기" />
 
     <ConceptCard tone="note" title="새 용어: 오버플로 / 언더플로 / NaN">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
@@ -102,6 +104,7 @@ function onSetComplete() {
       나오지만, 1을 나눠 보면 +inf 와 −inf 로 정체가 드러나죠).
     </DetailsCard>
 
+    <ReviewFlag id="ch5-ai" chapter="ch5" label="🤖 AI 연결 — loss: nan 사건의 전말 (8부 9장 회수)" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — loss: nan 사건의 전말 (8부 9장 회수)">
       <b><PartLink :part="8" ch="ch9">8부 9장</PartLink></b>에서 손실 곡선의 스파이크와 NaN 을
       "증상"으로 배웠다면, 오늘은 그 <b>병리</b>입니다 — 학습률 과대(8부 0장의 무모이)로 손실이
