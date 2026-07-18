@@ -9,6 +9,8 @@ const routes: RouteRecordRaw[] = [
   { path: '/map', name: 'map', component: () => import('../views/StructureView.vue') },
   // 도입 현황 대시보드 (P3) — 로그인 시 헤더에 노출
   { path: '/adoption', name: 'adoption', component: () => import('../views/AdoptionView.vue') },
+  // 미해결 질문 큐 (협업 주석 P3) — 관리자(VITE_ADMIN_EMAILS)만 헤더에 노출
+  { path: '/qna', name: 'qna', component: () => import('../views/QnaView.vue') },
 ]
 
 const router = createRouter({

@@ -3,7 +3,13 @@
 // 자체 완결 scoped 스타일(AuthPanel 방식) — Tailwind @source 의존 없음.
 // 설계: docs/todo_협업주석_260716.md · 읽기=로그인 전원(공유), 쓰기=본인.
 import { computed, ref } from 'vue'
-import { currentUser, useChapterAnnotations, type Annotation, type AnnotationKind } from '@series/store'
+import {
+  currentUser,
+  isAdmin,
+  useChapterAnnotations,
+  type Annotation,
+  type AnnotationKind,
+} from '@series/store'
 import { dispatchNoteAsk } from './noteAsk'
 
 const props = defineProps<{ part: number; chapter: string; itemId: string; label: string }>()
@@ -53,6 +59,38 @@ async function remove(id: string) {
   if (!confirm('이 메모를 지울까요?')) return
   busy.value = true
   await store.remove(id)
+  busy.value = false
+}
+
+// ── P3: 강사 답변(관리자) + 해결 처리 ──
+const answeringId = ref<string | null>(null)
+const answerBody = ref('')
+
+function startAnswer(id: string) {
+  answeringId.value = id
+  answerBody.value = ''
+}
+async function submitAnswer(id: string) {
+  const text = answerBody.value.trim()
+  if (!text || busy.value) return
+  busy.value = true
+  const created = await store.addAnswer(id, text)
+  busy.value = false
+  if (created) {
+    answeringId.value = null
+    answerBody.value = ''
+  }
+}
+async function removeAnswer(id: string) {
+  if (!confirm('이 답변을 지울까요?')) return
+  busy.value = true
+  await store.removeAnswer(id)
+  busy.value = false
+}
+async function toggleResolved(a: Annotation) {
+  if (busy.value) return
+  busy.value = true
+  await store.setResolved(a.id, !a.resolved)
   busy.value = false
 }
 
@@ -106,6 +144,39 @@ function when(iso: string): string {
             <p class="np-ai-body">{{ a.ai_answer }}</p>
           </div>
 
+          <!-- 사람(강사) 답변 — 익명 원칙: 이름 없이 "강사" 배지만 (작성 권한이 관리자뿐) -->
+          <div v-for="ans in store.answersFor(a.id)" :key="ans.id" class="np-ha">
+            <div class="np-ha-head">
+              <span class="np-ha-tag">🎓 강사 답변</span>
+              <span class="np-time">{{ when(ans.created_at) }}</span>
+              <button
+                v-if="currentUser && ans.user_id === currentUser.id"
+                class="np-link np-del"
+                type="button"
+                @click="removeAnswer(ans.id)"
+              >
+                삭제
+              </button>
+            </div>
+            <p class="np-ha-body">{{ ans.body }}</p>
+          </div>
+
+          <!-- 강사 답변 작성 폼 (관리자 전용) -->
+          <div v-if="answeringId === a.id" class="np-ha-form">
+            <textarea
+              v-model="answerBody"
+              class="np-ta"
+              rows="3"
+              placeholder="강사 답변 — 질문자와 동료 모두에게 보여요"
+            ></textarea>
+            <div class="np-row">
+              <button class="np-go" type="button" :disabled="busy || !answerBody.trim()" @click="submitAnswer(a.id)">
+                {{ busy ? '저장 중…' : '답변 저장' }}
+              </button>
+              <button class="np-link" type="button" @click="answeringId = null">취소</button>
+            </div>
+          </div>
+
           <div v-if="editingId !== a.id" class="np-row">
             <button
               v-if="a.kind === 'question'"
@@ -115,10 +186,17 @@ function when(iso: string): string {
             >
               🤖 AI에게 묻기
             </button>
-            <template v-if="isMine(a)">
-              <button class="np-link" type="button" @click="startEdit(a.id, a.body)">수정</button>
-              <button class="np-link np-del" type="button" @click="remove(a.id)">삭제</button>
+            <template v-if="isAdmin && a.kind === 'question'">
+              <button v-if="answeringId !== a.id" class="np-link" type="button" @click="startAnswer(a.id)">
+                🎓 답변 달기
+              </button>
+              <button class="np-link" type="button" @click="toggleResolved(a)">
+                {{ a.resolved ? '해결 취소' : '해결됨 표시' }}
+              </button>
             </template>
+            <button v-if="isMine(a)" class="np-link" type="button" @click="startEdit(a.id, a.body)">수정</button>
+            <!-- 삭제 = 본인 또는 관리자(모더레이션 — 서버 RLS del_admin 이 진짜 경계) -->
+            <button v-if="isMine(a) || isAdmin" class="np-link np-del" type="button" @click="remove(a.id)">삭제</button>
           </div>
         </li>
       </ul>
@@ -275,6 +353,36 @@ function when(iso: string): string {
   line-height: 1.6;
   white-space: pre-wrap;
   color: #475569;
+}
+.np-ha {
+  margin-top: 6px;
+  padding: 6px 8px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 8px;
+}
+.np-ha-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.np-ha-tag {
+  font-size: 11px;
+  font-weight: 600;
+  color: #047857;
+}
+.np-ha-body {
+  margin: 2px 0 0;
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  color: #334155;
+}
+.np-ha-form {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 .np-row {
   display: flex;

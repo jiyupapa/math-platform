@@ -2,7 +2,7 @@
 // 통합 포털(part0) — 진단·경로 추천 허브. @series/ui 공용 패키지를 소비.
 import { RouterView, RouterLink } from 'vue-router'
 import { SearchPalette } from '@series/ui'
-import { AuthPanel, currentUser } from '@series/store'
+import { AuthPanel, currentUser, isAdmin } from '@series/store'
 import { startPortalHydration, progressVersion } from './data/useProgress'
 
 // 개인 2층 — 로그인 시 내 진도를 DB 에서 읽어 지도/홈이 즉시 반영되게 한다.
@@ -38,6 +38,13 @@ function openSearch() {
             class="text-sm font-medium text-slate-600 hover:text-indigo-600 hover:underline"
           >
             도입 현황
+          </RouterLink>
+          <RouterLink
+            v-if="isAdmin"
+            to="/qna"
+            class="text-sm font-medium text-slate-600 hover:text-indigo-600 hover:underline"
+          >
+            🎓 질문 큐
           </RouterLink>
           <AuthPanel align="right" />
         </nav>
