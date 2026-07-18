@@ -179,6 +179,11 @@ function onSetComplete() {
           하나에 집중</b>하는 성향 — p 가 낮은 곳만 피하면 되니까요. RLHF 계열이 주로 이 방향.
         </li>
         <li>같은 "가까워져라"인데 방향에 따라 <b>덮개형 vs 집중형</b>으로 갈리는 것 — 비대칭의 실전 의미입니다.</li>
+        <li>
+          논문 용어로는 덮개형 = <b>mode-covering</b>(모드 커버링), 집중형 = <b>mode-seeking</b>(모드 시킹)
+          이라 하고, 방향 자체도 이름이 있어요 — D(p‖q) 쪽이 <b>forward KL</b>(순방향),
+          D(q‖p) 쪽이 <b>reverse KL</b>(역방향). 이 단어들로 검색하면 방금 이야기가 그대로 나옵니다.
+        </li>
       </ul>
     </DetailsCard>
 
