@@ -153,3 +153,65 @@ create policy edit_own  on public.annotations for update to authenticated
   using (auth.uid() = user_id) with check (auth.uid() = user_id);
 create policy del_own   on public.annotations for delete to authenticated
   using (auth.uid() = user_id);
+
+-- ─────────────────────────────────────────────────────────────
+-- 6) 협업 주석 P3 — 사람(강사) Q&A + 관리자 모더레이션
+--    설계: docs/todo_협업주석_260716.md §7·§8 P3
+--
+--    ⚠️ 관리자 목록은 두 곳에 있다 — 같게 유지할 것:
+--      · 아래 admin_emails() 배열 = **진짜 경계**(RLS 가 이걸 본다. API 직접 호출도 막힘)
+--      · 루트 .env 의 VITE_ADMIN_EMAILS = **UI 표시용**(답변 폼·큐 메뉴를 그릴지만 결정)
+--    env 만 고치고 SQL 을 안 고치면 화면엔 폼이 보여도 저장이 거부된다(안전한 방향).
+-- ─────────────────────────────────────────────────────────────
+create or replace function public.admin_emails()
+returns text[] language sql immutable as $$
+  select array[
+    'admin@solideos.com'   -- ← 실제 관리자(강사) 이메일로 교체. 콤마로 여러 명 가능.
+  ]
+$$;
+
+create or replace function public.is_admin()
+returns boolean language sql stable as $$
+  select lower(coalesce(auth.jwt() ->> 'email', '')) = any (public.admin_emails())
+$$;
+
+-- 질문에 대한 사람(강사) 답변 — 스레드.
+-- 익명 원칙 유지: author_name 없음. 작성자는 관리자뿐이라 화면엔 "강사" 배지만 표시한다.
+create table if not exists public.annotation_answers (
+  id            uuid        primary key default gen_random_uuid(),
+  annotation_id uuid        not null references public.annotations on delete cascade,
+  user_id       uuid        not null references auth.users on delete cascade,
+  body          text        not null,
+  created_at    timestamptz not null default now(),
+  constraint answers_body_chk check (char_length(body) between 1 and 4000)
+);
+create index if not exists answers_annotation_idx on public.annotation_answers (annotation_id);
+
+alter table public.annotation_answers enable row level security;
+
+drop policy if exists read_all_a  on public.annotation_answers;
+drop policy if exists write_admin on public.annotation_answers;
+drop policy if exists del_own_a   on public.annotation_answers;
+
+-- 읽기 = 로그인 전원(질문자·동료가 답을 본다) · 쓰기 = 관리자만(§7 강사 답변) · 삭제 = 본인(=관리자)
+create policy read_all_a  on public.annotation_answers for select to authenticated
+  using (true);
+create policy write_admin on public.annotation_answers for insert to authenticated
+  with check (public.is_admin() and auth.uid() = user_id);
+create policy del_own_a   on public.annotation_answers for delete to authenticated
+  using (auth.uid() = user_id);
+
+-- 모더레이션: 관리자는 남의 주석(스팸 등)을 지울 수 있다 (§7)
+drop policy if exists del_admin on public.annotations;
+create policy del_admin on public.annotations for delete to authenticated
+  using (public.is_admin());
+
+-- resolved 토글은 관리자 전용 + resolved 칼럼만 — 넓은 update 정책 대신 RPC 로 좁힌다
+-- (update 정책은 칼럼을 못 가려서, 관리자에게 남의 글 본문 수정 권한까지 주게 된다)
+create or replace function public.set_resolved(aid uuid, val boolean)
+returns void language sql security definer set search_path = public as $$
+  update annotations set resolved = val, updated_at = now()
+  where id = aid and public.is_admin();
+$$;
+revoke all on function public.set_resolved(uuid, boolean) from public, anon;
+grant execute on function public.set_resolved(uuid, boolean) to authenticated;
