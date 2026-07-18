@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // ch8 인터랙티브 — ① 원점 목줄: 7장의 암기 곡선(차수 9)에 weight decay(λ)를 채워 본다.
-//                 ② 목줄 경주: GD 훈련 곡선에서 목줄이 갈라짐 자체를 지우는 것을 본다.
+//                 ② 목줄 경주: GD 훈련 곡선에서 목줄이 벌어짐 자체를 지우는 것을 본다.
 // 7장과 같은 데이터(시드 101/102) — 이야기가 이어진다. 오프라인·결정적.
 import { computed, ref } from 'vue'
 
@@ -180,7 +180,7 @@ const lossLine = (ls: number[]) =>
 
     <!-- ② 목줄 경주 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 목줄 경주: 갈라짐이 사라진다</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 목줄 경주: 벌어짐이 사라진다</p>
     <p class="mb-3 text-xs text-slate-400">
       7장 실험 ②의 그 훈련(차수 9 × 3,000스텝)을 두 번 돌립니다 — 목줄 없이(λ=0) vs 목줄 채우고(λ=0.03).
       조기 종료 없이 <b>끝까지 완주</b>했을 때 검증 손실이 어떻게 되는지 보세요.
@@ -212,7 +212,7 @@ const lossLine = (ls: number[]) =>
         </div>
         <div>
           <p class="text-[11px] text-slate-400">목줄 λ=0.03 — 마지막 검증</p>
-          <p class="font-mono text-lg font-bold text-emerald-600">{{ race.leashed.vas[STEPS - 1]!.toFixed(3) }} <span class="text-[11px] font-normal text-slate-400">(갈라짐 없음)</span></p>
+          <p class="font-mono text-lg font-bold text-emerald-600">{{ race.leashed.vas[STEPS - 1]!.toFixed(3) }} <span class="text-[11px] font-normal text-slate-400">(벌어짐 없음)</span></p>
         </div>
         <div>
           <p class="text-[11px] text-slate-400">목줄 값 — 마지막 훈련 오차</p>
@@ -223,7 +223,7 @@ const lossLine = (ls: number[]) =>
       <p class="mt-3 rounded-lg bg-emerald-50 p-3 text-sm leading-relaxed text-emerald-800">
         ✅ 목줄 없는 훈련은 검증이 최저를 찍고 <b>{{ (race.free.vas[STEPS - 1]! / race.free.vas[race.free.best]!).toFixed(1) }}배로 되올랐지만</b>,
         목줄을 채우자 3,000스텝을 <b>완주하고도 검증이 최저 수준</b>에 머뭅니다 — 노이즈 암기에 필요한
-        큰 계수를 벌점이 계속 깎아내, <b>갈라짐 자체가 생기지 않아요</b>. 훈련 오차는 조금
+        큰 계수를 벌점이 계속 깎아내, <b>벌어짐 자체가 생기지 않아요</b>. 훈련 오차는 조금
         손해지만(목줄 값), 검증에서 남는 장사입니다. 멈출 타이밍(조기 종료)을 몰라도 안전해지는 것 —
         이것이 정규화가 "안전장치"인 이유.
       </p>

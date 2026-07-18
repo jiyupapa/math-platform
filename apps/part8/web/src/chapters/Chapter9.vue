@@ -154,7 +154,7 @@ function onSetComplete() {
         question="train_loss는 계속 내려가는데 eval_loss가 중반부터 올라갑니다. 진단은?"
         :choices="['과적합 시작(벌어짐) — 조기 종료·weight decay·데이터 늘리기', '발산 — lr을 올린다', '정상 — 무시한다', '클리핑이 필요하다']"
         :answer="0"
-        explanation="7장의 갈라짐 무늬 그대로 — 규칙 학습이 끝나고 암기가 시작된 신호입니다."
+        explanation="7장의 벌어짐 무늬 그대로 — 규칙 학습이 끝나고 암기가 시작된 신호입니다."
       />
       <Quiz
         difficulty="easy"
