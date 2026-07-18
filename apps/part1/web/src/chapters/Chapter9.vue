@@ -329,7 +329,8 @@ const isIndep = computed(() => Math.abs(indepDet.value) > 1e-9)
         </li>
         <li>
           <b>저랭크 근사 → ch11 SVD 예고</b>: 추천 시스템의 거대한 평점 행렬도 실제로는
-          "취향 축 몇 개"짜리 낮은 rank 로 잘 근사됩니다. 이걸 자동으로 해 주는 도구가 SVD.
+          "취향 축 몇 개"짜리 낮은 rank 로 잘 근사됩니다. 이 숨은 축들의 실무 이름이
+          <b>잠재 요인(latent factor)</b> — 이걸 자동으로 찾아 주는 도구가 SVD 예요(ch11).
         </li>
       </ul>
     </ConceptCard>

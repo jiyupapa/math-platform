@@ -124,6 +124,7 @@ const JOURNEY = [
           <tr class="border-b border-slate-100"><td class="py-2 pr-3">취향 다듬기 (선호 학습)</td><td class="py-2"><b>선호 최적화</b>(preference optimization) — RLHF·DPO 계열</td></tr>
           <tr class="border-b border-slate-100"><td class="py-2 pr-3">심판</td><td class="py-2"><b>보상 모델</b>(reward model)</td></tr>
           <tr class="border-b border-slate-100"><td class="py-2 pr-3">목줄</td><td class="py-2"><b>KL 페널티</b>(KL penalty) · KL 정규화</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">숨은 점수 (7장)</td><td class="py-2"><b>암묵적 보상</b>(implicit reward) — DPO 의 β·log(π/π_ref)</td></tr>
           <tr><td class="py-2 pr-3">살짝만 조련</td><td class="py-2"><b>LoRA</b> — PEFT(파라미터 효율적 파인튜닝)의 대표</td></tr>
         </tbody>
       </table>

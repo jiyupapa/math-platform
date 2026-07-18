@@ -94,6 +94,7 @@ function onSetComplete() {
         <li>
           <b>암묵적 보상</b> (implicit reward) — 읽는 법: 암묵적 보상.
           뜻: β·log(π/π<sub>ref</sub>) — 따로 훈련하지 않았는데 정책 안에 <b>이미 들어 있는</b> 점수.
+          <b>2절부터 부르던 "숨은 점수"가 바로 이것</b> — 논문·문서에서는 implicit reward 로 나와요.
         </li>
       </ul>
     </ConceptCard>
