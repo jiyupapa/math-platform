@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 1장 — 큰 그림: 검색의 진화와 RAG. 7부 전체의 지도를 그리는 챕터.
 // 6부와의 구도(지식 주입의 두 길: 조련 vs RAG)를 처음 명시하는 장 (part7 CLAUDE.md 규칙 8).
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -33,6 +33,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. AI가 모르는 것</h2>
+    <ReviewFlag id="ch1-s1" chapter="ch1" label="1. AI가 모르는 것" />
     <p class="leading-relaxed text-slate-700">
       LLM은 훈련 데이터에 있던 것만 압니다. 우리 회사의 경비 규정, 어제 올라온 회의록,
       방금 바뀐 결재선 — 전부 <b>훈련 데이터 밖</b>이에요. 훈련이 끝난 시점 이후의 세상을
@@ -50,6 +51,7 @@ function onSetComplete() {
     </p>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 검색의 진화 — 글자에서 뜻으로</h2>
+    <ReviewFlag id="ch1-s2" chapter="ch1" label="2. 검색의 진화 — 글자에서 뜻으로" />
     <p class="leading-relaxed text-slate-700">
       1세대는 <b>키워드 검색</b> — 질문의 단어가 문서에 나오는지 세는, 워밍업 실험 ①의 그 방식입니다.
       2세대는 <b>의미 검색</b> — 질문과 문서를 모두 의미 지도에 올리고 <b>가까운 것</b>을 찾는 방식이죠.
@@ -75,6 +77,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. RAG — 검색이 프롬프트가 되기까지</h2>
+    <ReviewFlag id="ch1-s3" chapter="ch1" label="3. RAG — 검색이 프롬프트가 되기까지" />
     <p class="leading-relaxed text-slate-700">
       실험 ②에서 통과한 5단계 — <b>질문 → 임베딩 → 검색 → 프롬프트 조립 → 생성</b> — 가
       RAG의 전부입니다. 포인트는 모델이 한 번도 재학습되지 않았다는 것:
@@ -110,6 +113,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">4. 지식 주입의 두 길 — 조련 vs RAG</h2>
+    <ReviewFlag id="ch1-s4" chapter="ch1" label="4. 지식 주입의 두 길 — 조련 vs RAG" />
     <p class="leading-relaxed text-slate-700">
       6부를 마친 여러분은 이제 지식을 넣는 두 길을 모두 알게 됐습니다. 나란히 놓고 비교해 보죠.
     </p>
@@ -146,6 +150,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">5. 이 지도에서 우리의 여정</h2>
+    <ReviewFlag id="ch1-s5" chapter="ch1" label="5. 이 지도에서 우리의 여정" />
     <p class="leading-relaxed text-slate-700">
       RAG 5단계의 단계마다 수학 질문이 하나씩 숨어 있고, 그 질문들이 곧 남은 9개 장입니다.
       길을 잃을 때마다 여기로 돌아오세요.
@@ -181,6 +186,7 @@ function onSetComplete() {
       전용 데이터베이스(<b>벡터 DB</b>)의 정체는 6장에서 열어 봅니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch1-ai" chapter="ch1" label="🤖 AI 연결 — 회수하는 수학: 4부 3장 · 6부 2장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 4부 3장 · 6부 2장">
       이 장의 두 기둥은 모두 시리즈에서 이미 만난 것들입니다.
       <b><PartLink :part="4" ch="ch3">4부 3장</PartLink></b>의 임베딩은 거기서 <b>트랜스포머의 입력 재료</b>였는데,

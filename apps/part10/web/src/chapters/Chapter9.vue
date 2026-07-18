@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 9장 — AI 채점관의 성적표: LLM 심판의 편향 3종과 감정법. 필수 소주제 ⑤, 3부 10장 회수.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -34,6 +34,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 실험 — 심판에게 편향을 심어 보자</h2>
+    <ReviewFlag id="ch9-s1" chapter="ch9" label="1. 실험 — 심판에게 편향을 심어 보자" />
     <p class="leading-relaxed text-slate-700">
       신의 시점 설계입니다. 두 모델 A·B의 200판 대결에서 <b>진짜 품질 차이를 우리가 정해</b>
       두었습니다(A가 근소 우위 — 진짜 승률 54.5%). 심판은 품질 차이에 <b>편향 항</b>을 더해
@@ -63,6 +64,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 완화책과 감정법 — 심판을 심판하기</h2>
+    <ReviewFlag id="ch9-s2" chapter="ch9" label="2. 완화책과 감정법 — 심판을 심판하기" />
     <p class="leading-relaxed text-slate-700">
       각 편향에는 짝이 되는 대책이 있습니다. <b>위치</b>는 순서를 뒤집어 두 번 채점하거나
       무작위화 — 7장 쌍대 비교와 같은 철학입니다(같은 판을 조건만 바꿔 두 번 재서 조건
@@ -113,6 +115,7 @@ function onSetComplete() {
       ±7%p — 아레나 순위가 출렁이는 이유 하나 추가).
     </DetailsCard>
 
+    <ReviewFlag id="ch9-ai" chapter="ch9" label="🤖 AI 연결 — 아레나 순위표를 읽는 눈 (캡스톤 체크리스트 4호)" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 아레나 순위표를 읽는 눈 (캡스톤 체크리스트 4호)">
       모델 대전 아레나·자동 평가 파이프라인의 순위는 대부분 LLM 심판 위에 서 있습니다.
       이제 그 순위표에 물을 질문들: <b>심판이 누구인가</b>(선수와 가족인가)?

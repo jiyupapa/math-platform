@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 12장 — 🎯 캡스톤: 이 에이전트, 도입해도 되나. 새 개념 없이 워밍업~11장 총조립 — 11부 졸업 시험.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { StepQuiz } from '@series/ui'
@@ -34,6 +34,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 감정 실습 — 검산대 4곳</h2>
+    <ReviewFlag id="ch12-s1" chapter="ch12" label="1. 감정 실습 — 검산대 4곳" />
     <p class="leading-relaxed text-slate-700">
       제안서 속 밑줄 친 주장 4개를 각각의 검산대에서 감정합니다. 다이얼을 직접 돌려
       숫자가 어떻게 달라지는지 보세요 — 어느 주장이 통과하고, 어느 주장이 걸릴까요?
@@ -62,6 +63,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 졸업 체크리스트 — 지갑에 넣어 가세요</h2>
+    <ReviewFlag id="ch12-s2" chapter="ch12" label="2. 졸업 체크리스트 — 지갑에 넣어 가세요" />
 
     <ConceptCard tone="note" title="에이전트 도입 감정 카드 (11부 요약)">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
@@ -93,6 +95,7 @@ function onSetComplete() {
       11부가 목표로 한 바로 그 문장들입니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch12-ai" chapter="ch12" label="🤖 AI 연결 — 이 눈은 시리즈 전체의 완성이다" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 이 눈은 시리즈 전체의 완성이다">
       11부의 도입 판정은 시리즈 전체 위에 서 있습니다 — 이 판정은
       <b><PartLink :part="10" ch="ch10">10부 10장</PartLink></b>(AI 뉴스 팩트체크)의

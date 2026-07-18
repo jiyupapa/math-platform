@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // ch3 — 고무줄 자: 부동소수점 (핵심). fp32 를 부호·지수·가수로 해부해
 // 워밍업의 모든 미스터리(0.1 티끌·1 삼키기 경계·늘어나는 눈금)를 회수한다.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -35,6 +35,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 아이디어 — 과학자들의 숫자 적기</h2>
+    <ReviewFlag id="ch3-s1" chapter="ch3" label="1. 아이디어 — 과학자들의 숫자 적기" />
     <p class="leading-relaxed text-slate-700">
       아보가드로 수 602,214,076,000,000,000,000,000 을 그대로 적는 과학자는 없죠 —
       <b>6.02 × 10²³</b> 처럼 "유효숫자 × 10의 몇 제곱"으로 적습니다
@@ -69,6 +70,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 부품에 이름표 달기</h2>
+    <ReviewFlag id="ch3-s2" chapter="ch3" label="2. 부품에 이름표 달기" />
 
     <ConceptCard tone="note" title="새 용어: 지수부 / 가수부 / 정규화(숨은 1)">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
@@ -106,6 +108,7 @@ function onSetComplete() {
       비워 뒀습니다 — 0과 비정규수, 그리고 ∞·NaN 의 자리. 5장(자의 끝)에서 입주민들을 만나요.
     </DetailsCard>
 
+    <ReviewFlag id="ch3-ai" chapter="ch3" label="🤖 AI 연결 — 회수하는 수학: 2부 7장 · 5부 1장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 2부 7장 · 5부 1장">
       <b><PartLink :part="2" ch="ch7">2부 7장</PartLink></b>의 지수함수가 자의 길이를,
       <b><PartLink :part="5" ch="ch1">5부 1장</PartLink></b>의 log₂ 감각("몇 비트가 필요한가")이

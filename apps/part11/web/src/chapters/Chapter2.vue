@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 2장 — 징검다리: 사슬의 수학 (핵심). 워밍업의 p^n 을 "단계마다 다른 정확도"로 일반화하고
 // 병목·로그 변환을 배운다. 회수: 3부 3장(독립 곱)·2부 7장(로그).
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -35,6 +35,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 무대 — 다섯 단계, 다섯 개의 확률</h2>
+    <ReviewFlag id="ch2-s1" chapter="ch2" label="1. 무대 — 다섯 단계, 다섯 개의 확률" />
     <p class="leading-relaxed text-slate-700">
       AI 일꾼에게 맡긴 "주간 보고서"를 뜯어 보니 다섯 단계였습니다 — 자료 검색(99%),
       수치 추출(95%), 표 만들기(90%), 요약(99%), 그리고 회사 양식에 맞추는
@@ -68,6 +69,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 오늘의 발견에 이름표 달기</h2>
+    <ReviewFlag id="ch2-s2" chapter="ch2" label="2. 오늘의 발견에 이름표 달기" />
 
     <ConceptCard tone="note" title="새 용어: 병목 / 곱셈 규칙 일반형 / 로그 변환">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
@@ -124,6 +126,7 @@ function onSetComplete() {
       explanation="0.9×0.8 = 0.72, 0.72×0.95 = 0.684 → 68.4%. 앞에서부터 하나씩 곱해 나가면 어떤 길이의 사슬도 계산할 수 있습니다 — 그리고 곱할 때마다 값이 줄어드는 것도 느껴 보세요."
     />
 
+    <ReviewFlag id="ch2-ai" chapter="ch2" label="🤖 AI 연결 — 에이전트 팀의 제1원칙, 병목부터 계측하라" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 에이전트 팀의 제1원칙, 병목부터 계측하라">
       실무 에이전트 개발팀은 배포 전에 반드시 <b>단계별 성공률 로깅</b>부터 붙입니다 —
       전체 성공률(58.7%)만 봐서는 어디를 고칠지 알 수 없지만, 단계별로 쪼개면 병목이

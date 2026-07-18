@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 10장 — 🎯 캡스톤: 사내 FAQ 검색봇 전체 조립. 7부의 완결 장 — 전 시리즈 회수.
 // 비유어 치환표(의미 지도→임베딩 공간 등)로 실무 용어 앵커를 총회수한다 (CLAUDE.md 규칙 2).
-import { ConceptCard } from '@series/ui'
+import { ConceptCard, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -35,6 +35,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 부품 목록 — 열 개 장이 한 상자에</h2>
+    <ReviewFlag id="ch10-s1" chapter="ch10" label="1. 부품 목록 — 열 개 장이 한 상자에" />
     <div class="my-4 overflow-x-auto">
       <table class="w-full min-w-[26rem] text-sm">
         <thead>
@@ -71,6 +72,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 용어 치환표 — 내일부터 쓰는 말로</h2>
+    <ReviewFlag id="ch10-s2" chapter="ch10" label="2. 용어 치환표 — 내일부터 쓰는 말로" />
     <p class="leading-relaxed text-slate-700">
       이 과정의 비유어들은 학습용 발판이었습니다. 이제 실무·문서·논문의 언어로 바꿔 끼우세요 —
       괄호 안이 동료와 대화할 때 쓰는 이름입니다.
@@ -105,6 +107,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 다음 걸음 — toy에서 실전으로</h2>
+    <ReviewFlag id="ch10-s3" chapter="ch10" label="3. 다음 걸음 — toy에서 실전으로" />
     <p class="leading-relaxed text-slate-700">
       오늘 만든 봇과 실전 봇의 차이는 부품의 <b>등급</b>뿐, 구조는 같습니다. 바꿔 끼울 것들:
     </p>
@@ -133,6 +136,7 @@ function onSetComplete() {
       정직함을 기능으로 소개하세요 — 지어내는 봇보다 신뢰가 오래갑니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch10-ai" chapter="ch10" label="🤖 AI 연결 — 회수하는 수학: 전 시리즈" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 전 시리즈">
       이 봇 한 대에 시리즈 전체가 들어 있습니다 — 좌표와 내적(<b>1부</b>), 좌표를 움직인
       경사하강(<b>2부</b>), 바닥의 집중과 성적표의 신뢰구간(<b>3부</b>), 임베딩과 어텐션과 온도(<b>4부</b>),

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 3장 — 임베딩 공간 탐험: 클러스터, 의미의 방향, 벡터 산수(왕 − 남자 + 여자).
 // 회수하는 수학: 1부 2장 벡터 연산(덧셈·뺄셈) · 4부 3장 임베딩.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -36,6 +36,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 창고가 아니라 지도 — 클러스터</h2>
+    <ReviewFlag id="ch3-s1" chapter="ch3" label="1. 창고가 아니라 지도 — 클러스터" />
     <p class="leading-relaxed text-slate-700">
       워밍업에서 토끼를 동물들 근처에 놓았을 때, 여러분은 이미 이 구조를 만들고 있었습니다 —
       비슷한 뜻의 단어들이 공간에서 <b>무리 지어 모이는 것</b>, 이걸 <b>클러스터</b>라 부릅니다.
@@ -66,6 +67,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 의미의 산수 — 벡터 연산의 재등장</h2>
+    <ReviewFlag id="ch3-s2" chapter="ch3" label="2. 의미의 산수 — 벡터 연산의 재등장" />
     <p class="leading-relaxed text-slate-700">
       방향이 뜻을 담는다면, 놀라운 일이 가능해집니다. <b>1부 2장의 벡터 덧셈·뺄셈</b> —
       화살표 이어 붙이기 — 로 <b>뜻을 계산</b>할 수 있어요. "왕"에서 "남자"의 성분을 빼면
@@ -89,6 +91,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 현실 체크 — toy 지도와 실전의 거리</h2>
+    <ReviewFlag id="ch3-s3" chapter="ch3" label="3. 현실 체크 — toy 지도와 실전의 거리" />
     <ul class="mt-2 list-disc space-y-2 pl-6 leading-relaxed text-slate-700">
       <li>
         <b>차원</b>: 우리 지도는 2차원, 실제는 수백~수천 차원입니다. 구조는 같지만 고차원에는
@@ -145,6 +148,7 @@ function onSetComplete() {
       한계)에서 본 교훈이 여기서도 반복되는 거죠.
     </DetailsCard>
 
+    <ReviewFlag id="ch3-ai" chapter="ch3" label="🤖 AI 연결 — 회수하는 수학: 1부 2장 · 4부 3장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 1부 2장 · 4부 3장">
       의미의 산수는 새 수학이 아닙니다 — <b><PartLink :part="1" ch="ch2">1부 2장</PartLink></b>에서
       화살표 이어 붙이기로 배운 <b>벡터 덧셈·뺄셈</b> 그대로예요. 그 연산이 임베딩 공간에서는

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 10장 — 🎯 캡스톤: 나만의 챗봇 조련. 시리즈 대단원 — 본편은 노트북(전 파이프라인 조립),
 // 웹은 여정 정리 + 조련 시뮬레이션 + 졸업 시험.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { StepQuiz } from '@series/ui'
@@ -46,6 +46,7 @@ const JOURNEY = [
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 여정 회고 — 1장의 지도가 다 채워졌다</h2>
+    <ReviewFlag id="ch10-s1" chapter="ch10" label="1. 여정 회고 — 1장의 지도가 다 채워졌다" />
     <p class="leading-relaxed text-slate-700">
       1장에서 받았던 빈 지도를 기억하나요? 이제 모든 칸이 채워졌습니다.
     </p>
@@ -77,6 +78,7 @@ const JOURNEY = [
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 졸업 실험 — 처음부터 끝까지, 직접</h2>
+    <ReviewFlag id="ch10-s2" chapter="ch10" label="2. 졸업 실험 — 처음부터 끝까지, 직접" />
     <p class="leading-relaxed text-slate-700">
       아래 시뮬레이션에서 파이프라인을 직접 끝까지 진행해 보세요.
       단계 ③에서 <b>당신의 진짜 취향</b>으로 고르세요 — 그 선택이 최종 챗봇을 결정합니다.
@@ -92,6 +94,7 @@ const JOURNEY = [
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 본편은 노트북 — 진짜 조립</h2>
+    <ReviewFlag id="ch10-s3" chapter="ch10" label="3. 본편은 노트북 — 진짜 조립" />
     <p class="leading-relaxed text-slate-700">
       이 장의 본편은 노트북입니다. 워밍업의 이어쓰기 기계에서 출발해 —
       SFT(3장의 표 갱신과 마스킹) → 보상 모델(4장의 Bradley-Terry 경사하강) →
@@ -106,6 +109,7 @@ const JOURNEY = [
     </div>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">밖에서 말할 때 — 용어 치환표</h2>
+    <ReviewFlag id="ch10-s4" chapter="ch10" label="밖에서 말할 때 — 용어 치환표" />
     <p class="leading-relaxed text-slate-700">
       "조련"은 이 과정의 <b>비유어</b>였습니다. 동료·문서·논문 앞에서는 실무 용어로 바꿔 말하세요 —
       비유는 이해를 위한 사다리였고, 이제 진짜 이름으로 대화할 차례입니다.
@@ -140,6 +144,7 @@ const JOURNEY = [
       — 이 여섯 줄을 자기 말로 할 수 있다면, 완주입니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch10-ai" chapter="ch10" label="🤖 AI 연결 — 회수하는 수학: 전 시리즈" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 전 시리즈">
       이 장에는 새 수학이 하나도 없습니다 — 그게 이 장의 메시지입니다.
       워밍업에서 예고했던 문장을 이제 증명했어요: <b>6부는 새 수학이 아니라,

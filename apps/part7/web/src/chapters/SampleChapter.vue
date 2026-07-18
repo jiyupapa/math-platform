@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // Phase 0 워밍업 챕터 — 7부 전체가 풀 문제("컴퓨터에게 '비슷함'을 가르치기")를 몸으로 먼저 느낀다.
 // 실제 Phase 1~10 챕터도 이 구조를 그대로 따른다.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -33,6 +33,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 사람은 쉽게 하는데, 컴퓨터는 왜 못할까</h2>
+    <ReviewFlag id="sample-s1" chapter="sample" label="1. 사람은 쉽게 하는데, 컴퓨터는 왜 못할까" />
     <p class="leading-relaxed text-slate-700">
       "회식 장소 어디로 정했어?"와 "저녁 모임 위치는 결정됐나요?" — 여러분은 두 문장이
       같은 뜻임을 <b>즉시</b> 압니다. 겹치는 단어가 하나도 없는데도요.
@@ -60,6 +61,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 뜻을 좌표로 — 임베딩의 재등장</h2>
+    <ReviewFlag id="sample-s2" chapter="sample" label="2. 뜻을 좌표로 — 임베딩의 재등장" />
     <p class="leading-relaxed text-slate-700">
       실험 ②의 지도에는 이름이 있습니다. 사실 여러분은 이미 만난 적이 있어요 —
       4부 3장에서 "단어를 벡터로 바꾸는 것"을
@@ -101,6 +103,7 @@ function onSetComplete() {
       (6부를 봤다면 — 조련 없이 문맥으로 지식을 넣는 길, 6부 2장의 그 이야기가 여기서 이어집니다.)
     </DetailsCard>
 
+    <ReviewFlag id="sample-ai" chapter="sample" label="🤖 AI 연결 — 회수하는 수학: 1부 1장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 1부 1장">
       실험 ②의 지도는 <PartLink :part="1" ch="ch1">1부 1장</PartLink>에서 배운
       <b>좌표평면</b> 그대로입니다 — 점의 위치를 숫자 두 개로 적던 그 평면에

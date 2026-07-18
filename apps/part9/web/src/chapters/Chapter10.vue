@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // ch10 — 품질 성적표: 양자화는 얼마나 잃나. 5부 7장의 퍼플렉시티가 열화를 재는 자로 —
 // 무릎 곡선(열화 = KL ≥ 0)과 성적표 읽기·RAM 추천까지.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -34,6 +34,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 자의 회수 — 퍼플렉시티, 다시 소개합니다</h2>
+    <ReviewFlag id="ch10-s1" chapter="ch10" label="1. 자의 회수 — 퍼플렉시티, 다시 소개합니다" />
     <p class="leading-relaxed text-slate-700">
       5부 7장의 정의 그대로 — 퍼플렉시티(PPL)는 <b>"평균 몇 갈래에서 고민하나"</b>,
       2^(평균 −log₂ p) 입니다. 양자화 열화 측정법은 단순해요: <b>같은 기준으로 전과 후를
@@ -67,6 +68,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 성적표의 언어 — 용어 이름표</h2>
+    <ReviewFlag id="ch10-s2" chapter="ch10" label="2. 성적표의 언어 — 용어 이름표" />
 
     <ConceptCard tone="note" title="새 용어: 열화 / 무릎(스윗 스팟) / 성적표의 전제">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
@@ -106,6 +108,7 @@ function onSetComplete() {
       기법 — 으로 같은 비트 예산에서 열화를 더 줄입니다. 9장 M 믹스의 정밀 조준판인 셈이죠.
     </DetailsCard>
 
+    <ReviewFlag id="ch10-ai" chapter="ch10" label="🤖 AI 연결 — 회수하는 수학: 5부 7장 · 6부 9장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 5부 7장 · 6부 9장">
       <b><PartLink :part="5" ch="ch7">5부 7장</PartLink></b>에서 퍼플렉시티는 "LLM 의
       성적표"였고, 오늘은 <b>압축의 성적표</b>가 됐습니다 — 같은 자의 두 번째 직업이에요.

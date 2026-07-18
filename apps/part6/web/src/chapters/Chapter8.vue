@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 8장 — LoRA: 살짝만 조련하기. 회수하는 수학: 1부 9장(rank) · 11장(SVD 감각).
 // 1부 후반(심화)을 건너뛴 학습자를 위해 rank 최소 직관을 이 장에 자체 포함한다(로드맵 요구).
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -37,6 +37,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 문제 — 70억 개를 다 만질 것인가</h2>
+    <ReviewFlag id="ch8-s1" chapter="ch8" label="1. 문제 — 70억 개를 다 만질 것인가" />
     <p class="leading-relaxed text-slate-700">
       전체 파인튜닝(지금까지 배운 방식 그대로)의 청구서는 셋입니다.
       ① 훈련 중 메모리 — 가중치에 더해 기울기·최적화 기록까지 들고 있어야 해서
@@ -54,6 +55,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. rank — 표의 진짜 정보량 (3분 완성)</h2>
+    <ReviewFlag id="ch8-s2" chapter="ch8" label="2. rank — 표의 진짜 정보량 (3분 완성)" />
     <p class="leading-relaxed text-slate-700">
       1부 9장을 건너뛰었어도 괜찮습니다 — 필요한 직관은 실험 하나면 충분해요.
       아래 표부터 보세요.
@@ -89,6 +91,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. LoRA — 변화분만 얇게 배운다</h2>
+    <ReviewFlag id="ch8-s3" chapter="ch8" label="3. LoRA — 변화분만 얇게 배운다" />
     <p class="leading-relaxed text-slate-700">
       이제 조립합니다. 조련 전 가중치 행렬을 W 라 하면, 조련은 W 를 W + ΔW 로 바꾸는 일.
       LoRA 의 선언은 — <b>"W 는 얼려 두고(🧊), ΔW 를 rank r 짜리로만 배우겠다"</b>:
@@ -107,6 +110,7 @@ function onSetComplete() {
     </div>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">4. 어댑터의 마법 — 갈아끼우기</h2>
+    <ReviewFlag id="ch8-s4" chapter="ch8" label="4. 어댑터의 마법 — 갈아끼우기" />
     <p class="leading-relaxed text-slate-700">
       LoRA 의 진짜 실무 파괴력은 <b>결과물이 분리돼 있다</b>는 데서 나옵니다.
     </p>
@@ -132,6 +136,7 @@ function onSetComplete() {
       "우리 회사 데이터로 챗봇 조련"의 표준 레시피가 <b>SFT(3장) + LoRA(이 장)</b> 조합이에요.
     </DetailsCard>
 
+    <ReviewFlag id="ch8-ai" chapter="ch8" label="🤖 AI 연결 — 회수하는 수학: 1부 9장 rank · 11장 SVD" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 1부 9장 rank · 11장 SVD">
       <b><PartLink :part="1" ch="ch9">1부 9장</PartLink></b>: rank — "데이터가 진짜 몇 차원어치 정보인가"가 조련 변화분의 성질로 재등장.
       <b><PartLink :part="1" ch="ch11">1부 11장</PartLink></b>: SVD — "행렬을 중요한 방향 몇 개로 근사한다"는 감각이 LoRA 의 설계 사상

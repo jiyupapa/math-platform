@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 3장 — SFT: 시범 보여주기 (핵심). 조련의 첫 단계가 새 수학이 아니라
 // 5부 4장 크로스 엔트로피 + 4부 11장 경사하강의 재사용임을 확인한다.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -35,6 +35,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 시범이 데이터가 되는 법</h2>
+    <ReviewFlag id="ch3-s1" chapter="ch3" label="1. 시범이 데이터가 되는 법" />
     <p class="leading-relaxed text-slate-700">
       SFT 데이터는 사람이 쓴 <b>지시 → 모범답안</b> 쌍이었죠(1장).
       모델에게 먹일 때는 이 쌍을 <b>한 줄의 텍스트로 이어 붙입니다</b>:
@@ -73,6 +74,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 채점기는 이미 배웠다 — 크로스 엔트로피</h2>
+    <ReviewFlag id="ch3-s2" chapter="ch3" label="2. 채점기는 이미 배웠다 — 크로스 엔트로피" />
     <p class="leading-relaxed text-slate-700">
       답변 토큰을 채점하는 자는 5부 4장에서 배운 그대로입니다.
       모범답안의 각 토큰이 "정답"이 되고, 모델이 그 정답 토큰에 준 확률이 q 라면:
@@ -94,6 +96,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 반복하면 경사하강 — 그리고 결정적 차이</h2>
+    <ReviewFlag id="ch3-s3" chapter="ch3" label="3. 반복하면 경사하강 — 그리고 결정적 차이" />
     <p class="leading-relaxed text-slate-700">
       "한 스텝 훈련" 버튼이 하던 일이 바로 4부 11장의 학습 루프입니다:
       손실을 재고 → 손실이 줄어드는 방향(기울기)을 구해 → 가중치를 조금 밀고 → 반복.
@@ -110,6 +113,7 @@ function onSetComplete() {
     </p>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">4. 그런데 시범만으로 안 되는 것</h2>
+    <ReviewFlag id="ch3-s4" chapter="ch3" label="4. 그런데 시범만으로 안 되는 것" />
     <p class="leading-relaxed text-slate-700">
       SFT 를 마치면 모델은 답변을 합니다(1장 실험의 2단계). 하지만 시범 데이터에는
       구조적인 빈틈이 있어요 — <b>모범답안은 "정답 하나"만 보여줄 뿐,
@@ -128,6 +132,7 @@ function onSetComplete() {
       이 템플릿의 한 자리에 끼워 넣는 텍스트일 뿐이에요.
     </DetailsCard>
 
+    <ReviewFlag id="ch3-ai" chapter="ch3" label="🤖 AI 연결 — 회수하는 수학: 5부 4장 · 4부 11장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 5부 4장 · 4부 11장">
       이 장의 전부가 재회였습니다. <b><PartLink :part="5" ch="ch4">5부 4장</PartLink></b>: 크로스 엔트로피 −log q(정답) — SFT 의 채점기.
       <b><PartLink :part="4" ch="ch11">4부 11장</PartLink></b>: 손실 → 기울기 → 가중치 갱신 루프 — SFT 의 엔진.

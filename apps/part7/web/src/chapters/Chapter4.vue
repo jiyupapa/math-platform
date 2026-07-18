@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 4장 — 고차원의 저주 (핵심): 무작위는 거의 직교, 그런데도 임베딩이 작동하는 이유.
 // 회수하는 수학: 3부 7장 큰 수의 법칙(집중) · 3부 5장 기댓값·분포 · 1부 9장 차원(용량).
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -38,6 +38,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 이상한 나라의 첫 관문 — 아무 벡터나 두 개 뽑으면</h2>
+    <ReviewFlag id="ch4-s1" chapter="ch4" label="1. 이상한 나라의 첫 관문 — 아무 벡터나 두 개 뽑으면" />
     <p class="leading-relaxed text-slate-700">
       2차원에서 무작위로 화살표 두 개를 던지면 사잇각은 아무거나 나옵니다 — 0°도, 90°도, 180°도요.
       그런데 차원을 올리면 이상한 일이 벌어집니다. 아래에서 차원 버튼을 눌러 가며
@@ -64,6 +65,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 왜 "저주"라 부르나 — 모두가 엇비슷하게 멀다</h2>
+    <ReviewFlag id="ch4-s2" chapter="ch4" label="2. 왜 「저주」라 부르나 — 모두가 엇비슷하게 멀다" />
     <p class="leading-relaxed text-slate-700">
       같은 집중 현상이 거리에도 일어납니다. 고차원에서 무작위 점들을 뿌리면 <b>서로 간의 거리가
       다 엇비슷</b>해져요 — 가장 가까운 점과 가장 먼 점의 차이가 미미해집니다. "최근접 이웃"이라는
@@ -81,6 +83,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 반전 — 임베딩은 무작위가 아니다</h2>
+    <ReviewFlag id="ch4-s3" chapter="ch4" label="3. 반전 — 임베딩은 무작위가 아니다" />
     <p class="leading-relaxed text-slate-700">
       저주의 전제를 다시 보세요 — 전부 "<b>무작위</b> 벡터"였습니다. 그런데 임베딩은 무작위가
       아니에요. 9장에서 배울 학습이 <b>관련된 것들은 같은 방향으로, 무관한 것들은 제멋대로</b> 되도록
@@ -136,6 +139,7 @@ function onSetComplete() {
       "cos 0.5 이상만 채택" 같은 임계값 규칙이 왜 조심스러운 문제인지는 7장(검색 품질)에서 다뤄요.
     </DetailsCard>
 
+    <ReviewFlag id="ch4-ai" chapter="ch4" label="🤖 AI 연결 — 회수하는 수학: 3부 7장 · 1부 9장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 3부 7장 · 1부 9장">
       집중 현상의 뿌리는 <b><PartLink :part="3" ch="ch7">3부 7장</PartLink></b>입니다 — 표본이 많을수록
       평균이 참값으로 조여들던 큰 수의 법칙, 그 1/√n이 여기선 차원 d에 붙어 무작위 코사인을

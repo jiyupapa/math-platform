@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 10장 — 🎯 캡스톤: AI 뉴스 팩트체크. 새 개념 없이 1~9장 총조립 — 졸업 시험.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { StepQuiz } from '@series/ui'
@@ -34,6 +34,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 감정 실습 — 검산대 4곳</h2>
+    <ReviewFlag id="ch10-s1" chapter="ch10" label="1. 감정 실습 — 검산대 4곳" />
     <p class="leading-relaxed text-slate-700">
       기사 속 밑줄 친 주장 4개를 각각의 검산대에서 감정합니다. 힌트 없이 먼저 스스로
       예상해 보세요 — 어느 주장이 통과하고, 어느 주장이 걸릴까요?
@@ -61,6 +62,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 졸업 체크리스트 — 지갑에 넣어 가세요</h2>
+    <ReviewFlag id="ch10-s2" chapter="ch10" label="2. 졸업 체크리스트 — 지갑에 넣어 가세요" />
 
     <ConceptCard tone="note" title="AI 발표 팩트체크 카드 (10부 요약)">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
@@ -90,6 +92,7 @@ function onSetComplete() {
       10부가 목표로 한 바로 그 문장들입니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch10-ai" chapter="ch10" label="🤖 AI 연결 — 이 눈은 시리즈 전체의 완성이다" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 이 눈은 시리즈 전체의 완성이다">
       10부의 팩트체크는 시리즈 전체 위에 서 있습니다 — 손실과 훈련은
       <b><PartLink :part="4" ch="ch11">4부 11장</PartLink></b>과 8부가, 평가의 기본기는

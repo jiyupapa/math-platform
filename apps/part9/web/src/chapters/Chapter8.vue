@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // ch8 — 눈금 갈아타기: 양자화 (핵심). 실수 자를 버리고 int8 정수 자 + 축척 스티커로 —
 // 그리고 "왜 추론은 반올림을 버티나"(상쇄·argmax 둔감·종모양 분포).
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -35,6 +35,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 아이디어 — 지도의 축척</h2>
+    <ReviewFlag id="ch8-s1" chapter="ch8" label="1. 아이디어 — 지도의 축척" />
     <p class="leading-relaxed text-slate-700">
       지도는 대한민국을 A4 에 담습니다 — 비결은 구석의 축척 표시("1cm = 10km") 하나죠.
       양자화도 똑같습니다. 가중치 한 묶음(행)의 최대 크기를 재서 <b>"정수 1칸 = 실수 s"</b> 라는
@@ -67,6 +68,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 용어 이름표 — 그리고 분포의 축복</h2>
+    <ReviewFlag id="ch8-s2" chapter="ch8" label="2. 용어 이름표 — 그리고 분포의 축복" />
     <p class="leading-relaxed text-slate-700">
       축척이 작을수록 눈금이 촘촘하고 오차가 작습니다 — 그런데 s = max|w|/127 이니
       <b>가중치의 최대 크기가 작아야</b> 유리하죠. 여기서 3부 5장의 지식이 축복이 됩니다:
@@ -113,6 +115,7 @@ function onSetComplete() {
       있지만, 오늘 한 것처럼 다 배운 모델을 나중에 옮기는 <b>PTQ</b>(post-training)가 기본값이에요.
     </DetailsCard>
 
+    <ReviewFlag id="ch8-ai" chapter="ch8" label="🤖 AI 연결 — 회수하는 수학: 1부 2장 · 3부 5장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 1부 2장 · 3부 5장">
       상쇄의 무대는 <b><PartLink :part="1" ch="ch2">1부 2장</PartLink></b>의 내적입니다 —
       추론의 몸통이 "곱해서 더하기"라서, 반올림 티끌이 4장의 √n 통계로 서로 지워지는 거예요.

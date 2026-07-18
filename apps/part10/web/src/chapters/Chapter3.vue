@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 3장 — 손실의 직선: 미니 LM 실측으로 스케일링 법칙(L = E + c/Dᵇ)을 직접 목격한다.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -34,6 +34,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 실험 — 먹인 만큼 내려가나</h2>
+    <ReviewFlag id="ch3-s1" chapter="ch3" label="1. 실험 — 먹인 만큼 내려가나" />
     <p class="leading-relaxed text-slate-700">
       실험 설계는 단순합니다. 8단어짜리 "고양이 세계" 언어에서 문장을 뽑아(시드 고정),
       미니 LM(바이그램 — 앞 단어를 보고 다음 단어 확률을 세는 학습기)에게 <b>D = 100부터
@@ -61,6 +62,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 법칙의 꼴 — 한 줄로 쓰기</h2>
+    <ReviewFlag id="ch3-s2" chapter="ch3" label="2. 법칙의 꼴 — 한 줄로 쓰기" />
     <p class="leading-relaxed text-slate-700">
       방금 목격한 것을 식 하나로 적으면 이렇습니다 (b &gt; 0, 우리 실험에선 b ≈ 1.06):
     </p>
@@ -115,6 +117,7 @@ function onSetComplete() {
       다릅니다 — 공통인 것은 <b>"멱법칙 꼴"</b>이라는 사실.
     </DetailsCard>
 
+    <ReviewFlag id="ch3-ai" chapter="ch3" label="🤖 AI 연결 — 프런티어 훈련은 '예측 게임'을 실전으로 한다" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 프런티어 훈련은 '예측 게임'을 실전으로 한다">
       랩의 예측 게임 — 싼 실험 5개로 직선을 긋고 10배 큰 훈련의 손실을 오차 0.01% 미만으로
       맞힌 것 — 이 바로 실제 프런티어 훈련의 표준 관행입니다. 수천억 원짜리 훈련을 지르기

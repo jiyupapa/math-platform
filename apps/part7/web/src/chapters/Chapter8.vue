@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 8장 — RAG 조립 (핵심): 파이프라인 완전판 + 실패 모드 진단 + 조련 vs RAG 선택 기준.
 // 규칙 8의 두 번째 지정 장 — 6부와의 구도를 실무 기준으로 완성. 회수: 6부 2~3장.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -34,6 +34,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 완전판 지도 — 두 개의 파이프라인</h2>
+    <ReviewFlag id="ch8-s1" chapter="ch8" label="1. 완전판 지도 — 두 개의 파이프라인" />
     <p class="leading-relaxed text-slate-700">
       1장의 5단계 지도는 사실 반쪽이었습니다. 질문이 들어오기 <b>전에</b> 미리 해 두는 준비 작업이
       따로 있거든요 — 문서를 모으고, 자르고, 좌표를 매겨 창고에 넣는 <b>인덱싱 파이프라인</b>입니다.
@@ -86,6 +87,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 지식 주입의 두 길 — 실무 결정 기준</h2>
+    <ReviewFlag id="ch8-s2" chapter="ch8" label="2. 지식 주입의 두 길 — 실무 결정 기준" />
     <p class="leading-relaxed text-slate-700">
       1장의 비교표를 이제 결정 절차로 바꿀 수 있습니다. 요구사항 앞에서 세 가지만 물으세요:
     </p>
@@ -105,6 +107,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 마지막 부품 — 그라운딩 프롬프트</h2>
+    <ReviewFlag id="ch8-s3" chapter="ch8" label="3. 마지막 부품 — 그라운딩 프롬프트" />
     <p class="leading-relaxed text-slate-700">
       사례 3·4의 범인은 프롬프트였습니다. 검색된 조각을 그냥 붙이는 게 아니라, 답을 근거 문서에
       <b>묶어 두는</b>(grounding) 지시가 필요해요. 실무 프롬프트의 뼈대는 세 문장입니다:
@@ -165,6 +168,7 @@ function onSetComplete() {
       (faithfulness)"를 사람 또는 LLM 심판으로 채점합니다 — 6부 9장의 평가 정신이 끝까지 갑니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch8-ai" chapter="ch8" label="🤖 AI 연결 — 회수하는 수학: 6부 2~3장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 6부 2~3장">
       갈림길 판단의 밑천은 6부에서 왔습니다 — <b><PartLink :part="6" ch="ch2">6부 2장</PartLink></b>에서
       프롬프트(문맥 창)가 <b>그 자리 한정의 지식</b>을 준다는 것을, <b><PartLink :part="6" ch="ch3">6부

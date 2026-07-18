@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 6장 — 시험의 오차범위 (핵심): 3부 8장 신뢰구간의 회수처. 필수 소주제 ③.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -36,6 +36,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 공식 — 여론조사와 벤치마크는 같은 수학</h2>
+    <ReviewFlag id="ch6-s1" chapter="ch6" label="1. 공식 — 여론조사와 벤치마크는 같은 수학" />
     <p class="leading-relaxed text-slate-700">
       왜 같을까요? 유권자 전부에게 물을 수 없어 1,004명을 <b>표본</b>으로 뽑듯, 낼 수 있는
       모든 문제를 다 낼 수 없어 n문항을 냅니다. 표본 정답률 p̂의 출렁임 폭(<b>표준오차</b>)은
@@ -112,6 +113,7 @@ function onSetComplete() {
       감각만 가져가면 충분합니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch6-ai" chapter="ch6" label="🤖 AI 연결 — 리더보드를 볼 때 자동으로 해야 할 나눗셈" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 리더보드를 볼 때 자동으로 해야 할 나눗셈">
       이제 벤치마크 점수를 보면 두 숫자를 찾게 될 겁니다 — 점수, 그리고 <b>문항 수</b>.
       실제로 널리 쓰이는 벤치마크 중엔 문항이 200개가 안 되는 것도 있고(±8%p — 한 자리

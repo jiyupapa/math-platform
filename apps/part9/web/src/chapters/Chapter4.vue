@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // ch4 — 눈금 사이의 오차: 반올림과 누적. 티끌(반올림 오차)이 계산에서 어떻게 행동하나 —
 // 순서 의존성·흡수·뺄셈 재앙, 그리고 GPU 병렬 합산 재현성(필수 소주제).
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -35,6 +35,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 무대 — 1 근처의 눈금 간격, 머신 엡실론</h2>
+    <ReviewFlag id="ch4-s1" chapter="ch4" label="1. 무대 — 1 근처의 눈금 간격, 머신 엡실론" />
     <p class="leading-relaxed text-slate-700">
       3장 관찰기에서 1 근처의 fp32 눈금 간격은 2⁻²³ ≈ 1.19×10⁻⁷ 이었죠. 이 값에는 이름이
       있습니다 — <b>머신 엡실론</b>(machine epsilon), "이 자가 1 근처에서 구분할 수 있는
@@ -63,6 +64,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 사건들에 이름표 달기</h2>
+    <ReviewFlag id="ch4-s2" chapter="ch4" label="2. 사건들에 이름표 달기" />
 
     <ConceptCard tone="note" title="새 용어: 머신 엡실론 / 흡수 / 파국적 상쇄">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
@@ -113,6 +115,7 @@ function onSetComplete() {
       제작자들은 이 장의 사건들을 <b>이미 알고 설계에 반영</b>해 뒀다는 것.
     </DetailsCard>
 
+    <ReviewFlag id="ch4-ai" chapter="ch4" label="🤖 AI 연결 — 같은 모델, 미세하게 다른 답의 수치적 범인" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 같은 모델, 미세하게 다른 답의 수치적 범인">
       GPU 는 수천 개의 코어가 합산을 <b>덩어리로 나눠 계산한 뒤 합류</b>시킵니다 — 스케줄에
       따라 실행마다 <b>더하는 순서가 달라질 수 있고</b>, 오늘 실험 ①이 보여줬듯 순서가 다르면

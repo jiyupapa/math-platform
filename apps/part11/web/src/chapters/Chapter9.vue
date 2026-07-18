@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 9장 — 여럿이 하기: 멀티에이전트 협업. 분업(전달 비용)·합의(상관)·역할 분리(검토)의 수학.
 // 핵심 수치(전부 해석적 검증): 혼자 34.9% / 분업 q0.95 31.5% / q0.99 34.2% / 작성+검토 48.8%(신뢰도 70.7%)
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -37,6 +37,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 무대 — 사람을 늘리면 나아질까</h2>
+    <ReviewFlag id="ch9-s1" chapter="ch9" label="1. 무대 — 사람을 늘리면 나아질까" />
     <p class="leading-relaxed text-slate-700">
       워밍업의 10단계 보고서 업무로 돌아갑시다. 걸음 정확도 90%, 혼자서는 성공률
       0.9¹⁰ ≈ <b>34.9%</b>. 팀장님의 첫 아이디어는 소박합니다 — "둘이서 5단계씩 나누면
@@ -67,6 +68,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 세 구도의 수학 — 분업 · 합의 · 역할 분리</h2>
+    <ReviewFlag id="ch9-s2" chapter="ch9" label="2. 세 구도의 수학 — 분업 · 합의 · 역할 분리" />
     <p class="leading-relaxed text-slate-700">
       <b>① 분업</b>(divide &amp; conquer)의 공식은 2장 사슬의 곱에 전달만 얹으면 됩니다 —
       단계 걸음 n개에 전달 h번이면:
@@ -146,6 +148,7 @@ function onSetComplete() {
       (0.92¹⁰ × 0.99² ≈ 42.6% &gt; 34.9%), 그리고 독립 검토자가 붙을 때(48.8%).
     </DetailsCard>
 
+    <ReviewFlag id="ch9-ai" chapter="ch9" label="🤖 AI 연결 — 계획자·실행자·검토자, 그리고 서브에이전트" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 계획자·실행자·검토자, 그리고 서브에이전트">
       실무의 멀티에이전트 시스템은 오늘 배운 구조를 그대로 씁니다 — <b>계획자</b>가 일을
       쪼개고(분업 + 전달 규격), <b>실행자</b>들이 병렬로 처리하고, <b>검토자</b>가 결과를

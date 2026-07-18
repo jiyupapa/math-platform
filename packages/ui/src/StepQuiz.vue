@@ -16,6 +16,8 @@
 import { ref, computed, onMounted, inject } from 'vue'
 import { MathBlock } from '@series/ui'
 import { quizGroupKey, type QuizGroup } from './quizGroup'
+import NoteMarker from './NoteMarker.vue'
+import { anchorChapter, anchorLabelOf } from './anchor'
 
 interface Step {
   /** 등호 왼쪽에 보일 KaTeX 수식 */
@@ -32,6 +34,8 @@ const props = withDefaults(
     explanation?: string
     hints?: string[]
     difficulty?: Difficulty
+    /** 협업 주석 앵커(P0, 선택) — {chapter}-quiz-{slug}. 붙이면 문제 머리에 💬 마커 */
+    anchorId?: string
   }>(),
   { hints: () => [] },
 )
@@ -103,6 +107,12 @@ const diffBadge: Record<Difficulty, { label: string; cls: string }> = {
       >
         {{ diffBadge[difficulty].label }}
       </span>
+      <NoteMarker
+        v-if="anchorId"
+        :item-id="anchorId"
+        :chapter="anchorChapter(anchorId)"
+        :label="anchorLabelOf(question)"
+      />
     </div>
     <p class="mb-4 font-medium leading-relaxed">{{ question }}</p>
 

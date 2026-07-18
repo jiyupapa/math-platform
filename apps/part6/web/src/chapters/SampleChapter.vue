@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // Phase 0 워밍업 챕터 — 6부 전체가 풀 문제("이어쓰기 기계 → 비서")를 몸으로 먼저 느낀다.
 // 실제 Phase 1~10 챕터도 이 구조를 그대로 따른다.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -33,6 +33,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 일단 실험부터 — 두 모델에게 같은 말 걸기</h2>
+    <ReviewFlag id="sample-s1" chapter="sample" label="1. 일단 실험부터 — 두 모델에게 같은 말 걸기" />
     <p class="leading-relaxed text-slate-700">
       여기 모델이 두 개 있습니다. 하나는 <b>베이스 모델</b>(인터넷 텍스트로 다음 단어 예측만 배운 상태),
       하나는 <b>챗 모델</b>(그 위에 조련을 마친 상태 — 여러분이 아는 ChatGPT가 이쪽).
@@ -58,6 +59,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 같은 두뇌, 다른 훈련</h2>
+    <ReviewFlag id="sample-s2" chapter="sample" label="2. 같은 두뇌, 다른 훈련" />
     <p class="leading-relaxed text-slate-700">
       놀라운 사실: 두 모델의 <b>내부 구조는 같습니다</b>. 토큰화 → 임베딩 → 어텐션 → 다음 단어 확률 —
       4부에서 조립한 트랜스포머 그대로예요. 다른 것은 딱 하나, <b>훈련의 마지막 단계</b>입니다.
@@ -106,6 +108,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 왜 이 과정이 '피날레'인가</h2>
+    <ReviewFlag id="sample-s3" chapter="sample" label="3. 왜 이 과정이 '피날레'인가" />
     <p class="leading-relaxed text-slate-700">
       조련의 각 단계를 열어 보면, 1~5부에서 배운 수학이 <b>전부 되돌아옵니다</b>.
       SFT의 손실은 5부의 크로스 엔트로피 그대로고(3장), 사람의 취향을 숫자로 바꾸는 보상 모델에는
@@ -121,6 +124,7 @@ function onSetComplete() {
       그 한계를 정확히 보는 게 2장 — 그래서 조련이 필요해집니다.
     </DetailsCard>
 
+    <ReviewFlag id="sample-ai" chapter="sample" label="🤖 AI 연결 — 회수하는 수학: 4부 전체" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 4부 전체">
       이 챕터의 실험은 <PartLink :part="4">4부</PartLink>의 결론 위에 서 있습니다. 4부에서 우리는
       <b>"LLM = 다음 단어를 확률로 고르는 기계"</b>를 직접 조립했죠.

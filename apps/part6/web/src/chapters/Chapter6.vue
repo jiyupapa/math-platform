@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 6장 — RLHF (핵심) — KL 목줄. 시리즈 하이라이트: 5부 5장의 KL 발산이 주인공으로 귀환.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -35,6 +35,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 조립 — RLHF의 등장인물</h2>
+    <ReviewFlag id="ch6-s1" chapter="ch6" label="1. 조립 — RLHF의 등장인물" />
     <p class="leading-relaxed text-slate-700">
       <b>RLHF</b>(Reinforcement Learning from Human Feedback — 사람 피드백 기반 강화학습)의
       훈련장에는 모델이 <b>세 개</b> 서 있습니다:
@@ -68,6 +69,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 목줄 — KL 발산의 귀환</h2>
+    <ReviewFlag id="ch6-s2" chapter="ch6" label="2. 목줄 — KL 발산의 귀환" />
     <p class="leading-relaxed text-slate-700">
       해법은 "점수를 쫓되, <b>원본에서 너무 멀어지면 벌점</b>"입니다.
       그러려면 <b>"멀어진 정도"를 재는 자</b>가 필요한데… 우리는 이미 갖고 있어요.
@@ -108,6 +110,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. β 다이얼 읽기 — 목줄의 트레이드오프</h2>
+    <ReviewFlag id="ch6-s3" chapter="ch6" label="3. β 다이얼 읽기 — 목줄의 트레이드오프" />
     <p class="leading-relaxed text-slate-700">
       실험의 네 버튼을 정리하면 이렇게 됩니다. β 는 "심판을 얼마나 믿을 것인가"의
       다이얼이기도 해요 — 심판이 불완전하다는 걸 알기에, 그 말을 <b>적당히만</b> 듣는 겁니다.
@@ -175,6 +178,7 @@ function onSetComplete() {
     </DetailsCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">4. 그런데… 부품이 너무 많다</h2>
+    <ReviewFlag id="ch6-s4" chapter="ch6" label="4. 그런데… 부품이 너무 많다" />
     <p class="leading-relaxed text-slate-700">
       RLHF 는 강력하지만 비쌉니다. 훈련장에 모델이 <b>세 개</b>(정책·심판·참조) 동시에 서 있고,
       샘플 생성 → 채점 → 갱신 루프는 느리고 불안정하기로 악명 높아요.
@@ -183,6 +187,7 @@ function onSetComplete() {
       수식 안에 그대로 살아 있습니다.
     </p>
 
+    <ReviewFlag id="ch6-ai" chapter="ch6" label="🤖 AI 연결 — 회수하는 수학: 5부 5장 KL 발산 (시리즈의 정점 연결)" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 5부 5장 KL 발산 (시리즈의 정점 연결)">
       루트 로드맵에서 예고했던 연결이 바로 이것입니다 —
       <b>"<PartLink :part="5" ch="ch5">5부 5장</PartLink> KL 발산 → 6부 RLHF: 조련이 원본에서 멀어지지 않게 묶는 목줄."</b>

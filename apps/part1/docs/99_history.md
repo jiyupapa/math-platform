@@ -5,6 +5,31 @@
 
 ---
 
+## 2026-07-18 (P3)
+
+### 📌 협업 주석 P0 — 임의 항목 앵커(anchorId) + 네이밍 정본
+`ConceptCard`·`Quiz`·`StepQuiz`·`MathBlock`(공용 @series/ui)에 **`anchorId` prop**(선택) —
+콘텐츠가 명시적 ID 를 넘기면 제목/문제 머리에 💬 마커가 붙는다. 라벨은 title/question 자동 파생
+(`anchorLabel` 로 덮어쓰기). 네이밍 정본 `{chapter}-{type}-{slug}` 와 금지 3종(자동 인덱스·배포 후
+변경·슬러그 외 첫 세그먼트)은 `packages/ui/src/anchor.ts` 가 단일 위치(챕터 파생이 여기 걸림).
+1부 ch1 에 실사용 2건: `ch1-concept-axes`(새 용어 카드)·`ch1-quiz-ordered-pair`(미니체크).
+E2E: 카드 마커로 메모 작성 → DB item_id=ch1-concept-axes 저장 확인. part6~11 섹션 앵커 백필
+247개(각 부 이력 참조)와 함께 **P0 완료** — 설계노트 §6·§8.
+
+### 🎓 협업 주석 P3 — 사람(강사) Q&A + 관리자 (미해결 큐·모더레이션)
+질문에 사람이 답하는 층 완성(설계: docs/todo_협업주석_260716.md §7·§8 P3). 관리자 지정 =
+`VITE_ADMIN_EMAILS`(사용자 결정) — 단 env 는 UI 표시용이고 **진짜 경계는 서버 `admin_emails()`
+SQL 함수 + RLS**(두 목록 동기 유지, env 만 고치면 안전한 방향으로 실패).
+- **DB**: `annotation_answers`(강사 답변 — 익명 원칙 유지, 이름 컬럼 없음) · `write_admin` RLS
+  (답변 작성=관리자만) · `del_admin`(모더레이션) · `set_resolved` RPC(resolved 칼럼만 —
+  넓은 update 정책이면 관리자가 남의 글 본문까지 고칠 수 있어 RPC 로 좁힘).
+- **NotePanel**: 🎓 강사 답변 스레드(이름 없이 배지만)·답변 폼·해결 토글·관리자 삭제.
+- **포털 `/qna`**: 미해결 질문 큐(관리자에게만 메뉴 노출) — 전 부 질문을 모아 챕터 앵커로
+  딥링크("챕터에서 답변하기"), 답 없이 해결 처리도 가능.
+- 검증: 실 Supabase E2E **22/22** — 일반 유저 답변 42501 차단·set_resolved 무효·관리자 답변→
+  질문자 화면 표시·해결 후 큐 비움·익명 유지(이름 노출 0)·모더레이션 삭제. 전 12앱 빌드 통과.
+- 남은 것: 알림(P3 후반 선택 — 브리티 SMTP 미정), P0(임의 항목 ID), 부 확대.
+
 ## 2026-07-18
 
 ### 📎 비유 앵커링 2차 — "취향 축" → 잠재 요인(latent factor)

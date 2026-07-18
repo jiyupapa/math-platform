@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 5장 — 창발일까 착시일까: "능력이 갑자기 튀어나온다"는 주장을 지표 분해로 검증한다.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -33,6 +33,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 무대 — 갑자기 산수를 하기 시작했다?</h2>
+    <ReviewFlag id="ch5-s1" chapter="ch5" label="1. 무대 — 갑자기 산수를 하기 시작했다?" />
     <p class="leading-relaxed text-slate-700">
       실험 설계는 워밍업의 "신의 시점" 그대로입니다. 8자리 덧셈 과제에서, 모델이 답의
       <b>각 자리를 맞힐 확률 p</b>가 모델 크기에 따라 <b>매끈한 멱법칙</b>(자리당 오차가
@@ -62,6 +63,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 이름표 달기 — 논쟁의 언어</h2>
+    <ReviewFlag id="ch5-s2" chapter="ch5" label="2. 이름표 달기 — 논쟁의 언어" />
 
     <ConceptCard tone="note" title="새 용어: 창발 / 비선형 지표 / 부분 점수">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
@@ -104,6 +106,7 @@ function onSetComplete() {
       "어려운 과제일수록 창발 시점이 늦다"는 관측과 정확히 맞물리는 예측이죠.
     </DetailsCard>
 
+    <ReviewFlag id="ch5-ai" chapter="ch5" label="🤖 AI 연결 — '갑자기 각성했다'는 기사를 읽는 법" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — '갑자기 각성했다'는 기사를 읽는 법">
       "규모 X를 넘자 능력이 깨어났다"는 발표는 캡스톤(10장)에서 팩트체크할 단골 문장입니다.
       이제 여러분의 체크리스트: 그 그래프의 y축이 exact match인가? 부분 점수·로그 확률로

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 1장 — 큰 그림: 챗봇에서 에이전트로. 상태·행동·도구·루프를 해부하고 11부 여정표를 편다.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
@@ -33,6 +33,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 무대 — 같은 부탁, 두 직원</h2>
+    <ReviewFlag id="ch1-s1" chapter="ch1" label="1. 무대 — 같은 부탁, 두 직원" />
     <p class="leading-relaxed text-slate-700">
       두 직원에게 같은 부탁을 합니다 — <b>"다음 주 화요일에 팀 회의실 좀 예약해 줘."</b>
       첫 번째 직원은 그 자리에서 바로 "네, 예약했습니다!"라고 답합니다. 시원시원한데…
@@ -62,6 +63,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 오늘의 발견에 이름표 달기</h2>
+    <ReviewFlag id="ch1-s2" chapter="ch1" label="2. 오늘의 발견에 이름표 달기" />
     <p class="leading-relaxed text-slate-700">
       방금 본 구조에 공식 이름을 달아 둡시다 — 11부 내내 이 세 단어로 이야기합니다.
     </p>
@@ -95,6 +97,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 11부 여정표 — 세 막짜리 연극</h2>
+    <ReviewFlag id="ch1-s3" chapter="ch1" label="3. 11부 여정표 — 세 막짜리 연극" />
     <p class="mb-3 leading-relaxed text-slate-700">
       출발 질문은 워밍업 그대로입니다 — <b>"일의 성공률은 걸음의 곱인데, 그럼 어떻게 일을
       맡기나?"</b> 11부는 세 막으로 답합니다.
@@ -127,6 +130,7 @@ function onSetComplete() {
       수학이 전부 통합니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch1-ai" chapter="ch1" label="🤖 AI 연결 — 루프의 원형과 훈련" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 루프의 원형과 훈련">
       에이전트 루프는 갑자기 등장한 발명품이 아닙니다.
       <b><PartLink :part="4" ch="ch12">4부 12장</PartLink></b>에서 본 <b>생성 루프</b> —

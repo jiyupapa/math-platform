@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 7장 — 청킹과 검색 품질: 문서 쪼개기 트레이드오프, top-k, recall@k.
 // 회수하는 수학: 6부 9장(평가의 정신) · 3부 8장(표본과 신뢰구간 — 평가 세트 크기).
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { StepQuiz } from '@series/ui'
@@ -35,6 +35,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 칼질의 기술 — 청킹</h2>
+    <ReviewFlag id="ch7-s1" chapter="ch7" label="1. 칼질의 기술 — 청킹" />
     <p class="leading-relaxed text-slate-700">
       벡터 DB에 넣는 단위는 문서 전체가 아니라 <b>조각</b>입니다 — 문서를 검색 단위로 자르는 일을
       <b>청킹</b>(chunking)이라 불러요. "그냥 통째로 넣으면 안 되나?" 그게 왜 안 되는지,
@@ -61,6 +62,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 몇 개를 꺼낼까 — top-k와 임계값</h2>
+    <ReviewFlag id="ch7-s2" chapter="ch7" label="2. 몇 개를 꺼낼까 — top-k와 임계값" />
     <p class="leading-relaxed text-slate-700">
       검색 결과 중 상위 <b>k개</b>를 꺼내 프롬프트에 넣습니다(<b>top-k</b>). k가 크면
       정답을 놓칠 확률은 줄지만, 프롬프트가 길어져 <b>토큰 비용이 늘고 잡음 조각이 답을 흐릴 수</b>
@@ -78,6 +80,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 감이 아니라 숫자로 — recall@k</h2>
+    <ReviewFlag id="ch7-s3" chapter="ch7" label="3. 감이 아니라 숫자로 — recall@k" />
     <p class="leading-relaxed text-slate-700">
       청킹 크기를 바꿨더니 좋아진 것 같은 "느낌" — 6부 9장에서 이 함정을 이미 배웠습니다:
       <b>평가 없이 개선 없다.</b> 검색의 성적표는 이렇게 만듭니다.
@@ -128,6 +131,7 @@ function onSetComplete() {
       실사용 질문 로그가 최고의 평가 세트 재료입니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch7-ai" chapter="ch7" label="🤖 AI 연결 — 회수하는 수학: 6부 9장 · 3부 8장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 6부 9장 · 3부 8장">
       이 장의 정신은 <b><PartLink :part="6" ch="ch9">6부 9장</PartLink></b>에서 왔습니다 —
       조련의 성적표(평가 세트·벤치마크) 없이 개선을 논하지 말라던 그 원칙이, RAG에서는

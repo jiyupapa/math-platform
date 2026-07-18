@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 2장 — 곱의 세계: 로그 눈금과 멱법칙 (핵심). 10부 1막 전체의 수학 도구.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -35,6 +35,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 무대 — 보통 종이가 망가지는 순간</h2>
+    <ReviewFlag id="ch2-s1" chapter="ch2" label="1. 무대 — 보통 종이가 망가지는 순간" />
     <p class="leading-relaxed text-slate-700">
       1장 노트북의 마지막 그림을 기억하시나요 — GPT-2급(9×10¹⁹)과 70B급(8.4×10²³)의 예산을
       보통 막대그래프에 함께 그리면 <b>GPT-2급 막대는 보이지도 않습니다</b>(8,900배 차이).
@@ -65,6 +66,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 왜 직선이 되나 — 로그 안경의 수학</h2>
+    <ReviewFlag id="ch2-s2" chapter="ch2" label="2. 왜 직선이 되나 — 로그 안경의 수학" />
     <p class="leading-relaxed text-slate-700">
       마법이 아니라 2부 7장의 로그 성질 그대로입니다. 멱법칙 y = a·xᵇ 의 양변에
       로그를 씌우면:
@@ -119,6 +121,7 @@ function onSetComplete() {
       멱("10배당 ×10ᵇ"). 지수가 훨씬 빨리 자랍니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch2-ai" chapter="ch2" label="🤖 AI 연결 — 스케일링 법칙 그래프는 전부 이 종이 위에 있다" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 스케일링 법칙 그래프는 전부 이 종이 위에 있다">
       스케일링 법칙 논문들의 그 유명한 그림 — 가로축 N(또는 D, C), 세로축 손실 — 은
       예외 없이 <b>로그-로그 종이</b>입니다. 법칙이 L ≈ a·N^(−b) 꼴 멱법칙이라 그 종이에서만

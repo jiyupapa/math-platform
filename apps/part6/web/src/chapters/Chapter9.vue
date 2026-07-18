@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 9장 — 조련 성적표: 평가와 부작용. 회수하는 수학: 3부 8장(신뢰구간)·9장(가설검정)·10장(상관).
 // 3부 심화 트랙(선택)의 회수처가 되는 장.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { Quiz } from '@series/ui'
 import { StepQuiz } from '@series/ui'
@@ -35,6 +35,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 왜 어려운가 — 퍼플렉시티로는 안 된다</h2>
+    <ReviewFlag id="ch9-s1" chapter="ch9" label="1. 왜 어려운가 — 퍼플렉시티로는 안 된다" />
     <p class="leading-relaxed text-slate-700">
       5부 7장에서 배운 퍼플렉시티가 있잖아? — 아쉽게도 안 됩니다.
       PPL 은 <b>"다음 토큰 맞히기" 성적</b>일 뿐이라, 조련이 만드는 가치
@@ -81,6 +82,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 성적표 읽기 — 3부 심화가 여기서 회수된다</h2>
+    <ReviewFlag id="ch9-s2" chapter="ch9" label="2. 성적표 읽기 — 3부 심화가 여기서 회수된다" />
     <p class="leading-relaxed text-slate-700">
       "우리 모델 72%, 경쟁 모델 66% — 우리가 이겼다!" 정말일까요?
       벤치마크 점수는 <b>표본 평균</b>입니다(3부). 문항 수가 적으면 오차범위(±)가 커서,
@@ -106,6 +108,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 성적표에 안 잡히는 것 — 부작용 3종</h2>
+    <ReviewFlag id="ch9-s3" chapter="ch9" label="3. 성적표에 안 잡히는 것 — 부작용 3종" />
     <p class="leading-relaxed text-slate-700">
       더 무서운 건 점수가 좋아 보여도 생기는 문제들입니다. 위 실험 ②(진단소)에서
       봤듯, 과잉 조련의 부작용은 <b>지금까지 배운 메커니즘의 그림자</b>예요 —
@@ -129,6 +132,7 @@ function onSetComplete() {
       조련 전후를 비교하는 것 — 그게 어떤 리더보드보다 정확한 성적표예요.
     </DetailsCard>
 
+    <ReviewFlag id="ch9-ai" chapter="ch9" label="🤖 AI 연결 — 회수하는 수학: 3부 8~10장 (심화 트랙의 회수처)" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 3부 8~10장 (심화 트랙의 회수처)">
       1~7장을 달리는 동안 "선택"으로 밀려 있던 3부 심화가 여기서 전부 일합니다.
       <b><PartLink :part="3" ch="ch8">8장 신뢰구간</PartLink></b>: 점수의 ± / <b><PartLink :part="3" ch="ch9">9장 가설검정</PartLink></b>: 차이가 우연인가 진짜인가 /

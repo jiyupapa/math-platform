@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 5장 — 다수결 회의: self-consistency. 되살리는 두 번째 길 — 이항 다수결의 힘과
 // 두 가지 전제(p>50%, 표의 독립)를 해석적 계산기로 확인한다.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -34,6 +34,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 무대 — 답이 3:2로 갈렸다</h2>
+    <ReviewFlag id="ch5-s1" chapter="ch5" label="1. 무대 — 답이 3:2로 갈렸다" />
     <p class="leading-relaxed text-slate-700">
       에이전트에게 수학 문제를 하나 맡기고, 같은 문제를 <b>다섯 번</b> 풀게 했습니다.
       답이 갈립니다 — 세 번은 <b>42</b>, 두 번은 <b>38</b>. 어느 쪽을 믿어야 할까요?
@@ -62,6 +63,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 다수결의 수학 — 이항분포의 재등장</h2>
+    <ReviewFlag id="ch5-s2" chapter="ch5" label="2. 다수결의 수학 — 이항분포의 재등장" />
     <p class="leading-relaxed text-slate-700">
       표 k개 중 <b>과반(⌈k/2⌉ 이상)</b>이 정답일 확률은, 3부 5장에서 만난
       <b>이항분포</b>의 합입니다:
@@ -106,6 +108,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 손으로 한 번 — 3표 다수결 계산</h2>
+    <ReviewFlag id="ch5-s3" chapter="ch5" label="3. 손으로 한 번 — 3표 다수결 계산" />
     <p class="mb-2 leading-relaxed text-slate-700">
       70%짜리 표 <b>3개</b>의 다수결(2표 이상 정답)을 직접 계산해 봅시다.
     </p>
@@ -133,6 +136,7 @@ function onSetComplete() {
       쓸 수 없어요 — 그런 일은 6장의 검수자가 맡습니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch5-ai" chapter="ch5" label="🤖 AI 연결 — 수학 벤치마크 점수를 끌어올린 그 기법" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 수학 벤치마크 점수를 끌어올린 그 기법">
       self-consistency는 실무에서 가장 값싸게 성능을 올리는 손잡이 중 하나입니다 —
       추론 모델에게 같은 수학 문제를 수십 번 풀게 하고 다수결을 시키면 벤치마크 점수가

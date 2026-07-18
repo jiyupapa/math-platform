@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 1장 — 큰 그림: 안개 낀 산과 여행자. 8부 전체의 지도를 그리는 챕터.
 // 회수하는 수학: 2부 8장(편미분 — 가중치별 기울기) · 4부 11장(트랜스포머의 손실).
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -35,6 +35,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 무대 — 손실 지형</h2>
+    <ReviewFlag id="ch1-s1" chapter="ch1" label="1. 무대 — 손실 지형" />
     <p class="leading-relaxed text-slate-700">
       모델의 가중치 값들을 하나 정하면, 훈련 데이터 전체에 대한 손실이 하나 정해집니다.
       즉 손실은 <b>모든 가중치의 함수</b>예요:
@@ -68,6 +69,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 지형의 지물들</h2>
+    <ReviewFlag id="ch1-s2" chapter="ch1" label="2. 지형의 지물들" />
     <p class="leading-relaxed text-slate-700">
       실험에서 만난 지물들에 이름표를 달아 둡시다. 여행자를 괴롭히는 것은 대부분 이 셋입니다 —
       <b>더 깊은 곳이 있는데 발밑이 평평해 멈추는 웅덩이</b>(국소최소), <b>발밑이 거의 평평해
@@ -110,6 +112,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 여정표 — 다이얼들이 이 그림 어디에 붙는가</h2>
+    <ReviewFlag id="ch1-s3" chapter="ch1" label="3. 여정표 — 다이얼들이 이 그림 어디에 붙는가" />
     <p class="leading-relaxed text-slate-700">
       이제 8부의 남은 장들을 이 그림 위에 배치할 수 있습니다. 길을 잃을 때마다 여기로 돌아오세요.
     </p>
@@ -153,6 +156,7 @@ function onSetComplete() {
       바로 그런 슬라이스의 축소판이었어요 — 10장에서 이 기법으로 진짜 지형의 함정들을 구경합니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch1-ai" chapter="ch1" label="🤖 AI 연결 — 회수하는 수학: 2부 8장 · 4부 11장" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 2부 8장 · 4부 11장">
       이 지형의 재료는 전부 배운 것입니다 — 고도의 정체는
       <b><PartLink :part="4" ch="ch11">4부 11장</PartLink></b>에서 본 트랜스포머의 손실(크로스

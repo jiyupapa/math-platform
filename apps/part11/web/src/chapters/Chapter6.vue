@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 6장 — 검수자: verifier와 베이즈 (핵심). 3부 4장(조건부 확률·베이즈)의 정면 회수처.
-import { ConceptCard, PartLink } from '@series/ui'
+import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
@@ -36,6 +36,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 무대 — 통과 도장의 무게</h2>
+    <ReviewFlag id="ch6-s1" chapter="ch6" label="1. 무대 — 통과 도장의 무게" />
     <p class="leading-relaxed text-slate-700">
       워밍업의 그 일꾼이 10단계 보고서를 하나 제출했습니다. 성공률 35%짜리 작업이니
       그대로 쓰기엔 불안하죠. 마침 팀에 <b>검수 담당</b>이 생겼습니다 — 맞는 보고서의
@@ -65,6 +66,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 오늘의 발견에 이름표 달기</h2>
+    <ReviewFlag id="ch6-s2" chapter="ch6" label="2. 오늘의 발견에 이름표 달기" />
     <p class="leading-relaxed text-slate-700">
       방금 만진 다이얼들의 공식 이름과, 그것들을 묶는 공식 하나를 배웁니다.
     </p>
@@ -134,6 +136,7 @@ function onSetComplete() {
       합니다.
     </DetailsCard>
 
+    <ReviewFlag id="ch6-ai" chapter="ch6" label="🤖 AI 연결 — 실무의 검수자들, 그리고 1막의 완성" />
     <ConceptCard tone="ai" title="🤖 AI 연결 — 실무의 검수자들, 그리고 1막의 완성">
       실무 에이전트의 검수자는 세 부류입니다 — <b>테스트 실행</b>(코드가 돌면 통과: 특이도가
       매우 높은 결정적 검수자 — 코딩 에이전트가 유독 강한 이유), <b>정답 대조</b>(수학·퀴즈),
