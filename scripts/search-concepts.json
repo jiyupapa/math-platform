@@ -50,7 +50,7 @@
   { "term": "모멘텀", "aliases": ["momentum", "관성", "지수이동평균", "EMA"], "note": "좁은 골짜기의 지그재그 → 속도 누적", "locations": [{ "part": 8, "slug": "ch4" }] },
   { "term": "Adam", "aliases": ["아담", "적응적 보폭", "RMSProp", "옵티마이저", "optimizer"], "note": "축마다 다른 보폭 = 모멘텀 + RMS", "locations": [{ "part": 8, "slug": "ch5" }] },
   { "term": "학습률 스케줄", "aliases": ["lr schedule", "워밍업", "warmup", "코사인 감쇠", "여행 일정표"], "note": "왜 초반은 조심스럽게, 후반은 미세하게", "locations": [{ "part": 8, "slug": "ch6" }] },
-  { "term": "과적합", "aliases": ["overfitting", "통째로 외움", "일반화", "generalization"], "note": "훈련 손실↓ 검증 손실↑ 갈라짐", "locations": [{ "part": 8, "slug": "ch7" }] },
+  { "term": "과적합", "aliases": ["overfitting", "통째로 외움", "일반화", "generalization"], "note": "훈련 손실↓ 검증 손실↑ 벌어짐", "locations": [{ "part": 8, "slug": "ch7" }] },
   { "term": "정규화", "aliases": ["regularization", "weight decay", "드롭아웃", "dropout", "조기 종료", "안전장치"], "note": "멀리 못 가게 묶는 원점 목줄", "locations": [{ "part": 8, "slug": "ch8" }] },
   { "term": "안장점", "aliases": ["saddle point", "국소최소", "평원", "지형의 함정"], "note": "고차원에선 국소최소보다 안장점이 흔하다", "locations": [{ "part": 8, "slug": "ch10" }] },
 

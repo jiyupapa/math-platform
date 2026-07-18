@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // ch7 인터랙티브 — ① 재단사의 유혹: 차수(다이얼 수)를 올리면 훈련 오차는 0으로, 검증 오차는 U자.
-//                 ② 갈라짐 감시자: 차수 9를 GD로 훈련 — 검증 손실이 돌아서는 순간(과적합 시작).
+//                 ② 벌어짐 감시자: 차수 9를 GD로 훈련 — 검증 손실이 돌아서는 순간(과적합 시작).
 // 오프라인·결정적 — 시드 고정 PRNG(mulberry32). 노트북과 같은 실험(시드는 별도 튜닝).
 import { computed, ref } from 'vue'
 
@@ -109,7 +109,7 @@ const curvePath = (f: (x: number) => number) =>
 const fittedPath = computed(() => curvePath((x) => predict(fit.value.w, x)))
 const truePath = curvePath(TRUE_RULE)
 
-// ── ② 갈라짐 감시자 ────────────────────────────────
+// ── ② 벌어짐 감시자 ────────────────────────────────
 const STEPS = 3000
 const trained = ref(false)
 const run = computed(() => {
@@ -199,9 +199,9 @@ const lossLine = (ls: number[]) =>
       <p class="min-w-0 flex-1 text-xs leading-relaxed" :class="verdict.tone"><b>{{ verdict.text }}</b></p>
     </div>
 
-    <!-- ② 갈라짐 감시자 -->
+    <!-- ② 벌어짐 감시자 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 갈라짐 감시자: 훈련 일지에 과적합이 남기는 무늬</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 벌어짐 감시자: 훈련 일지에 과적합이 남기는 무늬</p>
     <p class="mb-3 text-xs text-slate-400">
       실전에선 차수 슬라이더가 아니라 <b>훈련 스텝</b>이 흐릅니다. 아까 그 점 10개에 차수 9(암기 가능 용량)를
       경사하강으로 3,000스텝 — 두 손실을 함께 기록해 보세요.

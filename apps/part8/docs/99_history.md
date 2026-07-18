@@ -1,5 +1,15 @@
 # 8부 — 최적화: 작업 이력 (최신이 위)
 
+## 2026-07-18
+
+### 📎 용어 드리프트 통일 — "갈라짐" → "벌어짐" (시리즈 전수 점검 반영)
+같은 현상(train/val 곡선 분기 = 과적합 시작)을 ch7·8 은 "갈라짐", ch9·11·tutorContext 는 "벌어짐"으로
+혼용 → **"벌어짐"으로 전면 통일**(9장 4대 증상 도감·탭 라벨·목차 요약이 이미 벌어짐이었음).
+- 웹 24건(ch7·8·9, OverfitLab·RegularizeLab·DiagnoseLab, chapters.ts, tutorContext.json) +
+  노트북 ch07/ch08 8셀 + 검색 개념 사전(scripts/search-concepts.json) 1건.
+- Quiz `question` 문자열은 무변경(uid 보존 — 사용자 퀴즈 저장 상태 안전). ch07·ch08 nbconvert
+  `--execute` 무에러 재검증, `npm run build` 통과, 통합검색 인덱스 재생성.
+
 ## 2026-07-12
 
 ### 🎓 ch11 공개 — 캡스톤: 파인튜닝 설정 완독 → **8부 완결 (전 12챕터)**
