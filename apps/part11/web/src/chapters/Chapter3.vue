@@ -64,7 +64,7 @@ function onSetComplete() {
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 오늘의 발견에 이름표 달기</h2>
 
-    <ConceptCard tone="note" title="새 용어: 라우팅 / 신뢰도 / 임계값">
+    <ConceptCard tone="note" title="새 용어: 라우팅 / 신뢰도 / 임계값 / 놓침·헛발의 정식 이름">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
         <li>
           <b>라우팅</b> (routing) — 읽는 법: 라우팅.
@@ -80,6 +80,12 @@ function onSetComplete() {
           <b>임계값</b> (threshold) — 읽는 법: 스레숄드(문턱값).
           뜻: <b>"이 점수부터는 호출한다"</b>는 문턱. 내리면 헛발이 늘고 올리면 놓침이 늡니다 —
           공짜로 좋아지는 방향은 없어요.
+        </li>
+        <li>
+          <b>놓침·헛발의 정식 이름</b> — 통계·ML 에서는 놓침(필요한데 안 씀)을
+          <b>거짓 음성(false negative)</b>, 헛발(불필요한데 씀)을 <b>거짓 양성(false positive)</b>
+          이라고 부릅니다. 랩 ③처럼 네 칸으로 집계한 표의 이름이 <b>혼동 행렬(confusion matrix)</b> —
+          논문·문서에는 전부 이 이름으로 나와요. 이 과정에서는 계속 놓침·헛발이라 부를게요.
         </li>
       </ul>
     </ConceptCard>

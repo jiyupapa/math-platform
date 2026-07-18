@@ -59,6 +59,9 @@ function onSetComplete() {
           <span class="text-slate-500">(예: 회원 데이터에서 키가 큰 사람일수록 몸무게도 크다면, 키·몸무게의 공분산은 양수)</span>
           이 값들을 모은 게 <b>공분산행렬</b>이고,
           그 <b>고유벡터가 주성분</b>, <b>고유값이 그 방향의 퍼진 정도(정보량)</b>예요.
+          <span class="text-slate-500">("퍼진 정도"의 통계 정식 이름이 <b>분산(variance)</b>이에요 —
+          그래서 실무·라이브러리에서는 "정보 비율"을 <b>설명된 분산 비율(explained variance ratio)</b>이라
+          부릅니다. 이 이름으로 검색하면 같은 개념이 나와요.)</span>
         </li>
       </ul>
     </ConceptCard>
