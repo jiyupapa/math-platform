@@ -64,7 +64,7 @@ function onSetComplete() {
             <td class="py-2">가장 믿을 만함 / 비싸고 느림</td>
           </tr>
           <tr>
-            <td class="py-2 pr-3 font-medium">LLM 심판</td>
+            <td class="py-2 pr-3 font-medium">LLM 심판 (LLM-as-a-judge)</td>
             <td class="py-2 pr-3">강한 모델에게 두 답변 비교시킴</td>
             <td class="py-2">싸고 빠름 / 심판도 편향(장황함·첫 번째 위치·자기 스타일 선호)</td>
           </tr>
@@ -109,8 +109,10 @@ function onSetComplete() {
     <p class="leading-relaxed text-slate-700">
       더 무서운 건 점수가 좋아 보여도 생기는 문제들입니다. 위 실험 ②(진단소)에서
       봤듯, 과잉 조련의 부작용은 <b>지금까지 배운 메커니즘의 그림자</b>예요 —
-      아첨은 보상 모델의 근사 구멍(4장)이, 망각은 원본 이탈(6장)이,
-      거절 과잉은 안전 조련의 과최적화가 만든 것. 각각 전용 평가셋으로
+      <b>아첨(sycophancy)</b>은 보상 모델의 근사 구멍(4장)이,
+      <b>망각(catastrophic forgetting)</b>은 원본 이탈(6장)이,
+      <b>거절 과잉(over-refusal)</b>은 안전 조련의 과최적화가 만든 것.
+      (셋 다 논문·문서에는 이 영문 이름으로 나와요.) 각각 전용 평가셋으로
       <b>따로 감시</b>해야 잡힙니다. 종합 점수 하나로는 절대 안 보여요.
     </p>
 
