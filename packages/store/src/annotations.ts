@@ -9,7 +9,7 @@ import { currentUser } from './auth'
 
 // ── 관리자(강사) 판별 — P3 ────────────────────────────────
 // env VITE_ADMIN_EMAILS(콤마 구분)는 **UI 표시용**(답변 폼·큐 메뉴를 그릴지)이다.
-// 진짜 경계는 서버의 admin_emails() SQL 함수 + RLS — 두 목록을 같게 유지할 것(schema.sql §6).
+// 진짜 경계는 서버의 public.admins 테이블 + RLS — 두 목록을 같게 유지할 것(schema.sql §6).
 const env = (import.meta as { env?: Record<string, unknown> }).env ?? {}
 const ADMIN_EMAILS = ((env.VITE_ADMIN_EMAILS as string | undefined) ?? '')
   .split(',')
