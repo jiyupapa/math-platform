@@ -6,16 +6,40 @@
 -- 설계: docs/todo_supabase백엔드_260715.md · 콘솔 절차: docs/supabase_설정가이드_260715.md
 
 -- ─────────────────────────────────────────────────────────────
--- 1) @solideos.com 도메인만 가입 허용 (서버 차단 — API 직접 호출해도 막힘)
+-- 1) 가입 통제 (서버 차단 — API 직접 호출해도 막힘)
+--    ① @solideos.com 도메인 강제 (항상).
+--    ② 가입 허용목록 allowed_emails — **비어 있으면 지금까지와 동일**(도메인만 검사),
+--       한 건이라도 넣는 순간 "목록에 있는 이메일만" 가입할 수 있다.
+--    왜 ②가 필요한가: 배포본은 공개 인터넷이고 anon key 는 번들에 공개인데,
+--    "Confirm email OFF"(사내 SMTP 불가 — 경로 B)라 메일함 소유 증명이 없다 →
+--    외부인이 미사용 @solideos.com 주소로 가입해 공유 주석(read_all)을 읽을 수 있다.
+--    허용목록은 메일 발송 없이 이 구멍을 막는다(직원 이메일 명단을 미리 적재).
+--    운영(SQL Editor — 파일 재실행과 무관하게 유지된다):
+--      insert into public.allowed_emails(email) values ('hong@solideos.com') on conflict do nothing;
+--      delete from public.allowed_emails where email = 'hong@solideos.com';
 -- ─────────────────────────────────────────────────────────────
+
+-- 허용목록 — 재실행해도 보존(admins 와 같은 패턴). 명단 비공개: RLS ON + 정책 0개 + revoke.
+create table if not exists public.allowed_emails (
+  email      text        primary key,   -- 소문자로 저장할 것(트리거가 lower() 로 비교)
+  created_at timestamptz not null default now()
+);
+alter table public.allowed_emails enable row level security;
+revoke all on table public.allowed_emails from anon, authenticated;
+
 create or replace function public.enforce_email_domain()
 returns trigger
 language plpgsql
 security definer
+set search_path = public
 as $$
 begin
   if new.email is null or lower(new.email) not like '%@solideos.com' then
     raise exception 'solideos.com 계정만 등록할 수 있습니다';
+  end if;
+  if exists (select 1 from allowed_emails)
+     and not exists (select 1 from allowed_emails where email = lower(new.email)) then
+    raise exception '가입이 허용되지 않은 계정입니다 (관리자에게 문의하세요)';
   end if;
   return new;
 end $$;
@@ -222,6 +246,29 @@ $$;
 -- 관리자 추가·삭제는 이 두 줄로 (SQL Editor 에서 실행 — 파일 재실행과 무관하게 유지된다):
 --   insert into public.admins(email) values ('hong@solideos.com') on conflict do nothing;
 --   delete from public.admins where email = 'hong@solideos.com';
+-- ⚠️ 등록 순서: 대상자가 **가입을 마친 뒤** 넣는다 — 아래 가드가 미가입 주소를 거부한다.
+--    왜: "Confirm email OFF" 라 이메일 소유 증명이 없다. 미가입 주소를 먼저 명단에 올려두면
+--    그 주소를 선점 가입한 사람이 그대로 관리자가 된다. 넣기 전에 대시보드 auth.users 에서
+--    본인 계정이 맞는지(가입 시각 등) 확인할 것.
+
+create or replace function public.require_registered_admin()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  if not exists (select 1 from auth.users where lower(email) = lower(new.email)) then
+    raise exception '가입을 마친 계정만 관리자로 지정할 수 있습니다: %', new.email;
+  end if;
+  new.email := lower(new.email);
+  return new;
+end $$;
+
+drop trigger if exists require_registered_admin on public.admins;
+create trigger require_registered_admin
+  before insert on public.admins
+  for each row execute function public.require_registered_admin();
 
 -- 질문에 대한 사람(강사) 답변 — 스레드.
 -- 익명 원칙 유지: author_name 없음. 작성자는 관리자뿐이라 화면엔 "강사" 배지만 표시한다.
@@ -263,3 +310,47 @@ returns void language sql security definer set search_path = public as $$
 $$;
 revoke all on function public.set_resolved(uuid, boolean) from public, anon;
 grant execute on function public.set_resolved(uuid, boolean) to authenticated;
+
+-- ─────────────────────────────────────────────────────────────
+-- 7) 협업 주석 데이터 위생 + 수정 가드 (시큐어코딩 점검 2026-07-19)
+--    ① 위치 칼럼 서버측 제약 — 클라이언트는 정상값만 보내지만 anon key 가 공개라
+--       직접 API 호출로 임의 문자열을 넣을 수 있다(렌더링은 전부 이스케이프돼 XSS 는
+--       아니고 데이터 위생 문제). 현 최장 앵커 21자 — 상한은 여유 있게.
+--    ② edit_own(RLS)은 칼럼 단위를 못 가린다 → 본인 행이면 위치·resolved 도 직접 API 로
+--       바꿀 수 있었다. 트리거로 좁힌다: 위치·종류·작성자·작성시각은 생성 후 불변
+--       (수정 대상은 body·ai_answer·updated_at 뿐), resolved 는 관리자만
+--       (set_resolved RPC 의 update 도 이 트리거를 지난다 — is_admin 검사가 일관됨).
+-- ─────────────────────────────────────────────────────────────
+alter table public.annotations drop constraint if exists annotations_part_chk;
+alter table public.annotations add constraint annotations_part_chk
+  check (part between 1 and 32);                      -- 현재 1~11부 + 확장 여유
+alter table public.annotations drop constraint if exists annotations_chapter_chk;
+alter table public.annotations add constraint annotations_chapter_chk
+  check (char_length(chapter) between 1 and 32);      -- 예: 'ch6' · 'warmup'
+alter table public.annotations drop constraint if exists annotations_item_chk;
+alter table public.annotations add constraint annotations_item_chk
+  check (char_length(item_id) between 1 and 80);      -- 앵커 정본 {chapter}-{type}-{slug}
+
+create or replace function public.guard_annotation_update()
+returns trigger
+language plpgsql
+as $$
+begin
+  if new.part          is distinct from old.part
+     or new.chapter    is distinct from old.chapter
+     or new.item_id    is distinct from old.item_id
+     or new.kind       is distinct from old.kind
+     or new.user_id    is distinct from old.user_id
+     or new.created_at is distinct from old.created_at then
+    raise exception '주석의 위치·종류·작성자는 수정할 수 없습니다';
+  end if;
+  if new.resolved is distinct from old.resolved and not public.is_admin() then
+    raise exception '해결 처리는 관리자만 할 수 있습니다';
+  end if;
+  return new;
+end $$;
+
+drop trigger if exists guard_annotation_update on public.annotations;
+create trigger guard_annotation_update
+  before update on public.annotations
+  for each row execute function public.guard_annotation_update();
