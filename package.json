@@ -11,6 +11,15 @@
     "search:index": "node scripts/build-search-index.mjs",
     "postinstall": "node scripts/build-search-index.mjs",
     "deploy:build": "node scripts/build-deploy.mjs",
-    "deploy:serve": "node scripts/serve-deploy.mjs"
+    "deploy:serve": "node scripts/serve-deploy.mjs",
+    "e2e": "node e2e/run-all.mjs",
+    "e2e:p1": "node e2e/annotations-p1-share.mjs",
+    "e2e:p0": "node e2e/annotations-p0-anchor.mjs",
+    "e2e:expand": "node e2e/annotations-expand.mjs",
+    "e2e:p2": "node e2e/annotations-p2-ai.mjs",
+    "e2e:p3": "node e2e/annotations-p3-admin.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.49.1"
   }
 }
