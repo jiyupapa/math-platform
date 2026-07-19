@@ -31,8 +31,8 @@ app.provide(notebookResolverKey, (slug: string | null) =>
 )
 // 통합검색 인덱스 URL — 자기 BASE_URL 기준(=자기 public). SearchPalette 가 fetch.
 app.provide(searchIndexKey, import.meta.env.BASE_URL + 'search-index.json')
-// 부 번호 1 = 협업 주석(메모·질문) 켜기 — 이 주입이 있는 부에서만 섹션에 💬 마커가 붙는다.
-// 지금은 1부만 주입(얇은 슬라이스 검증 후 전 부로 확대 — docs/todo_협업주석_260716.md §8).
+// 부 번호 = 협업 주석(메모·질문) 게이트 — 이 주입이 있는 부에서만 💬 마커가 렌더된다.
+// 값은 Supabase annotations.part 와 같아야 한다(부가 섞이면 남의 부 메모가 보인다).
 app.provide(partNumberKey, 1)
 // Supabase 세션 복원 (env 미설정 시 no-op — 로그인 시 진도 동기화)
 void initAuth()
