@@ -6,27 +6,14 @@
 -- 설계: docs/todo_supabase백엔드_260715.md · 콘솔 절차: docs/supabase_설정가이드_260715.md
 
 -- ─────────────────────────────────────────────────────────────
--- 1) 가입 통제 (서버 차단 — API 직접 호출해도 막힘)
---    ① @solideos.com 도메인 강제 (항상).
---    ② 가입 허용목록 allowed_emails — **비어 있으면 지금까지와 동일**(도메인만 검사),
---       한 건이라도 넣는 순간 "목록에 있는 이메일만" 가입할 수 있다.
---    왜 ②가 필요한가: 배포본은 공개 인터넷이고 anon key 는 번들에 공개인데,
---    "Confirm email OFF"(사내 SMTP 불가 — 경로 B)라 메일함 소유 증명이 없다 →
---    외부인이 미사용 @solideos.com 주소로 가입해 공유 주석(read_all)을 읽을 수 있다.
---    허용목록은 메일 발송 없이 이 구멍을 막는다(직원 이메일 명단을 미리 적재).
---    운영(SQL Editor — 파일 재실행과 무관하게 유지된다):
---      insert into public.allowed_emails(email) values ('hong@solideos.com') on conflict do nothing;
---      delete from public.allowed_emails where email = 'hong@solideos.com';
+-- 1) @solideos.com 도메인만 가입 허용 (서버 차단 — API 직접 호출해도 막힘)
+--    Confirm email OFF(경로 B — 사내 SMTP 불가)라 메일함 소유 증명은 없다. 즉 도메인
+--    문자열만 맞으면 누구나 가입할 수 있는데, 이는 **수용한 위험**이다(2026-07-19 결정):
+--    주석 데이터가 익명·저민감이고, 관리자 권한은 admins 테이블 + 가입완료 가드(§6)로
+--    별도 보호되므로 도메인 검사로 충분하다. 가입 허용목록(allowed_emails)을 잠깐
+--    도입했다가 같은 날 제거 — 직원 명단 관리 부담 대비 실익 없음. 다시 필요해지면
+--    git 이력(7eaa63e)의 §1 참조.
 -- ─────────────────────────────────────────────────────────────
-
--- 허용목록 — 재실행해도 보존(admins 와 같은 패턴). 명단 비공개: RLS ON + 정책 0개 + revoke.
-create table if not exists public.allowed_emails (
-  email      text        primary key,   -- 소문자로 저장할 것(트리거가 lower() 로 비교)
-  created_at timestamptz not null default now()
-);
-alter table public.allowed_emails enable row level security;
-revoke all on table public.allowed_emails from anon, authenticated;
-
 create or replace function public.enforce_email_domain()
 returns trigger
 language plpgsql
@@ -37,12 +24,11 @@ begin
   if new.email is null or lower(new.email) not like '%@solideos.com' then
     raise exception 'solideos.com 계정만 등록할 수 있습니다';
   end if;
-  if exists (select 1 from allowed_emails)
-     and not exists (select 1 from allowed_emails where email = lower(new.email)) then
-    raise exception '가입이 허용되지 않은 계정입니다 (관리자에게 문의하세요)';
-  end if;
   return new;
 end $$;
+
+-- 허용목록 제거 이관 — 잠깐 존재했던 배포분 정리(신규 설치엔 애초에 없음).
+drop table if exists public.allowed_emails;
 
 drop trigger if exists enforce_email_domain on auth.users;
 create trigger enforce_email_domain
