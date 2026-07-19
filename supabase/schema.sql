@@ -159,21 +159,69 @@ create policy del_own   on public.annotations for delete to authenticated
 --    설계: docs/todo_협업주석_260716.md §7·§8 P3
 --
 --    ⚠️ 관리자 목록은 두 곳에 있다 — 같게 유지할 것:
---      · 아래 admin_emails() 배열 = **진짜 경계**(RLS 가 이걸 본다. API 직접 호출도 막힘)
+--      · 아래 admins 테이블 = **진짜 경계**(RLS 가 이걸 본다. API 직접 호출도 막힘)
 --      · 루트 .env 의 VITE_ADMIN_EMAILS = **UI 표시용**(답변 폼·큐 메뉴를 그릴지만 결정)
---    env 만 고치고 SQL 을 안 고치면 화면엔 폼이 보여도 저장이 거부된다(안전한 방향).
+--    env 만 고치고 DB 를 안 고치면 화면엔 폼이 보여도 저장이 거부된다(안전한 방향).
+--
+--    ⚠️ 관리자 목록은 **스키마가 아니라 설정값**이다 → 함수 본문에 하드코딩하지 않는다.
+--    하드코딩하면 이 파일을 다시 Run 할 때마다 지정한 관리자가 템플릿으로 되돌아간다
+--    (2026-07-18 실제로 두 번 리셋됨). 그래서 테이블에 두고, 파일 재실행은 테이블을 건드리지 않는다.
 -- ─────────────────────────────────────────────────────────────
+
+-- 관리자(강사) 명단. create table if not exists 라 **재실행해도 내용이 보존된다.**
+create table if not exists public.admins (
+  email      text        primary key,
+  created_at timestamptz not null default now()
+);
+
+-- 명단 자체는 비공개 — RLS 를 켜고 정책을 하나도 만들지 않는다(= API 로는 아무도 못 읽음).
+-- 조회는 아래 security definer 함수만 가능하다.
+alter table public.admins enable row level security;
+revoke all on table public.admins from anon, authenticated;
+
+-- 1회 이관 — 예전(하드코딩) 버전에서 올라오는 경우, 명단이 비어 있을 때만 값을 옮긴다.
+-- 재실행 시엔 명단이 차 있어 건너뛰고, 관리자를 전부 지운 뒤 재실행해도 되살아나지 않는다
+-- (그때는 새 admin_emails() 가 빈 테이블을 읽으므로 옮길 값이 없다).
+do $$
+declare old_list text[];
+begin
+  if not exists (select 1 from public.admins)
+     and to_regprocedure('public.admin_emails()') is not null then
+    begin
+      execute 'select public.admin_emails()' into old_list;
+      insert into public.admins(email)
+      select distinct lower(e)
+      from unnest(coalesce(old_list, '{}'::text[])) as e
+      where lower(e) <> 'admin@solideos.com'   -- 템플릿 플레이스홀더는 이관하지 않는다
+      on conflict do nothing;
+    exception when others then
+      null;  -- 옛 함수 시그니처가 다르면 조용히 건너뜀(신규 설치 경로)
+    end;
+  end if;
+end $$;
+
+-- 읽기 인터페이스는 그대로 유지(is_admin·RLS·클라이언트 계약 무변경) — 저장 위치만 테이블로.
+-- security definer: 위에서 RLS 를 전면 거부해 뒀으므로 이 함수만 명단을 읽을 수 있다.
 create or replace function public.admin_emails()
-returns text[] language sql immutable as $$
-  select array[
-    'admin@solideos.com','doskey@solideos.com'   -- ← 실제 관리자(강사) 이메일로 교체. 콤마로 여러 명 가능.
-  ]
+returns text[]
+language sql
+security definer
+stable
+set search_path = public
+as $$
+  select coalesce(array_agg(lower(email)), array[]::text[]) from admins
 $$;
+revoke all on function public.admin_emails() from public, anon;
+grant execute on function public.admin_emails() to authenticated;
 
 create or replace function public.is_admin()
-returns boolean language sql stable as $$
+returns boolean language sql stable set search_path = public as $$
   select lower(coalesce(auth.jwt() ->> 'email', '')) = any (public.admin_emails())
 $$;
+
+-- 관리자 추가·삭제는 이 두 줄로 (SQL Editor 에서 실행 — 파일 재실행과 무관하게 유지된다):
+--   insert into public.admins(email) values ('hong@solideos.com') on conflict do nothing;
+--   delete from public.admins where email = 'hong@solideos.com';
 
 -- 질문에 대한 사람(강사) 답변 — 스레드.
 -- 익명 원칙 유지: author_name 없음. 작성자는 관리자뿐이라 화면엔 "강사" 배지만 표시한다.
