@@ -166,7 +166,7 @@ create policy del_own   on public.annotations for delete to authenticated
 create or replace function public.admin_emails()
 returns text[] language sql immutable as $$
   select array[
-    'admin@solideos.com'   -- ← 실제 관리자(강사) 이메일로 교체. 콤마로 여러 명 가능.
+    'admin@solideos.com','doskey@solideos.com'   -- ← 실제 관리자(강사) 이메일로 교체. 콤마로 여러 명 가능.
   ]
 $$;
 

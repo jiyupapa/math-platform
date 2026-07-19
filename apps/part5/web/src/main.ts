@@ -3,7 +3,7 @@ import { createPinia } from 'pinia'
 import './style.css'
 import App from './App.vue'
 import router from './router'
-import { storagePrefixKey, reviewApiKey, notebookResolverKey, searchIndexKey } from '@series/ui'
+import { storagePrefixKey, reviewApiKey, notebookResolverKey, searchIndexKey, partNumberKey } from '@series/ui'
 import { initAuth } from '@series/store'
 import { useReviewStore } from '@/stores/review'
 import { chapters } from '@/data/chapters'
@@ -25,6 +25,9 @@ app.provide(notebookResolverKey, (slug: string | null) =>
 )
 // 통합검색 인덱스 URL — 자기 BASE_URL 기준(=자기 public). SearchPalette 가 fetch.
 app.provide(searchIndexKey, import.meta.env.BASE_URL + 'search-index.json')
+// 부 번호 = 협업 주석(메모·질문) 게이트 — 이 주입이 있는 부에서만 💬 마커가 렌더된다.
+// 값은 Supabase annotations.part 와 같아야 한다(부가 섞이면 남의 부 메모가 보인다).
+app.provide(partNumberKey, 5)
 
 // Supabase 세션 복원 (env 미설정 시 no-op — 로그인 시 진도 동기화)
 void initAuth()

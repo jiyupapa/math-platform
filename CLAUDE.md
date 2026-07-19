@@ -47,7 +47,9 @@ QuizSet↔StepQuiz 그룹 계약(`quizGroupKey`/`QuizGroup` — `quizGroup.ts`)�
   - `reviewApiKey` — ReviewFlag ↔ 각 앱 `review` 스토어.
   - `notebookResolverKey` — NotebookCard ↔ 각 앱 `chapters`(part1·4·5·6·7·8·9·10·11).
   - `partNumberKey` — **협업 주석(NoteMarker/NotePanel) 게이트**: 부 번호를 주입한 부에서만 💬 마커가
-    렌더된다(현재 part1만). 임의 항목 앵커는 `ConceptCard`·`Quiz`·`StepQuiz`·`MathBlock` 의 `anchorId`
+    렌더된다(**전 11부 주입 완료**). 값이 곧 Supabase `annotations.part` 라 **부 번호가 틀리면 남의 부
+    메모가 섞인다** — 같은 챕터 슬러그(`ch1`)·앵커 id(`ch1-s1`)를 여러 부가 공유하므로 part 가 유일한
+    구분자다. 임의 항목 앵커는 `ConceptCard`·`Quiz`·`StepQuiz`·`MathBlock` 의 `anchorId`
     prop — 네이밍 정본 `{chapter}-{type}-{slug}` 와 금지사항(자동 인덱스·배포 후 변경 금지)은
     `packages/ui/src/anchor.ts` 참조. 설계: `docs/todo_협업주석_260716.md`.
 - 소스 `.vue` 패키지라 각 앱 설정에: `vite.config.ts` 의 `optimizeDeps.exclude`(전 12앱 = `['@series/ui', '@series/tutor']`),
