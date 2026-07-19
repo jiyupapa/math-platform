@@ -165,6 +165,11 @@ VITE_SUPABASE_ANON_KEY=<anon public key>
 - [ ] DB Password는 별도 보관.
 - [ ] RLS가 세 테이블 모두 **Enabled**인지 Table Editor에서 확인 (RLS 꺼지면 남의 데이터도 보임).
 - [ ] `.env`는 커밋 안 함.
+- [ ] (권장) **가입 허용목록** `public.allowed_emails` 에 직원 이메일 적재(`supabase/schema.sql` §1).
+      비워두면 @solideos.com **문자열만** 검사한다 — 확인메일 OFF(경로 B)라 메일함 소유 증명이
+      없어서, 외부인이 미사용 사내 주소로 가입해 공유 주석을 읽을 수 있다.
+- [ ] 관리자 등록(`public.admins`)은 대상자가 **가입을 마친 뒤**에 — 미가입 주소는 가드 트리거가
+      거부한다(주소 선점 가입에 의한 관리자 탈취 방지, `schema.sql` §6).
 
 ---
 

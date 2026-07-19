@@ -9,7 +9,7 @@
 import { execSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 import { dirname, join, resolve } from 'node:path'
-import { rmSync, mkdirSync, cpSync, writeFileSync, existsSync } from 'node:fs'
+import { rmSync, mkdirSync, cpSync, writeFileSync, existsSync, readFileSync } from 'node:fs'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const deployDir = join(root, 'deploy')
@@ -63,12 +63,64 @@ const redirects =
 writeFileSync(join(deployDir, '_redirects'), redirects)
 console.log('\n▶ deploy/_redirects 작성 (정적 호스트용 SPA 폴백)')
 
+// 보안 헤더(_headers — Cloudflare Pages·Netlify 형식). XSS 싱크가 없어도 심층 방어로 CSP 를 깐다.
+//   - style 'unsafe-inline': KaTeX 렌더 출력이 인라인 style 속성을 쓴다(빼면 수식 레이아웃 깨짐).
+//   - connect-src: Supabase(https+wss) + Ollama 만 허용. 값은 앱 빌드와 같은 루트 .env 에서 읽는다
+//     (앱 vite.config 이 envDir=루트 — 같은 원천). OS 환경변수가 있으면 그것이 우선(Vite 와 동일).
+//   - nginx 배포 시 _headers 는 무시된다 → 같은 값을 add_header 로 옮길 것(docs/배포_가이드.md).
+function readRootEnv(name) {
+  if (process.env[name]) return process.env[name].trim()
+  try {
+    const m = readFileSync(join(root, '.env'), 'utf8').match(
+      new RegExp(`^\\s*${name}\\s*=\\s*(.+)$`, 'm'),
+    )
+    return m ? m[1].trim().replace(/^["']|["']$/g, '') : ''
+  } catch {
+    return ''
+  }
+}
+const originOf = (url) => {
+  try {
+    return url ? new URL(url).origin : ''
+  } catch {
+    return ''
+  }
+}
+const supabaseOrigin = originOf(readRootEnv('VITE_SUPABASE_URL'))
+const ollamaOrigin = originOf(readRootEnv('VITE_OLLAMA_URL')) || 'http://localhost:11434'
+const connectSrc = ["'self'"]
+if (supabaseOrigin) connectSrc.push(supabaseOrigin, supabaseOrigin.replace(/^https:/, 'wss:'))
+else connectSrc.push('https://*.supabase.co', 'wss://*.supabase.co') // env 미설정 조립본도 안전한 기본값
+if (!connectSrc.includes(ollamaOrigin)) connectSrc.push(ollamaOrigin)
+const csp = [
+  "default-src 'self'",
+  "script-src 'self'",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data:",
+  "font-src 'self' data:",
+  `connect-src ${connectSrc.join(' ')}`,
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'none'",
+].join('; ')
+const headers = `/*
+  Content-Security-Policy: ${csp}
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+`
+writeFileSync(join(deployDir, '_headers'), headers)
+console.log(`▶ deploy/_headers 작성 (보안 헤더 — connect-src: ${connectSrc.join(' ')})`)
+
 console.log(`
 ✅ 조립 완료 → deploy/
    로컬 확인:  npm run deploy:serve
    → http://localhost:4173 에서 포털(/) + 각 부(/part1 … /part11)가 한 origin 으로 뜬다.
      이 상태에서만 "포털이 다른 부 진도를 읽는" 개인화 2층을 실검증할 수 있다.
 
-   실제 배포: deploy/ 폴더를 그대로 정적 호스트에 올리면 된다(_redirects 포함).
-     nginx 라면 각 /partN/ 에 대해  try_files $uri $uri/ /partN/index.html;  , 루트는 /index.html.
+   실제 배포: deploy/ 폴더를 그대로 정적 호스트에 올리면 된다(_redirects·_headers 포함).
+     nginx 라면 각 /partN/ 에 대해  try_files $uri $uri/ /partN/index.html;  , 루트는 /index.html,
+     보안 헤더는 _headers 내용을 add_header 로 옮길 것.
 `)

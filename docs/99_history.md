@@ -6,6 +6,25 @@
 
 ---
 
+## 2026-07-19
+
+### 🛡️ 시큐어코딩 점검 + 보강 3종 (패키지명·보안 헤더·스키마 가드)
+전 저장소 보안 점검(XSS 싱크·비밀키·RLS·의존성) 결과, 렌더링(전부 텍스트 보간)·비밀 관리·RLS 는
+양호. 발견된 보강점 3건을 적용:
+- **`portal-web` → `@series/portal-web`** — npm 공개 레지스트리의 동명 악성 패키지(GHSA-25f9-p47j-2rc5,
+  현재 npm 이 `0.0.1-security` 로 치환)와 이름 충돌 → `npm audit` 영구 critical 오탐 + 의존성 혼동
+  위험. 스코프 이름으로 변경해 원천 차단(다른 앱 이름은 레지스트리에 없음 확인).
+- **배포 보안 헤더** — `build-deploy.mjs` 가 `deploy/_headers`(CF Pages·Netlify 형식) 생성:
+  CSP(`connect-src` 는 루트 `.env` 의 실제 Supabase·Ollama origin 으로 좁힘 — 앱 빌드와 같은 원천),
+  nosniff·frame-ancestors 등. KaTeX 인라인 style 때문에 `style-src 'unsafe-inline'` 유지.
+  Supabase 토큰이 localStorage 에 있으므로 CSP 가 XSS 시 토큰 탈취의 보험.
+- **`schema.sql` 보강**(재실행 필요 — 사용자 Run): §1 **가입 허용목록** `allowed_emails`
+  (비면 기존 동작, 채우면 명단만 가입 — Confirm email OFF·SMTP 불가 환경에서 외부인의
+  가짜 @solideos.com 가입을 메일 없이 차단) · §6 **관리자 지정 가드**(가입 완료 계정만
+  admins 등록 가능 — 미가입 주소 선점 가입에 의한 관리자 탈취 차단) · §7 **annotations
+  위생·수정 가드**(part/chapter/item_id 서버측 제약 + 위치·종류·작성자 불변, resolved 는
+  관리자만 — edit_own 이 칼럼을 못 가리는 한계를 트리거로 보완).
+
 ## 2026-07-16
 
 ### 🔐 Supabase 백엔드 도입 — 진도·복습·진단 크로스기기 저장 (P0~P3 + 폴리시)
