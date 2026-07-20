@@ -296,7 +296,7 @@ function onSetComplete() {
       <b>확률분포</b>입니다(3장의 소프트맥스가 이 모양을 만들어 줘요).
     </p>
 
-    <ConceptCard tone="goal" title="확률분포 → AI 학습의 언어">
+    <ConceptCard tone="ai" title="확률분포 → AI 학습의 언어">
       <ul class="list-disc space-y-2 pl-5">
         <li><b>분류 모델의 출력</b> = 클래스들 위의 확률분포. "정답일 확률"로 말하는 것이 AI 의 기본 화법.</li>
         <li>

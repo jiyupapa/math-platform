@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // Phase 9 — 출력층. 마지막 문맥 벡터 → 단어별 점수(logits) → 소프트맥스 → 다음 단어 확률.
 import { ConceptCard } from '@series/ui'
+import { PartLink } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import OutputLab from '@/components/OutputLab.vue'
@@ -131,6 +132,10 @@ function onSetComplete() {
           이 전체를 다음 챕터(ch10)에서 <b>한 흐름</b>으로 잇습니다.
         </li>
       </ul>
+      <p class="mt-2 text-sm text-violet-900/80">
+        회수하는 수학 — 출력층이 내놓는 <b>확률분포</b>의 문법은
+        <b><PartLink :part="3" ch="ch5">3부 5장</PartLink></b>에서 쌓은 그 기초입니다.
+      </p>
       <p class="mt-2 text-sm text-violet-900/80">
         🎉 다음 챕터가 이 과정의 <b>전체 조립</b> — 이 학습의 <b>궁극 목표</b>입니다!
       </p>

@@ -122,8 +122,9 @@ function onSetComplete() {
     </p>
     <MathBlock expr="f'(x) = \lim_{h \to 0} \dfrac{(x+h)^2 - x^2}{h}" />
     <p class="leading-relaxed text-slate-700">
-      <MathBlock inline expr="(x+h)^2" /> 을 펼치면 <MathBlock inline expr="x^2 + 2xh + h^2" /> 이에요
-      (Phase 2 에서 <MathBlock inline expr="(1+h)^2" /> 을 펼친 것과 같은 방식). <MathBlock inline expr="x^2" /> 끼리
+      <MathBlock inline expr="(x+h)^2" /> 을 Phase 2 처럼 분배법칙(앞 괄호의 각 항을 뒤 괄호의 각 항에
+      곱해 전부 더하기)으로 펼치면 <MathBlock inline expr="(x+h)(x+h) = x\cdot x + x\cdot h + h\cdot x + h\cdot h" /> —
+      같은 항을 합쳐 <MathBlock inline expr="x^2 + 2xh + h^2" /> 이에요. <MathBlock inline expr="x^2" /> 끼리
       지워지고, 남은 <MathBlock inline expr="2xh + h^2" /> 의 각 항을 <MathBlock inline expr="h" /> 로 나누면:
     </p>
     <MathBlock expr="= \lim_{h \to 0} \dfrac{x^2 + 2xh + h^2 - x^2}{h} = \lim_{h \to 0} \dfrac{2xh + h^2}{h}" />
@@ -180,7 +181,7 @@ function onSetComplete() {
       <b>대입 한 번</b>으로 기울기가 나옵니다.
     </p>
 
-    <ConceptCard tone="goal" title="도함수 = 재사용 가능한 '기울기 공식'">
+    <ConceptCard tone="ai" title="도함수 = 재사용 가능한 '기울기 공식'">
       <ul class="list-disc space-y-2 pl-5">
         <li>미분계수(한 점)를 매번 극한으로 구하면 느리고 반복적.</li>
         <li><b>도함수 <MathBlock inline expr="f'(x)" /></b> 를 한 번 구해두면 임의의 <MathBlock inline expr="x" /> 에 대입만 하면 됨.</li>

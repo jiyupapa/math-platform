@@ -200,7 +200,7 @@ function onSetComplete() {
       먼저 <b>숫자 벡터</b>로 바꾼 뒤에야 계산할 수 있거든요.
     </p>
 
-    <ConceptCard tone="goal" title="AI는 모든 것을 벡터로 바꾼다">
+    <ConceptCard tone="ai" title="AI는 모든 것을 벡터로 바꾼다">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <b>데이터 → 숫자 목록(벡터)</b>: 이미지는 <b>픽셀 밝기 벡터</b>, 단어는 <b>임베딩 벡터</b>,

@@ -211,7 +211,7 @@ function onSetComplete() {
       이라고 해요.
     </p>
 
-    <ConceptCard tone="goal" title="분산·표준편차 → AI">
+    <ConceptCard tone="ai" title="분산·표준편차 → AI">
       <ul class="list-disc space-y-2 pl-5">
         <li><b>표준화(z점수)</b>는 데이터 전처리의 기본기 — 2부에서 다루는 경사하강법이
           울퉁불퉁하지 않은 매끈한 골짜기를 내려가게 도와줍니다.</li>

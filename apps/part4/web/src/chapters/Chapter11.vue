@@ -2,6 +2,7 @@
 // Phase 11 (심화) — 학습. 무작위 가중치가 '다음 단어 맞히기'로 똑똑해지는 과정: 손실 + 경사하강.
 import { ref, computed } from 'vue'
 import { ConceptCard } from '@series/ui'
+import { PartLink } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import GradientDescentLab from '@/components/GradientDescentLab.vue'
@@ -163,6 +164,10 @@ function onSetComplete() {
           그래도 원리는 이 챕터 그대로 — <b>손실을 재고, 경사하강으로 조금씩 줄이기</b>의 반복입니다.
         </li>
       </ul>
+      <p class="mt-2 text-sm text-violet-900/80">
+        회수하는 수학 — 경사하강은 <b><PartLink :part="2" ch="ch9">2부 9장</PartLink></b>,
+        손실 −ln(p) 의 로그는 <b><PartLink :part="2" ch="ch7">2부 7장</PartLink></b>에서 쌓은 그 기초입니다.
+      </p>
       <p class="mt-2 text-sm text-violet-900/80">
         학습이 끝나 똑똑해진 모델이, 이제 다음 단어를 <b>어떻게 고를지</b>가 마지막 챕터(ch12 샘플링)입니다.
       </p>

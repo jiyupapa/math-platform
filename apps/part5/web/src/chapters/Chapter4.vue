@@ -2,6 +2,7 @@
 // Phase 4 · 크로스 엔트로피 (★ 핵심) — 틀린 지도로 세상을 부호화한 비용
 // 표준 구성: 개념 설명 + 새 기호 설명 + 인터랙티브 시각화 + 차트 + 미니체크 + 10문제 세트 + 노트북 안내
 import { ConceptCard } from '@series/ui'
+import { PartLink } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { ChartView } from '@series/ui'
@@ -259,6 +260,12 @@ function onSetComplete() {
           이 평균에 2^ 를 씌우면 7장의 <b>퍼플렉시티</b>가 됩니다.
         </li>
       </ul>
+      <p class="mt-2 text-sm">
+        회수하는 수학 — 원핫·확률분포의 문법은 <b><PartLink :part="3" ch="ch5">3부 5장</PartLink></b>,
+        본문 5절의 미니 신경망과 (ŷ−y) 기울기(ŷ = 와이-햇, <b>모델의 예측값</b>)는
+        <b><PartLink :part="1" ch="ch12">1부 12장(캡스톤)</PartLink></b>·<b><PartLink :part="2" ch="ch10">2부
+        10장(역전파)</PartLink></b>에서 쌓은 그 기초입니다.
+      </p>
     </ConceptCard>
 
     <ConceptCard tone="warn" title="미리 긋는 경계선 — 크로스 엔트로피 vs KL (5장 예고)">

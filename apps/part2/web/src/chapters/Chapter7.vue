@@ -178,7 +178,7 @@ function onSetComplete() {
       곳곳에서 곱해져요.
     </p>
 
-    <ConceptCard tone="goal" title="시그모이드 미분과 기울기 소실">
+    <ConceptCard tone="ai" title="시그모이드 미분과 기울기 소실">
       <ul class="list-disc space-y-2 pl-5">
         <li><MathBlock inline expr="\sigma'" /> 의 최댓값은 <b>0.25</b>(x=0), 양 끝에서는 거의 <b>0</b>.</li>
         <li>층이 깊으면 0.25 이하의 값이 <b>계속 곱해져</b> 기울기가 급격히 작아짐 → <b>기울기 소실</b>.</li>

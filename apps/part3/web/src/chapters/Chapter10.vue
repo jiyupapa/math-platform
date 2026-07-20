@@ -276,7 +276,7 @@ function onSetComplete() {
       확률분포로 만들어 다음 단어를 고르면 언어모델이죠. 여러분은 이제 그 전체 그림의
       <b>세 기둥을 모두</b> 가졌습니다.
     </p>
-    <ConceptCard tone="goal" title="수포자 3부작이 만나는 지점">
+    <ConceptCard tone="ai" title="수포자 3부작이 만나는 지점">
       <ul class="list-disc space-y-2 pl-5">
         <li><b>1부 선형대수 — 데이터의 구조</b>: 데이터·가중치를 벡터와 행렬로 표현하고, 층과 층의
           계산은 행렬곱으로.</li>

@@ -116,8 +116,14 @@ function onSetComplete() {
     </p>
     <MathBlock expr="\dfrac{f(1+h)-f(1)}{h} = \dfrac{(1+h)^2 - 1}{h}" />
     <p class="leading-relaxed text-slate-700">
-      여기서 <MathBlock inline expr="(1+h)^2" /> 은 <MathBlock inline expr="(1+h)\times(1+h)" /> 를 펼친 것,
-      즉 <MathBlock inline expr="(1+h)^2 = 1 + 2h + h^2" /> 입니다. 이걸 넣고 <MathBlock inline expr="-1" /> 로 지우면
+      여기서 <MathBlock inline expr="(1+h)^2" /> 은 <MathBlock inline expr="(1+h)\times(1+h)" /> 를 펼친 것.
+      펼치기는 중학교의 <b>분배법칙</b> 그대로예요 — 앞 괄호의 각 항(1과 h)을 뒤 괄호의 각 항에 곱해 전부 더합니다:
+    </p>
+    <MathBlock expr="(1+h)(1+h) = 1\cdot 1 + 1\cdot h + h\cdot 1 + h\cdot h = 1 + 2h + h^2" />
+    <p class="leading-relaxed text-slate-700">
+      가운데 <MathBlock inline expr="1\cdot h" /> 와 <MathBlock inline expr="h\cdot 1" /> 은 같은 값이라 합치면
+      <MathBlock inline expr="2h" /> — 그래서 <MathBlock inline expr="(1+h)^2 = 1 + 2h + h^2" /> 입니다.
+      이걸 넣고 <MathBlock inline expr="-1" /> 로 지우면
       <MathBlock inline expr="1" /> 끼리 사라지고, 남은 항을 <MathBlock inline expr="h" /> 로 나눌 수 있어요:
     </p>
     <MathBlock expr="= \dfrac{1 + 2h + h^2 - 1}{h} = \dfrac{2h + h^2}{h} = 2 + h" />
@@ -237,7 +243,7 @@ function onSetComplete() {
       어느 방향으로 얼마나" 정할 수 있거든요.
     </p>
 
-    <ConceptCard tone="goal" title="극한 → 미분 → 경사하강">
+    <ConceptCard tone="ai" title="극한 → 미분 → 경사하강">
       <ul class="list-disc space-y-2 pl-5">
         <li><b>극한</b>으로 "한 점의 기울기"를 정의하고 → 이것이 <b>미분(순간변화율)</b>.</li>
         <li>손실곡선 위 현재 지점의 미분값(기울기)이 <b>내려갈 방향</b>을 알려줍니다.</li>

@@ -351,7 +351,7 @@ function onSetComplete() {
       왜 그런지 세 가지만 봅시다.
     </p>
 
-    <ConceptCard tone="goal" title="AI가 내적을 쓰는 곳">
+    <ConceptCard tone="ai" title="AI가 내적을 쓰는 곳">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <b>추천·검색 (유사도)</b>: 영화·상품·문장·이미지를 <b>숫자 목록(벡터)</b>으로 바꾼 뒤,

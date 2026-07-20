@@ -173,7 +173,9 @@ function onSetComplete() {
       <b>표준정규분포(standard normal)</b>: 평균 0, 표준편차 1 로 표준화한 정규분포
       <MathBlock inline expr="N(0, 1)" />. <b>어떤</b> 정규분포든 z 점수로 바꾸면 전부 이 하나가
       됩니다 — 그래서 표(또는 함수) 하나로 모든 정규분포의 넓이를 구할 수 있어요.
-      68-95-99.7 규칙도 z 로 말하면 "|z| ≤ 1, 2, 3" 입니다.
+      68-95-99.7 규칙도 z 로 말하면 "|z| ≤ 1, 2, 3" 입니다. 막대 두 개는 <b>절댓값</b> 기호(읽기:
+      "z의 절댓값") — 부호(±)를 떼고 <b>크기만</b> 남긴다는 뜻이에요(예: |−2| = 2). 그러니
+      "|z| ≤ 2" 는 "평균에서 어느 쪽으로든 2σ 이내"가 됩니다.
     </ConceptCard>
 
     <StepQuiz
@@ -219,7 +221,7 @@ function onSetComplete() {
       <b>정규분포 노이즈</b>로 가득한 화면에서 시작해 조금씩 그림을 만들어냅니다.
     </p>
 
-    <ConceptCard tone="goal" title="정규분포 → AI 의 세 장면">
+    <ConceptCard tone="ai" title="정규분포 → AI 의 세 장면">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <b>가중치 초기화</b>: 학습 시작값 = <MathBlock inline expr="N(0, \sigma^2)" /> 난수.

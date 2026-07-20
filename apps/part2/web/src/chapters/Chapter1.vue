@@ -221,7 +221,7 @@ function onSetComplete() {
       앞으로 이 과정에서 "골짜기"라고 하면 곧 <b>손실의 최솟값</b>을 찾는 이야기입니다(9장에서 본격적으로).
     </p>
 
-    <ConceptCard tone="goal" title="경사하강법 미리보기 — 기울기를 보고 내려간다">
+    <ConceptCard tone="ai" title="경사하강법 미리보기 — 기울기를 보고 내려간다">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <b>손실곡선(loss curve)</b>: 가로축은 모델의 설정값, 세로축은 오차(손실). 골짜기가 정답에 가까운 곳.

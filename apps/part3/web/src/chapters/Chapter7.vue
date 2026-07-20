@@ -226,7 +226,7 @@ function onSetComplete() {
       매 걸음마다 그걸 다 계산하는 건 불가능합니다. 실제 AI 는 어떻게 할까요?
     </p>
 
-    <ConceptCard tone="goal" title="확률적 경사하강법(SGD) = 표본평균으로 대신하기">
+    <ConceptCard tone="ai" title="확률적 경사하강법(SGD) = 표본평균으로 대신하기">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           전체 대신 <b>미니배치</b>(예: 무작위 32개)만 뽑아 기울기의 <b>표본평균</b>을 계산합니다 —

@@ -312,7 +312,7 @@ function fmt(n: number) {
     <!-- 6. 총정리 -->
     <h2 class="mt-10 mb-2 text-xl font-bold">🤖 대장정의 끝 — AI 학습 한 사이클에 전부 들어있다</h2>
     <ReviewFlag id="ch12-ai" chapter="ch12" label="🤖 AI 학습 한 사이클 총정리" />
-    <ConceptCard tone="goal" title="신경망 학습 1회전 = 이 시리즈 전체">
+    <ConceptCard tone="ai" title="신경망 학습 1회전 = 이 시리즈 전체">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li><b>① 입력</b>: 데이터를 벡터로 (ch1) — 임베딩·유사도는 내적 (ch2)</li>
         <li><b>② 순전파</b>(forward — 입력에서 출력 방향으로 계산이 흘러가는 것): 층마다 행렬곱으로 변환 (ch3 · ch5)</li>

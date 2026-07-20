@@ -76,6 +76,15 @@ function onSetComplete() {
     <MathBlock expr="z \;=\; \frac{x - y}{\sqrt{x + y}} \qquad\rightarrow\qquad p\text{값} = 2\,(1 - \Phi(|z|))" />
 
     <p class="leading-relaxed text-slate-700">
+      낯선 기호 하나만 짚고 갑시다 — <MathBlock inline expr="\Phi" />(읽기: <b>파이</b>, 그리스 문자
+      φ의 대문자)는 <b>표준정규분포에서 그 값 이하가 나올 확률</b>(누적확률)을 돌려주는 함수입니다.
+      그래서 <MathBlock inline expr="1 - \Phi(|z|)" /> 는 "우연만으로 지금의 쏠림 크기(<MathBlock
+        inline expr="|z|" /> — 부호를 뗀 z의 절댓값)보다 더 극단이 나올 확률"이고, 쏠림은 양쪽 어느
+      방향이든 세니까 2를 곱해요. Φ 계산은 표·라이브러리가 대신 해 주니, 우리는 아래 실행 규칙만
+      기억하면 됩니다.
+    </p>
+
+    <p class="leading-relaxed text-slate-700">
       z가 1.96을 넘으면 p &lt; 0.05 — "실력이 같다면 이 정도 쏠림이 우연히 나올 확률이
       5% 미만"이라는 뜻입니다(3부 9장의 그 p값!). 1,000문항 실험에서 A만 57 vs B만 37:
       z = 20/√94 = 2.06, p = 0.039 — 유의. 이 판정법의 정식 이름은 <b>맥니마 검정</b>

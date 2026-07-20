@@ -170,7 +170,7 @@ function onSetComplete() {
       <b>더하기만</b> 하면 전체 기울기가 됩니다.
     </p>
 
-    <ConceptCard tone="goal" title="합 규칙이 계산을 쪼갤 수 있게 해준다">
+    <ConceptCard tone="ai" title="합 규칙이 계산을 쪼갤 수 있게 해준다">
       <ul class="list-disc space-y-2 pl-5">
         <li><b>합의 미분 = 미분의 합</b> — 큰 문제를 작은 항들로 나눠 각각 미분.</li>
         <li>역전파에서 여러 갈래로 흘러온 기울기를 <b>더해서</b> 합치는 것이 바로 이 규칙.</li>

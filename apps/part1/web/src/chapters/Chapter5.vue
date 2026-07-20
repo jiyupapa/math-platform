@@ -359,7 +359,7 @@ function onSetComplete() {
     <!-- 5. AI 연결 -->
     <h2 class="mt-10 mb-2 text-xl font-bold">🤖 신경망의 한 층 = 선형변환</h2>
     <ReviewFlag id="ch5-ai" chapter="ch5" label="🤖 신경망의 한 층 = 선형변환" />
-    <ConceptCard tone="goal" title="AI에서 선형변환이 쓰이는 곳">
+    <ConceptCard tone="ai" title="AI에서 선형변환이 쓰이는 곳">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <b>신경망 층 = Wx</b>: 인공신경망에서 데이터가 한 층을 지날 때 하는 핵심 계산이

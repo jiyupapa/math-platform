@@ -233,7 +233,7 @@ function fmt(n: number) {
     <!-- 6. AI 연결 -->
     <h2 class="mt-10 mb-2 text-xl font-bold">🤖 직교·투영이 AI에서 쓰이는 곳</h2>
     <ReviewFlag id="ch10-ai" chapter="ch10" label="🤖 AI에서 쓰이는 곳" />
-    <ConceptCard tone="goal" title="실제 활용">
+    <ConceptCard tone="ai" title="실제 활용">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <b>선형회귀 — 지도학습의 원형</b>: "데이터에 가장 덜 틀리는 모델 맞추기"의 가장 단순한

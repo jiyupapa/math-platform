@@ -5,6 +5,7 @@ import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { Quiz } from '@series/ui'
+import { StepQuiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
 import { NotebookCard } from '@series/ui'
 import DpoLab from '@/components/DpoLab.vue'
@@ -65,6 +66,19 @@ function onSetComplete() {
       :answer="0"
       :hints="['π/π_ref 비율이 2라면? 0.5라면?']"
       explanation="원본 대비 확률 비율의 로그입니다. 정책이 어떤 답의 확률을 올렸다는 것 자체가 '높게 친다'는 표현 — 정책이 곧 심판이에요."
+    />
+
+    <p class="mt-6 mb-1 text-sm font-semibold text-slate-500">✏️ 계산 연습 — 숨은 점수에 숫자 넣기</p>
+    <StepQuiz
+      difficulty="medium"
+      question="β = 0.1 인 DPO 훈련 중, 모델이 어떤 답변을 π = 0.2 확률로 냅니다. 원본(참조 모델)은 같은 답을 π_ref = 0.1 로 내던 참이었어요. 숨은 점수 r̂ = β·ln(π/π_ref) 를 단계별로 계산하세요. (여기서 로그는 자연로그 ln — 논문 표준. ln 2 ≈ 0.69 로 계산)"
+      :steps="[
+        { lhs: '\\pi / \\pi_{\\text{ref}} = ?', answer: 2, tolerance: 0.01 },
+        { lhs: '\\ln 2 \\approx ?', answer: 0.69, tolerance: 0.02 },
+        { lhs: '\\hat{r} = 0.1 \\times 0.69 \\approx ?', answer: 0.069, tolerance: 0.005 },
+      ]"
+      :hints="['원본의 몇 배로 자주 내는 답인지 비율부터 구하세요. 로그값은 문제에 준 근사(ln 2 ≈ 0.69)를 그대로 쓰면 됩니다.']"
+      explanation="비율 2 → ln 2 ≈ 0.69 → r̂ = 0.1 × 0.69 ≈ +0.069. 원본보다 2배 자주 내는 답이라 점수가 양수 — 모델이 그 답을 높게 친다는 뜻입니다. 반대로 π = 0.05(원본의 절반)라면 ln 0.5 ≈ −0.69 라 점수는 음수가 돼요. β 를 키우면 같은 비율 변화에도 점수가 커집니다 — 목줄(6장)의 세기가 점수의 눈금이 되는 거죠."
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 직접 해보기 — 심판 없는 훈련</h2>

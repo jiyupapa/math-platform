@@ -145,7 +145,7 @@ function onSetComplete() {
       역전파에서 곱셈 노드를 지날 때 기울기가 어떻게 나뉘는지가 바로 <b>곱의 법칙</b>의 모습이에요.
     </p>
 
-    <ConceptCard tone="goal" title="곱셈 노드 = 곱의 법칙">
+    <ConceptCard tone="ai" title="곱셈 노드 = 곱의 법칙">
       <ul class="list-disc space-y-2 pl-5">
         <li><MathBlock inline expr="p = u\cdot v" /> 에서 <MathBlock inline expr="u" /> 쪽 기울기는 <MathBlock inline expr="v" /> 배, <MathBlock inline expr="v" /> 쪽 기울기는 <MathBlock inline expr="u" /> 배로 갈라집니다. (= <MathBlock inline expr="f'g+fg'" /> 의 두 항)</li>
         <li>"상대편 값을 곱해서 뒤로 보낸다"는 역전파의 곱셈 규칙이 곧 곱의 법칙입니다.</li>

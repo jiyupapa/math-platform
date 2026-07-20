@@ -46,6 +46,11 @@ function onSetComplete() {
       우리는 공식도 압니다:
     </p>
     <MathBlock expr="\text{나침반의 흔들림} \;\approx\; \frac{\sigma}{\sqrt{B}} \qquad (B = \text{배치 크기})" />
+    <p class="leading-relaxed text-slate-700">
+      여기서 <MathBlock inline expr="\sigma" />(읽기: <b>시그마</b>)는 <b>데이터별 기울기가 서로 얼마나
+      다른가</b> — 3부 2장의 그 <b>표준편차</b>입니다. 데이터가 서로 딴소리를 할수록(σ 큼) 나침반이
+      크게 흔들리고, 배치를 키울수록(√B) 흔들림이 잦아듭니다.
+    </p>
 
     <MiniBatchLab />
 
