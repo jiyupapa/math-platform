@@ -36,7 +36,8 @@ function onSetComplete() {
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 지시를 못 따르는 이유 — 수학 한 줄</h2>
     <ReviewFlag id="ch2-s1" chapter="ch2" label="1. 지시를 못 따르는 이유 — 수학 한 줄" />
     <p class="leading-relaxed text-slate-700">
-      베이스 모델의 정체를 4부 9장에서 배운 그대로 쓰면 이렇습니다:
+      베이스 모델은 "질문에 답하는 기계"가 아니라 <b>이어질 글을 잇는 기계</b>입니다 —
+      그 정체를 4부 9장에서 배운 그대로 수식 한 줄로 쓰면 이렇습니다:
     </p>
     <MathBlock expr="P(\text{다음 단어} \mid \text{앞 문맥})" />
     <p class="leading-relaxed text-slate-700">

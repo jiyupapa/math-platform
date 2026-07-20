@@ -181,8 +181,10 @@ function onSetComplete() {
     <ReviewFlag id="ch8-s6" chapter="ch8" label="6. 여론조사 오차범위 계산" />
     <p class="leading-relaxed text-slate-700">
       지지율 같은 비율 조사에서 비율의 표준오차는 <MathBlock inline expr="\sqrt{p(1-p)/n}" /> 입니다.
-      5장에서 <b>성공 횟수의 분산이 <MathBlock inline expr="np(1-p)" /></b> 였죠 — 이걸 비율(전체
-      <MathBlock inline expr="n" /> 으로 나눈 몫)의 흔들림으로 옮기면 분산이 <MathBlock inline expr="p(1-p)/n" /> 이
+      5장에서 <b>성공 횟수의 분산이 <MathBlock inline expr="np(1-p)" /></b> 였죠 — 비율은 횟수를
+      <MathBlock inline expr="n" /> 으로 나눈 값인데, 값을 n으로 나누면 흩어짐(표준편차)도 n분의 1이
+      되므로 그 제곱인 <b>분산은 <MathBlock inline expr="n^2" /> 으로</b> 나뉩니다. 그래서
+      <MathBlock inline expr="np(1-p) \div n^2 = p(1-p)/n" /> 이 비율의 분산이
       되고, 그 제곱근이 표준오차예요. 조사기관은 가장 오차가 커지는
       <MathBlock inline expr="p = 0.5" /> 로 놓고 계산합니다. 뉴스 단골 숫자 n=1,000 을 넣어
       직접 구해 보세요:

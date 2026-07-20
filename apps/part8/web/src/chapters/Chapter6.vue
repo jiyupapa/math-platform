@@ -74,7 +74,9 @@ function onSetComplete() {
     </p>
     <p class="mt-2 leading-relaxed text-slate-700">
       워밍업이 끝나면 표준 일정표는 부드러운 하강 곡선을 탑니다 — 가장 흔한 모양이
-      코사인 곡선의 반쪽을 닮은 <b>코사인 감쇠</b>예요:
+      코사인 곡선의 반쪽을 닮은 <b>코사인 감쇠</b>예요. (cos 를 안 배웠어도 괜찮습니다 —
+      "1에서 −1까지 부드럽게 내려오는 곡선"이고, π 는 그 반 바퀴의 끝 지점이라고만 알면
+      아래 식이 읽혀요):
     </p>
     <MathBlock expr="lr(t) \;=\; lr_{max}\cdot\tfrac{1}{2}\Big(1 + \cos\tfrac{\pi\, t}{T}\Big) \qquad (T = \text{전체 스텝 수})" />
 

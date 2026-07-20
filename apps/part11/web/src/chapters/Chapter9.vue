@@ -70,6 +70,10 @@ function onSetComplete() {
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 세 구도의 수학 — 분업 · 합의 · 역할 분리</h2>
     <ReviewFlag id="ch9-s2" chapter="ch9" label="2. 세 구도의 수학 — 분업 · 합의 · 역할 분리" />
     <p class="leading-relaxed text-slate-700">
+      공식이 세 개 연달아 나오지만 겁먹지 마세요 — <b>전부 앞 장에서 이미 만든 부품의 재사용</b>입니다
+      (분업 = 2장의 사슬, 합의 = 5장의 다수결, 역할 분리 = 6장의 베이즈). 하나씩 천천히 갑니다.
+    </p>
+    <p class="leading-relaxed text-slate-700">
       <b>① 분업</b>(divide &amp; conquer)의 공식은 2장 사슬의 곱에 전달만 얹으면 됩니다 —
       단계 걸음 n개에 전달 h번이면:
     </p>

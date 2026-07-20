@@ -72,7 +72,7 @@ function onSetComplete() {
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 밑의 기계 — 지수이동평균(EMA)</h2>
     <ReviewFlag id="ch4-s2" chapter="ch4" label="2. 밑의 기계 — 지수이동평균(EMA)" />
     <p class="leading-relaxed text-slate-700">
-      v ← β·v + g 를 풀어 쓰면 v = g<sub>지금</sub> + β·g<sub>1걸음 전</sub> + β²·g<sub>2걸음 전</sub> + … —
+      기울기 ∇L 을 <b>g</b> 로 줄여 쓰기로 하고, v ← β·v + g 를 풀어 쓰면 v = g<sub>지금</sub> + β·g<sub>1걸음 전</sub> + β²·g<sub>2걸음 전</sub> + … —
       <b>최근 것은 크게, 옛것은 지수적으로 잊는 평균</b>입니다. 이런 평균의 이름이
       <b>지수이동평균</b>(EMA)이고, β가 잊는 속도를 정해요. 유효 기억 길이는 대략
       <b>1/(1−β)걸음</b>: β = 0.9면 최근 10걸음쯤, 0.99면 100걸음쯤을 기억하는 셈입니다.

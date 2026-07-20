@@ -25,7 +25,8 @@ function onSetComplete() {
     <h1 class="mb-4 text-3xl font-bold">KL 발산 — 바가지 초과분의 이름</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       4장 실험실 게이지에서 바닥(H(p)) 위로 튀어나온 <b>"초과분"</b>을 기억하나요?
-      오늘 그 초과분에 이름을 붙입니다 — <b>KL 발산</b>. RLHF 의 정렬 페널티,
+      오늘 그 초과분에 이름을 붙입니다 — <b>KL 발산</b>. RLHF(Reinforcement Learning from
+      Human Feedback — 사람 피드백 기반 강화학습, 6부에서 정식으로)의 정렬 페널티,
       모델 증류, 그리고 6장 "AI 학습의 정체"까지, 요즘 AI 문서에서 가장 자주 만나는
       기호가 이겁니다.
     </p>

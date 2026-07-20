@@ -52,7 +52,8 @@ function onSetComplete() {
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li><b>다변수 함수</b>: 입력이 2개 이상인 함수. <MathBlock inline expr="f(x,y)" />, <MathBlock inline expr="f(x,y,z)" /> …</li>
         <li>입력 2개의 그래프 = <b>곡면</b>. <MathBlock inline expr="x^2+y^2" /> 은 밥그릇처럼 생긴 골짜기예요.</li>
-        <li>AI 연결: 손실 <MathBlock inline expr="L(w_1, w_2, \dots)" /> 은 수많은 가중치의 다변수 함수입니다.</li>
+        <li>AI 연결: 손실 <MathBlock inline expr="L(w_1, w_2, \dots)" /> 은 수많은 가중치의 다변수 함수입니다.
+          (아래첨자 1, 2, … 는 "첫째·둘째 가중치"라는 <b>번호표</b>일 뿐이에요)</li>
       </ul>
     </ConceptCard>
 

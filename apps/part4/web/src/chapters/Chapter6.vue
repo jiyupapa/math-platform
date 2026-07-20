@@ -99,6 +99,24 @@ function onSetComplete() {
       </ul>
     </ConceptCard>
 
+    <DetailsCard title="➕ 손으로 한 바퀴 — 두 단어 문장을 숫자로 끝까지">
+      <p class="mb-2">
+        공식이 눈에 안 들어오면, 2차원(d=2)의 두 단어로 <b>점수 → softmax → 가중합</b>을
+        끝까지 한 번만 따라가 보세요. 단어①의 Query 가 <MathBlock inline expr="q = (1, 0)" />,
+        두 단어의 Key 가 <MathBlock inline expr="k_1 = (2, 0),\ k_2 = (0, 2)" />,
+        Value 가 <MathBlock inline expr="v_1 = (10, 0),\ v_2 = (0, 10)" /> 이라고 합시다.
+      </p>
+      <ul class="list-disc space-y-1.5 pl-5">
+        <li><b>① 점수(내적)</b>: <MathBlock inline expr="q \cdot k_1 = 1{\times}2 + 0{\times}0 = 2" />,
+          <MathBlock inline expr="q \cdot k_2 = 0" /> — 단어①은 자기 자신 쪽과 잘 맞네요.</li>
+        <li><b>② √d 로 나눔</b>: <MathBlock inline expr="\sqrt{2} \approx 1.41" /> 로 나눠
+          점수는 약 <b>1.41 과 0</b>.</li>
+        <li><b>③ softmax</b>: 두 점수가 집중도 약 <b>0.8 : 0.2</b> 가 됩니다(합 1).</li>
+        <li><b>④ 가중합</b>: <MathBlock inline expr="0.8{\times}(10,0) + 0.2{\times}(0,10) = (8, 2)" /> —
+          이 <b>(8, 2)</b> 가 단어①의 <b>새 문맥 벡터</b>입니다. 공식 한 줄이 한 일의 전부예요.</li>
+      </ul>
+    </DetailsCard>
+
     <p class="mt-6 mb-1 text-sm font-semibold text-slate-500">🔎 잠깐 확인!</p>
     <Quiz
       question="어텐션 점수(관련성)는 무엇으로 계산할까요?"

@@ -89,7 +89,7 @@ function onSetComplete() {
           메모리·속도와 안전을 동시에 잡는 표준 훈련법.
         </li>
         <li>
-          <b>loss scaling</b> — 읽는 법: 로스 스케일링. 뜻: fp16 훈련에서 작은 gradient 가
+          <b>loss scaling</b> — 읽는 법: 로스 스케일링. 뜻: fp16 훈련에서 작은 gradient(그래디언트 — 기울기)가
           소실되지 않게 <b>loss 를 ×S 확대 → backward → 갱신 직전 ÷S 복원</b>하는 재주.
           S 가 크면 오버플로, 작으면 소실 — 그래서 동적(dynamic) 조절이 표준.
         </li>
@@ -205,7 +205,7 @@ function onSetComplete() {
         question="'가중치가 fp16이면 훈련 메모리도 추론의 2배 정도겠지'가 틀린 이유는?"
         :choices="['혼합 정밀도는 master weights(fp32)·옵티마이저 상태(fp32, Adam은 2벌)·gradient까지 들고 있어 가중치 몫의 몇 배가 더 필요하다', '훈련은 fp64만 쓰기 때문이다', '틀리지 않았다 — 정확히 2배다', '훈련 중엔 가중치가 압축되기 때문이다']"
         :answer="0"
-        :hints="['8부에서 본 Adam — 파라미터마다 무엇을 두 벌씩 기억했었죠?']"
+        :hints="['8부 5장의 Adam — 파라미터마다 m(관성)·v(RMS) 두 통계를 기억하는 옵티마이저였죠. 그 두 벌이 fp32로 함께 상주합니다.']"
         explanation="fp16 가중치(2B) + fp32 원본(4B) + Adam의 m·v(fp32 8B) + gradient(2B)… 파라미터당 16B 안팎 — 추론(2B)의 8배 급입니다. 훈련이 비싼 이유이자, 11장 캡스톤 메모리 정산의 예고편."
       />
     </QuizSet>

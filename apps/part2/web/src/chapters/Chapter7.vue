@@ -87,7 +87,8 @@ function onSetComplete() {
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 자연로그 ln x</h2>
     <ReviewFlag id="ch7-s2" chapter="ch7" label="2. 자연로그 ln x" />
     <p class="leading-relaxed text-slate-700">
-      <b>자연로그</b> <MathBlock inline expr="\ln x" /> 는 <MathBlock inline expr="e^x" /> 의 <b>역함수</b>
+      <b>자연로그</b> <MathBlock inline expr="\ln x" /> 는 <MathBlock inline expr="e^x" /> 의 <b>역함수</b>(거꾸로
+      함수 — 출력에서 입력을 되찾아 주는 함수)
       (밑이 <MathBlock inline expr="e" /> 인 로그)입니다. 미분은 아주 깔끔해요:
     </p>
     <MathBlock expr="(\ln x)' = \dfrac{1}{x} \qquad (x > 0)" />
@@ -182,7 +183,7 @@ function onSetComplete() {
       <ul class="list-disc space-y-2 pl-5">
         <li><MathBlock inline expr="\sigma'" /> 의 최댓값은 <b>0.25</b>(x=0), 양 끝에서는 거의 <b>0</b>.</li>
         <li>층이 깊으면 0.25 이하의 값이 <b>계속 곱해져</b> 기울기가 급격히 작아짐 → <b>기울기 소실</b>.</li>
-        <li>그래서 깊은 신경망은 시그모이드 대신 <b>ReLU</b> 같은 함수를 활성화로 많이 씁니다. (미분값이 0 또는 1 로 단순)</li>
+        <li>그래서 깊은 신경망은 시그모이드 대신 <b>ReLU</b>(렐루 — 0 이하는 0, 양수는 그대로 통과시키는 활성화 함수) 같은 함수를 많이 씁니다. (미분값이 0 또는 1 로 단순)</li>
       </ul>
     </ConceptCard>
 

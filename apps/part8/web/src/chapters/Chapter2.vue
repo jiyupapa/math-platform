@@ -43,9 +43,11 @@ function onSetComplete() {
       2부 3장에서 "기울기의 기울기" 감각으로 스친 그것)입니다. 이차 골짜기
       L = (c/2)(w − t)² 에서 c가 바로 곡률이에요 (여기서 <b>w</b>는 지금 위치, <b>t</b>는 목표=골짜기
       바닥이라, w − t 가 곧 "지금 오차"). 기울기는 c·(w − t) — <b>목표에서 먼 만큼,
-      그리고 가파른 만큼 큽니다.</b> 이제 경사하강 한 스텝을 대수로 정리하면:
+      그리고 가파른 만큼 큽니다.</b> 이제 경사하강 한 스텝
+      <MathBlock inline expr="w_{new} = w_{old} - lr \cdot c\,(w_{old} - t)" /> 에서
+      <b>양변에서 t 를 빼고</b> 공통인 <MathBlock inline expr="(w_{old} - t)" /> 로 묶으면:
     </p>
-    <MathBlock expr="w_{new} - t \;=\; (1 - lr \cdot c)\,(w_{old} - t)" />
+    <MathBlock expr="w_{new} - t \;=\; (w_{old} - t) - lr \cdot c\,(w_{old} - t) \;=\; (1 - lr \cdot c)\,(w_{old} - t)" />
     <p class="leading-relaxed text-slate-700">
       읽는 법: "새 오차 = (1 − 보폭×곡률) × 지금 오차". 한 스텝마다 오차에
       <b>같은 배율이 곱해질 뿐</b>입니다 — 그 배율의 절대값을 <b>수축 인자</b>라 부르기로 하죠.

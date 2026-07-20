@@ -53,7 +53,8 @@ function onSetComplete() {
       <b>낮은 확률</b>을 줬으면 손실이 큽니다. 공식은 <MathBlock inline expr="\text{손실} = -\ln(p_{\text{정답}})" /> 예요.
     </p>
     <p class="mt-1 text-sm text-slate-500">
-      🔑 <MathBlock inline expr="\ln" /> 은 <b>로그</b>라는 함수인데, 지금은 <b>계산법을 몰라도 됩니다</b>.
+      🔑 <MathBlock inline expr="\ln" /> 은 <b>로그</b>라는 함수인데, 지금은 <b>계산법을 몰라도
+      됩니다</b>(정식 소개는 2부 7장 — 지수·로그 미분).
       이 <MathBlock inline expr="-\ln(p)" /> 가 하는 일은 딱 하나 — <b>정답 확률 p가 1이면 손실 0, p가 작아질수록
       손실이 확 커지는</b> 변환이에요. 아래 슬라이더를 움직이면 그 모양이 그대로 보입니다.
     </p>

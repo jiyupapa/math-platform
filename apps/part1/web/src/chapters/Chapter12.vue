@@ -318,7 +318,7 @@ function fmt(n: number) {
         <li><b>② 순전파</b>(forward — 입력에서 출력 방향으로 계산이 흘러가는 것): 층마다 행렬곱으로 변환 (ch3 · ch5)</li>
         <li><b>③ 손실 계산</b>: 예측 − 정답, 제곱합 — 최소제곱의 마음 (ch4 · ch10)</li>
         <li><b>④ 역전파</b>: 연쇄법칙 = 행렬곱의 연쇄로 <MathBlock inline expr="\nabla L" /> 계산 (ch12)</li>
-        <li><b>⑤ 갱신</b>: <MathBlock inline expr="\vec{w} \leftarrow \vec{w} - \eta \nabla L" /> (ch12) — 그리고 ①로 반복</li>
+        <li><b>⑤ 갱신</b>: <MathBlock inline expr="\vec{w} \leftarrow \vec{w} - \eta \nabla L" /> (ch12) — ← 는 <b>대입 화살표</b>(왼쪽 값을 오른쪽 계산 결과로 새로 바꿔 넣기). 그리고 ①로 반복</li>
         <li>
           <b>그 사이사이</b>: 데이터 요약·압축엔 고유값·PCA·SVD (ch7·8·11), 정보량 진단엔
           rank (ch9), 되돌리기·해석엔 행렬식·역행렬 (ch6)
