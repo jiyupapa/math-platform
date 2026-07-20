@@ -105,7 +105,9 @@ function onSetComplete() {
     <ReviewFlag id="ch2-s3" chapter="ch2" label="3. 손으로 한 번 — 계산 순서 3단계" />
     <p class="leading-relaxed text-slate-700">
       실험 ①의 질문 q = (1, 1)과 문서 B = (6, 6)으로 직접 계산해 보죠. 순서는 늘 같습니다:
-      <b>내적 → 길이 두 개 → 나누기</b>.
+      <b>내적 → 길이 두 개 → 나누기</b>. (√ 는 <b>제곱근·루트</b> — "제곱해서 그 수가 되는 값",
+      예: √2 ≈ 1.41. cos 은 각도를 −1~1 사이 숫자로 바꿔 주는 함수인데, 위 눈금표 세 개만
+      기억하면 충분해요)
     </p>
     <ul class="mt-2 list-disc space-y-1 pl-6 leading-relaxed text-slate-700">
       <li>내적: 1×6 + 1×6 = <b>12</b></li>

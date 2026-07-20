@@ -233,7 +233,7 @@ function onSetComplete() {
           (길이 × 길이 × cos θ). — 여기 나온 <b>cos 은 바로 아래 카드에서 설명</b>하니 잠시만요!
         </li>
         <li>
-          <b>핵심</b>: 내적이 <b>0이면 두 벡터는 수직</b>(<MathBlock inline expr="\theta = 90^\circ" />)입니다.
+          <b>핵심</b>: 내적이 <b>0이면 두 벡터는 수직</b>(<MathBlock inline expr="\theta = 90^\circ" /> — ° 는 각도 단위 "도")입니다.
         </li>
       </ul>
     </ConceptCard>

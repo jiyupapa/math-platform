@@ -172,7 +172,7 @@ function onSetComplete() {
     <ConceptCard tone="ai" title="🤖 AI 연결 — 회수하는 수학: 6부 2~3장">
       갈림길 판단의 밑천은 6부에서 왔습니다 — <b><PartLink :part="6" ch="ch2">6부 2장</PartLink></b>에서
       프롬프트(문맥 창)가 <b>그 자리 한정의 지식</b>을 준다는 것을, <b><PartLink :part="6" ch="ch3">6부
-      3장</PartLink></b>에서 조련(SFT)이 <b>행동 양식</b>을 새긴다는 것을 배웠기에, "지식은 RAG로 행동은
+      3장</PartLink></b>에서 조련(SFT — Supervised Fine-Tuning, 지도 파인튜닝)이 <b>행동 양식</b>을 새긴다는 것을 배웠기에, "지식은 RAG로 행동은
       조련으로"라는 기준이 성립해요. 그리고 RAG의 마지막 단계(생성)에 서 있는 LLM 자체가
       6부의 조련을 거친 비서입니다 — 두 과정은 경쟁이 아니라 <b>한 시스템의 두 층</b>이에요.
       이제 남은 퍼즐은 하나 — 이 모든 것의 토대인 <b>좌표는 누가 그렸나</b>(9장, 대조 학습).

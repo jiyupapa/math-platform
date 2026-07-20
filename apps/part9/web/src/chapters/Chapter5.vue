@@ -108,7 +108,7 @@ function onSetComplete() {
     <ConceptCard tone="ai" title="🤖 AI 연결 — loss: nan 사건의 전말 (8부 9장 회수)">
       <b><PartLink :part="8" ch="ch9">8부 9장</PartLink></b>에서 손실 곡선의 스파이크와 NaN 을
       "증상"으로 배웠다면, 오늘은 그 <b>병리</b>입니다 — 학습률 과대(8부 0장의 무모이)로 손실이
-      치솟고 → 어텐션 점수·gradient 가 exp 폭발 시계를 타고 자의 끝을 넘어(오버플로)
+      치솟고 → 어텐션 점수·gradient(그래디언트 — 기울기, 2부 9장)가 exp 폭발 시계를 타고 자의 끝을 넘어(오버플로)
       → inf 끼리 만나 NaN 변이 → 수 스텝 만에 모델 전체가 오염. 그래서 처방도 이 사슬을
       끊는 것들이에요: gradient clipping(8부 9장 — 폭발 전에 자르기), 학습률 낮추기, 그리고
       fp16처럼 <b>자가 짧은 칸</b>(최대 65,504!)에서는 loss scaling(7장) — 다음 두 장의 예고편입니다.
@@ -156,7 +156,7 @@ function onSetComplete() {
         :choices="['약 89 (exp(88.7) ≈ 3.4×10³⁸)', '약 709 — 그건 fp64의 경계', '약 3.4×10³⁸', '약 128만']"
         :answer="0"
         :hints="['폭발 시계에서 fp32 쪽이 터진 눈금을 보세요.']"
-        explanation="로짓이 89만 돼도 fp32 exp는 즉사합니다 — 훈련이 조금만 불안해도 닿는 크기라, softmax 를 그대로 계산하면 위험해요(구급대는 6장의 max 빼기)."
+        explanation="로짓(모델이 내놓는 점수 — 6장에서 정식 소개)이 89만 돼도 fp32 exp는 즉사합니다 — 훈련이 조금만 불안해도 닿는 크기라, softmax 를 그대로 계산하면 위험해요(구급대는 6장의 max 빼기)."
       />
       <Quiz
         difficulty="medium"

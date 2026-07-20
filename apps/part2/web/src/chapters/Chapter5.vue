@@ -109,7 +109,10 @@ function onSetComplete() {
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 몫의 법칙</h2>
     <ReviewFlag id="ch5-s3" chapter="ch5" label="3. 몫의 법칙" />
     <p class="leading-relaxed text-slate-700">
-      나눗셈(분수) 꼴은 이렇게 미분합니다. <b>순서와 부호, 분모의 제곱</b>에 주의하세요.
+      나눗셈(분수) 꼴은 이렇게 미분합니다. 왜 이런 모양이냐면 —
+      <MathBlock inline expr="\tfrac{f}{g} = f \times \tfrac{1}{g}" /> 로 바꿔 놓고 방금 배운
+      <b>곱의 법칙</b>을 적용하면 이 공식이 저절로 나옵니다(1/g 의 미분이 −g′/g² 이라 부호와
+      분모 제곱이 생겨요). 유도를 다 따라갈 필요는 없고, <b>순서와 부호, 분모의 제곱</b>에 주의하세요.
     </p>
     <MathBlock expr="\left(\dfrac{f}{g}\right)' = \dfrac{f'\,g - f\,g'}{g^2}" />
 

@@ -123,7 +123,7 @@ function fmt(n: number) {
         <b>특이값(singular value, 싱귤러 밸류)</b>: 기호는 <MathBlock inline expr="\sigma_1, \sigma_2, \dots" />
         (시그마). 행렬이 단위원을 타원으로 보낼 때 <b>타원의 반지름들</b> = 각 방향의 <b>확대 배율</b>.
         항상 <b>0 이상</b>이고, 큰 것부터 <MathBlock inline expr="\sigma_1 \ge \sigma_2 \ge \cdots \ge 0" />
-        순서로 적는 게 약속이에요. "중요한 순서로 줄 세우기"가 여기서 나옵니다.
+        순서로 적는 게 약속이에요(≥ 는 "크거나 같다"). "중요한 순서로 줄 세우기"가 여기서 나옵니다.
       </p>
     </ConceptCard>
 

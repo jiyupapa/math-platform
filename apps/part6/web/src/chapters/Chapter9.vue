@@ -61,7 +61,7 @@ function onSetComplete() {
           </tr>
           <tr class="border-b border-slate-100">
             <td class="py-2 pr-3 font-medium">사람 평가</td>
-            <td class="py-2 pr-3">A/B 대결 → Elo 순위 (4장의 수학!)</td>
+            <td class="py-2 pr-3">A/B 대결 → Elo 순위(승패 기록으로 실력 점수를 매기는 레이팅 — 4장의 수학!)</td>
             <td class="py-2">가장 믿을 만함 / 비싸고 느림</td>
           </tr>
           <tr>

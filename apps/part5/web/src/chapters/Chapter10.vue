@@ -85,7 +85,8 @@ function onSetComplete() {
     <ReviewFlag id="ch10-s2" chapter="ch10" label="2. 실험 A — 손실 교체" />
     <p class="leading-relaxed text-slate-700">
       1부 캡스톤의 신경망은 시그모이드 출력에 MSE 손실을 썼고, 역전파 출력층에서
-      "받아 적은 선물" σ′ = σ(1−σ) 를 곱해야 했습니다. 손실을 크로스 엔트로피로 갈아 끼우면:
+      "받아 적은 선물" σ′ = σ(1−σ) 를 곱해야 했습니다. 아래 식의 ŷ(와이-햇)은 <b>모델의 예측값</b>,
+      y 는 정답 — 햇(^)은 "추정한 값"이라는 표기 관례예요. 손실을 크로스 엔트로피로 갈아 끼우면:
     </p>
     <div class="my-4 grid gap-3 sm:grid-cols-2">
       <div class="rounded-xl border border-amber-200 bg-amber-50 p-4">

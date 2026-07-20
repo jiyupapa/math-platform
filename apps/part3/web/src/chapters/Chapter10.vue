@@ -242,7 +242,7 @@ function onSetComplete() {
           <tr class="border-b border-slate-100">
             <td class="py-1.5">잔차 제곱합 SSE</td>
             <td class="py-1.5 font-semibold text-indigo-700">손실 함수 (loss)</td>
-            <td class="py-1.5">MSE·크로스 엔트로피</td>
+            <td class="py-1.5">MSE(평균제곱오차)·크로스 엔트로피(5부에서 정식으로)</td>
           </tr>
           <tr>
             <td class="py-1.5">SSE 최소인 a, b 찾기</td>
@@ -272,7 +272,8 @@ function onSetComplete() {
     <ReviewFlag id="ch10-ai" chapter="ch10" label="🤖 3부작 대단원" />
     <p class="leading-relaxed text-slate-700">
       선형회귀에서 출발하면 현대 AI 까지 한 줄로 이어집니다. 뉴런 하나(= 회귀)를
-      수백만 개 쌓으면 신경망, 손실을 낮추는 도구가 경사하강법·역전파, 그 출력을
+      수백만 개 쌓으면 신경망, 손실을 낮추는 도구가 경사하강법·역전파(기울기를 출력에서
+      입력 쪽으로 전달해 구하는 계산법 — 둘 다 2부에서 정식으로), 그 출력을
       확률분포로 만들어 다음 단어를 고르면 언어모델이죠. 여러분은 이제 그 전체 그림의
       <b>세 기둥을 모두</b> 가졌습니다.
     </p>

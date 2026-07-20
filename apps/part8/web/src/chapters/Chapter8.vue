@@ -40,7 +40,8 @@ function onSetComplete() {
     <ReviewFlag id="ch8-s1" chapter="ch8" label="1. 원점 목줄 — weight decay" />
     <p class="leading-relaxed text-slate-700">
       아이디어는 한 줄입니다 — 손실에 <b>계수 크기의 벌점</b>을 더해요. 여기서 ‖w‖는 1부에서 배운
-      노름, 즉 모든 가중치를 모은 벡터의 길이입니다:
+      노름, 즉 모든 가중치를 모은 벡터의 길이이고, λ(읽기: <b>람다</b>)는 그 벌점의 세기를 정하는
+      다이얼입니다:
     </p>
     <MathBlock expr="L_{\text{전체}} \;=\; L_{\text{데이터}} \;+\; \lambda\,\lVert w\rVert^2 \qquad (\lambda = \text{목줄의 세기})" />
     <p class="mt-2 leading-relaxed text-slate-700">
