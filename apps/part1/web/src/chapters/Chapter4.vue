@@ -455,7 +455,7 @@ function onSetComplete() {
     <!-- 5. AI 연결 -->
     <h2 class="mt-10 mb-2 text-xl font-bold">🤖 AI는 거대한 Ax=b 를 푼다</h2>
     <ReviewFlag id="ch4-ai" chapter="ch4" label="🤖 AI는 거대한 Ax=b 를 푼다" />
-    <ConceptCard tone="goal" title="AI에서 연립방정식이 쓰이는 곳">
+    <ConceptCard tone="ai" title="AI에서 연립방정식이 쓰이는 곳">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <b>선형회귀</b>: 데이터에 가장 잘 맞는 직선/평면을 찾는 일은

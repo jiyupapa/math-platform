@@ -215,7 +215,7 @@ function onSetComplete() {
       모델부터 만드는 건, 재료를 안 보고 요리하는 것과 같거든요.
     </p>
 
-    <ConceptCard tone="goal" title="평균 = 가장 단순한 예측 모델 (베이스라인)">
+    <ConceptCard tone="ai" title="평균 = 가장 단순한 예측 모델 (베이스라인)">
       <ul class="list-disc space-y-2 pl-5">
         <li>내일 방문자 수를 예측해야 한다면? 가장 단순한 모델은 <b>"무조건 지금까지의 평균"</b>이라고
           답하는 것 — 이걸 <b>베이스라인(baseline)</b>이라고 합니다.</li>

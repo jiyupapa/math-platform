@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // Phase 6 — Q·K·V & 셀프 어텐션 (핵심). 어텐션 점수를 Query·Key 내적으로 계산한다.
 import { ConceptCard } from '@series/ui'
+import { PartLink } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import QKVLab from '@/components/QKVLab.vue'
@@ -147,6 +148,10 @@ function onSetComplete() {
           Q·K·V 가 다르기에 "무엇을 <b>묻고</b>, 무엇으로 <b>매칭</b>하고, 무엇을 <b>전달</b>할지"를 유연하게 배웁니다.
         </li>
       </ul>
+      <p class="mt-2 text-sm text-violet-900/80">
+        회수하는 수학 — 점수의 정체인 내적은 <b><PartLink :part="1" ch="ch2">1부 2장</PartLink></b>,
+        Q·K·V 를 만드는 행렬곱은 <b><PartLink :part="1" ch="ch3">1부 3장</PartLink></b>에서 쌓은 그 기초입니다.
+      </p>
       <p class="mt-2 text-sm text-violet-900/80">
         다음 칸(ch7)은 이 어텐션을 <b>여러 개 동시에</b> 돌리는 <b>멀티헤드 어텐션</b>입니다.
       </p>

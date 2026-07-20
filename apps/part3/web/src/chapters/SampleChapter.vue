@@ -159,7 +159,7 @@ function onSetComplete() {
       확률을 모르면 AI 가 무슨 말을 하는지 절반은 놓치는 셈이에요.
     </p>
 
-    <ConceptCard tone="goal" title="확률·통계 → AI 로 가는 길">
+    <ConceptCard tone="ai" title="확률·통계 → AI 로 가는 길">
       <ul class="list-disc space-y-2 pl-5">
         <li><b>확률</b>(3~6장) → AI 의 출력·예측이 전부 확률분포 (소프트맥스, 다음 단어 확률)</li>
         <li><b>통계</b>(1~2장, 7~9장) → AI 는 데이터(표본)로 배우고, 성능도 통계로 검증</li>

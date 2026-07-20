@@ -136,7 +136,7 @@ function onSetComplete() {
     <!-- 3. AI 연결 -->
     <h2 class="mt-10 mb-2 text-xl font-bold">🤖 고유벡터가 AI에서 중요한 이유</h2>
     <ReviewFlag id="ch7-ai" chapter="ch7" label="🤖 고유벡터가 AI에서 중요한 이유" />
-    <ConceptCard tone="goal" title="AI에서 쓰이는 곳">
+    <ConceptCard tone="ai" title="AI에서 쓰이는 곳">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <b>PCA(주성분 분석)·차원축소</b>: 데이터가 <b>가장 넓게 퍼진 방향</b>을 찾는 게 핵심인데,

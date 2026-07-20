@@ -306,7 +306,7 @@ function onSetComplete() {
       <p class="mt-2 text-center text-xs text-slate-400">전부 더하면 정확히 1 — 표본공간의 확률 합 = 1, 방금 배운 그 성질입니다.</p>
     </div>
 
-    <ConceptCard tone="goal" title="확률분포 → 소프트맥스 → 다음 단어">
+    <ConceptCard tone="ai" title="확률분포 → 소프트맥스 → 다음 단어">
       <ul class="list-disc space-y-2 pl-5">
         <li>언어모델의 출력 = 다음 단어 후보 전체에 대한 <b>확률분포</b> (5장에서 정식으로 배웁니다).</li>
         <li>모델 내부의 점수를 "합이 1인 확률"로 바꿔 주는 장치가 <b>소프트맥스(softmax)</b>입니다.</li>

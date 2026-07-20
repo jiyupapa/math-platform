@@ -3,6 +3,7 @@
 // 세부(토큰화·임베딩·어텐션…)는 ch2~10에서 확대. 여기선 "무엇을 하는지"만 새가 내려다보듯.
 import { ref } from 'vue'
 import { ConceptCard } from '@series/ui'
+import { PartLink } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import NextWordGame from '@/components/NextWordGame.vue'
 import TransformerMap from '@/components/TransformerMap.vue'
@@ -148,6 +149,10 @@ function onSetComplete() {
         이때 "가장 확률 높은 단어"만 늘 고르면 답이 <b>뻔하고 단조로워</b>집니다. 그래서 실제로는
         확률에 따라 <b>살짝 무작위로</b> 고르기도 해요 — 같은 질문에 매번 조금씩 다른 답이 나오는 이유입니다.
         (고르는 방법은 Phase 12에서 자세히.)
+      </p>
+      <p class="mt-2 text-sm text-violet-900/80">
+        회수하는 수학 — "다음 단어를 <b>확률로</b> 고른다"의 문법(확률분포)은
+        <b><PartLink :part="3" ch="ch5">3부 5장</PartLink></b>에서 쌓은 그 기초입니다.
       </p>
     </ConceptCard>
 

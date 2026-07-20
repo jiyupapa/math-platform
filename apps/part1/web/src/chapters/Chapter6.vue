@@ -162,7 +162,7 @@ function onSetComplete() {
     <!-- 5. AI 연결 -->
     <h2 class="mt-10 mb-2 text-xl font-bold">🤖 AI에서 행렬식·역행렬</h2>
     <ReviewFlag id="ch6-ai" chapter="ch6" label="🤖 AI에서 행렬식·역행렬" />
-    <ConceptCard tone="goal" title="AI에서 쓰이는 곳">
+    <ConceptCard tone="ai" title="AI에서 쓰이는 곳">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <b>선형회귀</b>: 데이터에 가장 잘 맞는 모델 파라미터를 <MathBlock inline expr="\vec{x} = A^{-1}\vec{b}" /> 꼴로

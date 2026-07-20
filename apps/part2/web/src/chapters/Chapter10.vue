@@ -119,7 +119,7 @@ function onSetComplete() {
       우리가 걸어온 길을 되짚어 볼게요:
     </p>
 
-    <ConceptCard tone="tip" title="한 장으로 보는 여정">
+    <ConceptCard tone="ai" title="한 장으로 보는 여정">
       <ol class="list-decimal space-y-1 pl-5 text-sm">
         <li><b>극한</b>으로 순간변화율을 정의하고(2~3장),</li>
         <li><b>공식·연쇄·곱몫</b>으로 어떤 함수든 미분하고(4~6장),</li>

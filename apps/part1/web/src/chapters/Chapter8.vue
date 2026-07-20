@@ -105,7 +105,7 @@ function onSetComplete() {
     <!-- 3. AI 연결 -->
     <h2 class="mt-10 mb-2 text-xl font-bold">🤖 PCA가 AI에서 쓰이는 곳</h2>
     <ReviewFlag id="ch8-ai" chapter="ch8" label="🤖 PCA가 AI에서 쓰이는 곳" />
-    <ConceptCard tone="goal" title="실제 활용">
+    <ConceptCard tone="ai" title="실제 활용">
       <ul class="list-disc space-y-2 pl-5">
         <li><b>데이터 압축·시각화</b>: 수백 차원 데이터를 2~3차원으로 줄여 그래프로 보거나 용량을 줄여요.</li>
         <li><b>노이즈 제거</b>: 작은 고유값(잡음에 가까운 축)을 버려 데이터를 깨끗하게.</li>

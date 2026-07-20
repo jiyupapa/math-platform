@@ -120,7 +120,7 @@ function onSetComplete() {
       "<MathBlock inline expr="w_i" /> 하나만 조금 바꿀 때 손실이 얼마나 변하나"예요.
     </p>
 
-    <ConceptCard tone="goal" title="가중치마다 편미분 하나">
+    <ConceptCard tone="ai" title="가중치마다 편미분 하나">
       <ul class="list-disc space-y-2 pl-5">
         <li><MathBlock inline expr="\partial L/\partial w_i" /> = 그 가중치의 <b>책임 정도</b>(손실에 대한 민감도).</li>
         <li>다른 가중치는 <b>상수로 두고</b> 하나씩 미분 → 각자의 "고칠 방향"을 얻습니다.</li>

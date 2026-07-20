@@ -217,7 +217,7 @@ function onSetComplete() {
       아니에요.
     </p>
 
-    <ConceptCard tone="goal" title="벤치마크 점수를 통계학자의 눈으로">
+    <ConceptCard tone="ai" title="벤치마크 점수를 통계학자의 눈으로">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           테스트셋이 1,000개라면 정확도의 오차범위는 대략 ±2~3%p — <b>모델 A 87.3% vs 모델 B 86.9%</b>

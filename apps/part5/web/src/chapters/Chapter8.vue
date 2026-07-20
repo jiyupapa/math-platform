@@ -2,6 +2,7 @@
 // Phase 8 · temperature — 창의성 다이얼의 정체 (소프트맥스 온도 = 엔트로피 조절기)
 // 표준 구성: 개념 설명 + 인터랙티브 시각화 + 미니체크 + 10문제 세트 + 노트북 안내
 import { ConceptCard } from '@series/ui'
+import { PartLink } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import TemperatureDial from '@/components/TemperatureDial.vue'
@@ -201,6 +202,11 @@ function onSetComplete() {
           <b>큰 그림</b>: 학습(6장)은 분포를 <b>만들고</b>, 퍼플렉시티(7장)는 그 분포를
           <b>채점하고</b>, temperature(8장)는 그 분포에서 <b>어떻게 뽑을지</b>를 정합니다 —
           전부 같은 분포 하나를 둘러싼 이야기예요.
+        </li>
+        <li>
+          <b>회수하는 수학</b> — 이 장은 <b><PartLink :part="4" ch="ch12">4부 12장(샘플링)</PartLink></b>의
+          심화판이고, 소프트맥스의 e 거듭제곱은 <b><PartLink :part="2" ch="ch7">2부 7장</PartLink></b>에서
+          만난 그 지수함수입니다.
         </li>
       </ul>
     </ConceptCard>

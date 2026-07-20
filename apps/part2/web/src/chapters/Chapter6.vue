@@ -152,7 +152,7 @@ function onSetComplete() {
       이게 바로 <b>역전파</b>이고, 그 수학적 정체가 <b>연쇄법칙</b>이에요.
     </p>
 
-    <ConceptCard tone="goal" title="역전파는 연쇄법칙의 반복 적용">
+    <ConceptCard tone="ai" title="역전파는 연쇄법칙의 반복 적용">
       <ul class="list-disc space-y-2 pl-5">
         <li>출력의 기울기에서 시작해 <b>층마다 국소 미분을 곱하며</b> 입력 쪽으로 전파.</li>
         <li>각 곱셈이 곧 <MathBlock inline expr="\frac{dy}{du}\cdot\frac{du}{dx}" /> — 사슬을 거슬러 올라가는 연쇄법칙.</li>

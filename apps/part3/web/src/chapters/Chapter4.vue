@@ -297,7 +297,7 @@ function onSetComplete() {
       "각 단어가 독립"이라는 순진한(naive) 가정 덕분에 3장의 곱셈법칙으로 증거들을 결합할 수 있어요.
     </p>
 
-    <ConceptCard tone="goal" title="베이즈 관점 = AI 학습의 큰 그림">
+    <ConceptCard tone="ai" title="베이즈 관점 = AI 학습의 큰 그림">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <b>나이브 베이즈</b>: P(스팸|단어들) ∝ P(단어들|스팸) × P(스팸) — 방금 배운 공식 그대로.

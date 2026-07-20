@@ -310,7 +310,7 @@ const isIndep = computed(() => Math.abs(indepDet.value) > 1e-9)
     <!-- 7. AI 연결 -->
     <h2 class="mt-10 mb-2 text-xl font-bold">🤖 기저·차원·rank 가 AI에서 쓰이는 곳</h2>
     <ReviewFlag id="ch9-ai" chapter="ch9" label="🤖 AI에서 쓰이는 곳" />
-    <ConceptCard tone="goal" title="실제 활용">
+    <ConceptCard tone="ai" title="실제 활용">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <b>특징 중복 진단(다중공선성)</b>: 데이터 행렬의 rank 가 열 개수보다 작으면 중복 특징이

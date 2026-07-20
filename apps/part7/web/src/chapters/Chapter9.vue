@@ -68,9 +68,10 @@ function onSetComplete() {
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 목표를 손실로 — 또 너였구나, −log</h2>
     <ReviewFlag id="ch9-s2" chapter="ch9" label="2. 목표를 손실로 — 또 너였구나, −log" />
     <p class="leading-relaxed text-slate-700">
-      "짝은 가깝게"를 미분 가능한 숫자로 바꿔야 경사하강(2부 9장)이 밀 수 있습니다.
-      만드는 법은 6부에서 본 요리 그대로예요 — 질문과 후보 문서들의 유사도를
-      <b>소프트맥스</b>로 확률로 바꾸고, <b>정답 문서에 준 확률에 −log</b>를 씌웁니다:
+      "짝은 가깝게"를 미분 가능한 숫자로 바꿔야 경사하강(2부 9장 — 손실이 줄어드는 방향으로
+      파라미터를 조금씩 미는 학습 절차)이 밀 수 있습니다.
+      만드는 법은 6부에서 본 요리 그대로인데, 못 봤어도 괜찮아요(아래 카드) — 질문과 후보 문서들의
+      유사도를 <b>소프트맥스</b>로 확률로 바꾸고, <b>정답 문서에 준 확률에 −log</b>를 씌웁니다:
     </p>
     <MathBlock expr="\text{손실} = -\log \frac{e^{s_+/\tau}}{e^{s_+/\tau} + \sum_{\text{오답}} e^{s_-/\tau}}" />
     <p class="leading-relaxed text-slate-700">
@@ -80,6 +81,24 @@ function onSetComplete() {
       결정하고, 손실을 낮추는 유일한 길은 <b>짝 유사도는 올리고 남 유사도는 내리는 것</b> —
       목표 선언이 그대로 수식이 된 겁니다. 이 손실의 이름은 <b>InfoNCE</b>라 불립니다.
     </p>
+
+    <ConceptCard tone="note" title="처음이어도 괜찮아요 — 이 수식의 부품 사전">
+      <ul class="list-disc space-y-1 pl-5 text-sm leading-relaxed">
+        <li>
+          <b>소프트맥스(softmax)</b> — 읽는 법: 소프트맥스. 뜻: 점수 목록을 <b>합이 1인 확률</b>로
+          바꾸는 변환. 각 점수 s 에 <MathBlock inline expr="e^{s}" /> 를 취해(e ≈ 2.718 — 어떤 점수든
+          <b>양수</b>가 되게 하는 거듭제곱) 전체 합으로 나눕니다 — 큰 점수일수록 큰 확률을 받아요.
+        </li>
+        <li>
+          <b>Σ(시그마)</b> — 뜻: "오답 후보들 것을 <b>전부 더하라</b>"는 합 기호. 분모가 "정답 +
+          오답 전부"라서 확률의 합이 1이 됩니다.
+        </li>
+        <li>
+          <b>−log</b> — 뜻: 정답에 준 확률이 1에 가까우면 손실 ≈ 0, 작을수록 손실이 치솟는
+          <b>벌점 변환</b>. τ(타우)는 위에서 말한 온도 다이얼입니다.
+        </li>
+      </ul>
+    </ConceptCard>
 
     <p class="mt-6 mb-1 text-sm font-semibold text-slate-500">🔎 잠깐 확인!</p>
     <Quiz

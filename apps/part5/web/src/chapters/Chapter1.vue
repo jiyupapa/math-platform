@@ -2,6 +2,7 @@
 // Phase 1 · 놀람의 크기 — 정보를 숫자로 재다
 // 표준 구성: 개념 설명 + 새 기호 설명 + 인터랙티브 시각화 + 차트 + 미니체크 + 10문제 세트 + 노트북 안내
 import { ConceptCard } from '@series/ui'
+import { PartLink } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import { ChartView } from '@series/ui'
@@ -262,6 +263,11 @@ function onSetComplete() {
           2^(그 값)이 <b>퍼플렉시티</b>(7장)예요. 이번 챕터의 공식 하나로 두 챕터를 예약해 둔 셈!
         </li>
       </ul>
+      <p class="mt-2 text-sm">
+        회수하는 수학 — 이 −log 의 로그는 <b><PartLink :part="2" ch="ch7">2부 7장</PartLink></b>에서
+        만난 그 log, "다음 토큰의 확률 q"라는 문법은 <b><PartLink :part="3" ch="ch5">3부 5장</PartLink></b>의
+        확률분포입니다.
+      </p>
     </ConceptCard>
 
     <p class="mt-6 mb-1 text-sm font-semibold text-slate-500">🔎 잠깐 확인!</p>

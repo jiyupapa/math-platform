@@ -2,6 +2,7 @@
 // Phase 9 · 문맥의 가치 — 조건부 엔트로피 H(X|Y) 와 상호정보량 I(X;Y)
 // 표준 구성: 개념 설명 + 인터랙티브 시각화 + 미니체크 + 10문제 세트 + 노트북 안내
 import { ConceptCard } from '@series/ui'
+import { PartLink } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import InfoVenn from '@/components/InfoVenn.vue'
@@ -187,6 +188,10 @@ function onSetComplete() {
         <li>
           <b>특징 선택(feature selection)</b>: "어떤 입력 변수가 정답과 I 가 큰가"는 고전 ML 의
           변수 고르기 기준이기도 — 상호정보량은 AI 전반의 만능 자입니다.
+        </li>
+        <li>
+          <b>회수하는 수학</b> — 조건부 확률의 문법은 <b><PartLink :part="3" ch="ch4">3부 4장</PartLink></b>,
+          여기서 직관을 보강한 어텐션의 본체는 <b><PartLink :part="4" ch="ch6">4부 6장</PartLink></b>입니다.
         </li>
       </ul>
     </ConceptCard>

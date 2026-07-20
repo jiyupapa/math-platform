@@ -266,7 +266,7 @@ function onSetComplete() {
       <b>"그 차이, 문제 몇 개짜리 벤치마크에서 나온 건가요?"</b> 문제가 500개뿐이라면 1%p 는
       고작 5문제 차이라 우연일 가능성이 큽니다(8장의 오차범위!). 실제로 AI 연구·서비스 현장에서는:
     </p>
-    <ConceptCard tone="goal" title="가설검정이 AI 현장에서 쓰이는 곳">
+    <ConceptCard tone="ai" title="가설검정이 AI 현장에서 쓰이는 곳">
       <ul class="list-disc space-y-2 pl-5">
         <li><b>모델 비교</b>: 모델 A vs B 의 벤치마크 점수 차이가 유의한지 검정 — 유의하지 않다면 "동급".</li>
         <li><b>배포 결정</b>: 새 추천 모델·새 프롬프트를 일부 사용자에게만 적용하는 <b>A/B 테스트</b>로

@@ -300,7 +300,7 @@ function fmt(n: number) {
     <!-- 5. AI 연결 -->
     <h2 class="mt-10 mb-2 text-xl font-bold">🤖 SVD 가 AI에서 쓰이는 곳</h2>
     <ReviewFlag id="ch11-ai" chapter="ch11" label="🤖 AI에서 쓰이는 곳" />
-    <ConceptCard tone="goal" title="실제 활용 — 'ML에서 가장 중요한 분해'인 이유">
+    <ConceptCard tone="ai" title="실제 활용 — 'ML에서 가장 중요한 분해'인 이유">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <b>추천 시스템</b>: 평점 행렬을 SVD 로 저랭크 분해하면 <MathBlock inline expr="\vec{u}" />

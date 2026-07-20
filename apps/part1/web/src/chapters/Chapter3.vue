@@ -241,7 +241,7 @@ function onSetComplete() {
     <!-- 6. AI 연결 -->
     <h2 class="mt-10 mb-2 text-xl font-bold">🤖 행렬은 AI의 데이터 그 자체</h2>
     <ReviewFlag id="ch3-ai" chapter="ch3" label="🤖 행렬은 AI의 데이터 그 자체" />
-    <ConceptCard tone="goal" title="AI에서 행렬이 쓰이는 곳">
+    <ConceptCard tone="ai" title="AI에서 행렬이 쓰이는 곳">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <b>데이터셋</b> = 행렬. 한 <b>행</b>이 샘플 하나(예: 사람 1명),

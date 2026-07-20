@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // Phase 3 — 임베딩. 뜻 없는 토큰 ID 를 "의미를 담은 숫자 벡터(좌표)"로 바꾼다.
 import { ConceptCard } from '@series/ui'
+import { PartLink } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import EmbeddingLab from '@/components/EmbeddingLab.vue'
@@ -178,6 +179,10 @@ function onSetComplete() {
           단어 유사도, 추천, 검색(임베딩 검색)도 모두 "<b>가까운 벡터 찾기</b>"입니다.
         </li>
       </ul>
+      <p class="mt-2 text-sm text-violet-900/80">
+        회수하는 수학 — 벡터·거리·내적은 <b><PartLink :part="1" ch="ch2">1부 2장</PartLink></b>에서
+        쌓은 그 기초입니다.
+      </p>
       <p class="mt-2 text-sm text-violet-900/80">
         다음 칸(ch4 위치 인코딩)은 이 임베딩에 <b>"몇 번째 단어인지"</b> 순서 정보를 더합니다.
       </p>

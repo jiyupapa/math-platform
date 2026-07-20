@@ -74,7 +74,7 @@ function onSetComplete() {
       ]"
       :answer="0"
       :hints="['고속도로/지름길을 떠올려 보세요.']"
-      explanation="출력 = 입력 + f(입력). 원래 정보와 기울기가 곧장 흐르게 해 깊은 학습을 돕습니다."
+      explanation="출력 = 입력 + f(입력). 원래 정보(신호)가 곧장 흐르게 해 깊은 학습을 돕습니다."
     />
 
     <!-- ===== 2. 피드포워드 ===== -->
@@ -189,7 +189,7 @@ function onSetComplete() {
         question="잔차연결(residual)은 서브층의 입력을 출력에 다시 더하는 지름길이다."
         type="truefalse"
         :answer="0"
-        explanation="맞아요. 출력 = 입력 + f(입력). 정보와 기울기가 곧장 흐릅니다."
+        explanation="맞아요. 출력 = 입력 + f(입력). 원래 정보(신호)가 곧장 흐릅니다."
       />
       <Quiz
         difficulty="easy"
@@ -223,7 +223,7 @@ function onSetComplete() {
         difficulty="medium"
         question="잔차연결이 없으면 층을 깊게 쌓을 때 흔히 생기는 문제는?"
         :choices="[
-          '신호/기울기가 사라지거나 폭발해 학습이 안 된다',
+          '신호가 사라지거나 폭발해 학습이 안 된다',
           '단어 수가 늘어난다',
           '토큰 ID가 바뀐다',
           '확률의 합이 2가 된다',
@@ -272,7 +272,7 @@ function onSetComplete() {
         difficulty="hard"
         question="잔차연결을 '고속도로'에 비유하는 이유로 가장 옳은 것은?"
         :choices="[
-          '원래 정보와 기울기가 층을 건너뛰어 곧장 흐르게 해줘서',
+          '원래 정보(신호)가 층을 건너뛰어 곧장 흐르게 해줘서',
           '자동차가 지나가서',
           '단어를 빠르게 지워서',
           '확률을 높여서',

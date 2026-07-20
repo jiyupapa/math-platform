@@ -145,7 +145,7 @@ function onSetComplete() {
       것입니다. 단지 <MathBlock inline expr="w" /> 가 하나가 아니라 거대한 벡터일 뿐, 원리는 똑같아요.
     </p>
 
-    <ConceptCard tone="goal" title="학습 루프 = 경사하강의 반복">
+    <ConceptCard tone="ai" title="학습 루프 = 경사하강의 반복">
       <ol class="list-decimal space-y-2 pl-5">
         <li><b>예측</b>하고 <b>손실 <MathBlock inline expr="L" /></b> 을 계산 (얼마나 틀렸나).</li>
         <li><b>그래디언트 <MathBlock inline expr="\nabla L" /></b> 계산 — 각 가중치의 편미분. (다음 챕터의 <b>역전파</b>가 이걸 효율적으로!)</li>
