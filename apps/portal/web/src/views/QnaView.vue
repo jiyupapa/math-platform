@@ -61,7 +61,7 @@ async function resolve(q: Annotation) {
     <p v-else-if="!isAdmin" class="mt-8 rounded-lg bg-slate-50 px-4 py-6 text-center text-sm text-slate-500">
       관리자(강사) 전용 화면입니다.
     </p>
-    <p v-else-if="loading" class="mt-8 text-center text-sm text-slate-400">불러오는 중…</p>
+    <p v-else-if="loading" class="mt-8 text-center text-sm text-slate-500">불러오는 중…</p>
     <p v-else-if="questions.length === 0" class="mt-8 rounded-lg bg-emerald-50 px-4 py-6 text-center text-sm text-emerald-700">
       🎉 미해결 질문이 없습니다 — 전부 답했어요!
     </p>
@@ -84,7 +84,7 @@ async function resolve(q: Annotation) {
           </a>
           <button
             type="button"
-            class="text-xs text-slate-400 hover:text-emerald-600 hover:underline"
+            class="text-xs text-slate-500 hover:text-emerald-600 hover:underline"
             :disabled="busyId === q.id"
             @click="resolve(q)"
           >

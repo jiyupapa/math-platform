@@ -16,33 +16,36 @@ function openSearch() {
 <template>
   <div class="min-h-screen bg-slate-50">
     <header class="border-b border-slate-200 bg-white/80 backdrop-blur">
-      <div class="mx-auto flex max-w-3xl items-center justify-between px-5 py-3">
-        <RouterLink to="/" class="font-bold text-indigo-700">수포자 사관학교</RouterLink>
-        <nav class="flex items-center gap-4">
+      <!-- 모바일: 한 줄에 469px 가 필요해 로고·메뉴가 단어 중간에서 잘렸다(수포자 사관/학교, 학습 구/조도).
+           바깥은 flex-wrap 으로 메뉴를 통째로 다음 줄에 내리고, 각 항목은 whitespace-nowrap 으로
+           절대 쪼개지지 않게 한다. 로그인·관리자면 항목이 6개까지 늘어나므로 nav 자체도 wrap. -->
+      <div class="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-5 py-3">
+        <RouterLink to="/" class="py-1 font-bold whitespace-nowrap text-indigo-700">수포자 사관학교</RouterLink>
+        <nav class="flex flex-wrap items-center gap-x-4 gap-y-1">
           <button
             type="button"
-            class="text-sm font-medium text-slate-600 hover:text-indigo-600 hover:underline"
+            class="py-1.5 text-sm font-medium whitespace-nowrap text-slate-600 hover:text-indigo-600 hover:underline"
             @click="openSearch"
           >
             🔎 검색
           </button>
-          <RouterLink to="/map" class="text-sm font-medium text-slate-600 hover:text-indigo-600 hover:underline">
+          <RouterLink to="/map" class="py-1.5 text-sm font-medium whitespace-nowrap text-slate-600 hover:text-indigo-600 hover:underline">
             학습 구조도
           </RouterLink>
-          <RouterLink to="/diagnose" class="text-sm font-medium text-indigo-600 hover:underline">
+          <RouterLink to="/diagnose" class="py-1.5 text-sm font-medium whitespace-nowrap text-indigo-600 hover:underline">
             경로 진단
           </RouterLink>
           <RouterLink
             v-if="currentUser"
             to="/adoption"
-            class="text-sm font-medium text-slate-600 hover:text-indigo-600 hover:underline"
+            class="py-1.5 text-sm font-medium whitespace-nowrap text-slate-600 hover:text-indigo-600 hover:underline"
           >
             도입 현황
           </RouterLink>
           <RouterLink
             v-if="isAdmin"
             to="/qna"
-            class="text-sm font-medium text-slate-600 hover:text-indigo-600 hover:underline"
+            class="py-1.5 text-sm font-medium whitespace-nowrap text-slate-600 hover:text-indigo-600 hover:underline"
           >
             🎓 질문 큐
           </RouterLink>
@@ -52,6 +55,12 @@ function openSearch() {
     </header>
     <!-- 로그인 후 DB 하이드레이션이 끝나면 progressVersion 이 올라 뷰가 리마운트(진도 재계산)된다 -->
     <RouterView :key="progressVersion" />
+
+    <!-- 사이트 푸터 — main 밖에 둬야 contentinfo 랜드마크가 생긴다(main/section 안이면 generic).
+         전 페이지 공통으로 참인 문장만 둔다(페이지별 안내는 각 뷰에). -->
+    <footer class="mx-auto max-w-3xl break-keep px-5 pb-10 text-center text-xs text-slate-500">
+      진도는 배포본(같은 주소)에서 각 부와 통합됩니다.
+    </footer>
 
     <!-- 통합검색 팔레트 (⌘K / Ctrl+K · 상단 🔎 검색) -->
     <SearchPalette />

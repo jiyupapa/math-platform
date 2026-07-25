@@ -12,7 +12,7 @@ import { stats } from '../data/stats'
     >
       <p class="text-2xl font-bold text-indigo-600">{{ s.value }}</p>
       <p class="mt-0.5 text-sm font-semibold text-slate-800">{{ s.label }}</p>
-      <p class="mt-1 text-xs leading-tight text-slate-400">{{ s.sub }}</p>
+      <p class="mt-1 text-xs leading-tight text-slate-500">{{ s.sub }}</p>
     </div>
   </section>
 </template>

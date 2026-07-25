@@ -73,13 +73,13 @@ function stateOf(n: BoardNode): NodeState {
 }
 
 const toneStyle: Record<Tone, { card: string; badge: string; title: string }> = {
-  done: { card: 'border-slate-200 bg-slate-100', badge: 'bg-slate-200 text-slate-500', title: 'text-slate-500' },
-  current: { card: 'border-emerald-500 bg-emerald-50 ring-2 ring-emerald-100', badge: 'bg-emerald-600 text-white', title: 'text-emerald-900' },
+  done: { card: 'border-slate-200 bg-slate-100', badge: 'bg-slate-200 text-slate-600', title: 'text-slate-600' },
+  current: { card: 'border-emerald-500 bg-emerald-50 ring-2 ring-emerald-100', badge: 'bg-emerald-700 text-white', title: 'text-emerald-900' },
   active: { card: 'border-indigo-400 bg-white', badge: 'bg-indigo-100 text-indigo-700', title: 'text-slate-900' },
   review: { card: 'border-sky-400 bg-sky-50', badge: 'bg-sky-100 text-sky-700', title: 'text-slate-900' },
-  known: { card: 'border-dashed border-slate-300 bg-slate-50', badge: 'bg-slate-100 text-slate-400', title: 'text-slate-400 line-through' },
-  wait: { card: 'border-slate-200 bg-white', badge: 'bg-slate-100 text-slate-400', title: 'text-slate-800' },
-  optional: { card: 'border-dashed border-slate-300 bg-white', badge: 'bg-slate-100 text-slate-500', title: 'text-slate-700' },
+  known: { card: 'border-dashed border-slate-300 bg-slate-50', badge: 'bg-slate-100 text-slate-600', title: 'text-slate-500 line-through' },
+  wait: { card: 'border-slate-200 bg-white', badge: 'bg-slate-100 text-slate-600', title: 'text-slate-800' },
+  optional: { card: 'border-dashed border-slate-300 bg-white', badge: 'bg-slate-100 text-slate-600', title: 'text-slate-700' },
 }
 
 // 노드 카드 표시용 파생값
@@ -306,7 +306,7 @@ const legend: { tone: Tone; label: string }[] = [
 
         <div class="grid gap-0" :style="{ gridTemplateColumns: gridCols }">
           <!-- 헤더 행: 모서리 + 레인(열) 헤더 -->
-          <div class="border-b border-slate-200 pb-2 text-[11px] font-medium text-slate-400">
+          <div class="border-b border-slate-200 pb-2 text-[11px] font-medium text-slate-500">
             국면 ↓ · 레인 →
           </div>
           <div
@@ -321,7 +321,7 @@ const legend: { tone: Tone; label: string }[] = [
           <template v-for="c in columns" :key="c.id">
             <div class="flex flex-col border-b border-slate-100 pt-3 pr-2">
               <p class="text-sm font-bold text-slate-700">{{ c.title }}</p>
-              <p class="text-[11px] leading-tight text-slate-400">{{ c.sub }}</p>
+              <p class="text-[11px] leading-tight text-slate-500">{{ c.sub }}</p>
             </div>
             <div
               v-for="lane in visibleLanes"
@@ -338,7 +338,7 @@ const legend: { tone: Tone; label: string }[] = [
                 @click="selected = selected === n.id ? null : n.id"
               >
                 <div class="flex items-center justify-between gap-1">
-                  <span class="font-mono text-[10px] font-bold text-slate-400">{{ viewOf(n.id).label }}</span>
+                  <span class="font-mono text-[10px] font-bold text-slate-500">{{ viewOf(n.id).label }}</span>
                   <span class="rounded px-1.5 py-0.5 text-[10px] font-semibold" :class="viewOf(n.id).style.badge">
                     {{ viewOf(n.id).state.badge }}
                   </span>
@@ -346,7 +346,7 @@ const legend: { tone: Tone; label: string }[] = [
                 <p class="mt-0.5 text-[13px] font-bold leading-tight" :class="viewOf(n.id).style.title">
                   {{ viewOf(n.id).title }}
                 </p>
-                <p class="mt-0.5 truncate text-[11px] text-slate-400">{{ viewOf(n.id).meta }}</p>
+                <p class="mt-0.5 truncate text-[11px] text-slate-500">{{ viewOf(n.id).meta }}</p>
                 <div v-if="viewOf(n.id).progress" class="mt-1.5 h-1 overflow-hidden rounded-full bg-slate-200">
                   <div
                     class="h-full rounded-full bg-indigo-500"
@@ -368,7 +368,7 @@ const legend: { tone: Tone; label: string }[] = [
             <span class="rounded px-1.5 py-0.5 text-[11px] font-semibold" :class="detail.style.badge">
               {{ detail.state.badge }}
             </span>
-            <span v-if="detail.step" class="text-xs text-slate-400">
+            <span v-if="detail.step" class="text-xs text-slate-500">
               {{ detail.step.role }} · {{ detail.step.scope }}
             </span>
           </div>
@@ -397,19 +397,19 @@ const legend: { tone: Tone; label: string }[] = [
 
       <div v-if="detail.step" class="mt-3 grid gap-3 sm:grid-cols-3">
         <div class="rounded-xl bg-slate-50 p-3">
-          <p class="text-xs text-slate-400">분량</p>
+          <p class="text-xs text-slate-500">분량</p>
           <p class="mt-0.5 text-sm font-semibold text-slate-800">
             {{ detail.step.chapterCount }}챕터 · 약 {{ hoursOf(detail.step.minutes) }}시간
           </p>
         </div>
         <div class="rounded-xl bg-slate-50 p-3">
-          <p class="text-xs text-slate-400">진도</p>
+          <p class="text-xs text-slate-500">진도</p>
           <p class="mt-0.5 text-sm font-semibold text-slate-800">
             {{ detail.progress ? `${detail.progress.completed}/${detail.progress.total} (${detail.progress.percent}%)` : '아직 시작 전' }}
           </p>
         </div>
         <div class="rounded-xl bg-slate-50 p-3">
-          <p class="text-xs text-slate-400">진입 조건</p>
+          <p class="text-xs text-slate-500">진입 조건</p>
           <p class="mt-0.5 text-sm font-semibold text-slate-800">
             {{ detail.node.prereqText ?? '필수 경로 — 앞 단계 순서대로' }}
           </p>
@@ -419,7 +419,7 @@ const legend: { tone: Tone; label: string }[] = [
         💡 {{ detail.note }}
       </p>
     </section>
-    <p v-else class="mt-4 text-center text-sm text-slate-400">
+    <p v-else class="mt-4 text-center text-sm text-slate-500">
       노드를 누르면 단계 상세(분량 · 진도 · 진입 조건)가 여기 열립니다.
     </p>
   </main>

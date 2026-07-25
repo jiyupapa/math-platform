@@ -57,7 +57,7 @@ const activeParts = computed(() => parts.value.length)
     <p v-else-if="!currentUser" class="mt-8 rounded-lg bg-slate-50 px-4 py-6 text-center text-sm text-slate-500">
       도입 현황을 보려면 <span class="font-medium text-indigo-600">로그인</span>이 필요해요.
     </p>
-    <p v-else-if="loading" class="mt-8 text-center text-sm text-slate-400">불러오는 중…</p>
+    <p v-else-if="loading" class="mt-8 text-center text-sm text-slate-500">불러오는 중…</p>
     <p v-else-if="!stats" class="mt-8 rounded-lg bg-slate-50 px-4 py-6 text-center text-sm text-slate-500">
       집계를 불러오지 못했어요. (adoption_stats 함수가 배포됐는지 확인)
     </p>
@@ -119,10 +119,10 @@ const activeParts = computed(() => parts.value.length)
                   :style="{ height: (c.users ? Math.max(6, Math.round((c.users / p.maxCh) * 100)) : 0) + '%' }"
                 />
               </div>
-              <span class="mt-1 text-[9px] leading-none text-slate-400">{{ c.num }}</span>
+              <span class="mt-1 text-[9px] leading-none text-slate-500">{{ c.num }}</span>
             </div>
           </div>
-          <p class="mt-1 text-[11px] text-slate-400">
+          <p class="mt-1 text-[11px] text-slate-500">
             막대 = 각 장을 완료한 인원(왼→오 진행). 오른쪽으로 갈수록 낮아지면 그 지점이 이탈 구간.
           </p>
         </div>

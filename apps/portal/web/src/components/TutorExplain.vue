@@ -48,14 +48,14 @@ async function ask() {
     >
       🤖 AI 강사에게 더 듣기
     </button>
-    <span v-else-if="state === 'checking'" class="text-sm text-slate-400">튜터를 부르는 중…</span>
+    <span v-else-if="state === 'checking'" class="text-sm text-slate-500">튜터를 부르는 중…</span>
 
     <p v-if="output" class="mt-2 rounded-lg bg-indigo-50 p-3 text-sm text-slate-700">{{ output }}</p>
 
-    <p v-if="state === 'offline'" class="mt-2 text-xs text-slate-400">
+    <p v-if="state === 'offline'" class="mt-2 text-xs text-slate-500">
       로컬 튜터(Ollama)가 꺼져 있어요 — 위 안내로 갈음합니다. (켜면 더 자세히 설명해드려요)
     </p>
-    <p v-else-if="state === 'error'" class="mt-2 text-xs text-slate-400">
+    <p v-else-if="state === 'error'" class="mt-2 text-xs text-slate-500">
       튜터 응답에 문제가 있었어요. 위 안내를 참고하세요.
     </p>
   </div>
