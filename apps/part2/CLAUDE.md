@@ -14,13 +14,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 명령어
 
-모노레포 npm workspaces. `npm install` 은 **루트에서 1회**. 이 부만 다룰 때(루트에서 실행):
-
-```bash
-npm run dev   -w apps/part2/web   # 개발 서버
-npm run build -w apps/part2/web   # vue-tsc 타입체크 + vite 프로덕션 빌드 (타입 에러도 빌드 실패)
-```
-
+모노레포 npm workspaces — `npm install` 은 **루트에서 1회**, 이 부 대상 명령은 루트에서 `-w apps/part2/web` 로 실행한다.
 테스트 러너는 없다. 검증은 `npm run build`(타입체크 포함) 통과 + dev 서버 동작 확인으로 한다.
 노트북은 **루트 공용 venv 하나**(`.venv`, 커널 `math-platform`) 사용 — 설치·검증은 루트 `docs/TESTING.md` 3절.
 
