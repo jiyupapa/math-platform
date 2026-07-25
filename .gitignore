@@ -24,6 +24,7 @@ __pycache__/
 # 로컬 설정 / 에디터
 .claude/settings.local.json
 .obsidian/
+.idea/
 .DS_Store
 *.local
 

@@ -18,9 +18,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 구조
 
-배치는 `ls`로: `apps/`(portal + part1..N — 각각 web/·notebooks/·docs/), `packages/`(ui·tutor).
+배치는 `ls`로: `apps/`(portal + part1..N — 각각 web/·notebooks/·docs/), `packages/`(ui·tutor·store).
 부 목록·주제·완결 상태·시리즈 커리큘럼·추천 학습 경로(1→2→3→4→5 순서가 아님)·부 간 연결은
 루트 `README.md` 가 정본.
+
+**스택**(전 12앱 공통): Vue 3 + TypeScript + Vite + Vue Router + KaTeX +
+Tailwind v4(`@tailwindcss/vite` — **설정 파일 없이** `style.css` 의 `@import 'tailwindcss'` 로 시작).
+각 부는 여기에 **Pinia**(진도·복습 스토어)와 **Chart.js**(vue-chartjs)를 더 쓴다 — **포털만 이 둘이 없다**.
+노트북은 루트 공용 venv 하나: NumPy·Matplotlib·JupyterLab + SciPy(3부)·SymPy(2부)·scikit-learn(7부),
+ipywidgets·requests(AI 튜터). 명세는 루트 `requirements.txt`.
 
 ## 명령어 (npm workspaces — 루트에서 실행)
 
@@ -52,12 +58,19 @@ QuizSet↔StepQuiz 그룹 계약(`quizGroupKey`/`QuizGroup` — `quizGroup.ts`)�
     구분자다. 임의 항목 앵커는 `ConceptCard`·`Quiz`·`StepQuiz`·`MathBlock` 의 `anchorId`
     prop — 네이밍 정본 `{chapter}-{type}-{slug}` 와 금지사항(자동 인덱스·배포 후 변경 금지)은
     `packages/ui/src/anchor.ts` 참조. 설계: `docs/todo_협업주석_260716.md`.
-- 소스 `.vue` 패키지라 각 앱 설정에: `vite.config.ts` 의 `optimizeDeps.exclude`(전 12앱 = `['@series/ui', '@series/tutor']`),
+- 소스 `.vue` 패키지라 각 앱 설정에: `vite.config.ts` 의 `optimizeDeps.exclude`(전 12앱 = `['@series/ui', '@series/tutor', '@series/store']`),
   `style.css` 의 `@source '../../../../packages/ui/src'`(Tailwind 가 패키지 클래스 스캔 — 빠지면 스타일이 조용히 누락).
 - **THEMED(각 앱에 유지)**: `progress`/`review` 스토어, `TutorChat.vue`(튜터 주제), `notebooks/tutor.py`.
 - **AI 튜터 클라이언트 = `packages/tutor`(@series/tutor)** — 로컬/원격 Ollama 전송 계층. 서버 주소는 빌드 환경변수
   **`VITE_OLLAMA_URL`** 로 바꾼다(미설정 시 `http://localhost:11434`) → 코드 수정 없이 local↔remote 전환.
   소비처: `TutorChat.vue`(각 부, 주제별) + 포털 `TutorExplain.vue`(추천 설명 재구술 — Ollama 미실행 시 규칙 템플릿 폴백).
+- **백엔드 층 = `packages/store`(@series/store)** — Supabase 클라이언트 하나로 ① 인증(`AuthPanel`·`initAuth`·`isAllowedEmail`),
+  ② 진도·복습 크로스기기 동기화(`registerProgressSync`/`registerReviewSync` — 각 앱 THEMED 스토어가 등록),
+  ③ 협업 주석(`useChapterAnnotations` — 익명, 작성자 이름 컬럼 자체가 없음), ④ 도입 통계(`fetchAdoptionStats`)를 담당.
+  **`VITE_SUPABASE_URL`·`VITE_SUPABASE_ANON_KEY` 미설정 시 전부 no-op** → 앱은 localStorage 만으로 정상 동작하므로,
+  백엔드 없이 빌드해도 깨지지 않는다(로컬 개발의 기본 상태).
+  `isAdmin` 의 `VITE_ADMIN_EMAILS` 는 **UI 표시용일 뿐 — 진짜 경계는 서버 `public.admins` 테이블 + RLS**(두 목록을 같게 유지).
+  DB 스키마 `supabase/schema.sql`, 설계 `docs/todo_supabase백엔드_260715.md`.
 
 ## 시리즈 설계 철학 (모든 부 공통)
 

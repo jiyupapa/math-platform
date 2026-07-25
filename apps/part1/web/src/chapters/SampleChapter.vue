@@ -9,6 +9,7 @@ import VectorCanvas, { type Vec } from '@/components/VectorCanvas.vue'
 import { Quiz } from '@series/ui'
 import { StepQuiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
+import { ReviewFlag } from '@series/ui'
 import { NotebookCard } from '@series/ui'
 import { useProgressStore } from '@/stores/progress'
 
@@ -53,6 +54,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 벡터는 화살표예요</h2>
+    <ReviewFlag id="sample-s1" chapter="sample" label="1. 벡터는 화살표예요" />
     <p class="leading-relaxed text-slate-700">
       벡터는 원점 <MathBlock inline expr="(0,0)" /> 에서 어떤 점까지 그은 화살표입니다.
       아래 그림에서 <b style="color: #6366f1">파란 점</b>을 마우스로 끌어보세요. 화살표가 따라옵니다.
@@ -88,6 +90,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 성분을 막대로 보면</h2>
+    <ReviewFlag id="sample-s2" chapter="sample" label="2. 성분을 막대로 보면" />
     <p class="leading-relaxed text-slate-700">
       벡터의 <MathBlock inline expr="x" />, <MathBlock inline expr="y" /> 값을 막대 높이로 나타낸 것입니다.
       위에서 점을 끌면 이 막대도 실시간으로 바뀝니다.
@@ -104,6 +107,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 드디어 공식</h2>
+    <ReviewFlag id="sample-s3" chapter="sample" label="3. 드디어 공식 — 벡터의 길이" />
     <p class="leading-relaxed text-slate-700">
       벡터의 길이는 <b>피타고라스 정리</b>로 구합니다. 직각삼각형에서
       <b>빗변² = 가로² + 세로²</b> 였죠 — 벡터의 길이가 바로 그 빗변이에요.
@@ -136,6 +140,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">4. 직접 풀어보기</h2>
+    <ReviewFlag id="sample-s4" chapter="sample" label="4. 직접 풀어보기" />
     <p class="mb-2 leading-relaxed text-slate-700">
       세 가지 유형(객관식 · 참/거짓 · 숫자입력)을 난이도 순으로 풀어보세요.
       <b>10문제를 모두 맞히면</b> 이 챕터가 완료됩니다.

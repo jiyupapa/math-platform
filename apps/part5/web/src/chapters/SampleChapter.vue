@@ -9,6 +9,7 @@ import TwentyQuestions from '@/components/TwentyQuestions.vue'
 import { Quiz } from '@series/ui'
 import { StepQuiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
+import { ReviewFlag } from '@series/ui'
 import { NotebookCard } from '@series/ui'
 import { useProgressStore } from '@/stores/progress'
 
@@ -57,6 +58,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 일단 게임부터 — 업다운 스무고개</h2>
+    <ReviewFlag id="sample-s1" chapter="sample" label="1. 일단 게임부터 — 업다운 스무고개" />
     <p class="leading-relaxed text-slate-700">
       제가 1~64 중에 숫자 하나를 숨겼습니다. 여러분이 숫자를 물으면
       저는 <b>UP(더 커요) / DOWN(더 작아요) / 정답</b> 셋 중 하나로만 답해요.
@@ -81,6 +83,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 찍기 vs 반반 — 전략을 그래프로 비교</h2>
+    <ReviewFlag id="sample-s2" chapter="sample" label="2. 찍기 vs 반반 — 전략 비교" />
     <p class="leading-relaxed text-slate-700">
       "정답이 7인가요?"처럼 <b>하나씩 찍으면</b> 틀릴 때마다 후보가 딱 1개씩만 줄어요.
       운이 나쁘면 63번을 물어야 합니다. 반면 <b>가운데를 묻는 반반 질문</b>은
@@ -115,6 +118,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 정보 = 줄어드는 불확실성</h2>
+    <ReviewFlag id="sample-s3" chapter="sample" label="3. 정보 = 줄어드는 불확실성" />
     <p class="leading-relaxed text-slate-700">
       방금 게임에서 UP/DOWN 답변 하나를 들을 때마다 후보가 줄었죠.
       그 <b>"줄어든 만큼"이 바로 그 답변이 준 정보</b>입니다.
@@ -147,6 +151,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">4. 직접 풀어보기</h2>
+    <ReviewFlag id="sample-s4" chapter="sample" label="4. 직접 풀어보기" />
     <p class="mb-2 leading-relaxed text-slate-700">
       세 가지 유형(객관식 · 참/거짓 · 숫자입력)을 난이도 순으로 풀어보세요.
       <b>10문제를 모두 맞히면</b> 이 챕터가 완료됩니다.

@@ -9,6 +9,7 @@ import TangentExplorer from '@/components/TangentExplorer.vue'
 import { Quiz } from '@series/ui'
 import { StepQuiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
+import { ReviewFlag } from '@series/ui'
 import { useProgressStore } from '@/stores/progress'
 
 const progress = useProgressStore()
@@ -54,6 +55,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 먼저, '기울기'가 뭐였죠?</h2>
+    <ReviewFlag id="sample-s1" chapter="sample" label="1. 먼저, '기울기'가 뭐였죠?" />
     <p class="leading-relaxed text-slate-700">
       직선의 <b>기울기</b>는 "옆으로 간 만큼(가로 변화) 대비 위로 간 정도(세로 변화)"입니다.
       가파를수록 기울기가 큽니다.
@@ -71,6 +73,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 곡선의 기울기는 점마다 다르다</h2>
+    <ReviewFlag id="sample-s2" chapter="sample" label="2. 곡선의 기울기는 점마다 다르다" />
     <p class="leading-relaxed text-slate-700">
       직선은 어디서나 기울기가 같지만, <b>곡선</b>은 위치마다 가파른 정도가 다릅니다.
       그래서 곡선에서는 <b>"그 점에 살짝 닿는 직선"</b>, 즉 <b>접선</b>의 기울기로 "그 지점의 기울기"를 정합니다.
@@ -112,6 +115,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 할선이 접선으로 — 평균에서 순간으로</h2>
+    <ReviewFlag id="sample-s3" chapter="sample" label="3. 할선이 접선으로 — 평균에서 순간으로" />
     <p class="leading-relaxed text-slate-700">
       두 점을 잇는 직선을 <b>할선</b>이라 하고, 그 기울기는 두 점 사이의 <b>평균변화율</b>입니다.
       위 그림에서 간격 <MathBlock inline expr="h" /> 를 점점 줄이면 노란 할선이 빨간 접선에 딱 붙습니다.
@@ -124,6 +128,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">4. 도함수도 '함수'다</h2>
+    <ReviewFlag id="sample-s4" chapter="sample" label="4. 도함수도 '함수'다" />
     <p class="leading-relaxed text-slate-700">
       슬라이더를 움직이며 눈치챘을 수도 있어요: <MathBlock inline expr="f(x)=x^2" /> 의 접선 기울기는
       항상 <b>x 의 2배</b>, 즉 <MathBlock inline expr="f'(x) = 2x" /> 입니다.
@@ -148,6 +153,7 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">5. 드디어 공식 (정의)</h2>
+    <ReviewFlag id="sample-s5" chapter="sample" label="5. 드디어 공식 (정의)" />
     <p class="leading-relaxed text-slate-700">
       위에서 그림으로 본 "간격을 0 으로 보낸 할선의 기울기"를 식으로 쓰면 이렇습니다.
     </p>
@@ -174,6 +180,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">6. 직접 풀어보기</h2>
+    <ReviewFlag id="sample-s6" chapter="sample" label="6. 직접 풀어보기" />
     <p class="mb-2 leading-relaxed text-slate-700">
       세 가지 유형(객관식 · 참/거짓 · 숫자입력)과 단계별 계산을 난이도 순으로 풀어보세요.
       <b>10문제를 모두 맞히면</b> 이 챕터가 완료됩니다.
