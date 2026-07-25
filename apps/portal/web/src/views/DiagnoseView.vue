@@ -42,7 +42,7 @@ function submit() {
     <ol class="space-y-6">
       <li v-for="(q, i) in questions" :key="q.id" class="rounded-xl bg-white p-4 shadow-sm ring-1 ring-slate-200">
         <p class="mb-3 font-medium text-slate-900">
-          <span class="mr-1 text-slate-400">{{ i + 1 }}.</span> {{ q.prompt }}
+          <span class="mr-1 text-slate-500">{{ i + 1 }}.</span> {{ q.prompt }}
         </p>
         <div class="grid gap-2">
           <button
@@ -98,7 +98,7 @@ function submit() {
       >
         결과 보기 — 내 경로 짜기 →
       </button>
-      <span v-if="!allAnswered" class="text-sm text-slate-400">모든 문항에 답하면 활성화돼요</span>
+      <span v-if="!allAnswered" class="text-sm text-slate-500">모든 문항에 답하면 활성화돼요</span>
     </div>
   </main>
 </template>

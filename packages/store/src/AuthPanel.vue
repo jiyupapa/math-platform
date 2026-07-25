@@ -92,6 +92,8 @@ async function submit() {
   font-size: 13px;
   color: #475569;
 }
+/* 세로 패딩은 터치 타깃 확보용 — 글자만 두면 높이가 21px 라 WCAG 2.5.8(최소 24x24) 미달이었다.
+   여기 하나 고치면 전 11부 사이드바 + 포털 헤더에 함께 반영된다. */
 .ap-link {
   font-size: 14px;
   font-weight: 500;
@@ -99,6 +101,7 @@ async function submit() {
   background: none;
   border: none;
   cursor: pointer;
+  padding: 5px 4px;
 }
 .ap-link:hover {
   text-decoration: underline;
