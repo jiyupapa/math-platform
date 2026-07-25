@@ -13,24 +13,27 @@ import StatChips from '../components/StatChips.vue'
 import ImprovementCard from '../components/ImprovementCard.vue'
 
 // 역할별 색 (토대/조립/본체/조련/심화/실용/평가/전략)
+// dot = 단계 번호 배지의 배경. 그 위에 10px 흰 글씨가 올라가므로 **700 계열 고정** —
+// 500 계열은 흰 글씨 대비가 2.2~4.2:1 로 WCAG AA(4.5:1) 미달이었다(조련 amber-500 이 2.15 로 최악).
+// 700 이면 전 역할 5.0:1 이상. tag 칩의 text-*-700 과 같은 토큰이라 역할 색 언어도 일관된다.
 const roleStyle: Record<StepRole, { tag: string; dot: string; ring: string }> = {
-  토대: { tag: 'bg-sky-100 text-sky-700', dot: 'bg-sky-500', ring: 'ring-sky-200' },
-  조립: { tag: 'bg-emerald-100 text-emerald-700', dot: 'bg-emerald-500', ring: 'ring-emerald-200' },
-  본체: { tag: 'bg-violet-100 text-violet-700', dot: 'bg-violet-500', ring: 'ring-violet-200' },
-  조련: { tag: 'bg-amber-100 text-amber-700', dot: 'bg-amber-500', ring: 'ring-amber-200' },
-  심화: { tag: 'bg-slate-100 text-slate-600', dot: 'bg-slate-400', ring: 'ring-slate-200' },
-  실용: { tag: 'bg-teal-100 text-teal-700', dot: 'bg-teal-500', ring: 'ring-teal-200' },
-  평가: { tag: 'bg-rose-100 text-rose-700', dot: 'bg-rose-500', ring: 'ring-rose-200' },
-  전략: { tag: 'bg-cyan-100 text-cyan-700', dot: 'bg-cyan-500', ring: 'ring-cyan-200' },
+  토대: { tag: 'bg-sky-100 text-sky-700', dot: 'bg-sky-700', ring: 'ring-sky-200' },
+  조립: { tag: 'bg-emerald-100 text-emerald-700', dot: 'bg-emerald-700', ring: 'ring-emerald-200' },
+  본체: { tag: 'bg-violet-100 text-violet-700', dot: 'bg-violet-700', ring: 'ring-violet-200' },
+  조련: { tag: 'bg-amber-100 text-amber-700', dot: 'bg-amber-700', ring: 'ring-amber-200' },
+  심화: { tag: 'bg-slate-100 text-slate-600', dot: 'bg-slate-700', ring: 'ring-slate-200' },
+  실용: { tag: 'bg-teal-100 text-teal-700', dot: 'bg-teal-700', ring: 'ring-teal-200' },
+  평가: { tag: 'bg-rose-100 text-rose-700', dot: 'bg-rose-700', ring: 'ring-rose-200' },
+  전략: { tag: 'bg-cyan-100 text-cyan-700', dot: 'bg-cyan-700', ring: 'ring-cyan-200' },
 }
 
 // 진단 상태별 배지/스타일
 const statusStyle: Record<StepStatus, { label: string; badge: string; dim: boolean; strike: boolean }> = {
   필수: { label: '필수', badge: 'bg-indigo-100 text-indigo-700', dim: false, strike: false },
-  건너뛰기: { label: '이미 앎 ✓', badge: 'bg-slate-100 text-slate-400', dim: true, strike: true },
+  건너뛰기: { label: '이미 앎 ✓', badge: 'bg-slate-100 text-slate-600', dim: true, strike: true },
   빠른복습: { label: '빠른 복습', badge: 'bg-sky-100 text-sky-700', dim: false, strike: false },
-  예정: { label: '예정', badge: 'bg-slate-200 text-slate-500', dim: true, strike: false },
-  선택: { label: '선택', badge: 'bg-slate-100 text-slate-500', dim: true, strike: false },
+  예정: { label: '예정', badge: 'bg-slate-200 text-slate-600', dim: true, strike: false },
+  선택: { label: '선택', badge: 'bg-slate-100 text-slate-600', dim: true, strike: false },
 }
 
 const progress = readAllProgress() // 2층 — 각 부 진도(같은 origin 배포본에서 통합)
@@ -64,6 +67,25 @@ const rows = computed(() =>
   })),
 )
 
+// 지도는 두 구획으로 나뉜다 — **번호는 핵심 경로에만** 붙인다.
+// 이전엔 13개를 한 레일에 1..13 으로 늘어놓아 "13단계 필수 코스"로 읽혔다. 실제로는
+// 핵심 7단계(55챕터·37시간, 히어로 칩과 같은 수치)가 완주 기준이고 선택 6트랙(63챕터·43시간)은
+// 골라 담는 것이라, 순서를 뜻하는 번호를 선택 트랙에 붙이면 안 된다.
+// step.order 는 내부 식별자로 그대로 둔다 — structure.ts 의 진입조건 문구("1단계·2단계·4단계")와
+// ?node=stepN 딥링크가 이 번호를 참조하므로 재번호는 금물(참조는 전부 핵심 1~7 이라 안전).
+const coreRows = computed(() => rows.value.filter((r) => !r.step.optional))
+const optionalRows = computed(() => rows.value.filter((r) => r.step.optional))
+const optionalChapters = computed(() => optionalRows.value.reduce((n, r) => n + r.step.chapterCount, 0))
+// 구획 합계는 정수 시간 — 히어로/핵심 쪽 totalHours 와 표기를 맞춘다(카드별 소수 표기와 구분).
+const optionalHours = computed(() =>
+  Math.round(optionalRows.value.reduce((n, r) => n + r.step.minutes, 0) / 60),
+)
+// 카드 마크업을 한 벌만 두려고 두 구획을 같은 v-for 로 돈다(numbered 로 레일 마커만 갈린다).
+const sections = computed(() => [
+  { key: 'core' as const, rows: coreRows.value, numbered: true },
+  { key: 'optional' as const, rows: optionalRows.value, numbered: false },
+])
+
 // 다음 목적지 — 활성(필수/빠른복습, 진단 전엔 전부) 단계 중 아직 완료 안 된 첫 단계
 const nextStop = computed(() => {
   for (const r of rows.value) {
@@ -92,7 +114,7 @@ function reset() {
       <h1 class="mb-3 text-3xl font-bold text-slate-900 sm:text-4xl">
         수학을 포기했어도, <span class="text-indigo-600">AI의 원리</span>까지 간다
       </h1>
-      <p class="mx-auto mb-6 max-w-xl text-slate-600">
+      <p class="mx-auto mb-6 max-w-xl break-keep text-slate-600">
         1→2→3→4→5 순서로 가지 않습니다. 트랜스포머(4부)를 가장 빨리 만나도록 짠
         <strong>비선형 학습 경로</strong>를 따라, 필요한 것만 배웁니다.
       </p>
@@ -110,7 +132,7 @@ function reset() {
         >
           내게 맞는 경로 찾기 →
         </RouterLink>
-        <p class="mt-2 text-xs text-slate-400">5분 진단 후, 아래 지도에서 당신에게 필요한 단계만 남습니다.</p>
+        <p class="mt-2 break-keep text-xs text-slate-500">5분 진단 후, 아래 지도에서 당신에게 필요한 단계만 남습니다.</p>
       </template>
 
       <!-- 진단 후: 개인화 요약 + 강사 설명 -->
@@ -152,7 +174,7 @@ function reset() {
         <div>
           <p class="text-xs font-semibold text-indigo-600">{{ anyProgress ? '이어서 학습' : '여기서 시작' }}</p>
           <p class="font-semibold text-slate-900">{{ nextStop.step.title }}</p>
-          <p v-if="nextStop.prog && nextStop.prog.completed > 0" class="text-xs text-slate-400">
+          <p v-if="nextStop.prog && nextStop.prog.completed > 0" class="text-xs text-slate-500">
             이 단계 진도 {{ nextStop.prog.completed }}/{{ nextStop.prog.total }}
           </p>
         </div>
@@ -195,18 +217,58 @@ function reset() {
     <section>
       <div class="mb-5 flex items-baseline justify-between">
         <h2 class="text-lg font-bold text-slate-800">학습 경로 지도</h2>
-        <RouterLink to="/map" class="text-sm font-medium text-indigo-600 hover:underline">
+        <RouterLink to="/map" class="py-1.5 text-sm font-medium whitespace-nowrap text-indigo-600 hover:underline">
           전체 구조도 보기 →
         </RouterLink>
       </div>
-      <ol class="relative space-y-3 border-l-2 border-slate-200 pl-6">
-        <li v-for="row in rows" :key="row.step.order" class="relative">
+      <template v-for="sec in sections" :key="sec.key">
+        <!-- 두 구획 다 h3 머리말을 갖고 카드 제목은 h4 — 머리말이 카드의 부모로 읽히게 한다 -->
+        <div v-if="sec.key === 'core'" class="mb-4">
+          <h3 class="text-base font-bold text-slate-800">
+            핵심 경로 · {{ coreRows.length }}단계로 완주
+          </h3>
+          <p class="mt-1 break-keep text-sm text-slate-600">
+            번호 순서대로 밟으면 트랜스포머까지 닿습니다 — {{ totalChapters }}챕터 · 약 {{ totalHours }}시간.
+          </p>
+        </div>
+
+        <!-- 선택 구획 머리말 — 번호가 끝나고 성격이 바뀌는 지점을 말로도 못박는다 -->
+        <template v-if="sec.key === 'optional'">
+          <p class="mt-4 mb-5 rounded-xl bg-emerald-50 px-4 py-3 text-center text-sm font-semibold text-emerald-800 ring-1 ring-emerald-200">
+            ✓ 여기까지가 핵심 경로 — {{ totalChapters }}챕터 · 약 {{ totalHours }}시간
+          </p>
+          <div class="mt-8 mb-4">
+            <h3 class="text-base font-bold text-slate-800">
+              선택 트랙 · 필요할 때 골라 담기 ({{ optionalRows.length }}개)
+            </h3>
+            <p class="mt-1 break-keep text-sm text-slate-600">
+              <strong>순서가 아니라 선택입니다</strong> — 그래서 번호를 붙이지 않았습니다.
+              각 카드의 진입 조건만 맞으면 언제든 들어갈 수 있어요.
+              <span class="whitespace-nowrap">(전부 담으면 {{ optionalChapters }}챕터 · 약 {{ optionalHours }}시간)</span>
+            </p>
+          </div>
+        </template>
+
+        <component
+          :is="sec.numbered ? 'ol' : 'ul'"
+          class="relative space-y-3 border-l-2 pl-6"
+          :class="sec.numbered ? 'border-slate-200' : 'border-dashed border-slate-300'"
+        >
+        <li v-for="row in sec.rows" :key="row.step.order" class="relative">
+          <!-- 핵심 = 순서를 뜻하는 번호 배지 / 선택 = 순서 없는 역할 점 -->
           <span
+            v-if="sec.numbered"
             class="absolute -left-[31px] flex h-5 w-5 items-center justify-center rounded-full ring-4 ring-white"
             :class="roleStyle[row.step.role].dot"
           >
             <span class="text-[10px] font-bold text-white">{{ row.step.order }}</span>
           </span>
+          <span
+            v-else
+            class="absolute -left-[27px] top-5 h-3 w-3 rounded-full ring-4 ring-white"
+            :class="roleStyle[row.step.role].dot"
+            aria-hidden="true"
+          />
           <component
             :is="row.href ? 'a' : 'div'"
             :href="row.href ?? undefined"
@@ -227,12 +289,12 @@ function reset() {
                 진도 {{ row.prog.completed }}/{{ row.prog.total }}
               </span>
             </div>
-            <h3 class="font-semibold text-slate-900" :class="{ 'line-through': row.status && statusStyle[row.status].strike }">
+            <h4 class="font-semibold text-slate-900" :class="{ 'line-through': row.status && statusStyle[row.status].strike }">
               {{ row.step.title }}
-            </h3>
-            <p class="mt-0.5 text-sm text-slate-600">{{ row.step.gain }}</p>
+            </h4>
+            <p class="mt-0.5 break-keep text-sm text-slate-600">{{ row.step.gain }}</p>
             <p v-if="row.note" class="mt-1 text-xs font-medium text-amber-600">💡 {{ row.note }}</p>
-            <div class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-slate-400">
+            <div class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-slate-500">
               <span>{{ row.step.scope }}</span>
               <span aria-hidden="true">·</span>
               <span>{{ row.step.chapterCount }}챕터</span>
@@ -241,10 +303,12 @@ function reset() {
             </div>
           </component>
         </li>
-      </ol>
-      <p class="mt-6 text-center text-xs text-slate-400">
-        각 카드를 누르면 해당 부의 학습 앱으로 이동합니다. 진도는 배포본(같은 주소)에서 각 부와 통합됩니다.
-      </p>
+        </component>
+      </template>
     </section>
+
+    <p class="mt-6 break-keep text-center text-xs text-slate-500">
+      각 카드를 누르면 해당 부의 학습 앱으로 이동합니다.
+    </p>
   </main>
 </template>
