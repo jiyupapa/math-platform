@@ -22,13 +22,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 공용 컴포넌트(`MathBlock`·`ConceptCard`·`Quiz`·`QuizSet`·`StepQuiz`·`PartLink` 등)와 규칙은 루트 `CLAUDE.md` 참조.
 앱전용 결합은 `main.ts` 의 provide 로 주입(접두사·복습·노트북 리졸버).
 
-## 명령어 (루트에서)
-
-```bash
-npm run dev   -w apps/part9/web    # 개발 서버
-npm run build -w apps/part9/web    # 타입체크 + 빌드 (= 검증)
-```
-
 ## 아키텍처
 
 - **저장 접두사 `num`** — `num-progress-v1`(진도)·`num-review-v1`(복습)·`num-quizset-v1:*`(문제).
@@ -77,10 +70,6 @@ npm run build -w apps/part9/web    # 타입체크 + 빌드 (= 검증)
   왜 파일은 4.1GB?"(블록 스케일·메타데이터 오버헤드)까지 다뤄야 수포자가 안 막힌다.
 - 0.1+0.2 같은 예제는 표시 자릿수에 따라 0.3 으로 '보일' 수 있다 — toFixed(20)/전체 자릿수로
   실제 저장값을 보여줄 것.
-
-## 스택
-
-Vue 3 + TypeScript + Vite + Pinia + Tailwind v4 + KaTeX + Chart.js. 튜터는 `@series/tutor`(로컬 Ollama).
 
 ## 이력
 

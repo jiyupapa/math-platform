@@ -25,13 +25,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 공용 컴포넌트(`MathBlock`·`ConceptCard`·`Quiz`·`QuizSet`·`StepQuiz`·`PartLink` 등)와 규칙은 루트 `CLAUDE.md` 참조.
 앱전용 결합은 `main.ts` 의 provide 로 주입(접두사·복습·노트북 리졸버).
 
-## 명령어 (루트에서)
-
-```bash
-npm run dev   -w apps/part11/web    # 개발 서버
-npm run build -w apps/part11/web    # 타입체크 + 빌드 (= 검증)
-```
-
 ## 아키텍처
 
 - **저장 접두사 `agent`** — `agent-progress-v1`(진도)·`agent-review-v1`(복습)·`agent-quizset-v1:*`(문제).
@@ -85,10 +78,6 @@ npm run build -w apps/part11/web    # 타입체크 + 빌드 (= 검증)
 - 챕터 라우트를 `router/index.ts` 에 등록하지 않으면 catch-all 이 ComingSoonView 로 보낸다.
 - Tailwind `@source`(style.css)가 빠지면 공용 컴포넌트 스타일이 조용히 사라진다 — 빌드는 통과하므로 눈으로 확인.
 - KaTeX 백슬래시: 정적 `expr="..."` 는 1개, JS 바인딩(StepQuiz steps 등)은 2개.
-
-## 스택
-
-Vue 3 + TypeScript + Vite + Pinia + Tailwind v4 + KaTeX + Chart.js. 튜터는 `@series/tutor`(로컬 Ollama).
 
 ## 이력
 

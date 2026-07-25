@@ -41,7 +41,6 @@ LLM이 *"다음 단어를 확률로 고르는 기계"*이며 그 핵심 부품�
 - 주제 이탈 방지: 시스템 프롬프트가 트랜스포머·LLM·관련 수학·학습 고민 외엔 `[OFFTOPIC]` 만 출력하게 함(UI가 걷어냄).
 
 ## 운영
-- 스택: Vue 3 + TS + Vite + Vue Router + Pinia + KaTeX + vue-chartjs + Tailwind v4 / Jupyter + NumPy (+ Ollama 튜터).
 - 진도·복습은 Pinia + localStorage(`tf-progress-v1`, `tf-review-v1`). 접두사 `tf` 는 각 앱 `main.ts` 가 `storagePrefixKey` 로 주입(공용 QuizSet 이 사용).
 - 모노레포: `npm install` 은 루트 1회, 이 부 빌드는 `npm run build -w apps/part4/web`(루트에서). 변경 후 반드시 이걸로 검증. 노트북은 루트 공용 venv — 루트 `docs/TESTING.md` 3절.
 - KaTeX 수식을 `:steps`/`:hints` 같은 **JS 표현식 속성**에 넣을 땐 백슬래시 이스케이프 주의(`'\\div'`),

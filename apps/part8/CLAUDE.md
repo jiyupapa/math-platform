@@ -19,13 +19,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 공용 컴포넌트(`MathBlock`·`ConceptCard`·`Quiz`·`QuizSet`·`StepQuiz`·`PartLink` 등)와 규칙은 루트 `CLAUDE.md` 참조.
 앱전용 결합은 `main.ts` 의 provide 로 주입(접두사·복습·노트북 리졸버).
 
-## 명령어 (루트에서)
-
-```bash
-npm run dev   -w apps/part8/web    # 개발 서버
-npm run build -w apps/part8/web    # 타입체크 + 빌드 (= 검증)
-```
-
 ## 아키텍처
 
 - **저장 접두사 `opt`** — `opt-progress-v1`(진도)·`opt-review-v1`(복습)·`opt-quizset-v1:*`(문제).
@@ -64,10 +57,6 @@ npm run build -w apps/part8/web    # 타입체크 + 빌드 (= 검증)
 - Tailwind `@source`(style.css)가 빠지면 공용 컴포넌트 스타일이 조용히 사라진다 — 빌드는 통과하므로 눈으로 확인.
 - 손실 지형·훈련 시뮬은 차원·스텝 수를 작게 잡아 브라우저/노트북에서 즉시 돌게 할 것.
 - 훈련 시뮬의 난수는 반드시 시드 고정(웹 mulberry32 · 노트북 default_rng(시드)) — 결정적이어야 E2E·assert 가 성립.
-
-## 스택
-
-Vue 3 + TypeScript + Vite + Pinia + Tailwind v4 + KaTeX + Chart.js. 튜터는 `@series/tutor`(로컬 Ollama).
 
 ## 이력
 

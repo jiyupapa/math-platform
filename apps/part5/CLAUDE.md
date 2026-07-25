@@ -20,11 +20,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 명령어
 
-모노레포이므로 `npm install` 은 **루트에서 1회**. 이 부만 다룰 때(루트에서 실행):
-```bash
-npm run dev   -w apps/part5/web   # 개발 서버 (HMR)
-npm run build -w apps/part5/web   # vue-tsc 타입체크 + vite 빌드 — 변경 후 이걸로 검증
-```
 - 테스트·린트 설정은 없음. **검증 수단은 `npm run build`** (vue-tsc가 타입/템플릿 오류를 잡음). `noUnusedLocals`/`noUnusedParameters` 가 켜져 있어 미사용 변수도 에러다.
 - 노트북: **루트 공용 venv 하나**(`.venv`, 커널 `math-platform`) 사용. 설치·실행·검증은 루트 `docs/TESTING.md` 3절.
 
@@ -70,7 +65,3 @@ npm run build -w apps/part5/web   # vue-tsc 타입체크 + vite 빌드 — 변�
 - **Malgun Gothic 에 없는 수학 글리프**: matplotlib 라벨·제목에 `≈`(U+2248) · `−`(U+2212) · `‖`(U+2016) 를 쓰면 UserWarning + 네모 출력. 그래프 문자열에서는 `약`/`-`(ASCII)/`||` 로 치환할 것 (print 콘솔 출력에는 써도 됨).
 - **.ipynb 편집은 `NotebookEdit`** 도구로만 (Read 선행 필수). 손으로 JSON을 쓸 때는 코드 셀마다 `"execution_count": null` 과 `"id"` 가 **둘 다** 있어야 한다. 작성 후 `nbconvert --execute` 로 무에러를 검증할 것.
 - 모노레포이므로 `npm` 은 **루트에서 `-w apps/part5/web`** 로 실행한다(옛날처럼 각 부 `web/` 로 `cd` 하지 않는다). Bash 작업 디렉토리는 유지되니 루트인지 확인.
-
-## 스택
-
-Vue 3 + TypeScript + Vite + Vue Router + Pinia + KaTeX + Chart.js(vue-chartjs) + Tailwind CSS v4(`@tailwindcss/vite`, 설정 파일 없이 `@import 'tailwindcss'`) · NumPy + Matplotlib + JupyterLab.

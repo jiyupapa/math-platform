@@ -17,11 +17,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 명령어
 
-모노레포이므로 `npm install` 은 **루트에서 1회**. 이 부만 다룰 때(루트에서 실행):
-```bash
-npm run dev   -w apps/part3/web   # 개발 서버 (HMR)
-npm run build -w apps/part3/web   # vue-tsc 타입체크 + vite 빌드 — 변경 후 이걸로 검증
-```
 - 테스트·린트 설정은 없음. **검증 수단은 `npm run build`** (vue-tsc가 타입/템플릿 오류를 잡음). `noUnusedLocals`/`noUnusedParameters` 가 켜져 있어 미사용 변수도 에러다.
 - 노트북: **루트 공용 venv 하나**(`.venv`, scipy 포함). 검증 시 **반드시 venv 의 python 을 직접 호출** — 시스템 PATH 의 nbconvert 로 새면 `No module named scipy` 오탐이 난다:
   `.venv\Scripts\python.exe -m jupyter nbconvert --to notebook --execute --stdout --ExecutePreprocessor.kernel_name=math-platform apps\part3\notebooks\chXX.ipynb`. 상세는 루트 `docs/TESTING.md` 3절.
@@ -92,8 +87,3 @@ npm run build -w apps/part3/web   # vue-tsc 타입체크 + vite 빌드 — 변�
 - **노트북 난수**: 시뮬레이션 셀은 `rng = np.random.default_rng(42)` 처럼 시드를 고정해
   본문 설명과 출력 숫자가 일치하게 한다.
 - 모노레포이므로 `npm` 은 **루트에서 `-w apps/part3/web`** 로 실행한다(옛날처럼 각 부 `web/` 로 `cd` 하지 않는다). Bash 작업 디렉토리는 유지되니 루트인지 확인.
-
-## 스택
-
-Vue 3 + TypeScript + Vite + Vue Router + Pinia + KaTeX + Chart.js(vue-chartjs) + Tailwind CSS v4
-(`@tailwindcss/vite`, 설정 파일 없이 `@import 'tailwindcss'`) · NumPy + Matplotlib + SciPy + JupyterLab.
