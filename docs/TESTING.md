@@ -1,6 +1,6 @@
 # 전체 테스트 수행 방법 — MATH_PLATFORM 모노레포
 
-> 대상: `C:\STUDY\MATH_PLATFORM` (npm workspaces 모노레포). 8개 부(`apps/part1..8`) + 포털(`apps/portal`) + 공용 패키지(`packages/ui`·`packages/tutor`).
+> 대상: `C:\STUDY\MATH_PLATFORM` (npm workspaces 모노레포). 11개 부(`apps/part1..11`) + 포털(`apps/portal`) + 공용 패키지(`packages/ui`·`packages/tutor`·`packages/store`).
 > 원본 `C:\STUDY\MATH` 는 손대지 않은 백업. 문제가 생기면 이 폴더를 지우고 원본에서 다시 시작해도 무손실.
 >
 > **이 테스트로 확인하려는 것**: 모노레포 전환(공용 컴포넌트를 `@series/ui` 패키지로 분리, provide/inject 결합해제) 후에도
@@ -28,7 +28,7 @@ cd /d C:\STUDY\MATH_PLATFORM
 npm install
 ```
 
-> 워크스페이스라 루트에서 한 번 설치하면 9개 앱 + 패키지가 모두 링크된다. `@series/ui` 는 `node_modules/@series/ui` 심링크로 연결됨.
+> 워크스페이스라 루트에서 한 번 설치하면 12개 앱 + 패키지가 모두 링크된다. `@series/ui` 는 `node_modules/@series/ui` 심링크로 연결됨.
 
 ---
 
@@ -43,7 +43,7 @@ npm install
 npm run build --workspaces --if-present
 ```
 
-- 9개 앱 전부 `built in ...` 이 뜨면 통과. (`packages/ui` 는 build 스크립트가 없어 자동 건너뜀.)
+- 12개 앱 전부 `built in ...` 이 뜨면 통과. (`packages/ui`·`packages/tutor`·`packages/store` 는 build 스크립트가 없어 자동 건너뜀.)
 - 하나라도 `error TS...` 또는 `Cannot find module` 이 뜨면 실패 → 5절 참고.
 
 ### 개별 앱만
@@ -199,18 +199,18 @@ foreach ($a in 'part1','part2','part3','part4','part5','part6','part7','part8','
   `@source '../../../../packages/ui/src';` 줄이 있어야 한다. **이 실패는 `npm run build` 가 못 잡는다**(타입은 통과, 스타일만 누락) → 반드시 눈으로 확인.
 - **`Cannot find module '@series/ui'`** — 루트에서 `npm install` 을 다시 실행(워크스페이스 링크 재생성).
 - **`Failed to resolve ... .vue`** 또는 패키지 컴포넌트가 안 뜸 — 해당 앱 `vite.config.ts` 에
-  `optimizeDeps: { exclude: [...] }` 가 있는지 확인 (전 9부 + 포털 = `['@series/ui', '@series/tutor']`).
+  `optimizeDeps: { exclude: [...] }` 가 있는지 확인 (전 11부 + 포털 = `['@series/ui', '@series/tutor', '@series/store']`).
 - **진도/복습이 새로고침 후 사라진다** — 각 부 `web/src/main.ts` 의 `app.provide(storagePrefixKey, '...')`
   와 `reviewApiKey` 주입이 있는지 확인. 접두사는 부마다 고정: part1=`la`, part2=`diff`, part3=`stat`, part4=`tf`, part5=`it`,
-  part6=`tame`, part7=`emb`, part8=`opt`, part9=`num`, portal=`hub`. **바꾸면 기존 진도가 끊긴다(포털 연동 포함).**
+  part6=`tame`, part7=`emb`, part8=`opt`, part9=`num`, part10=`scale`, part11=`agent`, portal=`hub`. **바꾸면 기존 진도가 끊긴다(포털 연동 포함).**
 - **타입 에러 `... is declared but never used`** — `noUnusedLocals` 규칙. 미사용 import/변수 제거.
 
 ---
 
 ## 부록: 현재 상태
 
-- 구조: `apps/part1..9` + `apps/portal` + `packages/ui`(공용 컴포넌트 10종: MathBlock·ConceptCard·DetailsCard·ChartView·NotebookCard·ReviewFlag·PartLink·Quiz·StepQuiz·QuizSet + quizGroup 그룹계약 + injection) + `packages/tutor`(AI 튜터 Ollama 클라이언트).
-- 결합해제 주입 계약: `storagePrefixKey`(QuizSet 접두사) · `reviewApiKey`(ReviewFlag) · `notebookResolverKey`(NotebookCard).
-- 검증됨(빌드): 전 9부 + 포털 `vue-tsc + vite` 통과, Tailwind `@source` 로 패키지 클래스 생성 전 부 확인.
+- 구조: `apps/part1..11` + `apps/portal` + `packages/ui`(공용 컴포넌트 10종: MathBlock·ConceptCard·DetailsCard·ChartView·NotebookCard·ReviewFlag·PartLink·Quiz·StepQuiz·QuizSet + quizGroup 그룹계약 + injection) + `packages/tutor`(AI 튜터 Ollama 클라이언트) + `packages/store`(Supabase 인증·동기화·협업 주석 — env 미설정 시 no-op).
+- 결합해제 주입 계약: `storagePrefixKey`(QuizSet 접두사) · `reviewApiKey`(ReviewFlag) · `notebookResolverKey`(NotebookCard) · `partNumberKey`(협업 주석 게이트 — 부 번호가 틀리면 남의 부 메모가 섞인다) · `searchIndexKey`(통합검색).
+- 검증됨(빌드): 전 11부 + 포털 `vue-tsc + vite` 통과, Tailwind `@source` 로 패키지 클래스 생성 전 부 확인.
 - 미검증(이 문서의 2절이 그 확인 절차): 런타임 동작(퀴즈·진도·복습·튜터).
 - 커밋 되돌림 지점: `b3e3a00`(baseline) → `71c1aff`(trial) → `deaed16`(패키지 완성) → `b0ee776`(2~5부 전파).

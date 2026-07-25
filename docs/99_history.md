@@ -6,6 +6,40 @@
 
 ---
 
+## 2026-07-25
+
+### 🔍 저장소 전반 점검 — 발견 3건 전부 조치
+빌드·구조 불변식·콘텐츠 정합성 전수 점검. **정상 확인**: 전 12앱 빌드 통과, 저장 접두사 12개 전부
+명세 일치, `partNumberKey` 11부 정확(남의 부 메모 섞임 위험 없음), `optimizeDeps`·Tailwind `@source`
+12앱 정상, 앵커 ID 420개 중복 0건, 웹↔노트북 1:1 전부 일치(1부 `ch13` 캡스톤만 의도된 노트북 전용).
+
+**조치 3건**:
+1. **워밍업 챕터 3곳에 `ReviewFlag` 부재** — 1·2·5부 `SampleChapter.vue` 에 `ReviewFlag` 가 하나도
+   없어(import조차 없음) 그 챕터에서는 복습 별표도 협업 주석 💬 도 달 수 없었다(`ReviewFlag` 가
+   `NoteMarker` 를 함께 얹는 구조). 특히 1부 워밍업은 시리즈 전체의 첫 화면이라 신규 사용자가 두 기능의
+   존재 자체를 못 봤다. 절 제목마다 `sample-sN` 추가(1부 4 · 2부 6 · 5부 4) → **전 11부 모든 챕터가
+   앵커 보유**. 3개 앱 빌드 통과.
+2. **루트 `CLAUDE.md` 가 `packages/store` 를 전혀 언급 안 함** — 12앱 전부가 쓰는 워크스페이스
+   패키지인데 "구조" 절에 누락됐고 `optimizeDeps.exclude` 도 2개로 적혀 있었다(실제 3개). 구조 줄·
+   optimizeDeps 정정 + `@series/store` 항목 신설(인증·진도 동기화·협업 주석·도입 통계, env 미설정 시
+   전부 no-op, `VITE_ADMIN_EMAILS` 는 UI 표시용이고 진짜 경계는 `public.admins`+RLS).
+3. **`.idea/` 가 `.gitignore` 에 없음** — JetBrains 디렉토리가 실수로 커밋될 수 있어 에디터 항목에 추가.
+
+**후속**: 같은 시점의 부별 `CLAUDE.md` 중복 제거 작업이 11개 부에서 "스택" 줄을 걷어냈는데 루트엔 그
+설명이 없어 정보가 사라진 상태였다 → 루트 "구조" 절에 스택 항목 신설. 지워진 문구를 옮겨 적지 않고
+전 12앱 `package.json` 을 집계해 다시 확인: 공통은 Vue 3+TS+Vite+Vue Router+KaTeX+Tailwind v4
+(설정 파일 없음 — `@import 'tailwindcss'`), **Pinia·Chart.js 는 11개 부에만 있고 포털엔 없다**.
+
+### 📄 낡은 부 개수 표기 정리 — `requirements.txt` · `docs/TESTING.md`
+`serve-deploy.mjs` 의 10부→11부 수정과 같은 종류를 전 저장소에서 쓸어 살아있는 지침만 정정
+(이력 문서 `99_history`·`TODO_*`·`점검_*` 은 당시 상태 기록이므로 **의도적으로 그대로 둠**).
+- `requirements.txt` — "10개 부 전체의 합집합" → 11개 부.
+- `docs/TESTING.md` — **8~9부 시절에 통째로 멈춰 있었다**: 대상 "8개 부(part1..8)" → 11개 부,
+  설치·빌드 통과 기준 "9개 앱" → **12개 앱**(오늘 실측과 일치), 5절 `optimizeDeps` 예시가
+  `['@series/ui','@series/tutor']` 2개 → 3개(`@series/store` 추가), 진도 유실 진단용 접두사 목록에
+  빠져 있던 **part10=`scale`·part11=`agent` 추가**(10·11부 디버깅 시 접두사를 못 찾던 상태),
+  부록의 구조·주입 계약에 `packages/store` 와 `partNumberKey`·`searchIndexKey` 반영.
+
 ## 2026-07-20
 
 ### 🔍 수포자 적합성 전수 점검 (11개 부 전 챕터)
