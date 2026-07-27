@@ -13,9 +13,9 @@ withDefaults(defineProps<{ title?: string; open?: boolean }>(), {
     <summary
       class="flex cursor-pointer list-none items-center gap-2 rounded-xl px-5 py-3 font-semibold text-slate-700 hover:bg-slate-100"
     >
-      <span class="text-slate-400 transition-transform group-open:rotate-90">▸</span>
+      <span class="text-slate-600 transition-transform group-open:rotate-90">▸</span>
       <span>{{ title }}</span>
-      <span class="ml-auto text-xs font-normal text-slate-400">(선택 — 궁금하면 펼치기)</span>
+      <span class="ml-auto text-xs font-normal text-slate-600">(선택 — 궁금하면 펼치기)</span>
     </summary>
     <div class="border-t border-slate-200 px-5 py-4 leading-relaxed text-slate-700">
       <slot />

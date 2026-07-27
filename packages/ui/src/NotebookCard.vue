@@ -22,6 +22,6 @@ const notebook = computed(() => {
     <code class="rounded bg-slate-100 px-1 text-[13px]">notebooks/{{ notebook }}</code>
     에서 웹과 <b>같은 예제를 직접 코드로</b> 계산해 봅니다. 노트북 맨 위 <b>🤖 AI 튜터 셀</b>을 실행하면
     웹과 같은 챗봇에게 물어볼 수도 있어요.
-    <span class="text-slate-400">(선택 — 웹만으로도 학습을 완료할 수 있어요)</span>
+    <span class="text-slate-500">(선택 — 웹만으로도 학습을 완료할 수 있어요)</span>
   </ConceptCard>
 </template>

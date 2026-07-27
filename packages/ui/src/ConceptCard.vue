@@ -16,19 +16,24 @@ const props = withDefaults(
   { tone: 'note' },
 )
 
+// 테두리 색은 왼쪽 막대에만 보인다(border-l-4) — 200 은 막대로선 흐려 400 계열을 쓴다.
+// note 는 흰 배경을 유지한다 — 페이지 배경이 slate-50 이라 slate-50 카드는 사라진다.
 const styles: Record<Tone, { box: string; icon: string }> = {
-  note: { box: 'border-slate-200 bg-white', icon: '📘' },
-  tip: { box: 'border-emerald-200 bg-emerald-50', icon: '💡' },
-  warn: { box: 'border-amber-200 bg-amber-50', icon: '⚠️' },
-  goal: { box: 'border-indigo-200 bg-indigo-50', icon: '🎯' },
-  ai: { box: 'border-violet-200 bg-violet-50', icon: '🤖' },
+  note: { box: 'border-slate-300 bg-white', icon: '📘' },
+  tip: { box: 'border-emerald-400 bg-emerald-50', icon: '💡' },
+  warn: { box: 'border-amber-400 bg-amber-50', icon: '⚠️' },
+  goal: { box: 'border-indigo-400 bg-indigo-50', icon: '🎯' },
+  ai: { box: 'border-violet-400 bg-violet-50', icon: '🤖' },
 }
 
 const style = styles[props.tone]
 </script>
 
 <template>
-  <div class="my-5 rounded-xl border p-5" :class="style.box">
+  <!-- 형태로 역할을 가른다: 설명 카드(읽는 것) = 왼쪽 막대 + 옅은 배경, 전체 테두리 없음.
+       문제/노트북 카드(하는 것) = 사방 테두리 상자(Quiz·StepQuiz·QuizSet·NotebookCard).
+       이전엔 둘 다 `rounded-xl border p-5` 라 색조만 다른 같은 상자가 20개씩 이어졌다. -->
+  <div class="my-5 rounded-r-xl border-l-4 py-4 pr-5 pl-5" :class="style.box">
     <h3 v-if="title || anchorId" class="mb-2 flex items-center gap-2 font-semibold">
       <span v-if="title">{{ style.icon }}</span>
       <span v-if="title">{{ title }}</span>

@@ -26,7 +26,7 @@ const href = computed(() => `/part${props.part}/${props.ch ? `ch/${props.ch}` : 
     :href="href"
     target="_blank"
     rel="noopener"
-    class="font-medium text-indigo-600 underline decoration-dotted underline-offset-2 hover:text-indigo-500"
+    class="font-medium text-indigo-600 underline decoration-dotted underline-offset-2 hover:text-indigo-600"
   ><slot /></a>
   <span v-else :title="`조립 배포본에서 ${href} 로 연결됩니다 (dev 단독 실행에서는 비활성)`"><slot /></span>
 </template>

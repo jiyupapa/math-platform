@@ -83,22 +83,22 @@ onUnmounted(() => {
   padding: 2px 6px;
   font-size: 11px;
   line-height: 1.4;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--c-slate-200);
   border-radius: 6px;
   background: none;
-  color: #94a3b8;
+  color: var(--c-slate-400);
   cursor: pointer;
   transition: border-color 0.15s, color 0.15s;
 }
 .nm-btn:hover,
 .nm-btn.nm-on {
-  border-color: #c7d2fe;
-  color: #4f46e5;
+  border-color: var(--c-indigo-200);
+  color: var(--c-indigo-600);
 }
 .nm-btn.nm-has {
-  border-color: #c7d2fe;
-  background: #eef2ff;
-  color: #4f46e5;
+  border-color: var(--c-indigo-200);
+  background: var(--c-indigo-50);
+  color: var(--c-indigo-600);
 }
 .nm-badge {
   font-size: 10px;
