@@ -20,9 +20,11 @@
     "e2e:p0": "node e2e/annotations-p0-anchor.mjs",
     "e2e:expand": "node e2e/annotations-expand.mjs",
     "e2e:p2": "node e2e/annotations-p2-ai.mjs",
-    "e2e:p3": "node e2e/annotations-p3-admin.mjs"
+    "e2e:p3": "node e2e/annotations-p3-admin.mjs",
+    "check:mermaid": "node scripts/check-mermaid.mjs"
   },
   "devDependencies": {
+    "mermaid": "^11.16.0",
     "playwright-core": "^1.49.1"
   }
 }

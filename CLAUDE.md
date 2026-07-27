@@ -18,6 +18,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 구조
 
+> **전체가 어떻게 이어지는지**(제작 타임라인·전환점·설계 결정·불변식·산출물 지도)는 `docs/PROCESS.md`.
+> 이 파일은 "지금 작업할 때의 규칙", 그쪽은 "왜 이렇게 됐는지".
+
 배치는 `ls`로: `apps/`(portal + part1..N — 각각 web/·notebooks/·docs/), `packages/`(ui·tutor·store).
 부 목록·주제·완결 상태·시리즈 커리큘럼·추천 학습 경로(1→2→3→4→5 순서가 아님)·부 간 연결은
 루트 `README.md` 가 정본.

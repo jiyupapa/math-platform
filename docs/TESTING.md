@@ -249,6 +249,34 @@ npm run deploy:build && npm run deploy:serve   # http://localhost:4173 — 12앱
 
 ---
 
+## 5-3. mermaid 다이어그램 검사
+
+```bash
+npm run check:mermaid                    # 전체 (.md 추적분 + 아직 커밋 안 한 새 문서)
+node scripts/check-mermaid.mjs docs/PROCESS.md   # 특정 파일만
+```
+
+mermaid 라벨은 평문처럼 보여도 파서 토큰이 섞이면 **조용히 깨진다.** 눈으로는 멀쩡하고,
+뷰어에서 렌더할 때야 드러난다. 그래서 눈으로 보지 말고 파서에 직접 물어본다 — 설치된 Edge/Chrome 을
+playwright-core 로 띄워 그 안에서 `mermaid.parse` + `mermaid.render` 를 돌린다(브라우저 탐색은
+`e2e/lib.mjs` 의 `browserPath()` 재사용).
+
+**라벨에서 빼야 하는 것** (실제로 깨졌던 것들):
+
+| 넣으면 깨지는 것 | 대신 |
+|---|---|
+| HTML 엔터티 `&ge;` `&gt;` `&nbsp;` | 유니코드 직접 입력(`≥`) 또는 ASCII(`>=`) |
+| 라벨 **중간**의 괄호 | 제거하거나 끝에 한 쌍만 |
+| 중괄호 `{ }` · 파이프 `|` · 콜론 두 번 이상 | 평문으로 치환 — `{order\|product}` → `order/product` |
+| `<br/>` in `stateDiagram-v2` 전이 라벨 | `, ` 같은 구분자로 한 줄에. flowchart 는 **따옴표 라벨 안**에서만 허용 |
+
+`stateDiagram-v2` 가 가장 엄격하다. 의심되면 평문으로 쓰고 필요할 때만 살을 붙인다.
+
+커밋 훅에는 넣지 않았다 — 브라우저를 띄우느라 몇 초 걸려서, 0.2초인 대비 검사와 달리 매 커밋에
+물리면 거슬린다. 다이어그램을 고쳤을 때 손으로 돌린다.
+
+---
+
 ## 6. 문제 해결
 
 - **카드/버튼에 색이 없다 (흰 네모)** — Tailwind `@source` 누락. 각 부 `web/src/style.css` 에
