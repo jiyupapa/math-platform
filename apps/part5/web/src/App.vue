@@ -18,7 +18,7 @@ function openSearch() {
     <!-- 본문 -->
     <div class="flex min-w-0 flex-1 flex-col">
       <header
-        class="flex items-center gap-3 border-b border-slate-200 bg-white px-4 py-3 lg:hidden"
+        class="flex items-center gap-3 border-t-4 border-b border-t-violet-600 border-b-slate-200 bg-white px-4 py-3 lg:hidden"
       >
         <button
           class="rounded-md p-2 hover:bg-slate-100"
@@ -27,7 +27,7 @@ function openSearch() {
         >
           ☰
         </button>
-        <span class="font-semibold">수포자를 위한 정보이론</span>
+        <span class="font-semibold text-violet-900">수포자를 위한 정보이론</span>
         <button
           type="button"
           class="ml-auto rounded-md p-2 hover:bg-slate-100"

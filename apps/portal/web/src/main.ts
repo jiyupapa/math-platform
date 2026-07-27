@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import { storagePrefixKey, searchIndexKey } from '@series/ui'
+import { storagePrefixKey, searchIndexKey, initTheme } from '@series/ui'
 import { initAuth } from '@series/store'
 import App from './App.vue'
 import router from './router'
@@ -13,4 +13,7 @@ app.provide(storagePrefixKey, 'hub')
 app.provide(searchIndexKey, import.meta.env.BASE_URL + 'search-index.json')
 // Supabase 세션 복원 (env 미설정 시 no-op — 앱은 localStorage 만 사용, 현재 동작 불변)
 void initAuth()
+// 테마(시스템/라이트/다크) — 색은 CSS 가 처리하고, 여기선 저장된 선택을 싣고 OS 변경을 감지한다.
+initTheme()
+
 app.mount('#app')

@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { AuthPanel } from '@series/store'
+import { ThemeToggle } from '@series/ui'
 import { chapters, availableChapters } from '@/data/chapters'
 import { useProgressStore } from '@/stores/progress'
 import { useReviewStore } from '@/stores/review'
@@ -28,10 +29,18 @@ const latestPhase = computed(() => Math.max(...availableChapters.map((c) => c.ph
     class="fixed inset-y-0 left-0 z-30 flex w-72 flex-col border-r border-slate-200 bg-white transition-transform lg:static lg:translate-x-0"
     :class="open ? 'translate-x-0' : '-translate-x-full'"
   >
+    <!-- 부 고유색 띠 — 11개 앱을 오갈 때 위치를 색으로 먼저 알린다 -->
+    <div class="h-1 shrink-0 bg-violet-600" aria-hidden="true" />
     <div class="border-b border-slate-200 px-5 py-5">
       <RouterLink to="/" class="block" @click="emit('close')">
-        <h1 class="text-lg font-bold leading-tight">수포자를 위한<br />정보이론</h1>
+        <h1 class="text-lg font-bold leading-tight text-violet-900">수포자를 위한<br />정보이론</h1>
       </RouterLink>
+      <!-- 부 번호 = 부 고유색(위치) / 역할 칩 = 포털 학습지도와 같은 역할색(같은 언어).
+           둘 다 700 계열 — 흰 글씨·흰 배경 모두에서 대비 4.5:1 을 넘긴다. -->
+      <p class="mt-2 flex flex-wrap items-center gap-1.5">
+        <span class="rounded bg-violet-700 px-1.5 py-0.5 text-xs font-bold text-white">5부</span>
+        <span class="rounded bg-violet-100 px-1.5 py-0.5 text-xs font-medium text-violet-700">본체</span>
+      </p>
       <!-- 진도 표시 -->
       <div class="mt-4">
         <div class="mb-1 flex justify-between text-xs text-slate-500">
@@ -49,7 +58,7 @@ const latestPhase = computed(() => Math.max(...availableChapters.map((c) => c.ph
       <RouterLink
         to="/review"
         class="mt-4 flex items-center justify-between rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-600 hover:bg-slate-100"
-        active-class="!border-indigo-200 !bg-indigo-50 !text-indigo-700"
+        active-class="!border-violet-200 !bg-violet-50 !text-violet-700"
         @click="emit('close')"
       >
         <span>복습 목록</span>
@@ -60,6 +69,11 @@ const latestPhase = computed(() => Math.max(...availableChapters.map((c) => c.ph
           {{ review.count }}
         </span>
       </RouterLink>
+
+      <!-- 화면 테마 — 밤에 공부하는 경우가 있어 OS 설정과 별개로 덮어쓸 수 있게 둔다 -->
+      <div class="mt-4">
+        <ThemeToggle />
+      </div>
 
       <!-- 로그인 — 진도 크로스기기 저장 (백엔드 미설정 시 표시 안 됨) -->
       <div class="mt-4">
@@ -74,25 +88,25 @@ const latestPhase = computed(() => Math.max(...availableChapters.map((c) => c.ph
             :to="ch.slug === 'sample' ? '/ch/sample' : `/ch/${ch.slug}`"
             class="block rounded-lg px-3 py-2.5 text-sm transition-colors"
             :class="[
-              ch.comingSoon ? 'text-slate-400' : 'text-slate-700 hover:bg-slate-100',
+              ch.comingSoon ? 'text-slate-600' : 'text-slate-700 hover:bg-slate-100',
             ]"
-            active-class="!bg-indigo-50 !text-indigo-700 font-medium"
+            active-class="!bg-violet-50 !text-violet-700 font-medium"
             @click="emit('close')"
           >
             <div class="flex items-center gap-2">
               <span
-                class="flex h-5 w-5 shrink-0 items-center justify-center rounded text-[10px] font-bold"
+                class="flex h-5 w-5 shrink-0 items-center justify-center rounded text-xs font-bold"
                 :class="
                   progress.isDone(ch.slug)
                     ? 'bg-emerald-500 text-white'
-                    : 'bg-slate-200 text-slate-500'
+                    : 'bg-slate-200 text-slate-600'
                 "
               >
                 {{ progress.isDone(ch.slug) ? '✓' : ch.phase }}
               </span>
               <span class="min-w-0 flex-1">
                 {{ ch.title }}
-                <span v-if="ch.comingSoon" class="text-[10px]">(예정)</span>
+                <span v-if="ch.comingSoon" class="text-xs">(예정)</span>
               </span>
             </div>
           </RouterLink>
@@ -100,7 +114,7 @@ const latestPhase = computed(() => Math.max(...availableChapters.map((c) => c.ph
       </ul>
     </nav>
 
-    <div class="border-t border-slate-200 px-5 py-3 text-[11px] text-slate-400">
+    <div class="border-t border-slate-200 px-5 py-3 text-xs text-slate-500">
       현재 Phase {{ latestPhase }}까지 공개
     </div>
   </aside>

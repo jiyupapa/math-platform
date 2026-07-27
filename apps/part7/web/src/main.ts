@@ -3,7 +3,7 @@ import { createPinia } from 'pinia'
 import './style.css'
 import App from './App.vue'
 import router from './router'
-import { storagePrefixKey, reviewApiKey, notebookResolverKey, searchIndexKey, partNumberKey } from '@series/ui'
+import { storagePrefixKey, reviewApiKey, notebookResolverKey, searchIndexKey, partNumberKey, initTheme } from '@series/ui'
 import { initAuth } from '@series/store'
 import { useReviewStore } from '@/stores/review'
 import { chapters } from '@/data/chapters'
@@ -31,4 +31,7 @@ app.provide(partNumberKey, 7)
 
 // Supabase 세션 복원 (env 미설정 시 no-op — 로그인 시 진도 동기화)
 void initAuth()
+// 테마(시스템/라이트/다크) — 색은 CSS 가 처리하고, 여기선 저장된 선택을 싣고 OS 변경을 감지한다.
+initTheme()
+
 app.mount('#app')
