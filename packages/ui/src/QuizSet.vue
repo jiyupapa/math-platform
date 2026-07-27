@@ -90,7 +90,7 @@ watch(allDone, (v) => {
       v-if="allDone"
       class="mt-6 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">문제 세트 완료. 모든 문제를 풀었습니다.</p>
     </div>
   </section>

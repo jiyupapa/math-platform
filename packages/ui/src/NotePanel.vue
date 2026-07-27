@@ -239,13 +239,13 @@ function when(iso: string): string {
   max-height: 70vh;
   overflow-y: auto;
   padding: 12px;
-  background: #fff;
-  border: 1px solid #e2e8f0;
+  background: var(--c-white);
+  border: 1px solid var(--c-slate-200);
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
   text-align: left;
   font-size: 13px;
-  color: #334155;
+  color: var(--c-slate-700);
   cursor: default;
 }
 .np-head {
@@ -259,26 +259,26 @@ function when(iso: string): string {
   margin: 0;
   font-size: 13px;
   font-weight: 600;
-  color: #0f172a;
+  color: var(--c-slate-900);
   line-height: 1.4;
 }
 .np-x {
   flex: none;
   border: none;
   background: none;
-  color: #94a3b8;
+  color: var(--c-slate-400);
   cursor: pointer;
   font-size: 13px;
 }
 .np-x:hover {
-  color: #475569;
+  color: var(--c-slate-600);
 }
 .np-empty {
   margin: 0;
   padding: 10px 2px;
   font-size: 12px;
   line-height: 1.6;
-  color: #94a3b8;
+  color: var(--c-slate-400);
 }
 .np-list {
   margin: 0 0 10px;
@@ -290,8 +290,8 @@ function when(iso: string): string {
 }
 .np-item {
   padding: 8px 10px;
-  background: #f8fafc;
-  border: 1px solid #eef2f7;
+  background: var(--c-slate-50);
+  border: 1px solid var(--c-grid);
   border-radius: 10px;
 }
 .np-meta {
@@ -301,31 +301,31 @@ function when(iso: string): string {
   gap: 6px;
   margin-bottom: 4px;
   font-size: 11px;
-  color: #94a3b8;
+  color: var(--c-slate-400);
 }
 .np-kind {
   padding: 1px 6px;
   border-radius: 999px;
   font-weight: 600;
-  background: #eef2ff;
-  color: #4f46e5;
+  background: var(--c-indigo-50);
+  color: var(--c-indigo-600);
 }
 .np-kind.question {
-  background: #fef3c7;
-  color: #b45309;
+  background: var(--c-amber-100);
+  color: var(--c-amber-700);
 }
 .np-mine {
   padding: 1px 6px;
   border-radius: 999px;
-  background: #f1f5f9;
-  color: #64748b;
+  background: var(--c-slate-100);
+  color: var(--c-slate-500);
   font-weight: 600;
 }
 .np-done {
   padding: 1px 6px;
   border-radius: 999px;
-  background: #dcfce7;
-  color: #15803d;
+  background: var(--c-green-100);
+  color: var(--c-green-700);
   font-weight: 600;
 }
 .np-body {
@@ -333,32 +333,32 @@ function when(iso: string): string {
   font-size: 13px;
   line-height: 1.6;
   white-space: pre-wrap;
-  color: #334155;
+  color: var(--c-slate-700);
 }
 .np-ai {
   margin-top: 6px;
   padding: 6px 8px;
-  background: #fff;
-  border: 1px dashed #c7d2fe;
+  background: var(--c-white);
+  border: 1px dashed var(--c-indigo-200);
   border-radius: 8px;
 }
 .np-ai-tag {
   font-size: 11px;
   font-weight: 600;
-  color: #4f46e5;
+  color: var(--c-indigo-600);
 }
 .np-ai-body {
   margin: 2px 0 0;
   font-size: 12px;
   line-height: 1.6;
   white-space: pre-wrap;
-  color: #475569;
+  color: var(--c-slate-600);
 }
 .np-ha {
   margin-top: 6px;
   padding: 6px 8px;
-  background: #ecfdf5;
-  border: 1px solid #a7f3d0;
+  background: var(--c-emerald-50);
+  border: 1px solid var(--c-emerald-200);
   border-radius: 8px;
 }
 .np-ha-head {
@@ -369,14 +369,14 @@ function when(iso: string): string {
 .np-ha-tag {
   font-size: 11px;
   font-weight: 600;
-  color: #047857;
+  color: var(--c-emerald-700);
 }
 .np-ha-body {
   margin: 2px 0 0;
   font-size: 12px;
   line-height: 1.6;
   white-space: pre-wrap;
-  color: #334155;
+  color: var(--c-slate-700);
 }
 .np-ha-form {
   margin-top: 6px;
@@ -394,20 +394,20 @@ function when(iso: string): string {
   border: none;
   background: none;
   font-size: 11px;
-  color: #6366f1;
+  color: var(--c-indigo-500);
   cursor: pointer;
 }
 .np-link:hover {
   text-decoration: underline;
 }
 .np-del {
-  color: #94a3b8;
+  color: var(--c-slate-400);
 }
 .np-del:hover {
-  color: #dc2626;
+  color: var(--c-red-600);
 }
 .np-form {
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid var(--c-slate-100);
   padding-top: 10px;
   display: flex;
   flex-direction: column;
@@ -421,16 +421,16 @@ function when(iso: string): string {
   flex: 1;
   padding: 5px;
   font-size: 12px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--c-slate-200);
   border-radius: 8px;
-  background: #f8fafc;
-  color: #64748b;
+  background: var(--c-slate-50);
+  color: var(--c-slate-500);
   cursor: pointer;
 }
 .np-tabs button.on {
-  background: #eef2ff;
-  border-color: #c7d2fe;
-  color: #4f46e5;
+  background: var(--c-indigo-50);
+  border-color: var(--c-indigo-200);
+  color: var(--c-indigo-600);
   font-weight: 600;
 }
 .np-ta {
@@ -439,27 +439,27 @@ function when(iso: string): string {
   font: inherit;
   font-size: 13px;
   line-height: 1.5;
-  color: #334155;
-  border: 1px solid #e2e8f0;
+  color: var(--c-slate-700);
+  border: 1px solid var(--c-slate-200);
   border-radius: 8px;
   outline: none;
   resize: vertical;
   box-sizing: border-box;
 }
 .np-ta:focus {
-  border-color: #a5b4fc;
+  border-color: var(--c-indigo-300);
 }
 .np-err {
   margin: 0;
   font-size: 11px;
-  color: #dc2626;
+  color: var(--c-red-600);
 }
 .np-go {
   padding: 7px;
   font-size: 12px;
   font-weight: 600;
-  color: #fff;
-  background: #4f46e5;
+  color: var(--c-white);
+  background: var(--c-indigo-600);
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -471,7 +471,7 @@ function when(iso: string): string {
 .np-note {
   margin: 0;
   font-size: 10px;
-  color: #94a3b8;
+  color: var(--c-slate-400);
   text-align: center;
 }
 </style>

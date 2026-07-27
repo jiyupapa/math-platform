@@ -10,8 +10,11 @@
   "scripts": {
     "search:index": "node scripts/build-search-index.mjs",
     "postinstall": "node scripts/build-search-index.mjs",
+    "prepare": "git config core.hooksPath githooks",
     "deploy:build": "node scripts/build-deploy.mjs",
     "deploy:serve": "node scripts/serve-deploy.mjs",
+    "theme:dark": "node scripts/build-dark-theme.mjs",
+    "check:contrast": "node scripts/check-contrast.mjs",
     "e2e": "node e2e/run-all.mjs",
     "e2e:p1": "node e2e/annotations-p1-share.mjs",
     "e2e:p0": "node e2e/annotations-p0-anchor.mjs",

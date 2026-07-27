@@ -44,7 +44,7 @@ npm run build --workspaces --if-present
 ```
 
 - 12개 앱 전부 `built in ...` 이 뜨면 통과. (`packages/ui`·`packages/tutor`·`packages/store` 는 build 스크립트가 없어 자동 건너뜀.)
-- 하나라도 `error TS...` 또는 `Cannot find module` 이 뜨면 실패 → 5절 참고.
+- 하나라도 `error TS...` 또는 `Cannot find module` 이 뜨면 실패 → 6절 참고.
 
 ### 개별 앱만
 
@@ -193,7 +193,63 @@ foreach ($a in 'part1','part2','part3','part4','part5','part6','part7','part8','
 
 ---
 
-## 5. 문제 해결
+## 5. 글자 대비 검사 (라이트 · 다크)
+
+### 5-1. 정적 검사 — 커밋 전에 항상
+
+```bash
+npm run check:contrast          # 검사만. 미달이 있으면 exit 1
+npm run check:contrast -- --fix # 통과하는 가장 가까운 단계로 자동 수정
+```
+
+전 `*.vue` 를 태그 스택으로 훑어 **조상 배경**과 글자색을 짝지어 **라이트·다크 양쪽**에서 4.5:1 을
+검사한다. 색 값은 Tailwind 정본(`node_modules/tailwindcss/theme.css`)과 생성물
+`packages/ui/src/dark.css` 에서 읽으므로 팔레트가 바뀌면 자동으로 따라온다.
+
+**눈으로는 못 잡는 것들을 잡는다** — ① 배경이 부모에 있는 경우, ② 배경이 `:class` 삼항 안에 있는 경우,
+③ 계열마다 밝기가 달라("emerald-600 은 3.49:1 미달 / indigo-600 은 6.18:1 통과") 규칙으로 외울 수 없는 경우,
+④ 라이트는 통과하는데 다크에서 미달인 경우(`bg-X-100 text-X-600` 이 대표).
+
+`tokens.css` 에 데모 색 토큰을 추가/삭제했으면 **먼저** `npm run theme:dark` 를 돌려 `dark.css` 를
+다시 만든다. 잊어도 검사기가 잡는다 — `dark.css` 에 다크 값이 없는 토큰이 있으면
+"dark.css 가 낡았습니다" 로 멈춘다(그냥 지나가면 그 토큰만 다크에서 안 뒤집히는데 검사는 0건이라고
+말하는 사각지대가 생긴다).
+
+**커밋 훅으로 자동 실행된다** — `githooks/pre-commit` 이 이 검사를 돌려 미달이면 커밋을 막는다
+(0.2초라 체감되지 않는다). 훅 경로는 루트 `package.json` 의 `prepare` 스크립트가 `npm install` 때
+`git config core.hooksPath githooks` 로 설정한다. 수동 설정:
+
+```bash
+git config core.hooksPath githooks
+```
+
+한 번 청소하고 끝나는 문제가 아니라서 게이트로 세웠다 — 챕터를 추가할 때마다 계열별 미달 색이
+다시 들어오고, **빌드는 이걸 못 잡는다.** 급하면 `git commit --no-verify` 로 건너뛸 수 있지만
+그렇게 들어간 미달은 다음 사람이 찾기 어렵다.
+
+### 5-2. 브라우저 실측 — 릴리스 전
+
+정적 검사는 **배경이 컴포넌트 경계를 넘어오는 경우**(`ConceptCard` 슬롯 안의 내용)를 못 본다.
+그건 실제 렌더에서만 보이므로, 배포 전에는 조립본으로 확인한다.
+
+```bash
+npm run deploy:build && npm run deploy:serve   # http://localhost:4173 — 12앱이 한 origin
+```
+
+한 origin 이라 **숨은 iframe** 에 각 앱을 띄워 `contentDocument` 를 직접 측정할 수 있다(앱마다
+서버를 띄울 필요 없음). 측정 시 두 가지 함정:
+
+- Tailwind v4 는 색을 `oklch()` 로 내보내므로 **문자열 파싱이 안 된다** → 1×1 캔버스에 칠하고
+  픽셀을 읽어 실제 RGB 를 얻는다.
+- 그때 캔버스를 미리 검정으로 칠하면 **투명색의 알파가 1 로 읽혀** 배경 추적이 어긋난다 →
+  `clearRect` 만 하고 바로 칠할 것.
+- 테마는 `iframe.contentDocument.documentElement.dataset.theme = 'light' | 'dark'` 로 바꾼다.
+
+확인 범위는 앱당 홈·ch1·ch3·복습 정도면 공용 컴포넌트를 다 지난다(2026-07-27 기준 47경로 × 2테마 = 0건).
+
+---
+
+## 6. 문제 해결
 
 - **카드/버튼에 색이 없다 (흰 네모)** — Tailwind `@source` 누락. 각 부 `web/src/style.css` 에
   `@source '../../../../packages/ui/src';` 줄이 있어야 한다. **이 실패는 `npm run build` 가 못 잡는다**(타입은 통과, 스타일만 누락) → 반드시 눈으로 확인.

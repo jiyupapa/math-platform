@@ -118,7 +118,7 @@ const diffBadge: Record<Difficulty, { label: string; cls: string }> = {
       <span>✏️ 문제</span>
       <span
         v-if="difficulty"
-        class="rounded-full px-2 py-0.5 text-[11px] font-medium"
+        class="rounded-full px-2 py-0.5 text-xs font-medium"
         :class="diffBadge[difficulty].cls"
       >
         {{ diffBadge[difficulty].label }}
@@ -216,7 +216,7 @@ const diffBadge: Record<Difficulty, { label: string; cls: string }> = {
       class="mt-3 rounded-lg bg-sky-50 px-4 py-3 text-sm text-sky-800"
     >
       📖 해설: {{ explanation }}
-      <p class="mt-1 text-xs text-sky-600">해설을 읽었다면 다시 풀어서 정답을 맞혀 보세요 — 그래야 완료로 기록돼요.</p>
+      <p class="mt-1 text-xs text-sky-700">해설을 읽었다면 다시 풀어서 정답을 맞혀 보세요 — 그래야 완료로 기록돼요.</p>
     </div>
 
     <!-- 버튼 -->

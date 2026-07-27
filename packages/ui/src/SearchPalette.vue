@@ -151,16 +151,16 @@ onBeforeUnmount(() => {
         class="w-full max-w-xl overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-slate-200"
       >
         <div class="flex items-center gap-2 border-b border-slate-100 px-4">
-          <span class="text-slate-400" aria-hidden="true">🔎</span>
+          <span class="text-slate-500" aria-hidden="true">🔎</span>
           <input
             ref="inputEl"
             v-model="query"
             type="text"
             placeholder="장 제목·개념·용어로 검색 (예: 코사인 유사도, KL 발산, 파인튜닝)"
-            class="w-full bg-transparent py-3.5 text-slate-800 placeholder:text-slate-400 focus:outline-none"
+            class="w-full bg-transparent py-3.5 text-slate-800 placeholder:text-slate-500 focus:outline-none"
           />
           <kbd
-            class="hidden shrink-0 rounded border border-slate-200 px-1.5 py-0.5 text-[11px] text-slate-400 sm:inline"
+            class="hidden shrink-0 rounded border border-slate-200 px-1.5 py-0.5 text-xs text-slate-500 sm:inline"
             >Esc</kbd
           >
         </div>
@@ -189,12 +189,12 @@ onBeforeUnmount(() => {
                       <span class="truncate font-medium text-slate-800">{{ r.title }}</span>
                       <span
                         v-if="r.advanced"
-                        class="shrink-0 rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-700"
+                        class="shrink-0 rounded bg-amber-100 px-1.5 py-0.5 text-xs font-medium text-amber-700"
                         >심화</span
                       >
                     </span>
                     <span class="block truncate text-xs text-indigo-600">{{ r.label }}</span>
-                    <span v-if="r.summary" class="block truncate text-xs text-slate-500">{{
+                    <span v-if="r.summary" class="block truncate text-xs text-slate-600">{{
                       r.summary
                     }}</span>
                   </span>
@@ -206,7 +206,7 @@ onBeforeUnmount(() => {
             </p>
           </template>
 
-          <p v-else class="px-4 py-6 text-center text-sm text-slate-400">
+          <p v-else class="px-4 py-6 text-center text-sm text-slate-500">
             전 부의 장·개념 {{ entries.length }}개에서 검색합니다. ⌘K / Ctrl+K 로 언제든 열려요.
           </p>
         </div>

@@ -21,7 +21,7 @@ const review = inject(reviewApiKey, { isFlagged: () => false, toggle: () => {} }
       :class="
         review.isFlagged(props.id)
           ? 'border-amber-300 bg-amber-50 text-amber-700'
-          : 'border-slate-200 text-slate-400 hover:border-indigo-200 hover:text-indigo-600'
+          : 'border-slate-200 text-slate-500 hover:border-indigo-200 hover:text-indigo-600'
       "
       :aria-pressed="review.isFlagged(props.id)"
       @click="review.toggle({ id: props.id, chapter: props.chapter, label: props.label })"

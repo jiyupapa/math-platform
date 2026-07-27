@@ -59,7 +59,46 @@ QuizSet↔StepQuiz 그룹 계약(`quizGroupKey`/`QuizGroup` — `quizGroup.ts`)�
     prop — 네이밍 정본 `{chapter}-{type}-{slug}` 와 금지사항(자동 인덱스·배포 후 변경 금지)은
     `packages/ui/src/anchor.ts` 참조. 설계: `docs/todo_협업주석_260716.md`.
 - 소스 `.vue` 패키지라 각 앱 설정에: `vite.config.ts` 의 `optimizeDeps.exclude`(전 12앱 = `['@series/ui', '@series/tutor', '@series/store']`),
-  `style.css` 의 `@source '../../../../packages/ui/src'`(Tailwind 가 패키지 클래스 스캔 — 빠지면 스타일이 조용히 누락).
+  `style.css` 의 `@source '../../../../packages/ui/src'`(Tailwind 가 패키지 클래스 스캔 — 빠지면 스타일이 조용히 누락),
+  `style.css` 의 `@import '../../../../packages/ui/src/base.css'`(아래 공용 CSS).
+- **공용 CSS 2벌도 `packages/ui` 에 있다** — 12개 앱의 `style.css` 가 `base.css` 하나만 import 하면 딸려온다:
+  - `base.css` — 읽기 열(`article > *` 46rem 가운데 정렬)·제목 위계·`focus-visible` 링·터치 타깃·`prefers-reduced-motion`.
+    **레이어 밖(unlayered) 평범한 CSS 로 쓴다** — Tailwind v4 가 유틸리티를 `@layer` 에 넣으므로 레이어 밖 규칙이
+    마크업에 박힌 `text-xl`·`focus:outline-none` 을 이긴다. 덕분에 129개 챕터를 안 건드리고 본문 리듬을 바꾼다.
+  - `tokens.css` — **데모 색 토큰 `--c-*`.** SVG 데모·차트에서 **hex 를 직접 쓰지 말고 토큰을 쓴다**
+    (`stroke="var(--c-slate-200)"`, `{ color: 'var(--c-indigo-500)' }`). SVG 표현 속성의 `var()` 는 정상 동작하고,
+    Chart.js 는 canvas 라 못 읽으므로 `ChartView` 가 실제 색으로 풀어준다. 새 hex 를 박으면 다크 모드에서 그 데모만 깨진다.
+  - `dark.css` — **자동 생성물**(`npm run theme:dark` = `scripts/build-dark-theme.mjs`). 직접 고치지 말 것.
+    **다크 모드. `dark:` 클래스는 하나도 쓰지 않는다.** Tailwind v4 가 유틸리티를
+    `.bg-white{background-color:var(--color-white)}` 처럼 변수 참조로 내보내므로, 팔레트 변수(`--color-*`)와
+    데모 토큰(`--c-*`) 값만 다시 정의해 전 앱을 한 번에 뒤집는다. **마크업에 `dark:` 를 추가하지 말 것** —
+    이 방식과 섞이면 어느 쪽이 이기는지 예측이 어려워진다. 색을 바꾸고 싶으면 `dark.css` 를 고친다.
+    - 생성 규칙: 강조색은 50↔950·100↔900·600↔400·700↔300(500 은 고정), 중립(slate)은 역할 기준으로
+      별도 매핑(파일 상단 주석에 대비 수치와 함께 적어 뒀다).
+    - **런타임에 색을 조립하는 곳은 안 따라온다** — 1부 ch3 히트맵 `rgb(c,c,c)`, 8부 손실지형 `hsl(...)`.
+      데이터 색이라 의도적으로 그대로 두고, 그 위 글자는 안 뒤집히는 `--c-on-light`/`--c-on-dark` 를 쓴다.
+  - 전환 UI 는 `ThemeToggle`(시스템/라이트/다크 순환), 상태는 `theme.ts`. 각 앱 `main.ts` 가 `initTheme()` 호출,
+    첫 페인트 깜빡임은 각 `index.html` 인라인 스크립트가 막는다(localStorage 키 `series-theme-v1` — 3곳이 같아야 함).
+
+### 글자색 최소 단계 (WCAG AA 4.5:1)
+
+밝은 배경 위 **본문 글자**에 쓸 수 있는 최소 단계. 계열마다 밝기가 달라 "600이면 안전" 같은 규칙은 틀린다.
+(Tailwind 원본 oklch 를 sRGB 로 변환해 slate-50 배경 기준으로 계산한 값)
+
+| 500 | 600 | 700 |
+|---|---|---|
+| slate | indigo · violet · purple · blue · red | emerald · amber · rose · pink · cyan · sky · teal · orange · fuchsia · green |
+
+- `text-slate-400` 은 흰 배경에서 **2.51:1** — 본문에 쓰지 말 것(장식이어도 500 을 쓴다).
+- `bg-slate-100`/`bg-slate-200` **위**에서는 `text-slate-500` 도 미달(3.86~4.35) → `text-slate-600`.
+- 데모 색과 본문 글자를 맞출 때(`<b style="color: var(--c-indigo-500)">`)도 같은 기준 —
+  그래픽은 500 이어도 되지만(3:1) **글자는 위 표의 단계**를 쓴다.
+- 위 단계보다 **밝은** 색(`text-*-300` 이하)은 어두운 배경 위 글씨일 수 있으니 표만 보고 올리지 말 것.
+
+**표를 외우지 말고 검사기를 돌린다** — `npm run check:contrast` (미달이면 exit 1, `-- --fix` 로 자동 수정).
+조상 배경·`:class` 동적 바인딩까지 추적해 **라이트·다크 양쪽**을 본다. 절차·한계는 `docs/TESTING.md` 5절.
+`tokens.css` 를 건드렸으면 먼저 `npm run theme:dark` → 그다음 검사(잊으면 검사기가 "dark.css 가 낡았습니다"로 멈춘다).
+**커밋 훅(`githooks/pre-commit`)이 자동으로 돌려 미달이면 커밋을 막는다** — 빌드는 이걸 못 잡기 때문이다.
 - **THEMED(각 앱에 유지)**: `progress`/`review` 스토어, `TutorChat.vue`(튜터 주제), `notebooks/tutor.py`.
 - **AI 튜터 클라이언트 = `packages/tutor`(@series/tutor)** — 로컬/원격 Ollama 전송 계층. 서버 주소는 빌드 환경변수
   **`VITE_OLLAMA_URL`** 로 바꾼다(미설정 시 `http://localhost:11434`) → 코드 수정 없이 local↔remote 전환.

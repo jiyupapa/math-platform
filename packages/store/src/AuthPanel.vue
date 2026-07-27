@@ -90,14 +90,14 @@ async function submit() {
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 13px;
-  color: #475569;
+  color: var(--c-slate-600);
 }
 /* 세로 패딩은 터치 타깃 확보용 — 글자만 두면 높이가 21px 라 WCAG 2.5.8(최소 24x24) 미달이었다.
    여기 하나 고치면 전 11부 사이드바 + 포털 헤더에 함께 반영된다. */
 .ap-link {
   font-size: 14px;
   font-weight: 500;
-  color: #4f46e5;
+  color: var(--c-indigo-600);
   background: none;
   border: none;
   cursor: pointer;
@@ -113,8 +113,8 @@ async function submit() {
   z-index: 60;
   width: 260px;
   padding: 12px;
-  background: #fff;
-  border: 1px solid #e2e8f0;
+  background: var(--c-white);
+  border: 1px solid var(--c-slate-200);
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
   display: flex;
@@ -133,39 +133,39 @@ async function submit() {
   flex: 1;
   padding: 6px;
   font-size: 13px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--c-slate-200);
   border-radius: 8px;
-  background: #f8fafc;
-  color: #64748b;
+  background: var(--c-slate-50);
+  color: var(--c-slate-500);
   cursor: pointer;
 }
 .ap-tabs button.on {
-  background: #eef2ff;
-  border-color: #c7d2fe;
-  color: #4f46e5;
+  background: var(--c-indigo-50);
+  border-color: var(--c-indigo-200);
+  color: var(--c-indigo-600);
   font-weight: 600;
 }
 .ap-pop input {
   padding: 8px 10px;
   font-size: 13px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--c-slate-200);
   border-radius: 8px;
   outline: none;
 }
 .ap-pop input:focus {
-  border-color: #a5b4fc;
+  border-color: var(--c-indigo-300);
 }
 .ap-err {
   margin: 0;
   font-size: 12px;
-  color: #dc2626;
+  color: var(--c-red-600);
 }
 .ap-go {
   padding: 8px;
   font-size: 13px;
   font-weight: 600;
-  color: #fff;
-  background: #4f46e5;
+  color: var(--c-white);
+  background: var(--c-indigo-600);
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -177,7 +177,7 @@ async function submit() {
 .ap-note {
   margin: 0;
   font-size: 11px;
-  color: #94a3b8;
+  color: var(--c-slate-400);
   text-align: center;
 }
 </style>

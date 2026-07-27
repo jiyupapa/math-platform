@@ -1,0 +1,28 @@
+#!/bin/sh
+# 커밋 전 게이트 — 글자 대비(라이트·다크) 검사.
+#
+# 왜 커밋 훅인가: 이 검사는 "한 번 청소하고 끝"이 되지 않는다. 챕터를 추가할 때마다
+#   text-emerald-600 처럼 계열별로 미달인 색이 다시 들어온다(사람이 외울 수 있는 규칙이 아니다).
+#   빌드는 이걸 못 잡으므로 커밋 시점에 세운다. 0.2초라 체감되지 않는다.
+#
+# 이 훅이 동작하려면 hooksPath 가 설정돼 있어야 한다:
+#   git config core.hooksPath githooks
+#   (루트 package.json 의 "prepare" 스크립트가 npm install 때 자동으로 설정한다)
+#
+# 통과해야 하는 것:
+#   ① packages/ui/src/dark.css 가 tokens.css 보다 낡지 않았는가 (theme:dark 를 돌렸는가)
+#   ② 모든 *.vue 의 글자색이 조상 배경 대비 4.5:1 이상인가 — 라이트·다크 양쪽
+#
+# 급할 때만: git commit --no-verify  (미달을 그대로 커밋한다 — 다음 사람이 찾기 어려워진다)
+
+if ! node scripts/check-contrast.mjs; then
+  echo ""
+  echo "─────────────────────────────────────────────────────────────"
+  echo " 커밋을 중단했습니다 — 글자 대비 미달."
+  echo ""
+  echo "   자동 수정:  npm run check:contrast -- --fix"
+  echo "   토큰을 추가했다면 먼저:  npm run theme:dark"
+  echo "   기준·한계:  docs/TESTING.md 5절"
+  echo "─────────────────────────────────────────────────────────────"
+  exit 1
+fi

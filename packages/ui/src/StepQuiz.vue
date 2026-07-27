@@ -102,7 +102,7 @@ const diffBadge: Record<Difficulty, { label: string; cls: string }> = {
       <span>단계별 계산</span>
       <span
         v-if="difficulty"
-        class="rounded-full px-2 py-0.5 text-[11px] font-medium"
+        class="rounded-full px-2 py-0.5 text-xs font-medium"
         :class="diffBadge[difficulty].cls"
       >
         {{ diffBadge[difficulty].label }}
@@ -126,9 +126,9 @@ const diffBadge: Record<Difficulty, { label: string; cls: string }> = {
           marks[i] === 'ok' ? 'bg-emerald-50' : marks[i] === 'no' ? 'bg-rose-50' : ''
         "
       >
-        <span class="w-5 text-right text-xs text-slate-400">{{ i + 1 }}.</span>
+        <span class="w-5 text-right text-xs text-slate-500">{{ i + 1 }}.</span>
         <MathBlock inline :expr="s.lhs" />
-        <span class="font-bold text-slate-400">=</span>
+        <span class="font-bold text-slate-500">=</span>
         <input
           v-model="inputs[i]"
           type="number"
@@ -138,8 +138,8 @@ const diffBadge: Record<Difficulty, { label: string; cls: string }> = {
           :disabled="solved"
           @keyup.enter="canSubmit && check()"
         />
-        <span v-if="marks[i] === 'ok'" class="text-emerald-600">✓</span>
-        <span v-else-if="marks[i] === 'no'" class="text-rose-500">✗ 다시</span>
+        <span v-if="marks[i] === 'ok'" class="text-emerald-700">✓</span>
+        <span v-else-if="marks[i] === 'no'" class="text-rose-700">✗ 다시</span>
       </div>
     </div>
 
@@ -169,7 +169,7 @@ const diffBadge: Record<Difficulty, { label: string; cls: string }> = {
       class="mt-3 rounded-lg bg-sky-50 px-4 py-3 text-sm text-sky-800"
     >
       📖 해설: {{ explanation }}
-      <p class="mt-1 text-xs text-sky-600">해설을 읽었다면 다시 계산해서 정답을 맞혀 보세요 — 그래야 완료로 기록돼요.</p>
+      <p class="mt-1 text-xs text-sky-700">해설을 읽었다면 다시 계산해서 정답을 맞혀 보세요 — 그래야 완료로 기록돼요.</p>
     </div>
 
     <!-- 버튼 -->
