@@ -98,7 +98,7 @@ const pct = (v: number) => (v * 100).toFixed(1)
       >
         {{ (B / 1000) }}k
       </button>
-      <span class="ml-auto text-xs text-slate-400">이 예산의 값: 약 ₩{{ cost }}/문제 (가상 단가 ₩0.002/토큰)</span>
+      <span class="ml-auto text-xs text-slate-500">이 예산의 값: 약 ₩{{ cost }}/문제 (가상 단가 ₩0.002/토큰)</span>
     </div>
 
     <!-- ③ 전략 비교 -->
@@ -106,7 +106,7 @@ const pct = (v: number) => (v * 100).toFixed(1)
       <div v-for="s in strats" :key="s.key" class="flex items-center gap-3">
         <span class="w-56 shrink-0 text-sm" :class="s.key === winner.key ? 'font-bold text-slate-800' : 'text-slate-600'">
           {{ s.label }}
-          <span v-if="s.key === winner.key" class="ml-1 rounded bg-emerald-100 px-1.5 py-0.5 text-[11px] font-bold text-emerald-700">승</span>
+          <span v-if="s.key === winner.key" class="ml-1 rounded bg-emerald-100 px-1.5 py-0.5 text-xs font-bold text-emerald-700">승</span>
         </span>
         <div class="relative h-6 flex-1 overflow-hidden rounded-md bg-white ring-1 ring-slate-200">
           <div
@@ -117,7 +117,7 @@ const pct = (v: number) => (v * 100).toFixed(1)
         </div>
         <span class="w-16 shrink-0 text-right font-mono text-sm font-bold text-slate-800">{{ pct(s.acc) }}%</span>
       </div>
-      <p class="text-xs text-slate-400">
+      <p class="text-xs text-slate-500">
         투표 전략의 풀이 하나당 길이 = 예산 ÷ 표 수 — 표가 많을수록 풀이 하나는 짧아집니다(정확도
         {{ pct(strats[1].p) }}% / {{ pct(strats[2].p) }}%).
       </p>

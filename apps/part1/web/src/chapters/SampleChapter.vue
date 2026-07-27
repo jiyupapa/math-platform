@@ -16,7 +16,7 @@ import { useProgressStore } from '@/stores/progress'
 const progress = useProgressStore()
 
 // 드래그 가능한 벡터 하나
-const vecs = ref<Vec[]>([{ x: 3, y: 2, color: '#6366f1', label: 'a', draggable: true }])
+const vecs = ref<Vec[]>([{ x: 3, y: 2, color: 'var(--c-indigo-500)', label: 'a', draggable: true }])
 const v = computed(() => vecs.value[0])
 const length = computed(() => Math.sqrt(v.value.x ** 2 + v.value.y ** 2))
 
@@ -27,7 +27,7 @@ const chartData = computed(() => ({
     {
       label: '벡터 a 의 성분',
       data: [v.value.x, v.value.y],
-      backgroundColor: ['#818cf8', '#34d399'],
+      backgroundColor: ['var(--c-indigo-400)', 'var(--c-emerald-400)'],
       borderRadius: 6,
     },
   ],
@@ -57,7 +57,7 @@ function onSetComplete() {
     <ReviewFlag id="sample-s1" chapter="sample" label="1. 벡터는 화살표예요" />
     <p class="leading-relaxed text-slate-700">
       벡터는 원점 <MathBlock inline expr="(0,0)" /> 에서 어떤 점까지 그은 화살표입니다.
-      아래 그림에서 <b style="color: #6366f1">파란 점</b>을 마우스로 끌어보세요. 화살표가 따라옵니다.
+      아래 그림에서 <b style="color: var(--c-indigo-600)">파란 점</b>을 마우스로 끌어보세요. 화살표가 따라옵니다.
     </p>
 
     <VectorCanvas v-model="vecs" :range="5" />
@@ -240,7 +240,7 @@ function onSetComplete() {
       v-if="progress.isDone('sample')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">워밍업 완료 — 준비 끝!</p>
       <p class="mt-1 text-sm text-emerald-700">
         본 학습도 정확히 이렇게 진행됩니다. 이제 1챕터(좌표와 벡터)부터 시작하세요.

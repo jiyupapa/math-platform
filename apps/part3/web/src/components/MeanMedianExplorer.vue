@@ -85,10 +85,10 @@ const fmt = (n: number) => Number(n.toFixed(1)).toString()
         @pointerleave="onUp"
       >
         <!-- 수직선(축) + 눈금 -->
-        <line :x1="PAD" :y1="AXIS_Y" :x2="W - PAD" :y2="AXIS_Y" stroke="#94a3b8" stroke-width="1.5" />
+        <line :x1="PAD" :y1="AXIS_Y" :x2="W - PAD" :y2="AXIS_Y" stroke="var(--c-slate-400)" stroke-width="1.5" />
         <g v-for="t in ticks()" :key="t">
-          <line :x1="sx(t)" :y1="AXIS_Y - 4" :x2="sx(t)" :y2="AXIS_Y + 4" stroke="#cbd5e1" />
-          <text :x="sx(t)" :y="AXIS_Y + 18" text-anchor="middle" fill="#94a3b8" class="text-[9px]">
+          <line :x1="sx(t)" :y1="AXIS_Y - 4" :x2="sx(t)" :y2="AXIS_Y + 4" stroke="var(--c-slate-300)" />
+          <text :x="sx(t)" :y="AXIS_Y + 18" text-anchor="middle" fill="var(--c-slate-400)" class="text-xs">
             {{ t }}
           </text>
         </g>
@@ -96,18 +96,18 @@ const fmt = (n: number) => Number(n.toFixed(1)).toString()
         <!-- 평균 마커 (빨강, 아래 삼각형 = 시소의 받침점) -->
         <polygon
           :points="`${sx(mean)},${AXIS_Y + 24} ${sx(mean) - 7},${AXIS_Y + 38} ${sx(mean) + 7},${AXIS_Y + 38}`"
-          fill="#ef4444"
+          fill="var(--c-red-500)"
         />
-        <text :x="sx(mean)" :y="AXIS_Y + 52" text-anchor="middle" fill="#ef4444" class="text-[10px] font-bold">
+        <text :x="sx(mean)" :y="AXIS_Y + 52" text-anchor="middle" fill="var(--c-red-500)" class="text-xs font-bold">
           평균 {{ fmt(mean) }}
         </text>
 
         <!-- 중앙값 마커 (파랑, 위 삼각형) -->
         <polygon
           :points="`${sx(median)},${AXIS_Y - 26} ${sx(median) - 7},${AXIS_Y - 40} ${sx(median) + 7},${AXIS_Y - 40}`"
-          fill="#3b82f6"
+          fill="var(--c-blue-500)"
         />
-        <text :x="sx(median)" :y="AXIS_Y - 46" text-anchor="middle" fill="#3b82f6" class="text-[10px] font-bold">
+        <text :x="sx(median)" :y="AXIS_Y - 46" text-anchor="middle" fill="var(--c-blue-500)" class="text-xs font-bold">
           중앙값 {{ fmt(median) }}
         </text>
 
@@ -118,8 +118,8 @@ const fmt = (n: number) => Number(n.toFixed(1)).toString()
           :cx="sx(v)"
           :cy="AXIS_Y"
           r="8"
-          fill="#6366f1"
-          stroke="#fff"
+          fill="var(--c-indigo-500)"
+          stroke="var(--c-white)"
           stroke-width="2"
           class="cursor-grab"
           :class="dragIdx === i ? 'opacity-80' : ''"
@@ -156,7 +156,7 @@ const fmt = (n: number) => Number(n.toFixed(1)).toString()
     </div>
 
     <p class="mt-2 px-1 text-xs leading-relaxed text-slate-500">
-      보라 점을 좌우로 끌어 보세요. <b class="text-rose-600">평균(빨간 받침점)</b>은 모든 점의
+      보라 점을 좌우로 끌어 보세요. <b class="text-rose-700">평균(빨간 받침점)</b>은 모든 점의
       무게중심이라 극단값에 끌려가지만, <b class="text-blue-600">중앙값(파란 삼각형)</b>은
       "가운데 순번"만 보므로 거의 움직이지 않습니다.
     </p>

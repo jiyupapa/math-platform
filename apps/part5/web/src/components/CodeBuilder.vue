@@ -5,7 +5,7 @@
 import { ref, computed } from 'vue'
 
 const LETTERS = ['A', 'B', 'C', 'D']
-const COLORS = ['#6366f1', '#10b981', '#f59e0b', '#ec4899']
+const COLORS = ['var(--c-indigo-500)', 'var(--c-emerald-500)', 'var(--c-amber-500)', 'var(--c-pink-500)']
 
 // 빈도 가중치 (1~32). 기본값은 절약이 잘 보이는 치우친 분포.
 const weights = ref<number[]>([16, 8, 4, 4])
@@ -71,7 +71,7 @@ function surprise(p: number): number {
     <div class="overflow-x-auto">
       <table class="w-full min-w-[30rem] text-sm">
         <thead>
-          <tr class="border-b border-slate-200 text-left text-xs text-slate-400">
+          <tr class="border-b border-slate-200 text-left text-xs text-slate-500">
             <th class="py-1.5 pr-2 font-medium">글자</th>
             <th class="py-1.5 pr-2 font-medium">빈도</th>
             <th class="w-16 py-1.5 pr-2 font-medium">확률</th>
@@ -117,21 +117,21 @@ function surprise(p: number): number {
     <div class="mt-3 grid grid-cols-3 gap-2 text-center">
       <div class="rounded-lg bg-slate-50 p-2.5">
         <p class="text-lg font-bold text-slate-700">{{ FIXED.toFixed(2) }}</p>
-        <p class="text-[11px] text-slate-500">고정 코드 (글자당 비트)</p>
+        <p class="text-xs text-slate-500">고정 코드 (글자당 비트)</p>
       </div>
       <div class="rounded-lg bg-indigo-50 p-2.5">
         <p class="text-lg font-bold text-indigo-700">{{ avgBits.toFixed(2) }}</p>
-        <p class="text-[11px] text-indigo-500">내가 만든 코드 (평균 비트)</p>
+        <p class="text-xs text-indigo-600">내가 만든 코드 (평균 비트)</p>
       </div>
       <div class="rounded-lg p-2.5" :class="savingPct > 0.5 ? 'bg-emerald-50' : 'bg-amber-50'">
         <p class="text-lg font-bold" :class="savingPct > 0.5 ? 'text-emerald-700' : 'text-amber-700'">
           {{ savingPct.toFixed(0) }}%
         </p>
-        <p class="text-[11px]" :class="savingPct > 0.5 ? 'text-emerald-600' : 'text-amber-600'">절약</p>
+        <p class="text-xs" :class="savingPct > 0.5 ? 'text-emerald-700' : 'text-amber-700'">절약</p>
       </div>
     </div>
 
-    <p class="mt-2 text-xs text-slate-400">
+    <p class="mt-2 text-xs text-slate-500">
       1000글자짜리 메시지라면: 고정 {{ (FIXED * 1000).toLocaleString() }}비트 →
       내 코드 <b class="text-slate-600">{{ Math.round(avgBits * 1000).toLocaleString() }}비트</b>.
       균등(25%씩)으로 맞추면 절약이 0이 되는 것도 확인해 보세요.

@@ -133,25 +133,25 @@ function onSetComplete() {
           <!-- 화살표 머리 -->
           <defs>
             <marker id="ah" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
-              <path d="M0,0 L6,3 L0,6 Z" fill="#6366f1" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="var(--c-indigo-500)" />
             </marker>
           </defs>
           <!-- 가로 보조선 (성별 방향) -->
-          <line x1="55" y1="140" x2="205" y2="140" stroke="#e2e8f0" stroke-dasharray="4 3" />
-          <line x1="55" y1="50" x2="205" y2="50" stroke="#e2e8f0" stroke-dasharray="4 3" />
+          <line x1="55" y1="140" x2="205" y2="140" stroke="var(--c-slate-200)" stroke-dasharray="4 3" />
+          <line x1="55" y1="50" x2="205" y2="50" stroke="var(--c-slate-200)" stroke-dasharray="4 3" />
           <!-- 세로 화살표 (왕관 방향): 남자→왕, 여자→여왕 -->
-          <line x1="55" y1="140" x2="55" y2="58" stroke="#6366f1" stroke-width="2" marker-end="url(#ah)" />
-          <line x1="205" y1="140" x2="205" y2="58" stroke="#6366f1" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ah)" />
+          <line x1="55" y1="140" x2="55" y2="58" stroke="var(--c-indigo-500)" stroke-width="2" marker-end="url(#ah)" />
+          <line x1="205" y1="140" x2="205" y2="58" stroke="var(--c-indigo-500)" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ah)" />
           <!-- 점 -->
-          <circle cx="55" cy="140" r="4" fill="#334155" />
-          <circle cx="205" cy="140" r="4" fill="#334155" />
-          <circle cx="55" cy="50" r="4" fill="#334155" />
-          <circle cx="205" cy="50" r="4" fill="#334155" />
+          <circle cx="55" cy="140" r="4" fill="var(--c-slate-700)" />
+          <circle cx="205" cy="140" r="4" fill="var(--c-slate-700)" />
+          <circle cx="55" cy="50" r="4" fill="var(--c-slate-700)" />
+          <circle cx="205" cy="50" r="4" fill="var(--c-slate-700)" />
           <!-- 라벨 -->
-          <text x="55" y="158" text-anchor="middle" font-size="12" fill="#334155">남자</text>
-          <text x="205" y="158" text-anchor="middle" font-size="12" fill="#334155">여자</text>
-          <text x="55" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#334155">왕</text>
-          <text x="205" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#334155">여왕</text>
+          <text x="55" y="158" text-anchor="middle" font-size="12" fill="var(--c-slate-700)">남자</text>
+          <text x="205" y="158" text-anchor="middle" font-size="12" fill="var(--c-slate-700)">여자</text>
+          <text x="55" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="var(--c-slate-700)">왕</text>
+          <text x="205" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="var(--c-slate-700)">여왕</text>
         </svg>
       </div>
       <div class="mt-3 rounded-lg bg-white px-4 py-3 text-sm text-slate-600">
@@ -297,7 +297,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch3')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 3 완료 — 단어가 의미 좌표가 됐습니다</p>
       <p class="mt-1 text-sm text-emerald-700">
         이제 각 토큰이 <b>의미 벡터</b>를 가집니다. 다음 챕터(ch4 위치 인코딩)에서

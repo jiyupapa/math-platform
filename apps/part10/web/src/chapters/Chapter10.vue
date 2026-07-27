@@ -192,7 +192,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch10')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-2xl font-bold text-emerald-600">🎓</div>
+      <div class="mb-1 text-2xl font-bold text-emerald-700">🎓</div>
       <p class="text-lg font-bold text-emerald-800">10부 완결 — 스케일링 법칙과 평가의 통계, 졸업!</p>
       <p class="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-emerald-700">
         성장은 로그-로그 위의 직선이고, 점수 차이는 오차범위 안에선 소음입니다.

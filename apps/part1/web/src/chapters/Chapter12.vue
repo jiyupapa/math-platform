@@ -186,19 +186,19 @@ function fmt(n: number) {
     </p>
     <div class="my-4 rounded-xl border border-slate-200 bg-white p-4">
       <svg :viewBox="`0 0 ${W} ${H}`" class="mx-auto block w-full max-w-[420px]">
-        <polyline :points="curvePoints" fill="none" stroke="#6366f1" stroke-width="2.5" />
+        <polyline :points="curvePoints" fill="none" stroke="var(--c-indigo-500)" stroke-width="2.5" />
         <!-- 가야 할 방향 화살표 -->
         <line
           v-if="!converged && !diverged"
           :x1="ballX" :y1="ballY - 16" :x2="ballX + arrowDx" :y2="ballY - 16"
-          stroke="#f59e0b" stroke-width="2.5"
+          stroke="var(--c-amber-500)" stroke-width="2.5"
         />
         <circle
           v-if="!converged && !diverged"
-          :cx="ballX + arrowDx" :cy="ballY - 16" r="3.5" fill="#f59e0b"
+          :cx="ballX + arrowDx" :cy="ballY - 16" r="3.5" fill="var(--c-amber-500)"
         />
         <!-- 공 -->
-        <circle :cx="ballX" :cy="ballY" r="9" :fill="diverged ? '#ef4444' : converged ? '#10b981' : '#f43f5e'" stroke="white" stroke-width="2" />
+        <circle :cx="ballX" :cy="ballY" r="9" :fill="diverged ? 'var(--c-red-500)' : converged ? 'var(--c-emerald-500)' : 'var(--c-rose-500)'" stroke="var(--c-white)" stroke-width="2" />
       </svg>
       <div class="mt-3 flex flex-wrap items-center gap-2 text-sm">
         <button class="rounded-lg bg-indigo-600 px-3 py-1.5 font-medium text-white hover:bg-indigo-500" @click="stepOnce">
@@ -439,7 +439,7 @@ function fmt(n: number) {
       v-if="progress.isDone('ch12')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">🎓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">🎓</div>
       <p class="font-semibold text-emerald-800">
         Phase 12 완료 — 1부 선형대수 전 과정(12챕터)을 마쳤습니다!
       </p>

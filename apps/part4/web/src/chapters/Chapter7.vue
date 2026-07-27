@@ -249,7 +249,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch7')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 7 완료 — 여러 관점을 한 번에</p>
       <p class="mt-1 text-sm text-emerald-700">
         어텐션 조각은 이제 다 모였어요. 다음 챕터(ch8)에서 <b>잔차연결·층정규화·피드포워드</b>와 묶어

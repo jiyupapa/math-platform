@@ -211,7 +211,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch10')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">10장 완료 — 압축 편(8~10장) 끝!</p>
       <p class="mt-1 text-sm text-emerald-700">
         저장·계산·압축을 모두 정복했습니다. 남은 건 하나 — 배운 전부를 모아

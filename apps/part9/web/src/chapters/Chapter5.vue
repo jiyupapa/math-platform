@@ -205,7 +205,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch5')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">5장 완료 — 저장 편(2~5장) 끝!</p>
       <p class="mt-1 text-sm text-emerald-700">
         칸의 구조와 사고를 모두 봤습니다. 이제 "계산" 편 — exp 폭발과 확률 언더플로를

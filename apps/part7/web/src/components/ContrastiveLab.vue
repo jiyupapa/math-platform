@@ -7,12 +7,12 @@ import { computed, ref } from 'vue'
 // ── ① 대조 학습 시뮬 ──────────────────────────────────────────
 // 쌍 3개: (질문 Qi, 정답 문서 Di) — 처음엔 짝이 멀리 흩어져 있다
 const INIT = [
-  { id: 'Q1', pair: 1, x: 2.0, y: 7.5, isQ: true, color: '#6366f1' },
-  { id: 'D1', pair: 1, x: 8.0, y: 2.0, isQ: false, color: '#6366f1' },
-  { id: 'Q2', pair: 2, x: 7.5, y: 7.5, isQ: true, color: '#d97706' },
-  { id: 'D2', pair: 2, x: 1.8, y: 2.2, isQ: false, color: '#d97706' },
-  { id: 'Q3', pair: 3, x: 5.0, y: 8.2, isQ: true, color: '#059669' },
-  { id: 'D3', pair: 3, x: 5.0, y: 1.2, isQ: false, color: '#059669' },
+  { id: 'Q1', pair: 1, x: 2.0, y: 7.5, isQ: true, color: 'var(--c-indigo-500)' },
+  { id: 'D1', pair: 1, x: 8.0, y: 2.0, isQ: false, color: 'var(--c-indigo-500)' },
+  { id: 'Q2', pair: 2, x: 7.5, y: 7.5, isQ: true, color: 'var(--c-amber-600)' },
+  { id: 'D2', pair: 2, x: 1.8, y: 2.2, isQ: false, color: 'var(--c-amber-600)' },
+  { id: 'Q3', pair: 3, x: 5.0, y: 8.2, isQ: true, color: 'var(--c-emerald-600)' },
+  { id: 'D3', pair: 3, x: 5.0, y: 1.2, isQ: false, color: 'var(--c-emerald-600)' },
 ]
 const points = ref(INIT.map((p) => ({ ...p })))
 const steps = ref(0)
@@ -97,7 +97,7 @@ const loss2 = computed(() => -Math.log2(prob.value))
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 대조 학습 시뮬 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 지도가 스스로 정리된다: 짝은 끌고, 남은 밀고</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       (질문, 정답 문서) 쌍 3개가 뒤죽박죽 흩어져 있습니다. 같은 색이 짝이에요 (⭐ = 질문, ● = 문서).
       학습 스텝을 눌러 보세요.
     </p>
@@ -130,23 +130,23 @@ const loss2 = computed(() => -Math.log2(prob.value))
       <button type="button" class="rounded-lg bg-indigo-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-indigo-500" @click="trainN(10)">
         학습 10스텝
       </button>
-      <button type="button" class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-500 transition hover:bg-slate-200" @click="resetMap()">
+      <button type="button" class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-600 transition hover:bg-slate-200" @click="resetMap()">
         처음부터
       </button>
-      <span class="text-[11px] text-slate-400">스텝 {{ steps }}</span>
+      <span class="text-xs text-slate-500">스텝 {{ steps }}</span>
     </div>
 
     <div class="mt-2 grid grid-cols-3 gap-2 text-center">
       <div class="rounded-lg bg-slate-50 p-2">
-        <p class="text-[11px] text-slate-400">짝 평균 거리</p>
-        <p class="font-mono text-sm font-bold text-emerald-600">{{ metrics.pairAvg.toFixed(2) }}</p>
+        <p class="text-xs text-slate-500">짝 평균 거리</p>
+        <p class="font-mono text-sm font-bold text-emerald-700">{{ metrics.pairAvg.toFixed(2) }}</p>
       </div>
       <div class="rounded-lg bg-slate-50 p-2">
-        <p class="text-[11px] text-slate-400">남 평균 거리</p>
-        <p class="font-mono text-sm font-bold text-rose-600">{{ metrics.nonAvg.toFixed(2) }}</p>
+        <p class="text-xs text-slate-500">남 평균 거리</p>
+        <p class="font-mono text-sm font-bold text-rose-700">{{ metrics.nonAvg.toFixed(2) }}</p>
       </div>
       <div class="rounded-lg bg-slate-50 p-2">
-        <p class="text-[11px] text-slate-400">손실 (비트)</p>
+        <p class="text-xs text-slate-500">손실 (비트)</p>
         <p class="font-mono text-sm font-bold text-slate-700">{{ metrics.loss.toFixed(2) }}</p>
       </div>
     </div>
@@ -163,30 +163,30 @@ const loss2 = computed(() => -Math.log2(prob.value))
     <!-- ② −log 손실 재회 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 손실의 얼굴: 정답과 오답의 차이가 전부다</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       질문 하나, 후보 문서 4개(정답 1 + 오답 3). 유사도 두 개를 움직여 "정답을 고를 확률"과 손실을 보세요.
     </p>
 
     <div class="space-y-3">
       <label class="block text-xs text-slate-500">
-        정답 문서와의 유사도 s₊ = <b class="text-emerald-600">{{ sPos.toFixed(2) }}</b>
+        정답 문서와의 유사도 s₊ = <b class="text-emerald-700">{{ sPos.toFixed(2) }}</b>
         <input v-model.number="sPos" type="range" min="0" max="1" step="0.05" class="mt-1 w-full accent-emerald-600" />
       </label>
       <label class="block text-xs text-slate-500">
-        오답 문서들(3개)의 유사도 s₋ = <b class="text-rose-600">{{ sNeg.toFixed(2) }}</b>
+        오답 문서들(3개)의 유사도 s₋ = <b class="text-rose-700">{{ sNeg.toFixed(2) }}</b>
         <input v-model.number="sNeg" type="range" min="0" max="1" step="0.05" class="mt-1 w-full accent-rose-600" />
       </label>
     </div>
 
     <div class="mt-3 grid grid-cols-2 gap-2 text-center">
       <div class="rounded-lg bg-slate-50 p-3">
-        <p class="text-[11px] text-slate-400">P(정답을 1등으로 고름)</p>
-        <p class="font-mono text-xl font-bold" :class="prob > 0.7 ? 'text-emerald-600' : prob > 0.3 ? 'text-amber-600' : 'text-rose-600'">
+        <p class="text-xs text-slate-500">P(정답을 1등으로 고름)</p>
+        <p class="font-mono text-xl font-bold" :class="prob > 0.7 ? 'text-emerald-700' : prob > 0.3 ? 'text-amber-700' : 'text-rose-700'">
           {{ (prob * 100).toFixed(0) }}%
         </p>
       </div>
       <div class="rounded-lg bg-slate-50 p-3">
-        <p class="text-[11px] text-slate-400">손실 = −log₂ P (비트)</p>
+        <p class="text-xs text-slate-500">손실 = −log₂ P (비트)</p>
         <p class="font-mono text-xl font-bold text-slate-700">{{ loss2.toFixed(2) }}</p>
         <div class="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
           <div class="h-full rounded-full bg-indigo-500" :style="{ width: Math.min(100, loss2 * 16) + '%' }" />

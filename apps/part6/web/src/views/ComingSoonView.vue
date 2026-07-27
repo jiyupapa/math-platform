@@ -16,7 +16,7 @@ const chapter = computed(() => chapters.find((c) => c.slug === route.params.slug
     <p class="mb-6 text-slate-500">
       {{ chapter ? `Phase ${chapter.phase} · ${chapter.summary}` : '곧 만나요!' }}
     </p>
-    <p class="mb-8 text-sm text-slate-400">
+    <p class="mb-8 text-sm text-slate-500">
       6부는 지금 만드는 중입니다. 목차의 로드맵은 확정돼 있고, 챕터가 공개되면 바로 여기서 학습할 수 있어요.
       그동안 1~5부를 먼저 마치는 것을 추천합니다.
     </p>

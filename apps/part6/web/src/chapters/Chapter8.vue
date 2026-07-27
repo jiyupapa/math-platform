@@ -239,7 +239,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch8')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">8장 완료 — 조련의 도구함까지 챙겼어요!</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 9장 — 조련이 잘 됐는지 어떻게 아나? 성적표(벤치마크·LLM 심판)와

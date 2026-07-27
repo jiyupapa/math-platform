@@ -20,7 +20,7 @@ const tokens = computed(() => tokenize(text.value, mode.value))
 const unkCount = computed(() => tokens.value.filter((t) => t.unknown).length)
 
 // 색상(토큰 구분용, UNK 는 별도)
-const palette = ['#6366f1', '#10b981', '#f59e0b', '#ec4899', '#06b6d4', '#8b5cf6']
+const palette = ['var(--c-indigo-500)', 'var(--c-emerald-500)', 'var(--c-amber-500)', 'var(--c-pink-500)', 'var(--c-cyan-500)', 'var(--c-violet-500)']
 </script>
 
 <template>
@@ -60,7 +60,7 @@ const palette = ['#6366f1', '#10b981', '#f59e0b', '#ec4899', '#06b6d4', '#8b5cf6
         {{ m.label }}
       </button>
     </div>
-    <p class="mt-1.5 text-xs text-slate-400">{{ modes.find((m) => m.key === mode)?.desc }}</p>
+    <p class="mt-1.5 text-xs text-slate-500">{{ modes.find((m) => m.key === mode)?.desc }}</p>
 
     <!-- 토큰 결과 -->
     <p class="mt-4 mb-2 text-sm font-semibold text-slate-500">③ 토큰 — 조각 + 사전 ID(번호)</p>
@@ -71,10 +71,10 @@ const palette = ['#6366f1', '#10b981', '#f59e0b', '#ec4899', '#06b6d4', '#8b5cf6
         class="flex flex-col items-center rounded-lg border px-2.5 py-1.5"
         :class="t.unknown ? 'border-rose-200 bg-rose-50' : 'border-slate-200 bg-slate-50'"
       >
-        <span class="text-sm font-semibold" :style="{ color: t.unknown ? '#e11d48' : palette[i % palette.length] }">
+        <span class="text-sm font-semibold" :style="{ color: t.unknown ? 'var(--c-rose-600)' : palette[i % palette.length] }">
           {{ t.tok }}
         </span>
-        <span class="font-mono text-[11px] tabular-nums text-slate-400">
+        <span class="font-mono text-xs tabular-nums text-slate-600">
           {{ t.unknown ? '[UNK]' : '#' + t.id }}
         </span>
       </div>
@@ -83,7 +83,7 @@ const palette = ['#6366f1', '#10b981', '#f59e0b', '#ec4899', '#06b6d4', '#8b5cf6
     <!-- 요약 -->
     <div class="mt-4 rounded-lg bg-slate-50 px-4 py-2.5 text-sm text-slate-600">
       토큰 <b class="text-slate-800">{{ tokens.length }}개</b>
-      <span v-if="unkCount > 0"> · 그중 <b class="text-rose-600">[UNK] {{ unkCount }}개</b>(사전에 없는 토큰)</span>
+      <span v-if="unkCount > 0"> · 그중 <b class="text-rose-700">[UNK] {{ unkCount }}개</b>(사전에 없는 토큰)</span>
       <span v-else> · [UNK] 없음 👍</span>
     </div>
   </div>

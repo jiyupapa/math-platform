@@ -230,7 +230,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch6')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">6장 완료 — 검색의 엔진룸을 봤어요!</p>
       <p class="mt-1 text-sm text-emerald-700">
         빨리 찾는 법은 갖췄고, 이제 품질입니다 — 문서를 얼마나 잘게 자를까(청킹),

@@ -64,23 +64,23 @@ const edges = [
       <svg viewBox="0 0 500 230" width="500" height="230" class="max-w-full rounded-lg border border-slate-100 bg-slate-50">
         <defs>
           <marker id="bp-arrow" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
-            <path d="M0,0 L7,3 L0,6 Z" fill="#cbd5e1" />
+            <path d="M0,0 L7,3 L0,6 Z" fill="var(--c-slate-300)" />
           </marker>
         </defs>
         <!-- 엣지 (순전파 방향) -->
         <line v-for="(e, i) in edges" :key="'e' + i" :x1="e.x1" :y1="e.y1" :x2="e.x2" :y2="e.y2"
-          stroke="#cbd5e1" stroke-width="2" marker-end="url(#bp-arrow)" />
+          stroke="var(--c-slate-300)" stroke-width="2" marker-end="url(#bp-arrow)" />
         <!-- 출력 L 화살표 -->
-        <line x1="433" y1="138" x2="480" y2="138" stroke="#cbd5e1" stroke-width="2" marker-end="url(#bp-arrow)" />
+        <line x1="433" y1="138" x2="480" y2="138" stroke="var(--c-slate-300)" stroke-width="2" marker-end="url(#bp-arrow)" />
 
         <!-- 노드 -->
         <g v-for="n in nodes" :key="n.id">
           <rect :x="n.cx - 33" :y="n.cy - 18" width="66" height="36" rx="8"
-            :fill="n.gvis ? '#fef2f2' : '#fff'" :stroke="n.gvis ? '#ef4444' : '#94a3b8'" stroke-width="1.5" />
-          <text :x="n.cx" :y="n.cy - 3" text-anchor="middle" font-size="11" fill="#475569">{{ n.label }}</text>
-          <text :x="n.cx" :y="n.cy + 12" text-anchor="middle" font-size="12" font-weight="bold" fill="#0f172a">{{ fmt(n.val) }}</text>
+            :fill="n.gvis ? 'var(--c-red-50)' : 'var(--c-white)'" :stroke="n.gvis ? 'var(--c-red-500)' : 'var(--c-slate-400)'" stroke-width="1.5" />
+          <text :x="n.cx" :y="n.cy - 3" text-anchor="middle" font-size="11" fill="var(--c-slate-600)">{{ n.label }}</text>
+          <text :x="n.cx" :y="n.cy + 12" text-anchor="middle" font-size="12" font-weight="bold" fill="var(--c-slate-900)">{{ fmt(n.val) }}</text>
           <!-- 기울기 (역전파로 드러날 때) -->
-          <text v-if="n.gvis" :x="n.cx" :y="n.cy + 30" text-anchor="middle" font-size="11" font-weight="bold" fill="#ef4444">
+          <text v-if="n.gvis" :x="n.cx" :y="n.cy + 30" text-anchor="middle" font-size="11" font-weight="bold" fill="var(--c-red-500)">
             ∂L/∂ = {{ fmt(n.grad) }}
           </text>
         </g>

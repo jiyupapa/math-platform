@@ -210,7 +210,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch2')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">2장 완료!</p>
       <p class="mt-1 text-sm text-emerald-700">
         정수는 이제 담을 수 있습니다 — 그런데 0.1은? 아주 큰 수와 아주 작은 수를

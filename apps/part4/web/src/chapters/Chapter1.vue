@@ -109,12 +109,12 @@ function onSetComplete() {
 
     <p class="leading-relaxed text-slate-700">각 칸이 하는 일을 한 줄로 미리 보면(세부는 표시된 챕터에서):</p>
     <ul class="my-3 space-y-1.5 pl-1 text-sm text-slate-700">
-      <li>🔹 <b>토큰화</b> — 글을 <b>토큰</b>(단어·글자 조각)으로 쪼갠다. <span class="text-slate-400">(ch2)</span></li>
-      <li>🔹 <b>임베딩</b> — 각 토큰을 <b>의미를 담은 숫자 벡터</b>(좌표)로 바꾼다. <span class="text-slate-400">(ch3)</span></li>
-      <li>🔹 <b>위치 인코딩</b> — "몇 번째 단어인지" <b>순서 정보</b>를 더한다. <span class="text-slate-400">(ch4)</span></li>
-      <li>🔹 <b>어텐션</b> — 단어들이 <b>서로를 얼마나 참고할지</b> 정한다. <span class="text-slate-400">(ch5·6)</span></li>
-      <li>🔹 <b>피드포워드</b> — 참고한 정보를 <b>한 번 더 가공</b>한다. <span class="text-slate-400">(ch8)</span></li>
-      <li>🔹 <b>출력층</b> — 마지막 점수를 <b>소프트맥스로 확률화</b>해 다음 단어를 고른다. <span class="text-slate-400">(ch9·10)</span></li>
+      <li>🔹 <b>토큰화</b> — 글을 <b>토큰</b>(단어·글자 조각)으로 쪼갠다. <span class="text-slate-500">(ch2)</span></li>
+      <li>🔹 <b>임베딩</b> — 각 토큰을 <b>의미를 담은 숫자 벡터</b>(좌표)로 바꾼다. <span class="text-slate-500">(ch3)</span></li>
+      <li>🔹 <b>위치 인코딩</b> — "몇 번째 단어인지" <b>순서 정보</b>를 더한다. <span class="text-slate-500">(ch4)</span></li>
+      <li>🔹 <b>어텐션</b> — 단어들이 <b>서로를 얼마나 참고할지</b> 정한다. <span class="text-slate-500">(ch5·6)</span></li>
+      <li>🔹 <b>피드포워드</b> — 참고한 정보를 <b>한 번 더 가공</b>한다. <span class="text-slate-500">(ch8)</span></li>
+      <li>🔹 <b>출력층</b> — 마지막 점수를 <b>소프트맥스로 확률화</b>해 다음 단어를 고른다. <span class="text-slate-500">(ch9·10)</span></li>
     </ul>
 
     <ConceptCard tone="note" title="새 용어 세 개">
@@ -298,7 +298,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch1')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 1 완료 — 큰 그림을 잡았습니다</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음 챕터(ch2 토큰화)부터 이 파이프라인의 칸을 하나씩 확대합니다.

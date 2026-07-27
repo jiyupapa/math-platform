@@ -27,8 +27,8 @@ const graphData = computed(() => ({
     {
       label: 'f(x) = 2x + 1',
       data: graphXs.map((x) => f(x)),
-      borderColor: '#6366f1',
-      backgroundColor: '#6366f1',
+      borderColor: 'var(--c-indigo-500)',
+      backgroundColor: 'var(--c-indigo-500)',
       tension: 0,
       pointRadius: 5,
     },
@@ -75,17 +75,17 @@ function onSetComplete() {
     <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
       <div class="flex items-center justify-center gap-3 text-center">
         <div class="rounded-lg bg-slate-100 px-4 py-3">
-          <div class="text-xs text-slate-500">입력 x</div>
+          <div class="text-xs text-slate-600">입력 x</div>
           <div class="text-2xl font-bold text-slate-800">{{ machineX }}</div>
         </div>
-        <div class="text-2xl text-slate-400">→</div>
+        <div class="text-2xl text-slate-500">→</div>
         <div class="rounded-lg bg-indigo-100 px-4 py-3">
-          <div class="text-xs text-indigo-500">기계: 2배 하고 +1</div>
+          <div class="text-xs text-indigo-700">기계: 2배 하고 +1</div>
           <div class="text-sm font-mono text-indigo-700">f(x) = 2x + 1</div>
         </div>
-        <div class="text-2xl text-slate-400">→</div>
+        <div class="text-2xl text-slate-500">→</div>
         <div class="rounded-lg bg-emerald-100 px-4 py-3">
-          <div class="text-xs text-emerald-600">출력 f(x)</div>
+          <div class="text-xs text-emerald-700">출력 f(x)</div>
           <div class="text-2xl font-bold text-emerald-700">{{ machineOut }}</div>
         </div>
       </div>
@@ -350,7 +350,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch1')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 1 완료. 기울기의 감각을 잡았습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 "직선의 기울기"를 "곡선의 순간 기울기"로 넓히는 열쇠 — 변화율과 극한입니다.

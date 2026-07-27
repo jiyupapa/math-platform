@@ -61,7 +61,7 @@ function reset() {
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- 입력 -->
     <div class="mb-3 rounded-lg bg-slate-50 px-4 py-3">
-      <span class="text-xs text-slate-400">입력 글</span>
+      <span class="text-xs text-slate-500">입력 글</span>
       <div class="text-lg font-medium text-slate-800">"{{ INPUT }} ___"</div>
     </div>
 
@@ -79,17 +79,17 @@ function reset() {
     <div class="space-y-2">
       <!-- 1. 토큰화 -->
       <div v-if="step >= 1" class="rounded-lg border border-slate-200 p-3">
-        <p class="mb-1.5 text-sm font-semibold text-indigo-600">① 토큰화 <span class="text-xs font-normal text-slate-400">(ch2)</span></p>
+        <p class="mb-1.5 text-sm font-semibold text-indigo-600">① 토큰화 <span class="text-xs font-normal text-slate-500">(ch2)</span></p>
         <div class="flex flex-wrap gap-2">
           <span v-for="(t, i) in tokens" :key="t" class="rounded bg-slate-100 px-2 py-1 text-sm">
-            {{ t }} <span class="font-mono text-xs text-slate-400">#{{ ids[i] }}</span>
+            {{ t }} <span class="font-mono text-xs text-slate-600">#{{ ids[i] }}</span>
           </span>
         </div>
       </div>
 
       <!-- 2. 임베딩 -->
       <div v-if="step >= 2" class="rounded-lg border border-slate-200 p-3">
-        <p class="mb-1.5 text-sm font-semibold text-indigo-600">② 임베딩 <span class="text-xs font-normal text-slate-400">(ch3)</span></p>
+        <p class="mb-1.5 text-sm font-semibold text-indigo-600">② 임베딩 <span class="text-xs font-normal text-slate-500">(ch3)</span></p>
         <div class="flex flex-wrap gap-3 text-sm">
           <span v-for="(t, i) in tokens" :key="t"><b>{{ t }}</b> → <span class="font-mono text-slate-600">{{ fmt(emb[i]) }}</span></span>
         </div>
@@ -97,16 +97,16 @@ function reset() {
 
       <!-- 3. 위치 -->
       <div v-if="step >= 3" class="rounded-lg border border-slate-200 p-3">
-        <p class="mb-1.5 text-sm font-semibold text-indigo-600">③ 위치 인코딩 <span class="text-xs font-normal text-slate-400">(ch4)</span></p>
+        <p class="mb-1.5 text-sm font-semibold text-indigo-600">③ 위치 인코딩 <span class="text-xs font-normal text-slate-500">(ch4)</span></p>
         <div class="flex flex-wrap gap-3 text-sm">
           <span v-for="(t, i) in tokens" :key="t"><b>{{ t }}</b> → <span class="font-mono text-slate-600">{{ fmt(finalVecs[i]) }}</span></span>
         </div>
-        <p class="mt-1 text-xs text-slate-400">임베딩 + 위치 벡터 = 뜻과 순서가 모두 담긴 벡터</p>
+        <p class="mt-1 text-xs text-slate-500">임베딩 + 위치 벡터 = 뜻과 순서가 모두 담긴 벡터</p>
       </div>
 
       <!-- 4. 어텐션·블록 -->
       <div v-if="step >= 4" class="rounded-lg border border-slate-200 p-3">
-        <p class="mb-1.5 text-sm font-semibold text-indigo-600">④ 어텐션 · 블록 ×N <span class="text-xs font-normal text-slate-400">(ch5~8)</span></p>
+        <p class="mb-1.5 text-sm font-semibold text-indigo-600">④ 어텐션 · 블록 ×N <span class="text-xs font-normal text-slate-500">(ch5~8)</span></p>
         <p class="text-sm text-slate-600">
           단어들이 서로 참고(어텐션)하고 블록을 여러 번 통과 → 마지막 자리 <b>"정말"</b>의 문맥 벡터:
           <span class="font-mono text-slate-700">{{ fmt(context) }}</span>
@@ -115,7 +115,7 @@ function reset() {
 
       <!-- 5. 출력층 -->
       <div v-if="step >= 5" class="rounded-lg border border-slate-200 p-3">
-        <p class="mb-1.5 text-sm font-semibold text-indigo-600">⑤ 출력층 → 확률 <span class="text-xs font-normal text-slate-400">(ch9)</span></p>
+        <p class="mb-1.5 text-sm font-semibold text-indigo-600">⑤ 출력층 → 확률 <span class="text-xs font-normal text-slate-500">(ch9)</span></p>
         <div class="space-y-1">
           <div v-for="(v, i) in VOCAB" :key="v.w" class="flex items-center gap-2">
             <span class="w-12 shrink-0 text-right text-xs" :class="probs[i] === Math.max(...probs) ? 'font-bold' : 'text-slate-500'">{{ v.w }}</span>

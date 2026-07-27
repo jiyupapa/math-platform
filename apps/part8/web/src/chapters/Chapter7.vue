@@ -239,7 +239,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch7')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">7장 완료 — 이제 훈련 점수에 속지 않습니다!</p>
       <p class="mt-1 text-sm text-emerald-700">
         멈추기·데이터 늘리기까지 배웠으니, 남은 처방은 하나 — 암기를 어렵게 만드는

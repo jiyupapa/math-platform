@@ -219,7 +219,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch1')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">1장 완료 — 좌표축이 생겼습니다!</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 2장 — 곱의 세계. N·D·C처럼 10배씩 뛰는 수들을 다루는 도구,

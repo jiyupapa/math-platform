@@ -58,7 +58,7 @@ const fmt = (n: number) => (Math.round(n * 10) / 10).toFixed(1)
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험: 미니 SFT 훈련기 — 시범 1개를 가중치에 새겨 보기</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       토큰마다 손실 = −log₂ q(정답 토큰) · 회색 토큰 = 지시 부분(손실 마스킹 — 채점 안 함)
     </p>
 
@@ -67,23 +67,23 @@ const fmt = (n: number) => (Math.round(n * 10) / 10).toFixed(1)
       <div v-for="(t, i) in TOKENS" :key="i" class="min-w-14 text-center">
         <span
           class="block rounded-lg px-2 py-1 text-sm"
-          :class="t.masked ? 'bg-slate-100 text-slate-400' : 'bg-indigo-50 font-medium text-indigo-900'"
+          :class="t.masked ? 'bg-slate-100 text-slate-600' : 'bg-indigo-50 font-medium text-indigo-900'"
         >{{ t.text }}</span>
         <template v-if="!t.masked">
           <div class="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
             <div class="h-full rounded-full transition-all" :class="lossClass(loss(qs[i]))" :style="{ width: barWidth(loss(qs[i])) }" />
           </div>
-          <span class="mt-0.5 block text-[10px] text-slate-500">q={{ fmt(qs[i] * 100) }}% · 손실 {{ fmt(loss(qs[i])) }}</span>
+          <span class="mt-0.5 block text-xs text-slate-500">q={{ fmt(qs[i] * 100) }}% · 손실 {{ fmt(loss(qs[i])) }}</span>
         </template>
-        <span v-else class="mt-0.5 block text-[10px] text-slate-300">채점 안 함</span>
+        <span v-else class="mt-0.5 block text-xs text-slate-500">채점 안 함</span>
       </div>
     </div>
 
     <!-- 평균 손실 + 훈련 -->
     <div class="mb-3 flex flex-wrap items-center gap-3 rounded-lg bg-slate-50 p-3">
       <div>
-        <p class="text-[11px] font-semibold text-slate-400">평균 손실 (답변 토큰만)</p>
-        <p class="text-2xl font-bold" :class="done ? 'text-emerald-600' : 'text-slate-800'">{{ fmt(avgLoss) }} <span class="text-sm font-normal text-slate-400">비트</span></p>
+        <p class="text-xs font-semibold text-slate-500">평균 손실 (답변 토큰만)</p>
+        <p class="text-2xl font-bold" :class="done ? 'text-emerald-700' : 'text-slate-800'">{{ fmt(avgLoss) }} <span class="text-sm font-normal text-slate-500">비트</span></p>
       </div>
       <div class="text-sm text-slate-500">훈련 스텝: <b class="text-slate-700">{{ steps }}</b></div>
       <div class="ml-auto flex gap-2">

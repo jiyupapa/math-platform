@@ -204,7 +204,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch9')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">9장 완료 — 4GB 의 비밀 해독!</p>
       <p class="mt-1 text-sm text-emerald-700">
         이제 "얼마나 잃었나"를 감이 아니라 숫자로 잴 차례 — 5부에서 배운 퍼플렉시티가

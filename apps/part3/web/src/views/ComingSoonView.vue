@@ -16,7 +16,7 @@ const chapter = computed(() => chapters.find((c) => c.slug === route.params.slug
     <p class="mb-6 text-slate-500">
       {{ chapter ? `Phase ${chapter.phase} · ${chapter.summary}` : '곧 만나요!' }}
     </p>
-    <p class="mb-8 text-sm text-slate-400">
+    <p class="mb-8 text-sm text-slate-500">
       이 챕터는 아직 준비 중입니다. Phase 0(기반 구축)에서는
       <RouterLink to="/ch/sample" class="text-indigo-600 underline">샘플 챕터</RouterLink>
       로 전체 학습 패턴을 먼저 확인해 보세요.

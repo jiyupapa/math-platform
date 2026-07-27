@@ -46,7 +46,7 @@ const grouped = computed(() =>
             </RouterLink>
             <button
               type="button"
-              class="shrink-0 text-xs text-slate-400 underline hover:text-rose-600"
+              class="shrink-0 text-xs text-slate-500 underline hover:text-rose-700"
               @click="review.remove(it.id)"
             >
               제거
@@ -57,7 +57,7 @@ const grouped = computed(() =>
 
       <button
         type="button"
-        class="text-sm text-slate-400 underline hover:text-rose-600"
+        class="text-sm text-slate-500 underline hover:text-rose-700"
         @click="review.clear()"
       >
         전체 비우기

@@ -228,7 +228,7 @@ const ITINERARY = [
       v-if="progress.isDone('ch1')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">1장 완료!</p>
       <p class="mt-1 text-sm text-emerald-700">
         "개수"는 셌으니 이제 "칸"입니다. 다음은 2장 — 컴퓨터의 손가락,

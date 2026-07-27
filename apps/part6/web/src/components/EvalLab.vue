@@ -82,7 +82,7 @@ const opened = ref<boolean[]>(SYMPTOMS.map(() => false))
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 성적표 읽기 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 성적표 읽기: 6%p 차이는 진짜일까?</p>
-    <p class="mb-3 text-xs text-slate-400">모델 A 72% vs B 66%. 문항 수(n)를 바꿔 가며 오차범위(±)를 보세요.</p>
+    <p class="mb-3 text-xs text-slate-500">모델 A 72% vs B 66%. 문항 수(n)를 바꿔 가며 오차범위(±)를 보세요.</p>
 
     <div class="mb-3 flex flex-wrap items-center gap-2 text-sm">
       <span class="text-slate-600">시험 문항 수 n =</span>
@@ -103,7 +103,7 @@ const opened = ref<boolean[]>(SYMPTOMS.map(() => false))
       <div v-for="(m, i) in [{ name: '모델 A', p: A, ci: ciA, color: 'bg-indigo-500', line: 'bg-indigo-300' }, { name: '모델 B', p: B, ci: ciB, color: 'bg-amber-500', line: 'bg-amber-300' }]" :key="i">
         <div class="mb-1 flex justify-between text-xs">
           <span class="font-semibold text-slate-600">{{ m.name }} — {{ pp(m.p) }}%</span>
-          <span class="text-slate-400">± {{ pp(m.ci) }}%p</span>
+          <span class="text-slate-600">± {{ pp(m.ci) }}%p</span>
         </div>
         <div class="relative h-5">
           <div class="absolute inset-y-2 w-full rounded bg-slate-200/60" />
@@ -115,20 +115,20 @@ const opened = ref<boolean[]>(SYMPTOMS.map(() => false))
           <div class="absolute top-0 h-5 w-1.5 rounded transition-all" :class="m.color" :style="{ left: toPct(m.p) }" />
         </div>
       </div>
-      <div class="flex justify-between text-[10px] text-slate-400"><span>58%</span><span>70%</span><span>82%</span></div>
+      <div class="flex justify-between text-xs text-slate-500"><span>58%</span><span>70%</span><span>82%</span></div>
     </div>
     <p class="rounded-lg p-3 text-sm" :class="separated ? 'bg-emerald-50 text-emerald-800' : 'bg-amber-50 text-amber-800'">👀 {{ obs }}</p>
 
     <!-- ② 부작용 진단소 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 부작용 진단소: 이 모델, 어디가 아픈 걸까요?</p>
-    <p class="mb-3 text-xs text-slate-400">대화를 읽고 진단해 보세요. 버튼을 누르면 진단명·원인·처방이 나옵니다.</p>
+    <p class="mb-3 text-xs text-slate-500">대화를 읽고 진단해 보세요. 버튼을 누르면 진단명·원인·처방이 나옵니다.</p>
 
     <div class="space-y-3">
       <div v-for="(s, i) in SYMPTOMS" :key="i" class="rounded-lg border border-slate-100 p-3">
         <div class="mb-2 space-y-1.5">
           <p v-for="(d, j) in s.dialog" :key="j" class="text-sm leading-relaxed">
-            <span class="mr-1 rounded px-1.5 py-0.5 text-[11px] font-semibold" :class="d.who === '사용자' ? 'bg-slate-100 text-slate-500' : 'bg-indigo-50 text-indigo-500'">{{ d.who }}</span>
+            <span class="mr-1 rounded px-1.5 py-0.5 text-xs font-semibold" :class="d.who === '사용자' ? 'bg-slate-100 text-slate-600' : 'bg-indigo-50 text-indigo-600'">{{ d.who }}</span>
             <span class="text-slate-700">{{ d.text }}</span>
           </p>
         </div>
@@ -142,8 +142,8 @@ const opened = ref<boolean[]>(SYMPTOMS.map(() => false))
         </button>
         <div v-else class="rounded-lg bg-rose-50 p-3 text-sm text-slate-700">
           <p class="font-bold text-rose-700">{{ s.icon }} {{ s.diagnosis }}</p>
-          <p class="mt-1"><b class="text-slate-500">원인 계보:</b> {{ s.cause }}</p>
-          <p class="mt-1"><b class="text-slate-500">처방:</b> {{ s.remedy }}</p>
+          <p class="mt-1"><b class="text-slate-600">원인 계보:</b> {{ s.cause }}</p>
+          <p class="mt-1"><b class="text-slate-600">처방:</b> {{ s.remedy }}</p>
         </div>
       </div>
     </div>

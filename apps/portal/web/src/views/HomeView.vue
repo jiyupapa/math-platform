@@ -138,7 +138,8 @@ function reset() {
       <!-- 진단 후: 개인화 요약 + 강사 설명 -->
       <template v-else>
         <div class="mx-auto mb-4 max-w-lg rounded-2xl bg-indigo-600 p-5 text-left text-white shadow-sm">
-          <p class="text-sm font-medium text-indigo-100">AI 강사가 당신에게 맞춘 경로</p>
+          <!-- indigo-100 은 다크에서 배경(indigo-400)과 3.67:1 이 된다 — 아래 줄과 같은 50 을 쓴다 -->
+          <p class="text-sm font-medium text-indigo-50">AI 강사가 당신에게 맞춘 경로</p>
           <p class="mt-1 text-2xl font-bold">{{ rec.activeChapters }}챕터 · 예상 {{ hours(rec.activeMinutes) }}시간</p>
           <p class="mt-2 text-sm text-indigo-50">{{ explanation }}</p>
           <div class="mt-1">
@@ -154,7 +155,7 @@ function reset() {
         <!-- 향상도 (학습 전↔후) -->
         <div class="mx-auto mt-4 max-w-lg">
           <ImprovementCard v-if="improvement" :before="improvement.before" :after="improvement.after" />
-          <p v-else class="rounded-xl bg-slate-100 p-3 text-left text-sm text-slate-500">
+          <p v-else class="rounded-xl bg-slate-100 p-3 text-left text-sm text-slate-600">
             📈 학습을 진행한 뒤 <strong>다시 진단하기</strong>를 누르면, 학습 전과 비교한 향상도가 여기 나타납니다.
           </p>
         </div>
@@ -261,7 +262,7 @@ function reset() {
             class="absolute -left-[31px] flex h-5 w-5 items-center justify-center rounded-full ring-4 ring-white"
             :class="roleStyle[row.step.role].dot"
           >
-            <span class="text-[10px] font-bold text-white">{{ row.step.order }}</span>
+            <span class="text-xs font-bold text-white">{{ row.step.order }}</span>
           </span>
           <span
             v-else
@@ -293,7 +294,7 @@ function reset() {
               {{ row.step.title }}
             </h4>
             <p class="mt-0.5 break-keep text-sm text-slate-600">{{ row.step.gain }}</p>
-            <p v-if="row.note" class="mt-1 text-xs font-medium text-amber-600">💡 {{ row.note }}</p>
+            <p v-if="row.note" class="mt-1 text-xs font-medium text-amber-700">💡 {{ row.note }}</p>
             <div class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-slate-500">
               <span>{{ row.step.scope }}</span>
               <span aria-hidden="true">·</span>

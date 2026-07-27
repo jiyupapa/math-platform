@@ -101,10 +101,10 @@ function preset(na: number, nb: number, nc: number, nd: number) {
         <defs>
           <clipPath id="gt-clip"><rect x="0" y="0" :width="size" :height="size" /></clipPath>
           <marker id="gt-ihat" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
-            <path d="M0,0 L7,3 L0,6 Z" fill="#10b981" />
+            <path d="M0,0 L7,3 L0,6 Z" fill="var(--c-emerald-500)" />
           </marker>
           <marker id="gt-jhat" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
-            <path d="M0,0 L7,3 L0,6 Z" fill="#ec4899" />
+            <path d="M0,0 L7,3 L0,6 Z" fill="var(--c-pink-500)" />
           </marker>
         </defs>
 
@@ -117,11 +117,11 @@ function preset(na: number, nb: number, nc: number, nd: number) {
             :y1="l.y1"
             :x2="l.x2"
             :y2="l.y2"
-            stroke="#e2e8f0"
+            stroke="var(--c-slate-200)"
             stroke-width="1"
           />
           <!-- 변환된 평행사변형 (단위 정사각형의 상) -->
-          <polygon :points="square" fill="#6366f1" fill-opacity="0.12" stroke="none" />
+          <polygon :points="square" fill="var(--c-indigo-500)" fill-opacity="0.12" stroke="none" />
           <!-- 변환된 격자 -->
           <line
             v-for="(l, i) in movedLines"
@@ -130,7 +130,7 @@ function preset(na: number, nb: number, nc: number, nd: number) {
             :y1="l.y1"
             :x2="l.x2"
             :y2="l.y2"
-            stroke="#a5b4fc"
+            stroke="var(--c-indigo-300)"
             stroke-width="1.5"
           />
           <!-- 기저벡터 î, ĵ -->
@@ -139,7 +139,7 @@ function preset(na: number, nb: number, nc: number, nd: number) {
             :y1="origin.Y"
             :x2="iHat.X"
             :y2="iHat.Y"
-            stroke="#10b981"
+            stroke="var(--c-emerald-500)"
             stroke-width="3"
             marker-end="url(#gt-ihat)"
           />
@@ -148,11 +148,11 @@ function preset(na: number, nb: number, nc: number, nd: number) {
             :y1="origin.Y"
             :x2="jHat.X"
             :y2="jHat.Y"
-            stroke="#ec4899"
+            stroke="var(--c-pink-500)"
             stroke-width="3"
             marker-end="url(#gt-jhat)"
           />
-          <circle :cx="origin.X" :cy="origin.Y" r="3" fill="#334155" />
+          <circle :cx="origin.X" :cy="origin.Y" r="3" fill="var(--c-slate-700)" />
         </g>
       </svg>
 
@@ -164,22 +164,22 @@ function preset(na: number, nb: number, nc: number, nd: number) {
 
         <div class="mb-3 grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
           <label class="flex items-center gap-2">
-            <span class="w-6 font-mono text-emerald-600">a</span>
+            <span class="w-6 font-mono text-emerald-700">a</span>
             <input v-model.number="a" type="range" min="-2" max="2" step="0.25" class="flex-1" />
             <span class="w-10 text-right font-mono">{{ a }}</span>
           </label>
           <label class="flex items-center gap-2">
-            <span class="w-6 font-mono text-pink-600">b</span>
+            <span class="w-6 font-mono text-pink-700">b</span>
             <input v-model.number="b" type="range" min="-2" max="2" step="0.25" class="flex-1" />
             <span class="w-10 text-right font-mono">{{ b }}</span>
           </label>
           <label class="flex items-center gap-2">
-            <span class="w-6 font-mono text-emerald-600">c</span>
+            <span class="w-6 font-mono text-emerald-700">c</span>
             <input v-model.number="c" type="range" min="-2" max="2" step="0.25" class="flex-1" />
             <span class="w-10 text-right font-mono">{{ c }}</span>
           </label>
           <label class="flex items-center gap-2">
-            <span class="w-6 font-mono text-pink-600">d</span>
+            <span class="w-6 font-mono text-pink-700">d</span>
             <input v-model.number="d" type="range" min="-2" max="2" step="0.25" class="flex-1" />
             <span class="w-10 text-right font-mono">{{ d }}</span>
           </label>

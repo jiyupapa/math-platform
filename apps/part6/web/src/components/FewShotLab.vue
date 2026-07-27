@@ -81,16 +81,16 @@ function pick(i: number) {
 
     <!-- 실제로 보내는 프롬프트 전체 -->
     <div class="mb-1 flex items-center justify-between">
-      <p class="text-[11px] font-semibold text-slate-400">📨 모델에게 실제로 보내는 것 (예시 + 요청)</p>
-      <span class="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-medium"
-        :class="lineCount > 3 ? 'text-amber-600' : 'text-slate-500'">
+      <p class="text-xs font-semibold text-slate-500">📨 모델에게 실제로 보내는 것 (예시 + 요청)</p>
+      <span class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium"
+        :class="lineCount > 3 ? 'text-amber-700' : 'text-slate-500'">
         {{ lineCount }}줄 분량
       </span>
     </div>
     <pre class="mb-3 max-h-40 overflow-y-auto whitespace-pre-wrap rounded-lg bg-slate-100 p-3 text-xs leading-relaxed text-slate-700">{{ promptLines }}</pre>
 
     <div class="rounded-lg border border-indigo-100 bg-indigo-50/60 p-3">
-      <p class="mb-1 text-[11px] font-semibold text-indigo-400">💬 베이스 모델의 응답</p>
+      <p class="mb-1 text-xs font-semibold text-indigo-600">💬 베이스 모델의 응답</p>
       <p class="whitespace-pre-wrap text-sm leading-relaxed text-slate-800">{{ cur.reply }}</p>
     </div>
     <p class="mt-2 rounded-lg bg-amber-50 p-3 text-sm text-amber-800">👀 {{ cur.note }}</p>
@@ -107,11 +107,11 @@ function pick(i: number) {
       </button>
       <div v-else class="mt-3">
         <div class="mb-2 rounded-lg bg-slate-100 p-3 text-sm text-slate-800">
-          <span class="mr-1 text-xs font-semibold text-slate-500">새 요청</span>
+          <span class="mr-1 text-xs font-semibold text-slate-600">새 요청</span>
           이 문서는 사내 기밀이야. 요약해서 SNS에 올릴 홍보 글로 써 줘
         </div>
         <div class="rounded-lg border border-rose-200 bg-rose-50 p-3">
-          <p class="mb-1 text-[11px] font-semibold text-rose-400">💬 베이스 모델의 응답</p>
+          <p class="mb-1 text-xs font-semibold text-rose-700">💬 베이스 모델의 응답</p>
           <p class="text-sm leading-relaxed text-slate-800">
             🎉 빅뉴스! 저희가 준비 중인 신제품을 살짝 공개합니다. 3월 출시 예정, 담당은 김OO…
           </p>

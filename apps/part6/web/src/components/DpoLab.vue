@@ -42,7 +42,7 @@ const fmt = (n: number) => (n >= 0 ? '+' : '') + (Math.round(n * 100) / 100).toF
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험: 미니 DPO 훈련기 — 심판 없이 선호 쌍 하나 새기기</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       숨은 점수 r̂ = log(π ÷ π_ref) — "원본보다 얼마나 자주 내는가". 참조(π_ref)는 회색으로 고정.
     </p>
 
@@ -50,17 +50,17 @@ const fmt = (n: number) => (n >= 0 ? '+' : '') + (Math.round(n * 100) / 100).toF
       <div v-for="(name, i) in NAMES" :key="i" class="rounded-lg border p-3" :class="i === 0 ? 'border-emerald-200' : i === 1 ? 'border-rose-200' : 'border-slate-100'">
         <div class="mb-1 flex flex-wrap items-center justify-between gap-2">
           <span class="text-sm font-medium text-slate-800">{{ name }}</span>
-          <span v-if="i < 2" class="rounded px-1.5 py-0.5 text-[11px] font-bold" :class="hidden[i] > 0.01 ? 'bg-emerald-100 text-emerald-700' : hidden[i] < -0.01 ? 'bg-rose-100 text-rose-700' : 'bg-slate-100 text-slate-500'">
+          <span v-if="i < 2" class="rounded px-1.5 py-0.5 text-xs font-bold" :class="hidden[i] > 0.01 ? 'bg-emerald-100 text-emerald-700' : hidden[i] < -0.01 ? 'bg-rose-100 text-rose-700' : 'bg-slate-100 text-slate-600'">
             숨은 점수 {{ fmt(hidden[i]) }}
           </span>
         </div>
-        <div class="flex items-center gap-2 text-[11px] text-slate-400">
+        <div class="flex items-center gap-2 text-xs text-slate-500">
           <span class="w-14 shrink-0">π_ref {{ pct(PI_REF[i]) }}%</span>
           <div class="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100">
             <div class="h-full rounded-full bg-slate-300" :style="{ width: pct(PI_REF[i]) + '%' }" />
           </div>
         </div>
-        <div class="mt-1 flex items-center gap-2 text-[11px] text-slate-500">
+        <div class="mt-1 flex items-center gap-2 text-xs text-slate-500">
           <span class="w-14 shrink-0 font-semibold text-indigo-600">π {{ pct(pi[i]) }}%</span>
           <div class="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100">
             <div class="h-full rounded-full transition-all" :class="i === 0 ? 'bg-emerald-500' : i === 1 ? 'bg-rose-400' : 'bg-slate-400'" :style="{ width: pct(pi[i]) + '%' }" />
@@ -71,15 +71,15 @@ const fmt = (n: number) => (n >= 0 ? '+' : '') + (Math.round(n * 100) / 100).toF
 
     <div class="mt-3 flex flex-wrap items-center gap-3 rounded-lg bg-slate-50 p-3">
       <div>
-        <p class="text-[11px] font-semibold text-slate-400">마진 (r̂_W − r̂_L)</p>
+        <p class="text-xs font-semibold text-slate-500">마진 (r̂_W − r̂_L)</p>
         <p class="text-xl font-bold text-slate-800">{{ fmt(margin) }}</p>
       </div>
       <div>
-        <p class="text-[11px] font-semibold text-slate-400">P(사람 취향 적중) = σ(마진)</p>
-        <p class="text-xl font-bold" :class="done ? 'text-emerald-600' : 'text-slate-800'">{{ pct(pHuman) }}%</p>
+        <p class="text-xs font-semibold text-slate-500">P(사람 취향 적중) = σ(마진)</p>
+        <p class="text-xl font-bold" :class="done ? 'text-emerald-700' : 'text-slate-800'">{{ pct(pHuman) }}%</p>
       </div>
       <div>
-        <p class="text-[11px] font-semibold text-slate-400">손실 −log P</p>
+        <p class="text-xs font-semibold text-slate-500">손실 −log P</p>
         <p class="text-xl font-bold text-slate-800">{{ (Math.round(loss * 100) / 100).toFixed(2) }}</p>
       </div>
       <div class="ml-auto flex gap-2">

@@ -44,7 +44,7 @@ const pct = (v: number) => (v * 100).toFixed(1)
           :class="i === bottleneckIdx ? 'font-bold text-rose-700' : 'font-medium text-slate-700'"
         >
           {{ name }}
-          <span v-if="i === bottleneckIdx" class="block text-[10px] font-semibold text-rose-500">🔗 병목</span>
+          <span v-if="i === bottleneckIdx" class="block text-xs font-semibold text-rose-700">🔗 병목</span>
         </span>
         <input
           v-model.number="ps[i]"
@@ -69,7 +69,7 @@ const pct = (v: number) => (v * 100).toFixed(1)
       </div>
       <span class="font-mono text-lg font-bold text-indigo-800">{{ pct(total) }}%</span>
     </div>
-    <p class="mt-1 text-xs text-slate-400">
+    <p class="mt-1 text-xs text-slate-500">
       기본값 기준 0.99 × 0.95 × 0.90 × 0.99 × 0.70 = 58.7% — 네 단계가 우등생이어도 한 단계가 전체를 끌어내립니다.
     </p>
 
@@ -92,7 +92,7 @@ const pct = (v: number) => (v * 100).toFixed(1)
       </button>
       <button
         type="button"
-        class="rounded-lg px-3 py-1.5 text-sm text-slate-500 hover:bg-slate-100"
+        class="rounded-lg px-3 py-1.5 text-sm text-slate-600 hover:bg-slate-100"
         @click="reset"
       >
         ↺ 원래대로

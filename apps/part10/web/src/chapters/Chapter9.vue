@@ -217,7 +217,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch9')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">9장 완료 — 2막의 무기가 모두 모였습니다!</p>
       <p class="mt-1 text-sm text-emerald-700">
         오차범위(6장) → 쌍대·p값(7장) → 오염(8장) → 심판 감정(9장). 다음은 캡스톤 —

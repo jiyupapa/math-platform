@@ -40,7 +40,7 @@ const top = computed(() => ranked.value[0])
         <input v-model.number="action" type="range" min="0" max="5" step="1" class="w-full" />
       </label>
       <label class="text-sm">
-        <span class="mb-1 block">💕 로맨스 선호: <b class="text-pink-600">{{ romance }}</b></span>
+        <span class="mb-1 block">💕 로맨스 선호: <b class="text-pink-700">{{ romance }}</b></span>
         <input v-model.number="romance" type="range" min="0" max="5" step="1" class="w-full" />
       </label>
     </div>
@@ -56,7 +56,7 @@ const top = computed(() => ranked.value[0])
         <span class="w-6 text-center text-lg">{{ m.emoji }}</span>
         <span class="w-28 shrink-0 text-sm">
           {{ m.name }}
-          <span v-if="i === 0" class="ml-1 text-xs font-bold text-emerald-600">추천</span>
+          <span v-if="i === 0" class="ml-1 text-xs font-bold text-emerald-700">추천</span>
         </span>
         <span class="h-3 flex-1 overflow-hidden rounded-full bg-slate-100">
           <span

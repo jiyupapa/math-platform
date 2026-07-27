@@ -88,7 +88,7 @@ const presets = [
         <p class="mb-1 text-xs font-semibold text-slate-500">결합분포 p(X, Y)</p>
         <table class="text-center text-sm">
           <thead>
-            <tr class="text-[11px] text-slate-400">
+            <tr class="text-xs text-slate-500">
               <th class="px-2 py-1"></th>
               <th class="px-2 py-1">예보: 비</th>
               <th class="px-2 py-1">예보: 맑음</th>
@@ -96,7 +96,7 @@ const presets = [
           </thead>
           <tbody>
             <tr>
-              <td class="px-2 py-1 text-[11px] text-slate-400">실제: 비</td>
+              <td class="px-2 py-1 text-xs text-slate-500">실제: 비</td>
               <td class="rounded bg-indigo-50 px-3 py-1.5 font-medium tabular-nums text-indigo-800">
                 {{ joint.rainRain.toFixed(2) }}
               </td>
@@ -105,7 +105,7 @@ const presets = [
               </td>
             </tr>
             <tr>
-              <td class="px-2 py-1 text-[11px] text-slate-400">실제: 맑음</td>
+              <td class="px-2 py-1 text-xs text-slate-500">실제: 맑음</td>
               <td class="rounded bg-slate-50 px-3 py-1.5 tabular-nums text-slate-600">
                 {{ joint.sunRain.toFixed(2) }}
               </td>
@@ -115,39 +115,39 @@ const presets = [
             </tr>
           </tbody>
         </table>
-        <p class="mt-1 max-w-[13rem] text-[11px] leading-relaxed text-slate-400">
+        <p class="mt-1 max-w-[13rem] text-xs leading-relaxed text-slate-500">
           대각선(예보 적중)에 확률이 몰릴수록 두 변수가 강하게 얽힙니다.
         </p>
       </div>
 
       <!-- 벤다이어그램 -->
       <svg :viewBox="`0 0 ${W} ${HEIGHT}`" class="min-w-0 max-w-sm flex-1 select-none">
-        <circle :cx="cx1" :cy="CY" :r="R" fill="#10b981" fill-opacity="0.35" stroke="#059669" stroke-width="1.5" />
-        <circle :cx="cx2" :cy="CY" :r="R" fill="#6366f1" fill-opacity="0.35" stroke="#4f46e5" stroke-width="1.5" />
+        <circle :cx="cx1" :cy="CY" :r="R" fill="var(--c-emerald-500)" fill-opacity="0.35" stroke="var(--c-emerald-600)" stroke-width="1.5" />
+        <circle :cx="cx2" :cy="CY" :r="R" fill="var(--c-indigo-500)" fill-opacity="0.35" stroke="var(--c-indigo-600)" stroke-width="1.5" />
         <!-- 원 이름 -->
-        <text :x="cx1 - R * 0.45" :y="CY - R - 8" text-anchor="middle" font-size="11" fill="#059669" font-weight="bold">
+        <text :x="cx1 - R * 0.45" :y="CY - R - 8" text-anchor="middle" font-size="11" fill="var(--c-emerald-600)" font-weight="bold">
           H(X) 실제 날씨 = 1비트
         </text>
-        <text :x="cx2 + R * 0.45" :y="CY + R + 16" text-anchor="middle" font-size="11" fill="#4f46e5" font-weight="bold">
+        <text :x="cx2 + R * 0.45" :y="CY + R + 16" text-anchor="middle" font-size="11" fill="var(--c-indigo-600)" font-weight="bold">
           H(Y) 예보 = 1비트
         </text>
         <!-- 영역 라벨 -->
-        <text v-if="I < 0.97" :x="cx1 - R * 0.55" :y="CY + 4" text-anchor="middle" font-size="10" fill="#047857">
+        <text v-if="I < 0.97" :x="cx1 - R * 0.55" :y="CY + 4" text-anchor="middle" font-size="10" fill="var(--c-emerald-700)">
           H(X|Y)
         </text>
-        <text v-if="I < 0.97" :x="cx1 - R * 0.55" :y="CY + 17" text-anchor="middle" font-size="10" fill="#047857">
+        <text v-if="I < 0.97" :x="cx1 - R * 0.55" :y="CY + 17" text-anchor="middle" font-size="10" fill="var(--c-emerald-700)">
           {{ condH.toFixed(2) }}
         </text>
-        <text v-if="I > 0.03" :x="MID" :y="CY + 4" text-anchor="middle" font-size="10" font-weight="bold" fill="#7c3aed">
+        <text v-if="I > 0.03" :x="MID" :y="CY + 4" text-anchor="middle" font-size="10" font-weight="bold" fill="var(--c-violet-600)">
           I(X;Y)
         </text>
-        <text v-if="I > 0.03" :x="MID" :y="CY + 17" text-anchor="middle" font-size="10" font-weight="bold" fill="#7c3aed">
+        <text v-if="I > 0.03" :x="MID" :y="CY + 17" text-anchor="middle" font-size="10" font-weight="bold" fill="var(--c-violet-600)">
           {{ I.toFixed(2) }}
         </text>
-        <text v-if="I < 0.97" :x="cx2 + R * 0.55" :y="CY + 4" text-anchor="middle" font-size="10" fill="#4338ca">
+        <text v-if="I < 0.97" :x="cx2 + R * 0.55" :y="CY + 4" text-anchor="middle" font-size="10" fill="var(--c-indigo-700)">
           H(Y|X)
         </text>
-        <text v-if="I < 0.97" :x="cx2 + R * 0.55" :y="CY + 17" text-anchor="middle" font-size="10" fill="#4338ca">
+        <text v-if="I < 0.97" :x="cx2 + R * 0.55" :y="CY + 17" text-anchor="middle" font-size="10" fill="var(--c-indigo-700)">
           {{ condH.toFixed(2) }}
         </text>
       </svg>
@@ -157,19 +157,19 @@ const presets = [
     <div class="mt-3 grid grid-cols-3 gap-2 text-center">
       <div class="rounded-lg bg-emerald-50 p-2">
         <p class="text-lg font-bold tabular-nums text-emerald-700">1.000</p>
-        <p class="text-[11px] text-emerald-600">H(X) — 예보 없이 남는 불확실성</p>
+        <p class="text-xs text-emerald-700">H(X) — 예보 없이 남는 불확실성</p>
       </div>
       <div class="rounded-lg bg-slate-50 p-2">
         <p class="text-lg font-bold tabular-nums text-slate-700">{{ condH.toFixed(3) }}</p>
-        <p class="text-[11px] text-slate-500">H(X|Y) — 예보를 본 뒤 남는 것</p>
+        <p class="text-xs text-slate-500">H(X|Y) — 예보를 본 뒤 남는 것</p>
       </div>
       <div class="rounded-lg bg-violet-50 p-2">
         <p class="text-lg font-bold tabular-nums text-violet-700">{{ I.toFixed(3) }}</p>
-        <p class="text-[11px] text-violet-600">I(X;Y) — 예보가 준 정보 (겹침)</p>
+        <p class="text-xs text-violet-600">I(X;Y) — 예보가 준 정보 (겹침)</p>
       </div>
     </div>
 
-    <p class="mt-2 text-xs" :class="s <= 0.02 ? 'font-semibold text-violet-600' : 'text-slate-400'">
+    <p class="mt-2 text-xs" :class="s <= 0.02 ? 'font-semibold text-violet-600' : 'text-slate-500'">
       <template v-if="s <= 0.02">
         🙃 항상 반대로 말하는 예보 — 그런데 I = 1비트 만점! 틀리는 걸 알면 뒤집어 들으면
         되니까요. 상호정보량은 "맞느냐"가 아니라 <b>"얽혀 있느냐"</b>를 잽니다.

@@ -96,7 +96,7 @@ const activeParts = computed(() => parts.value.length)
             <span class="font-medium text-slate-800">{{ p.label }}</span>
             <span class="text-xs text-slate-500">
               진입 <b class="text-slate-700">{{ p.users }}</b>명 · 완주율
-              <b class="text-emerald-600">{{ p.rate }}%</b>
+              <b class="text-emerald-700">{{ p.rate }}%</b>
             </span>
           </div>
 
@@ -119,10 +119,10 @@ const activeParts = computed(() => parts.value.length)
                   :style="{ height: (c.users ? Math.max(6, Math.round((c.users / p.maxCh) * 100)) : 0) + '%' }"
                 />
               </div>
-              <span class="mt-1 text-[9px] leading-none text-slate-500">{{ c.num }}</span>
+              <span class="mt-1 text-xs leading-none text-slate-500">{{ c.num }}</span>
             </div>
           </div>
-          <p class="mt-1 text-[11px] text-slate-500">
+          <p class="mt-1 text-xs text-slate-500">
             막대 = 각 장을 완료한 인원(왼→오 진행). 오른쪽으로 갈수록 낮아지면 그 지점이 이탈 구간.
           </p>
         </div>

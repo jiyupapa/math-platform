@@ -287,7 +287,7 @@ function onSetComplete() {
       v-if="progress.isDone('sample')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">워밍업 완료! 이 패턴 그대로 끝까지 갑니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 확률보다 먼저, 눈앞의 데이터를 요약하는 법 — <b>평균·중앙값·최빈값</b>입니다.

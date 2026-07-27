@@ -118,11 +118,11 @@ const dotY = computed(() => yOf(showBits.value))
           :style="{ width: showRatio * 100 + '%' }"
         />
       </div>
-      <span class="w-28 shrink-0 text-sm font-bold tabular-nums" :class="overflow ? 'text-rose-600' : 'text-indigo-700'">
+      <span class="w-28 shrink-0 text-sm font-bold tabular-nums" :class="overflow ? 'text-rose-700' : 'text-indigo-700'">
         {{ showBits.toFixed(2) }} 비트{{ overflow ? ' 💥' : '' }}
       </span>
     </div>
-    <p class="mt-1 text-xs text-slate-400" style="padding-left: 6.75rem">
+    <p class="mt-1 text-xs text-slate-500" style="padding-left: 6.75rem">
       = 반반 질문 약 {{ Math.ceil(showBits) }}번 어치의 정보
       <template v-if="showP === 1">— 이미 아는 일이라 정보가 0!</template>
     </p>
@@ -131,17 +131,17 @@ const dotY = computed(() => yOf(showBits.value))
     <div class="mt-4 flex flex-col items-center">
       <svg :viewBox="`0 0 ${W} ${H}`" class="w-full max-w-md">
         <!-- 축 -->
-        <line :x1="PAD" :y1="H - PAD" :x2="W - PAD" :y2="H - PAD" stroke="#cbd5e1" stroke-width="1" />
-        <line :x1="PAD" :y1="PAD" :x2="PAD" :y2="H - PAD" stroke="#cbd5e1" stroke-width="1" />
+        <line :x1="PAD" :y1="H - PAD" :x2="W - PAD" :y2="H - PAD" stroke="var(--c-slate-300)" stroke-width="1" />
+        <line :x1="PAD" :y1="PAD" :x2="PAD" :y2="H - PAD" stroke="var(--c-slate-300)" stroke-width="1" />
         <!-- 곡선 -->
-        <path :d="curvePath" fill="none" stroke="#6366f1" stroke-width="2.5" />
+        <path :d="curvePath" fill="none" stroke="var(--c-indigo-500)" stroke-width="2.5" />
         <!-- 현재 점 -->
-        <circle :cx="dotX" :cy="dotY" r="6" fill="#4f46e5" stroke="#fff" stroke-width="2" />
+        <circle :cx="dotX" :cy="dotY" r="6" fill="var(--c-indigo-600)" stroke="var(--c-white)" stroke-width="2" />
         <!-- 라벨 -->
-        <text :x="W - PAD" :y="H - PAD - 4" text-anchor="end" font-size="10" fill="#94a3b8">확률 p →</text>
-        <text :x="PAD + 4" :y="PAD + 10" font-size="10" fill="#94a3b8">↑ 놀람 (비트)</text>
+        <text :x="W - PAD" :y="H - PAD - 4" text-anchor="end" font-size="10" fill="var(--c-slate-400)">확률 p →</text>
+        <text :x="PAD + 4" :y="PAD + 10" font-size="10" fill="var(--c-slate-400)">↑ 놀람 (비트)</text>
       </svg>
-      <p class="mt-1 text-xs text-slate-400">
+      <p class="mt-1 text-xs text-slate-500">
         오른쪽 끝(p = 1)에서 0으로 죽고, 왼쪽(p → 0)으로 갈수록 절벽처럼 치솟아요.
       </p>
     </div>

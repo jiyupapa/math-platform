@@ -52,7 +52,7 @@ const swallow = computed(() => {
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 계산기 대결 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 계산기 대결: 학교 산수 vs 이 브라우저</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       아래 계산을 <b>지금 이 브라우저</b>가 직접 합니다(미리 적어 둔 답이 아닙니다).
       학교에서 배운 답과 비교해 보세요.
     </p>
@@ -72,24 +72,24 @@ const swallow = computed(() => {
 
     <div class="mt-3 grid gap-2 sm:grid-cols-2">
       <div class="rounded-lg bg-slate-50 p-3">
-        <p class="text-[11px] text-slate-400">🏫 학교 산수의 답</p>
+        <p class="text-xs text-slate-500">🏫 학교 산수의 답</p>
         <p class="font-mono text-lg font-bold text-slate-700">{{ duel.school }}</p>
       </div>
       <div class="rounded-lg p-3" :class="duel.match ? 'bg-emerald-50' : 'bg-rose-50'">
-        <p class="text-[11px]" :class="duel.match ? 'text-emerald-500' : 'text-rose-400'">💻 이 브라우저의 답</p>
-        <p class="break-all font-mono text-lg font-bold" :class="duel.match ? 'text-emerald-700' : 'text-rose-600'">
+        <p class="text-xs" :class="duel.match ? 'text-emerald-700' : 'text-rose-700'">💻 이 브라우저의 답</p>
+        <p class="break-all font-mono text-lg font-bold" :class="duel.match ? 'text-emerald-700' : 'text-rose-700'">
           {{ duel.text }}
         </p>
       </div>
     </div>
 
-    <p class="mt-2 text-sm font-medium" :class="duel.match ? 'text-emerald-600' : 'text-rose-600'">
+    <p class="mt-2 text-sm font-medium" :class="duel.match ? 'text-emerald-700' : 'text-rose-700'">
       {{ duel.match ? '✅ 일치 — 이 수들은 컴퓨터의 눈금 위에 정확히 있습니다' : '❗ 불일치 — 답이 미세하게 어긋났습니다' }}
     </p>
 
     <button
       type="button"
-      class="mt-3 rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-500 transition hover:bg-slate-200"
+      class="mt-3 rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-600 transition hover:bg-slate-200"
       @click="zoom = !zoom"
     >
       🔍 저장값 돋보기 {{ zoom ? '닫기' : '— 재료 숫자들의 진짜 저장값 보기' }}
@@ -111,7 +111,7 @@ const swallow = computed(() => {
     <!-- ② 1 삼키기 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 1 삼키기: 큰 수는 1을 더해도 그대로?</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       10의 거듭제곱에 1을 더했다가 도로 빼 봅니다 — 학교 산수라면 답은 언제나 1이어야 하죠.
       수를 키워 가며 <b>1이 사라지는 경계</b>를 찾아보세요.
     </p>
@@ -124,10 +124,10 @@ const swallow = computed(() => {
     <div class="mt-2 rounded-lg bg-slate-50 p-3">
       <p class="break-all font-mono text-xs text-slate-500">{{ swallow.big }} + 1 − {{ swallow.big }}</p>
       <div class="mt-1 flex items-center gap-3">
-        <p class="font-mono text-2xl font-bold" :class="swallow.ok ? 'text-emerald-600' : 'text-rose-600'">
+        <p class="font-mono text-2xl font-bold" :class="swallow.ok ? 'text-emerald-700' : 'text-rose-700'">
           = {{ swallow.diff }}
         </p>
-        <p class="flex-1 text-sm font-medium" :class="swallow.ok ? 'text-emerald-600' : 'text-rose-600'">
+        <p class="flex-1 text-sm font-medium" :class="swallow.ok ? 'text-emerald-700' : 'text-rose-700'">
           {{ swallow.ok ? '✅ 정상 — 아직 눈금 간격이 1보다 촘촘합니다' : '❗ 1이 삼켜졌다 — 더했는데 아무 일도 일어나지 않음' }}
         </p>
       </div>

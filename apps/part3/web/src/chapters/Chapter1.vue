@@ -136,7 +136,7 @@ function onSetComplete() {
     <ReviewFlag id="ch1-s5" chapter="ch1" label="5. 직접 움직여 보기 — 평균 vs 중앙값" />
     <p class="leading-relaxed text-slate-700">
       아래 수직선의 보라 점(데이터)을 끌어 보세요. 특히 <b>⚡ 이상치 만들기</b> 버튼을 눌러
-      점 하나를 95 로 보냈을 때 — <b class="text-rose-600">빨간 받침점(평균)</b>과
+      점 하나를 95 로 보냈을 때 — <b class="text-rose-700">빨간 받침점(평균)</b>과
       <b class="text-blue-600">파란 삼각형(중앙값)</b> 중 누가 크게 움직이나요?
     </p>
 
@@ -338,7 +338,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch1')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 1 완료. 데이터의 "대표"를 뽑을 수 있게 됐습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         그런데 평균이 같아도 데이터 모양이 전혀 다를 수 있어요. 다음은 <b>흩어짐 재기 — 분산과 표준편차</b>입니다.

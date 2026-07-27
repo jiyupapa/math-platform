@@ -29,7 +29,7 @@ function onSetComplete() {
     <ConceptCard tone="goal" title="이 챕터의 목표">
       <ul class="list-disc space-y-1 pl-5">
         <li>연립방정식의 해 = <b>직선들의 교점</b>임을 안다</li>
-        <li>연립방정식을 <b>행렬(첨가행렬)</b>로 표현한다 <span class="text-sm text-slate-400">(첨가행렬이 뭔지는 아래 2번에서 설명)</span></li>
+        <li>연립방정식을 <b>행렬(첨가행렬)</b>로 표현한다 <span class="text-sm text-slate-500">(첨가행렬이 뭔지는 아래 2번에서 설명)</span></li>
         <li><b>가우스 소거법</b>으로 단계별로 푼다</li>
         <li>해가 <b>1개 / 없음 / 무수히 많음</b> 세 경우를 안다</li>
       </ul>
@@ -276,7 +276,7 @@ function onSetComplete() {
               </tr>
             </thead>
             <tbody class="font-mono">
-              <tr><td class="px-3 py-0.5">x</td><td class="px-3 py-0.5">x</td><td class="px-3 py-0.5">− x</td><td class="px-3 py-0.5 font-semibold text-rose-600">x − x = 0 (사라짐!)</td></tr>
+              <tr><td class="px-3 py-0.5">x</td><td class="px-3 py-0.5">x</td><td class="px-3 py-0.5">− x</td><td class="px-3 py-0.5 font-semibold text-rose-700">x − x = 0 (사라짐!)</td></tr>
               <tr><td class="px-3 py-0.5">y</td><td class="px-3 py-0.5">− y</td><td class="px-3 py-0.5">− y</td><td class="px-3 py-0.5">−y − y = −2y</td></tr>
               <tr><td class="px-3 py-0.5">우변</td><td class="px-3 py-0.5">1</td><td class="px-3 py-0.5">− 3</td><td class="px-3 py-0.5">1 − 3 = −2</td></tr>
             </tbody>
@@ -350,14 +350,14 @@ function onSetComplete() {
                   <td class="border-l-2 border-slate-400 px-3 py-1.5">6</td>
                 </tr>
                 <tr>
-                  <td class="border border-slate-200 bg-slate-100 px-3 py-1.5 text-slate-400">0</td>
+                  <td class="border border-slate-200 bg-slate-100 px-3 py-1.5 text-slate-600">0</td>
                   <td class="border border-slate-200 bg-emerald-100 px-3 py-1.5 font-bold text-emerald-700">3</td>
                   <td class="border border-slate-200 px-3 py-1.5">1</td>
                   <td class="border-l-2 border-slate-400 px-3 py-1.5">5</td>
                 </tr>
                 <tr>
-                  <td class="border border-slate-200 bg-slate-100 px-3 py-1.5 text-slate-400">0</td>
-                  <td class="border border-slate-200 bg-slate-100 px-3 py-1.5 text-slate-400">0</td>
+                  <td class="border border-slate-200 bg-slate-100 px-3 py-1.5 text-slate-600">0</td>
+                  <td class="border border-slate-200 bg-slate-100 px-3 py-1.5 text-slate-600">0</td>
                   <td class="border border-slate-200 bg-emerald-100 px-3 py-1.5 font-bold text-emerald-700">2</td>
                   <td class="border-l-2 border-slate-400 px-3 py-1.5">4</td>
                 </tr>
@@ -636,7 +636,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch4')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 4 완료. 연립방정식을 풀 수 있습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">다음은 행렬을 '공간을 바꾸는 함수'로 보는 선형변환입니다.</p>
       <RouterLink

@@ -91,7 +91,7 @@ const GLOSSARY = [
     <div class="overflow-x-auto">
       <table class="w-full text-left text-xs text-slate-600">
         <thead>
-          <tr class="border-b border-slate-200 text-slate-400">
+          <tr class="border-b border-slate-200 text-slate-500">
             <th class="p-2 font-normal">9부의 비유</th>
             <th class="p-2 font-normal">실무 용어</th>
             <th class="p-2 font-normal">장</th>
@@ -101,7 +101,7 @@ const GLOSSARY = [
           <tr v-for="g in GLOSSARY" :key="g.fable" class="border-b border-slate-100">
             <td class="p-2 font-medium text-slate-700">{{ g.fable }}</td>
             <td class="p-2">{{ g.real }}</td>
-            <td class="p-2 text-slate-400">{{ g.ch }}</td>
+            <td class="p-2 text-slate-500">{{ g.ch }}</td>
           </tr>
         </tbody>
       </table>

@@ -65,7 +65,7 @@ const selValue = computed(() => (sel.value ? result.value[sel.value.i][sel.value
         </table>
       </div>
 
-      <span class="text-lg font-bold text-slate-400">×</span>
+      <span class="text-lg font-bold text-slate-500">×</span>
 
       <!-- B -->
       <div>
@@ -86,7 +86,7 @@ const selValue = computed(() => (sel.value ? result.value[sel.value.i][sel.value
         </table>
       </div>
 
-      <span class="text-lg font-bold text-slate-400">=</span>
+      <span class="text-lg font-bold text-slate-500">=</span>
 
       <!-- C (클릭 가능) -->
       <div>

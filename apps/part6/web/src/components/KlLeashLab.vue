@@ -75,7 +75,7 @@ const pct = (v: number, max: number) => `${Math.min(100, Math.round((v / max) * 
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험: KL 목줄 실험실 — 목줄 길이(β)를 골라 훈련 결과를 보세요</p>
-    <p class="mb-3 text-xs text-slate-400">목적 = 심판 점수 − β × (원본에서 멀어진 정도). 같은 훈련, 다른 β.</p>
+    <p class="mb-3 text-xs text-slate-500">목적 = 심판 점수 − β × (원본에서 멀어진 정도). 같은 훈련, 다른 β.</p>
 
     <div class="mb-3 flex flex-wrap gap-2">
       <button
@@ -96,22 +96,22 @@ const pct = (v: number, max: number) => `${Math.min(100, Math.round((v / max) * 
       <!-- 세 개의 계기판 -->
       <div class="mb-3 grid gap-2 sm:grid-cols-3">
         <div class="rounded-lg bg-slate-50 p-3">
-          <p class="text-[11px] font-semibold text-slate-400">🏅 심판(RM) 점수</p>
+          <p class="text-xs font-semibold text-slate-500">🏅 심판(RM) 점수</p>
           <p class="text-xl font-bold text-slate-800">{{ cur.rm }}</p>
           <div class="mt-1 h-2 w-full overflow-hidden rounded-full bg-slate-200">
             <div class="h-full rounded-full bg-indigo-500 transition-all" :style="{ width: pct(cur.rm, 10) }" />
           </div>
         </div>
         <div class="rounded-lg bg-slate-50 p-3">
-          <p class="text-[11px] font-semibold text-slate-400">📏 원본과의 거리 (KL)</p>
+          <p class="text-xs font-semibold text-slate-500">📏 원본과의 거리 (KL)</p>
           <p class="text-xl font-bold text-slate-800">{{ cur.kl }}</p>
           <div class="mt-1 h-2 w-full overflow-hidden rounded-full bg-slate-200">
             <div class="h-full rounded-full bg-rose-400 transition-all" :style="{ width: pct(cur.kl, 45) }" />
           </div>
         </div>
         <div class="rounded-lg bg-slate-50 p-3">
-          <p class="text-[11px] font-semibold text-slate-400">🧑 진짜 사람의 평가</p>
-          <p class="text-xl font-bold" :class="cur.human >= 8 ? 'text-emerald-600' : 'text-slate-800'">{{ cur.human }}</p>
+          <p class="text-xs font-semibold text-slate-500">🧑 진짜 사람의 평가</p>
+          <p class="text-xl font-bold" :class="cur.human >= 8 ? 'text-emerald-700' : 'text-slate-800'">{{ cur.human }}</p>
           <div class="mt-1 h-2 w-full overflow-hidden rounded-full bg-slate-200">
             <div class="h-full rounded-full bg-emerald-500 transition-all" :style="{ width: pct(cur.human, 10) }" />
           </div>
@@ -119,11 +119,11 @@ const pct = (v: number, max: number) => `${Math.min(100, Math.round((v / max) * 
       </div>
 
       <div class="rounded-lg border border-indigo-100 bg-indigo-50/60 p-3">
-        <p class="mb-1 text-[11px] font-semibold text-indigo-400">💬 훈련을 마친 모델의 답변 ("회의록 세 줄 요약해 줘")</p>
+        <p class="mb-1 text-xs font-semibold text-indigo-600">💬 훈련을 마친 모델의 답변 ("회의록 세 줄 요약해 줘")</p>
         <p class="whitespace-pre-wrap text-sm leading-relaxed text-slate-800">{{ cur.reply }}</p>
       </div>
       <p class="mt-2 rounded-lg p-3 text-sm" :class="toneBox[cur.tone]">👀 {{ cur.note }}</p>
     </template>
-    <p v-else class="text-sm text-slate-400">β 버튼을 하나 골라 보세요 — β=0(목줄 없음)부터 추천.</p>
+    <p v-else class="text-sm text-slate-500">β 버튼을 하나 골라 보세요 — β=0(목줄 없음)부터 추천.</p>
   </div>
 </template>

@@ -19,7 +19,7 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">3장 · 저장 — 칸의 해부 ② <span class="ml-1 rounded bg-indigo-100 px-1.5 py-0.5 text-[11px] font-semibold text-indigo-700">핵심</span></p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">3장 · 저장 — 칸의 해부 ② <span class="ml-1 rounded bg-indigo-100 px-1.5 py-0.5 text-xs font-semibold text-indigo-700">핵심</span></p>
     <h1 class="mb-4 text-3xl font-bold">고무줄 자 — 부동소수점</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       2장의 정수 자에는 두 가지가 안 담깁니다 — <b>0.1</b>(눈금 사이) 그리고 <b>10³⁸</b>(자 밖).
@@ -209,7 +209,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch3')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">3장 완료 — 첫 핵심 통과!</p>
       <p class="mt-1 text-sm text-emerald-700">
         칸의 구조를 열어 봤으니, 이제 그 칸으로 계산할 때 티끌이 어떻게 쌓이는지 —

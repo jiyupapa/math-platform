@@ -251,7 +251,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch9')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 9 완료 — 벡터가 다음 단어가 됐습니다</p>
       <p class="mt-1 text-sm text-emerald-700">
         입력부터 다음 단어까지 조각이 전부 모였어요. 다음 챕터(ch10)에서 이 모두를 <b>한 흐름</b>으로 잇습니다

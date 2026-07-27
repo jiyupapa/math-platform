@@ -15,20 +15,20 @@ import { useProgressStore } from '@/stores/progress'
 const progress = useProgressStore()
 
 // 점 좌표 읽기용 (화살표 없이 점만)
-const point = ref<Vec[]>([{ x: 3, y: 2, color: '#6366f1', label: 'P', draggable: true }])
+const point = ref<Vec[]>([{ x: 3, y: 2, color: 'var(--c-indigo-500)', label: 'P', draggable: true }])
 const p = computed(() => point.value[0])
 
 // 점에서 벡터로 (화살표 표시)
-const vec = ref<Vec[]>([{ x: 4, y: 3, color: '#6366f1', label: 'a', draggable: true }])
+const vec = ref<Vec[]>([{ x: 4, y: 3, color: 'var(--c-indigo-500)', label: 'a', draggable: true }])
 const a = computed(() => vec.value[0])
 
 // 사분면 산점도 (고정 점 4개)
 const quadrantChart = {
   datasets: [
-    { label: '1사분면 (+, +)', data: [{ x: 3, y: 2 }], backgroundColor: '#6366f1', pointRadius: 8 },
-    { label: '2사분면 (−, +)', data: [{ x: -3, y: 2 }], backgroundColor: '#ec4899', pointRadius: 8 },
-    { label: '3사분면 (−, −)', data: [{ x: -3, y: -2 }], backgroundColor: '#f59e0b', pointRadius: 8 },
-    { label: '4사분면 (+, −)', data: [{ x: 3, y: -2 }], backgroundColor: '#10b981', pointRadius: 8 },
+    { label: '1사분면 (+, +)', data: [{ x: 3, y: 2 }], backgroundColor: 'var(--c-indigo-500)', pointRadius: 8 },
+    { label: '2사분면 (−, +)', data: [{ x: -3, y: 2 }], backgroundColor: 'var(--c-pink-500)', pointRadius: 8 },
+    { label: '3사분면 (−, −)', data: [{ x: -3, y: -2 }], backgroundColor: 'var(--c-amber-500)', pointRadius: 8 },
+    { label: '4사분면 (+, −)', data: [{ x: 3, y: -2 }], backgroundColor: 'var(--c-emerald-500)', pointRadius: 8 },
   ],
 }
 const quadrantOptions = {
@@ -85,7 +85,7 @@ function onSetComplete() {
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 점의 좌표 읽기</h2>
     <ReviewFlag id="ch1-s2" chapter="ch1" label="2. 점의 좌표 읽기" />
     <p class="leading-relaxed text-slate-700">
-      점의 위치는 <b>순서쌍</b> 으로 나타냅니다. 아래 <b style="color:#6366f1">파란 점</b>을 끌어보세요.
+      점의 위치는 <b>순서쌍</b> 으로 나타냅니다. 아래 <b style="color: var(--c-indigo-600)">파란 점</b>을 끌어보세요.
       가로로 얼마(x), 세로로 얼마(y) 떨어졌는지가 곧 좌표입니다.
     </p>
 
@@ -337,7 +337,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch1')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 1 완료. 좌표와 벡터의 기초를 다졌습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">다음은 벡터끼리 더하고 빼는 연산입니다.</p>
       <RouterLink

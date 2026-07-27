@@ -12,11 +12,11 @@ const boundary = computed(() => 2 / c1.value)
 const oneShot = computed(() => 1 / c1.value)
 const verdict1 = computed(() => {
   const f = factor.value
-  if (f < 0.02) return { label: '🎯 한 방 도착권 — 수축 인자 ≈ 0', tone: 'text-emerald-600' }
-  if (f < 0.6) return { label: '🏃 빠른 수렴 — 스텝마다 오차가 확확 준다', tone: 'text-emerald-600' }
-  if (f < 1 - 1e-9) return { label: '🐢 수렴은 하지만 느림 — 오차가 조금씩만 준다', tone: 'text-sky-600' }
-  if (Math.abs(f - 1) < 1e-9) return { label: '♾️ 경계 — 같은 오차로 영원히 진동', tone: 'text-amber-600' }
-  return { label: '💥 폭발 — 스텝마다 오차가 커진다', tone: 'text-rose-600' }
+  if (f < 0.02) return { label: '🎯 한 방 도착권 — 수축 인자 ≈ 0', tone: 'text-emerald-700' }
+  if (f < 0.6) return { label: '🏃 빠른 수렴 — 스텝마다 오차가 확확 준다', tone: 'text-emerald-700' }
+  if (f < 1 - 1e-9) return { label: '🐢 수렴은 하지만 느림 — 오차가 조금씩만 준다', tone: 'text-sky-700' }
+  if (Math.abs(f - 1) < 1e-9) return { label: '♾️ 경계 — 같은 오차로 영원히 진동', tone: 'text-amber-700' }
+  return { label: '💥 폭발 — 스텝마다 오차가 커진다', tone: 'text-rose-700' }
 })
 // 12스텝 손실 스파크라인 (출발 오차 8, 손실 = (c/2)·오차²)
 const spark = computed(() => {
@@ -43,12 +43,12 @@ function trySweep(lr: number) {
   const startLoss = (HIDDEN_C / 2) * 64
   const fate =
     loss > startLoss + 1e-9
-      ? { fate: '💥 폭발', tone: 'text-rose-600' }
+      ? { fate: '💥 폭발', tone: 'text-rose-700' }
       : loss < 0.01
-        ? { fate: '✅ 수렴', tone: 'text-emerald-600' }
+        ? { fate: '✅ 수렴', tone: 'text-emerald-700' }
         : loss < startLoss * 0.5
-          ? { fate: '🏃 내려가는 중', tone: 'text-sky-600' }
-          : { fate: '🐢 거의 제자리', tone: 'text-amber-600' }
+          ? { fate: '🏃 내려가는 중', tone: 'text-sky-700' }
+          : { fate: '🐢 거의 제자리', tone: 'text-amber-700' }
   tried.value = { ...tried.value, [lr]: { loss, ...fate } }
 }
 const triedCount = computed(() => Object.keys(tried.value).length)
@@ -58,7 +58,7 @@ const triedCount = computed(() => Object.keys(tried.value).length)
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 수축 인자 기계 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 수축 인자 기계: 운명은 곱셈 하나로 결정된다</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       이차 골짜기에서 한 스텝마다 오차(목표까지의 거리)에는 <b>1 − 보폭×곡률</b>이 곱해집니다.
       두 다이얼을 돌려 이 배율의 절대값을 지켜보세요.
     </p>
@@ -76,24 +76,24 @@ const triedCount = computed(() => Object.keys(tried.value).length)
 
     <div class="mt-3 grid grid-cols-3 gap-2 text-center">
       <div class="rounded-lg bg-slate-50 p-2">
-        <p class="text-[11px] text-slate-400">수축 인자 |1 − lr·c|</p>
-        <p class="font-mono text-xl font-bold" :class="factor < 1 ? 'text-emerald-600' : 'text-rose-600'">{{ factor.toFixed(2) }}</p>
+        <p class="text-xs text-slate-500">수축 인자 |1 − lr·c|</p>
+        <p class="font-mono text-xl font-bold" :class="factor < 1 ? 'text-emerald-700' : 'text-rose-700'">{{ factor.toFixed(2) }}</p>
       </div>
       <div class="rounded-lg bg-slate-50 p-2">
-        <p class="text-[11px] text-slate-400">발산 경계 2/c</p>
-        <p class="font-mono text-xl font-bold text-amber-600">{{ boundary.toFixed(2) }}</p>
+        <p class="text-xs text-slate-500">발산 경계 2/c</p>
+        <p class="font-mono text-xl font-bold text-amber-700">{{ boundary.toFixed(2) }}</p>
       </div>
       <div class="rounded-lg bg-slate-50 p-2">
-        <p class="text-[11px] text-slate-400">한 방 도착 1/c</p>
+        <p class="text-xs text-slate-500">한 방 도착 1/c</p>
         <p class="font-mono text-xl font-bold text-indigo-600">{{ oneShot.toFixed(2) }}</p>
       </div>
     </div>
 
     <!-- 12스텝 손실 스파크라인 -->
     <div class="mt-2 rounded-lg bg-slate-50 p-2">
-      <p class="mb-1 text-[11px] text-slate-400">12스텝 손실 곡선 (300에서 절단)</p>
+      <p class="mb-1 text-xs text-slate-500">12스텝 손실 곡선 (300에서 절단)</p>
       <svg viewBox="0 0 270 68" class="h-16 w-full">
-        <polyline :points="spark" fill="none" :stroke="factor < 1 ? '#059669' : '#e11d48'" stroke-width="2" />
+        <polyline :points="spark" fill="none" :stroke="factor < 1 ? 'var(--c-emerald-600)' : 'var(--c-rose-600)'" stroke-width="2" />
       </svg>
     </div>
     <p class="mt-2 rounded-lg bg-slate-50 p-3 text-sm font-medium" :class="verdict1.tone">{{ verdict1.label }}</p>
@@ -107,7 +107,7 @@ const triedCount = computed(() => Object.keys(tried.value).length)
     <!-- ② lr 스위프 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 실전 상황: 곡률을 모르는 골짜기에서 보폭 고르기</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       이번 골짜기의 곡률은 <b>비공개</b>입니다(실전이 늘 그렇듯). 후보 보폭들을 10스텝씩 시험해
       좋은 보폭을 찾아보세요 — 후보가 로그 스케일(×3씩)인 것에 주목.
     </p>
@@ -118,7 +118,7 @@ const triedCount = computed(() => Object.keys(tried.value).length)
         :key="lr"
         type="button"
         class="rounded-lg px-3 py-1.5 font-mono text-xs font-semibold transition"
-        :class="tried[lr] ? 'bg-slate-200 text-slate-400' : 'bg-indigo-600 text-white hover:bg-indigo-500'"
+        :class="tried[lr] ? 'bg-slate-200 text-slate-600' : 'bg-indigo-600 text-white hover:bg-indigo-500'"
         :disabled="!!tried[lr]"
         @click="trySweep(lr)"
       >

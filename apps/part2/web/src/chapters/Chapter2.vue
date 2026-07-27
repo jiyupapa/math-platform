@@ -139,8 +139,8 @@ function onSetComplete() {
         <thead>
           <tr class="border-b border-slate-200 text-slate-500">
             <th class="py-2 font-medium">간격 크기 |h|</th>
-            <th class="py-2 font-medium text-amber-600">왼쪽에서 (h &lt; 0)</th>
-            <th class="py-2 font-medium text-emerald-600">오른쪽에서 (h &gt; 0)</th>
+            <th class="py-2 font-medium text-amber-700">왼쪽에서 (h &lt; 0)</th>
+            <th class="py-2 font-medium text-emerald-700">오른쪽에서 (h &gt; 0)</th>
           </tr>
         </thead>
         <tbody>
@@ -369,7 +369,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch2')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 2 완료. 극한으로 '순간의 기울기'를 잡았습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 이 극한을 공식으로 굳힌 <b>미분계수와 도함수의 정의</b>입니다.

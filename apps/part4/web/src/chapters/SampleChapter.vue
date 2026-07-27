@@ -36,7 +36,7 @@ const expChartData = computed(() => ({
     {
       label: 'e^(점수) — 정규화 전 지수값',
       data: tokens.value.map((t) => Math.exp(t.logit)),
-      backgroundColor: ['#818cf8', '#34d399', '#fbbf24', '#f472b6'],
+      backgroundColor: ['var(--c-indigo-400)', 'var(--c-emerald-400)', 'var(--c-amber-400)', 'var(--c-pink-400)'],
       borderRadius: 6,
     },
   ],
@@ -157,7 +157,7 @@ function onSetComplete() {
           <tbody class="font-mono tabular-nums">
             <tr class="border-b border-slate-100"><td class="py-1">75%</td><td>3</td><td class="font-bold text-indigo-600">+1.10</td></tr>
             <tr class="border-b border-slate-100 bg-slate-50"><td class="py-1">50%</td><td>1</td><td class="font-bold text-slate-700">0</td></tr>
-            <tr><td class="py-1">25%</td><td>0.33</td><td class="font-bold text-rose-500">−1.10</td></tr>
+            <tr><td class="py-1">25%</td><td>0.33</td><td class="font-bold text-rose-700">−1.10</td></tr>
           </tbody>
         </table>
       </div>
@@ -417,7 +417,7 @@ function onSetComplete() {
       v-if="progress.isDone('sample')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">샘플 챕터 완료</p>
       <p class="mt-1 text-sm text-emerald-700">
         왼쪽 진도 표시줄이 채워졌습니다. 실제 챕터도 이렇게 진행됩니다.

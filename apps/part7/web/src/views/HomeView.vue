@@ -54,7 +54,7 @@ const sampleReady = availableChapters.some((c) => c.slug === 'sample')
         >
           🚀 처음이신가요? 워밍업(비슷한 문장 찾기)부터 시작하세요 →
         </RouterLink>
-        <p class="mt-2 text-center text-xs text-indigo-400">
+        <p class="mt-2 text-center text-xs text-indigo-600">
           1부 전반(벡터·내적)만 알면 충분합니다 — 실용 트랙이라 언제든 진입할 수 있어요.
         </p>
       </template>
@@ -80,8 +80,8 @@ const sampleReady = availableChapters.some((c) => c.slug === 'sample')
           <span class="min-w-0">
             <span class="font-medium">
               {{ ch.title }}
-              <span v-if="ch.comingSoon" class="text-xs text-slate-400">(예정)</span>
-              <span v-else-if="ch.minutes" class="ml-1 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-normal text-slate-500">약 {{ ch.minutes }}분</span>
+              <span v-if="ch.comingSoon" class="text-xs text-slate-500">(예정)</span>
+              <span v-else-if="ch.minutes" class="ml-1 rounded-full bg-slate-100 px-2 py-0.5 text-xs font-normal text-slate-600">약 {{ ch.minutes }}분</span>
             </span>
             <span class="block text-sm text-slate-500">{{ ch.summary }}</span>
           </span>

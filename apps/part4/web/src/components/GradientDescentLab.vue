@@ -74,38 +74,38 @@ const lossNow = computed(() => f(w.value))
     <p class="mb-1 text-sm font-semibold text-slate-500">
       손실 곡선 위의 공을 굴려 <b>가장 낮은 골짜기</b>(손실 최소)로 내려보내세요
     </p>
-    <p class="mb-3 text-xs text-slate-400">
-      가로 = 가중치 값, 세로 = 손실(틀린 정도). 공은 현재 가중치, <b class="text-amber-600">주황 선</b>은 그 자리의
+    <p class="mb-3 text-xs text-slate-500">
+      가로 = 가중치 값, 세로 = 손실(틀린 정도). 공은 현재 가중치, <b class="text-amber-700">주황 선</b>은 그 자리의
       <b>기울기</b>(경사)예요. 공은 이 기울기의 <b>반대쪽(내리막)</b>으로 굴러갑니다.
     </p>
 
     <div class="flex justify-center">
       <svg :viewBox="`0 0 ${W} ${H}`" :width="W" :height="H" class="max-w-full rounded-xl border border-slate-100 bg-slate-50/40">
         <!-- 최소 지점 표시 -->
-        <line :x1="toX(2)" :y1="0" :x2="toX(2)" :y2="H" stroke="#e2e8f0" stroke-dasharray="4 3" />
-        <text :x="toX(2)" :y="14" text-anchor="middle" font-size="10" fill="#94a3b8">최소(골짜기)</text>
+        <line :x1="toX(2)" :y1="0" :x2="toX(2)" :y2="H" stroke="var(--c-slate-200)" stroke-dasharray="4 3" />
+        <text :x="toX(2)" :y="14" text-anchor="middle" font-size="10" fill="var(--c-slate-400)">최소(골짜기)</text>
         <!-- 손실 곡선 -->
-        <path :d="curvePath" fill="none" stroke="#c7d2fe" stroke-width="3" />
+        <path :d="curvePath" fill="none" stroke="var(--c-indigo-200)" stroke-width="3" />
         <!-- 접선(기울기): 공 위치에서 곡선이 기울어진 방향 -->
         <line
           v-if="!diverged"
           :x1="toX(w - 0.8)" :y1="toY(f(w) - grad(w) * 0.8)"
           :x2="toX(w + 0.8)" :y2="toY(f(w) + grad(w) * 0.8)"
-          stroke="#f59e0b" stroke-width="2.5"
+          stroke="var(--c-amber-500)" stroke-width="2.5"
         />
-        <text v-if="!diverged" :x="ballX + 14" :y="ballY - 12" font-size="10" fill="#d97706">기울기(경사)</text>
+        <text v-if="!diverged" :x="ballX + 14" :y="ballY - 12" font-size="10" fill="var(--c-amber-600)">기울기(경사)</text>
         <!-- 공 -->
-        <circle :cx="ballX" :cy="ballY" r="9" :fill="diverged ? '#f43f5e' : '#6366f1'" stroke="#fff" stroke-width="2.5" />
+        <circle :cx="ballX" :cy="ballY" r="9" :fill="diverged ? 'var(--c-rose-500)' : 'var(--c-indigo-500)'" stroke="var(--c-white)" stroke-width="2.5" />
       </svg>
     </div>
 
     <!-- 상태 -->
     <div class="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1 text-sm">
       <span>가중치 <b class="font-mono">{{ w.toFixed(2) }}</b></span>
-      <span>손실 <b class="font-mono" :class="lossNow < 0.1 ? 'text-emerald-600' : 'text-slate-700'">{{ lossNow.toFixed(2) }}</b></span>
-      <span class="text-slate-400">걸음 {{ steps }}</span>
-      <span v-if="diverged" class="font-medium text-rose-600">💥 발산! 학습률이 너무 큽니다</span>
-      <span v-else-if="lossNow < 0.05" class="font-medium text-emerald-600">🎯 골짜기 도착!</span>
+      <span>손실 <b class="font-mono" :class="lossNow < 0.1 ? 'text-emerald-700' : 'text-slate-700'">{{ lossNow.toFixed(2) }}</b></span>
+      <span class="text-slate-500">걸음 {{ steps }}</span>
+      <span v-if="diverged" class="font-medium text-rose-700">💥 발산! 학습률이 너무 큽니다</span>
+      <span v-else-if="lossNow < 0.05" class="font-medium text-emerald-700">🎯 골짜기 도착!</span>
     </div>
 
     <!-- 학습률 -->
@@ -114,7 +114,7 @@ const lossNow = computed(() => f(w.value))
       <input type="range" min="0.05" max="1.1" step="0.05" v-model.number="lr" class="h-2 w-40 cursor-pointer accent-indigo-500" />
       <span class="w-10 font-mono text-sm tabular-nums">{{ lr.toFixed(2) }}</span>
     </label>
-    <p v-if="lr > 1" class="mt-1 text-xs text-rose-500">⚠️ 학습률 &gt; 1: 골짜기를 지나쳐 튕겨 나갑니다(발산). 줄여 보세요.</p>
+    <p v-if="lr > 1" class="mt-1 text-xs text-rose-700">⚠️ 학습률 &gt; 1: 골짜기를 지나쳐 튕겨 나갑니다(발산). 줄여 보세요.</p>
 
     <!-- 버튼 -->
     <div class="mt-3 flex flex-wrap gap-2">

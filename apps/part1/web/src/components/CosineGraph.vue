@@ -38,10 +38,10 @@ const markY = computed(() => yOf(Math.cos(rad.value)))
 
 const tone = computed(() =>
   cosVal.value > 0.01
-    ? { color: '#10b981', label: '같은 쪽 (닮음 · 내적 +)' }
+    ? { color: 'var(--c-emerald-500)', label: '같은 쪽 (닮음 · 내적 +)' }
     : cosVal.value < -0.01
-      ? { color: '#f43f5e', label: '반대 쪽 (내적 −)' }
-      : { color: '#64748b', label: '수직 (내적 0)' },
+      ? { color: 'var(--c-rose-500)', label: '반대 쪽 (내적 −)' }
+      : { color: 'var(--c-slate-500)', label: '수직 (내적 0)' },
 )
 
 // --- 두 벡터 미니 그림 ---
@@ -65,37 +65,37 @@ const by = computed(() => vc - vr * Math.sin(rad.value))
       <svg :width="VS" :height="VS" :viewBox="`0 0 ${VS} ${VS}`" class="mx-auto shrink-0 rounded-lg bg-slate-50">
         <defs>
           <marker id="cg-a" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L6,3 L0,6 Z" fill="#6366f1" />
+            <path d="M0,0 L6,3 L0,6 Z" fill="var(--c-indigo-500)" />
           </marker>
           <marker id="cg-b" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L6,3 L0,6 Z" fill="#ec4899" />
+            <path d="M0,0 L6,3 L0,6 Z" fill="var(--c-pink-500)" />
           </marker>
         </defs>
         <!-- a: 오른쪽 고정 -->
-        <line :x1="vc" :y1="vc" :x2="vc + vr" :y2="vc" stroke="#6366f1" stroke-width="3" marker-end="url(#cg-a)" />
+        <line :x1="vc" :y1="vc" :x2="vc + vr" :y2="vc" stroke="var(--c-indigo-500)" stroke-width="3" marker-end="url(#cg-a)" />
         <!-- b: θ 회전 -->
-        <line :x1="vc" :y1="vc" :x2="bx" :y2="by" stroke="#ec4899" stroke-width="3" marker-end="url(#cg-b)" />
-        <circle :cx="vc" :cy="vc" r="2.5" fill="#334155" />
-        <text :x="vc + vr + 2" :y="vc + 4" class="fill-indigo-500 text-[11px]">a</text>
-        <text :x="bx" :y="by - 4" class="fill-pink-500 text-[11px]">b</text>
+        <line :x1="vc" :y1="vc" :x2="bx" :y2="by" stroke="var(--c-pink-500)" stroke-width="3" marker-end="url(#cg-b)" />
+        <circle :cx="vc" :cy="vc" r="2.5" fill="var(--c-slate-700)" />
+        <text :x="vc + vr + 2" :y="vc + 4" class="fill-indigo-500 text-xs">a</text>
+        <text :x="bx" :y="by - 4" class="fill-pink-500 text-xs">b</text>
       </svg>
 
       <!-- 코사인 곡선 -->
       <svg :width="W" :height="H" :viewBox="`0 0 ${W} ${H}`" class="mx-auto flex-1 rounded-lg bg-slate-50">
         <!-- 기준선 -->
-        <line :x1="padL" :y1="yOf(1)" :x2="W - padR" :y2="yOf(1)" stroke="#e2e8f0" stroke-width="1" />
-        <line :x1="padL" :y1="midY" :x2="W - padR" :y2="midY" stroke="#cbd5e1" stroke-width="1" />
-        <line :x1="padL" :y1="yOf(-1)" :x2="W - padR" :y2="yOf(-1)" stroke="#e2e8f0" stroke-width="1" />
+        <line :x1="padL" :y1="yOf(1)" :x2="W - padR" :y2="yOf(1)" stroke="var(--c-slate-200)" stroke-width="1" />
+        <line :x1="padL" :y1="midY" :x2="W - padR" :y2="midY" stroke="var(--c-slate-300)" stroke-width="1" />
+        <line :x1="padL" :y1="yOf(-1)" :x2="W - padR" :y2="yOf(-1)" stroke="var(--c-slate-200)" stroke-width="1" />
         <!-- y 라벨 -->
-        <text :x="padL - 6" :y="yOf(1) + 4" text-anchor="end" class="fill-slate-400 text-[10px]">1</text>
-        <text :x="padL - 6" :y="midY + 4" text-anchor="end" class="fill-slate-400 text-[10px]">0</text>
-        <text :x="padL - 6" :y="yOf(-1) + 4" text-anchor="end" class="fill-slate-400 text-[10px]">-1</text>
+        <text :x="padL - 6" :y="yOf(1) + 4" text-anchor="end" class="fill-slate-400 text-xs">1</text>
+        <text :x="padL - 6" :y="midY + 4" text-anchor="end" class="fill-slate-400 text-xs">0</text>
+        <text :x="padL - 6" :y="yOf(-1) + 4" text-anchor="end" class="fill-slate-400 text-xs">-1</text>
         <!-- x 라벨 -->
-        <text :x="xOf(0)" :y="H - 8" text-anchor="middle" class="fill-slate-400 text-[10px]">0°</text>
-        <text :x="xOf(90)" :y="H - 8" text-anchor="middle" class="fill-slate-400 text-[10px]">90°</text>
-        <text :x="xOf(180)" :y="H - 8" text-anchor="middle" class="fill-slate-400 text-[10px]">180°</text>
+        <text :x="xOf(0)" :y="H - 8" text-anchor="middle" class="fill-slate-400 text-xs">0°</text>
+        <text :x="xOf(90)" :y="H - 8" text-anchor="middle" class="fill-slate-400 text-xs">90°</text>
+        <text :x="xOf(180)" :y="H - 8" text-anchor="middle" class="fill-slate-400 text-xs">180°</text>
         <!-- 곡선 -->
-        <path :d="curvePath" fill="none" stroke="#94a3b8" stroke-width="2" />
+        <path :d="curvePath" fill="none" stroke="var(--c-slate-400)" stroke-width="2" />
         <!-- 현재 점 보조선 -->
         <line :x1="markX" :y1="markY" :x2="markX" :y2="H - padB" :stroke="tone.color" stroke-width="1" stroke-dasharray="4 3" />
         <line :x1="padL" :y1="markY" :x2="markX" :y2="markY" :stroke="tone.color" stroke-width="1" stroke-dasharray="4 3" />

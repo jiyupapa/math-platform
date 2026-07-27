@@ -267,7 +267,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch9')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">9장 완료 — 지도를 그리는 손까지 이해했어요!</p>
       <p class="mt-1 text-sm text-emerald-700">
         이론은 끝났습니다. 마지막 장 — 🎯 캡스톤. 임베딩 → 코사인 → top-k → 그라운딩 —

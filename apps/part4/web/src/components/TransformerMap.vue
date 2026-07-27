@@ -37,22 +37,22 @@ const stages: Stage[] = [
               : 'border-slate-200 bg-slate-50'
           "
         >
-          <span class="text-[10px] font-bold text-slate-400">Phase {{ s.phase }}</span>
+          <span class="text-xs font-bold text-slate-600">Phase {{ s.phase }}</span>
           <span class="text-sm font-semibold" :class="s.goal ? 'text-indigo-700' : 'text-slate-700'">
             {{ s.label }}
           </span>
-          <span class="mt-0.5 text-[11px] text-slate-500">{{ s.sub }}</span>
+          <span class="mt-0.5 text-xs text-slate-600">{{ s.sub }}</span>
         </div>
         <div
           v-if="i < stages.length - 1"
-          class="flex items-center text-lg text-slate-300"
+          class="flex items-center text-lg text-slate-500"
           aria-hidden="true"
         >
           ›
         </div>
       </template>
     </div>
-    <p class="mt-4 text-xs text-slate-400">
+    <p class="mt-4 text-xs text-slate-500">
       💡 샘플 챕터의 <b>소프트맥스</b>는 맨 끝 "출력층"에서 점수를 확률로 바꾸는 바로 그 장치입니다.
     </p>
   </div>

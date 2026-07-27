@@ -81,7 +81,7 @@ const lx = (v: number) => 90 + ((v - 0.6) / 0.16) * 380
     <!-- ① 계산기 -->
     <p class="mb-1 text-sm font-semibold text-slate-500">① 오차범위 계산기 — ± = 1.96 × √( p̂(1−p̂) / n )</p>
     <div class="mb-2 flex flex-wrap items-center gap-1.5">
-      <span class="text-xs text-slate-400">문항 수 n:</span>
+      <span class="text-xs text-slate-500">문항 수 n:</span>
       <button
         v-for="v in NS"
         :key="v"
@@ -92,25 +92,25 @@ const lx = (v: number) => 90 + ((v - 0.6) / 0.16) * 380
       >
         {{ v.toLocaleString() }}
       </button>
-      <span class="ml-3 text-xs text-slate-400">점수 p̂:</span>
+      <span class="ml-3 text-xs text-slate-500">점수 p̂:</span>
       <input v-model.number="phatPct" type="range" min="50" max="95" step="1" class="w-36 accent-indigo-600" />
       <span class="font-mono text-sm font-bold text-slate-700">{{ phatPct }}%</span>
     </div>
     <div class="flex flex-wrap items-center gap-3 rounded-lg bg-slate-50 p-3">
       <div class="rounded-lg bg-white px-3 py-2 ring-1 ring-slate-200">
         <span class="font-mono text-lg font-bold text-indigo-700">{{ phatPct }} ± {{ hw.toFixed(1) }}%p</span>
-        <span class="ml-2 text-xs text-slate-400">→ [{{ (phatPct - hw).toFixed(1) }}, {{ (phatPct + hw).toFixed(1) }}]</span>
+        <span class="ml-2 text-xs text-slate-500">→ [{{ (phatPct - hw).toFixed(1) }}, {{ (phatPct + hw).toFixed(1) }}]</span>
       </div>
       <span v-if="isPollTwin" class="rounded-lg bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-800">
         📺 여론조사의 그 문장 — "n=1,004명, 95% 신뢰수준, ±3.1%p"와 같은 공식!
       </span>
-      <span v-else class="text-xs text-slate-400">어림: ± ≈ 98/√n %p (p̂=50% 기준) = {{ (98 / Math.sqrt(n)).toFixed(1) }}%p</span>
+      <span v-else class="text-xs text-slate-500">어림: ± ≈ 98/√n %p (p̂=50% 기준) = {{ (98 / Math.sqrt(n)).toFixed(1) }}%p</span>
     </div>
 
     <!-- ② 참값 담기 -->
     <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">② "95%"의 진짜 뜻 — 참 실력 70%(신의 시점)로 시험 100회, 구간이 참값을 담나</p>
     <div class="mb-2 flex items-center gap-1.5 text-xs">
-      <span class="text-slate-400">시험 문항 수:</span>
+      <span class="text-slate-500">시험 문항 수:</span>
       <button
         v-for="v in [100, 1000] as const"
         :key="v"
@@ -123,7 +123,7 @@ const lx = (v: number) => 90 + ((v - 0.6) / 0.16) * 380
       </button>
     </div>
     <svg :viewBox="`0 0 ${W} ${H}`" class="w-full rounded-lg bg-slate-50 ring-1 ring-slate-200">
-      <line :x1="PADL" :x2="W - 8" :y1="ty(P_TRUE)" :y2="ty(P_TRUE)" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5 4" />
+      <line :x1="PADL" :x2="W - 8" :y1="ty(P_TRUE)" :y2="ty(P_TRUE)" stroke="var(--c-amber-500)" stroke-width="1.5" stroke-dasharray="5 4" />
       <text :x="PADL - 3" :y="ty(P_TRUE) + 3" text-anchor="end" class="fill-amber-600" font-size="9">참값 70</text>
       <text :x="PADL - 3" :y="ty(0.9) + 3" text-anchor="end" class="fill-slate-400" font-size="8">90</text>
       <text :x="PADL - 3" :y="ty(0.5) + 3" text-anchor="end" class="fill-slate-400" font-size="8">50</text>
@@ -133,7 +133,7 @@ const lx = (v: number) => 90 + ((v - 0.6) / 0.16) * 380
           :x2="tx(i)"
           :y1="ty(Math.min(t.hi, 0.9))"
           :y2="ty(Math.max(t.lo, 0.5))"
-          :stroke="t.miss ? '#e11d48' : '#a5b4fc'"
+          :stroke="t.miss ? 'var(--c-rose-600)' : 'var(--c-indigo-300)'"
           :stroke-width="t.miss ? 2.5 : 1.5"
         />
       </g>
@@ -150,8 +150,8 @@ const lx = (v: number) => 90 + ((v - 0.6) / 0.16) * 380
       <g v-for="(m, i) in lbRows" :key="m.name">
         <text x="8" :y="20 + i * 28" class="fill-slate-600" font-size="11" font-weight="bold">{{ m.name }}</text>
         <text x="58" :y="20 + i * 28" class="fill-slate-400" font-size="10">{{ (m.s * 100).toFixed(1) }}</text>
-        <line :x1="lx(Math.max(m.s - m.h, 0.6))" :x2="lx(Math.min(m.s + m.h, 0.76))" :y1="16 + i * 28" :y2="16 + i * 28" stroke="#818cf8" stroke-width="7" stroke-linecap="round" opacity="0.5" />
-        <circle :cx="lx(m.s)" :cy="16 + i * 28" r="4" fill="#4f46e5" />
+        <line :x1="lx(Math.max(m.s - m.h, 0.6))" :x2="lx(Math.min(m.s + m.h, 0.76))" :y1="16 + i * 28" :y2="16 + i * 28" stroke="var(--c-indigo-400)" stroke-width="7" stroke-linecap="round" opacity="0.5" />
+        <circle :cx="lx(m.s)" :cy="16 + i * 28" r="4" fill="var(--c-indigo-600)" />
       </g>
       <text x="480" y="122" class="fill-slate-400" font-size="9">60 ~ 76점 구간</text>
     </svg>

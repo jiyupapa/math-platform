@@ -72,7 +72,7 @@ function send() {
 
     <template v-if="selected !== null">
       <div class="mb-3 rounded-lg bg-slate-100 p-3 text-sm text-slate-800">
-        <span class="mr-1 text-xs font-semibold text-slate-500">프롬프트</span>
+        <span class="mr-1 text-xs font-semibold text-slate-600">프롬프트</span>
         {{ examples[selected].prompt }}
       </div>
 
@@ -90,12 +90,12 @@ function send() {
           <div class="rounded-lg border border-amber-200 bg-amber-50 p-3">
             <p class="mb-1 text-xs font-bold text-amber-700">🦁 베이스 모델 (조련 전)</p>
             <p class="whitespace-pre-wrap text-sm leading-relaxed text-slate-700">{{ examples[selected].base }}</p>
-            <p class="mt-2 text-[11px] text-amber-600">…그럴듯한 글을 계속 이어 씁니다 (끝나지 않음)</p>
+            <p class="mt-2 text-xs text-amber-700">…그럴듯한 글을 계속 이어 씁니다 (끝나지 않음)</p>
           </div>
           <div class="rounded-lg border border-emerald-200 bg-emerald-50 p-3">
             <p class="mb-1 text-xs font-bold text-emerald-700">🐕 챗 모델 (조련 후)</p>
             <p class="whitespace-pre-wrap text-sm leading-relaxed text-slate-700">{{ examples[selected].chat }}</p>
-            <p class="mt-2 text-[11px] text-emerald-600">지시를 이해하고, 답하고, 멈춥니다</p>
+            <p class="mt-2 text-xs text-emerald-700">지시를 이해하고, 답하고, 멈춥니다</p>
           </div>
         </div>
         <p class="mt-3 rounded-lg bg-indigo-50 p-3 text-sm text-indigo-800">
@@ -103,6 +103,6 @@ function send() {
         </p>
       </div>
     </template>
-    <p v-else class="text-sm text-slate-400">위에서 프롬프트를 하나 골라 보세요.</p>
+    <p v-else class="text-sm text-slate-500">위에서 프롬프트를 하나 골라 보세요.</p>
   </div>
 </template>

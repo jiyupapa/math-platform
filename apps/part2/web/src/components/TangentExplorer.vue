@@ -116,49 +116,49 @@ const showYAxis = computed(() => props.xmin <= 0 && props.xmax >= 0)
         class="max-w-full rounded-lg border border-slate-100 bg-slate-50"
       >
         <!-- 격자 -->
-        <g stroke="#e2e8f0" stroke-width="1">
+        <g stroke="var(--c-slate-200)" stroke-width="1">
           <line v-for="t in xticks" :key="'gx' + t" :x1="sx(t)" :y1="0" :x2="sx(t)" :y2="height" />
           <line v-for="t in yticks" :key="'gy' + t" :x1="0" :y1="sy(t)" :x2="width" :y2="sy(t)" />
         </g>
 
         <!-- 축 -->
-        <g stroke="#94a3b8" stroke-width="1.5">
+        <g stroke="var(--c-slate-400)" stroke-width="1.5">
           <line v-if="showXAxis" :x1="0" :y1="xAxisY" :x2="width" :y2="xAxisY" />
           <line v-if="showYAxis" :x1="yAxisX" :y1="0" :x2="yAxisX" :y2="height" />
         </g>
         <!-- 눈금 숫자 -->
-        <g fill="#94a3b8" font-size="10" text-anchor="middle">
+        <g fill="var(--c-slate-400)" font-size="10" text-anchor="middle">
           <text v-for="t in xticks.filter((n) => n !== 0)" :key="'lx' + t"
             :x="sx(t)" :y="(showXAxis ? xAxisY : height) - 4">{{ t }}</text>
         </g>
 
         <!-- 함수 곡선 -->
-        <polyline :points="curvePoints" fill="none" stroke="#6366f1" stroke-width="2.5" />
+        <polyline :points="curvePoints" fill="none" stroke="var(--c-indigo-500)" stroke-width="2.5" />
 
         <!-- 할선 (평균변화율) -->
         <template v-if="showSecant">
           <line
             :x1="sx(xmin)" :y1="sy(secantY(xmin))"
             :x2="sx(xmax)" :y2="sy(secantY(xmax))"
-            stroke="#f59e0b" stroke-width="2" stroke-dasharray="6 4"
+            stroke="var(--c-amber-500)" stroke-width="2" stroke-dasharray="6 4"
           />
           <!-- 두 번째 점 -->
-          <circle :cx="sx(x1)" :cy="sy(fx1)" r="5" fill="#f59e0b" />
+          <circle :cx="sx(x1)" :cy="sy(fx1)" r="5" fill="var(--c-amber-500)" />
           <!-- 직각 보조선 (rise / run) -->
-          <line :x1="sx(x0)" :y1="sy(fx0)" :x2="sx(x1)" :y2="sy(fx0)" stroke="#f59e0b" stroke-width="1" stroke-dasharray="3 3" opacity="0.7" />
-          <line :x1="sx(x1)" :y1="sy(fx0)" :x2="sx(x1)" :y2="sy(fx1)" stroke="#f59e0b" stroke-width="1" stroke-dasharray="3 3" opacity="0.7" />
+          <line :x1="sx(x0)" :y1="sy(fx0)" :x2="sx(x1)" :y2="sy(fx0)" stroke="var(--c-amber-500)" stroke-width="1" stroke-dasharray="3 3" opacity="0.7" />
+          <line :x1="sx(x1)" :y1="sy(fx0)" :x2="sx(x1)" :y2="sy(fx1)" stroke="var(--c-amber-500)" stroke-width="1" stroke-dasharray="3 3" opacity="0.7" />
         </template>
 
         <!-- 접선 (순간변화율) -->
         <line
           :x1="sx(xmin)" :y1="sy(tangentY(xmin))"
           :x2="sx(xmax)" :y2="sy(tangentY(xmax))"
-          stroke="#ef4444" stroke-width="2.5"
+          stroke="var(--c-red-500)" stroke-width="2.5"
         />
 
         <!-- 접점 -->
-        <circle :cx="sx(x0)" :cy="sy(fx0)" r="6" fill="#fff" stroke="#ef4444" stroke-width="3" />
-        <text :x="sx(x0) + 10" :y="sy(fx0) - 10" fill="#ef4444" font-size="12" font-weight="bold">
+        <circle :cx="sx(x0)" :cy="sy(fx0)" r="6" fill="var(--c-white)" stroke="var(--c-red-500)" stroke-width="3" />
+        <text :x="sx(x0) + 10" :y="sy(fx0) - 10" fill="var(--c-red-500)" font-size="12" font-weight="bold">
           ({{ fmt(x0) }}, {{ fmt(fx0) }})
         </text>
       </svg>

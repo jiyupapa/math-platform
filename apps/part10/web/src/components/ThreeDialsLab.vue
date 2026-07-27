@@ -66,26 +66,27 @@ function days(v: number): string {
         :class="nIdx === p.n && dIdx === p.d ? 'border-indigo-500 bg-indigo-50 font-semibold text-indigo-700' : 'border-slate-200 text-slate-600 hover:bg-slate-50'"
         @click="preset(p)"
       >
-        {{ p.label }} <span class="text-xs text-slate-400">({{ p.desc }})</span>
+        <!-- 선택 시 배경이 bg-indigo-50 으로 바뀌므로 slate-500 은 4.26:1 로 미달 — 600 을 쓴다 -->
+        {{ p.label }} <span class="text-xs text-slate-600">({{ p.desc }})</span>
       </button>
     </div>
 
     <div class="space-y-3 rounded-lg bg-slate-50 p-4">
       <div>
         <div class="mb-1 flex items-baseline justify-between text-sm">
-          <span class="font-semibold text-indigo-800">파라미터 N <span class="font-normal text-slate-400">— 모델의 몸집</span></span>
-          <span class="font-mono font-bold text-slate-800">{{ param(N) }} <span class="text-xs font-normal text-slate-400">= {{ big(N) }} 개</span></span>
+          <span class="font-semibold text-indigo-800">파라미터 N <span class="font-normal text-slate-500">— 모델의 몸집</span></span>
+          <span class="font-mono font-bold text-slate-800">{{ param(N) }} <span class="text-xs font-normal text-slate-500">= {{ big(N) }} 개</span></span>
         </div>
         <input v-model.number="nIdx" type="range" :min="0" :max="N_STEPS.length - 1" step="1" class="w-full accent-indigo-600" />
       </div>
       <div>
         <div class="mb-1 flex items-baseline justify-between text-sm">
-          <span class="font-semibold text-emerald-800">데이터 D <span class="font-normal text-slate-400">— 먹인 토큰 수</span></span>
-          <span class="font-mono font-bold text-slate-800">{{ tokens(D) }} <span class="text-xs font-normal text-slate-400">= {{ big(D) }} 토큰</span></span>
+          <span class="font-semibold text-emerald-800">데이터 D <span class="font-normal text-slate-500">— 먹인 토큰 수</span></span>
+          <span class="font-mono font-bold text-slate-800">{{ tokens(D) }} <span class="text-xs font-normal text-slate-500">= {{ big(D) }} 토큰</span></span>
         </div>
         <input v-model.number="dIdx" type="range" :min="0" :max="D_STEPS.length - 1" step="1" class="w-full accent-emerald-600" />
       </div>
-      <p class="text-xs text-slate-400">다이얼 눈금이 10배씩 뛰는 것에 주목 — 이 "곱의 세계"가 2장의 주인공입니다.</p>
+      <p class="text-xs text-slate-500">다이얼 눈금이 10배씩 뛰는 것에 주목 — 이 "곱의 세계"가 2장의 주인공입니다.</p>
     </div>
 
     <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">② 훈련 예산 계산서 — 컴퓨트 C ≈ 6 × N × D</p>
@@ -100,15 +101,15 @@ function days(v: number): string {
       </div>
       <div class="mt-3 grid gap-2 sm:grid-cols-3">
         <div class="rounded-lg bg-white p-3 ring-1 ring-slate-200">
-          <p class="text-xs text-slate-400">A100 GPU 1장으로</p>
+          <p class="text-xs text-slate-500">A100 GPU 1장으로</p>
           <p class="mt-0.5 font-bold text-slate-800">{{ days(gpuDays) }}</p>
         </div>
         <div class="rounded-lg bg-white p-3 ring-1 ring-slate-200">
-          <p class="text-xs text-slate-400">100장으로</p>
+          <p class="text-xs text-slate-500">100장으로</p>
           <p class="mt-0.5 font-bold text-slate-800">{{ days(gpuDays / 100) }}</p>
         </div>
         <div class="rounded-lg bg-white p-3 ring-1 ring-slate-200">
-          <p class="text-xs text-slate-400">1,000장으로</p>
+          <p class="text-xs text-slate-500">1,000장으로</p>
           <p class="mt-0.5 font-bold text-slate-800">{{ days(gpuDays / 1000) }}</p>
         </div>
       </div>

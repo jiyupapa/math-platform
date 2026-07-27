@@ -17,9 +17,9 @@ interface Runner {
   emoji: string
 }
 const RUNNERS: Runner[] = [
-  { name: '소심이', lr: 0.02, color: '#0ea5e9', emoji: '🐢' },
-  { name: '적당이', lr: 0.3, color: '#059669', emoji: '🏃' },
-  { name: '무모이', lr: 1.05, color: '#e11d48', emoji: '💥' },
+  { name: '소심이', lr: 0.02, color: 'var(--c-sky-500)', emoji: '🐢' },
+  { name: '적당이', lr: 0.3, color: 'var(--c-emerald-600)', emoji: '🏃' },
+  { name: '무모이', lr: 1.05, color: 'var(--c-rose-600)', emoji: '💥' },
 ]
 const positions = ref(RUNNERS.map(() => [START]))
 const steps = ref(0)
@@ -41,10 +41,10 @@ function reset() {
 type Fate = { label: string; tone: string }
 function fateOf(w: number, lr: number): Fate {
   const L = loss(w)
-  if (L > loss(START) + 1e-9) return { label: '💥 폭발 (출발점보다 높이!)', tone: 'text-rose-600' }
-  if (L < 0.01) return { label: '✅ 도착', tone: 'text-emerald-600' }
-  if (lr < 0.1) return { label: '🐢 기어가는 중…', tone: 'text-sky-600' }
-  return { label: '🏃 내려가는 중', tone: 'text-emerald-600' }
+  if (L > loss(START) + 1e-9) return { label: '💥 폭발 (출발점보다 높이!)', tone: 'text-rose-700' }
+  if (L < 0.01) return { label: '✅ 도착', tone: 'text-emerald-700' }
+  if (lr < 0.1) return { label: '🐢 기어가는 중…', tone: 'text-sky-700' }
+  return { label: '🏃 내려가는 중', tone: 'text-emerald-700' }
 }
 const rows = computed(() =>
   RUNNERS.map((r, i) => {
@@ -69,10 +69,10 @@ const result2 = computed(() => {
   for (let i = 0; i < 20; i++) w = step(w, lr2.value)
   const L = loss(w)
   let verdict: Fate
-  if (L > loss(START) + 1e-9) verdict = { label: '💥 폭발 — 스텝마다 더 높이 튕겨 나갑니다', tone: 'text-rose-600' }
-  else if (Math.abs(L - loss(START)) < 1e-9) verdict = { label: '♾️ 무한 진동 — 같은 높이의 반대편으로 영원히', tone: 'text-amber-600' }
-  else if (L < 0.01) verdict = { label: '✅ 도착 — 골짜기 바닥', tone: 'text-emerald-600' }
-  else verdict = { label: '🐢 아직 가는 중 — 20스텝으로는 부족', tone: 'text-sky-600' }
+  if (L > loss(START) + 1e-9) verdict = { label: '💥 폭발 — 스텝마다 더 높이 튕겨 나갑니다', tone: 'text-rose-700' }
+  else if (Math.abs(L - loss(START)) < 1e-9) verdict = { label: '♾️ 무한 진동 — 같은 높이의 반대편으로 영원히', tone: 'text-amber-700' }
+  else if (L < 0.01) verdict = { label: '✅ 도착 — 골짜기 바닥', tone: 'text-emerald-700' }
+  else verdict = { label: '🐢 아직 가는 중 — 20스텝으로는 부족', tone: 'text-sky-700' }
   return { w, loss: L, verdict }
 })
 </script>
@@ -81,13 +81,13 @@ const result2 = computed(() => {
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 세 개의 운명 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 세 개의 운명: 같은 산, 같은 출발점, 다른 보폭</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       셋 다 같은 손실 골짜기(L = (w−3)²)를 w = −5에서 출발합니다. 다른 것은 <b>보폭(학습률)</b> 하나 —
       스텝을 진행시켜 보세요.
     </p>
 
     <svg viewBox="0 0 320 200" class="w-full rounded-lg bg-slate-50 ring-1 ring-slate-100">
-      <polyline :points="PARABOLA" fill="none" stroke="#cbd5e1" stroke-width="2" />
+      <polyline :points="PARABOLA" fill="none" stroke="var(--c-slate-300)" stroke-width="2" />
       <!-- 목표 깃발 -->
       <text :x="px(TARGET)" :y="py(0) + 14" text-anchor="middle" font-size="12">🚩</text>
       <!-- 러너 자취 + 현재 위치 -->
@@ -117,10 +117,10 @@ const result2 = computed(() => {
       <button type="button" class="rounded-lg bg-indigo-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-indigo-500" @click="run(5)">
         5스텝
       </button>
-      <button type="button" class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-500 transition hover:bg-slate-200" @click="reset()">
+      <button type="button" class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-600 transition hover:bg-slate-200" @click="reset()">
         처음부터
       </button>
-      <span class="text-[11px] text-slate-400">스텝 {{ steps }}</span>
+      <span class="text-xs text-slate-500">스텝 {{ steps }}</span>
     </div>
 
     <div class="mt-2 space-y-1">
@@ -141,7 +141,7 @@ const result2 = computed(() => {
     <!-- ② 경계 탐색기 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 경계 탐색기: 폭발은 정확히 어디서 시작될까</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       보폭을 직접 정하고 20스텝을 달리게 해 보세요. <b>도착↔폭발의 경계</b>가 어딘가에 있습니다 — 찾아보세요.
     </p>
 
@@ -152,7 +152,7 @@ const result2 = computed(() => {
 
     <div class="mt-2 flex items-center gap-3 rounded-lg bg-slate-50 p-3">
       <div class="text-center">
-        <p class="text-[11px] text-slate-400">20스텝 후 손실</p>
+        <p class="text-xs text-slate-500">20스텝 후 손실</p>
         <p class="font-mono text-lg font-bold text-slate-700">{{ result2.loss > 9999 ? '∞급' : result2.loss.toFixed(3) }}</p>
       </div>
       <p class="flex-1 text-sm font-medium" :class="result2.verdict.tone">{{ result2.verdict.label }}</p>

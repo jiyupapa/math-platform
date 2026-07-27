@@ -237,7 +237,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch5')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">5장 완료 — 현대 훈련의 기본기를 조립했어요!</p>
       <p class="mt-1 text-sm text-emerald-700">
         설정 파일의 optimizer 줄이 전부 읽힙니다. 다음은 시간축 — 여행 단계마다 보폭을

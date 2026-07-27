@@ -102,29 +102,29 @@ const fmt = (n: number) => (Number.isFinite(n) ? Number(n.toFixed(3)).toString()
       <svg :viewBox="`0 0 ${size} ${height}`" :width="size" :height="height"
         class="max-w-full rounded-lg border border-slate-100 bg-slate-50">
         <!-- 격자 -->
-        <g stroke="#e2e8f0" stroke-width="1">
+        <g stroke="var(--c-slate-200)" stroke-width="1">
           <line v-for="t in ticks()" :key="'g' + t" :x1="sx(t)" :y1="0" :x2="sx(t)" :y2="height" />
         </g>
-        <line :x1="0" :y1="sy(0)" :x2="size" :y2="sy(0)" stroke="#94a3b8" stroke-width="1.2" />
+        <line :x1="0" :y1="sy(0)" :x2="size" :y2="sy(0)" stroke="var(--c-slate-400)" stroke-width="1.2" />
 
         <!-- 손실 곡선 -->
-        <polyline :points="curve" fill="none" stroke="#6366f1" stroke-width="2.5" />
+        <polyline :points="curve" fill="none" stroke="var(--c-indigo-500)" stroke-width="2.5" />
 
         <!-- 지나온 자취 -->
         <g>
           <circle v-for="(pw, i) in path" :key="i" :cx="sx(pw)" :cy="sy(f(pw))" r="3"
-            fill="#c7d2fe" :opacity="0.4 + 0.6 * (i / Math.max(1, path.length - 1))" />
+            fill="var(--c-indigo-200)" :opacity="0.4 + 0.6 * (i / Math.max(1, path.length - 1))" />
         </g>
 
         <!-- 현재 공 -->
-        <circle :cx="sx(w)" :cy="sy(fw)" r="8" fill="#ef4444" stroke="#fff" stroke-width="2" />
+        <circle :cx="sx(w)" :cy="sy(fw)" r="8" fill="var(--c-red-500)" stroke="var(--c-white)" stroke-width="2" />
         <!-- 이동 방향 화살표 (−grad) -->
         <line v-if="!converged && !diverged"
           :x1="sx(w)" :y1="sy(fw) + 16" :x2="sx(w) - Math.sign(grad) * 22" :y2="sy(fw) + 16"
-          stroke="#ef4444" stroke-width="2" marker-end="url(#gd-arrow)" />
+          stroke="var(--c-red-500)" stroke-width="2" marker-end="url(#gd-arrow)" />
         <defs>
           <marker id="gd-arrow" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L6,3 L0,6 Z" fill="#ef4444" />
+            <path d="M0,0 L6,3 L0,6 Z" fill="var(--c-red-500)" />
           </marker>
         </defs>
       </svg>
@@ -145,7 +145,7 @@ const fmt = (n: number) => (Number.isFinite(n) ? Number(n.toFixed(3)).toString()
         :disabled="running || converged || diverged" @click="step">한 걸음</button>
       <button v-if="!running" type="button" class="rounded-lg bg-emerald-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-emerald-500 disabled:opacity-40"
         :disabled="converged || diverged" @click="start">▶ 자동 재생</button>
-      <button v-else type="button" class="rounded-lg bg-rose-100 px-3 py-1.5 text-sm font-medium text-rose-700 hover:bg-rose-200" @click="stop">■ 멈춤</button>
+      <button v-else type="button" class="rounded-lg bg-rose-100 px-3 py-1.5 text-sm font-medium text-rose-800 hover:bg-rose-200" @click="stop">■ 멈춤</button>
       <button type="button" class="rounded-lg bg-slate-100 px-3 py-1.5 text-sm font-medium text-slate-600 hover:bg-slate-200" @click="reset">↺ 리셋</button>
     </div>
 

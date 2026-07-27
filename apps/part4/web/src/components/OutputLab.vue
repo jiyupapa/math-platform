@@ -27,7 +27,7 @@ function setCtx(axis: 0 | 1, val: number) {
   next[axis] = val
   ctx.value = next
 }
-const palette = ['#6366f1', '#10b981', '#f59e0b', '#ec4899', '#06b6d4', '#8b5cf6']
+const palette = ['var(--c-indigo-500)', 'var(--c-emerald-500)', 'var(--c-amber-500)', 'var(--c-pink-500)', 'var(--c-cyan-500)', 'var(--c-violet-500)']
 const pct = (p: number) => (p * 100).toFixed(1)
 </script>
 
@@ -68,7 +68,7 @@ const pct = (p: number) => (p * 100).toFixed(1)
                 <div class="h-4 flex-1 overflow-hidden rounded bg-slate-100">
                   <div class="h-full rounded" :style="{ width: Math.max(probs[i] * 100, 2) + '%', backgroundColor: palette[i % palette.length], opacity: i === top ? 1 : 0.5 }" />
                 </div>
-                <span class="w-12 shrink-0 text-right font-mono text-xs tabular-nums text-slate-500">{{ pct(probs[i]) }}%</span>
+                <span class="w-12 shrink-0 text-right font-mono text-xs tabular-nums text-slate-600">{{ pct(probs[i]) }}%</span>
               </div>
             </td>
           </tr>
@@ -79,7 +79,7 @@ const pct = (p: number) => (p * 100).toFixed(1)
     <!-- 예측 -->
     <div class="mt-4 rounded-lg bg-violet-50 px-4 py-3 text-sm text-violet-900">
       🎯 "오늘 날씨가 정말 <b class="text-violet-700">{{ VOCAB[top].w }}</b>"
-      <span class="text-violet-500">(확률 {{ pct(probs[top]) }}%)</span>
+      <span class="text-violet-600">(확률 {{ pct(probs[top]) }}%)</span>
       — 문맥 벡터가 가리키는 방향의 단어가 다음 단어로 뽑힙니다.
     </div>
   </div>

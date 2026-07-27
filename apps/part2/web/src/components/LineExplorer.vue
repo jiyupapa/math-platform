@@ -85,18 +85,18 @@ const yAxisX = computed(() => sx(0))
         class="max-w-full rounded-lg border border-slate-100 bg-slate-50"
       >
         <!-- 격자 -->
-        <g stroke="#e2e8f0" stroke-width="1">
+        <g stroke="var(--c-slate-200)" stroke-width="1">
           <line v-for="t in xticks" :key="'gx' + t" :x1="sx(t)" :y1="0" :x2="sx(t)" :y2="height" />
           <line v-for="t in yticks" :key="'gy' + t" :x1="0" :y1="sy(t)" :x2="width" :y2="sy(t)" />
         </g>
 
         <!-- 축 -->
-        <g stroke="#94a3b8" stroke-width="1.5">
+        <g stroke="var(--c-slate-400)" stroke-width="1.5">
           <line :x1="0" :y1="xAxisY" :x2="width" :y2="xAxisY" />
           <line :x1="yAxisX" :y1="0" :x2="yAxisX" :y2="height" />
         </g>
         <!-- 눈금 숫자 -->
-        <g fill="#94a3b8" font-size="10" text-anchor="middle">
+        <g fill="var(--c-slate-400)" font-size="10" text-anchor="middle">
           <text v-for="t in xticks.filter((n) => n !== 0)" :key="'lx' + t"
             :x="sx(t)" :y="xAxisY + 12">{{ t }}</text>
         </g>
@@ -104,20 +104,20 @@ const yAxisX = computed(() => sx(0))
         <!-- rise/run 삼각형 -->
         <!-- 가로(run) -->
         <line :x1="sx(p0.x)" :y1="sy(p0.y)" :x2="sx(p1.x)" :y2="sy(p0.y)"
-          stroke="#f59e0b" stroke-width="2" stroke-dasharray="4 3" />
+          stroke="var(--c-amber-500)" stroke-width="2" stroke-dasharray="4 3" />
         <!-- 세로(rise) -->
         <line :x1="sx(p1.x)" :y1="sy(p0.y)" :x2="sx(p1.x)" :y2="sy(p1.y)"
-          stroke="#10b981" stroke-width="2" stroke-dasharray="4 3" />
-        <text :x="(sx(p0.x) + sx(p1.x)) / 2" :y="sy(p0.y) + 14" fill="#d97706" font-size="11" text-anchor="middle">가로 +1</text>
-        <text :x="sx(p1.x) + 6" :y="(sy(p0.y) + sy(p1.y)) / 2" fill="#059669" font-size="11">세로 {{ fmt(a) }}</text>
+          stroke="var(--c-emerald-500)" stroke-width="2" stroke-dasharray="4 3" />
+        <text :x="(sx(p0.x) + sx(p1.x)) / 2" :y="sy(p0.y) + 14" fill="var(--c-amber-600)" font-size="11" text-anchor="middle">가로 +1</text>
+        <text :x="sx(p1.x) + 6" :y="(sy(p0.y) + sy(p1.y)) / 2" fill="var(--c-emerald-600)" font-size="11">세로 {{ fmt(a) }}</text>
 
         <!-- 직선 -->
         <line :x1="sx(xmin)" :y1="sy(line(xmin))" :x2="sx(xmax)" :y2="sy(line(xmax))"
-          stroke="#6366f1" stroke-width="2.5" />
+          stroke="var(--c-indigo-500)" stroke-width="2.5" />
 
         <!-- y절편 점 -->
-        <circle :cx="sx(0)" :cy="sy(b)" r="5" fill="#fff" stroke="#6366f1" stroke-width="3" />
-        <text :x="sx(0) + 8" :y="sy(b) - 8" fill="#6366f1" font-size="11" font-weight="bold">
+        <circle :cx="sx(0)" :cy="sy(b)" r="5" fill="var(--c-white)" stroke="var(--c-indigo-500)" stroke-width="3" />
+        <text :x="sx(0) + 8" :y="sy(b) - 8" fill="var(--c-indigo-500)" font-size="11" font-weight="bold">
           y절편 (0, {{ fmt(b) }})
         </text>
       </svg>

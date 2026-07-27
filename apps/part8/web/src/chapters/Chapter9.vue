@@ -230,7 +230,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch9')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">9장 완료 — 이제 곡선이 말을 겁니다!</p>
       <p class="mt-1 text-sm text-emerald-700">
         다이얼과 계기판을 모두 익혔습니다. 남은 미스터리는 지형 그 자체 —

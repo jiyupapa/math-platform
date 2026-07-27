@@ -90,7 +90,7 @@ function label(w: string) {
     <!-- 현재까지 만든 문장 -->
     <p class="mb-1 text-sm font-semibold text-slate-500">지금까지 만든 문장</p>
     <div class="mb-4 rounded-lg bg-slate-50 px-4 py-3 text-lg font-medium text-slate-800">
-      {{ text }}<span v-if="!done" class="ml-0.5 animate-pulse text-indigo-400">▌</span>
+      {{ text }}<span v-if="!done" class="ml-0.5 animate-pulse text-indigo-600">▌</span>
     </div>
 
     <!-- 후보 단어 (확률과 함께) -->
@@ -116,7 +116,7 @@ function label(w: string) {
               :style="{ width: Math.max(probs[i] * 100, 2) + '%', opacity: i === best ? 1 : 0.5 }"
             />
           </span>
-          <span class="w-10 shrink-0 text-right font-mono text-sm tabular-nums text-slate-500">
+          <span class="w-10 shrink-0 text-right font-mono text-sm tabular-nums text-slate-600">
             {{ (probs[i] * 100).toFixed(0) }}%
           </span>
         </button>

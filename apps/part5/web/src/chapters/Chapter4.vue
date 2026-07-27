@@ -24,15 +24,15 @@ const lossChart = {
     {
       label: '크로스 엔트로피 −log₂ q (비트)',
       data: qs.map((v) => Math.log2(1 / v)),
-      borderColor: '#6366f1',
-      backgroundColor: '#6366f1',
+      borderColor: 'var(--c-indigo-500)',
+      backgroundColor: 'var(--c-indigo-500)',
       tension: 0.3,
     },
     {
       label: 'MSE (1 − q)²',
       data: qs.map((v) => (1 - v) ** 2),
-      borderColor: '#f59e0b',
-      backgroundColor: '#f59e0b',
+      borderColor: 'var(--c-amber-500)',
+      backgroundColor: 'var(--c-amber-500)',
       tension: 0.3,
     },
   ],
@@ -386,7 +386,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch4')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 4 완료. LLM 손실함수의 정체를 알았습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 실험실 게이지의 "초과분"에 이름을 붙입니다 — RLHF 와 증류의 언어, <b>KL 발산</b>.

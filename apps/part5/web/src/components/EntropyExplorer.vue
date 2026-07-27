@@ -5,7 +5,12 @@
 import { ref, computed } from 'vue'
 
 const LETTERS = ['A', 'B', 'C', 'D']
-const COLORS = ['#6366f1', '#10b981', '#f59e0b', '#ec4899']
+// 막대·범례용 — 그래픽이라 500 이면 충분하다(비텍스트 대비 기준 3:1).
+const COLORS = ['var(--c-indigo-500)', 'var(--c-emerald-500)', 'var(--c-amber-500)', 'var(--c-pink-500)']
+// 표의 A·B·C·D 배지용 — 같은 색을 500 으로 쓰면 흰 글씨가 2.15~4.47:1 로 미달이었다
+// (amber-500 이 최악). 700 단계면 흰 글씨가 4.8:1 이상이고, 다크에서도 300 단계로 뒤집혀
+// 어두운 글씨와 짝이 맞는다. 색 계열은 위와 같아서 막대와 배지가 여전히 같은 색으로 읽힌다.
+const LABEL_COLORS = ['var(--c-indigo-700)', 'var(--c-emerald-700)', 'var(--c-amber-700)', 'var(--c-pink-700)']
 
 // 막대의 원시 높이(0~1). 확률은 이걸 정규화해서 얻는다.
 const weights = ref<number[]>([0.6, 0.6, 0.6, 0.6])
@@ -113,10 +118,10 @@ function surprise(p: number): number {
       @pointercancel="onUp"
     >
       <!-- 바닥선 -->
-      <line :x1="PAD_X" :y1="BASE_Y" :x2="W - PAD_X" :y2="BASE_Y" stroke="#cbd5e1" stroke-width="1.5" />
+      <line :x1="PAD_X" :y1="BASE_Y" :x2="W - PAD_X" :y2="BASE_Y" stroke="var(--c-slate-300)" stroke-width="1.5" />
       <g v-for="(letter, i) in LETTERS" :key="letter">
         <!-- 드래그 영역 표시(연한 기둥) -->
-        <rect :x="barX(i)" :y="BASE_Y - PLOT_H" :width="barW()" :height="PLOT_H" fill="#f8fafc" rx="6" />
+        <rect :x="barX(i)" :y="BASE_Y - PLOT_H" :width="barW()" :height="PLOT_H" fill="var(--c-slate-50)" rx="6" />
         <!-- 실제 막대 -->
         <rect :x="barX(i)" :y="barY(i)" :width="barW()" :height="Math.max(barH(i), 2)" :fill="COLORS[i]" rx="6" />
         <!-- 확률 라벨 -->
@@ -131,12 +136,12 @@ function surprise(p: number): number {
           {{ (probs[i] * 100).toFixed(0) }}%
         </text>
         <!-- 글자 라벨 -->
-        <text :x="barX(i) + barW() / 2" :y="BASE_Y + 16" text-anchor="middle" font-size="12" fill="#64748b">
+        <text :x="barX(i) + barW() / 2" :y="BASE_Y + 16" text-anchor="middle" font-size="12" fill="var(--c-slate-500)">
           {{ letter }}
         </text>
       </g>
     </svg>
-    <p class="mt-0.5 text-xs text-slate-400">
+    <p class="mt-0.5 text-xs text-slate-500">
       막대 높이는 상대적 빈도 — 확률(%)은 네 막대의 비율로 자동 계산됩니다.
     </p>
 
@@ -155,7 +160,7 @@ function surprise(p: number): number {
         {{ H.toFixed(3) }} 비트
       </span>
     </div>
-    <p class="mt-1 text-xs text-slate-400" style="padding-left: 7.75rem">
+    <p class="mt-1 text-xs text-slate-500" style="padding-left: 7.75rem">
       최대 = log₂4 = {{ H_MAX }}비트 (정확히 균등일 때) · 한 글자 몰빵이면 0비트
     </p>
 
@@ -163,7 +168,7 @@ function surprise(p: number): number {
     <div class="mt-3 overflow-x-auto">
       <table class="w-full min-w-[24rem] text-center text-sm">
         <thead>
-          <tr class="border-b border-slate-200 text-xs text-slate-400">
+          <tr class="border-b border-slate-200 text-xs text-slate-500">
             <th class="py-1.5 font-medium">글자</th>
             <th class="py-1.5 font-medium">확률 p</th>
             <th class="py-1.5 font-medium">놀람 log₂(1/p)</th>
@@ -175,7 +180,7 @@ function surprise(p: number): number {
             <td class="py-1.5">
               <span
                 class="inline-flex h-6 w-6 items-center justify-center rounded text-xs font-bold text-white"
-                :style="{ background: COLORS[i] }"
+                :style="{ background: LABEL_COLORS[i] }"
               >{{ letter }}</span>
             </td>
             <td class="py-1.5 tabular-nums text-slate-700">{{ probs[i].toFixed(2) }}</td>

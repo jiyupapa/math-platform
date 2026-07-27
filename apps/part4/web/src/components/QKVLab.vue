@@ -59,7 +59,7 @@ const pct = (w: number) => (w * 100).toFixed(0)
     <!-- Query 설정 -->
     <p class="mb-2 text-sm font-semibold text-slate-500">① Query(질문) 벡터 — "내가 찾는 것"</p>
     <div class="mb-2 flex flex-wrap gap-2">
-      <span class="text-xs text-slate-400 self-center">이 단어의 질문 불러오기:</span>
+      <span class="text-xs text-slate-500 self-center">이 단어의 질문 불러오기:</span>
       <button
         v-for="(w, i) in WORDS"
         :key="w"
@@ -99,17 +99,17 @@ const pct = (w: number) => (w * 100).toFixed(0)
         <tbody>
           <tr v-for="(w, i) in WORDS" :key="w" class="border-b border-slate-100" :class="i === top ? 'bg-indigo-50/50' : ''">
             <td class="px-2 py-1.5 font-semibold text-slate-700">{{ w }}</td>
-            <td class="px-2 py-1.5 font-mono text-slate-500">{{ fmt(KEY[i]) }}</td>
+            <td class="px-2 py-1.5 font-mono text-slate-600">{{ fmt(KEY[i]) }}</td>
             <td class="px-2 py-1.5 font-mono text-slate-700">{{ scores[i].toFixed(2) }}</td>
             <td class="px-2 py-1.5">
               <div class="flex items-center gap-2">
                 <div class="h-3 flex-1 overflow-hidden rounded bg-slate-100">
                   <div class="h-full rounded bg-indigo-400" :style="{ width: Math.max(weights[i] * 100, 2) + '%', opacity: i === top ? 1 : 0.55 }" />
                 </div>
-                <span class="w-9 text-right font-mono text-xs tabular-nums text-slate-500">{{ pct(weights[i]) }}%</span>
+                <span class="w-9 text-right font-mono text-xs tabular-nums text-slate-600">{{ pct(weights[i]) }}%</span>
               </div>
             </td>
-            <td class="px-2 py-1.5 font-mono text-slate-500">{{ fmt(VAL[i]) }}</td>
+            <td class="px-2 py-1.5 font-mono text-slate-600">{{ fmt(VAL[i]) }}</td>
           </tr>
         </tbody>
       </table>
@@ -118,7 +118,7 @@ const pct = (w: number) => (w * 100).toFixed(0)
     <!-- 출력 -->
     <div class="mt-4 rounded-lg bg-violet-50 px-4 py-3 text-sm text-violet-900">
       🔑 지금 Query 는 <b>"{{ WORDS[top] }}"</b>의 Key 와 가장 잘 맞습니다
-      <span class="text-violet-500">(집중도 {{ pct(weights[top]) }}%)</span>.
+      <span class="text-violet-600">(집중도 {{ pct(weights[top]) }}%)</span>.
       <div class="mt-1 text-violet-700">
         출력 = 집중도로 Value 가중합 =
         <span class="font-mono">({{ output[0].toFixed(2) }}, {{ output[1].toFixed(2) }})</span>

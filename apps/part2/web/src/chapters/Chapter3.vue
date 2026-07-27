@@ -312,7 +312,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch3')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 3 완료. 미분계수와 도함수를 구분했습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 매번 극한을 쓰지 않고 빠르게 미분하는 <b>기본 공식(멱법칙 등)</b>입니다.

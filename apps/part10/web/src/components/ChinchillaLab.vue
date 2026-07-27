@@ -93,17 +93,17 @@ const fmtD = (v: number) => (v >= 1e12 ? `${(v / 1e12).toFixed(2)}T` : `${(v / 1
     <p class="mb-1 text-sm font-semibold text-slate-500">② 같은 예산, 배분만 바꾸기 — 몸집 N을 키우면 밥 D가 줄어듭니다</p>
     <div class="flex flex-wrap items-start gap-4">
       <svg :viewBox="`0 0 ${W} ${H}`" class="h-56 w-full max-w-md rounded-lg bg-slate-50 ring-1 ring-slate-200">
-        <line v-for="i in 5" :key="'g' + i" :x1="gx(i - 3)" :x2="gx(i - 3)" :y1="PAD.t" :y2="H - PAD.b" stroke="#e2e8f0" />
+        <line v-for="i in 5" :key="'g' + i" :x1="gx(i - 3)" :x2="gx(i - 3)" :y1="PAD.t" :y2="H - PAD.b" stroke="var(--c-slate-200)" />
         <text :x="gx(-2)" :y="H - 10" text-anchor="middle" class="fill-slate-400" font-size="9">N*÷100</text>
         <text :x="gx(0)" :y="H - 10" text-anchor="middle" class="fill-slate-400" font-size="9">N*</text>
         <text :x="gx(2)" :y="H - 10" text-anchor="middle" class="fill-slate-400" font-size="9">N*×100</text>
         <!-- U자 곡선 -->
-        <path :d="path" fill="none" stroke="#6366f1" stroke-width="2.5" />
+        <path :d="path" fill="none" stroke="var(--c-indigo-500)" stroke-width="2.5" />
         <!-- 최저점 -->
-        <circle :cx="gx(0)" :cy="gy(Lstar)" r="5" fill="#10b981" />
+        <circle :cx="gx(0)" :cy="gy(Lstar)" r="5" fill="var(--c-emerald-500)" />
         <text :x="gx(0)" :y="gy(Lstar) - 9" text-anchor="middle" class="fill-emerald-600" font-size="9" font-weight="bold">최적</text>
         <!-- 현재 배분 -->
-        <circle :cx="gx(offset)" :cy="gy(L)" r="6" fill="#4f46e5" stroke="white" stroke-width="1.5" />
+        <circle :cx="gx(offset)" :cy="gy(L)" r="6" fill="var(--c-indigo-600)" stroke="var(--c-white)" stroke-width="1.5" />
         <!-- 좌우 안내 -->
         <text :x="gx(-1.7)" :y="PAD.t + 12" class="fill-slate-400" font-size="9">← 몸집 부족 (밥만 많음)</text>
         <text :x="gx(0.35)" :y="PAD.t + 12" class="fill-slate-400" font-size="9">과체격 — 밥 부족 →</text>
@@ -113,21 +113,21 @@ const fmtD = (v: number) => (v >= 1e12 ? `${(v / 1e12).toFixed(2)}T` : `${(v / 1
         <input v-model.number="offset" type="range" min="-2" max="2" step="0.01" class="w-full accent-indigo-600" />
         <div class="grid grid-cols-2 gap-2 text-sm">
           <div class="rounded-lg bg-indigo-50 p-2.5">
-            <p class="text-xs text-indigo-400">몸집 N</p>
+            <p class="text-xs text-indigo-600">몸집 N</p>
             <p class="font-mono font-bold text-indigo-800">{{ fmtN(N) }}</p>
           </div>
           <div class="rounded-lg bg-emerald-50 p-2.5">
-            <p class="text-xs text-emerald-500">밥 D</p>
+            <p class="text-xs text-emerald-700">밥 D</p>
             <p class="font-mono font-bold text-emerald-800">{{ fmtD(D) }} 토큰</p>
           </div>
           <div class="rounded-lg bg-slate-50 p-2.5">
-            <p class="text-xs text-slate-400">토큰/파라미터</p>
+            <p class="text-xs text-slate-500">토큰/파라미터</p>
             <p class="font-mono font-bold" :class="Math.abs(ratio - 20) / 20 < 0.15 ? 'text-emerald-700' : 'text-slate-800'">
               {{ ratio >= 100 ? ratio.toFixed(0) : ratio.toFixed(1) }} : 1
             </p>
           </div>
           <div class="rounded-lg bg-slate-50 p-2.5">
-            <p class="text-xs text-slate-400">손실 L</p>
+            <p class="text-xs text-slate-500">손실 L</p>
             <p class="font-mono font-bold text-slate-800">{{ L.toFixed(3) }}</p>
           </div>
         </div>
@@ -160,7 +160,7 @@ const fmtD = (v: number) => (v >= 1e12 ? `${(v / 1e12).toFixed(2)}T` : `${(v / 1
       >
         {{ cs.label }}
       </button>
-      <p class="w-full text-xs text-slate-400">
+      <p class="w-full text-xs text-slate-500">
         280B 배분은 토큰 350B(비율 1.25 — 과체격)로 손실 1.992, 70B 배분은 1.4T(비율 20)로
         1.932 — <b>4배 작은 모델이 같은 예산으로 이깁니다.</b>
       </p>

@@ -82,7 +82,7 @@ const pct = (w: number) => (w * 100).toFixed(0)
       </div>
     </div>
 
-    <div class="my-3 text-center text-sm font-semibold text-indigo-500">↓ 소프트맥스 ↓</div>
+    <div class="my-3 text-center text-sm font-semibold text-indigo-600">↓ 소프트맥스 ↓</div>
 
     <!-- 집중도(가중치) -->
     <p class="mb-2 text-sm font-semibold text-slate-500">③ 집중도 (합 100%)</p>
@@ -102,7 +102,7 @@ const pct = (w: number) => (w * 100).toFixed(0)
     <!-- 결과 -->
     <div class="mt-4 rounded-lg bg-violet-50 px-4 py-3 text-sm text-violet-900">
       👀 <b>"{{ WORDS[queryIdx] }}"</b>는 지금 <b>"{{ WORDS[top] }}"</b>에 가장 집중
-      <span class="text-violet-500">({{ pct(weights[top]) }}%)</span>합니다.
+      <span class="text-violet-600">({{ pct(weights[top]) }}%)</span>합니다.
       <div class="mt-1 text-violet-700">
         섞인 문맥 벡터(가중 평균) =
         <span class="font-mono">({{ context[0].toFixed(2) }}, {{ context[1].toFixed(2) }})</span>

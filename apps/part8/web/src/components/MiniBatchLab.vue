@@ -100,7 +100,7 @@ const CURVE = Array.from({ length: 69 }, (_, i) => {
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 나침반의 흔들림 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 나침반의 흔들림: 몇 개를 물어보고 방향을 정할까</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       진짜 기울기(빨간 화살표)는 전체 데이터 256개의 평균입니다. 미니배치 B개만 뽑아 평균 낸
       "추정 나침반" 12개를 회색으로 겹쳐 그렸어요 — 배치 크기를 바꿔 보세요.
     </p>
@@ -111,7 +111,7 @@ const CURVE = Array.from({ length: 69 }, (_, i) => {
         :key="b"
         type="button"
         class="rounded-lg px-3 py-1.5 text-xs font-bold transition"
-        :class="bIdx === i ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'"
+        :class="bIdx === i ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
         @click="bIdx = i"
       >
         B = {{ b }}{{ b === 256 ? ' (전체)' : '' }}
@@ -121,10 +121,10 @@ const CURVE = Array.from({ length: 69 }, (_, i) => {
     <svg viewBox="0 0 220 160" class="w-full max-w-md rounded-lg bg-slate-50 ring-1 ring-slate-100">
       <defs>
         <marker id="arr-g" markerWidth="6" markerHeight="6" refX="4" refY="3" orient="auto">
-          <path d="M0,0 L5,3 L0,6 z" fill="#94a3b8" />
+          <path d="M0,0 L5,3 L0,6 z" fill="var(--c-slate-400)" />
         </marker>
         <marker id="arr-t" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
-          <path d="M0,0 L6,3.5 L0,7 z" fill="#e11d48" />
+          <path d="M0,0 L6,3.5 L0,7 z" fill="var(--c-rose-600)" />
         </marker>
       </defs>
       <line
@@ -134,21 +134,21 @@ const CURVE = Array.from({ length: 69 }, (_, i) => {
         :y1="CC.y"
         :x2="CC.x + a.x * scaleArrow"
         :y2="CC.y - a.y * scaleArrow"
-        stroke="#94a3b8"
+        stroke="var(--c-slate-400)"
         stroke-width="1.5"
         opacity="0.65"
         marker-end="url(#arr-g)"
       />
-      <line :x1="CC.x" :y1="CC.y" :x2="CC.x + TRUE_G.x * scaleArrow" :y2="CC.y - TRUE_G.y * scaleArrow" stroke="#e11d48" stroke-width="3" marker-end="url(#arr-t)" />
+      <line :x1="CC.x" :y1="CC.y" :x2="CC.x + TRUE_G.x * scaleArrow" :y2="CC.y - TRUE_G.y * scaleArrow" stroke="var(--c-rose-600)" stroke-width="3" marker-end="url(#arr-t)" />
     </svg>
 
     <div class="mt-2 grid grid-cols-2 gap-2 text-center">
       <div class="rounded-lg bg-slate-50 p-2">
-        <p class="text-[11px] text-slate-400">추정 나침반의 산포 (실측)</p>
+        <p class="text-xs text-slate-500">추정 나침반의 산포 (실측)</p>
         <p class="font-mono text-sm font-bold text-slate-700">{{ st.spread.toFixed(3) }}</p>
       </div>
       <div class="rounded-lg bg-slate-50 p-2">
-        <p class="text-[11px] text-slate-400">이론값 ∝ σ/√B</p>
+        <p class="text-xs text-slate-500">이론값 ∝ σ/√B</p>
         <p class="font-mono text-sm font-bold text-indigo-600">{{ theory.toFixed(3) }}</p>
       </div>
     </div>
@@ -162,16 +162,16 @@ const CURVE = Array.from({ length: 69 }, (_, i) => {
     <!-- ② GD vs SGD 경주 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 노이즈의 순기능: 완벽한 나침반이 함정에 빠진다</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       오른쪽의 <b>얕은 웅덩이</b> 위에서 두 여행자가 출발합니다 — 🔵 정확한 나침반(GD) vs
       🟠 흔들리는 나침반(SGD, 미니배치 노이즈). 왼쪽에 더 깊은 골짜기가 있어요.
     </p>
 
     <svg viewBox="0 0 320 165" class="w-full rounded-lg bg-slate-50 ring-1 ring-slate-100">
-      <polyline :points="CURVE" fill="none" stroke="#cbd5e1" stroke-width="2" />
+      <polyline :points="CURVE" fill="none" stroke="var(--c-slate-300)" stroke-width="2" />
       <text :x="wx(-2.19)" :y="wy(L2(-2.19)) + 14" text-anchor="middle" font-size="11">🚩</text>
       <!-- 자취 -->
-      <circle v-for="(w, k) in sgdTrail.filter((_, i) => i % 3 === 0)" :key="'s' + k" :cx="wx(w)" :cy="wy(L2(w))" r="1.8" fill="#f59e0b" opacity="0.35" />
+      <circle v-for="(w, k) in sgdTrail.filter((_, i) => i % 3 === 0)" :key="'s' + k" :cx="wx(w)" :cy="wy(L2(w))" r="1.8" fill="var(--c-amber-500)" opacity="0.35" />
       <text :x="wx(gdW)" :y="wy(L2(gdW)) - 6" text-anchor="middle" font-size="13">🔵</text>
       <text :x="wx(sgdW)" :y="wy(L2(sgdW)) - 18" text-anchor="middle" font-size="13">🟠</text>
     </svg>
@@ -183,19 +183,19 @@ const CURVE = Array.from({ length: 69 }, (_, i) => {
       <button type="button" class="rounded-lg bg-indigo-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-indigo-500" @click="race(50)">
         50스텝
       </button>
-      <button type="button" class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-500 transition hover:bg-slate-200" @click="resetRace()">
+      <button type="button" class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-600 transition hover:bg-slate-200" @click="resetRace()">
         처음부터
       </button>
-      <span class="text-[11px] text-slate-400">스텝 {{ raceSteps }}</span>
+      <span class="text-xs text-slate-500">스텝 {{ raceSteps }}</span>
     </div>
 
     <div class="mt-2 grid grid-cols-2 gap-2">
       <div class="rounded-lg bg-slate-50 p-2 text-center">
-        <p class="text-[11px] text-slate-400">🔵 정확한 나침반 (GD)</p>
+        <p class="text-xs text-slate-500">🔵 정확한 나침반 (GD)</p>
         <p class="font-mono text-sm font-bold text-slate-700">L = {{ L2(gdW).toFixed(2) }}</p>
       </div>
       <div class="rounded-lg bg-slate-50 p-2 text-center">
-        <p class="text-[11px] text-slate-400">🟠 흔들리는 나침반 (SGD)</p>
+        <p class="text-xs text-slate-500">🟠 흔들리는 나침반 (SGD)</p>
         <p class="font-mono text-sm font-bold text-slate-700">L = {{ L2(sgdW).toFixed(2) }}</p>
       </div>
     </div>

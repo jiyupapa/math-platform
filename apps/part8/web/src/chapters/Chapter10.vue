@@ -237,7 +237,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch10')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">10장 완료 — 지형의 마지막 미스터리까지 풀렸습니다!</p>
       <p class="mt-1 text-sm text-emerald-700">
         다이얼(2~6장), 안전장치(7~8장), 계기판(9장), 지형(10장) — 훈련의 수학이 전부

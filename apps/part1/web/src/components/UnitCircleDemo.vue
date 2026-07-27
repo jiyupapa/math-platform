@@ -17,7 +17,7 @@ const Py = computed(() => c - R * sinv.value)
 const cosLabel = computed(() => +cosv.value.toFixed(2))
 
 const tone = computed(() =>
-  cosLabel.value > 0.01 ? '#10b981' : cosLabel.value < -0.01 ? '#f43f5e' : '#64748b',
+  cosLabel.value > 0.01 ? 'var(--c-emerald-500)' : cosLabel.value < -0.01 ? 'var(--c-rose-500)' : 'var(--c-slate-500)',
 )
 
 // 각도 호(arc) — 0에서 θ까지 작은 반지름으로 샘플
@@ -49,27 +49,27 @@ function preset(v: number) {
     <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
       <svg :width="VS" :height="VS" :viewBox="`0 0 ${VS} ${VS}`" class="mx-auto shrink-0 rounded-lg bg-slate-50">
         <!-- 축 -->
-        <line x1="10" :y1="c" :x2="VS - 10" :y2="c" stroke="#cbd5e1" stroke-width="1" />
-        <line :x1="c" y1="10" :x2="c" :y2="VS - 10" stroke="#cbd5e1" stroke-width="1" />
+        <line x1="10" :y1="c" :x2="VS - 10" :y2="c" stroke="var(--c-slate-300)" stroke-width="1" />
+        <line :x1="c" y1="10" :x2="c" :y2="VS - 10" stroke="var(--c-slate-300)" stroke-width="1" />
         <!-- 단위원 -->
-        <circle :cx="c" :cy="c" :r="R" fill="none" stroke="#94a3b8" stroke-width="1.5" />
+        <circle :cx="c" :cy="c" :r="R" fill="none" stroke="var(--c-slate-400)" stroke-width="1.5" />
         <!-- 각도 호 -->
-        <path :d="arcPath" fill="none" stroke="#f59e0b" stroke-width="2" />
+        <path :d="arcPath" fill="none" stroke="var(--c-amber-500)" stroke-width="2" />
         <!-- sin (세로 보조선, 옅게) -->
-        <line :x1="Px" :y1="c" :x2="Px" :y2="Py" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4 3" />
+        <line :x1="Px" :y1="c" :x2="Px" :y2="Py" stroke="var(--c-slate-300)" stroke-width="2" stroke-dasharray="4 3" />
         <!-- cos (가로 굵은 선, 강조) -->
         <line :x1="c" :y1="c" :x2="Px" :y2="c" :stroke="tone" stroke-width="4" />
         <!-- 반지름 -->
-        <line :x1="c" :y1="c" :x2="Px" :y2="Py" stroke="#6366f1" stroke-width="2.5" />
+        <line :x1="c" :y1="c" :x2="Px" :y2="Py" stroke="var(--c-indigo-500)" stroke-width="2.5" />
         <!-- 점 -->
-        <circle :cx="Px" :cy="Py" r="6" fill="#6366f1" />
-        <circle :cx="c" :cy="c" r="2.5" fill="#334155" />
+        <circle :cx="Px" :cy="Py" r="6" fill="var(--c-indigo-500)" />
+        <circle :cx="c" :cy="c" r="2.5" fill="var(--c-slate-700)" />
         <!-- 라벨 -->
-        <text :x="Px" :y="Py - 10" text-anchor="middle" class="fill-indigo-600 text-[11px]">점</text>
-        <text :x="(c + Px) / 2" :y="c - 6" text-anchor="middle" :fill="tone" class="text-[11px]">cos θ</text>
+        <text :x="Px" :y="Py - 10" text-anchor="middle" class="fill-indigo-600 text-xs">점</text>
+        <text :x="(c + Px) / 2" :y="c - 6" text-anchor="middle" :fill="tone" class="text-xs">cos θ</text>
         <!-- x축 눈금 -1, 1 -->
-        <text :x="c - R" :y="c + 14" text-anchor="middle" class="fill-slate-400 text-[10px]">-1</text>
-        <text :x="c + R" :y="c + 14" text-anchor="middle" class="fill-slate-400 text-[10px]">1</text>
+        <text :x="c - R" :y="c + 14" text-anchor="middle" class="fill-slate-400 text-xs">-1</text>
+        <text :x="c + R" :y="c + 14" text-anchor="middle" class="fill-slate-400 text-xs">1</text>
       </svg>
 
       <div class="flex-1">
@@ -96,7 +96,7 @@ function preset(v: number) {
           </button>
         </div>
 
-        <p class="mt-3 text-xs text-slate-400">
+        <p class="mt-3 text-xs text-slate-500">
           x좌표는 원 안에서 −1~1 사이라, <b>cos 도 항상 −1~1</b>이에요.
         </p>
       </div>

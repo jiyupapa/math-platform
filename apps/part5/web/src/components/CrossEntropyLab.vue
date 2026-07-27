@@ -124,21 +124,21 @@ function applyPreset(w: number[]) {
       @pointerup="onUp"
       @pointercancel="onUp"
     >
-      <line :x1="PAD_X" :y1="BASE_Y" :x2="W - PAD_X" :y2="BASE_Y" stroke="#cbd5e1" stroke-width="1.5" />
+      <line :x1="PAD_X" :y1="BASE_Y" :x2="W - PAD_X" :y2="BASE_Y" stroke="var(--c-slate-300)" stroke-width="1.5" />
       <g v-for="(name, i) in OUTCOMES" :key="name">
         <!-- 세상 p (고정, 회색) -->
-        <rect :x="pX(i)" :y="pY(i)" :width="subW()" :height="P[i] * PLOT_H" fill="#cbd5e1" rx="4" />
-        <text :x="pX(i) + subW() / 2" :y="pY(i) - 5" text-anchor="middle" font-size="10" fill="#94a3b8">
+        <rect :x="pX(i)" :y="pY(i)" :width="subW()" :height="P[i] * PLOT_H" fill="var(--c-slate-300)" rx="4" />
+        <text :x="pX(i) + subW() / 2" :y="pY(i) - 5" text-anchor="middle" font-size="10" fill="var(--c-slate-400)">
           {{ (P[i] * 100).toFixed(1) }}%
         </text>
         <!-- 내 지도 q (드래그, 보라) -->
-        <rect :x="qX(i)" :y="BASE_Y - PLOT_H" :width="subW()" :height="PLOT_H" fill="#f8fafc" rx="4" />
+        <rect :x="qX(i)" :y="BASE_Y - PLOT_H" :width="subW()" :height="PLOT_H" fill="var(--c-slate-50)" rx="4" />
         <rect
           :x="qX(i)"
           :y="qY(i)"
           :width="subW()"
           :height="Math.max(q[i] * PLOT_H, 2)"
-          fill="#6366f1"
+          fill="var(--c-indigo-500)"
           rx="4"
         />
         <text
@@ -147,20 +147,20 @@ function applyPreset(w: number[]) {
           text-anchor="middle"
           font-size="10"
           font-weight="bold"
-          fill="#4f46e5"
+          fill="var(--c-indigo-600)"
         >
           {{ (q[i] * 100).toFixed(1) }}%
         </text>
         <!-- 라벨 -->
-        <text :x="PAD_X + i * groupW + groupW / 2" :y="BASE_Y + 16" text-anchor="middle" font-size="11" fill="#64748b">
+        <text :x="PAD_X + i * groupW + groupW / 2" :y="BASE_Y + 16" text-anchor="middle" font-size="11" fill="var(--c-slate-500)">
           {{ name }}
         </text>
       </g>
       <!-- 범례 -->
-      <rect :x="W - 130" y="4" width="10" height="10" fill="#cbd5e1" rx="2" />
-      <text :x="W - 116" y="13" font-size="10" fill="#94a3b8">세상 p (고정)</text>
-      <rect :x="W - 130" y="20" width="10" height="10" fill="#6366f1" rx="2" />
-      <text :x="W - 116" y="29" font-size="10" fill="#4f46e5">내 지도 q (드래그)</text>
+      <rect :x="W - 130" y="4" width="10" height="10" fill="var(--c-slate-300)" rx="2" />
+      <text :x="W - 116" y="13" font-size="10" fill="var(--c-slate-400)">세상 p (고정)</text>
+      <rect :x="W - 130" y="20" width="10" height="10" fill="var(--c-indigo-500)" rx="2" />
+      <text :x="W - 116" y="29" font-size="10" fill="var(--c-indigo-600)">내 지도 q (드래그)</text>
     </svg>
 
     <!-- 비용 게이지 -->
@@ -181,12 +181,12 @@ function applyPreset(w: number[]) {
       </div>
       <span
         class="w-28 shrink-0 text-sm font-bold tabular-nums"
-        :class="Number.isFinite(cost) ? (atMin ? 'text-emerald-600' : 'text-indigo-700') : 'text-rose-600'"
+        :class="Number.isFinite(cost) ? (atMin ? 'text-emerald-700' : 'text-indigo-700') : 'text-rose-700'"
       >
         {{ Number.isFinite(cost) ? cost.toFixed(3) + ' 비트' : '∞ 💥' }}
       </span>
     </div>
-    <p class="mt-1 text-xs" :class="atMin ? 'font-semibold text-emerald-600' : 'text-slate-400'" style="padding-left: 7.75rem">
+    <p class="mt-1 text-xs" :class="atMin ? 'font-semibold text-emerald-700' : 'text-slate-500'" style="padding-left: 7.75rem">
       <template v-if="!Number.isFinite(cost)">
         일어날 수 있는 일(눈 12.5%)에 확률 0을 준 지도 — 그 날이 오면 부호화 불가, 비용 무한대!
       </template>
@@ -203,7 +203,7 @@ function applyPreset(w: number[]) {
     <div class="mt-3 overflow-x-auto">
       <table class="w-full min-w-[26rem] text-center text-sm">
         <thead>
-          <tr class="border-b border-slate-200 text-xs text-slate-400">
+          <tr class="border-b border-slate-200 text-xs text-slate-500">
             <th class="py-1.5 font-medium">경우</th>
             <th class="py-1.5 font-medium">실제 빈도 p</th>
             <th class="py-1.5 font-medium">지도의 코드 길이 log₂(1/q)</th>

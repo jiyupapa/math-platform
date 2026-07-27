@@ -34,12 +34,12 @@ const MIN_NORMAL = 2 ** -126
 const journey = computed(() => {
   const v = cur.value
   if (!Number.isFinite(v))
-    return { label: `💥 오버플로 — ${steps.value}번 만에 자의 끝 너머, inf 로 포화`, tone: 'text-rose-600' }
+    return { label: `💥 오버플로 — ${steps.value}번 만에 자의 끝 너머, inf 로 포화`, tone: 'text-rose-700' }
   if (v === 0)
-    return { label: `🕳️ 언더플로 — ${steps.value}번 만에 눈금 사이로 소멸, 0`, tone: 'text-rose-600' }
+    return { label: `🕳️ 언더플로 — ${steps.value}번 만에 눈금 사이로 소멸, 0`, tone: 'text-rose-700' }
   if (v < MIN_NORMAL)
-    return { label: '⚠️ 비정규 구간 — 숨은 1을 포기하고 낭떠러지 대신 경사로로 버티는 중', tone: 'text-amber-600' }
-  return { label: '✅ 정상 구간 — 아직 자 위에 있습니다', tone: 'text-emerald-600' }
+    return { label: '⚠️ 비정규 구간 — 숨은 1을 포기하고 낭떠러지 대신 경사로로 버티는 중', tone: 'text-amber-700' }
+  return { label: '✅ 정상 구간 — 아직 자 위에 있습니다', tone: 'text-emerald-700' }
 })
 const fmtV = (v: number) =>
   !Number.isFinite(v) ? 'inf' : v === 0 ? '0' : v >= 1e5 || v < 1e-4 ? v.toExponential(3) : String(v)
@@ -72,7 +72,7 @@ const infectedSum = [3, 5, Number.NaN].reduce((a, b) => a + b, 0)
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 2배 여행 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 2배 여행: 자의 끝은 생각보다 가깝다</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       1에서 출발해 fp32 로 ×2(또는 ÷2)를 반복합니다 — 몇 걸음 만에 자의 끝에 닿는지 세어 보세요.
     </p>
 
@@ -93,19 +93,19 @@ const infectedSum = [3, 5, Number.NaN].reduce((a, b) => a + b, 0)
       >
         🕳️ ÷2 여행 (아래로)
       </button>
-      <button type="button" class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-500 hover:bg-slate-200" @click="run(1)">1스텝</button>
-      <button type="button" class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-500 hover:bg-slate-200" @click="run(10)">10스텝</button>
+      <button type="button" class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-200" @click="run(1)">1스텝</button>
+      <button type="button" class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-200" @click="run(10)">10스텝</button>
       <button type="button" class="rounded-lg bg-indigo-100 px-3 py-2 text-xs font-semibold text-indigo-700 hover:bg-indigo-200" @click="toEnd()">끝까지 →</button>
-      <button type="button" class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-500 hover:bg-slate-200" @click="resetJourney()">처음부터</button>
+      <button type="button" class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-200" @click="resetJourney()">처음부터</button>
     </div>
 
     <div class="mt-3 flex flex-wrap items-center gap-3 rounded-lg bg-slate-50 p-3">
       <div>
-        <p class="text-[11px] text-slate-400">스텝</p>
+        <p class="text-xs text-slate-600">스텝</p>
         <p class="font-mono text-lg font-bold text-slate-700">{{ steps }}</p>
       </div>
       <div class="min-w-0 flex-1">
-        <p class="text-[11px] text-slate-400">현재 값 (fp32)</p>
+        <p class="text-xs text-slate-600">현재 값 (fp32)</p>
         <p class="break-all font-mono text-lg font-bold text-slate-700">{{ fmtV(cur) }}</p>
       </div>
       <p class="w-full text-sm font-medium sm:w-auto" :class="journey.tone">{{ journey.label }}</p>
@@ -122,7 +122,7 @@ const infectedSum = [3, 5, Number.NaN].reduce((a, b) => a + b, 0)
     <!-- ② exp 폭발 시계 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — exp 폭발 시계: 지수함수는 자의 끝을 향해 달린다</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       2부 7장의 그 지수함수 — exp(x)는 x 가 조금만 커져도 폭발적으로 자랍니다.
       fp32 와 fp64 가 각각 몇에서 터지는지 다이얼을 돌려 보세요.
     </p>
@@ -134,18 +134,18 @@ const infectedSum = [3, 5, Number.NaN].reduce((a, b) => a + b, 0)
 
     <div class="mt-2 grid gap-2 sm:grid-cols-2">
       <div class="rounded-lg p-3" :class="expProbe.boom32 ? 'bg-rose-50' : 'bg-slate-50'">
-        <p class="text-[11px]" :class="expProbe.boom32 ? 'text-rose-500' : 'text-slate-400'">fp32 의 exp(x)</p>
-        <p class="break-all font-mono text-lg font-bold" :class="expProbe.boom32 ? 'text-rose-600' : 'text-slate-700'">
+        <p class="text-xs" :class="expProbe.boom32 ? 'text-rose-700' : 'text-slate-500'">fp32 의 exp(x)</p>
+        <p class="break-all font-mono text-lg font-bold" :class="expProbe.boom32 ? 'text-rose-700' : 'text-slate-700'">
           {{ expProbe.boom32 ? '💥 inf (오버플로!)' : expProbe.e32.toExponential(3) }}
         </p>
-        <p class="text-[11px] text-slate-400">한계 ≈ 3.4×10³⁸ → x ≈ 88.7 에서 폭발</p>
+        <p class="text-xs text-slate-600">한계 ≈ 3.4×10³⁸ → x ≈ 88.7 에서 폭발</p>
       </div>
       <div class="rounded-lg p-3" :class="expProbe.boom64 ? 'bg-rose-50' : 'bg-slate-50'">
-        <p class="text-[11px]" :class="expProbe.boom64 ? 'text-rose-500' : 'text-slate-400'">fp64 의 exp(x)</p>
-        <p class="break-all font-mono text-lg font-bold" :class="expProbe.boom64 ? 'text-rose-600' : 'text-slate-700'">
+        <p class="text-xs" :class="expProbe.boom64 ? 'text-rose-700' : 'text-slate-500'">fp64 의 exp(x)</p>
+        <p class="break-all font-mono text-lg font-bold" :class="expProbe.boom64 ? 'text-rose-700' : 'text-slate-700'">
           {{ expProbe.boom64 ? '💥 inf' : expProbe.e64.toExponential(3) }}
         </p>
-        <p class="text-[11px] text-slate-400">한계 ≈ 1.8×10³⁰⁸ → x ≈ 709.8 에서 폭발</p>
+        <p class="text-xs text-slate-600">한계 ≈ 1.8×10³⁰⁸ → x ≈ 709.8 에서 폭발</p>
       </div>
     </div>
 
@@ -158,7 +158,7 @@ const infectedSum = [3, 5, Number.NaN].reduce((a, b) => a + b, 0)
     <!-- ③ NaN 공장 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ③ — NaN 공장: 답이 없는 계산의 표식</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       자의 끝(inf·0)끼리 만나면 "답이 없는" 계산이 생깁니다 — 각 카드를 눌러 결과를 확인하세요.
     </p>
 
@@ -172,16 +172,16 @@ const infectedSum = [3, 5, Number.NaN].reduce((a, b) => a + b, 0)
         @click="revealed[i] = true"
       >
         <p class="font-mono text-sm font-bold text-slate-700">{{ c.label }}</p>
-        <p v-if="revealed[i]" class="mt-1 font-mono text-lg font-bold text-rose-600">= {{ c.value }}</p>
-        <p v-else class="mt-1 text-[11px] text-slate-400">{{ c.hint }}</p>
+        <p v-if="revealed[i]" class="mt-1 font-mono text-lg font-bold text-rose-700">= {{ c.value }}</p>
+        <p v-else class="mt-1 text-xs text-slate-600">{{ c.hint }}</p>
       </button>
     </div>
 
     <div class="mt-3 rounded-lg bg-slate-50 p-3 font-mono text-xs leading-relaxed text-slate-600">
-      3 + 5 + NaN = <b class="text-rose-600">{{ infectedSum }}</b>
-      <span class="text-slate-400"> ← 하나만 끼어도 장부 전체가 오염(전염성)</span><br />
-      NaN === NaN → <b class="text-rose-600">{{ (Number.NaN === Number.NaN).toString() }}</b>
-      <span class="text-slate-400"> ← 자기 자신과도 같지 않은 유일한 값 (검사는 isNaN 으로)</span>
+      3 + 5 + NaN = <b class="text-rose-700">{{ infectedSum }}</b>
+      <span class="text-slate-500"> ← 하나만 끼어도 장부 전체가 오염(전염성)</span><br />
+      NaN === NaN → <b class="text-rose-700">{{ (Number.NaN === Number.NaN).toString() }}</b>
+      <span class="text-slate-500"> ← 자기 자신과도 같지 않은 유일한 값 (검사는 isNaN 으로)</span>
     </div>
 
     <p class="mt-2 rounded-lg bg-indigo-50 p-3 text-xs leading-relaxed text-indigo-800">

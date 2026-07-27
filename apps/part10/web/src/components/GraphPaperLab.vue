@@ -83,7 +83,7 @@ const fmtFactor = computed(() => {
     <p class="mb-1 text-sm font-semibold text-slate-500">① 종이 갈아끼우기 — 곡선과 종이를 바꿔 가며 "직선이 되는 짝"을 찾아보세요</p>
     <div class="mb-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
       <div class="flex items-center gap-1.5">
-        <span class="text-xs text-slate-400">곡선:</span>
+        <span class="text-xs text-slate-500">곡선:</span>
         <button
           v-for="c in CURVES"
           :key="c.id"
@@ -96,7 +96,7 @@ const fmtFactor = computed(() => {
         </button>
       </div>
       <div class="flex items-center gap-1.5">
-        <span class="text-xs text-slate-400">종이:</span>
+        <span class="text-xs text-slate-500">종이:</span>
         <button
           v-for="p in PAPERS"
           :key="p.id"
@@ -120,7 +120,7 @@ const fmtFactor = computed(() => {
           :x2="xPos(Math.max(t, 1), paper)"
           :y1="PAD.t"
           :y2="H - PAD.b"
-          stroke="#e2e8f0"
+          stroke="var(--c-slate-200)"
           stroke-width="1"
         />
         <line
@@ -130,7 +130,7 @@ const fmtFactor = computed(() => {
           :x2="W - PAD.r"
           :y1="yPos(Math.max(t, paper === 'linlin' ? 0 : 1), paper)"
           :y2="yPos(Math.max(t, paper === 'linlin' ? 0 : 1), paper)"
-          stroke="#e2e8f0"
+          stroke="var(--c-slate-200)"
           stroke-width="1"
         />
         <!-- 눈금 라벨 -->
@@ -153,7 +153,7 @@ const fmtFactor = computed(() => {
           font-size="9"
         >{{ t }}</text>
         <!-- 곡선 -->
-        <polyline :points="points" fill="none" :stroke="isStraight ? '#059669' : '#6366f1'" stroke-width="2.5" />
+        <polyline :points="points" fill="none" :stroke="isStraight ? 'var(--c-emerald-600)' : 'var(--c-indigo-500)'" stroke-width="2.5" />
       </svg>
 
       <div class="min-w-48 flex-1 space-y-2">
@@ -176,12 +176,12 @@ const fmtFactor = computed(() => {
     <p class="mt-5 mb-1 text-sm font-semibold text-slate-500">② 기울기 b 다이얼 — 로그-로그 직선의 기울기가 말하는 것 (y = xᵇ)</p>
     <div class="flex flex-wrap items-start gap-4 rounded-lg bg-slate-50 p-4">
       <svg :viewBox="`0 0 ${W} ${H}`" class="h-52 w-full max-w-sm rounded-lg bg-white ring-1 ring-slate-200">
-        <line v-for="i in 4" :key="'gx' + i" :x1="PAD.l + ((i - 1) / 3) * (W - PAD.l - PAD.r)" :x2="PAD.l + ((i - 1) / 3) * (W - PAD.l - PAD.r)" :y1="PAD.t" :y2="H - PAD.b" stroke="#e2e8f0" />
-        <line v-for="i in 10" :key="'gy' + i" :x1="PAD.l" :x2="W - PAD.r" :y1="H - PAD.b - ((i - 1) / 9) * (H - PAD.b - PAD.t)" :y2="H - PAD.b - ((i - 1) / 9) * (H - PAD.b - PAD.t)" stroke="#f1f5f9" />
+        <line v-for="i in 4" :key="'gx' + i" :x1="PAD.l + ((i - 1) / 3) * (W - PAD.l - PAD.r)" :x2="PAD.l + ((i - 1) / 3) * (W - PAD.l - PAD.r)" :y1="PAD.t" :y2="H - PAD.b" stroke="var(--c-slate-200)" />
+        <line v-for="i in 10" :key="'gy' + i" :x1="PAD.l" :x2="W - PAD.r" :y1="H - PAD.b - ((i - 1) / 9) * (H - PAD.b - PAD.t)" :y2="H - PAD.b - ((i - 1) / 9) * (H - PAD.b - PAD.t)" stroke="var(--c-slate-100)" />
         <text v-for="(lx, i) in [1, 10, 100, 1000]" :key="'glx' + i" :x="PAD.l + (i / 3) * (W - PAD.l - PAD.r)" :y="H - 8" text-anchor="middle" class="fill-slate-400" font-size="9">{{ lx }}</text>
         <!-- y=1 기준선 -->
-        <line :x1="PAD.l" :x2="W - PAD.r" :y1="H - PAD.b - (3 / 9) * (H - PAD.b - PAD.t)" :y2="H - PAD.b - (3 / 9) * (H - PAD.b - PAD.t)" stroke="#cbd5e1" stroke-dasharray="4 3" />
-        <line :x1="slopePts.x1" :y1="slopePts.y1" :x2="slopePts.x2" :y2="slopePts.y2" stroke="#6366f1" stroke-width="2.5" />
+        <line :x1="PAD.l" :x2="W - PAD.r" :y1="H - PAD.b - (3 / 9) * (H - PAD.b - PAD.t)" :y2="H - PAD.b - (3 / 9) * (H - PAD.b - PAD.t)" stroke="var(--c-slate-300)" stroke-dasharray="4 3" />
+        <line :x1="slopePts.x1" :y1="slopePts.y1" :x2="slopePts.x2" :y2="slopePts.y2" stroke="var(--c-indigo-500)" stroke-width="2.5" />
       </svg>
       <div class="min-w-48 flex-1">
         <div class="mb-1 flex items-baseline justify-between text-sm">

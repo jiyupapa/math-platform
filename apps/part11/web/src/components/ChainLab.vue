@@ -89,7 +89,7 @@ const fmt = (v: number) => (v >= 10 ? v.toFixed(1) : v.toFixed(1))
       >
         {{ v }}%
       </button>
-      <span class="ml-2 text-xs text-slate-400">한 단계씩만 보면 꽤 믿음직한 일꾼입니다</span>
+      <span class="ml-2 text-xs text-slate-500">한 단계씩만 보면 꽤 믿음직한 일꾼입니다</span>
     </div>
 
     <!-- ② 일 맡기기 -->
@@ -120,7 +120,7 @@ const fmt = (v: number) => (v >= 10 ? v.toFixed(1) : v.toFixed(1))
           v-for="(m, i) in stepMarks"
           :key="i"
           class="flex h-8 w-8 items-center justify-center rounded-md text-sm font-bold"
-          :class="m === 'ok' ? 'bg-emerald-400 text-white' : m === 'fail' ? 'bg-rose-500 text-white' : 'bg-slate-200 text-slate-400'"
+          :class="m === 'ok' ? 'bg-emerald-400 text-white' : m === 'fail' ? 'bg-rose-500 text-white' : 'bg-slate-200 text-slate-600'"
           :title="`${i + 1}단계`"
         >{{ m === 'ok' ? '✓' : m === 'fail' ? '✗' : i + 1 }}</span>
       </div>
@@ -131,7 +131,7 @@ const fmt = (v: number) => (v >= 10 ? v.toFixed(1) : v.toFixed(1))
         <template v-if="failedAt === 0">🎉 이번엔 끝까지 해냈습니다 — 하지만 아래 20회 요약을 보세요.</template>
         <template v-else>😱 {{ failedAt }}단계에서 미끄러졌습니다 — 앞의 {{ failedAt - 1 }}걸음이 전부 물거품이 됐어요.</template>
       </p>
-      <p class="text-xs text-slate-400">한 단계라도 틀리면 일 전체가 실패로 칩니다 — 잘못된 표가 들어간 보고서처럼요.</p>
+      <p class="text-xs text-slate-500">한 단계라도 틀리면 일 전체가 실패로 칩니다 — 잘못된 표가 들어간 보고서처럼요.</p>
     </div>
 
     <!-- ③ 20회 요약 -->
@@ -141,7 +141,7 @@ const fmt = (v: number) => (v >= 10 ? v.toFixed(1) : v.toFixed(1))
         <span
           v-for="(ok, i) in summary.marks"
           :key="i"
-          class="flex h-6 w-6 items-center justify-center rounded text-[11px] font-bold"
+          class="flex h-6 w-6 items-center justify-center rounded text-xs font-bold"
           :class="ok ? 'bg-emerald-400 text-white' : 'bg-rose-400 text-white'"
           :title="`${i + 1}회차`"
         >{{ ok ? 'O' : '✗' }}</span>

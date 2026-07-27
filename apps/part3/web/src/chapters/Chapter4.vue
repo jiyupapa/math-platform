@@ -437,7 +437,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch4')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 4 완료. '정보가 확률을 바꾸는' 규칙을 손에 넣었습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 확률에 <b>숫자를 붙여 계산하는</b> 도구 — 확률변수와 확률분포입니다.

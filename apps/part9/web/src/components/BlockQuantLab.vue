@@ -108,7 +108,7 @@ const fileGB = computed(() => (N_PARAMS * tag.value.bits) / 8 / 1e9)
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 아웃라이어 전쟁 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 아웃라이어 전쟁: 통짜 축척 vs 분단별 채점</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       종모양 가중치 128개를 int4(눈금 ±7)로 담습니다 — 첫 번째 값에 아웃라이어를 침입시키며
       두 방식을 비교하세요: 축척 하나(통짜) vs 32개마다 하나(블록).
     </p>
@@ -120,23 +120,23 @@ const fileGB = computed(() => (N_PARAMS * tag.value.bits) / 8 / 1e9)
 
     <div class="mt-2 grid gap-2 sm:grid-cols-2">
       <div class="rounded-lg p-3" :class="war.ratio > 2 ? 'bg-rose-50' : 'bg-slate-50'">
-        <p class="text-[11px]" :class="war.ratio > 2 ? 'text-rose-500' : 'text-slate-400'">🏫 통짜 — 128개가 축척 하나를 공유</p>
-        <p class="font-mono text-lg font-bold" :class="war.ratio > 2 ? 'text-rose-600' : 'text-slate-700'">평균 오차 {{ war.mMono.toExponential(2) }}</p>
-        <p class="text-[11px] text-slate-400">아웃라이어가 전원의 눈금을 성기게 만든다</p>
+        <p class="text-xs" :class="war.ratio > 2 ? 'text-rose-700' : 'text-slate-500'">🏫 통짜 — 128개가 축척 하나를 공유</p>
+        <p class="font-mono text-lg font-bold" :class="war.ratio > 2 ? 'text-rose-700' : 'text-slate-700'">평균 오차 {{ war.mMono.toExponential(2) }}</p>
+        <p class="text-xs text-slate-500">아웃라이어가 전원의 눈금을 성기게 만든다</p>
       </div>
       <div class="rounded-lg bg-emerald-50 p-3">
-        <p class="text-[11px] text-emerald-600">🧱 블록 — 32개마다 축척 하나 (4블록)</p>
+        <p class="text-xs text-emerald-700">🧱 블록 — 32개마다 축척 하나 (4블록)</p>
         <p class="font-mono text-lg font-bold text-emerald-700">평균 오차 {{ war.mBlock.toExponential(2) }}</p>
-        <p class="text-[11px] text-emerald-500">피해가 아웃라이어의 블록 안에 국한</p>
+        <p class="text-xs text-emerald-700">피해가 아웃라이어의 블록 안에 국한</p>
       </div>
     </div>
 
     <div class="mt-2 flex items-center gap-2">
-      <span class="text-[11px] text-slate-400">블록별 피해 상황:</span>
+      <span class="text-xs text-slate-500">블록별 피해 상황:</span>
       <div
         v-for="(e, i) in war.perBlock"
         :key="i"
-        class="flex-1 rounded-lg p-2 text-center text-[11px] font-semibold"
+        class="flex-1 rounded-lg p-2 text-center text-xs font-semibold"
         :class="e > war.perBlock[3] * 2 ? 'bg-rose-100 text-rose-700' : 'bg-emerald-100 text-emerald-700'"
       >
         블록 {{ i + 1 }}{{ i === 0 && outlier > 0 ? ' 🦹' : '' }}
@@ -153,7 +153,7 @@ const fileGB = computed(() => (N_PARAMS * tag.value.bits) / 8 / 1e9)
     <!-- ② GGUF 태그 해독기 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — GGUF 태그 해독기: 문패를 한 조각씩 읽는다</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       Ollama 모델 목록에서 보던 그 태그들입니다 — 골라서 문패를 분해하고, 실효 비트로
       7B급(6.57B, 1장)의 파일 영수증을 계산해 보세요.
     </p>
@@ -184,11 +184,11 @@ const fileGB = computed(() => (N_PARAMS * tag.value.bits) / 8 / 1e9)
 
     <div class="mt-2 flex flex-wrap items-center gap-3 rounded-lg bg-slate-50 p-3">
       <div>
-        <p class="text-[11px] text-slate-400">실효 비트/파라미터</p>
+        <p class="text-xs text-slate-500">실효 비트/파라미터</p>
         <p class="font-mono text-lg font-bold text-slate-700">{{ tag.bits }}</p>
       </div>
       <div>
-        <p class="text-[11px] text-slate-400">7B급 파일 크기 ≈ 6.57B × {{ tag.bits }}bit</p>
+        <p class="text-xs text-slate-500">7B급 파일 크기 ≈ 6.57B × {{ tag.bits }}bit</p>
         <p class="font-mono text-lg font-bold text-indigo-700">{{ fileGB.toFixed(1) }} GB</p>
       </div>
       <p class="min-w-0 flex-1 text-xs leading-relaxed text-slate-500">{{ tag.note }}</p>

@@ -45,9 +45,9 @@ function barWidth(l: number): number {
   return Math.min(l / LOSS_MAX, 1) * 100
 }
 function barColor(l: number): string {
-  if (l > 5) return '#ef4444'
-  if (l > 2.5) return '#f97316'
-  return '#6366f1'
+  if (l > 5) return 'var(--c-red-500)'
+  if (l > 2.5) return 'var(--c-orange-500)'
+  return 'var(--c-indigo-500)'
 }
 </script>
 
@@ -112,18 +112,18 @@ function barColor(l: number): string {
     <div class="mt-4 grid grid-cols-2 gap-2 text-center">
       <div class="rounded-lg bg-slate-50 p-3">
         <p class="text-xl font-bold tabular-nums text-slate-700">{{ avg.toFixed(3) }} 비트</p>
-        <p class="text-[11px] text-slate-500">평균 손실 (크로스 엔트로피)</p>
+        <p class="text-xs text-slate-500">평균 손실 (크로스 엔트로피)</p>
       </div>
       <div class="rounded-lg bg-indigo-50 p-3">
         <p class="text-xl font-bold tabular-nums text-indigo-700">PPL {{ ppl < 10 ? ppl.toFixed(2) : ppl.toFixed(1) }}</p>
-        <p class="text-[11px] text-indigo-500">퍼플렉시티 = 2^평균</p>
+        <p class="text-xs text-indigo-600">퍼플렉시티 = 2^평균</p>
       </div>
     </div>
     <p class="mt-2 rounded-lg bg-amber-50 px-3 py-2 text-center text-sm text-amber-800">
       이 모델은 매 토큰을 <b>평균 {{ ppl < 10 ? ppl.toFixed(1) : Math.round(ppl) }}갈래</b>의 균등한 후보에서
       고민하는 것과 같은 수준입니다
     </p>
-    <p class="mt-1.5 text-xs text-slate-400">
+    <p class="mt-1.5 text-xs text-slate-500">
       💡 실험: 어려운 토큰(국밥·삶았다) 하나의 q 를 조금만 올려도 PPL 이 확 내려가요 —
       성적은 어려운 토큰이 지배합니다.
     </p>

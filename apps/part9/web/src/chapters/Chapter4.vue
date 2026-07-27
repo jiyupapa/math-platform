@@ -219,7 +219,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch4')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">4장 완료!</p>
       <p class="mt-1 text-sm text-emerald-700">
         티끌의 행동까지 읽었습니다. 다음은 자의 양쪽 끝 — 너무 커서 터지고(inf),

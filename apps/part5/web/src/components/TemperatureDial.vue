@@ -49,7 +49,7 @@ function draw() {
   samples.value = out
 }
 
-const COLORS = ['#6366f1', '#818cf8', '#a5b4fc', '#c7d2fe', '#e0e7ff']
+const COLORS = ['var(--c-indigo-500)', 'var(--c-indigo-400)', 'var(--c-indigo-300)', 'var(--c-indigo-200)', 'var(--c-indigo-100)']
 </script>
 
 <template>
@@ -57,7 +57,7 @@ const COLORS = ['#6366f1', '#818cf8', '#a5b4fc', '#c7d2fe', '#e0e7ff']
     <p class="mb-1 text-sm font-semibold text-slate-700">
       🌡️ 온도 다이얼 — "오늘 날씨가 참 ___" 의 다음 토큰
     </p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       모델의 점수(로짓)는 고정입니다 — 다이얼은 확률의 배분만 바꿔요.
     </p>
 
@@ -80,7 +80,7 @@ const COLORS = ['#6366f1', '#818cf8', '#a5b4fc', '#c7d2fe', '#e0e7ff']
       <button
         v-for="pr in presets"
         :key="pr.label"
-        class="rounded-full border border-slate-200 bg-slate-50 px-2 py-0.5 text-[11px] font-medium text-slate-600 hover:bg-slate-100"
+        class="rounded-full border border-slate-200 bg-slate-50 px-2 py-0.5 text-xs font-medium text-slate-600 hover:bg-slate-100"
         @click="T = pr.t"
       >
         {{ pr.label }}
@@ -93,7 +93,7 @@ const COLORS = ['#6366f1', '#818cf8', '#a5b4fc', '#c7d2fe', '#e0e7ff']
         <span class="w-20 shrink-0 truncate rounded bg-slate-100 px-1.5 py-0.5 text-center text-xs font-medium text-slate-700">
           {{ tok }}
         </span>
-        <span class="w-14 shrink-0 text-right text-[11px] tabular-nums text-slate-400">
+        <span class="w-14 shrink-0 text-right text-xs tabular-nums text-slate-500">
           로짓 {{ LOGITS[i].toFixed(1) }}
         </span>
         <div class="h-4 min-w-0 flex-1 overflow-hidden rounded bg-slate-100">
@@ -121,7 +121,7 @@ const COLORS = ['#6366f1', '#818cf8', '#a5b4fc', '#c7d2fe', '#e0e7ff']
         {{ H.toFixed(3) }}비트 ≈ {{ branches.toFixed(2) }}갈래
       </span>
     </div>
-    <p class="mt-1 text-xs text-slate-400" style="padding-left: 7.75rem">
+    <p class="mt-1 text-xs text-slate-500" style="padding-left: 7.75rem">
       최대 = log₂5 ≈ {{ H_MAX.toFixed(2) }}비트 (T→∞ 균등) · T→0 이면 0비트(몰빵)
     </p>
 
@@ -143,7 +143,7 @@ const COLORS = ['#6366f1', '#818cf8', '#a5b4fc', '#c7d2fe', '#e0e7ff']
         </span>
       </div>
     </div>
-    <p v-if="samples.length" class="mt-1.5 text-xs text-slate-400">
+    <p v-if="samples.length" class="mt-1.5 text-xs text-slate-500">
       🧊 낮은 T 에서는 같은 단어만, 🔥 높은 T 에서는 "감자같다"까지 —
       다이얼을 바꿔 다시 뽑아 보세요.
     </p>

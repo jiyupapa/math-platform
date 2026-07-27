@@ -298,7 +298,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch6')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 6 완료. 넓이 배율과 되돌리기를 익혔습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">다음은 변환에도 방향이 안 바뀌는 특별한 축 — 고유값과 고유벡터입니다.</p>
       <RouterLink

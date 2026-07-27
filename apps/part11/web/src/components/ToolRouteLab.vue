@@ -101,7 +101,7 @@ const STATUS_TEXT: Record<Status, string> = {
       >
         {{ v.toFixed(2) }} 로
       </button>
-      <span class="self-center text-slate-400">— 세 지점을 오가며 오류의 종류를 비교해 보세요</span>
+      <span class="self-center text-slate-500">— 세 지점을 오가며 오류의 종류를 비교해 보세요</span>
     </div>
 
     <!-- ② 질문 20개 -->
@@ -115,16 +115,16 @@ const STATUS_TEXT: Record<Status, string> = {
       >
         <span
           class="w-9 shrink-0 rounded px-1 py-0.5 text-center font-semibold"
-          :class="r.k === 'calc' ? 'bg-indigo-100 text-indigo-700' : r.k === 'search' ? 'bg-sky-100 text-sky-700' : 'bg-slate-100 text-slate-500'"
+          :class="r.k === 'calc' ? 'bg-indigo-100 text-indigo-700' : r.k === 'search' ? 'bg-sky-100 text-sky-700' : 'bg-slate-100 text-slate-600'"
         >{{ KIND_LABEL[r.k] }}</span>
         <span class="min-w-0 flex-1 truncate text-slate-700" :title="r.t">{{ r.t }}</span>
         <div class="h-2 w-20 shrink-0 overflow-hidden rounded bg-slate-200">
           <div class="h-full rounded" :class="r.s >= threshold ? 'bg-indigo-400' : 'bg-slate-400'" :style="{ width: r.s * 100 + '%' }" />
         </div>
-        <span class="w-9 shrink-0 text-right font-mono text-slate-500">{{ r.s.toFixed(2) }}</span>
+        <span class="w-9 shrink-0 text-right font-mono text-slate-600">{{ r.s.toFixed(2) }}</span>
         <span
           class="w-12 shrink-0 text-right font-semibold"
-          :class="r.st === 'fn' ? 'text-rose-600' : r.st === 'fp' ? 'text-amber-600' : 'text-emerald-600'"
+          :class="r.st === 'fn' ? 'text-rose-700' : r.st === 'fp' ? 'text-amber-700' : 'text-emerald-700'"
         >{{ STATUS_TEXT[r.st] }}</span>
       </div>
     </div>
@@ -135,7 +135,7 @@ const STATUS_TEXT: Record<Status, string> = {
       <div class="overflow-hidden rounded-lg ring-1 ring-slate-200">
         <table class="w-full text-center text-sm">
           <thead>
-            <tr class="bg-slate-100 text-xs text-slate-500">
+            <tr class="bg-slate-100 text-xs text-slate-600">
               <th class="px-2 py-1.5 font-medium"></th>
               <th class="px-2 py-1.5 font-medium">도구 호출</th>
               <th class="px-2 py-1.5 font-medium">패스</th>
@@ -145,11 +145,11 @@ const STATUS_TEXT: Record<Status, string> = {
             <tr class="border-t border-slate-100">
               <td class="bg-slate-50 px-2 py-1.5 text-xs font-medium text-slate-500">계산 필요 (8)</td>
               <td class="px-2 py-1.5 font-bold text-emerald-700">{{ agg.tp }}</td>
-              <td class="px-2 py-1.5 font-bold text-rose-600">{{ agg.fn }} 놓침</td>
+              <td class="px-2 py-1.5 font-bold text-rose-700">{{ agg.fn }} 놓침</td>
             </tr>
             <tr class="border-t border-slate-100">
               <td class="bg-slate-50 px-2 py-1.5 text-xs font-medium text-slate-500">불필요 (12)</td>
-              <td class="px-2 py-1.5 font-bold text-amber-600">{{ agg.fp }} 헛발</td>
+              <td class="px-2 py-1.5 font-bold text-amber-700">{{ agg.fp }} 헛발</td>
               <td class="px-2 py-1.5 font-bold text-emerald-700">{{ agg.tn }}</td>
             </tr>
           </tbody>
@@ -158,7 +158,7 @@ const STATUS_TEXT: Record<Status, string> = {
       <div class="flex flex-col justify-center rounded-lg bg-slate-50 p-3 text-sm text-slate-700">
         <p>
           20개 중 올바른 판정 <b class="text-emerald-700">{{ agg.ok }}개</b> —
-          놓침 <b class="text-rose-600">{{ agg.fn }}</b> · 헛발 <b class="text-amber-600">{{ agg.fp }}</b>
+          놓침 <b class="text-rose-700">{{ agg.fn }}</b> · 헛발 <b class="text-amber-700">{{ agg.fp }}</b>
         </p>
         <p class="mt-1 text-xs text-slate-500">
           <template v-if="agg.fn === 0 && agg.fp === 0">완벽 — 하지만 이 데이터에선 불가능할 텐데요…?</template>

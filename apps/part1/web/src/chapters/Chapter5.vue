@@ -114,7 +114,7 @@ function onSetComplete() {
 
     <p class="leading-relaxed text-slate-700">
       아래에서 행렬 슬라이더를 움직여 보세요. <b>옅은 회색 = 원래 격자</b>, <b>파란 격자 = 변환된 모습</b>,
-      <b style="color:#10b981">초록 화살표 î</b> 와 <b style="color:#ec4899">분홍 화살표 ĵ</b> 가 어디로 가는지 보세요.
+      <b style="color: var(--c-emerald-700)">초록 화살표 î</b> 와 <b style="color: var(--c-pink-700)">분홍 화살표 ĵ</b> 가 어디로 가는지 보세요.
     </p>
 
     <GridTransform />
@@ -146,8 +146,8 @@ function onSetComplete() {
         <!-- 원래 직선 -->
         <figure class="text-center">
           <svg viewBox="0 0 150 100" width="150" height="100" role="img" aria-label="원래 직선: 같은 간격 점들">
-            <polyline points="15,50 135,50" fill="none" stroke="#cbd5e1" stroke-width="2" />
-            <g fill="#6366f1">
+            <polyline points="15,50 135,50" fill="none" stroke="var(--c-slate-300)" stroke-width="2" />
+            <g fill="var(--c-indigo-500)">
               <circle cx="15" cy="50" r="4" /><circle cx="45" cy="50" r="4" />
               <circle cx="75" cy="50" r="4" /><circle cx="105" cy="50" r="4" /><circle cx="135" cy="50" r="4" />
             </g>
@@ -155,13 +155,13 @@ function onSetComplete() {
           <figcaption class="text-xs text-slate-500">원래 직선<br />(같은 간격 발자국)</figcaption>
         </figure>
 
-        <div class="pb-6 text-2xl text-slate-400" aria-hidden="true">→</div>
+        <div class="pb-6 text-2xl text-slate-500" aria-hidden="true">→</div>
 
         <!-- 선형변환 후: 늘고 기울어도 직선 -->
         <figure class="text-center">
           <svg viewBox="0 0 150 100" width="150" height="100" role="img" aria-label="선형변환 후: 늘고 기울어도 여전히 직선">
-            <polyline points="15,80 135,25" fill="none" stroke="#10b981" stroke-width="2" />
-            <g fill="#059669">
+            <polyline points="15,80 135,25" fill="none" stroke="var(--c-emerald-500)" stroke-width="2" />
+            <g fill="var(--c-emerald-600)">
               <circle cx="15" cy="80" r="4" /><circle cx="45" cy="66" r="4" />
               <circle cx="75" cy="52" r="4" /><circle cx="105" cy="39" r="4" /><circle cx="135" cy="25" r="4" />
             </g>
@@ -172,14 +172,14 @@ function onSetComplete() {
         <!-- 금지: 휘어짐 -->
         <figure class="text-center">
           <svg viewBox="0 0 150 100" width="150" height="100" role="img" aria-label="휘어짐: 선형변환이 아님">
-            <path d="M15,78 Q75,35 135,72" fill="none" stroke="#fda4af" stroke-width="2" />
-            <g fill="#e11d48">
+            <path d="M15,78 Q75,35 135,72" fill="none" stroke="var(--c-rose-300)" stroke-width="2" />
+            <g fill="var(--c-rose-600)">
               <circle cx="15" cy="78" r="4" /><circle cx="45" cy="61.5" r="4" />
               <circle cx="75" cy="55" r="4" /><circle cx="105" cy="58.5" r="4" /><circle cx="135" cy="72" r="4" />
             </g>
-            <text x="75" y="20" text-anchor="middle" font-size="20" fill="#e11d48">✕</text>
+            <text x="75" y="20" text-anchor="middle" font-size="20" fill="var(--c-rose-600)">✕</text>
           </svg>
-          <figcaption class="text-xs font-semibold text-rose-600">❌ 휘어짐<br />= 선형변환 아님</figcaption>
+          <figcaption class="text-xs font-semibold text-rose-700">❌ 휘어짐<br />= 선형변환 아님</figcaption>
         </figure>
       </div>
 
@@ -320,7 +320,7 @@ function onSetComplete() {
             <tr><td class="px-3 py-1 font-mono">2</td><td class="px-3 py-1">2배로 커짐</td><td class="px-3 py-1">확대</td></tr>
             <tr><td class="px-3 py-1 font-mono">1</td><td class="px-3 py-1">그대로 (안 변함)</td><td class="px-3 py-1">회전·전단</td></tr>
             <tr><td class="px-3 py-1 font-mono">0.5</td><td class="px-3 py-1">절반으로 줄어듦</td><td class="px-3 py-1">축소</td></tr>
-            <tr><td class="px-3 py-1 font-mono text-rose-600">0</td><td class="px-3 py-1 text-rose-600">납작하게 찌부러짐 (직선·점)</td><td class="px-3 py-1">납작</td></tr>
+            <tr><td class="px-3 py-1 font-mono text-rose-700">0</td><td class="px-3 py-1 text-rose-700">납작하게 찌부러짐 (직선·점)</td><td class="px-3 py-1">납작</td></tr>
             <tr><td class="px-3 py-1 font-mono">−1</td><td class="px-3 py-1">넓이는 1배인데 뒤집힘</td><td class="px-3 py-1">반사</td></tr>
           </tbody>
         </table>
@@ -517,7 +517,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch5')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 5 완료. 행렬을 '공간을 바꾸는 함수'로 보게 되었습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">다음은 그 변환이 넓이를 얼마나 바꾸는지 — 행렬식과 역행렬입니다.</p>
       <RouterLink

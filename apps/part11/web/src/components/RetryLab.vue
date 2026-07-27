@@ -64,7 +64,7 @@ const fmt = (v: number) => v.toFixed(1)
         <span>🎲 첫 성공까지 평균 <b>{{ expectedTries.toFixed(1) }}회</b> (= 1/p)</span>
         <span>💰 N번 뽑기 비용 ≈ <b>{{ (n * TOKENS_PER_TRY).toLocaleString() }}토큰</b></span>
       </div>
-      <p class="text-xs text-slate-400">
+      <p class="text-xs text-slate-500">
         한 번의 성공률 {{ pPct }}%를 N={{ n }}번 다시 뽑으면 1 − (1 − {{ (p).toFixed(2) }})<sup>{{ n }}</sup> = {{ fmt(success) }}%.
       </p>
     </div>
@@ -82,7 +82,7 @@ const fmt = (v: number) => v.toFixed(1)
           :title="`N=${pt.N}: ${fmt(pt.pct)}%`"
         />
       </div>
-      <div class="mt-1 flex justify-between text-[11px] text-slate-400"><span>N=1</span><span>N=10</span><span>N=20</span></div>
+      <div class="mt-1 flex justify-between text-xs text-slate-500"><span>N=1</span><span>N=10</span><span>N=20</span></div>
       <p class="mt-2 text-sm text-slate-700">
         처음 몇 번이 이득의 대부분을 가져갑니다 — 뒤로 갈수록 한 번 더 뽑는 값어치가 줄어요.
       </p>
@@ -94,7 +94,7 @@ const fmt = (v: number) => v.toFixed(1)
       <div v-for="t in targets" :key="t.pct" class="rounded-lg bg-amber-50 px-3 py-2 text-center">
         <p class="text-xs font-medium text-amber-700">{{ t.pct }}% 넘기기</p>
         <p class="font-mono text-lg font-bold text-amber-900">N = {{ t.N }}</p>
-        <p class="text-[11px] text-amber-700">≈ {{ t.cost.toLocaleString() }}토큰</p>
+        <p class="text-xs text-amber-700">≈ {{ t.cost.toLocaleString() }}토큰</p>
       </div>
     </div>
     <p class="mt-3 rounded-md bg-rose-50 px-3 py-2 text-xs text-rose-700">

@@ -114,9 +114,9 @@ function reveal(id: 's1' | 's2' | 's3' | 's4') {
       <table class="w-full text-xs">
         <tbody class="divide-y divide-indigo-100">
           <tr><td class="py-1.5 pr-2 font-medium text-slate-700">① 예산·배분 (C=6ND · 30:1)</td><td class="py-1.5 font-bold text-emerald-700">검산 일치 — 신뢰</td></tr>
-          <tr><td class="py-1.5 pr-2 font-medium text-slate-700">② 종합 1위 (0.8점 차)</td><td class="py-1.5 font-bold text-amber-700">오차범위 안 — 쌍대·p값 요구</td></tr>
+          <tr><td class="py-1.5 pr-2 font-medium text-slate-700">② 종합 1위 (0.8점 차)</td><td class="py-1.5 font-bold text-amber-800">오차범위 안 — 쌍대·p값 요구</td></tr>
           <tr><td class="py-1.5 pr-2 font-medium text-slate-700">③ 수학 창발 (+33점)</td><td class="py-1.5 font-bold text-rose-700">오염 강한 의심 — 정직 추정 64점대</td></tr>
-          <tr><td class="py-1.5 pr-2 font-medium text-slate-700">④ 대전 승률 55%</td><td class="py-1.5 font-bold text-amber-700">표본 부족 + 심판 미감정 — 보류</td></tr>
+          <tr><td class="py-1.5 pr-2 font-medium text-slate-700">④ 대전 승률 55%</td><td class="py-1.5 font-bold text-amber-800">표본 부족 + 심판 미감정 — 보류</td></tr>
         </tbody>
       </table>
       <p class="mt-2 rounded-md bg-white px-3 py-2 text-sm leading-relaxed text-slate-700 ring-1 ring-indigo-100">
@@ -126,6 +126,6 @@ function reveal(id: 's1' | 's2' | 's3' | 's4') {
         이 판정서를 스스로 쓸 수 있다면 — 10부 졸업입니다.
       </p>
     </div>
-    <p v-else class="mt-3 text-center text-xs text-slate-400">검산대 4곳을 모두 감정하면 최종 판정서가 열립니다.</p>
+    <p v-else class="mt-3 text-center text-xs text-slate-500">검산대 4곳을 모두 감정하면 최종 판정서가 열립니다.</p>
   </div>
 </template>

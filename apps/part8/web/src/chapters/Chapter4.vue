@@ -232,7 +232,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch4')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">4장 완료 — 관성을 손에 넣었어요!</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 5장 — 두 번째 핵심. 진동은 지웠지만 보폭은 아직 하나입니다.

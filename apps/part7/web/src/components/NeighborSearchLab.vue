@@ -41,9 +41,9 @@ function gaussian(rand: () => number) {
   return s - 6
 }
 const CENTERS = [
-  { x: 2.5, y: 3.0, color: '#6366f1' },
-  { x: 7.5, y: 3.0, color: '#d97706' },
-  { x: 5.0, y: 8.0, color: '#059669' },
+  { x: 2.5, y: 3.0, color: 'var(--c-indigo-500)' },
+  { x: 7.5, y: 3.0, color: 'var(--c-amber-600)' },
+  { x: 5.0, y: 8.0, color: 'var(--c-emerald-600)' },
 ]
 const POINTS = (() => {
   const rand = mulberry32(606)
@@ -90,7 +90,7 @@ const py = (v: number) => 275 - v * 25
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 전수조사의 비용 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 전수조사(kNN)의 청구서</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       가장 정직한 검색: 질문과 <b>모든 문서</b>의 유사도를 재서 1등을 뽑기. 문서가 늘면 무슨 일이 생길까요?
       (가정: 512차원 내적 초당 500만 번)
     </p>
@@ -101,7 +101,7 @@ const py = (v: number) => 275 - v * 25
         :key="s.n"
         type="button"
         class="rounded-lg px-3 py-1.5 text-xs font-semibold transition"
-        :class="sizeIdx === i ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'"
+        :class="sizeIdx === i ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
         @click="sizeIdx = i"
       >
         {{ s.label }}
@@ -110,16 +110,16 @@ const py = (v: number) => 275 - v * 25
 
     <div class="grid grid-cols-3 gap-2 text-center">
       <div class="rounded-lg bg-slate-50 p-3">
-        <p class="text-[11px] text-slate-400">유사도 계산 횟수/질문</p>
+        <p class="text-xs text-slate-500">유사도 계산 횟수/질문</p>
         <p class="font-mono text-sm font-bold text-slate-700">{{ cost.n.toLocaleString() }}</p>
       </div>
       <div class="rounded-lg bg-slate-50 p-3">
-        <p class="text-[11px] text-slate-400">응답 시간/질문</p>
-        <p class="font-mono text-sm font-bold" :class="cost.dead ? 'text-rose-600' : 'text-emerald-600'">{{ cost.perQuery }}</p>
+        <p class="text-xs text-slate-500">응답 시간/질문</p>
+        <p class="font-mono text-sm font-bold" :class="cost.dead ? 'text-rose-700' : 'text-emerald-700'">{{ cost.perQuery }}</p>
       </div>
       <div class="rounded-lg bg-slate-50 p-3">
-        <p class="text-[11px] text-slate-400">하루 1만 질문 처리</p>
-        <p class="font-mono text-sm font-bold" :class="cost.dead ? 'text-rose-600' : 'text-slate-700'">{{ cost.perDay }}시간</p>
+        <p class="text-xs text-slate-500">하루 1만 질문 처리</p>
+        <p class="font-mono text-sm font-bold" :class="cost.dead ? 'text-rose-700' : 'text-slate-700'">{{ cost.perDay }}시간</p>
       </div>
     </div>
 
@@ -136,7 +136,7 @@ const py = (v: number) => 275 - v * 25
     <!-- ② 구역 나누기 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 구역 나누기: 빨라지는 대신 무엇을 잃나</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       문서들을 미리 구역(클러스터)으로 정리해 두고, 질문이 떨어진 구역만 조사합니다.
       질문과 탐색 범위를 바꿔 보세요 — <b>× 표시</b>는 구역의 중심입니다.
     </p>
@@ -152,7 +152,7 @@ const py = (v: number) => 275 - v * 25
       >
         ⭐ {{ q.label }}
       </button>
-      <span class="mx-1 hidden text-slate-300 sm:inline">|</span>
+      <span class="mx-1 hidden text-slate-500 sm:inline">|</span>
       <button
         v-for="m in [
           { key: 'full', label: '전수조사' },
@@ -162,7 +162,7 @@ const py = (v: number) => 275 - v * 25
         :key="m.key"
         type="button"
         class="rounded-lg px-3 py-1.5 text-xs font-semibold transition"
-        :class="mode === m.key ? 'bg-slate-700 text-white' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'"
+        :class="mode === m.key ? 'bg-slate-700 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
         @click="mode = m.key as 'full' | 'probe1' | 'probe2'"
       >
         {{ m.label }}
@@ -183,21 +183,21 @@ const py = (v: number) => 275 - v * 25
       <!-- 구역 중심 -->
       <text v-for="(c, i) in CENTERS" :key="'c' + i" :x="px(c.x)" :y="py(c.y) + 4" text-anchor="middle" font-size="13" font-weight="bold" :fill="c.color">×</text>
       <!-- 진짜 1등 (놓쳤을 때만 빨간 링) -->
-      <circle v-if="!result.hit" :cx="px(POINTS[result.trueBest].x)" :cy="py(POINTS[result.trueBest].y)" r="8" fill="none" stroke="#e11d48" stroke-width="2" stroke-dasharray="3 2" />
+      <circle v-if="!result.hit" :cx="px(POINTS[result.trueBest].x)" :cy="py(POINTS[result.trueBest].y)" r="8" fill="none" stroke="var(--c-rose-600)" stroke-width="2" stroke-dasharray="3 2" />
       <!-- 찾은 문서 -->
-      <circle :cx="px(POINTS[result.found].x)" :cy="py(POINTS[result.found].y)" r="7" fill="none" :stroke="result.hit ? '#059669' : '#d97706'" stroke-width="2.5" />
+      <circle :cx="px(POINTS[result.found].x)" :cy="py(POINTS[result.found].y)" r="7" fill="none" :stroke="result.hit ? 'var(--c-emerald-600)' : 'var(--c-amber-600)'" stroke-width="2.5" />
       <!-- 질문 -->
       <text :x="px(QUERIES[qIdx].x)" :y="py(QUERIES[qIdx].y) + 5" text-anchor="middle" font-size="15">⭐</text>
     </svg>
 
     <div class="mt-2 grid grid-cols-2 gap-2 text-center">
       <div class="rounded-lg bg-slate-50 p-2">
-        <p class="text-[11px] text-slate-400">비교 횟수</p>
+        <p class="text-xs text-slate-500">비교 횟수</p>
         <p class="font-mono text-sm font-bold text-slate-700">{{ result.comparisons }} / {{ POINTS.length }}</p>
       </div>
       <div class="rounded-lg p-2" :class="result.hit ? 'bg-emerald-50' : 'bg-rose-50'">
-        <p class="text-[11px]" :class="result.hit ? 'text-emerald-500' : 'text-rose-400'">진짜 1등을 찾았나?</p>
-        <p class="text-sm font-bold" :class="result.hit ? 'text-emerald-700' : 'text-rose-600'">{{ result.hit ? '✓ 찾음' : '✗ 놓침!' }}</p>
+        <p class="text-xs" :class="result.hit ? 'text-emerald-700' : 'text-rose-700'">진짜 1등을 찾았나?</p>
+        <p class="text-sm font-bold" :class="result.hit ? 'text-emerald-700' : 'text-rose-700'">{{ result.hit ? '✓ 찾음' : '✗ 놓침!' }}</p>
       </div>
     </div>
 

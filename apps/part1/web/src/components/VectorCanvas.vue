@@ -4,7 +4,7 @@
 // 수학 좌표계(위로 +y)를 화면 좌표계(아래로 +y)로 변환해서 그린다.
 //
 // 사용 예:
-//   const vecs = ref<Vec[]>([{ x: 2, y: 1, color: '#6366f1', label: 'a', draggable: true }])
+//   const vecs = ref<Vec[]>([{ x: 2, y: 1, color: 'var(--c-indigo-500)', label: 'a', draggable: true }])
 //   <VectorCanvas v-model="vecs" :range="5" />
 import { ref, computed } from 'vue'
 
@@ -119,18 +119,18 @@ function endDrag() {
       @pointerleave="endDrag"
     >
       <!-- 격자 -->
-      <g stroke="#eef2f7" stroke-width="1">
+      <g stroke="var(--c-grid)" stroke-width="1">
         <line v-for="t in ticks" :key="'v' + t" :x1="toScreenX(t)" :y1="0" :x2="toScreenX(t)" :y2="size" />
         <line v-for="t in ticks" :key="'h' + t" :x1="0" :y1="toScreenY(t)" :x2="size" :y2="toScreenY(t)" />
       </g>
 
       <!-- 축 -->
-      <g stroke="#94a3b8" stroke-width="1.5">
+      <g stroke="var(--c-slate-400)" stroke-width="1.5">
         <line :x1="0" :y1="toScreenY(0)" :x2="size" :y2="toScreenY(0)" />
         <line :x1="toScreenX(0)" :y1="0" :x2="toScreenX(0)" :y2="size" />
       </g>
       <!-- 눈금 숫자 (0 제외, 양 끝 제외) -->
-      <g fill="#94a3b8" font-size="10" text-anchor="middle">
+      <g fill="var(--c-slate-400)" font-size="10" text-anchor="middle">
         <text v-for="t in ticks.filter((n) => n !== 0 && Math.abs(n) !== range)" :key="'tx' + t"
           :x="toScreenX(t)" :y="toScreenY(0) + 14">{{ t }}</text>
         <text v-for="t in ticks.filter((n) => n !== 0 && Math.abs(n) !== range)" :key="'ty' + t"
@@ -149,7 +149,7 @@ function endDrag() {
           refY="3"
           orient="auto"
         >
-          <path d="M0,0 L7,3 L0,6 Z" :fill="v.color || '#6366f1'" />
+          <path d="M0,0 L7,3 L0,6 Z" :fill="v.color || 'var(--c-indigo-500)'" />
         </marker>
       </defs>
 
@@ -161,7 +161,7 @@ function endDrag() {
           :y1="toScreenY(tailOf(v).y)"
           :x2="toScreenX(tipOf(v).x)"
           :y2="toScreenY(tipOf(v).y)"
-          :stroke="v.color || '#6366f1'"
+          :stroke="v.color || 'var(--c-indigo-500)'"
           :stroke-width="v.dashed ? 2 : 3"
           :stroke-dasharray="v.dashed ? '6 5' : undefined"
           :opacity="v.dashed ? 0.45 : 1"
@@ -174,8 +174,8 @@ function endDrag() {
             :cx="toScreenX(tipOf(v).x)"
             :cy="toScreenY(tipOf(v).y)"
             :r="v.draggable ? 9 : 4"
-            :fill="v.draggable ? '#fff' : v.color || '#6366f1'"
-            :stroke="v.color || '#6366f1'"
+            :fill="v.draggable ? 'var(--c-white)' : v.color || 'var(--c-indigo-500)'"
+            :stroke="v.color || 'var(--c-indigo-500)'"
             stroke-width="2.5"
             :class="v.draggable ? 'cursor-grab' : ''"
             @pointerdown="startDrag(i, $event)"
@@ -183,7 +183,7 @@ function endDrag() {
           <text
             :x="toScreenX(tipOf(v).x) + 10"
             :y="toScreenY(tipOf(v).y) - 8"
-            :fill="v.color || '#6366f1'"
+            :fill="v.color || 'var(--c-indigo-500)'"
             font-size="13"
             font-weight="bold"
           >

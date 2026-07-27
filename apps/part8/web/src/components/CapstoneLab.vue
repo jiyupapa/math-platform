@@ -141,23 +141,23 @@ const allRead = computed(() => readSet.value.size === CONFIG.length)
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 미니 조련 튜너 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 미니 조련 튜너: 미션, eval을 0.15 이하로 정착시켜라</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       7~8장의 그 무대(점 10개 · 차수 9 · 노이즈 낀 기울기 · 3,000스텝)입니다. 다이얼 3종 ×
       12조합 중 <b>미션에 성공하는 조합</b>을 찾아 보세요 — 실패에도 전부 진단이 붙습니다.
     </p>
 
     <div class="space-y-2 text-xs">
       <div class="flex flex-wrap items-center gap-1.5">
-        <span class="w-24 shrink-0 text-slate-400">보폭 lr</span>
-        <button v-for="(l, i) in LR_LABELS" :key="l" type="button" class="rounded-lg px-2.5 py-1 font-semibold transition" :class="lrIdx === i ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'" @click="lrIdx = i">{{ l }}</button>
+        <span class="w-24 shrink-0 text-slate-500">보폭 lr</span>
+        <button v-for="(l, i) in LR_LABELS" :key="l" type="button" class="rounded-lg px-2.5 py-1 font-semibold transition" :class="lrIdx === i ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'" @click="lrIdx = i">{{ l }}</button>
       </div>
       <div class="flex flex-wrap items-center gap-1.5">
-        <span class="w-24 shrink-0 text-slate-400">일정표</span>
-        <button v-for="(l, i) in SCHED_LABELS" :key="l" type="button" class="rounded-lg px-2.5 py-1 font-semibold transition" :class="schedIdx === i ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'" @click="schedIdx = i">{{ l }}</button>
+        <span class="w-24 shrink-0 text-slate-500">일정표</span>
+        <button v-for="(l, i) in SCHED_LABELS" :key="l" type="button" class="rounded-lg px-2.5 py-1 font-semibold transition" :class="schedIdx === i ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'" @click="schedIdx = i">{{ l }}</button>
       </div>
       <div class="flex flex-wrap items-center gap-1.5">
-        <span class="w-24 shrink-0 text-slate-400">목줄 (decay)</span>
-        <button v-for="(l, i) in LAM_LABELS" :key="l" type="button" class="rounded-lg px-2.5 py-1 font-semibold transition" :class="lamIdx === i ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'" @click="lamIdx = i">{{ l }}</button>
+        <span class="w-24 shrink-0 text-slate-500">목줄 (decay)</span>
+        <button v-for="(l, i) in LAM_LABELS" :key="l" type="button" class="rounded-lg px-2.5 py-1 font-semibold transition" :class="lamIdx === i ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'" @click="lamIdx = i">{{ l }}</button>
       </div>
     </div>
 
@@ -173,27 +173,27 @@ const allRead = computed(() => readSet.value.size === CONFIG.length)
     <template v-if="result">
       <div v-if="result.diverged" class="mt-3 rounded-lg bg-rose-50 p-5 text-center">
         <p class="text-2xl">💥</p>
-        <p class="mt-1 font-mono text-sm font-bold text-rose-600">loss = NaN</p>
+        <p class="mt-1 font-mono text-sm font-bold text-rose-700">loss = NaN</p>
       </div>
       <svg v-else viewBox="0 0 300 112" class="mt-3 w-full rounded-lg bg-slate-50 ring-1 ring-slate-100">
-        <line x1="15" :y1="cy(0.15)" x2="290" :y2="cy(0.15)" stroke="#059669" stroke-width="0.8" stroke-dasharray="3 3" />
-        <text x="288" :y="cy(0.15) - 3" text-anchor="end" font-size="7" fill="#059669">미션 기준 0.15</text>
-        <polyline :points="linePath(result.trs)" fill="none" stroke="#4f46e5" stroke-width="1" opacity="0.45" />
-        <polyline :points="linePath(result.vas)" fill="none" stroke="#e11d48" stroke-width="1.5" />
-        <text x="18" y="12" font-size="7" fill="#94a3b8">보라 = 훈련 · 빨강 = 검증 (선형, 1.2 절단)</text>
+        <line x1="15" :y1="cy(0.15)" x2="290" :y2="cy(0.15)" stroke="var(--c-emerald-600)" stroke-width="0.8" stroke-dasharray="3 3" />
+        <text x="288" :y="cy(0.15) - 3" text-anchor="end" font-size="7" fill="var(--c-emerald-600)">미션 기준 0.15</text>
+        <polyline :points="linePath(result.trs)" fill="none" stroke="var(--c-indigo-600)" stroke-width="1" opacity="0.45" />
+        <polyline :points="linePath(result.vas)" fill="none" stroke="var(--c-rose-600)" stroke-width="1.5" />
+        <text x="18" y="12" font-size="7" fill="var(--c-slate-400)">보라 = 훈련 · 빨강 = 검증 (선형, 1.2 절단)</text>
       </svg>
 
       <div class="mt-2 flex flex-wrap items-center gap-3 rounded-lg bg-slate-50 p-3">
         <div class="text-center">
-          <p class="text-[11px] text-slate-400">최종 검증 (마지막 100스텝 평균)</p>
-          <p class="font-mono text-lg font-bold" :class="passed ? 'text-emerald-600' : 'text-rose-600'">{{ result.diverged ? 'NaN' : result.tail.toFixed(3) }}</p>
+          <p class="text-xs text-slate-500">최종 검증 (마지막 100스텝 평균)</p>
+          <p class="font-mono text-lg font-bold" :class="passed ? 'text-emerald-700' : 'text-rose-700'">{{ result.diverged ? 'NaN' : result.tail.toFixed(3) }}</p>
         </div>
         <div class="text-center">
-          <p class="text-[11px] text-slate-400">미션</p>
-          <p class="text-lg font-bold" :class="passed ? 'text-emerald-600' : 'text-rose-600'">{{ passed ? '✅ 성공' : '❌ 실패' }}</p>
+          <p class="text-xs text-slate-500">미션</p>
+          <p class="text-lg font-bold" :class="passed ? 'text-emerald-700' : 'text-rose-700'">{{ passed ? '✅ 성공' : '❌ 실패' }}</p>
         </div>
         <div class="text-center">
-          <p class="text-[11px] text-slate-400">시도한 조합</p>
+          <p class="text-xs text-slate-500">시도한 조합</p>
           <p class="font-mono text-lg font-bold text-indigo-600">{{ tried.size }} / 12</p>
         </div>
       </div>
@@ -206,7 +206,7 @@ const allRead = computed(() => readSet.value.size === CONFIG.length)
     <!-- ② 설정 파일 완독기 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 설정 파일 완독기: 졸업 시험</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       실전 파인튜닝 설정 파일입니다. <b>모든 줄을 클릭해</b> 그 줄의 수학을 확인하세요 —
       완독 <b class="text-indigo-600">{{ readSet.size }} / {{ CONFIG.length }}</b>
     </p>
@@ -219,12 +219,14 @@ const allRead = computed(() => readSet.value.size === CONFIG.length)
           :class="openIdx === i ? 'bg-slate-700/80' : ''"
           @click="openLine(i)"
         >
-          <span class="text-sky-300">{{ line.key }}</span><span class="text-slate-500">:</span>
+          <span class="text-sky-300">{{ line.key }}</span><span class="text-slate-300">:</span>
           <span class="text-amber-200"> {{ line.val }}</span>
-          <span v-if="readSet.has(i)" class="float-right text-emerald-400">✓ {{ line.ch }}</span>
-          <span v-else class="float-right text-slate-600">?</span>
+          <!-- 어두운 코드 패널 위라 형제들(sky-300·amber-200·slate-300)과 같은 밝은 단계를 쓴다.
+               700 이면 배경과 1.23:1 로 사실상 안 보였다. -->
+          <span v-if="readSet.has(i)" class="float-right text-emerald-200">✓ {{ line.ch }}</span>
+          <span v-else class="float-right text-slate-300">?</span>
         </button>
-        <p v-if="openIdx === i" class="border-l-2 border-indigo-400 bg-slate-800 px-4 py-2 font-sans text-[11px] leading-relaxed text-slate-200">
+        <p v-if="openIdx === i" class="border-l-2 border-indigo-400 bg-slate-800 px-4 py-2 font-sans text-xs leading-relaxed text-slate-200">
           {{ line.text }}
         </p>
       </template>

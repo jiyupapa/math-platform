@@ -293,7 +293,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch6')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 6 완료 — 트랜스포머의 핵심을 통과했습니다 🎉</p>
       <p class="mt-1 text-sm text-emerald-700">
         Q·K·V 로 어텐션이 스스로 점수를 낸다는 걸 이해했어요. 다음 챕터(ch7)에서 이 어텐션을

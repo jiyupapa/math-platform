@@ -69,7 +69,7 @@ const windowWidth = computed(() => 2 * halfSpan.value)
         class="max-w-full rounded-lg border border-slate-100 bg-slate-50"
       >
         <!-- 점을 지나는 옅은 십자 보조선 (기준용) -->
-        <g stroke="#e2e8f0" stroke-width="1">
+        <g stroke="var(--c-slate-200)" stroke-width="1">
           <line :x1="0" :y1="sy(fa)" :x2="size" :y2="sy(fa)" />
           <line :x1="sx(a)" :y1="0" :x2="sx(a)" :y2="size" />
         </g>
@@ -78,13 +78,13 @@ const windowWidth = computed(() => 2 * halfSpan.value)
         <line
           :x1="sx(xlo)" :y1="sy(tangentY(xlo))"
           :x2="sx(a + halfSpan)" :y2="sy(tangentY(a + halfSpan))"
-          stroke="#ef4444" stroke-width="2.5"
+          stroke="var(--c-red-500)" stroke-width="2.5"
         />
         <!-- 함수 곡선 (파랑) -->
-        <polyline :points="curvePoints" fill="none" stroke="#6366f1" stroke-width="2.5" />
+        <polyline :points="curvePoints" fill="none" stroke="var(--c-indigo-500)" stroke-width="2.5" />
 
         <!-- 확대 중심 점 -->
-        <circle :cx="sx(a)" :cy="sy(fa)" r="6" fill="#fff" stroke="#6366f1" stroke-width="3" />
+        <circle :cx="sx(a)" :cy="sy(fa)" r="6" fill="var(--c-white)" stroke="var(--c-indigo-500)" stroke-width="3" />
       </svg>
     </div>
 
@@ -108,7 +108,7 @@ const windowWidth = computed(() => 2 * halfSpan.value)
     </div>
     <p class="mt-2 px-1 text-xs leading-relaxed text-slate-500">
       배율을 키워보세요. 확대할수록 <b class="text-indigo-600">파란 곡선</b>이
-      <b class="text-red-500">빨간 접선</b>과 겹쳐 구분이 안 됩니다 — 아주 가까이서 보면 곡선도
+      <b class="text-red-600">빨간 접선</b>과 겹쳐 구분이 안 됩니다 — 아주 가까이서 보면 곡선도
       "거의 직선"이죠. 그 직선의 기울기가 바로 그 점의 <b>순간변화율</b>입니다.
     </p>
   </div>

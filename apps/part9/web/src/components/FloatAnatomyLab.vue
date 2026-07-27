@@ -67,7 +67,7 @@ const fmtGap = (g: number) => (g >= 1 ? g.toLocaleString('en-US') : g.toExponent
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① fp32 해부기 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — fp32 해부기: 스위치 32개를 세 부품으로 읽는다</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       숫자를 넣으면 <b>진짜 fp32 칸</b>에 담아(반올림) 부품별 비트를 펼쳐 보여줍니다 —
       부호 1개 · 지수 8개 · 가수 23개.
     </p>
@@ -95,18 +95,18 @@ const fmtGap = (g: number) => (g >= 1 ? g.toLocaleString('en-US') : g.toExponent
     <template v-if="valid">
       <div class="mt-3 grid gap-2 sm:grid-cols-3">
         <div class="rounded-lg bg-rose-50 p-3">
-          <p class="text-[11px] font-semibold text-rose-500">부호 (1비트)</p>
+          <p class="text-xs font-semibold text-rose-700">부호 (1비트)</p>
           <p class="break-all font-mono text-sm font-bold text-rose-700">{{ anat.sBits }}</p>
-          <p class="mt-1 text-xs text-rose-600">{{ anat.s === 0 ? '+ (양수)' : '− (음수)' }}</p>
+          <p class="mt-1 text-xs text-rose-700">{{ anat.s === 0 ? '+ (양수)' : '− (음수)' }}</p>
         </div>
         <div class="rounded-lg bg-amber-50 p-3">
-          <p class="text-[11px] font-semibold text-amber-600">지수 (8비트) — 자의 위치</p>
+          <p class="text-xs font-semibold text-amber-700">지수 (8비트) — 자의 위치</p>
           <p class="break-all font-mono text-sm font-bold text-amber-700">{{ anat.eBits }}</p>
           <p class="mt-1 text-xs text-amber-700">= {{ anat.e }} − 127 = <b>{{ expVal }}</b> → ×2<sup>{{ expVal }}</sup></p>
         </div>
         <div class="rounded-lg bg-indigo-50 p-3">
-          <p class="text-[11px] font-semibold text-indigo-500">가수 (23비트) — 눈금 위 좌표</p>
-          <p class="break-all font-mono text-[10px] font-bold leading-relaxed text-indigo-700">{{ anat.mBits }}</p>
+          <p class="text-xs font-semibold text-indigo-600">가수 (23비트) — 눈금 위 좌표</p>
+          <p class="break-all font-mono text-xs font-bold leading-relaxed text-indigo-700">{{ anat.mBits }}</p>
           <p class="mt-1 text-xs text-indigo-700">숨은 1을 붙여 "1.○○○" 로 읽으면 <b>{{ fraction.toPrecision(9) }}</b></p>
         </div>
       </div>
@@ -116,7 +116,7 @@ const fmtGap = (g: number) => (g >= 1 ? g.toLocaleString('en-US') : g.toExponent
           ({{ anat.s === 0 ? '+' : '−' }}1) × {{ fraction.toPrecision(9) }} × 2<sup>{{ expVal }}</sup>
         </p>
         <p class="break-all font-mono text-lg font-bold text-slate-700">= {{ storedStr }}</p>
-        <p class="mt-1 text-xs" :class="err === 0 ? 'text-emerald-600' : 'text-rose-600'">
+        <p class="mt-1 text-xs" :class="err === 0 ? 'text-emerald-700' : 'text-rose-700'">
           {{ err === 0 ? '✅ 오차 없음 — 이 수는 fp32 눈금 위에 정확히 있습니다' : `❗ 입력과의 어긋남 ≈ ${err.toExponential(2)} — 가장 가까운 눈금으로 반올림된 티끌` }}
         </p>
       </div>
@@ -137,7 +137,7 @@ const fmtGap = (g: number) => (g >= 1 ? g.toLocaleString('en-US') : g.toExponent
     <!-- ② 눈금 간격 관찰기 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 눈금 간격 관찰기: 고무줄이 늘어나는 속도</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       수의 크기를 옮겨 가며 <b>이웃 눈금까지의 간격</b>을 잽니다 — 같은 위치에서
       fp32(오늘의 자)와 fp64(워밍업에서 놀던 브라우저 기본 자)를 나란히.
     </p>
@@ -149,16 +149,16 @@ const fmtGap = (g: number) => (g >= 1 ? g.toLocaleString('en-US') : g.toExponent
 
     <div class="mt-2 grid gap-2 sm:grid-cols-2">
       <div class="rounded-lg bg-slate-50 p-3">
-        <p class="text-[11px] text-slate-400">fp32 눈금 간격 (32비트 칸)</p>
-        <p class="font-mono text-lg font-bold" :class="probe.swallow32 ? 'text-rose-600' : 'text-slate-700'">{{ fmtGap(probe.g32) }}</p>
-        <p class="text-[11px]" :class="probe.swallow32 ? 'text-rose-500' : 'text-emerald-600'">
+        <p class="text-xs text-slate-500">fp32 눈금 간격 (32비트 칸)</p>
+        <p class="font-mono text-lg font-bold" :class="probe.swallow32 ? 'text-rose-700' : 'text-slate-700'">{{ fmtGap(probe.g32) }}</p>
+        <p class="text-xs" :class="probe.swallow32 ? 'text-rose-700' : 'text-emerald-700'">
           {{ probe.swallow32 ? '❗ 간격이 1보다 넓다 — +1이 삼켜질 수 있음' : '✅ +1은 아직 살아남는다' }}
         </p>
       </div>
       <div class="rounded-lg bg-slate-50 p-3">
-        <p class="text-[11px] text-slate-400">fp64 눈금 간격 (64비트 칸 — 워밍업의 자)</p>
-        <p class="font-mono text-lg font-bold" :class="probe.swallow64 ? 'text-rose-600' : 'text-slate-700'">{{ fmtGap(probe.g64) }}</p>
-        <p class="text-[11px]" :class="probe.swallow64 ? 'text-rose-500' : 'text-emerald-600'">
+        <p class="text-xs text-slate-500">fp64 눈금 간격 (64비트 칸 — 워밍업의 자)</p>
+        <p class="font-mono text-lg font-bold" :class="probe.swallow64 ? 'text-rose-700' : 'text-slate-700'">{{ fmtGap(probe.g64) }}</p>
+        <p class="text-xs" :class="probe.swallow64 ? 'text-rose-700' : 'text-emerald-700'">
           {{ probe.swallow64 ? '❗ 간격이 1보다 넓다' : '✅ 이 구간에선 훨씬 촘촘하다' }}
         </p>
       </div>

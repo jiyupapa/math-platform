@@ -303,7 +303,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch7')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 7 완료. AI 활성화 함수를 미분했습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 변수가 여러 개인 함수의 미분 — <b>편미분</b>입니다. (가중치별 기울기!)

@@ -39,15 +39,15 @@ const pair = computed(() => {
     <p class="mb-1 text-sm font-semibold text-slate-500">
       단어 지도 — 점을 <b>두 개</b> 눌러 거리를 재보세요
     </p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       가까이 모인 단어일수록 뜻이 비슷합니다. (뜻이 비슷 → 좌표가 가까움)
     </p>
 
     <div class="flex justify-center">
       <svg :viewBox="`0 0 ${SIZE} ${SIZE}`" :width="SIZE" :height="SIZE" class="max-w-full rounded-xl border border-slate-100 bg-slate-50/40">
         <!-- 축 -->
-        <line :x1="0" :y1="toY(0)" :x2="SIZE" :y2="toY(0)" stroke="#e2e8f0" stroke-width="1" />
-        <line :x1="toX(0)" :y1="0" :x2="toX(0)" :y2="SIZE" stroke="#e2e8f0" stroke-width="1" />
+        <line :x1="0" :y1="toY(0)" :x2="SIZE" :y2="toY(0)" stroke="var(--c-slate-200)" stroke-width="1" />
+        <line :x1="toX(0)" :y1="0" :x2="toX(0)" :y2="SIZE" stroke="var(--c-slate-200)" stroke-width="1" />
 
         <!-- 선택된 두 단어를 잇는 선 -->
         <line
@@ -56,7 +56,7 @@ const pair = computed(() => {
           :y1="toY(pair.a.vec[1])"
           :x2="toX(pair.b.vec[0])"
           :y2="toY(pair.b.vec[1])"
-          :stroke="pair.same ? '#10b981' : '#f43f5e'"
+          :stroke="pair.same ? 'var(--c-emerald-500)' : 'var(--c-rose-500)'"
           stroke-width="2"
           stroke-dasharray="5 4"
         />
@@ -68,7 +68,7 @@ const pair = computed(() => {
             :cy="toY(w.vec[1])"
             :r="selected.includes(w.word) ? 9 : 6"
             :fill="GROUP_COLOR[w.group]"
-            :stroke="selected.includes(w.word) ? '#1e293b' : '#fff'"
+            :stroke="selected.includes(w.word) ? 'var(--c-slate-800)' : 'var(--c-white)'"
             :stroke-width="selected.includes(w.word) ? 2.5 : 1.5"
           />
           <text
@@ -77,7 +77,7 @@ const pair = computed(() => {
             text-anchor="middle"
             font-size="12"
             :font-weight="selected.includes(w.word) ? 700 : 500"
-            fill="#334155"
+            fill="var(--c-slate-700)"
           >
             {{ w.word }}
           </text>

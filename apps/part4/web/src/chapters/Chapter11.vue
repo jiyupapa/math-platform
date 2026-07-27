@@ -70,8 +70,8 @@ function onSetComplete() {
       </div>
       <p class="mt-2 text-sm">
         손실 = <b class="font-mono">{{ ceLoss.toFixed(2) }}</b>
-        <span v-if="p > 0.9" class="text-emerald-600"> — 정답을 거의 확신! 손실이 0에 가깝습니다. 👍</span>
-        <span v-else-if="p < 0.15" class="text-rose-600"> — 정답을 거의 놓침! 손실이 큽니다.</span>
+        <span v-if="p > 0.9" class="text-emerald-700"> — 정답을 거의 확신! 손실이 0에 가깝습니다. 👍</span>
+        <span v-else-if="p < 0.15" class="text-rose-700"> — 정답을 거의 놓침! 손실이 큽니다.</span>
         <span v-else class="text-slate-500"> — 정답 확률을 1(100%)로 올릴수록 손실은 0으로 갑니다.</span>
       </p>
     </div>
@@ -276,7 +276,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch11')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 11 완료 — 모델이 똑똑해지는 원리</p>
       <p class="mt-1 text-sm text-emerald-700">
         손실을 재고 경사하강으로 줄이기 — 그게 학습입니다. 마지막 챕터

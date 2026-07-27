@@ -58,36 +58,36 @@ const fmt = (n: number) => Number(n.toFixed(3)).toString()
       <svg :viewBox="`0 0 ${width} ${topH}`" :width="width" :height="topH"
         class="max-w-full rounded-lg border border-slate-100 bg-slate-50">
         <!-- 0, 0.5, 1 안내선 -->
-        <g stroke="#e2e8f0" stroke-width="1">
+        <g stroke="var(--c-slate-200)" stroke-width="1">
           <line :x1="0" :y1="syTop(0)" :x2="width" :y2="syTop(0)" />
           <line :x1="0" :y1="syTop(1)" :x2="width" :y2="syTop(1)" />
         </g>
-        <line :x1="0" :y1="syTop(0.5)" :x2="width" :y2="syTop(0.5)" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3" />
-        <line :x1="sx(0)" :y1="0" :x2="sx(0)" :y2="topH" stroke="#e2e8f0" stroke-width="1" />
-        <line :x1="sx(x0)" :y1="0" :x2="sx(x0)" :y2="topH" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="4 3" />
-        <polyline :points="sCurve" fill="none" stroke="#6366f1" stroke-width="2.5" />
-        <circle :cx="sx(x0)" :cy="syTop(s)" r="5.5" fill="#fff" stroke="#6366f1" stroke-width="3" />
+        <line :x1="0" :y1="syTop(0.5)" :x2="width" :y2="syTop(0.5)" stroke="var(--c-slate-300)" stroke-width="1" stroke-dasharray="3 3" />
+        <line :x1="sx(0)" :y1="0" :x2="sx(0)" :y2="topH" stroke="var(--c-slate-200)" stroke-width="1" />
+        <line :x1="sx(x0)" :y1="0" :x2="sx(x0)" :y2="topH" stroke="var(--c-indigo-200)" stroke-width="1.5" stroke-dasharray="4 3" />
+        <polyline :points="sCurve" fill="none" stroke="var(--c-indigo-500)" stroke-width="2.5" />
+        <circle :cx="sx(x0)" :cy="syTop(s)" r="5.5" fill="var(--c-white)" stroke="var(--c-indigo-500)" stroke-width="3" />
       </svg>
     </div>
 
-    <div class="my-1 text-center text-xs text-slate-400">↕ 기울기 = 아래 종 모양의 높이</div>
+    <div class="my-1 text-center text-xs text-slate-500">↕ 기울기 = 아래 종 모양의 높이</div>
 
     <!-- 아래: σ'(x) -->
     <p class="mb-1 text-center text-sm font-semibold text-slate-600">
-      σ′(x) = σ(1−σ) · 현재 σ′({{ fmt(x0) }}) = <b class="text-rose-600">{{ fmt(ds) }}</b>
+      σ′(x) = σ(1−σ) · 현재 σ′({{ fmt(x0) }}) = <b class="text-rose-700">{{ fmt(ds) }}</b>
     </p>
     <div class="flex justify-center">
       <svg :viewBox="`0 0 ${width} ${botH}`" :width="width" :height="botH"
         class="max-w-full rounded-lg border border-slate-100 bg-slate-50">
-        <g stroke="#e2e8f0" stroke-width="1">
+        <g stroke="var(--c-slate-200)" stroke-width="1">
           <line :x1="0" :y1="syBot(0)" :x2="width" :y2="syBot(0)" />
         </g>
         <!-- 최댓값 0.25 안내선 -->
-        <line :x1="0" :y1="syBot(0.25)" :x2="width" :y2="syBot(0.25)" stroke="#fca5a5" stroke-width="1" stroke-dasharray="3 3" />
-        <text :x="width - 4" :y="syBot(0.25) - 3" text-anchor="end" font-size="9" fill="#ef4444">최대 0.25</text>
-        <line :x1="sx(x0)" :y1="0" :x2="sx(x0)" :y2="botH" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="4 3" />
-        <polyline :points="dCurve" fill="none" stroke="#ef4444" stroke-width="2.5" />
-        <circle :cx="sx(x0)" :cy="syBot(ds)" r="5.5" fill="#fff" stroke="#ef4444" stroke-width="3" />
+        <line :x1="0" :y1="syBot(0.25)" :x2="width" :y2="syBot(0.25)" stroke="var(--c-red-300)" stroke-width="1" stroke-dasharray="3 3" />
+        <text :x="width - 4" :y="syBot(0.25) - 3" text-anchor="end" font-size="9" fill="var(--c-red-500)">최대 0.25</text>
+        <line :x1="sx(x0)" :y1="0" :x2="sx(x0)" :y2="botH" stroke="var(--c-indigo-200)" stroke-width="1.5" stroke-dasharray="4 3" />
+        <polyline :points="dCurve" fill="none" stroke="var(--c-red-500)" stroke-width="2.5" />
+        <circle :cx="sx(x0)" :cy="syBot(ds)" r="5.5" fill="var(--c-white)" stroke="var(--c-red-500)" stroke-width="3" />
       </svg>
     </div>
 

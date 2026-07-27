@@ -234,7 +234,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch10')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-6 text-center"
     >
-      <div class="mb-1 text-2xl font-bold text-emerald-600">🎉</div>
+      <div class="mb-1 text-2xl font-bold text-emerald-700">🎉</div>
       <p class="text-lg font-bold text-emerald-800">7부 완주 — 임베딩 기하학, 완결!</p>
       <p class="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-emerald-700">
         "의미는 위치다"라는 한 문장에서 출발해 — 코사인, 고차원, 벡터 DB, recall@k, 대조 학습을

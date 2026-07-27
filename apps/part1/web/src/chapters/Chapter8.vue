@@ -261,7 +261,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch8')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 8 완료 — 핵심 과정(1~8)을 마쳤습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         수포자에서 시작해 선형대수로 AI의 토대를 갖췄습니다. 더 깊이 가려면 심화(9~12)로 이어가세요.

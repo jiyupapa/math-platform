@@ -234,7 +234,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch4')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">4장 완료 — 취향이 숫자가 됐어요!</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 5장 — 이 점수를 보상 삼아 배우는 법, 강화학습의 최소 직관.

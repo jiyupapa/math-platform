@@ -155,10 +155,10 @@ const fmt1 = (v: number) => v.toFixed(1)
       <p class="mb-2 text-sm font-bold text-indigo-900">📋 최종 판정서 — ‘일손 2’ 도입 제안 감정 결과</p>
       <table class="w-full text-xs">
         <tbody class="divide-y divide-indigo-100">
-          <tr><td class="py-1.5 pr-2 font-medium text-slate-700">① 각 단계 98% (“어떤 업무든”)</td><td class="py-1.5 font-bold text-amber-700">12단계면 78.5% — 단계 수 감춘 과장</td></tr>
-          <tr><td class="py-1.5 pr-2 font-medium text-slate-700">② 20건 90% 데모</td><td class="py-1.5 font-bold text-amber-700">±21.9%p — 표본 부족, 보류</td></tr>
-          <tr><td class="py-1.5 pr-2 font-medium text-slate-700">③ pass@5 97%</td><td class="py-1.5 font-bold text-amber-700">pass@1 50.4% + 검수·비용 전제, 보류</td></tr>
-          <tr><td class="py-1.5 pr-2 font-medium text-slate-700">④ 자체 검수 이중 확인</td><td class="py-1.5 font-bold text-amber-700">난이도별 조건부 + 독립성 미확인</td></tr>
+          <tr><td class="py-1.5 pr-2 font-medium text-slate-700">① 각 단계 98% (“어떤 업무든”)</td><td class="py-1.5 font-bold text-amber-800">12단계면 78.5% — 단계 수 감춘 과장</td></tr>
+          <tr><td class="py-1.5 pr-2 font-medium text-slate-700">② 20건 90% 데모</td><td class="py-1.5 font-bold text-amber-800">±21.9%p — 표본 부족, 보류</td></tr>
+          <tr><td class="py-1.5 pr-2 font-medium text-slate-700">③ pass@5 97%</td><td class="py-1.5 font-bold text-amber-800">pass@1 50.4% + 검수·비용 전제, 보류</td></tr>
+          <tr><td class="py-1.5 pr-2 font-medium text-slate-700">④ 자체 검수 이중 확인</td><td class="py-1.5 font-bold text-amber-800">난이도별 조건부 + 독립성 미확인</td></tr>
         </tbody>
       </table>
       <p class="mt-2 rounded-md bg-white px-3 py-2 text-sm leading-relaxed text-slate-700 ring-1 ring-indigo-100">
@@ -168,6 +168,6 @@ const fmt1 = (v: number) => v.toFixed(1)
         <b>단계별 성공률 로깅</b>(2장 병목 계측). 🎓 이 판정서를 스스로 쓸 수 있다면 — 11부 졸업입니다.
       </p>
     </div>
-    <p v-else class="mt-3 text-center text-xs text-slate-400">검산대 4곳을 모두 감정하면 최종 판정서가 열립니다.</p>
+    <p v-else class="mt-3 text-center text-xs text-slate-500">검산대 4곳을 모두 감정하면 최종 판정서가 열립니다.</p>
   </div>
 </template>

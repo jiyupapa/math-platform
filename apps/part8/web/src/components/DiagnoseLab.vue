@@ -140,8 +140,8 @@ const divRatio = (divFree.vas[divFree.vas.length - 1]! / Math.min(...divFree.vas
 const gallery = computed(() => {
   if (tab.value === 0) {
     const y = logY(1e-3, 10)
-    const curves: Curve[] = [{ pts: spikeNo, color: '#e11d48' }]
-    if (fix.value) curves.push({ pts: spikeYes, color: '#059669', width: 1.8 })
+    const curves: Curve[] = [{ pts: spikeNo, color: 'var(--c-rose-600)' }]
+    if (fix.value) curves.push({ pts: spikeYes, color: 'var(--c-emerald-600)', width: 1.8 })
     return {
       y, curves, yLabel: '손실 (log)',
       cause: '원인: 드문 이상치 배치 — 순간 기울기가 폭주해 보폭 × 기울기가 골짜기를 건너뜀(2장 경계 초과). 초반에만 몰리면 워밍업 부족(6장).',
@@ -152,8 +152,8 @@ const gallery = computed(() => {
   }
   if (tab.value === 1) {
     const y = logY(1e-4, 100)
-    const curves: Curve[] = [{ pts: platFlat, color: '#e11d48' }]
-    if (fix.value) curves.push({ pts: platFix, color: '#059669', width: 1.8 })
+    const curves: Curve[] = [{ pts: platFlat, color: 'var(--c-rose-600)' }]
+    if (fix.value) curves.push({ pts: platFix, color: 'var(--c-emerald-600)', width: 1.8 })
     return {
       y, curves, yLabel: '손실 (log)',
       cause: '원인 후보 둘: ① 보폭 과소(2장 소심이 — 기울기는 멀쩡한데 걸음이 티끌) ② 진짜 지형 평원(1장 — 기울기 자체가 0 근처, 10장에서 재회). 구분법: 개입해 보기.',
@@ -164,8 +164,8 @@ const gallery = computed(() => {
   }
   if (tab.value === 2) {
     const y = logY(1e-4, 100)
-    const curves: Curve[] = [{ pts: stairL, color: '#4f46e5' }]
-    if (fix.value) curves.push({ pts: Array.from({ length: 160 }, (_, t) => stairLr(t)), color: '#0ea5e9', width: 1.2 })
+    const curves: Curve[] = [{ pts: stairL, color: 'var(--c-indigo-600)' }]
+    if (fix.value) curves.push({ pts: Array.from({ length: 160 }, (_, t) => stairLr(t)), color: 'var(--c-sky-500)', width: 1.2 })
     return {
       y, curves, yLabel: '손실 (log)',
       cause: '이건 병이 아닙니다 — 스텝 감쇠 일정표(6장)의 지문이에요. 서성임 반경 ∝ 보폭이라, lr이 뚝 떨어질 때마다 손실도 한 단 내려앉습니다.',
@@ -176,10 +176,10 @@ const gallery = computed(() => {
   }
   const y = linY(1.2)
   const curves: Curve[] = [
-    { pts: divFree.trs, color: '#4f46e5', width: 1, opacity: 0.45 },
-    { pts: divFree.vas, color: '#e11d48' },
+    { pts: divFree.trs, color: 'var(--c-indigo-600)', width: 1, opacity: 0.45 },
+    { pts: divFree.vas, color: 'var(--c-rose-600)' },
   ]
-  if (fix.value) curves.push({ pts: divLeash.vas, color: '#059669', width: 1.8 })
+  if (fix.value) curves.push({ pts: divLeash.vas, color: 'var(--c-emerald-600)', width: 1.8 })
   return {
     y, curves, yLabel: '손실 (선형) — 훈련(보라)·검증(빨강)',
     cause: `원인: 과적합 시작(7장) — 훈련은 계속 내려가는데 검증이 돌아서서 ${divRatio}배 되오름. 규칙 학습이 끝나고 암기가 시작된 순간.`,
@@ -237,7 +237,7 @@ function next() {
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 증상 도감 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 증상 도감: 4대 무늬와 처방</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       전부 앞 장들의 무대에서 실제로 돌린 훈련입니다. 증상을 하나씩 보고 <b>처방을 적용</b>해 보세요.
     </p>
 
@@ -247,7 +247,7 @@ function next() {
         :key="t"
         type="button"
         class="rounded-lg px-3 py-1.5 text-xs font-semibold transition"
-        :class="tab === i ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'"
+        :class="tab === i ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
         @click="tab = i"
       >{{ t }}</button>
     </div>
@@ -262,7 +262,7 @@ function next() {
         :stroke-width="c.width ?? 1.5"
         :opacity="c.opacity ?? 0.9"
       />
-      <text x="18" y="12" font-size="7" fill="#94a3b8">{{ gallery.yLabel }}</text>
+      <text x="18" y="12" font-size="7" fill="var(--c-slate-400)">{{ gallery.yLabel }}</text>
     </svg>
 
     <p class="mt-2 text-xs leading-relaxed text-slate-600">{{ gallery.cause }}</p>
@@ -281,17 +281,17 @@ function next() {
     <!-- ② 판독 훈련소 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 판독 훈련소: 일지 6장, 당신의 진단은?</p>
-    <p class="mb-3 text-xs text-slate-400">
-      새 훈련 일지 6장(전부 실제 시뮬, <span class="text-indigo-500">보라 = 훈련</span> ·
-      <span class="text-rose-500">빨강 = 검증</span>)을 진단하세요.
+    <p class="mb-3 text-xs text-slate-500">
+      새 훈련 일지 6장(전부 실제 시뮬, <span class="text-indigo-600">보라 = 훈련</span> ·
+      <span class="text-rose-700">빨강 = 검증</span>)을 진단하세요.
     </p>
 
     <template v-if="!done">
-      <p class="mb-1 text-xs font-semibold text-slate-500">일지 {{ round + 1 }} / {{ ROUNDS.length }} <span class="ml-2 font-normal text-slate-400">맞힌 수: {{ score }}</span></p>
+      <p class="mb-1 text-xs font-semibold text-slate-500">일지 {{ round + 1 }} / {{ ROUNDS.length }} <span class="ml-2 font-normal text-slate-500">맞힌 수: {{ score }}</span></p>
       <svg viewBox="0 0 300 112" class="w-full rounded-lg bg-slate-50 ring-1 ring-slate-100">
-        <polyline :points="path(cur.train, curY)" fill="none" stroke="#4f46e5" stroke-width="1.2" opacity="0.6" />
-        <polyline :points="path(cur.val, curY)" fill="none" stroke="#e11d48" stroke-width="1.5" />
-        <text x="18" y="12" font-size="7" fill="#94a3b8">{{ cur.log ? '손실 (log)' : '손실 (선형)' }}</text>
+        <polyline :points="path(cur.train, curY)" fill="none" stroke="var(--c-indigo-600)" stroke-width="1.2" opacity="0.6" />
+        <polyline :points="path(cur.val, curY)" fill="none" stroke="var(--c-rose-600)" stroke-width="1.5" />
+        <text x="18" y="12" font-size="7" fill="var(--c-slate-400)">{{ cur.log ? '손실 (log)' : '손실 (선형)' }}</text>
       </svg>
 
       <div class="mt-2 flex flex-wrap gap-1.5">
@@ -303,7 +303,7 @@ function next() {
           :class="
             answered === null ? 'bg-slate-100 text-slate-600 hover:bg-indigo-100'
             : i === cur.kind ? 'bg-emerald-600 text-white'
-            : i === answered ? 'bg-rose-500 text-white' : 'bg-slate-100 text-slate-400'
+            : i === answered ? 'bg-rose-500 text-white' : 'bg-slate-100 text-slate-600'
           "
           :disabled="answered !== null"
           @click="answer(i)"

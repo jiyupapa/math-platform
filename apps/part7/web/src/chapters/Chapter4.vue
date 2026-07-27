@@ -262,7 +262,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch4')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">4장 완료 — 고차원이 더 이상 무섭지 않아요!</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 5장 — 눈에 안 보이는 수백 차원 지도를 종이(2D)에 펴는 법, 차원 축소입니다.

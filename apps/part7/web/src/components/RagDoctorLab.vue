@@ -90,7 +90,7 @@ function pickCase(i: number) {
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 갈림길 게임 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 갈림길 게임: 이 요구는 조련인가, RAG인가</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       사내 챗봇 요구사항 6개입니다. 각각 어느 길로 풀어야 할까요? — 🐎 조련(가중치, 6부) / 🗺️ RAG(문맥, 7부)
     </p>
 
@@ -102,7 +102,7 @@ function pickCase(i: number) {
             <button
               type="button"
               class="rounded-lg px-2.5 py-1 text-xs font-semibold transition"
-              :class="picks[i] === 'tame' ? (r.answer === 'tame' ? 'bg-emerald-500 text-white' : 'bg-rose-500 text-white') : 'bg-slate-100 text-slate-500 hover:bg-slate-200'"
+              :class="picks[i] === 'tame' ? (r.answer === 'tame' ? 'bg-emerald-500 text-white' : 'bg-rose-500 text-white') : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
               :disabled="picks[i] !== null"
               @click="picks[i] = 'tame'"
             >
@@ -111,7 +111,7 @@ function pickCase(i: number) {
             <button
               type="button"
               class="rounded-lg px-2.5 py-1 text-xs font-semibold transition"
-              :class="picks[i] === 'rag' ? (r.answer === 'rag' ? 'bg-emerald-500 text-white' : 'bg-rose-500 text-white') : 'bg-slate-100 text-slate-500 hover:bg-slate-200'"
+              :class="picks[i] === 'rag' ? (r.answer === 'rag' ? 'bg-emerald-500 text-white' : 'bg-rose-500 text-white') : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
               :disabled="picks[i] !== null"
               @click="picks[i] = 'rag'"
             >
@@ -133,7 +133,7 @@ function pickCase(i: number) {
     <!-- ② RAG 진료실 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — RAG 진료실: 틀린 답의 범인을 찾아라</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       실제 프로젝트에서 만나는 실패 사례 4건 — <b>검색 로그</b>가 결정적 증거입니다. 증상을 읽고 범인을 지목하세요.
     </p>
 
@@ -154,7 +154,7 @@ function pickCase(i: number) {
       <p class="mb-2 text-sm font-semibold text-slate-700">{{ curCase.title }}</p>
       <div class="space-y-1.5 text-sm">
         <p class="text-slate-600">🙋 질문: {{ curCase.q }}</p>
-        <p class="text-slate-600">🤖 답변: <span class="text-rose-600">{{ curCase.a }}</span></p>
+        <p class="text-slate-600">🤖 답변: <span class="text-rose-700">{{ curCase.a }}</span></p>
         <p class="rounded-lg bg-white p-2.5 text-xs leading-relaxed ring-1 ring-slate-200" :class="curCase.logTone === 'good' ? 'text-emerald-700' : 'text-slate-500'">
           📋 {{ curCase.log }}
         </p>
@@ -175,7 +175,7 @@ function pickCase(i: number) {
               ? 'border-emerald-400 bg-emerald-50 text-emerald-800'
               : diagnosis === c.key
                 ? 'border-rose-400 bg-rose-50 text-rose-700'
-                : 'border-slate-100 text-slate-400'
+                : 'border-slate-100 text-slate-500'
         "
         :disabled="diagnosis !== null"
         @click="diagnosis = c.key"

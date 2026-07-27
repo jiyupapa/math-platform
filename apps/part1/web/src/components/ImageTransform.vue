@@ -50,7 +50,7 @@ function preset(na: number, nb: number, nc: number, nd: number) {
       <!-- 변환 무대 -->
       <div
         class="relative mx-auto flex h-[240px] w-[240px] shrink-0 items-center justify-center overflow-hidden rounded-lg bg-slate-50"
-        style="background-image: linear-gradient(#eef2f7 1px, transparent 1px), linear-gradient(90deg, #eef2f7 1px, transparent 1px); background-size: 24px 24px"
+        style="background-image: linear-gradient(var(--c-grid) 1px, transparent 1px), linear-gradient(90deg, var(--c-grid) 1px, transparent 1px); background-size: 24px 24px"
       >
         <div class="origin-center transition-transform duration-150" :style="style">
           <!-- 업로드 이미지 -->
@@ -95,7 +95,7 @@ function preset(na: number, nb: number, nc: number, nd: number) {
             <input type="file" accept="image/*" class="hidden" @change="onFile" />
           </label>
           <button v-if="imgUrl" class="text-xs text-slate-500 underline" @click="clearImg">기본 이미지로</button>
-          <span class="text-xs text-slate-400">사진은 기기 안에서만 처리돼요 (업로드 안 함)</span>
+          <span class="text-xs text-slate-500">사진은 기기 안에서만 처리돼요 (업로드 안 함)</span>
         </div>
       </div>
     </div>

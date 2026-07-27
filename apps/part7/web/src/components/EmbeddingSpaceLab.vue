@@ -18,7 +18,7 @@ const WORDS: Record<string, { x: number; y: number; group: 'people' | 'animal' |
   바나나: { x: 9.4, y: 5.6, group: 'fruit' },
   포도: { x: 9.1, y: 6.8, group: 'fruit' },
 }
-const GROUP_COLOR = { people: '#4f46e5', animal: '#d97706', fruit: '#059669' }
+const GROUP_COLOR = { people: 'var(--c-indigo-600)', animal: 'var(--c-amber-600)', fruit: 'var(--c-emerald-600)' }
 
 // SVG 좌표 변환 (원점 좌하단)
 const px = (p: { x: number; y: number }) => ({ x: 22 + p.x * 26, y: 192 - p.y * 24 })
@@ -70,14 +70,14 @@ function pick(i: number) {
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 의미 지도 관찰: 클러스터, 그리고 숨은 방향</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       미리 준비한 toy 임베딩 12단어입니다. 먼저 <b>모여 있는 무리</b>(클러스터)를 눈으로 확인하고, 버튼을 눌러 보세요.
     </p>
 
     <svg viewBox="0 0 300 210" class="w-full rounded-lg bg-slate-50 ring-1 ring-slate-100">
       <defs>
         <marker id="arr-dir" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
-          <path d="M0,0 L6,3.5 L0,7 z" fill="#e11d48" />
+          <path d="M0,0 L6,3.5 L0,7 z" fill="var(--c-rose-600)" />
         </marker>
       </defs>
       <!-- 성별 방향 화살표 -->
@@ -89,15 +89,15 @@ function pick(i: number) {
           :y1="px(WORDS[from]).y - 4"
           :x2="px(WORDS[to]).x - 16"
           :y2="px(WORDS[to]).y - 4"
-          stroke="#e11d48"
+          stroke="var(--c-rose-600)"
           stroke-width="2.5"
           marker-end="url(#arr-dir)"
         />
       </template>
       <!-- 산수 결과 ? 마커 -->
       <template v-if="calc">
-        <circle :cx="px(calc.res).x" :cy="px(calc.res).y" r="11" fill="none" stroke="#e11d48" stroke-width="2" stroke-dasharray="3 2" />
-        <text v-if="!revealed" :x="px(calc.res).x" :y="px(calc.res).y + 4" text-anchor="middle" font-size="12" font-weight="bold" fill="#e11d48">?</text>
+        <circle :cx="px(calc.res).x" :cy="px(calc.res).y" r="11" fill="none" stroke="var(--c-rose-600)" stroke-width="2" stroke-dasharray="3 2" />
+        <text v-if="!revealed" :x="px(calc.res).x" :y="px(calc.res).y + 4" text-anchor="middle" font-size="12" font-weight="bold" fill="var(--c-rose-600)">?</text>
       </template>
       <!-- 단어 점 + 라벨 -->
       <template v-for="(p, w) in WORDS" :key="w">
@@ -108,7 +108,7 @@ function pick(i: number) {
           text-anchor="middle"
           font-size="10"
           :font-weight="revealed && calc && w === calc.nearest ? 'bold' : 'normal'"
-          :fill="revealed && calc && w === calc.nearest ? '#e11d48' : '#475569'"
+          :fill="revealed && calc && w === calc.nearest ? 'var(--c-rose-600)' : 'var(--c-slate-600)'"
         >{{ w }}</text>
       </template>
     </svg>
@@ -122,7 +122,7 @@ function pick(i: number) {
       >
         {{ showArrows ? '화살표 숨기기' : '💡 남성→여성 화살표 그리기' }}
       </button>
-      <span class="text-[11px] text-slate-400">● 사람·왕족(남색) ● 동물(주황) ● 과일(초록)</span>
+      <span class="text-xs text-slate-500">● 사람·왕족(남색) ● 동물(주황) ● 과일(초록)</span>
     </div>
 
     <p v-if="showArrows" class="mt-3 rounded-lg bg-rose-50 p-3 text-sm text-rose-800">
@@ -134,7 +134,7 @@ function pick(i: number) {
     <!-- ② 의미의 산수 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 의미의 산수: 화살표로 계산하는 뜻</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       방향이 뜻을 담는다면 — 벡터 덧셈·뺄셈(1부 2장)으로 뜻을 <b>계산</b>할 수 있을 겁니다. 골라 보세요.
     </p>
 
@@ -156,7 +156,7 @@ function pick(i: number) {
         ({{ calc.A.x }}, {{ calc.A.y }}) − ({{ calc.B.x }}, {{ calc.B.y }}) + ({{ calc.C.x }}, {{ calc.C.y }})
         = <b>({{ calc.res.x }}, {{ calc.res.y }})</b>
       </p>
-      <p class="mt-1 text-xs text-slate-400">지도 위 점선 동그라미가 그 지점입니다 — 거기 뭐가 있죠?</p>
+      <p class="mt-1 text-xs text-slate-500">지도 위 점선 동그라미가 그 지점입니다 — 거기 뭐가 있죠?</p>
       <button
         v-if="!revealed"
         type="button"

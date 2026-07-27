@@ -215,7 +215,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch4')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">4장 완료 — 되살리는 길 하나를 손에 넣었습니다!</p>
       <p class="mt-1 text-sm text-emerald-700">
         다시 뽑기는 "성공을 알아볼 수 있다"는 전제가 필요했죠. 다음 5장 — 다수결 회의에서는

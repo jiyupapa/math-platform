@@ -16,7 +16,7 @@ const chapter = computed(() => chapters.find((c) => c.slug === route.params.slug
     <p class="mb-6 text-slate-500">
       {{ chapter ? `Phase ${chapter.phase} · ${chapter.summary}` : '곧 만나요!' }}
     </p>
-    <p class="mb-8 text-sm text-slate-400">
+    <p class="mb-8 text-sm text-slate-500">
       11부는 지금 만드는 중이에요. 챕터가 공개되면 목차에서 (예정) 표시가 사라지고
       바로 학습할 수 있습니다.
     </p>

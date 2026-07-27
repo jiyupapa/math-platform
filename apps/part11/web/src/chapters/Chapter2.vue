@@ -232,7 +232,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch2')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">2장 완료 — 사슬의 수학이 손에 잡혔습니다!</p>
       <p class="mt-1 text-sm text-emerald-700">
         성공률은 곱이고, 곱은 병목이 지배하고, 로그가 그것을 보여줍니다. 다음은 3장 —

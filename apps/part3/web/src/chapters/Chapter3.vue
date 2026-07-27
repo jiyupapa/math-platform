@@ -161,7 +161,7 @@ function onSetComplete() {
           </tr>
         </tbody>
       </table>
-      <p class="mt-2 text-center text-xs text-slate-400">
+      <p class="mt-2 text-center text-xs text-slate-500">
         가로·세로 = 각 주사위의 눈, 칸 = 두 눈의 합. 합 7 이 대각선으로 6칸 — 가장 많습니다.
       </p>
     </div>
@@ -303,7 +303,7 @@ function onSetComplete() {
           <tr><td class="py-1.5">바나나</td><td class="font-mono text-indigo-700">0.05</td></tr>
         </tbody>
       </table>
-      <p class="mt-2 text-center text-xs text-slate-400">전부 더하면 정확히 1 — 표본공간의 확률 합 = 1, 방금 배운 그 성질입니다.</p>
+      <p class="mt-2 text-center text-xs text-slate-500">전부 더하면 정확히 1 — 표본공간의 확률 합 = 1, 방금 배운 그 성질입니다.</p>
     </div>
 
     <ConceptCard tone="ai" title="확률분포 → 소프트맥스 → 다음 단어">
@@ -442,7 +442,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch3')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 3 완료. 경우의 수로 확률을 계산하는 힘이 생겼습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 확률이 <b>정보에 따라 변하는</b> 이야기 — 이 과정의 첫 핵심 챕터입니다.

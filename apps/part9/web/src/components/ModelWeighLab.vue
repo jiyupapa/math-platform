@@ -71,9 +71,9 @@ const fileGB = computed(() => (parts.value.total * box.value.bytes) / 1e9)
 const RAMS = [8, 16, 32]
 function ramVerdict(ram: number): { label: string; tone: string } {
   const gb = fileGB.value
-  if (gb > ram) return { label: '❌ 불가', tone: 'text-rose-600' }
-  if (gb > ram * 0.75) return { label: '⚠️ 아슬', tone: 'text-amber-600' }
-  return { label: '✅ 여유', tone: 'text-emerald-600' }
+  if (gb > ram) return { label: '❌ 불가', tone: 'text-rose-700' }
+  if (gb > ram * 0.75) return { label: '⚠️ 아슬', tone: 'text-amber-700' }
+  return { label: '✅ 여유', tone: 'text-emerald-700' }
 }
 </script>
 
@@ -81,7 +81,7 @@ function ramVerdict(ram: number): { label: string; tone: string } {
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 부품별 저울 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 부품별 저울: 모델의 숫자는 어디에 몇 개 있나</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       4부에서 조립한 부품 그대로입니다 — 임베딩 표(V×d) + 블록마다 어텐션(4d²)·FFN(8d²).
       다이얼을 돌려 숫자가 어디서 불어나는지 보세요.
     </p>
@@ -139,7 +139,7 @@ function ramVerdict(ram: number): { label: string; tone: string } {
     </div>
 
     <div class="mt-3 rounded-lg bg-slate-50 p-3">
-      <p class="text-[11px] text-slate-400">총 파라미터 (근사 공식 V·d + L·12d²)</p>
+      <p class="text-xs text-slate-500">총 파라미터 (근사 공식 V·d + L·12d²)</p>
       <p class="font-mono text-xl font-bold text-slate-700">{{ fmtCount(parts.total) }}</p>
     </div>
 
@@ -157,7 +157,7 @@ function ramVerdict(ram: number): { label: string; tone: string } {
     <!-- ② 몸무게 계산기 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 몸무게 계산기: 파일 크기 = 개수 × 칸 크기</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       위에서 센 파라미터를 그대로 가져와, 숫자 하나를 담는 <b>칸의 크기</b>만 바꿔 봅니다.
       워밍업에서 본 그 칸입니다 — 몇 바이트짜리 칸에 담을까?
     </p>
@@ -174,23 +174,23 @@ function ramVerdict(ram: number): { label: string; tone: string } {
         {{ b.label }}
       </button>
     </div>
-    <p class="mt-1 text-[11px] text-slate-400">{{ box.note }}</p>
+    <p class="mt-1 text-xs text-slate-500">{{ box.note }}</p>
 
     <div class="mt-2 rounded-lg bg-slate-50 p-3">
       <p class="break-all font-mono text-xs text-slate-500">
         {{ parts.total.toLocaleString('en-US') }} 개 × {{ box.bytes }} 바이트
       </p>
       <p class="font-mono text-2xl font-bold text-slate-700">≈ {{ fileGB < 0.1 ? fileGB.toFixed(3) : fileGB.toFixed(1) }} GB</p>
-      <p class="mt-1 text-[11px] text-slate-400">(십진 GB = 10억 바이트 기준 — 파일 관리자의 GiB 표기와 약 7% 다른 이유는 아래 "더 깊이")</p>
+      <p class="mt-1 text-xs text-slate-500">(십진 GB = 10억 바이트 기준 — 파일 관리자의 GiB 표기와 약 7% 다른 이유는 아래 "더 깊이")</p>
     </div>
 
     <div class="mt-2 grid gap-2 sm:grid-cols-3">
       <div v-for="ram in RAMS" :key="ram" class="rounded-lg border border-slate-100 bg-white p-2 text-center">
-        <p class="text-[11px] text-slate-400">RAM {{ ram }}GB PC</p>
+        <p class="text-xs text-slate-500">RAM {{ ram }}GB PC</p>
         <p class="text-sm font-semibold" :class="ramVerdict(ram).tone">{{ ramVerdict(ram).label }}</p>
       </div>
     </div>
-    <p class="mt-1 text-[11px] text-slate-400">
+    <p class="mt-1 text-xs text-slate-500">
       ※ 가중치만의 판정입니다 — 실제로는 OS·브라우저·문맥(KV 캐시) 몫이 더 필요해요(11장 캡스톤에서 정산).
     </p>
 

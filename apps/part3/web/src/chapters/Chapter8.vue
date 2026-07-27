@@ -349,7 +349,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch8')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">
         Phase 8 완료. 이제 여론조사와 벤치마크 점수를 통계학자의 눈으로 읽을 수 있습니다.
       </p>

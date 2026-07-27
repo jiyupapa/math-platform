@@ -64,7 +64,7 @@ function reset() {
     </p>
 
     <div class="mb-3 rounded-lg bg-slate-100 p-3 text-sm text-slate-800">
-      <span class="mr-1 text-xs font-semibold text-slate-500">요청</span>
+      <span class="mr-1 text-xs font-semibold text-slate-600">요청</span>
       {{ PROMPT }}
     </div>
 
@@ -73,9 +73,9 @@ function reset() {
       <template v-for="(s, i) in stages" :key="i">
         <span
           class="rounded-full px-3 py-1 text-xs font-semibold transition"
-          :class="i <= step ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-400'"
+          :class="i <= step ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600'"
         >{{ s.badge }}</span>
-        <span v-if="i < stages.length - 1" class="text-slate-300">→</span>
+        <span v-if="i < stages.length - 1" class="text-slate-500">→</span>
       </template>
     </div>
 
@@ -83,21 +83,21 @@ function reset() {
     <p class="mb-2 text-sm font-bold text-slate-800">{{ stages[step].name }}</p>
     <div class="mb-3 grid gap-2 text-sm sm:grid-cols-3">
       <div class="rounded-lg bg-slate-50 p-3">
-        <p class="text-[11px] font-semibold text-slate-400">🍚 이 단계가 먹는 데이터</p>
+        <p class="text-xs font-semibold text-slate-500">🍚 이 단계가 먹는 데이터</p>
         <p class="mt-0.5 text-slate-700">{{ stages[step].food }}</p>
       </div>
       <div class="rounded-lg bg-slate-50 p-3">
-        <p class="text-[11px] font-semibold text-slate-400">🧠 여기서 배우는 것</p>
+        <p class="text-xs font-semibold text-slate-500">🧠 여기서 배우는 것</p>
         <p class="mt-0.5 text-slate-700">{{ stages[step].learn }}</p>
       </div>
       <div class="rounded-lg bg-slate-50 p-3">
-        <p class="text-[11px] font-semibold text-slate-400">📍 이 과정에서 배우는 곳</p>
+        <p class="text-xs font-semibold text-slate-500">📍 이 과정에서 배우는 곳</p>
         <p class="mt-0.5 text-slate-700">{{ stages[step].where }}</p>
       </div>
     </div>
 
     <div class="rounded-lg border border-indigo-100 bg-indigo-50/60 p-3">
-      <p class="mb-1 text-[11px] font-semibold text-indigo-400">💬 지금 이 모델의 응답</p>
+      <p class="mb-1 text-xs font-semibold text-indigo-600">💬 지금 이 모델의 응답</p>
       <p class="whitespace-pre-wrap text-sm leading-relaxed text-slate-800">{{ stages[step].reply }}</p>
     </div>
     <p class="mt-2 rounded-lg bg-amber-50 p-3 text-sm text-amber-800">👀 {{ stages[step].note }}</p>

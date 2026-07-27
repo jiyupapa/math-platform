@@ -34,14 +34,14 @@ const obs = computed(() => {
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① rank 미니 실험 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 이 표(행렬)의 진짜 정보량은 몇 개일까요?</p>
-    <p class="mb-3 text-xs text-slate-400">숫자 16개짜리 표입니다. 행들을 가만히 비교해 보세요.</p>
+    <p class="mb-3 text-xs text-slate-500">숫자 16개짜리 표입니다. 행들을 가만히 비교해 보세요.</p>
 
     <div class="mb-3 inline-block overflow-hidden rounded-lg border border-slate-200">
       <table class="text-center font-mono text-sm">
         <tbody>
           <tr v-for="(row, i) in TABLE" :key="i" :class="revealed ? (i === 0 ? 'bg-indigo-50' : 'bg-amber-50/60') : ''">
             <td v-for="(v, j) in row" :key="j" class="border border-slate-100 px-4 py-1.5 text-slate-700">{{ v }}</td>
-            <td v-if="revealed" class="border-0 pl-3 text-left text-xs font-sans" :class="i === 0 ? 'text-indigo-600 font-semibold' : 'text-amber-600'">
+            <td v-if="revealed" class="border-0 pl-3 text-left text-xs font-sans" :class="i === 0 ? 'text-indigo-600 font-semibold' : 'text-amber-700'">
               {{ i === 0 ? '기준 행' : `= 기준 행 × ${MULTIPLIERS[i]}` }}
             </td>
           </tr>
@@ -69,7 +69,7 @@ const obs = computed(() => {
     <!-- ② LoRA 파라미터 계산기 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — LoRA 파라미터 계산기: 얼마나 가벼워지나</p>
-    <p class="mb-3 text-xs text-slate-400">거대 행렬 W(d×d)는 얼리고 🧊, 변화분 ΔW = B(d×r)·A(r×d)만 학습합니다.</p>
+    <p class="mb-3 text-xs text-slate-500">거대 행렬 W(d×d)는 얼리고 🧊, 변화분 ΔW = B(d×r)·A(r×d)만 학습합니다.</p>
 
     <div class="mb-3 flex flex-wrap items-center gap-2 text-sm">
       <span class="text-slate-600">행렬 크기 d =</span>
@@ -102,34 +102,34 @@ const obs = computed(() => {
     <div class="mb-3 flex items-end gap-3">
       <div class="flex flex-col items-center">
         <div class="flex h-28 w-28 items-center justify-center rounded-lg border-2 border-sky-200 bg-sky-50 text-3xl">🧊</div>
-        <span class="mt-1 text-[11px] text-slate-500">W (얼림 — 학습 안 함)</span>
+        <span class="mt-1 text-xs text-slate-500">W (얼림 — 학습 안 함)</span>
       </div>
-      <span class="pb-10 text-lg text-slate-400">+</span>
+      <span class="pb-10 text-lg text-slate-500">+</span>
       <div class="flex items-end gap-1">
         <div class="flex flex-col items-center">
           <div class="w-4 rounded bg-indigo-500 transition-all" :style="{ height: `${112}px` }" />
-          <span class="mt-1 text-[11px] text-slate-500">B</span>
+          <span class="mt-1 text-xs text-slate-500">B</span>
         </div>
-        <span class="pb-10 text-slate-400">·</span>
+        <span class="pb-10 text-slate-500">·</span>
         <div class="flex flex-col items-center">
           <div class="h-4 rounded bg-indigo-500 transition-all" :style="{ width: `${112}px` }" />
-          <span class="mt-1 text-[11px] text-slate-500">A</span>
+          <span class="mt-1 text-xs text-slate-500">A</span>
         </div>
       </div>
     </div>
 
     <div class="grid gap-2 sm:grid-cols-3">
       <div class="rounded-lg bg-slate-50 p-3">
-        <p class="text-[11px] font-semibold text-slate-400">전체 파인튜닝 (W 전부)</p>
-        <p class="text-xl font-bold text-slate-800">{{ fmtNum(fullParams) }}<span class="text-xs font-normal text-slate-400"> 개</span></p>
+        <p class="text-xs font-semibold text-slate-500">전체 파인튜닝 (W 전부)</p>
+        <p class="text-xl font-bold text-slate-800">{{ fmtNum(fullParams) }}<span class="text-xs font-normal text-slate-500"> 개</span></p>
       </div>
       <div class="rounded-lg bg-slate-50 p-3">
-        <p class="text-[11px] font-semibold text-slate-400">LoRA (B + A 만)</p>
-        <p class="text-xl font-bold text-indigo-700">{{ fmtNum(loraParams) }}<span class="text-xs font-normal text-slate-400"> 개</span></p>
+        <p class="text-xs font-semibold text-slate-500">LoRA (B + A 만)</p>
+        <p class="text-xl font-bold text-indigo-700">{{ fmtNum(loraParams) }}<span class="text-xs font-normal text-slate-500"> 개</span></p>
       </div>
       <div class="rounded-lg bg-emerald-50 p-3">
-        <p class="text-[11px] font-semibold text-emerald-500">절약 배율</p>
-        <p class="text-xl font-bold text-emerald-600">×{{ ratio.toLocaleString() }}</p>
+        <p class="text-xs font-semibold text-emerald-700">절약 배율</p>
+        <p class="text-xl font-bold text-emerald-700">×{{ ratio.toLocaleString() }}</p>
       </div>
     </div>
     <p class="mt-2 rounded-lg bg-sky-50 p-3 text-sm text-sky-800">👀 {{ obs }}</p>

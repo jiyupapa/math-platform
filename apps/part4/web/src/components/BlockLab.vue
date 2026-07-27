@@ -40,7 +40,7 @@ const chartData = computed(() => ({
     {
       label: '신호 크기',
       data: magnitudes.value.map((m) => Math.min(m, 100)),
-      borderColor: '#6366f1',
+      borderColor: 'var(--c-indigo-500)',
       backgroundColor: 'rgba(99,102,241,0.1)',
       pointRadius: 3,
       tension: 0.2,
@@ -76,7 +76,7 @@ const chartOptions = { scales: { y: { beginAtZero: true } } }
       {{ layers }}개 층을 지난 뒤 신호 크기 =
       <b class="font-mono">{{ finalMag > 99 ? '100+' : finalMag.toFixed(2) }}</b> · {{ verdict.text }}
     </div>
-    <p class="mt-2 text-xs text-slate-400">
+    <p class="mt-2 text-xs text-slate-500">
       💡 잔차연결만 켜면 폭발, 둘 다 끄면 소멸, <b>층정규화까지 켜면 안정</b> — 그래서 딥한 트랜스포머가 학습됩니다.
     </p>
   </div>

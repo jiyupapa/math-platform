@@ -52,7 +52,7 @@ function onSetComplete() {
     <div class="my-4 overflow-x-auto">
       <table class="w-full min-w-[26rem] text-center text-sm">
         <thead>
-          <tr class="border-b border-slate-200 text-xs text-slate-400">
+          <tr class="border-b border-slate-200 text-xs text-slate-500">
             <th class="py-1.5 font-medium">지도 (4장 재사용)</th>
             <th class="py-1.5 font-medium">요금 H(p,q)</th>
             <th class="py-1.5 font-medium">기본요금 H(p)</th>
@@ -63,20 +63,20 @@ function onSetComplete() {
           <tr class="border-b border-slate-100">
             <td class="py-1.5">🎯 세상과 같은 지도</td>
             <td class="py-1.5 tabular-nums">1.75비트</td>
-            <td class="py-1.5 tabular-nums text-slate-400">1.75비트</td>
-            <td class="py-1.5 font-bold tabular-nums text-emerald-600">0</td>
+            <td class="py-1.5 tabular-nums text-slate-500">1.75비트</td>
+            <td class="py-1.5 font-bold tabular-nums text-emerald-700">0</td>
           </tr>
           <tr class="border-b border-slate-100">
             <td class="py-1.5">⚖️ 균등 지도</td>
             <td class="py-1.5 tabular-nums">2비트</td>
-            <td class="py-1.5 tabular-nums text-slate-400">1.75비트</td>
-            <td class="py-1.5 font-bold tabular-nums text-amber-600">0.25비트</td>
+            <td class="py-1.5 tabular-nums text-slate-500">1.75비트</td>
+            <td class="py-1.5 font-bold tabular-nums text-amber-700">0.25비트</td>
           </tr>
           <tr>
             <td class="py-1.5">🙃 거꾸로 지도</td>
             <td class="py-1.5 tabular-nums">2.625비트</td>
-            <td class="py-1.5 tabular-nums text-slate-400">1.75비트</td>
-            <td class="py-1.5 font-bold tabular-nums text-rose-600">0.875비트</td>
+            <td class="py-1.5 tabular-nums text-slate-500">1.75비트</td>
+            <td class="py-1.5 font-bold tabular-nums text-rose-700">0.875비트</td>
           </tr>
         </tbody>
       </table>
@@ -329,7 +329,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch5')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 5 완료. 분포 사이의 자, KL 을 얻었습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         이제 재료가 다 모였습니다 — 다음 장에서 "AI 가 배운다"를 <b>한 줄로 정의</b>합니다.

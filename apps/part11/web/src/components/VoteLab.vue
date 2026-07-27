@@ -40,7 +40,7 @@ const pct = (v: number) => (v * 100).toFixed(1)
     <p class="mb-1 text-sm font-semibold text-slate-500">① 한 표의 정답률 — 풀이 하나가 정답을 맞힐 확률</p>
     <div class="mb-4 flex items-center gap-3">
       <input v-model.number="p" type="range" min="0.3" max="0.95" step="0.05" class="flex-1 accent-indigo-600" />
-      <span class="w-14 shrink-0 text-right font-mono text-sm font-bold" :class="p < 0.5 ? 'text-rose-600' : 'text-slate-800'">{{ Math.round(p * 100) }}%</span>
+      <span class="w-14 shrink-0 text-right font-mono text-sm font-bold" :class="p < 0.5 ? 'text-rose-700' : 'text-slate-800'">{{ Math.round(p * 100) }}%</span>
     </div>
 
     <!-- ② 투표자 수 -->
@@ -70,7 +70,7 @@ const pct = (v: number) => (v * 100).toFixed(1)
         </div>
         <span class="w-16 shrink-0 text-right font-mono text-sm font-bold text-slate-800">{{ row.v.toFixed(1) }}%</span>
       </div>
-      <p class="text-xs text-slate-400">점선 = 50% (다수결이 도움이 되는지의 분수령)</p>
+      <p class="text-xs text-slate-500">점선 = 50% (다수결이 도움이 되는지의 분수령)</p>
 
       <p
         class="rounded-md px-3 py-2 text-sm font-medium"

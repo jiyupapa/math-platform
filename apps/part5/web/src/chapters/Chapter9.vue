@@ -304,7 +304,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch9')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 9 완료. 힌트의 가치를 재는 자까지 얻었습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         이제 마지막 — 🎓 캡스톤에서 1부의 신경망과 미니 언어모델로 시리즈 전체를 완성합니다.
