@@ -22,21 +22,21 @@ const sinCosChart = {
     {
       label: '차원0: sin(pos)',
       data: positions.map((p) => Math.sin(p)),
-      borderColor: '#6366f1',
+      borderColor: 'var(--c-indigo-500)',
       pointRadius: 2,
       tension: 0.3,
     },
     {
       label: '차원1: cos(pos)',
       data: positions.map((p) => Math.cos(p)),
-      borderColor: '#10b981',
+      borderColor: 'var(--c-emerald-500)',
       pointRadius: 2,
       tension: 0.3,
     },
     {
       label: '차원2: sin(pos/4) — 느린 파동',
       data: positions.map((p) => Math.sin(p / 4)),
-      borderColor: '#f59e0b',
+      borderColor: 'var(--c-amber-500)',
       pointRadius: 2,
       tension: 0.3,
     },
@@ -288,7 +288,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch4')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 4 완료 — 뜻 + 위치가 모두 담겼습니다</p>
       <p class="mt-1 text-sm text-emerald-700">
         입력 준비가 끝났어요(토큰화 → 임베딩 → 위치). 다음 챕터(ch5 어텐션의 직관)부터

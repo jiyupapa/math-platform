@@ -19,8 +19,8 @@ function onSetComplete() {
 
 // ── 투영 데모: a, b 를 드래그하면 그림자 p 와 잔차가 실시간 갱신
 const projBase = ref<Vec[]>([
-  { x: 2, y: 4, color: '#6366f1', label: 'a', draggable: true },
-  { x: 4, y: 1, color: '#f59e0b', label: 'b', draggable: true },
+  { x: 2, y: 4, color: 'var(--c-indigo-500)', label: 'a', draggable: true },
+  { x: 4, y: 1, color: 'var(--c-amber-500)', label: 'b', draggable: true },
 ])
 const projInfo = computed(() => {
   const a = projBase.value[0]
@@ -38,8 +38,8 @@ const projVecs = computed<Vec[]>({
     return [
       projBase.value[0],
       projBase.value[1],
-      { x: p.x, y: p.y, color: '#10b981', label: 'p' },
-      { x: r.x, y: r.y, tail: { x: p.x, y: p.y }, color: '#94a3b8', label: '잔차', dashed: true },
+      { x: p.x, y: p.y, color: 'var(--c-emerald-500)', label: 'p' },
+      { x: r.x, y: r.y, tail: { x: p.x, y: p.y }, color: 'var(--c-slate-400)', label: '잔차', dashed: true },
     ]
   },
   // 드래그로 바뀌는 건 a, b 뿐 — p 와 잔차는 항상 계산해서 그린다
@@ -361,7 +361,7 @@ function fmt(n: number) {
       v-if="progress.isDone('ch10')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 10 완료 — '가장 가까운 답'의 원리를 얻었습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 특이값분해 SVD(ch11) — ML에서 가장 중요한 분해가 기다립니다.

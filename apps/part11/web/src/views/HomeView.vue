@@ -57,7 +57,7 @@ const sampleReady = availableChapters.some((c) => c.slug === 'sample')
         >
           🚀 처음이신가요? 워밍업(한 번은 맞히는데 열 번은 못 맞힌다)부터 시작하세요 →
         </RouterLink>
-        <p class="mt-2 text-center text-xs text-indigo-400">
+        <p class="mt-2 text-center text-xs text-indigo-600">
           조건부 확률·분포도 자체 포함 — 3부 전반(확률 기초)을 봤다면 준비 완료입니다.
         </p>
       </template>
@@ -83,8 +83,8 @@ const sampleReady = availableChapters.some((c) => c.slug === 'sample')
           <span class="min-w-0">
             <span class="font-medium">
               {{ ch.title }}
-              <span v-if="ch.comingSoon" class="text-xs text-slate-400">(예정)</span>
-              <span v-else-if="ch.minutes" class="ml-1 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-normal text-slate-500">약 {{ ch.minutes }}분</span>
+              <span v-if="ch.comingSoon" class="text-xs text-slate-500">(예정)</span>
+              <span v-else-if="ch.minutes" class="ml-1 rounded-full bg-slate-100 px-2 py-0.5 text-xs font-normal text-slate-600">약 {{ ch.minutes }}분</span>
             </span>
             <span class="block text-sm text-slate-500">{{ ch.summary }}</span>
           </span>

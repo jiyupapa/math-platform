@@ -245,7 +245,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch11')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">11장 완료 — 판정의 무기가 모두 모였습니다!</p>
       <p class="mt-1 text-sm text-emerald-700">
         pass@k의 비편향 추정, 성적표의 오차범위, 궤적 평가와 다중 비교까지 — 이제 성적표를 보면

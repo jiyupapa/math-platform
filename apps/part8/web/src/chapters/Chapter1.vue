@@ -257,7 +257,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch1')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">1장 완료 — 지도를 손에 넣었어요!</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 2장 — 첫 핵심 챕터입니다. 워밍업에서 발견한 그 경계(1.00)가 왜 하필 1인지,

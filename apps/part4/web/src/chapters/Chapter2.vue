@@ -27,7 +27,7 @@ const compareChart = computed(() => ({
     {
       label: `"${compareSentence}" 의 토큰 수`,
       data: [counts.value.word, counts.value.subword, counts.value.char],
-      backgroundColor: ['#f472b6', '#6366f1', '#fbbf24'],
+      backgroundColor: ['var(--c-pink-400)', 'var(--c-indigo-500)', 'var(--c-amber-400)'],
       borderRadius: 6,
     },
   ],
@@ -92,7 +92,7 @@ function onSetComplete() {
       차이가 확 드러나요:
     </p>
     <ul class="my-3 space-y-1.5 pl-1 text-sm text-slate-700">
-      <li>🔸 <b>단어 단위</b> — 사전에 <b>통째로</b> 있어야 함. 없으면 <b class="text-rose-600">[UNK]</b>(모르는 단어)로
+      <li>🔸 <b>단어 단위</b> — 사전에 <b>통째로</b> 있어야 함. 없으면 <b class="text-rose-700">[UNK]</b>(모르는 단어)로
         뭉개져 뜻을 잃습니다. 새 단어·오타에 취약해요.</li>
       <li>🔸 <b>글자 단위</b> — [UNK] 는 거의 없지만, 토큰 수가 <b>확 늘어</b>납니다(계산량↑).</li>
       <li>🔸 <b>서브워드</b> — 자주 쓰는 말은 통째로, 드문 말은 <b>조각</b>으로. 두 문제를 절충한
@@ -174,7 +174,7 @@ function onSetComplete() {
       <div class="mb-2 overflow-x-auto rounded-lg bg-white px-4 py-3">
         <table class="w-full min-w-[24rem] text-sm text-slate-600">
           <thead>
-            <tr class="border-b border-slate-200 text-left text-slate-400">
+            <tr class="border-b border-slate-200 text-left text-slate-500">
               <th class="py-1 pr-3">라운드</th><th class="py-1 pr-3">현재 조각들</th><th class="py-1 pr-3">가장 잦은 쌍</th><th class="py-1">병합 결과</th>
             </tr>
           </thead>
@@ -303,7 +303,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch2')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 2 완료 — 글이 숫자가 됐습니다</p>
       <p class="mt-1 text-sm text-emerald-700">
         이제 토큰 ID 를 얻었으니, 다음 챕터(ch3 임베딩)에서 이 ID 를

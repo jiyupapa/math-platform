@@ -104,15 +104,15 @@ const fmt = (v: number) => Number(v.toFixed(2)).toString()
       <svg :viewBox="`0 0 ${width} ${H}`" :width="width" :height="H"
         class="max-w-full rounded-lg border border-slate-100 bg-slate-50">
         <!-- 참값 세로선 -->
-        <line :x1="sx(MU)" :y1="0" :x2="sx(MU)" :y2="H" stroke="#4f46e5" stroke-width="1.5"
+        <line :x1="sx(MU)" :y1="0" :x2="sx(MU)" :y2="H" stroke="var(--c-indigo-600)" stroke-width="1.5"
           stroke-dasharray="5 4" />
-        <text :x="sx(MU) + 4" y="11" fill="#4f46e5" font-size="11">참값 μ = 50</text>
+        <text :x="sx(MU) + 4" y="11" fill="var(--c-indigo-600)" font-size="11">참값 μ = 50</text>
         <!-- 신뢰구간들 -->
         <g v-for="(ci, i) in intervals" :key="i">
           <line :x1="sx(ci.lo)" :y1="TOP + i * ROW" :x2="sx(ci.hi)" :y2="TOP + i * ROW"
-            :stroke="ci.hit ? '#94a3b8' : '#e11d48'" :stroke-width="ci.hit ? 1.2 : 2" />
+            :stroke="ci.hit ? 'var(--c-slate-400)' : 'var(--c-rose-600)'" :stroke-width="ci.hit ? 1.2 : 2" />
           <circle :cx="sx(ci.mean)" :cy="TOP + i * ROW" r="1.4"
-            :fill="ci.hit ? '#64748b' : '#e11d48'" />
+            :fill="ci.hit ? 'var(--c-slate-500)' : 'var(--c-rose-600)'" />
         </g>
       </svg>
     </div>
@@ -131,7 +131,7 @@ const fmt = (v: number) => Number(v.toFixed(2)).toString()
     </div>
 
     <p class="mt-2 px-1 text-xs leading-relaxed text-slate-500">
-      가로 막대 하나 = "표본을 뽑아 만든 신뢰구간" 한 번의 실험. <b class="text-rose-600">빨간 막대</b>는
+      가로 막대 하나 = "표본을 뽑아 만든 신뢰구간" 한 번의 실험. <b class="text-rose-700">빨간 막대</b>는
       참값을 놓친 불운한 구간이에요. 신뢰수준 95% 면 놓침이 평균 5개꼴 — 그게 "95% 신뢰"의 뜻입니다.
       n 을 키우면 구간이 짧아지고(더 정밀), 신뢰수준을 높이면 구간이 길어지는 것도 확인해 보세요.
     </p>

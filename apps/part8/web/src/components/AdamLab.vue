@@ -113,7 +113,7 @@ const norm2 = computed(() => rmsNormalized(amp2.value))
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 두 지형 3파전 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 두 지형 3파전: 지형이 100배 가파라지면</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       세 여행자의 설정은 <b>지형이 바뀌어도 그대로</b>입니다. 지형 A에서 먼저 경주하고,
       지형 B(벽 곡률 100배)로 바꿔 다시 경주해 보세요.
     </p>
@@ -138,26 +138,26 @@ const norm2 = computed(() => rmsNormalized(amp2.value))
       <button type="button" class="rounded-lg bg-indigo-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-indigo-500" @click="stepAll(60)">
         60스텝
       </button>
-      <button type="button" class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-500 transition hover:bg-slate-200" @click="resetRace()">
+      <button type="button" class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-600 transition hover:bg-slate-200" @click="resetRace()">
         처음부터
       </button>
-      <span class="text-[11px] text-slate-400">스텝 {{ steps }}</span>
+      <span class="text-xs text-slate-500">스텝 {{ steps }}</span>
     </div>
 
     <div class="mt-2 space-y-1">
       <div v-for="r in rows" :key="r.name" class="flex items-center gap-2 rounded-lg bg-slate-50 p-2 text-xs">
         <span class="w-56 shrink-0 font-semibold text-slate-600">{{ r.name }}</span>
-        <span class="min-w-0 flex-1 font-mono font-bold" :class="r.dead ? 'text-rose-600' : 'text-slate-700'">손실 {{ r.val }}</span>
+        <span class="min-w-0 flex-1 font-mono font-bold" :class="r.dead ? 'text-rose-700' : 'text-slate-700'">손실 {{ r.val }}</span>
       </div>
     </div>
 
     <div v-if="effSteps" class="mt-2 grid grid-cols-2 gap-2 text-center">
       <div class="rounded-lg bg-amber-50 p-2">
-        <p class="text-[11px] text-amber-600">Adam의 유효 보폭 — 완만한 x축</p>
+        <p class="text-xs text-amber-700">Adam의 유효 보폭 — 완만한 x축</p>
         <p class="font-mono text-sm font-bold text-amber-700">{{ effSteps.x.toFixed(3) }}</p>
       </div>
       <div class="rounded-lg bg-amber-50 p-2">
-        <p class="text-[11px] text-amber-600">Adam의 유효 보폭 — 가파른 y축</p>
+        <p class="text-xs text-amber-700">Adam의 유효 보폭 — 가파른 y축</p>
         <p class="font-mono text-sm font-bold text-amber-700">{{ effSteps.y.toFixed(4) }}</p>
       </div>
     </div>
@@ -175,7 +175,7 @@ const norm2 = computed(() => rmsNormalized(amp2.value))
     <!-- ② 스케일 지우개 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 스케일 지우개: √(g²의 평균)으로 나누면</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       축1의 기울기는 크기 5로 고정, 축2의 크기는 슬라이더로 — RMS(g²의 EMA의 제곱근)로 나눈
       뒤의 값을 비교하세요.
     </p>
@@ -187,12 +187,12 @@ const norm2 = computed(() => rmsNormalized(amp2.value))
 
     <div class="mt-3 grid grid-cols-2 gap-2 text-center">
       <div class="rounded-lg bg-slate-50 p-3">
-        <p class="text-[11px] text-slate-400">축1 — 나누기 후 (원래 크기 5)</p>
-        <p class="font-mono text-xl font-bold text-emerald-600">{{ norm1.toFixed(2) }}</p>
+        <p class="text-xs text-slate-500">축1 — 나누기 후 (원래 크기 5)</p>
+        <p class="font-mono text-xl font-bold text-emerald-700">{{ norm1.toFixed(2) }}</p>
       </div>
       <div class="rounded-lg bg-slate-50 p-3">
-        <p class="text-[11px] text-slate-400">축2 — 나누기 후 (원래 크기 {{ amp2.toFixed(2) }})</p>
-        <p class="font-mono text-xl font-bold text-emerald-600">{{ norm2.toFixed(2) }}</p>
+        <p class="text-xs text-slate-500">축2 — 나누기 후 (원래 크기 {{ amp2.toFixed(2) }})</p>
+        <p class="font-mono text-xl font-bold text-emerald-700">{{ norm2.toFixed(2) }}</p>
       </div>
     </div>
 

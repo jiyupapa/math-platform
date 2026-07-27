@@ -405,7 +405,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch9')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 9 완료. "우연인가 진짜인가"를 숫자로 판별할 수 있게 됐습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         마지막 챕터는 데이터에서 관계를 찾아 예측하는 <b>상관관계와 회귀</b> — 그리고 그것이 곧 머신러닝입니다.

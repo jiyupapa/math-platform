@@ -63,8 +63,8 @@ function preset(kind: 'unique' | 'none' | 'infinite') {
 
 const kindLabel = computed(() => {
   if (kind.value === 'unique') return { text: '교차 → 유일한 해 1개', cls: 'text-emerald-700' }
-  if (kind.value === 'none') return { text: '평행 → 해 없음', cls: 'text-rose-600' }
-  return { text: '완전히 겹침 → 무수히 많은 해', cls: 'text-amber-600' }
+  if (kind.value === 'none') return { text: '평행 → 해 없음', cls: 'text-rose-700' }
+  return { text: '완전히 겹침 → 무수히 많은 해', cls: 'text-amber-700' }
 })
 </script>
 
@@ -78,27 +78,27 @@ const kindLabel = computed(() => {
         class="max-w-full shrink-0 rounded-lg border border-slate-200"
       >
         <!-- 격자 -->
-        <g stroke="#eef2f7" stroke-width="1">
+        <g stroke="var(--c-grid)" stroke-width="1">
           <line v-for="t in ticks" :key="'v' + t" :x1="toX(t)" y1="0" :x2="toX(t)" :y2="size" />
           <line v-for="t in ticks" :key="'h' + t" x1="0" :y1="toY(t)" :x2="size" :y2="toY(t)" />
         </g>
         <!-- 축 -->
-        <g stroke="#94a3b8" stroke-width="1.5">
+        <g stroke="var(--c-slate-400)" stroke-width="1.5">
           <line x1="0" :y1="toY(0)" :x2="size" :y2="toY(0)" />
           <line :x1="toX(0)" y1="0" :x2="toX(0)" :y2="size" />
         </g>
         <!-- 직선 1 -->
-        <line :x1="line1.x1" :y1="line1.y1" :x2="line1.x2" :y2="line1.y2" stroke="#6366f1" stroke-width="3" />
+        <line :x1="line1.x1" :y1="line1.y1" :x2="line1.x2" :y2="line1.y2" stroke="var(--c-indigo-500)" stroke-width="3" />
         <!-- 직선 2 -->
-        <line :x1="line2.x1" :y1="line2.y1" :x2="line2.x2" :y2="line2.y2" stroke="#ec4899" stroke-width="3" />
+        <line :x1="line2.x1" :y1="line2.y1" :x2="line2.x2" :y2="line2.y2" stroke="var(--c-pink-500)" stroke-width="3" />
         <!-- 교점 -->
         <circle
           v-if="solution"
           :cx="toX(solution.x)"
           :cy="toY(solution.y)"
           r="7"
-          fill="#10b981"
-          stroke="#fff"
+          fill="var(--c-emerald-500)"
+          stroke="var(--c-white)"
           stroke-width="2.5"
         />
       </svg>
@@ -110,7 +110,7 @@ const kindLabel = computed(() => {
           <label class="flex items-center gap-2">절편 <input v-model.number="k1" type="range" min="-4" max="4" step="1" class="flex-1" /></label>
         </div>
         <div>
-          <div class="mb-1 font-semibold text-pink-600">직선 2: y = {{ m2 }}x + {{ k2 }}</div>
+          <div class="mb-1 font-semibold text-pink-700">직선 2: y = {{ m2 }}x + {{ k2 }}</div>
           <label class="flex items-center gap-2">기울기 <input v-model.number="m2" type="range" min="-3" max="3" step="0.5" class="flex-1" /></label>
           <label class="flex items-center gap-2">절편 <input v-model.number="k2" type="range" min="-4" max="4" step="1" class="flex-1" /></label>
         </div>
@@ -123,9 +123,9 @@ const kindLabel = computed(() => {
         </div>
 
         <div class="flex flex-wrap gap-1.5">
-          <button class="rounded-md bg-emerald-100 px-2.5 py-1 text-xs font-medium text-emerald-700 hover:bg-emerald-200" @click="preset('unique')">유일해 예시</button>
-          <button class="rounded-md bg-rose-100 px-2.5 py-1 text-xs font-medium text-rose-700 hover:bg-rose-200" @click="preset('none')">해 없음(평행)</button>
-          <button class="rounded-md bg-amber-100 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-200" @click="preset('infinite')">무수히 많은 해</button>
+          <button class="rounded-md bg-emerald-100 px-2.5 py-1 text-xs font-medium text-emerald-800 hover:bg-emerald-200" @click="preset('unique')">유일해 예시</button>
+          <button class="rounded-md bg-rose-100 px-2.5 py-1 text-xs font-medium text-rose-800 hover:bg-rose-200" @click="preset('none')">해 없음(평행)</button>
+          <button class="rounded-md bg-amber-100 px-2.5 py-1 text-xs font-medium text-amber-800 hover:bg-amber-200" @click="preset('infinite')">무수히 많은 해</button>
         </div>
       </div>
     </div>

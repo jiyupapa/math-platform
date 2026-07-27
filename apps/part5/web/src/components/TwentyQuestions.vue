@@ -103,7 +103,7 @@ const resultLabel: Record<Turn['result'], string> = {
       <button
         v-for="n in N"
         :key="n"
-        class="flex aspect-square items-center justify-center rounded text-[10px] font-medium transition-colors sm:text-[11px]"
+        class="flex aspect-square items-center justify-center rounded text-xs font-medium transition-colors sm:text-xs"
         :class="cellClass(n)"
         :disabled="done || n < lo || n > hi"
         :title="`${n} 물어보기`"
@@ -112,21 +112,21 @@ const resultLabel: Record<Turn['result'], string> = {
         {{ n }}
       </button>
     </div>
-    <p class="mt-1.5 text-xs text-slate-400">칸을 직접 눌러 물어봐도 돼요.</p>
+    <p class="mt-1.5 text-xs text-slate-500">칸을 직접 눌러 물어봐도 돼요.</p>
 
     <!-- 현황판 -->
     <div class="mt-3 grid grid-cols-3 gap-2 text-center">
       <div class="rounded-lg bg-slate-50 p-2">
         <p class="text-lg font-bold text-slate-800">{{ turns.length }}</p>
-        <p class="text-[11px] text-slate-500">질문 수</p>
+        <p class="text-xs text-slate-500">질문 수</p>
       </div>
       <div class="rounded-lg bg-indigo-50 p-2">
         <p class="text-lg font-bold text-indigo-700">{{ remaining }}</p>
-        <p class="text-[11px] text-indigo-500">남은 후보</p>
+        <p class="text-xs text-indigo-600">남은 후보</p>
       </div>
       <div class="rounded-lg bg-amber-50 p-2">
         <p class="text-lg font-bold text-amber-700">{{ foldsLeft }}</p>
-        <p class="text-[11px] text-amber-600">반으로 접기, 앞으로 최대 몇 번?</p>
+        <p class="text-xs text-amber-700">반으로 접기, 앞으로 최대 몇 번?</p>
       </div>
     </div>
 
@@ -179,11 +179,11 @@ const resultLabel: Record<Turn['result'], string> = {
           :key="i"
           class="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-slate-600"
         >
-          <span class="w-4 shrink-0 text-right font-semibold text-slate-400">{{ i + 1 }}.</span>
+          <span class="w-4 shrink-0 text-right font-semibold text-slate-500">{{ i + 1 }}.</span>
           <span class="w-14 shrink-0">"{{ t.guess }}?"</span>
           <span
             class="w-28 shrink-0 font-medium"
-            :class="t.result === 'hit' ? 'text-emerald-600' : 'text-slate-700'"
+            :class="t.result === 'hit' ? 'text-emerald-700' : 'text-slate-700'"
           >
             {{ resultLabel[t.result] }}
           </span>
@@ -192,7 +192,7 @@ const resultLabel: Record<Turn['result'], string> = {
           <span class="h-2 rounded-full bg-indigo-400" :style="{ width: (t.after / N) * 140 + 'px' }" />
           <span
             v-if="t.result !== 'hit'"
-            class="shrink-0 rounded-full px-1.5 py-0.5 text-[10px] font-medium"
+            class="shrink-0 rounded-full px-1.5 py-0.5 text-xs font-medium"
             :class="
               t.after <= Math.ceil(t.before / 2)
                 ? 'bg-emerald-100 text-emerald-700'

@@ -62,8 +62,8 @@ const curve = computed(() => {
 
     <!-- 패턴 설명 -->
     <p class="px-1 text-sm leading-relaxed text-slate-600">
-      지수 <b class="text-rose-600">{{ n }}</b> 이 앞으로 <b>내려와 계수</b>가 되고,
-      지수는 <b class="text-emerald-600">{{ n }} − 1 = {{ n - 1 }}</b> 로 줄어듭니다.
+      지수 <b class="text-rose-700">{{ n }}</b> 이 앞으로 <b>내려와 계수</b>가 되고,
+      지수는 <b class="text-emerald-700">{{ n }} − 1 = {{ n - 1 }}</b> 로 줄어듭니다.
       <span v-if="n === 1">(n=1 이면 x¹ 의 미분은 상수 1)</span>
     </p>
 
@@ -75,13 +75,13 @@ const curve = computed(() => {
         :height="size"
         class="max-w-full rounded-lg border border-slate-100 bg-slate-50"
       >
-        <g stroke="#94a3b8" stroke-width="1.2">
+        <g stroke="var(--c-slate-400)" stroke-width="1.2">
           <line :x1="0" :y1="size / 2" :x2="size" :y2="size / 2" />
           <line :x1="sx(0)" :y1="0" :x2="sx(0)" :y2="size" />
         </g>
-        <polyline :points="curve" fill="none" stroke="#6366f1" stroke-width="2.5" />
+        <polyline :points="curve" fill="none" stroke="var(--c-indigo-500)" stroke-width="2.5" />
       </svg>
     </div>
-    <p class="mt-1 text-center text-xs text-slate-400">f(x) = x<sup>{{ n }}</sup> 의 모양</p>
+    <p class="mt-1 text-center text-xs text-slate-500">f(x) = x<sup>{{ n }}</sup> 의 모양</p>
   </div>
 </template>

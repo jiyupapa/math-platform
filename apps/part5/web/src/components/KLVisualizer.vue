@@ -128,16 +128,16 @@ function applyPreset(pr: { p: number[]; q: number[] }) {
       @pointerup="onUp"
       @pointercancel="onUp"
     >
-      <line :x1="PAD_X" :y1="BASE_Y" :x2="W - PAD_X" :y2="BASE_Y" stroke="#cbd5e1" stroke-width="1.5" />
+      <line :x1="PAD_X" :y1="BASE_Y" :x2="W - PAD_X" :y2="BASE_Y" stroke="var(--c-slate-300)" stroke-width="1.5" />
       <g v-for="(cat, i) in CATS" :key="cat">
         <!-- p (에메랄드) -->
-        <rect :x="pX(i)" :y="BASE_Y - PLOT_H" :width="subW()" :height="PLOT_H" fill="#f8fafc" rx="4" />
+        <rect :x="pX(i)" :y="BASE_Y - PLOT_H" :width="subW()" :height="PLOT_H" fill="var(--c-slate-50)" rx="4" />
         <rect
           :x="pX(i)"
           :y="BASE_Y - p[i] * PLOT_H"
           :width="subW()"
           :height="Math.max(p[i] * PLOT_H, 2)"
-          fill="#10b981"
+          fill="var(--c-emerald-500)"
           rx="4"
         />
         <text
@@ -146,18 +146,18 @@ function applyPreset(pr: { p: number[]; q: number[] }) {
           text-anchor="middle"
           font-size="10"
           font-weight="bold"
-          fill="#059669"
+          fill="var(--c-emerald-600)"
         >
           {{ (p[i] * 100).toFixed(0) }}%
         </text>
         <!-- q (보라) -->
-        <rect :x="qX(i)" :y="BASE_Y - PLOT_H" :width="subW()" :height="PLOT_H" fill="#f8fafc" rx="4" />
+        <rect :x="qX(i)" :y="BASE_Y - PLOT_H" :width="subW()" :height="PLOT_H" fill="var(--c-slate-50)" rx="4" />
         <rect
           :x="qX(i)"
           :y="BASE_Y - q[i] * PLOT_H"
           :width="subW()"
           :height="Math.max(q[i] * PLOT_H, 2)"
-          fill="#6366f1"
+          fill="var(--c-indigo-500)"
           rx="4"
         />
         <text
@@ -166,19 +166,19 @@ function applyPreset(pr: { p: number[]; q: number[] }) {
           text-anchor="middle"
           font-size="10"
           font-weight="bold"
-          fill="#4f46e5"
+          fill="var(--c-indigo-600)"
         >
           {{ (q[i] * 100).toFixed(0) }}%
         </text>
-        <text :x="PAD_X + i * groupW + groupW / 2" :y="BASE_Y + 16" text-anchor="middle" font-size="12" fill="#64748b">
+        <text :x="PAD_X + i * groupW + groupW / 2" :y="BASE_Y + 16" text-anchor="middle" font-size="12" fill="var(--c-slate-500)">
           {{ cat }}
         </text>
       </g>
       <!-- 범례 -->
-      <rect :x="W - 120" y="4" width="10" height="10" fill="#10b981" rx="2" />
-      <text :x="W - 106" y="13" font-size="10" fill="#059669">분포 p</text>
-      <rect :x="W - 120" y="20" width="10" height="10" fill="#6366f1" rx="2" />
-      <text :x="W - 106" y="29" font-size="10" fill="#4f46e5">분포 q</text>
+      <rect :x="W - 120" y="4" width="10" height="10" fill="var(--c-emerald-500)" rx="2" />
+      <text :x="W - 106" y="13" font-size="10" fill="var(--c-emerald-600)">분포 p</text>
+      <rect :x="W - 120" y="20" width="10" height="10" fill="var(--c-indigo-500)" rx="2" />
+      <text :x="W - 106" y="29" font-size="10" fill="var(--c-indigo-600)">분포 q</text>
     </svg>
 
     <!-- 두 방향 KL 게이지 나란히 -->
@@ -192,7 +192,7 @@ function applyPreset(pr: { p: number[]; q: number[] }) {
             :style="{ width: ratio(dPQ) * 100 + '%' }"
           />
         </div>
-        <span class="w-24 shrink-0 text-sm font-bold tabular-nums" :class="Number.isFinite(dPQ) ? 'text-emerald-700' : 'text-rose-600'">
+        <span class="w-24 shrink-0 text-sm font-bold tabular-nums" :class="Number.isFinite(dPQ) ? 'text-emerald-700' : 'text-rose-700'">
           {{ fmt(dPQ) }}
         </span>
       </div>
@@ -205,13 +205,13 @@ function applyPreset(pr: { p: number[]; q: number[] }) {
             :style="{ width: ratio(dQP) * 100 + '%' }"
           />
         </div>
-        <span class="w-24 shrink-0 text-sm font-bold tabular-nums" :class="Number.isFinite(dQP) ? 'text-indigo-700' : 'text-rose-600'">
+        <span class="w-24 shrink-0 text-sm font-bold tabular-nums" :class="Number.isFinite(dQP) ? 'text-indigo-700' : 'text-rose-700'">
           {{ fmt(dQP) }}
         </span>
       </div>
     </div>
 
-    <p class="mt-2 text-xs" :class="same ? 'font-semibold text-emerald-600' : 'text-slate-400'">
+    <p class="mt-2 text-xs" :class="same ? 'font-semibold text-emerald-700' : 'text-slate-500'">
       <template v-if="same">
         🎉 p = q — 두 방향 모두 0. 완벽히 같은 분포만 KL 을 0으로 만듭니다.
       </template>

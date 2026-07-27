@@ -96,7 +96,7 @@ const drawCount = computed(() => {
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 말안장 위의 여행자 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 말안장 위의 여행자: 완벽한 나침반의 저주</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       가운데 ✕가 안장점(높이 0.25) — 세로로는 골짜기 바닥이지만 <b>가로로는 능선 꼭대기</b>입니다.
       진짜 바닥(★, 높이 0)은 양옆에. 위쪽 기슭에서 두 여행자를 출발시켜 보세요.
     </p>
@@ -112,38 +112,38 @@ const drawCount = computed(() => {
 
     <template v-if="race">
       <svg viewBox="0 0 300 150" class="w-full rounded-lg bg-slate-50 ring-1 ring-slate-100">
-        <rect v-for="(c, i) in cells" :key="i" :x="c.x" :y="c.y" :width="280 / 48 + 0.3" :height="140 / 26 + 0.3" fill="#6366f1" :opacity="c.o" />
-        <polyline :points="trajPath(race.gd.traj)" fill="none" stroke="#e11d48" stroke-width="1.8" />
-        <polyline :points="trajPath(race.sgd.traj)" fill="none" stroke="#34d399" stroke-width="1.5" />
-        <text :x="px(0)" :y="py(0) + 2.5" text-anchor="middle" font-size="9" fill="#fff" font-weight="bold">✕</text>
-        <text :x="px(1)" :y="py(0) + 2.5" text-anchor="middle" font-size="9" fill="#fbbf24">★</text>
-        <text :x="px(-1)" :y="py(0) + 2.5" text-anchor="middle" font-size="9" fill="#fbbf24">★</text>
-        <text :x="px(0) + 5" :y="py(0) - 5" font-size="7" fill="#fff">안장점 (높이 0.25)</text>
-        <text :x="px(1)" :y="py(0) + 12" text-anchor="middle" font-size="7" fill="#b45309">골짜기 (0)</text>
-        <text x="14" y="13" font-size="7" fill="#e11d48">— GD (완벽한 나침반)</text>
-        <text x="14" y="22" font-size="7" fill="#059669">— SGD (흔들리는 나침반)</text>
+        <rect v-for="(c, i) in cells" :key="i" :x="c.x" :y="c.y" :width="280 / 48 + 0.3" :height="140 / 26 + 0.3" fill="var(--c-indigo-500)" :opacity="c.o" />
+        <polyline :points="trajPath(race.gd.traj)" fill="none" stroke="var(--c-rose-600)" stroke-width="1.8" />
+        <polyline :points="trajPath(race.sgd.traj)" fill="none" stroke="var(--c-emerald-400)" stroke-width="1.5" />
+        <text :x="px(0)" :y="py(0) + 2.5" text-anchor="middle" font-size="9" fill="var(--c-white)" font-weight="bold">✕</text>
+        <text :x="px(1)" :y="py(0) + 2.5" text-anchor="middle" font-size="9" fill="var(--c-amber-400)">★</text>
+        <text :x="px(-1)" :y="py(0) + 2.5" text-anchor="middle" font-size="9" fill="var(--c-amber-400)">★</text>
+        <text :x="px(0) + 5" :y="py(0) - 5" font-size="7" fill="var(--c-white)">안장점 (높이 0.25)</text>
+        <text :x="px(1)" :y="py(0) + 12" text-anchor="middle" font-size="7" fill="var(--c-amber-700)">골짜기 (0)</text>
+        <text x="14" y="13" font-size="7" fill="var(--c-rose-600)">— GD (완벽한 나침반)</text>
+        <text x="14" y="22" font-size="7" fill="var(--c-emerald-600)">— SGD (흔들리는 나침반)</text>
       </svg>
 
-      <p class="mt-2 mb-1 text-[11px] font-semibold text-slate-400">손실 곡선 (log)</p>
+      <p class="mt-2 mb-1 text-xs font-semibold text-slate-500">손실 곡선 (log)</p>
       <svg viewBox="0 0 300 112" class="w-full rounded-lg bg-slate-50 ring-1 ring-slate-100">
-        <line x1="15" :y1="logY(0.25)" x2="290" :y2="logY(0.25)" stroke="#94a3b8" stroke-width="0.8" stroke-dasharray="3 3" />
-        <text x="288" :y="logY(0.25) - 3" text-anchor="end" font-size="7" fill="#94a3b8">안장 높이 0.25</text>
-        <polyline :points="lossPath(race.gd.losses)" fill="none" stroke="#e11d48" stroke-width="1.5" />
-        <polyline :points="lossPath(race.sgd.losses)" fill="none" stroke="#059669" stroke-width="1.5" />
+        <line x1="15" :y1="logY(0.25)" x2="290" :y2="logY(0.25)" stroke="var(--c-slate-400)" stroke-width="0.8" stroke-dasharray="3 3" />
+        <text x="288" :y="logY(0.25) - 3" text-anchor="end" font-size="7" fill="var(--c-slate-400)">안장 높이 0.25</text>
+        <polyline :points="lossPath(race.gd.losses)" fill="none" stroke="var(--c-rose-600)" stroke-width="1.5" />
+        <polyline :points="lossPath(race.sgd.losses)" fill="none" stroke="var(--c-emerald-600)" stroke-width="1.5" />
       </svg>
 
       <div class="mt-2 flex flex-wrap gap-3 rounded-lg bg-slate-50 p-3 text-center">
         <div>
-          <p class="text-[11px] text-slate-400">GD — 150스텝째 손실</p>
-          <p class="font-mono text-lg font-bold text-rose-600">{{ race.gd.losses[149]!.toFixed(3) }} <span class="text-[11px] font-normal text-slate-400">(안장 높이 그대로)</span></p>
+          <p class="text-xs text-slate-500">GD — 150스텝째 손실</p>
+          <p class="font-mono text-lg font-bold text-rose-700">{{ race.gd.losses[149]!.toFixed(3) }} <span class="text-xs font-normal text-slate-500">(안장 높이 그대로)</span></p>
         </div>
         <div>
-          <p class="text-[11px] text-slate-400">SGD — 탈출 스텝</p>
-          <p class="font-mono text-lg font-bold text-emerald-600">{{ race.escape }}</p>
+          <p class="text-xs text-slate-500">SGD — 탈출 스텝</p>
+          <p class="font-mono text-lg font-bold text-emerald-700">{{ race.escape }}</p>
         </div>
         <div>
-          <p class="text-[11px] text-slate-400">SGD — 최종 손실</p>
-          <p class="font-mono text-lg font-bold text-emerald-600">{{ race.sgd.losses[149]!.toFixed(4) }}</p>
+          <p class="text-xs text-slate-500">SGD — 최종 손실</p>
+          <p class="font-mono text-lg font-bold text-emerald-700">{{ race.sgd.losses[149]!.toFixed(4) }}</p>
         </div>
       </div>
 
@@ -159,32 +159,32 @@ const drawCount = computed(() => {
     <!-- ② 동전 세기 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 동전 세기: 고차원 임계점은 왜 거의 다 안장점인가</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       임계점(기울기 0)이 <b>국소최소가 되려면 모든 방향이 위로(+) 굽어야</b> 합니다. 방향별 곡률
       부호를 반반 동전이라 치고 — 방향 수 W를 올려 보세요.
     </p>
 
     <label class="block text-xs text-slate-500">
-      방향(차원) 수 W = <b class="text-slate-700">{{ W }}</b> <span class="text-slate-400">(실제 LLM은 수십억)</span>
+      방향(차원) 수 W = <b class="text-slate-700">{{ W }}</b> <span class="text-slate-500">(실제 LLM은 수십억)</span>
       <input v-model.number="W" type="range" min="1" max="30" step="1" class="mt-1 w-full accent-indigo-600" />
     </label>
 
     <div class="mt-2 flex flex-wrap items-center gap-1">
-      <span class="mr-1 text-[11px] text-slate-400">임계점 하나를 뽑아 봤습니다:</span>
+      <span class="mr-1 text-xs text-slate-500">임계점 하나를 뽑아 봤습니다:</span>
       <span
         v-for="(s, i) in signs"
         :key="i"
-        class="inline-flex h-5 w-5 items-center justify-center rounded font-mono text-[11px] font-bold"
-        :class="s ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-600'"
+        class="inline-flex h-5 w-5 items-center justify-center rounded font-mono text-xs font-bold"
+        :class="s ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'"
       >{{ s ? '+' : '−' }}</span>
-      <span class="ml-2 text-xs font-semibold" :class="signs.every((s) => s) ? 'text-emerald-700' : 'text-rose-600'">
+      <span class="ml-2 text-xs font-semibold" :class="signs.every((s) => s) ? 'text-emerald-700' : 'text-rose-700'">
         {{ signs.every((s) => s) ? '전부 + — 국소최소!' : '− 가 섞임 — 안장점 (탈출구 있음)' }}
       </span>
     </div>
 
     <div class="mt-3 flex flex-wrap items-center gap-3 rounded-lg bg-slate-50 p-3">
       <div class="text-center">
-        <p class="text-[11px] text-slate-400">모든 방향이 + 일 확률</p>
+        <p class="text-xs text-slate-500">모든 방향이 + 일 확률</p>
         <p class="font-mono text-base font-bold text-indigo-600">(1/2)<sup>{{ W }}</sup> = 1/{{ denom }}</p>
       </div>
       <button
@@ -196,7 +196,7 @@ const drawCount = computed(() => {
       </button>
       <p v-if="drawCount !== null" class="min-w-0 flex-1 text-xs leading-relaxed text-slate-600">
         100개 중 <b class="text-emerald-700">국소최소 {{ drawCount }}개</b> /
-        <b class="text-rose-600">안장점 {{ 100 - drawCount }}개</b>
+        <b class="text-rose-700">안장점 {{ 100 - drawCount }}개</b>
         <template v-if="W >= 15"> — W가 조금만 커져도 국소최소는 <b>씨가 마릅니다</b>. 수십억 차원의 임계점은 사실상 전부 안장점.</template>
         <template v-else-if="W <= 3"> — W가 작을 땐 국소최소도 꽤 나옵니다(이론 {{ (100 / 2 ** W).toFixed(0) }}개). W를 올려 보세요.</template>
       </p>

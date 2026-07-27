@@ -186,7 +186,7 @@ const fmt = (v: number) => (Number.isFinite(v) ? Number(v.toFixed(3)).toString()
       <svg :viewBox="`0 0 ${width} ${popH}`" :width="width" :height="popH"
         class="max-w-full rounded-lg border border-slate-100 bg-slate-50">
         <rect v-for="(b, i) in popBars" :key="i" :x="b.x" :y="popH - b.h" :width="b.w" :height="b.h"
-          fill="#94a3b8" />
+          fill="var(--c-slate-400)" />
       </svg>
     </div>
 
@@ -219,15 +219,15 @@ const fmt = (v: number) => (Number.isFinite(v) ? Number(v.toFixed(3)).toString()
       <svg :viewBox="`0 0 ${width} ${height}`" :width="width" :height="height"
         class="max-w-full rounded-lg border border-slate-100 bg-slate-50">
         <rect v-for="(b, i) in histBars" :key="i" :x="b.x" :y="height - b.h" :width="b.w" :height="b.h"
-          fill="#6366f1" opacity="0.85" />
+          fill="var(--c-indigo-500)" opacity="0.85" />
         <!-- 모평균 위치 -->
         <line :x1="sx(pop.mean)" :y1="0" :x2="sx(pop.mean)" :y2="height"
-          stroke="#059669" stroke-width="1.5" stroke-dasharray="5 4" />
+          stroke="var(--c-emerald-600)" stroke-width="1.5" stroke-dasharray="5 4" />
         <!-- 이론 정규곡선 -->
-        <polyline v-if="normalCurve" :points="normalCurve" fill="none" stroke="#f43f5e"
+        <polyline v-if="normalCurve" :points="normalCurve" fill="none" stroke="var(--c-rose-500)"
           stroke-width="2" stroke-dasharray="6 4" opacity="0.9" />
         <text v-if="count === 0" :x="width / 2" :y="height / 2" text-anchor="middle"
-          fill="#94a3b8" font-size="13">버튼을 눌러 표본을 뽑아 보세요</text>
+          fill="var(--c-slate-400)" font-size="13">버튼을 눌러 표본을 뽑아 보세요</text>
       </svg>
     </div>
 
@@ -235,9 +235,9 @@ const fmt = (v: number) => (Number.isFinite(v) ? Number(v.toFixed(3)).toString()
     <div class="mt-3 flex flex-wrap gap-2 text-sm">
       <span class="rounded-lg bg-slate-100 px-3 py-1.5 text-slate-600">뽑은 표본 = <b>{{ count }}</b>개</span>
       <span class="rounded-lg bg-indigo-50 px-3 py-1.5 text-indigo-700">표본평균들의 평균 = <b>{{ fmt(meanOfMeans) }}</b>
-        <span class="text-indigo-400">(모평균 {{ fmt(pop.mean) }})</span></span>
+        <span class="text-indigo-600">(모평균 {{ fmt(pop.mean) }})</span></span>
       <span class="rounded-lg bg-rose-50 px-3 py-1.5 text-rose-700">표본평균들의 표준편차 = <b>{{ fmt(sdOfMeans) }}</b>
-        <span class="text-rose-400">(이론 σ/√n = {{ fmt(theorySE) }})</span></span>
+        <span class="text-rose-700">(이론 σ/√n = {{ fmt(theorySE) }})</span></span>
     </div>
 
     <p class="mt-2 px-1 text-xs leading-relaxed text-slate-500">

@@ -84,7 +84,7 @@ async function resolve(q: Annotation) {
           </a>
           <button
             type="button"
-            class="text-xs text-slate-500 hover:text-emerald-600 hover:underline"
+            class="text-xs text-slate-500 hover:text-emerald-700 hover:underline"
             :disabled="busyId === q.id"
             @click="resolve(q)"
           >

@@ -107,7 +107,7 @@ const doneAll = computed(() => stepIdx.value === STEPS.length - 1)
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 검색 방식 비교 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 같은 질문, 두 검색기: 키워드 vs 의미</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       사내 문서 5건이 검색 대상입니다. 질문과 검색 방식을 바꿔 가며 순위가 어떻게 달라지는지 보세요.
     </p>
 
@@ -121,14 +121,14 @@ const doneAll = computed(() => stepIdx.value === STEPS.length - 1)
         @click="qIdx = i"
       >
         <span class="block font-semibold">{{ c.text }}</span>
-        <span class="block" :class="qIdx === i ? 'text-indigo-400' : 'text-slate-400'">{{ c.tag }}</span>
+        <span class="block" :class="qIdx === i ? 'text-indigo-600' : 'text-slate-500'">{{ c.tag }}</span>
       </button>
     </div>
     <div class="mb-3 flex gap-2">
       <button
         type="button"
         class="rounded-lg px-3 py-1.5 text-xs font-semibold transition"
-        :class="method === 'keyword' ? 'bg-slate-700 text-white' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'"
+        :class="method === 'keyword' ? 'bg-slate-700 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
         @click="method = 'keyword'"
       >
         🔤 키워드 검색 (겹치는 단어 수)
@@ -136,7 +136,7 @@ const doneAll = computed(() => stepIdx.value === STEPS.length - 1)
       <button
         type="button"
         class="rounded-lg px-3 py-1.5 text-xs font-semibold transition"
-        :class="method === 'semantic' ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'"
+        :class="method === 'semantic' ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
         @click="method = 'semantic'"
       >
         🗺️ 의미 검색 (지도에서 가까움)
@@ -150,7 +150,7 @@ const doneAll = computed(() => stepIdx.value === STEPS.length - 1)
         class="flex items-center gap-2 rounded-lg p-1.5 text-sm"
         :class="i === 0 && d.score > 0 ? 'bg-amber-50' : ''"
       >
-        <span class="w-8 shrink-0 text-center text-xs font-bold" :class="i === 0 && d.score > 0 ? 'text-amber-600' : 'text-slate-400'">
+        <span class="w-8 shrink-0 text-center text-xs font-bold" :class="i === 0 && d.score > 0 ? 'text-amber-700' : 'text-slate-500'">
           {{ i === 0 && d.score > 0 ? '1등' : d.score > 0 ? i + 1 + '위' : '—' }}
         </span>
         <span class="w-36 shrink-0 truncate text-xs text-slate-600">{{ d.title }}</span>
@@ -174,14 +174,14 @@ const doneAll = computed(() => stepIdx.value === STEPS.length - 1)
     <!-- ② RAG 파이프라인 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — RAG 파이프라인: 검색이 프롬프트가 되기까지</p>
-    <p class="mb-3 text-xs text-slate-400">"다음 단계"를 눌러 질문 하나가 답이 되는 5단계를 통과해 보세요.</p>
+    <p class="mb-3 text-xs text-slate-500">"다음 단계"를 눌러 질문 하나가 답이 되는 5단계를 통과해 보세요.</p>
 
     <div class="mb-3 flex flex-wrap gap-1.5">
       <span
         v-for="(s, i) in STEPS"
         :key="s.name"
-        class="rounded-full px-2.5 py-1 text-[11px] font-semibold transition"
-        :class="i === stepIdx ? 'bg-indigo-600 text-white' : i < stepIdx ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-100 text-slate-400'"
+        class="rounded-full px-2.5 py-1 text-xs font-semibold transition"
+        :class="i === stepIdx ? 'bg-indigo-600 text-white' : i < stepIdx ? 'bg-indigo-100 text-indigo-700' : 'bg-slate-100 text-slate-600'"
       >
         {{ i + 1 }}. {{ s.name }}
       </span>
@@ -190,7 +190,7 @@ const doneAll = computed(() => stepIdx.value === STEPS.length - 1)
     <div class="rounded-lg bg-slate-50 p-4">
       <p class="mb-1 text-sm font-semibold text-slate-700">
         {{ stepIdx + 1 }}단계 — {{ STEPS[stepIdx].name }}
-        <span class="ml-1 rounded-full bg-white px-2 py-0.5 text-[10px] font-medium text-slate-400 ring-1 ring-slate-200">{{ STEPS[stepIdx].badge }}</span>
+        <span class="ml-1 rounded-full bg-white px-2 py-0.5 text-xs font-medium text-slate-500 ring-1 ring-slate-200">{{ STEPS[stepIdx].badge }}</span>
       </p>
       <p class="mb-3 text-sm leading-relaxed text-slate-600">{{ STEPS[stepIdx].desc }}</p>
       <pre class="overflow-x-auto rounded-lg bg-white p-3 text-xs leading-relaxed whitespace-pre-wrap text-slate-700 ring-1 ring-slate-200">{{ STEPS[stepIdx].artifact }}</pre>
@@ -208,7 +208,7 @@ const doneAll = computed(() => stepIdx.value === STEPS.length - 1)
       <button
         v-if="stepIdx > 0"
         type="button"
-        class="rounded-lg bg-slate-100 px-3 py-2 text-sm font-medium text-slate-500 transition hover:bg-slate-200"
+        class="rounded-lg bg-slate-100 px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-200"
         @click="stepIdx = 0"
       >
         처음부터

@@ -90,14 +90,14 @@ const pair = computed(() => (pickedPair.value ? { key: pickedPair.value, ...PAIR
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① PCA 축 고르기 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — PCA 되어 보기: 그림자가 가장 넓게 지는 축 찾기</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       2차원 점 구름을 1차원(축 하나)으로 요약한다면 — 어느 방향의 축이 정보를 제일 덜 잃을까요?
       축을 돌리며 <b>투영(그림자)의 퍼짐</b>을 관찰하세요.
     </p>
 
     <svg viewBox="0 0 300 180" class="w-full rounded-lg bg-slate-50 ring-1 ring-slate-100">
       <!-- 축 -->
-      <line :x1="sx({ x: -axisEnd.x, y: -axisEnd.y })" :y1="sy({ x: -axisEnd.x, y: -axisEnd.y })" :x2="sx(axisEnd)" :y2="sy(axisEnd)" :stroke="isBest ? '#059669' : '#4f46e5'" stroke-width="2" />
+      <line :x1="sx({ x: -axisEnd.x, y: -axisEnd.y })" :y1="sy({ x: -axisEnd.x, y: -axisEnd.y })" :x2="sx(axisEnd)" :y2="sy(axisEnd)" :stroke="isBest ? 'var(--c-emerald-600)' : 'var(--c-indigo-600)'" stroke-width="2" />
       <!-- 점 + 투영선 -->
       <template v-for="(p, i) in POINTS" :key="i">
         <line
@@ -105,15 +105,15 @@ const pair = computed(() => (pickedPair.value ? { key: pickedPair.value, ...PAIR
           :y1="sy(p)"
           :x2="sx({ x: projected[i] * Math.cos((angle * Math.PI) / 180), y: projected[i] * Math.sin((angle * Math.PI) / 180) })"
           :y2="sy({ x: projected[i] * Math.cos((angle * Math.PI) / 180), y: projected[i] * Math.sin((angle * Math.PI) / 180) })"
-          stroke="#cbd5e1"
+          stroke="var(--c-slate-300)"
           stroke-width="0.7"
         />
-        <circle :cx="sx(p)" :cy="sy(p)" r="2.5" fill="#64748b" />
+        <circle :cx="sx(p)" :cy="sy(p)" r="2.5" fill="var(--c-slate-500)" />
         <circle
           :cx="sx({ x: projected[i] * Math.cos((angle * Math.PI) / 180), y: projected[i] * Math.sin((angle * Math.PI) / 180) })"
           :cy="sy({ x: projected[i] * Math.cos((angle * Math.PI) / 180), y: projected[i] * Math.sin((angle * Math.PI) / 180) })"
           r="2"
-          :fill="isBest ? '#059669' : '#818cf8'"
+          :fill="isBest ? 'var(--c-emerald-600)' : 'var(--c-indigo-400)'"
         />
       </template>
     </svg>
@@ -124,8 +124,8 @@ const pair = computed(() => (pickedPair.value ? { key: pickedPair.value, ...PAIR
         <input v-model.number="angle" type="range" min="0" max="179" step="1" class="mt-1 w-full accent-indigo-600" />
       </label>
       <div class="w-40 shrink-0 rounded-lg bg-slate-50 p-2 text-center">
-        <p class="text-[11px] text-slate-400">그림자의 퍼짐 (분산)</p>
-        <p class="font-mono text-lg font-bold" :class="isBest ? 'text-emerald-600' : 'text-slate-700'">{{ projVar.toFixed(2) }}</p>
+        <p class="text-xs text-slate-500">그림자의 퍼짐 (분산)</p>
+        <p class="font-mono text-lg font-bold" :class="isBest ? 'text-emerald-700' : 'text-slate-700'">{{ projVar.toFixed(2) }}</p>
         <div class="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
           <div class="h-full rounded-full" :class="isBest ? 'bg-emerald-500' : 'bg-indigo-400'" :style="{ width: (projVar / maxVar) * 100 + '%' }" />
         </div>
@@ -148,15 +148,15 @@ const pair = computed(() => (pickedPair.value ? { key: pickedPair.value, ...PAIR
     <!-- ② 지도의 거짓말 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 지도의 거짓말: 2D 거리 vs 실제 거리</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       수백 차원의 사내 문서 임베딩을 t-SNE풍 2D 지도로 그렸습니다(미리 준비됨). 클러스터 쌍을 눌러
       <b>지도상 거리</b>와 <b>실제(고차원) 거리</b>를 비교해 보세요.
     </p>
 
     <svg viewBox="0 0 300 170" class="w-full rounded-lg bg-slate-50 ring-1 ring-slate-100">
       <template v-for="d in DOCS5" :key="d.id">
-        <circle v-for="k in 6" :key="k" :cx="d.x + [8, -6, 2, 12, -10, 0][k - 1]" :cy="d.y + [-8, 6, 12, 2, -2, -12][k - 1]" r="3.5" :fill="d.id === 'A' ? '#6366f1' : d.id === 'B' ? '#d97706' : '#059669'" opacity="0.75" />
-        <text :x="d.x" :y="d.y + 30" text-anchor="middle" font-size="11" font-weight="bold" fill="#475569">{{ d.id }} · {{ d.name }}</text>
+        <circle v-for="k in 6" :key="k" :cx="d.x + [8, -6, 2, 12, -10, 0][k - 1]" :cy="d.y + [-8, 6, 12, 2, -2, -12][k - 1]" r="3.5" :fill="d.id === 'A' ? 'var(--c-indigo-500)' : d.id === 'B' ? 'var(--c-amber-600)' : 'var(--c-emerald-600)'" opacity="0.75" />
+        <text :x="d.x" :y="d.y + 30" text-anchor="middle" font-size="11" font-weight="bold" fill="var(--c-slate-600)">{{ d.id }} · {{ d.name }}</text>
       </template>
     </svg>
 
@@ -182,11 +182,11 @@ const pair = computed(() => (pickedPair.value ? { key: pickedPair.value, ...PAIR
         <span class="w-10 shrink-0 text-right font-mono text-xs text-slate-500">{{ pair.map.toFixed(1) }}</span>
       </div>
       <div class="flex items-center gap-2 text-sm">
-        <span class="w-32 shrink-0 text-xs font-semibold" :class="pair.twist ? 'text-rose-600' : 'text-indigo-600'">실제(고차원) 거리</span>
+        <span class="w-32 shrink-0 text-xs font-semibold" :class="pair.twist ? 'text-rose-700' : 'text-indigo-600'">실제(고차원) 거리</span>
         <div class="h-3 flex-1 overflow-hidden rounded-full bg-slate-100">
           <div class="h-full rounded-full" :class="pair.twist ? 'bg-rose-500' : 'bg-indigo-500'" :style="{ width: (pair.real / 0.9) * 100 + '%' }" />
         </div>
-        <span class="w-10 shrink-0 text-right font-mono text-xs" :class="pair.twist ? 'text-rose-600' : 'text-indigo-600'">{{ pair.real.toFixed(2) }}</span>
+        <span class="w-10 shrink-0 text-right font-mono text-xs" :class="pair.twist ? 'text-rose-700' : 'text-indigo-600'">{{ pair.real.toFixed(2) }}</span>
       </div>
       <p class="rounded-lg p-3 text-sm" :class="pair.twist ? 'bg-rose-50 text-rose-700' : 'bg-slate-50 text-slate-600'">
         {{ pair.twist ? '⚠️' : '✅' }} {{ pair.note }}

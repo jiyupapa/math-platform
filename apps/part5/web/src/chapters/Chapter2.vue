@@ -339,7 +339,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch2')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 2 완료. 비트를 아끼는 법을 배웠습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 이 과정의 심장 — 압축의 한계이자 평균 놀람, <b>엔트로피</b>입니다.

@@ -228,7 +228,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch4')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">4장 완료 — 황금비를 검산했습니다!</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 5장 — 창발일까 착시일까. "능력이 갑자기 튀어나온다"는 유명한 주장과,

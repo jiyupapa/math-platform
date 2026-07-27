@@ -367,7 +367,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch7')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">
         Phase 7 완료. '왜 일부만 보고도 전체를 알 수 있는지'의 수학적 근거를 손에 넣었습니다.
       </p>

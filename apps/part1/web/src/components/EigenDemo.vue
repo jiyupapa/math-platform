@@ -50,7 +50,7 @@ function preset(na: number, nb: number, nc: number, nd: number) {
 <template>
   <div class="my-4 rounded-xl border border-slate-200 bg-white p-4">
     <p class="mb-3 text-sm text-slate-600">
-      파란 화살표 <b>v</b> 를 돌리면 변환된 <b style="color:#f59e0b">Av</b> 가 따라 움직여요.
+      파란 화살표 <b>v</b> 를 돌리면 변환된 <b style="color: var(--c-amber-700)">Av</b> 가 따라 움직여요.
       둘이 <b>같은 직선에 놓이는 방향</b>이 바로 <b>고유벡터</b>입니다. 찾아보세요.
     </p>
 
@@ -58,14 +58,14 @@ function preset(na: number, nb: number, nc: number, nd: number) {
       <svg :width="VS" :height="VS" :viewBox="`0 0 ${VS} ${VS}`" class="mx-auto shrink-0 rounded-lg bg-slate-50">
         <defs>
           <marker id="eig-v" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L6,3 L0,6 Z" :fill="aligned ? '#10b981' : '#6366f1'" />
+            <path d="M0,0 L6,3 L0,6 Z" :fill="aligned ? 'var(--c-emerald-500)' : 'var(--c-indigo-500)'" />
           </marker>
           <marker id="eig-av" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L6,3 L0,6 Z" :fill="aligned ? '#10b981' : '#f59e0b'" />
+            <path d="M0,0 L6,3 L0,6 Z" :fill="aligned ? 'var(--c-emerald-500)' : 'var(--c-amber-500)'" />
           </marker>
         </defs>
-        <line x1="0" :y1="cc" :x2="VS" :y2="cc" stroke="#e2e8f0" stroke-width="1" />
-        <line :x1="cc" y1="0" :x2="cc" :y2="VS" stroke="#e2e8f0" stroke-width="1" />
+        <line x1="0" :y1="cc" :x2="VS" :y2="cc" stroke="var(--c-slate-200)" stroke-width="1" />
+        <line :x1="cc" y1="0" :x2="cc" :y2="VS" stroke="var(--c-slate-200)" stroke-width="1" />
         <!-- 고유벡터일 때 직선 강조 -->
         <line
           v-if="aligned"
@@ -73,15 +73,15 @@ function preset(na: number, nb: number, nc: number, nd: number) {
           :y1="cc + v.y * 200"
           :x2="cc + v.x * 200"
           :y2="cc - v.y * 200"
-          stroke="#10b981"
+          stroke="var(--c-emerald-500)"
           stroke-width="1"
           stroke-dasharray="5 4"
         />
         <!-- Av -->
-        <line :x1="oS.X" :y1="oS.Y" :x2="avS.X" :y2="avS.Y" :stroke="aligned ? '#10b981' : '#f59e0b'" stroke-width="3" marker-end="url(#eig-av)" />
+        <line :x1="oS.X" :y1="oS.Y" :x2="avS.X" :y2="avS.Y" :stroke="aligned ? 'var(--c-emerald-500)' : 'var(--c-amber-500)'" stroke-width="3" marker-end="url(#eig-av)" />
         <!-- v -->
-        <line :x1="oS.X" :y1="oS.Y" :x2="vS.X" :y2="vS.Y" :stroke="aligned ? '#10b981' : '#6366f1'" stroke-width="3" marker-end="url(#eig-v)" />
-        <circle :cx="oS.X" :cy="oS.Y" r="3" fill="#334155" />
+        <line :x1="oS.X" :y1="oS.Y" :x2="vS.X" :y2="vS.Y" :stroke="aligned ? 'var(--c-emerald-500)' : 'var(--c-indigo-500)'" stroke-width="3" marker-end="url(#eig-v)" />
+        <circle :cx="oS.X" :cy="oS.Y" r="3" fill="var(--c-slate-700)" />
       </svg>
 
       <div class="flex-1">
@@ -107,7 +107,7 @@ function preset(na: number, nb: number, nc: number, nd: number) {
           <button class="rounded-lg border border-slate-200 px-3 py-1.5 text-xs hover:bg-slate-100" @click="preset(2, 0, 0, 3)">대각 (λ=2, 3)</button>
           <button class="rounded-lg border border-slate-200 px-3 py-1.5 text-xs hover:bg-slate-100" @click="preset(1, 1, 0, 1)">전단 (λ=1 하나뿐)</button>
         </div>
-        <p class="mt-2 text-xs text-slate-400">
+        <p class="mt-2 text-xs text-slate-500">
           힌트: 대칭 행렬은 45°·135° 근처, 대각 행렬은 0°·90° 근처에서 찾을 수 있어요.
         </p>
       </div>

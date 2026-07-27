@@ -47,10 +47,10 @@ const placed = ref<number | null>(null)
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 비슷한 문장 찾기 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 비슷한 문장 찾기: 사람 vs 글자 세기</p>
-    <p class="mb-3 text-xs text-slate-400">아래 질문과 뜻이 가장 비슷한 문장을 골라 보세요.</p>
+    <p class="mb-3 text-xs text-slate-500">아래 질문과 뜻이 가장 비슷한 문장을 골라 보세요.</p>
 
     <div class="mb-3 rounded-lg bg-slate-100 p-3 text-sm text-slate-800">
-      <span class="mr-1 text-xs font-semibold text-slate-500">질문</span>{{ QUERY }}
+      <span class="mr-1 text-xs font-semibold text-slate-600">질문</span>{{ QUERY }}
     </div>
     <div class="space-y-2">
       <button
@@ -61,7 +61,7 @@ const placed = ref<number | null>(null)
         :class="picked === i ? 'border-indigo-500 bg-indigo-50 text-indigo-900' : 'border-slate-200 text-slate-700 hover:border-slate-300'"
         @click="picked = i"
       >
-        <span class="mr-1 text-[11px] font-bold" :class="picked === i ? 'text-indigo-500' : 'text-slate-400'">{{ c.key }}</span>
+        <span class="mr-1 text-xs font-bold" :class="picked === i ? 'text-indigo-600' : 'text-slate-500'">{{ c.key }}</span>
         {{ c.text }}
       </button>
     </div>
@@ -69,7 +69,7 @@ const placed = ref<number | null>(null)
     <div v-if="picked !== null" class="mt-3 space-y-2">
       <p class="rounded-lg bg-amber-50 p-3 text-sm text-amber-800">👀 {{ CANDS[picked].note }}</p>
       <div class="rounded-lg bg-slate-50 p-3">
-        <p class="mb-2 text-[11px] font-semibold text-slate-400">🤖 소박한 컴퓨터의 채점 — 질문과 겹치는 단어 수</p>
+        <p class="mb-2 text-xs font-semibold text-slate-500">🤖 소박한 컴퓨터의 채점 — 질문과 겹치는 단어 수</p>
         <div class="space-y-1.5">
           <div v-for="c in CANDS" :key="c.key" class="flex items-center gap-2 text-sm">
             <span class="w-4 font-bold text-slate-500">{{ c.key }}</span>
@@ -89,7 +89,7 @@ const placed = ref<number | null>(null)
     <!-- ② 의미 지도 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 의미 지도: "토끼"는 어디에 놓을까요?</p>
-    <p class="mb-3 text-xs text-slate-400">단어들이 이미 지도 위에 있습니다. 토끼의 자리(ㄱ·ㄴ·ㄷ)를 골라 보세요.</p>
+    <p class="mb-3 text-xs text-slate-500">단어들이 이미 지도 위에 있습니다. 토끼의 자리(ㄱ·ㄴ·ㄷ)를 골라 보세요.</p>
 
     <div class="relative h-72 w-full overflow-hidden rounded-xl border border-slate-200 bg-gradient-to-br from-slate-50 to-indigo-50/40">
       <span

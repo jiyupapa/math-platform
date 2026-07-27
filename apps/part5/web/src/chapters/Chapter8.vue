@@ -314,7 +314,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch8')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 8 완료. LLM 트랙 완주 — 다이얼의 정체를 알았습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 심화 트랙 — 문맥이 불확실성을 줄이는 원리, <b>조건부 엔트로피와 상호정보량</b>입니다.

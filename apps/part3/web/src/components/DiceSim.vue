@@ -119,7 +119,7 @@ const fmtPct = (p: number) => (p * 100).toFixed(1) + '%'
         class="max-w-full rounded-lg border border-slate-100 bg-slate-50"
       >
         <!-- 바닥선 -->
-        <line :x1="0" :y1="H - PAD_B" :x2="W" :y2="H - PAD_B" stroke="#94a3b8" stroke-width="1.2" />
+        <line :x1="0" :y1="H - PAD_B" :x2="W" :y2="H - PAD_B" stroke="var(--c-slate-400)" stroke-width="1.2" />
 
         <g v-for="(w, i) in WAYS" :key="i">
           <!-- 관측 상대도수 막대 -->
@@ -128,7 +128,7 @@ const fmtPct = (p: number) => (p * 100).toFixed(1) + '%'
             :y="barY(observed[i])"
             :width="BAR_W"
             :height="barH(observed[i])"
-            fill="#6366f1"
+            fill="var(--c-indigo-500)"
             opacity="0.85"
             rx="2"
           />
@@ -138,7 +138,7 @@ const fmtPct = (p: number) => (p * 100).toFixed(1) + '%'
             :y1="barY(w / 36)"
             :x2="barX(i) + BAR_W + 3"
             :y2="barY(w / 36)"
-            stroke="#f43f5e"
+            stroke="var(--c-rose-500)"
             stroke-width="2"
             stroke-dasharray="4 3"
           />
@@ -148,7 +148,7 @@ const fmtPct = (p: number) => (p * 100).toFixed(1) + '%'
             :y="H - 8"
             text-anchor="middle"
             font-size="12"
-            fill="#64748b"
+            fill="var(--c-slate-500)"
           >
             {{ i + 2 }}
           </text>
@@ -159,7 +159,7 @@ const fmtPct = (p: number) => (p * 100).toFixed(1) + '%'
             :y="Math.max(barY(observed[i]) - 4, 10)"
             text-anchor="middle"
             font-size="9"
-            fill="#475569"
+            fill="var(--c-slate-600)"
           >
             {{ fmtPct(observed[i]) }}
           </text>
@@ -169,7 +169,7 @@ const fmtPct = (p: number) => (p * 100).toFixed(1) + '%'
 
     <p class="mt-2 px-1 text-xs leading-relaxed text-slate-500">
       가로축 = 두 주사위의 <b>합</b>, 막대 = 실제로 나온 <b>비율</b>,
-      <span class="font-semibold text-rose-500">빨간 점선</span> = 이론 확률(경우의 수 ÷ 36).
+      <span class="font-semibold text-rose-700">빨간 점선</span> = 이론 확률(경우의 수 ÷ 36).
       조금 굴리면 들쭉날쭉하지만, 1000번씩 굴려 보면 막대가 점선의 <b>삼각형 모양</b>에 착 붙습니다.
     </p>
   </div>

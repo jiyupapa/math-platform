@@ -54,9 +54,9 @@ const RAMS = [8, 16, 32]
 const ram = ref(8)
 const verdict = computed(() => {
   const t = totalGB.value
-  if (t > ram.value) return { label: '❌ 불가 — RAM 초과', tone: 'text-rose-600', bar: 'bg-rose-400' }
-  if (t > ram.value * 0.85) return { label: '⚠️ 아슬 — 다른 앱을 닫아야 할 수도', tone: 'text-amber-600', bar: 'bg-amber-400' }
-  return { label: '✅ 여유 — 쾌적하게 돕니다', tone: 'text-emerald-600', bar: 'bg-emerald-400' }
+  if (t > ram.value) return { label: '❌ 불가 — RAM 초과', tone: 'text-rose-700', bar: 'bg-rose-400' }
+  if (t > ram.value * 0.85) return { label: '⚠️ 아슬 — 다른 앱을 닫아야 할 수도', tone: 'text-amber-700', bar: 'bg-amber-400' }
+  return { label: '✅ 여유 — 쾌적하게 돕니다', tone: 'text-emerald-700', bar: 'bg-emerald-400' }
 })
 </script>
 
@@ -64,7 +64,7 @@ const verdict = computed(() => {
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 모델 영수증 완독기 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 모델 영수증 완독기: 워밍업의 질문에 스스로 답한다</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       모델과 태그를 고르면 영수증이 한 줄씩 계산됩니다 — 각 줄 옆의 배지는 그 계산을 배운 장.
     </p>
 
@@ -79,7 +79,7 @@ const verdict = computed(() => {
       >
         {{ s.name }}
       </button>
-      <span class="mx-1 self-center text-slate-300">×</span>
+      <span class="mx-1 self-center text-slate-500">×</span>
       <button
         v-for="(t, i) in TAGS"
         :key="t.name"
@@ -100,22 +100,22 @@ const verdict = computed(() => {
       <div class="flex flex-wrap items-center gap-2 rounded-lg bg-slate-50 p-2">
         <span class="w-16 shrink-0 font-sans font-semibold text-slate-500">파라미터</span>
         <span class="min-w-0 flex-1 text-slate-700">V·d + L·12d² = {{ spec.V.toLocaleString('en-US') }}×{{ spec.d.toLocaleString('en-US') }} + {{ spec.L }}×12×{{ spec.d.toLocaleString('en-US') }}² = <b>{{ fmtB(nParams) }}</b></span>
-        <span class="shrink-0 rounded bg-indigo-100 px-1.5 py-0.5 font-sans text-[10px] font-bold text-indigo-700">1장</span>
+        <span class="shrink-0 rounded bg-indigo-100 px-1.5 py-0.5 font-sans text-xs font-bold text-indigo-700">1장</span>
       </div>
       <div class="flex flex-wrap items-center gap-2 rounded-lg bg-slate-50 p-2">
         <span class="w-16 shrink-0 font-sans font-semibold text-slate-500">칸</span>
         <span class="min-w-0 flex-1 text-slate-700">{{ tag.name }} → 실효 <b>{{ tag.bits }}비트</b>/파라미터 (정수 눈금 + 축척·믹스)</span>
-        <span class="shrink-0 rounded bg-indigo-100 px-1.5 py-0.5 font-sans text-[10px] font-bold text-indigo-700">3·8·9장</span>
+        <span class="shrink-0 rounded bg-indigo-100 px-1.5 py-0.5 font-sans text-xs font-bold text-indigo-700">3·8·9장</span>
       </div>
       <div class="flex flex-wrap items-center gap-2 rounded-lg bg-slate-50 p-2">
         <span class="w-16 shrink-0 font-sans font-semibold text-slate-500">가중치</span>
         <span class="min-w-0 flex-1 text-slate-700">{{ fmtB(nParams) }} × {{ tag.bits }}bit ÷ 8 = <b class="text-indigo-700">{{ weightsGB.toFixed(1) }} GB</b></span>
-        <span class="shrink-0 rounded bg-indigo-100 px-1.5 py-0.5 font-sans text-[10px] font-bold text-indigo-700">1·9장</span>
+        <span class="shrink-0 rounded bg-indigo-100 px-1.5 py-0.5 font-sans text-xs font-bold text-indigo-700">1·9장</span>
       </div>
       <div class="flex flex-wrap items-center gap-2 rounded-lg bg-slate-50 p-2">
         <span class="w-16 shrink-0 font-sans font-semibold text-slate-500">품질</span>
         <span class="min-w-0 flex-1 text-slate-700">퍼플렉시티 열화 {{ tag.quality }}</span>
-        <span class="shrink-0 rounded bg-indigo-100 px-1.5 py-0.5 font-sans text-[10px] font-bold text-indigo-700">10장</span>
+        <span class="shrink-0 rounded bg-indigo-100 px-1.5 py-0.5 font-sans text-xs font-bold text-indigo-700">10장</span>
       </div>
     </div>
 
@@ -127,7 +127,7 @@ const verdict = computed(() => {
     <!-- ② 메모리 정산기 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 메모리 정산기: 파일이 들어간다 ≠ 돌아간다</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       실행에는 가중치 외에 <b>문맥이 길수록 자라는 KV 캐시</b>(대화의 기억 장부)와 OS·실행기
       몫이 필요합니다 — 어림 공식: KV/토큰 = 2 × L × d × 2바이트(fp16).
     </p>

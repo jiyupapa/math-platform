@@ -249,7 +249,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch3')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">3장 완료 — 지도의 구조를 읽을 수 있게 됐어요!</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 4장 — 핵심 챕터입니다. 이 좋은 지도를 수백 차원으로 올리면 이상한 일이 벌어져요:

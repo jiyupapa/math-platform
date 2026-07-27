@@ -259,7 +259,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch7')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">7장 완료 — 지름길까지 손에 넣었어요!</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 8장 — 거대 모델을 통째로 훈련하지 않고 "살짝만" 조련하는 LoRA.

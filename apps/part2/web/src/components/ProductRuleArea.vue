@@ -70,20 +70,20 @@ const exactRate = computed(() => props.duf(x0.value) * v.value + u.value * props
       <svg :viewBox="`0 0 ${size} ${size}`" :width="size" :height="size"
         class="max-w-full rounded-lg border border-slate-100 bg-slate-50">
         <!-- 위 띠 u·Δv (amber) -->
-        <rect :x="ox" :y="oy - px(v2)" :width="px(u)" :height="px(dv)" fill="#fcd34d" opacity="0.85" />
+        <rect :x="ox" :y="oy - px(v2)" :width="px(u)" :height="px(dv)" fill="var(--c-amber-300)" opacity="0.85" />
         <!-- 오른쪽 띠 Δu·v (green) -->
-        <rect :x="ox + px(u)" :y="oy - px(v)" :width="px(du)" :height="px(v)" fill="#6ee7b7" opacity="0.9" />
+        <rect :x="ox + px(u)" :y="oy - px(v)" :width="px(du)" :height="px(v)" fill="var(--c-emerald-300)" opacity="0.9" />
         <!-- 모서리 Δu·Δv (red) -->
-        <rect :x="ox + px(u)" :y="oy - px(v2)" :width="px(du)" :height="px(dv)" fill="#fca5a5" />
+        <rect :x="ox + px(u)" :y="oy - px(v2)" :width="px(du)" :height="px(dv)" fill="var(--c-red-300)" />
         <!-- 기본 넓이 u·v (blue) -->
-        <rect :x="ox" :y="oy - px(v)" :width="px(u)" :height="px(v)" fill="#a5b4fc" opacity="0.9" />
+        <rect :x="ox" :y="oy - px(v)" :width="px(u)" :height="px(v)" fill="var(--c-indigo-300)" opacity="0.9" />
 
         <!-- 테두리 -->
-        <rect :x="ox" :y="oy - px(v2)" :width="px(u2)" :height="px(v2)" fill="none" stroke="#64748b" stroke-width="1.5" />
+        <rect :x="ox" :y="oy - px(v2)" :width="px(u2)" :height="px(v2)" fill="none" stroke="var(--c-slate-500)" stroke-width="1.5" />
 
         <!-- 축 라벨 -->
-        <text :x="ox + px(u) / 2" :y="oy + 16" text-anchor="middle" font-size="12" fill="#4f46e5">{{ labelU }} = {{ fmt(u) }}</text>
-        <text :x="ox - 8" :y="oy - px(v) / 2" text-anchor="end" font-size="12" fill="#4f46e5">{{ labelV }} = {{ fmt(v) }}</text>
+        <text :x="ox + px(u) / 2" :y="oy + 16" text-anchor="middle" font-size="12" fill="var(--c-indigo-600)">{{ labelU }} = {{ fmt(u) }}</text>
+        <text :x="ox - 8" :y="oy - px(v) / 2" text-anchor="end" font-size="12" fill="var(--c-indigo-600)">{{ labelV }} = {{ fmt(v) }}</text>
       </svg>
     </div>
 
@@ -113,7 +113,7 @@ const exactRate = computed(() => props.duf(x0.value) * v.value + u.value * props
       <span class="rounded-lg bg-slate-800 px-3 py-1.5 text-white">곱의 법칙 u'v + uv' = <b>{{ fmt(exactRate) }}</b></span>
     </div>
     <p class="mt-2 px-1 text-xs leading-relaxed text-slate-500">
-      증가분 <b class="text-rose-600">Δ</b> 를 줄여보세요. <b class="text-rose-500">빨간 모서리</b>(Δu·Δv)가
+      증가분 <b class="text-rose-700">Δ</b> 를 줄여보세요. <b class="text-rose-700">빨간 모서리</b>(Δu·Δv)가
       급격히 작아져 무시할 수 있게 되고, 남는 두 띠 <b>Δu·v + u·Δv</b> 가 넓이 변화의 전부가 됩니다.
       이걸 Δ 로 나누면 <b>u'v + u v'</b> — 곱의 법칙이에요.
     </p>

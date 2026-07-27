@@ -82,7 +82,7 @@ function addRandom() {
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 차원별 분포 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 무작위 두 벡터의 각도: 차원을 올려 보세요</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       각 차원에서 무작위 벡터 300쌍을 뽑아 코사인 유사도의 분포를 그렸습니다 (시드 고정 — 항상 같은 결과).
     </p>
 
@@ -92,7 +92,7 @@ function addRandom() {
         :key="d"
         type="button"
         class="rounded-lg px-3 py-1.5 text-xs font-bold transition"
-        :class="dimIdx === i ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'"
+        :class="dimIdx === i ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
         @click="dimIdx = i"
       >
         {{ d }}차원
@@ -109,22 +109,22 @@ function addRandom() {
           :style="{ height: (h / histMax) * 100 + '%', opacity: h ? 1 : 0.15 }"
         />
       </div>
-      <div class="mt-1 flex justify-between text-[10px] text-slate-400">
+      <div class="mt-1 flex justify-between text-xs text-slate-500">
         <span>−1 (반대)</span><span>0 (직교)</span><span>+1 (같은 방향)</span>
       </div>
     </div>
 
     <div class="mt-2 grid grid-cols-3 gap-2 text-center">
       <div class="rounded-lg bg-slate-50 p-2">
-        <p class="text-[11px] text-slate-400">표준편차 σ</p>
+        <p class="text-xs text-slate-500">표준편차 σ</p>
         <p class="font-mono text-sm font-bold text-slate-700">{{ st.std.toFixed(3) }}</p>
       </div>
       <div class="rounded-lg bg-slate-50 p-2">
-        <p class="text-[11px] text-slate-400">이론값 1/√d</p>
+        <p class="text-xs text-slate-500">이론값 1/√d</p>
         <p class="font-mono text-sm font-bold text-indigo-600">{{ (1 / Math.sqrt(dim)).toFixed(3) }}</p>
       </div>
       <div class="rounded-lg bg-slate-50 p-2">
-        <p class="text-[11px] text-slate-400">|cos| 최대 (300쌍)</p>
+        <p class="text-xs text-slate-500">|cos| 최대 (300쌍)</p>
         <p class="font-mono text-sm font-bold text-slate-700">{{ st.maxAbs.toFixed(2) }}</p>
       </div>
     </div>
@@ -145,7 +145,7 @@ function addRandom() {
     <!-- ② 신호 vs 바닥 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 신호 vs 바닥: 그런데도 검색이 되는 이유 (256차원)</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       질문 벡터 하나를 고정하고, <b>학습으로 관련지어진 문서 1개</b>와 <b>무작위 문서 무더기</b>의 점수를 비교합니다.
     </p>
 
@@ -174,7 +174,7 @@ function addRandom() {
       >
         🎲 무작위 문서 1,000개 더 던지기
       </button>
-      <span class="text-[11px] text-slate-400">아무리 던져도 바닥(0 근처)에서 못 벗어납니다</span>
+      <span class="text-xs text-slate-500">아무리 던져도 바닥(0 근처)에서 못 벗어납니다</span>
     </div>
 
     <p class="mt-3 rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">

@@ -68,7 +68,7 @@ const fmt = (v: number) => Number(v.toFixed(2)).toString()
             :width="Math.max(barW - 2, 1.5)"
             :height="barH(v)"
             rx="2"
-            fill="#6366f1"
+            fill="var(--c-indigo-500)"
             opacity="0.85"
           />
         </g>
@@ -78,22 +78,22 @@ const fmt = (v: number) => Number(v.toFixed(2)).toString()
           :y1="10"
           :x2="meanX"
           :y2="baseY"
-          stroke="#ef4444"
+          stroke="var(--c-red-500)"
           stroke-width="1.5"
           stroke-dasharray="4 3"
         />
-        <text :x="Math.min(meanX + 5, size - 84)" y="18" font-size="10" fill="#ef4444">
+        <text :x="Math.min(meanX + 5, size - 84)" y="18" font-size="10" fill="var(--c-red-500)">
           E[X] = {{ fmt(mean) }}
         </text>
         <!-- x축 -->
-        <line :x1="0" :y1="baseY" :x2="size" :y2="baseY" stroke="#94a3b8" stroke-width="1" />
+        <line :x1="0" :y1="baseY" :x2="size" :y2="baseY" stroke="var(--c-slate-400)" stroke-width="1" />
         <g v-for="k in ticks" :key="'t' + k">
           <text
             :x="barX(k) + barW / 2"
             :y="height - 10"
             font-size="9"
             text-anchor="middle"
-            fill="#64748b"
+            fill="var(--c-slate-500)"
           >
             {{ k }}
           </text>

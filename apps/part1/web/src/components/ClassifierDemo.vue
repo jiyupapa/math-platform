@@ -80,16 +80,16 @@ const lineX = size / 2 // 세로 결정선 (x=0)
         class="mx-auto shrink-0 rounded-lg bg-slate-50"
       >
         <!-- 결정선 (세로) -->
-        <line :x1="lineX" y1="0" :x2="lineX" :y2="size" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 4" />
+        <line :x1="lineX" y1="0" :x2="lineX" :y2="size" stroke="var(--c-slate-400)" stroke-width="1.5" stroke-dasharray="5 4" />
         <!-- 축 -->
-        <line x1="0" :y1="size / 2" :x2="size" :y2="size / 2" stroke="#e2e8f0" stroke-width="1" />
+        <line x1="0" :y1="size / 2" :x2="size" :y2="size / 2" stroke="var(--c-slate-200)" stroke-width="1" />
         <!-- 점들 -->
         <g v-for="(p, i) in plotted" :key="i">
           <circle
             :cx="p.X"
             :cy="p.Y"
             r="7"
-            :fill="p.cls === 'A' ? '#6366f1' : '#f59e0b'"
+            :fill="p.cls === 'A' ? 'var(--c-indigo-500)' : 'var(--c-amber-500)'"
             :opacity="p.correct ? 1 : 0.35"
           />
           <circle
@@ -98,7 +98,7 @@ const lineX = size / 2 // 세로 결정선 (x=0)
             :cy="p.Y"
             r="10"
             fill="none"
-            stroke="#ef4444"
+            stroke="var(--c-red-500)"
             stroke-width="2"
           />
         </g>
@@ -126,7 +126,7 @@ const lineX = size / 2 // 세로 결정선 (x=0)
         <p class="mt-1 font-mono text-sm text-slate-700">
           [[{{ matrix.c }}, {{ matrix.ns }}], [{{ matrix.s }}, {{ matrix.c }}]]
         </p>
-        <p class="mt-1 text-xs text-slate-400">힌트: −45° 근처에서 딱 나뉘어요.</p>
+        <p class="mt-1 text-xs text-slate-500">힌트: −45° 근처에서 딱 나뉘어요.</p>
       </div>
     </div>
 

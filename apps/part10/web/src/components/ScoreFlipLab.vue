@@ -77,7 +77,7 @@ const fmt = (v: number) => (Number.isInteger(v) ? String(v) : v.toFixed(1))
     <div class="mb-4 flex flex-wrap gap-3 text-sm">
       <div class="rounded-lg bg-indigo-50 px-3 py-1.5 font-medium text-indigo-800">모델 A — 진짜 실력 72%</div>
       <div class="rounded-lg bg-rose-50 px-3 py-1.5 font-medium text-rose-800">모델 B — 진짜 실력 70%</div>
-      <div class="self-center text-xs text-slate-400">→ A가 2%p 더 잘함 (이걸 시험으로 알아내야 함)</div>
+      <div class="self-center text-xs text-slate-500">→ A가 2%p 더 잘함 (이걸 시험으로 알아내야 함)</div>
     </div>
 
     <!-- ② 시험 치기 -->
@@ -124,7 +124,7 @@ const fmt = (v: number) => (Number.isInteger(v) ? String(v) : v.toFixed(1))
         </div>
         <span class="w-16 shrink-0 text-right font-mono text-sm font-bold text-slate-800">{{ fmt(current[i]) }}점</span>
       </div>
-      <p class="text-xs text-slate-400">점선 = 진짜 실력(72 / 70). 막대 = 이번 시험 점수.</p>
+      <p class="text-xs text-slate-500">점선 = 진짜 실력(72 / 70). 막대 = 이번 시험 점수.</p>
 
       <p
         class="rounded-md px-3 py-2 text-sm font-medium"
@@ -143,7 +143,7 @@ const fmt = (v: number) => (Number.isInteger(v) ? String(v) : v.toFixed(1))
         <span
           v-for="(m, i) in summary.marks"
           :key="i"
-          class="flex h-6 w-6 items-center justify-center rounded text-[11px] font-bold"
+          class="flex h-6 w-6 items-center justify-center rounded text-xs font-bold"
           :class="m === 'B' ? 'bg-rose-400 text-white' : m === 'T' ? 'bg-slate-300 text-slate-600' : 'bg-indigo-400 text-white'"
           :title="`${i + 1}회차`"
         >{{ m === 'T' ? '=' : m }}</span>

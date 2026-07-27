@@ -249,7 +249,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch5')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 5 완료 — 어텐션의 직관을 잡았습니다</p>
       <p class="mt-1 text-sm text-emerald-700">
         "집중도로 문맥을 가중 평균"이 핵심이에요. 다음 챕터(ch6)에서 그 집중도를

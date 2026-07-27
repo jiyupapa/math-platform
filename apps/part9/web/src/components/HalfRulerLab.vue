@@ -71,12 +71,12 @@ const rows = computed<RulerRow[]>(() => [
   { name: 'bf16 (지수 8 + 가수 7)', bits: '2바이트', value: toBf16(x.value) },
 ])
 function verdict(v: number): { label: string; tone: string } {
-  if (Number.isNaN(v)) return { label: 'NaN', tone: 'text-rose-600' }
-  if (!Number.isFinite(v)) return { label: '💥 inf — 자의 끝 너머(오버플로)', tone: 'text-rose-600' }
-  if (v === 0 && x.value !== 0) return { label: '🕳️ 0 — 사라짐(언더플로 소실)', tone: 'text-rose-600' }
+  if (Number.isNaN(v)) return { label: 'NaN', tone: 'text-rose-700' }
+  if (!Number.isFinite(v)) return { label: '💥 inf — 자의 끝 너머(오버플로)', tone: 'text-rose-700' }
+  if (v === 0 && x.value !== 0) return { label: '🕳️ 0 — 사라짐(언더플로 소실)', tone: 'text-rose-700' }
   const rel = Math.abs((v - x.value) / x.value)
-  if (rel === 0) return { label: '✅ 오차 없음', tone: 'text-emerald-600' }
-  return { label: `상대 오차 ≈ ${(rel * 100).toExponential(1)}%`, tone: rel > 1e-3 ? 'text-amber-600' : 'text-emerald-600' }
+  if (rel === 0) return { label: '✅ 오차 없음', tone: 'text-emerald-700' }
+  return { label: `상대 오차 ≈ ${(rel * 100).toExponential(1)}%`, tone: rel > 1e-3 ? 'text-amber-700' : 'text-emerald-700' }
 }
 
 // ── ② 누적 실험 — 혼합 정밀도의 심장 ──────────────────────────
@@ -104,11 +104,11 @@ const rescue = computed(() => {
   const storedF16 = toF16(scaled) // fp16 칸에 저장 (backward 가 사는 곳)
   const restored = storedF16 / S // 옵티마이저 직전 복원 (fp32 세계)
   let state: { label: string; tone: string }
-  if (!Number.isFinite(storedF16)) state = { label: '💥 스케일 과대 — 위로 터짐(오버플로)! S 를 줄이세요', tone: 'text-rose-600' }
-  else if (storedF16 === 0) state = { label: '🕳️ 소실 — fp16 이 담기엔 너무 작음. S 를 키우세요', tone: 'text-rose-600' }
+  if (!Number.isFinite(storedF16)) state = { label: '💥 스케일 과대 — 위로 터짐(오버플로)! S 를 줄이세요', tone: 'text-rose-700' }
+  else if (storedF16 === 0) state = { label: '🕳️ 소실 — fp16 이 담기엔 너무 작음. S 를 키우세요', tone: 'text-rose-700' }
   else {
     const rel = Math.abs((restored - g) / g) * 100
-    state = { label: `✅ 생존 — 복원 오차 ${rel < 0.001 ? '≈0' : rel.toPrecision(2)}%`, tone: 'text-emerald-600' }
+    state = { label: `✅ 생존 — 복원 오차 ${rel < 0.001 ? '≈0' : rel.toPrecision(2)}%`, tone: 'text-emerald-700' }
   }
   return { g, S, scaled, storedF16, restored, state }
 })
@@ -119,7 +119,7 @@ const fmtE = (v: number) => (!Number.isFinite(v) ? 'inf' : v === 0 ? '0' : v.toE
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 세 자 대조기 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 세 자 대조기: 16비트를 나누는 두 철학</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       같은 수를 세 자에 담아 봅니다 — fp16 은 눈금(가수 10비트)을, bf16 은 자 길이(지수
       8비트 = fp32 와 동일)를 택했습니다. 프리셋을 눌러 각 자의 강점·약점을 찾아보세요.
     </p>
@@ -147,7 +147,7 @@ const fmtE = (v: number) => (!Number.isFinite(v) ? 'inf' : v === 0 ? '0' : v.toE
     <div class="mt-3 space-y-1">
       <div v-for="r in rows" :key="r.name" class="flex flex-wrap items-center gap-2 rounded-lg bg-slate-50 p-2 text-xs sm:flex-nowrap">
         <span class="w-44 shrink-0 font-semibold text-slate-600">{{ r.name }}</span>
-        <span class="w-16 shrink-0 text-slate-400">{{ r.bits }}</span>
+        <span class="w-16 shrink-0 text-slate-500">{{ r.bits }}</span>
         <span class="min-w-0 flex-1 break-all font-mono text-slate-700">{{ String(r.value) }}</span>
         <span class="shrink-0 font-medium" :class="verdict(r.value).tone">{{ verdict(r.value).label }}</span>
       </div>
@@ -165,7 +165,7 @@ const fmtE = (v: number) => (!Number.isFinite(v) ? 'inf' : v === 0 ? '0' : v.toE
     <!-- ② 누적 실험 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 누적 실험: "저장은 반쪽, 누적은 fp32"의 이유</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       1.0 에 0.0001 을 N번 더합니다 — fp16 의 1 근처 눈금 간격은 <b>≈0.001</b>이라, 4장의 흡수가
       이번엔 일상적인 크기에서 벌어져요.
     </p>
@@ -177,19 +177,19 @@ const fmtE = (v: number) => (!Number.isFinite(v) ? 'inf' : v === 0 ? '0' : v.toE
 
     <div class="mt-2 grid gap-2 sm:grid-cols-3">
       <div class="rounded-lg bg-rose-50 p-3">
-        <p class="text-[11px] text-rose-500">순수 fp16 — 누적기도 반쪽 자</p>
-        <p class="break-all font-mono text-lg font-bold text-rose-600">{{ accum.pure }}</p>
-        <p class="text-[11px] text-rose-400">0.0001 이 눈금 절반(0.00049)보다 작아 매번 흡수</p>
+        <p class="text-xs text-rose-700">순수 fp16 — 누적기도 반쪽 자</p>
+        <p class="break-all font-mono text-lg font-bold text-rose-700">{{ accum.pure }}</p>
+        <p class="text-xs text-rose-700">0.0001 이 눈금 절반(0.00049)보다 작아 매번 흡수</p>
       </div>
       <div class="rounded-lg bg-emerald-50 p-3">
-        <p class="text-[11px] text-emerald-600">혼합 — 저장 fp16, 누적기 fp32</p>
+        <p class="text-xs text-emerald-700">혼합 — 저장 fp16, 누적기 fp32</p>
         <p class="break-all font-mono text-lg font-bold text-emerald-700">{{ accum.mixed.toFixed(4) }}</p>
-        <p class="text-[11px] text-emerald-500">같은 fp16 값을 더했는데 살아남는다</p>
+        <p class="text-xs text-emerald-700">같은 fp16 값을 더했는데 살아남는다</p>
       </div>
       <div class="rounded-lg bg-slate-50 p-3">
-        <p class="text-[11px] text-slate-400">🏫 참값</p>
+        <p class="text-xs text-slate-500">🏫 참값</p>
         <p class="break-all font-mono text-lg font-bold text-slate-700">{{ accum.exact.toFixed(4) }}</p>
-        <p class="text-[11px] text-slate-400">1 + N × 0.0001</p>
+        <p class="text-xs text-slate-500">1 + N × 0.0001</p>
       </div>
     </div>
 
@@ -202,7 +202,7 @@ const fmtE = (v: number) => (!Number.isFinite(v) ? 'inf' : v === 0 ? '0' : v.toE
     <!-- ③ loss scaling 구급차 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ③ — loss scaling 구급차: 작은 gradient 살리기</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       fp16 의 아래끝(≈6×10⁻⁸) 근처의 gradient 는 그냥 저장하면 0 — <b>확대(×S) → fp16 저장 →
       복원(÷S)</b> 3단계로 구출합니다. 스케일 S 를 골라 보세요.
     </p>

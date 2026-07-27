@@ -83,14 +83,14 @@ const clampPct = (x: number) => Math.max(0, Math.min(100, x))
 
       <div class="mt-4 grid gap-3 sm:grid-cols-2">
         <div class="rounded-lg bg-indigo-50 p-3">
-          <p class="text-xs font-medium text-indigo-500">비편향 pass@{{ kClamped }}</p>
+          <p class="text-xs font-medium text-indigo-600">비편향 pass@{{ kClamped }}</p>
           <p class="font-mono text-2xl font-bold text-indigo-700">{{ pct(pkUnbiased) }}%</p>
-          <p class="mt-1 text-[11px] text-indigo-400">= 1 − C({{ n - cClamped }},{{ kClamped }}) / C({{ n }},{{ kClamped }})</p>
+          <p class="mt-1 text-xs text-indigo-600">= 1 − C({{ n - cClamped }},{{ kClamped }}) / C({{ n }},{{ kClamped }})</p>
         </div>
         <div class="rounded-lg bg-slate-100 p-3">
-          <p class="text-xs font-medium text-slate-500">소박한 공식 1 − (1 − c/n)<sup>k</sup></p>
+          <p class="text-xs font-medium text-slate-600">소박한 공식 1 − (1 − c/n)<sup>k</sup></p>
           <p class="font-mono text-2xl font-bold text-slate-600">{{ pct(pkNaive) }}%</p>
-          <p class="mt-1 text-[11px] text-slate-400">pass@1 = c/n = {{ pct(pass1) }}% 을 그대로 거듭제곱</p>
+          <p class="mt-1 text-xs text-slate-600">pass@1 = c/n = {{ pct(pass1) }}% 을 그대로 거듭제곱</p>
         </div>
       </div>
 
@@ -111,16 +111,16 @@ const clampPct = (x: number) => Math.max(0, Math.min(100, x))
       <div class="mt-4">
         <p class="mb-1 text-xs font-semibold text-slate-500">k를 늘리면 (현재 n={{ n }}, c={{ cClamped }})</p>
         <div class="space-y-1">
-          <div v-for="row in curve" :key="row.k" class="flex items-center gap-2 text-[11px]">
-            <span class="w-10 shrink-0 text-right font-mono text-slate-400">k={{ row.k }}</span>
+          <div v-for="row in curve" :key="row.k" class="flex items-center gap-2 text-xs">
+            <span class="w-10 shrink-0 text-right font-mono text-slate-500">k={{ row.k }}</span>
             <div class="relative h-4 flex-1 overflow-hidden rounded bg-slate-100">
               <div class="absolute top-0 h-full rounded bg-slate-300" :style="{ width: row.nv * 100 + '%' }" />
               <div class="absolute top-0 h-full rounded bg-indigo-400/70" :style="{ width: row.unb * 100 + '%' }" />
             </div>
-            <span class="w-24 shrink-0 font-mono text-slate-500">{{ pct(row.unb) }}% <span class="text-slate-300">/ {{ pct(row.nv) }}%</span></span>
+            <span class="w-24 shrink-0 font-mono text-slate-500">{{ pct(row.unb) }}% <span class="text-slate-500">/ {{ pct(row.nv) }}%</span></span>
           </div>
         </div>
-        <p class="mt-1 text-[11px] text-slate-400"><span class="text-indigo-500">■</span> 비편향 &nbsp; <span class="text-slate-400">■</span> 소박한 공식</p>
+        <p class="mt-1 text-xs text-slate-600"><span class="text-indigo-600">■</span> 비편향 &nbsp; <span class="text-slate-500">■</span> 소박한 공식</p>
       </div>
     </div>
 
@@ -153,7 +153,7 @@ const clampPct = (x: number) => Math.max(0, Math.min(100, x))
       <div class="relative h-14 rounded-lg bg-slate-50 ring-1 ring-slate-200">
         <!-- 라이벌 70% 기준선 -->
         <div class="absolute top-0 h-full border-l-2 border-dashed border-slate-400" :style="{ left: RIVAL + '%' }">
-          <span class="absolute -top-5 -translate-x-1/2 text-[11px] text-slate-500">경쟁 {{ RIVAL }}%</span>
+          <span class="absolute -top-5 -translate-x-1/2 text-xs text-slate-500">경쟁 {{ RIVAL }}%</span>
         </div>
         <!-- ± 밴드 -->
         <div

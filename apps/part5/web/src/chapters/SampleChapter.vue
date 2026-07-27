@@ -22,15 +22,15 @@ const strategyChart = {
     {
       label: '반반 질문 (가운데 묻기)',
       data: [64, 32, 16, 8, 4, 2, 1],
-      borderColor: '#6366f1',
-      backgroundColor: '#6366f1',
+      borderColor: 'var(--c-indigo-500)',
+      backgroundColor: 'var(--c-indigo-500)',
       tension: 0.2,
     },
     {
       label: '하나씩 찍기 (운 나쁘면)',
       data: [64, 63, 62, 61, 60, 59, 58],
-      borderColor: '#f59e0b',
-      backgroundColor: '#f59e0b',
+      borderColor: 'var(--c-amber-500)',
+      backgroundColor: 'var(--c-amber-500)',
       tension: 0.2,
     },
   ],
@@ -250,7 +250,7 @@ function onSetComplete() {
       v-if="progress.isDone('sample')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">워밍업 완료 — 준비 끝!</p>
       <p class="mt-1 text-sm text-emerald-700">
         본 학습도 정확히 이렇게 진행됩니다. 다음은 1장 — "절반으로 몇 번 접나"에

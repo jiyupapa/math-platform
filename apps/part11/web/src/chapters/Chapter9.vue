@@ -257,7 +257,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch9')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">9장 완료 — 팀의 수학을 손에 넣었습니다!</p>
       <p class="mt-1 text-sm text-emerald-700">
         분업의 전달 비용, 합의의 상관, 역할 분리의 베이즈까지 — 이제 팀 구성표를 보면

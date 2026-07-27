@@ -235,7 +235,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch10')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">10장 완료 — 기억의 경제학을 손에 넣었습니다!</p>
       <p class="mt-1 text-sm text-emerald-700">
         예산·밀도·압축·검색까지 — 이제 컨텍스트를 채우는 것도 곱셈과 곱하기(비용) 사이의

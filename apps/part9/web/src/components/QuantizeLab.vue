@@ -60,7 +60,7 @@ const duel = computed(() => {
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 눈금 갈아타기 기계 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 눈금 갈아타기 기계: 실수 자 → 정수 자 + 축척 스티커</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       toy 가중치 8개를 b비트 정수 자로 옮깁니다 — 축척 s = max|w| ÷ 눈금 수, 저장은 정수
       q = round(w/s), 복원은 q×s. 비트를 줄이며 점들이 눈금에 강제로 붙는 걸 보세요.
     </p>
@@ -71,22 +71,22 @@ const duel = computed(() => {
     </label>
 
     <svg viewBox="0 0 320 90" class="mt-2 w-full rounded-lg bg-slate-50 ring-1 ring-slate-100">
-      <line :x1="px(-0.12)" y1="45" :x2="px(0.12)" y2="45" stroke="#cbd5e1" stroke-width="1.5" />
-      <line v-for="t in tickMarks" :key="t" :x1="px(t)" y1="40" :x2="px(t)" y2="50" stroke="#94a3b8" stroke-width="1" />
+      <line :x1="px(-0.12)" y1="45" :x2="px(0.12)" y2="45" stroke="var(--c-slate-300)" stroke-width="1.5" />
+      <line v-for="t in tickMarks" :key="t" :x1="px(t)" y1="40" :x2="px(t)" y2="50" stroke="var(--c-slate-400)" stroke-width="1" />
       <template v-for="(r, i) in machine.rows" :key="i">
-        <line :x1="px(r.w)" y1="25" :x2="px(r.deq)" y2="45" stroke="#fda4af" stroke-width="1" />
-        <circle :cx="px(r.w)" cy="25" r="3.5" fill="#6366f1" />
-        <circle :cx="px(r.deq)" cy="45" r="3.5" fill="#f97316" />
+        <line :x1="px(r.w)" y1="25" :x2="px(r.deq)" y2="45" stroke="var(--c-rose-300)" stroke-width="1" />
+        <circle :cx="px(r.w)" cy="25" r="3.5" fill="var(--c-indigo-500)" />
+        <circle :cx="px(r.deq)" cy="45" r="3.5" fill="var(--c-orange-500)" />
       </template>
-      <text :x="px(-0.115)" y="15" font-size="9" fill="#6366f1">● 원래 값(실수)</text>
-      <text :x="px(-0.115)" y="70" font-size="9" fill="#f97316">● 복원 값(눈금 위)</text>
-      <text :x="px(0)" y="82" text-anchor="middle" font-size="9" fill="#94a3b8">0</text>
+      <text :x="px(-0.115)" y="15" font-size="9" fill="var(--c-indigo-500)">● 원래 값(실수)</text>
+      <text :x="px(-0.115)" y="70" font-size="9" fill="var(--c-orange-500)">● 복원 값(눈금 위)</text>
+      <text :x="px(0)" y="82" text-anchor="middle" font-size="9" fill="var(--c-slate-400)">0</text>
     </svg>
 
     <div class="mt-2 overflow-x-auto">
-      <table class="w-full text-right font-mono text-[11px] text-slate-600">
+      <table class="w-full text-right font-mono text-xs text-slate-600">
         <thead>
-          <tr class="text-slate-400">
+          <tr class="text-slate-500">
             <th class="p-1 text-left font-normal">원래 w</th>
             <th class="p-1 font-normal">정수 q</th>
             <th class="p-1 font-normal">복원 q×s</th>
@@ -98,7 +98,7 @@ const duel = computed(() => {
             <td class="p-1 text-left">{{ r.w }}</td>
             <td class="p-1 font-bold text-indigo-600">{{ r.q }}</td>
             <td class="p-1">{{ r.deq.toFixed(5) }}</td>
-            <td class="p-1" :class="r.err > machine.s ? 'text-rose-600' : 'text-slate-400'">{{ r.err.toExponential(1) }}</td>
+            <td class="p-1" :class="r.err > machine.s ? 'text-rose-700' : 'text-slate-500'">{{ r.err.toExponential(1) }}</td>
           </tr>
         </tbody>
       </table>
@@ -114,7 +114,7 @@ const duel = computed(() => {
     <!-- ② 다음 토큰 대결 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 다음 토큰 대결: 박빙의 순위는 몇 비트까지 버틸까</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       미니 출력층(어휘 4개 × 차원 8)의 로짓 — fp 로는 <b>고양이 0.295 vs 강아지 0.290</b>,
       마진 겨우 0.005 인 박빙 승부입니다. 가중치를 양자화해도 1등이 지켜질까요?
     </p>
@@ -130,7 +130,7 @@ const duel = computed(() => {
       >
         int{{ b }}
       </button>
-      <span class="self-center rounded-full bg-slate-100 px-2 py-1 text-[11px] text-slate-500">가중치 메모리 fp32 대비 1/{{ duel.mem }}</span>
+      <span class="self-center rounded-full bg-slate-100 px-2 py-1 text-xs text-slate-600">가중치 메모리 fp32 대비 1/{{ duel.mem }}</span>
     </div>
 
     <div class="mt-2 space-y-1">
@@ -144,7 +144,7 @@ const duel = computed(() => {
       </div>
     </div>
 
-    <p class="mt-2 text-sm font-medium" :class="duel.same ? 'text-emerald-600' : 'text-rose-600'">
+    <p class="mt-2 text-sm font-medium" :class="duel.same ? 'text-emerald-700' : 'text-rose-700'">
       {{ duel.same ? `✅ 순위 유지 — 1등은 여전히 ${VOCAB[fpRank]} (로짓 오차 최대 ${duel.maxErr.toFixed(4)} — 마진 0.005 안쪽)` : `❗ 순위 역전 — 1등이 ${VOCAB[duel.qRank]} 로 바뀌었다! (로짓 오차 ${duel.maxErr.toFixed(3)} ≫ 마진 0.005)` }}
     </p>
 

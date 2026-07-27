@@ -116,7 +116,7 @@ function onSetComplete() {
       <p class="mb-3 text-sm font-semibold text-slate-600">📚 우리가 지나온 길</p>
       <ol class="space-y-1.5">
         <li v-for="(j, i) in journey" :key="j.ch" class="flex items-start gap-2 text-sm">
-          <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded bg-indigo-100 text-[10px] font-bold text-indigo-700">{{ i + 1 }}</span>
+          <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded bg-indigo-100 text-xs font-bold text-indigo-700">{{ i + 1 }}</span>
           <span>
             <RouterLink :to="`/ch/${j.ch}`" class="font-medium text-indigo-700 hover:underline">{{ j.name }}</RouterLink>
             <span class="text-slate-500"> — {{ j.role }}</span>

@@ -43,26 +43,26 @@ const cancel = computed(() => {
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 결합법칙 사망 사건 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 결합법칙 사망 사건: 같은 세 수, 다른 순서, 다른 답</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       1 + 10⁸ − 10⁸ 을 fp32 로 계산합니다 — 학교 수학이라면 순서와 무관하게 1이어야 하죠.
       두 경로의 영수증을 비교해 보세요.
     </p>
 
     <div class="grid gap-2 sm:grid-cols-2">
       <div class="rounded-lg bg-rose-50 p-3">
-        <p class="text-[11px] font-semibold text-rose-500">경로 A — (1 + 10⁸) 먼저</p>
+        <p class="text-xs font-semibold text-rose-700">경로 A — (1 + 10⁸) 먼저</p>
         <p class="mt-1 font-mono text-xs leading-relaxed text-rose-700">
           1 + 100,000,000<br />
-          = 100,000,001 <span class="text-rose-400">→ 이 구간 눈금 간격은 8 — 반올림!</span><br />
+          = 100,000,001 <span class="text-rose-700">→ 이 구간 눈금 간격은 8 — 반올림!</span><br />
           → <b>{{ A_STEP.toLocaleString('en-US') }}</b><br />
           − 100,000,000 = <b class="text-lg">{{ A_RESULT }}</b>
         </p>
       </div>
       <div class="rounded-lg bg-emerald-50 p-3">
-        <p class="text-[11px] font-semibold text-emerald-600">경로 B — (10⁸ − 10⁸) 먼저</p>
+        <p class="text-xs font-semibold text-emerald-700">경로 B — (10⁸ − 10⁸) 먼저</p>
         <p class="mt-1 font-mono text-xs leading-relaxed text-emerald-700">
           100,000,000 − 100,000,000<br />
-          = {{ B_STEP }} <span class="text-emerald-500">→ 눈금 위의 수 — 무사통과</span><br />
+          = {{ B_STEP }} <span class="text-emerald-700">→ 눈금 위의 수 — 무사통과</span><br />
           <br />
           1 + 0 = <b class="text-lg">{{ B_RESULT }}</b>
         </p>
@@ -77,7 +77,7 @@ const cancel = computed(() => {
     <!-- ② 티끌 경주 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 티끌 경주: 더하는 순서가 티끌의 생사를 가른다</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       1.0 에 티끌(10⁻⁸)을 N번 더합니다 — 1 근처 눈금 간격(1.19×10⁻⁷)보다 작은 티끌이라
       하나씩 더하면 <b>매번 흡수</b>되죠. 순서를 바꾸면?
     </p>
@@ -97,19 +97,19 @@ const cancel = computed(() => {
 
     <div class="mt-3 grid gap-2 sm:grid-cols-3">
       <div class="rounded-lg bg-rose-50 p-3">
-        <p class="text-[11px] text-rose-500">🐘 큰 수부터 — 1.0 에 하나씩</p>
-        <p class="break-all font-mono text-lg font-bold text-rose-600">{{ race.fwd }}</p>
-        <p class="text-[11px] text-rose-400">티끌 {{ race.N.toLocaleString('en-US') }}개 전멸(흡수)</p>
+        <p class="text-xs text-rose-700">🐘 큰 수부터 — 1.0 에 하나씩</p>
+        <p class="break-all font-mono text-lg font-bold text-rose-700">{{ race.fwd }}</p>
+        <p class="text-xs text-rose-700">티끌 {{ race.N.toLocaleString('en-US') }}개 전멸(흡수)</p>
       </div>
       <div class="rounded-lg bg-emerald-50 p-3">
-        <p class="text-[11px] text-emerald-600">🐜 작은 것끼리 먼저 모으면</p>
+        <p class="text-xs text-emerald-700">🐜 작은 것끼리 먼저 모으면</p>
         <p class="break-all font-mono text-lg font-bold text-emerald-700">{{ race.bwd }}</p>
-        <p class="text-[11px] text-emerald-500">모은 티끌 {{ race.tiny.toExponential(3) }} 이 살아서 합류</p>
+        <p class="text-xs text-emerald-700">모은 티끌 {{ race.tiny.toExponential(3) }} 이 살아서 합류</p>
       </div>
       <div class="rounded-lg bg-slate-50 p-3">
-        <p class="text-[11px] text-slate-400">🏫 참값</p>
+        <p class="text-xs text-slate-500">🏫 참값</p>
         <p class="break-all font-mono text-lg font-bold text-slate-700">{{ race.exact }}</p>
-        <p class="text-[11px] text-slate-400">1 + N × 10⁻⁸</p>
+        <p class="text-xs text-slate-500">1 + N × 10⁻⁸</p>
       </div>
     </div>
     <p class="mt-2 rounded-lg bg-indigo-50 p-3 text-xs leading-relaxed text-indigo-800">
@@ -121,7 +121,7 @@ const cancel = computed(() => {
     <!-- ③ 뺄셈 재앙 돋보기 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ③ — 뺄셈 재앙 돋보기: 가까운 두 수의 차는 위험하다</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       (1 + d) − 1 을 fp32 로 계산합니다. 참값은 당연히 d — 그런데 d 가 작아질수록(두 수가
       가까워질수록) 답의 <b>상대 오차</b>가 어떻게 되는지 보세요.
     </p>
@@ -133,16 +133,16 @@ const cancel = computed(() => {
 
     <div class="mt-2 grid gap-2 sm:grid-cols-3">
       <div class="rounded-lg bg-slate-50 p-3">
-        <p class="text-[11px] text-slate-400">참값 d</p>
+        <p class="text-xs text-slate-500">참값 d</p>
         <p class="break-all font-mono text-sm font-bold text-slate-700">{{ cancel.d.toExponential(4) }}</p>
       </div>
       <div class="rounded-lg bg-slate-50 p-3">
-        <p class="text-[11px] text-slate-400">fp32 의 (1+d) − 1</p>
+        <p class="text-xs text-slate-500">fp32 의 (1+d) − 1</p>
         <p class="break-all font-mono text-sm font-bold text-slate-700">{{ cancel.diff === 0 ? '0' : cancel.diff.toExponential(4) }}</p>
       </div>
       <div class="rounded-lg p-3" :class="cancel.rel > 10 ? 'bg-rose-50' : 'bg-emerald-50'">
-        <p class="text-[11px]" :class="cancel.rel > 10 ? 'text-rose-500' : 'text-emerald-600'">상대 오차</p>
-        <p class="font-mono text-lg font-bold" :class="cancel.rel > 10 ? 'text-rose-600' : 'text-emerald-700'">
+        <p class="text-xs" :class="cancel.rel > 10 ? 'text-rose-700' : 'text-emerald-700'">상대 오차</p>
+        <p class="font-mono text-lg font-bold" :class="cancel.rel > 10 ? 'text-rose-700' : 'text-emerald-700'">
           {{ cancel.rel < 0.01 ? cancel.rel.toExponential(1) : cancel.rel.toPrecision(3) }}%
         </p>
       </div>

@@ -21,7 +21,7 @@ const scatterData = {
     {
       label: '학생 8명 (공부 시간, 점수)',
       data: hours.map((h, i) => ({ x: h, y: scores[i] })),
-      backgroundColor: '#6366f1',
+      backgroundColor: 'var(--c-indigo-500)',
       pointRadius: 6,
     },
   ],

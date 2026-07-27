@@ -16,7 +16,7 @@ const chapter = computed(() => chapters.find((c) => c.slug === route.params.slug
     <p class="mb-6 text-slate-500">
       {{ chapter ? `Phase ${chapter.phase} · ${chapter.summary}` : '곧 만나요!' }}
     </p>
-    <p class="mb-8 text-sm text-slate-400">
+    <p class="mb-8 text-sm text-slate-500">
       존재하지 않는 챕터 주소예요. 9부는 전 챕터(워밍업 + 1~11장) 공개 완료 —
       목차에서 골라 바로 학습할 수 있습니다.
     </p>

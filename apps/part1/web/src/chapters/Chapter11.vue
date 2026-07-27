@@ -134,17 +134,17 @@ function fmt(n: number) {
     <div class="my-4 rounded-xl border border-slate-200 bg-white p-4">
       <svg :viewBox="`0 0 ${SIZE} ${SIZE}`" class="mx-auto block w-full max-w-[360px]">
         <!-- 좌표축 -->
-        <line :x1="0" :y1="Y(0)" :x2="SIZE" :y2="Y(0)" stroke="#e2e8f0" />
-        <line :x1="X(0)" :y1="0" :x2="X(0)" :y2="SIZE" stroke="#e2e8f0" />
+        <line :x1="0" :y1="Y(0)" :x2="SIZE" :y2="Y(0)" stroke="var(--c-slate-200)" />
+        <line :x1="X(0)" :y1="0" :x2="X(0)" :y2="SIZE" stroke="var(--c-slate-200)" />
         <!-- 단위원 (변환 전) -->
-        <circle :cx="X(0)" :cy="Y(0)" :r="scale" fill="none" stroke="#94a3b8" stroke-dasharray="5 4" />
+        <circle :cx="X(0)" :cy="Y(0)" :r="scale" fill="none" stroke="var(--c-slate-400)" stroke-dasharray="5 4" />
         <!-- 변환 결과 타원 -->
-        <polygon :points="ellipsePoints" fill="rgba(99,102,241,0.08)" stroke="#6366f1" stroke-width="2" />
+        <polygon :points="ellipsePoints" fill="rgba(99,102,241,0.08)" stroke="var(--c-indigo-500)" stroke-width="2" />
         <!-- 타원의 두 축 (σ1, σ2) -->
-        <line :x1="X(0)" :y1="Y(0)" :x2="X(svd.axis1[0])" :y2="Y(svd.axis1[1])" stroke="#10b981" stroke-width="3" />
-        <line :x1="X(0)" :y1="Y(0)" :x2="X(svd.axis2[0])" :y2="Y(svd.axis2[1])" stroke="#f59e0b" stroke-width="3" />
-        <circle :cx="X(svd.axis1[0])" :cy="Y(svd.axis1[1])" r="4" fill="#10b981" />
-        <circle :cx="X(svd.axis2[0])" :cy="Y(svd.axis2[1])" r="4" fill="#f59e0b" />
+        <line :x1="X(0)" :y1="Y(0)" :x2="X(svd.axis1[0])" :y2="Y(svd.axis1[1])" stroke="var(--c-emerald-500)" stroke-width="3" />
+        <line :x1="X(0)" :y1="Y(0)" :x2="X(svd.axis2[0])" :y2="Y(svd.axis2[1])" stroke="var(--c-amber-500)" stroke-width="3" />
+        <circle :cx="X(svd.axis1[0])" :cy="Y(svd.axis1[1])" r="4" fill="var(--c-emerald-500)" />
+        <circle :cx="X(svd.axis2[0])" :cy="Y(svd.axis2[1])" r="4" fill="var(--c-amber-500)" />
       </svg>
       <div class="mt-3 grid grid-cols-2 gap-x-6 gap-y-1 text-sm">
         <label class="flex items-center gap-2">
@@ -167,7 +167,7 @@ function fmt(n: number) {
       <div class="mt-3 rounded-lg bg-slate-50 p-3 text-sm font-mono text-slate-700">
         <p>
           <span class="text-emerald-700">σ1 = {{ fmt(svd.s1) }}</span> ·
-          <span class="text-amber-600">σ2 = {{ fmt(svd.s2) }}</span>
+          <span class="text-amber-700">σ2 = {{ fmt(svd.s2) }}</span>
           &nbsp;|&nbsp; σ1×σ2 = {{ fmt(svd.s1 * svd.s2) }} = |det| = {{ fmt(Math.abs(detA)) }}
         </p>
         <p v-if="svd.s2 < 0.05" class="mt-1 text-amber-700">
@@ -427,7 +427,7 @@ function fmt(n: number) {
       v-if="progress.isDone('ch11')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 11 완료 — ML에서 가장 중요한 분해를 손에 넣었습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         마지막은 그래디언트(ch12) — AI 가 실제로 '학습'하는 원리로 여정을 마무리합니다.

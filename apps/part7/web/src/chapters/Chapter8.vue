@@ -51,10 +51,10 @@ function onSetComplete() {
           </tr>
         </thead>
         <tbody class="text-slate-700">
-          <tr class="border-b border-slate-100"><td class="py-2 pr-3 font-medium text-slate-500" rowspan="3">🗂️ 인덱싱<br /><span class="text-[11px] font-normal">(미리, 오프라인)</span></td><td class="py-2 pr-3">문서 수집</td><td class="py-2 pr-3">—</td><td class="py-2">문서 부재·낡은 문서</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3 font-medium text-slate-500" rowspan="3">🗂️ 인덱싱<br /><span class="text-xs font-normal">(미리, 오프라인)</span></td><td class="py-2 pr-3">문서 수집</td><td class="py-2 pr-3">—</td><td class="py-2">문서 부재·낡은 문서</td></tr>
           <tr class="border-b border-slate-100"><td class="py-2 pr-3">청킹</td><td class="py-2 pr-3"><b>7장</b></td><td class="py-2">희석·찢김</td></tr>
           <tr class="border-b border-slate-100"><td class="py-2 pr-3">임베딩 → 벡터 DB 저장</td><td class="py-2 pr-3"><b>4부 3장 · 6장</b> (학습은 9장)</td><td class="py-2">엉뚱한 좌표(임베딩 품질)</td></tr>
-          <tr class="border-b border-slate-100"><td class="py-2 pr-3 font-medium text-slate-500" rowspan="4">⚡ 질의<br /><span class="text-[11px] font-normal">(실시간)</span></td><td class="py-2 pr-3">질문 임베딩</td><td class="py-2 pr-3">2장 · 워밍업</td><td class="py-2">—</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3 font-medium text-slate-500" rowspan="4">⚡ 질의<br /><span class="text-xs font-normal">(실시간)</span></td><td class="py-2 pr-3">질문 임베딩</td><td class="py-2 pr-3">2장 · 워밍업</td><td class="py-2">—</td></tr>
           <tr class="border-b border-slate-100"><td class="py-2 pr-3">검색 (ANN) + top-k</td><td class="py-2 pr-3"><b>2 · 6 · 7장</b></td><td class="py-2">검색 실패 (recall)</td></tr>
           <tr class="border-b border-slate-100"><td class="py-2 pr-3">프롬프트 조립</td><td class="py-2 pr-3">이 장 §3</td><td class="py-2">그라운딩 부족</td></tr>
           <tr><td class="py-2 pr-3">생성 (LLM)</td><td class="py-2 pr-3"><b>4부 · 6부</b></td><td class="py-2">문맥 무시·환각</td></tr>
@@ -268,7 +268,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch8')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">8장 완료 — RAG를 조립하고 고칠 수 있어요!</p>
       <p class="mt-1 text-sm text-emerald-700">
         시스템은 완성입니다. 남은 퍼즐은 토대 하나 — 이 좋은 지도(임베딩)는 누가 어떻게

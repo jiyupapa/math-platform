@@ -63,7 +63,7 @@ const analogy = computed(() => ANALOGY[nBits.value] ?? '')
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 스위치 놀이터 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 스위치 놀이터: 스위치 8개로 수를 만든다</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       스위치(비트)를 눌러 켜고 꺼 보세요. 켜진 스위치의 <b>자리값</b>을 더한 것이 그 수입니다 —
       자리값은 오른쪽부터 1, 2, 4, 8, … 두 배씩.
     </p>
@@ -79,10 +79,10 @@ const analogy = computed(() => ANALOGY[nBits.value] ?? '')
       >
         🎯 {{ c.label }}
       </button>
-      <button type="button" class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-500 transition hover:bg-slate-200" @click="setAll(false); challenge = null">
+      <button type="button" class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-600 transition hover:bg-slate-200" @click="setAll(false); challenge = null">
         모두 끄기
       </button>
-      <button type="button" class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-500 transition hover:bg-slate-200" @click="setAll(true); challenge = null">
+      <button type="button" class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-600 transition hover:bg-slate-200" @click="setAll(true); challenge = null">
         모두 켜기
       </button>
     </div>
@@ -93,24 +93,24 @@ const analogy = computed(() => ANALOGY[nBits.value] ?? '')
         :key="i"
         type="button"
         class="rounded-lg border p-1.5 text-center transition sm:p-2"
-        :class="b ? 'border-indigo-300 bg-indigo-600 text-white' : 'border-slate-200 bg-slate-50 text-slate-500 hover:bg-slate-100'"
+        :class="b ? 'border-indigo-300 bg-indigo-600 text-white' : 'border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100'"
         @click="toggle(i)"
       >
-        <span class="block text-[10px] opacity-70" :class="signed && i === 0 ? 'font-bold' : ''">{{ signed && i === 0 ? '-128' : PLACE[i] }}</span>
+        <span class="block text-xs opacity-70" :class="signed && i === 0 ? 'font-bold' : ''">{{ signed && i === 0 ? '-128' : PLACE[i] }}</span>
         <span class="block font-mono text-lg font-bold">{{ b ? 1 : 0 }}</span>
       </button>
     </div>
 
     <div class="mt-3 flex flex-wrap items-center gap-3 rounded-lg bg-slate-50 p-3">
       <div>
-        <p class="text-[11px] text-slate-400">이진수</p>
+        <p class="text-xs text-slate-500">이진수</p>
         <p class="font-mono text-sm font-bold text-slate-600">{{ bitString }}</p>
       </div>
       <div class="flex-1">
-        <p class="text-[11px] text-slate-400">{{ signed ? 'int8 로 읽으면' : '부호 없음(0~255)으로 읽으면' }}</p>
+        <p class="text-xs text-slate-500">{{ signed ? 'int8 로 읽으면' : '부호 없음(0~255)으로 읽으면' }}</p>
         <p class="font-mono text-2xl font-bold text-slate-700">
           = {{ value }}
-          <span v-if="terms.length" class="ml-1 text-xs font-normal text-slate-400">({{ terms.join(' + ') }})</span>
+          <span v-if="terms.length" class="ml-1 text-xs font-normal text-slate-500">({{ terms.join(' + ') }})</span>
         </p>
       </div>
       <p v-if="solved" class="rounded-lg bg-emerald-100 px-3 py-1.5 text-sm font-semibold text-emerald-700">✅ 성공!</p>
@@ -132,7 +132,7 @@ const analogy = computed(() => ANALOGY[nBits.value] ?? '')
     <!-- ② 천장 계산기 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 천장 계산기: 스위치 n개면 몇 가지를 셀까</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       스위치 하나가 2가지 → 하나 더할 때마다 <b>× 2</b>. 5부의 스무고개로 치면
       "질문 n개로 구분할 수 있는 가짓수"와 정확히 같은 수입니다.
     </p>

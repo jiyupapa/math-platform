@@ -108,36 +108,36 @@ const fmt = (n: number) => Number(n.toFixed(2)).toString()
       <svg :viewBox="`0 0 ${H} ${H}`" :width="H" :height="H" class="max-w-full rounded-lg border border-slate-100">
         <rect v-for="(c, i) in cells.list" :key="i" :x="c.x" :y="c.y" :width="c.w" :height="c.h" :fill="heatColor(c.v)" />
         <!-- 절단선 -->
-        <line :x1="0" :y1="syH(y0)" :x2="H" :y2="syH(y0)" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5 3" />
-        <line :x1="sxH(x0)" :y1="0" :x2="sxH(x0)" :y2="H" stroke="#10b981" stroke-width="2" stroke-dasharray="5 3" />
-        <circle :cx="sxH(x0)" :cy="syH(y0)" r="5" fill="#fff" stroke="#0f172a" stroke-width="2.5" />
-        <text :x="6" :y="syH(y0) - 4" font-size="10" fill="#d97706">y=y0 (x방향 단면)</text>
-        <text :x="sxH(x0) + 4" :y="14" font-size="10" fill="#059669">x=x0 (y방향)</text>
+        <line :x1="0" :y1="syH(y0)" :x2="H" :y2="syH(y0)" stroke="var(--c-amber-500)" stroke-width="2" stroke-dasharray="5 3" />
+        <line :x1="sxH(x0)" :y1="0" :x2="sxH(x0)" :y2="H" stroke="var(--c-emerald-500)" stroke-width="2" stroke-dasharray="5 3" />
+        <circle :cx="sxH(x0)" :cy="syH(y0)" r="5" fill="var(--c-white)" stroke="var(--c-slate-900)" stroke-width="2.5" />
+        <text :x="6" :y="syH(y0) - 4" font-size="10" fill="var(--c-amber-600)">y=y0 (x방향 단면)</text>
+        <text :x="sxH(x0) + 4" :y="14" font-size="10" fill="var(--c-emerald-600)">x=x0 (y방향)</text>
       </svg>
     </div>
 
     <!-- 두 단면 곡선 -->
     <div class="mt-3 flex flex-wrap justify-center gap-3">
       <div>
-        <p class="mb-1 text-center text-xs font-medium text-amber-600">
+        <p class="mb-1 text-center text-xs font-medium text-amber-700">
           x 방향 단면 g(x)=f(x, {{ fmt(y0) }}) · 기울기 ∂f/∂x = <b>{{ fmt(dfxVal) }}</b>
         </p>
         <svg :viewBox="`0 0 ${CW} ${CH}`" :width="CW" :height="CH" class="rounded-lg border border-slate-100 bg-slate-50">
-          <line :x1="sxL(x0)" :y1="0" :x2="sxL(x0)" :y2="CH" stroke="#fde68a" stroke-width="1.5" />
-          <line :x1="sxL(xmin)" :y1="syV(gTan(xmin))" :x2="sxL(xmax)" :y2="syV(gTan(xmax))" stroke="#ef4444" stroke-width="2" />
-          <polyline :points="gCurve" fill="none" stroke="#f59e0b" stroke-width="2.5" />
-          <circle :cx="sxL(x0)" :cy="syV(gx0)" r="5" fill="#fff" stroke="#f59e0b" stroke-width="3" />
+          <line :x1="sxL(x0)" :y1="0" :x2="sxL(x0)" :y2="CH" stroke="var(--c-amber-200)" stroke-width="1.5" />
+          <line :x1="sxL(xmin)" :y1="syV(gTan(xmin))" :x2="sxL(xmax)" :y2="syV(gTan(xmax))" stroke="var(--c-red-500)" stroke-width="2" />
+          <polyline :points="gCurve" fill="none" stroke="var(--c-amber-500)" stroke-width="2.5" />
+          <circle :cx="sxL(x0)" :cy="syV(gx0)" r="5" fill="var(--c-white)" stroke="var(--c-amber-500)" stroke-width="3" />
         </svg>
       </div>
       <div>
-        <p class="mb-1 text-center text-xs font-medium text-emerald-600">
+        <p class="mb-1 text-center text-xs font-medium text-emerald-700">
           y 방향 단면 h(y)=f({{ fmt(x0) }}, y) · 기울기 ∂f/∂y = <b>{{ fmt(dfyVal) }}</b>
         </p>
         <svg :viewBox="`0 0 ${CW} ${CH}`" :width="CW" :height="CH" class="rounded-lg border border-slate-100 bg-slate-50">
-          <line :x1="sxR(y0)" :y1="0" :x2="sxR(y0)" :y2="CH" stroke="#a7f3d0" stroke-width="1.5" />
-          <line :x1="sxR(ymin)" :y1="syV(hTan(ymin))" :x2="sxR(ymax)" :y2="syV(hTan(ymax))" stroke="#ef4444" stroke-width="2" />
-          <polyline :points="hCurve" fill="none" stroke="#10b981" stroke-width="2.5" />
-          <circle :cx="sxR(y0)" :cy="syV(hy0)" r="5" fill="#fff" stroke="#10b981" stroke-width="3" />
+          <line :x1="sxR(y0)" :y1="0" :x2="sxR(y0)" :y2="CH" stroke="var(--c-emerald-200)" stroke-width="1.5" />
+          <line :x1="sxR(ymin)" :y1="syV(hTan(ymin))" :x2="sxR(ymax)" :y2="syV(hTan(ymax))" stroke="var(--c-red-500)" stroke-width="2" />
+          <polyline :points="hCurve" fill="none" stroke="var(--c-emerald-500)" stroke-width="2.5" />
+          <circle :cx="sxR(y0)" :cy="syV(hy0)" r="5" fill="var(--c-white)" stroke="var(--c-emerald-500)" stroke-width="3" />
         </svg>
       </div>
     </div>
@@ -155,8 +155,8 @@ const fmt = (n: number) => Number(n.toFixed(2)).toString()
     </div>
 
     <p class="mt-2 px-1 text-xs leading-relaxed text-slate-500">
-      <b class="text-amber-600">∂f/∂x</b> 는 <b>y 를 상수로 고정</b>하고 x 방향으로 자른 단면 곡선의 기울기,
-      <b class="text-emerald-600">∂f/∂y</b> 는 <b>x 를 고정</b>하고 y 방향으로 자른 단면의 기울기입니다.
+      <b class="text-amber-700">∂f/∂x</b> 는 <b>y 를 상수로 고정</b>하고 x 방향으로 자른 단면 곡선의 기울기,
+      <b class="text-emerald-700">∂f/∂y</b> 는 <b>x 를 고정</b>하고 y 방향으로 자른 단면의 기울기입니다.
       한 번에 한 방향만 봅니다.
     </p>
   </div>

@@ -55,7 +55,7 @@ function clearPicks() {
   picks.value = []
 }
 
-const palette = ['#6366f1', '#10b981', '#f59e0b', '#ec4899', '#06b6d4', '#8b5cf6']
+const palette = ['var(--c-indigo-500)', 'var(--c-emerald-500)', 'var(--c-amber-500)', 'var(--c-pink-500)', 'var(--c-cyan-500)', 'var(--c-violet-500)']
 const pct = (p: number) => (p * 100).toFixed(0)
 const flavor = computed(() =>
   temp.value <= 0.5
@@ -91,7 +91,7 @@ const flavor = computed(() =>
         <span class="w-16 font-mono text-sm tabular-nums">{{ topp.toFixed(2) }} → {{ keptCount }}개</span>
       </label>
     </div>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       temperature {{ temp.toFixed(1) }} → {{ flavor }}
       <span v-if="mode === 'topp'"> · top-p는 <b>누적 확률 {{ (topp * 100).toFixed(0) }}%</b>까지만 후보로 (지금 {{ keptCount }}개)</span>
     </p>
@@ -104,7 +104,7 @@ const flavor = computed(() =>
           <div class="h-full rounded transition-all duration-200" :style="{ width: Math.max(probs[i] * 100, 0.5) + '%', backgroundColor: palette[i % palette.length] }" />
         </div>
         <span class="w-10 shrink-0 text-right font-mono text-xs tabular-nums text-slate-500">{{ pct(probs[i]) }}%</span>
-        <span class="w-12 shrink-0 text-[10px] text-slate-400">{{ kept.has(i) ? '' : '잘림' }}</span>
+        <span class="w-12 shrink-0 text-xs text-slate-500">{{ kept.has(i) ? '' : '잘림' }}</span>
       </div>
     </div>
 
@@ -112,7 +112,7 @@ const flavor = computed(() =>
     <div class="mt-4 flex flex-wrap items-center gap-2">
       <button type="button" class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700" @click="draw">🎲 다음 단어 뽑기</button>
       <button type="button" class="rounded-lg bg-slate-100 px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-200" @click="clearPicks">지우기</button>
-      <span class="text-xs text-slate-400">여러 번 눌러 보세요 — temperature가 높을수록 뽑히는 단어가 다양해집니다.</span>
+      <span class="text-xs text-slate-500">여러 번 눌러 보세요 — temperature가 높을수록 뽑히는 단어가 다양해집니다.</span>
     </div>
     <div v-if="picks.length" class="mt-3 flex flex-wrap gap-1.5">
       <span v-for="(w, i) in picks" :key="i" class="rounded bg-slate-100 px-2 py-0.5 text-xs text-slate-600">{{ w }}</span>

@@ -87,18 +87,18 @@ const game = computed(() => {
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 무릎 곡선 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 무릎 곡선: 우리 미니 모델의 성적표</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       bigram 미니 언어모델(어휘 12자)의 로짓을 b비트로 양자화하고, 원본(fp) 분포를 기준으로
       퍼플렉시티를 잽니다 — 열화의 정체는 5부의 KL(초과 비트)이라 0 아래로 내려갈 수 없어요.
     </p>
 
     <svg viewBox="0 0 320 120" class="w-full rounded-lg bg-slate-50 ring-1 ring-slate-100">
-      <line x1="30" y1="96" x2="290" y2="96" stroke="#cbd5e1" stroke-width="1" />
-      <polyline :points="POLY" fill="none" stroke="#6366f1" stroke-width="2" />
+      <line x1="30" y1="96" x2="290" y2="96" stroke="var(--c-slate-300)" stroke-width="1" />
+      <polyline :points="POLY" fill="none" stroke="var(--c-indigo-500)" stroke-width="2" />
       <template v-for="(pt, k) in CURVE" :key="pt.bits">
-        <circle :cx="cx(k)" :cy="cy(pt.ppl)" :r="k === levelIdx ? 5 : 3" :fill="k === levelIdx ? '#f97316' : '#6366f1'" class="cursor-pointer" @click="levelIdx = k" />
-        <text :x="cx(k)" y="112" text-anchor="middle" font-size="9" fill="#64748b">{{ pt.bits === 16 ? 'F16' : pt.bits + 'bit' }}</text>
-        <text :x="cx(k)" :y="cy(pt.ppl) - 8" text-anchor="middle" font-size="8" :fill="degrade(pt.ppl) > 2 ? '#e11d48' : '#64748b'">+{{ degrade(pt.ppl).toFixed(1) }}%</text>
+        <circle :cx="cx(k)" :cy="cy(pt.ppl)" :r="k === levelIdx ? 5 : 3" :fill="k === levelIdx ? 'var(--c-orange-500)' : 'var(--c-indigo-500)'" class="cursor-pointer" @click="levelIdx = k" />
+        <text :x="cx(k)" y="112" text-anchor="middle" font-size="9" fill="var(--c-slate-500)">{{ pt.bits === 16 ? 'F16' : pt.bits + 'bit' }}</text>
+        <text :x="cx(k)" :y="cy(pt.ppl) - 8" text-anchor="middle" font-size="8" :fill="degrade(pt.ppl) > 2 ? 'var(--c-rose-600)' : 'var(--c-slate-500)'">+{{ degrade(pt.ppl).toFixed(1) }}%</text>
       </template>
     </svg>
 
@@ -116,8 +116,8 @@ const game = computed(() => {
         </button>
       </div>
       <div>
-        <p class="text-[11px] text-slate-400">퍼플렉시티 (평균 몇 갈래 고민)</p>
-        <p class="font-mono text-lg font-bold text-slate-700">{{ sel.ppl.toFixed(3) }} <span class="text-xs font-normal" :class="degrade(sel.ppl) > 2 ? 'text-rose-600' : 'text-emerald-600'">(+{{ degrade(sel.ppl).toFixed(1) }}%)</span></p>
+        <p class="text-xs text-slate-500">퍼플렉시티 (평균 몇 갈래 고민)</p>
+        <p class="font-mono text-lg font-bold text-slate-700">{{ sel.ppl.toFixed(3) }} <span class="text-xs font-normal" :class="degrade(sel.ppl) > 2 ? 'text-rose-700' : 'text-emerald-700'">(+{{ degrade(sel.ppl).toFixed(1) }}%)</span></p>
       </div>
     </div>
 
@@ -140,10 +140,10 @@ const game = computed(() => {
           <div class="w-1.5 rounded-t bg-indigo-400" :style="{ height: z.fp * 100 + '%' }" />
           <div class="w-1.5 rounded-t bg-orange-400" :style="{ height: z.q * 100 + '%' }" />
         </div>
-        <span class="font-mono text-[9px] text-slate-400">{{ z.c }}</span>
+        <span class="font-mono text-xs text-slate-500">{{ z.c }}</span>
       </div>
     </div>
-    <p class="text-[10px] text-slate-400">■ 파랑 = fp 원본 · ■ 주황 = 양자화 — int2 로 내려 보세요, 분포가 뭉개집니다.</p>
+    <p class="text-xs text-slate-500">■ 파랑 = fp 원본 · ■ 주황 = 양자화 — int2 로 내려 보세요, 분포가 뭉개집니다.</p>
 
     <p class="mt-2 rounded-lg bg-indigo-50 p-3 text-xs leading-relaxed text-indigo-800">
       👀 무릎이 보이나요 — <b>8~4비트는 거의 공짜(+0.2% 이하), 3비트부터 오르막, 2비트에서
@@ -154,7 +154,7 @@ const game = computed(() => {
     <!-- ② 성적표 + RAM 게임 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 성적표 읽기: 내 RAM 의 최선은?</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       실전 스타일 성적표(7B급, llama.cpp 커뮤니티 실측 경향을 단순화한 교육용 수치)입니다.
       RAM 을 고르면 어림 규칙(파일 + 4GB 여유 ≤ RAM)으로 최선의 태그를 추천합니다.
     </p>
@@ -173,9 +173,9 @@ const game = computed(() => {
     </div>
 
     <div class="mt-2 overflow-x-auto">
-      <table class="w-full text-right font-mono text-[11px] text-slate-600">
+      <table class="w-full text-right font-mono text-xs text-slate-600">
         <thead>
-          <tr class="text-slate-400">
+          <tr class="text-slate-500">
             <th class="p-1.5 text-left font-normal">태그</th>
             <th class="p-1.5 font-normal">크기</th>
             <th class="p-1.5 font-normal">PPL</th>
@@ -188,7 +188,7 @@ const game = computed(() => {
             <td class="p-1.5 text-left">{{ r.tag }}{{ r.tag === game.best?.tag ? ' 🏆' : '' }}</td>
             <td class="p-1.5">{{ r.gb.toFixed(1) }}GB</td>
             <td class="p-1.5">{{ r.ppl.toFixed(2) }}</td>
-            <td class="p-1.5" :class="r.ppl / 5.8 > 1.02 ? 'text-rose-600' : 'text-emerald-600'">+{{ ((r.ppl / 5.8 - 1) * 100).toFixed(1) }}%</td>
+            <td class="p-1.5" :class="r.ppl / 5.8 > 1.02 ? 'text-rose-700' : 'text-emerald-700'">+{{ ((r.ppl / 5.8 - 1) * 100).toFixed(1) }}%</td>
             <td class="p-1.5">{{ r.gb <= game.limit ? '✅ 들어감' : '❌ 초과' }}</td>
           </tr>
         </tbody>

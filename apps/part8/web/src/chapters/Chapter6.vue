@@ -235,7 +235,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch6')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">6장 완료 — 보폭의 시간축까지 손에 넣었어요!</p>
       <p class="mt-1 text-sm text-emerald-700">
         속도의 다이얼(2~6장)이 완성됐습니다. 다음은 방향을 바꾸는 질문 —

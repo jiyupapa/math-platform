@@ -62,25 +62,25 @@ const finalStyle = computed(() => (picked.value === null ? '' : CANDIDATES[picke
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 졸업 실험: 나만의 챗봇 조련 — 파이프라인을 직접 끝까지</p>
-    <p class="mb-3 text-xs text-slate-400">요청: "{{ PROMPT }}" · ③에서 당신이 고른 선호가 최종 챗봇을 결정합니다.</p>
+    <p class="mb-3 text-xs text-slate-500">요청: "{{ PROMPT }}" · ③에서 당신이 고른 선호가 최종 챗봇을 결정합니다.</p>
 
     <!-- 진행 표시 -->
     <div class="mb-4 flex flex-wrap items-center gap-1 text-xs">
       <template v-for="(label, i) in ['사전학습', 'SFT', '선호 수집', 'DPO']" :key="i">
         <span
           class="rounded-full px-3 py-1 font-semibold transition"
-          :class="step >= i ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-400'"
+          :class="step >= i ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600'"
         >{{ label }}</span>
-        <span v-if="i < 3" class="text-slate-300">→</span>
+        <span v-if="i < 3" class="text-slate-500">→</span>
       </template>
     </div>
 
     <!-- 단계 0·1: 베이스 / SFT -->
     <template v-if="step <= 1">
       <p class="mb-1 text-sm font-bold text-slate-800">{{ STAGE_INFO[step].title }}</p>
-      <p class="mb-2 text-xs text-slate-400">🔧 사용한 수학: {{ STAGE_INFO[step].math }}</p>
+      <p class="mb-2 text-xs text-slate-500">🔧 사용한 수학: {{ STAGE_INFO[step].math }}</p>
       <div class="rounded-lg border border-indigo-100 bg-indigo-50/60 p-3">
-        <p class="mb-1 text-[11px] font-semibold text-indigo-400">💬 지금 모델의 응답</p>
+        <p class="mb-1 text-xs font-semibold text-indigo-600">💬 지금 모델의 응답</p>
         <p class="text-sm leading-relaxed text-slate-800">{{ STAGE_INFO[step].reply }}</p>
       </div>
       <p class="mt-2 rounded-lg bg-amber-50 p-3 text-sm text-amber-800">👀 {{ STAGE_INFO[step].note }}</p>
@@ -96,7 +96,7 @@ const finalStyle = computed(() => (picked.value === null ? '' : CANDIDATES[picke
     <!-- 단계 2: 선호 수집 — 사용자가 라벨러 -->
     <template v-else-if="step === 2">
       <p class="mb-1 text-sm font-bold text-slate-800">③ 선호 수집 — 이번엔 당신이 라벨러입니다</p>
-      <p class="mb-2 text-xs text-slate-400">🔧 사용한 수학: 선호 쌍 → Bradley-Terry σ(r_A − r_B) (ch4 · 3부 4장 · 2부 7장)</p>
+      <p class="mb-2 text-xs text-slate-500">🔧 사용한 수학: 선호 쌍 → Bradley-Terry σ(r_A − r_B) (ch4 · 3부 4장 · 2부 7장)</p>
       <p class="mb-2 text-sm text-slate-600">SFT 모델이 만든 두 후보입니다. <b>어느 쪽이 당신 취향인가요?</b> (정답 없음 — 진심으로 고르세요)</p>
       <div class="grid gap-2 sm:grid-cols-2">
         <button
@@ -106,7 +106,7 @@ const finalStyle = computed(() => (picked.value === null ? '' : CANDIDATES[picke
           class="rounded-lg border border-slate-200 p-3 text-left text-sm leading-relaxed text-slate-700 transition hover:border-indigo-400 hover:bg-indigo-50/40"
           @click="pick(i)"
         >
-          <span class="mb-1 block text-[11px] font-bold text-slate-400">후보 {{ c.key }} · {{ c.style }}</span>
+          <span class="mb-1 block text-xs font-bold text-slate-600">후보 {{ c.key }} · {{ c.style }}</span>
           {{ c.text }}
         </button>
       </div>
@@ -115,9 +115,9 @@ const finalStyle = computed(() => (picked.value === null ? '' : CANDIDATES[picke
     <!-- 단계 3: DPO 완료 -->
     <template v-else>
       <p class="mb-1 text-sm font-bold text-slate-800">④ DPO — 당신의 선호를 가중치에 새기기</p>
-      <p class="mb-2 text-xs text-slate-400">🔧 사용한 수학: −log σ(숨은 점수 마진) + KL 목줄 내장 (ch6~7 · 5부 5장)</p>
+      <p class="mb-2 text-xs text-slate-500">🔧 사용한 수학: −log σ(숨은 점수 마진) + KL 목줄 내장 (ch6~7 · 5부 5장)</p>
       <div class="rounded-lg border border-emerald-200 bg-emerald-50 p-3">
-        <p class="mb-1 text-[11px] font-semibold text-emerald-500">💬 조련 완료 — 당신의 챗봇의 응답 ({{ finalStyle }})</p>
+        <p class="mb-1 text-xs font-semibold text-emerald-700">💬 조련 완료 — 당신의 챗봇의 응답 ({{ finalStyle }})</p>
         <p class="text-sm leading-relaxed text-slate-800">{{ finalAnswer }}</p>
       </div>
       <p class="mt-2 rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">

@@ -94,12 +94,12 @@ const fmt = (n: number) => Number(n.toFixed(3)).toString()
 
     <!-- 최근 결과 -->
     <div v-if="recent.length" class="mt-3 flex flex-wrap items-center gap-1">
-      <span class="mr-1 text-xs text-slate-400">최근 결과:</span>
+      <span class="mr-1 text-xs text-slate-500">최근 결과:</span>
       <span
         v-for="(h, i) in recent"
         :key="i"
-        class="flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-bold"
-        :class="h ? 'bg-indigo-500 text-white' : 'bg-slate-200 text-slate-500'"
+        class="flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold"
+        :class="h ? 'bg-indigo-500 text-white' : 'bg-slate-200 text-slate-600'"
       >
         {{ h ? '앞' : '뒤' }}
       </span>
@@ -114,36 +114,36 @@ const fmt = (n: number) => Number(n.toFixed(3)).toString()
         class="max-w-full rounded-lg border border-slate-100 bg-slate-50"
       >
         <!-- y 눈금 (0, 0.5, 1) -->
-        <g class="text-[10px]" fill="#94a3b8">
+        <g class="text-xs" fill="var(--c-slate-400)">
           <text :x="4" :y="sy(1) + 3">1.0</text>
           <text :x="4" :y="sy(0.5) + 3">0.5</text>
           <text :x="4" :y="sy(0) + 3">0.0</text>
         </g>
-        <line :x1="PAD" :y1="sy(1)" :x2="width - 8" :y2="sy(1)" stroke="#e2e8f0" />
-        <line :x1="PAD" :y1="sy(0)" :x2="width - 8" :y2="sy(0)" stroke="#e2e8f0" />
+        <line :x1="PAD" :y1="sy(1)" :x2="width - 8" :y2="sy(1)" stroke="var(--c-slate-200)" />
+        <line :x1="PAD" :y1="sy(0)" :x2="width - 8" :y2="sy(0)" stroke="var(--c-slate-200)" />
         <!-- 0.5 기준선 -->
         <line
           :x1="PAD"
           :y1="sy(0.5)"
           :x2="width - 8"
           :y2="sy(0.5)"
-          stroke="#f59e0b"
+          stroke="var(--c-amber-500)"
           stroke-width="1.5"
           stroke-dasharray="5 4"
         />
         <!-- 비율 추이 -->
-        <polyline v-if="history.length > 1" :points="line" fill="none" stroke="#6366f1" stroke-width="2" />
+        <polyline v-if="history.length > 1" :points="line" fill="none" stroke="var(--c-indigo-500)" stroke-width="2" />
         <circle
           v-if="history.length"
           :cx="sx(history.length - 1)"
           :cy="sy(history[history.length - 1])"
           r="4"
-          fill="#6366f1"
+          fill="var(--c-indigo-500)"
         />
-        <text v-if="!history.length" :x="width / 2" :y="height / 2" text-anchor="middle" fill="#94a3b8" class="text-xs">
+        <text v-if="!history.length" :x="width / 2" :y="height / 2" text-anchor="middle" fill="var(--c-slate-400)" class="text-xs">
           버튼을 눌러 동전을 던져 보세요
         </text>
-        <text :x="width / 2" :y="height - 4" text-anchor="middle" fill="#94a3b8" class="text-[10px]">
+        <text :x="width / 2" :y="height - 4" text-anchor="middle" fill="var(--c-slate-400)" class="text-xs">
           던진 횟수 →
         </text>
       </svg>

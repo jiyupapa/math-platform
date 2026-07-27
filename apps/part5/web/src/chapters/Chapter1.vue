@@ -23,8 +23,8 @@ const questionChart = {
     {
       label: '필요한 반반 질문 수 (= 비트)',
       data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-      borderColor: '#6366f1',
-      backgroundColor: '#6366f1',
+      borderColor: 'var(--c-indigo-500)',
+      backgroundColor: 'var(--c-indigo-500)',
       tension: 0.2,
     },
   ],
@@ -378,7 +378,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch1')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 1 완료. 정보에 눈금을 붙였습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 이 눈금의 첫 활용 — 자주 나오는 것에 짧은 코드를 주는 <b>압축</b>입니다.

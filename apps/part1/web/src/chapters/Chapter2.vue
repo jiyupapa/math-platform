@@ -19,8 +19,8 @@ const progress = useProgressStore()
 
 // --- 1. 덧셈: a, b 드래그 → a+b 와 평행사변형 보조선 ---
 const addVecs = ref<Vec[]>([
-  { x: 3, y: 1, color: '#6366f1', label: 'a', draggable: true },
-  { x: 1, y: 3, color: '#ec4899', label: 'b', draggable: true },
+  { x: 3, y: 1, color: 'var(--c-indigo-500)', label: 'a', draggable: true },
+  { x: 1, y: 3, color: 'var(--c-pink-500)', label: 'b', draggable: true },
 ])
 const aV = computed(() => addVecs.value[0])
 const bV = computed(() => addVecs.value[1])
@@ -31,14 +31,14 @@ const addDisplay = computed<Vec[]>(() => {
   // 그리는 순서 = 겹침 순서. 드래그 대상 a, b 는 반드시 인덱스 0, 1.
   // 점선 보조선을 먼저 깔고, 결과 a+b 를 맨 마지막에 그려 위로 올린다.
   return [
-    { x: a.x, y: a.y, color: '#6366f1', label: 'a', draggable: true },
-    { x: b.x, y: b.y, color: '#ec4899', label: 'b', draggable: true },
+    { x: a.x, y: a.y, color: 'var(--c-indigo-500)', label: 'a', draggable: true },
+    { x: b.x, y: b.y, color: 'var(--c-pink-500)', label: 'b', draggable: true },
     // a의 끝에서 b를 이어 그림 (점선)
-    { x: b.x, y: b.y, color: '#ec4899', dashed: true, tail: { x: a.x, y: a.y } },
+    { x: b.x, y: b.y, color: 'var(--c-pink-500)', dashed: true, tail: { x: a.x, y: a.y } },
     // b의 끝에서 a를 이어 그림 (점선) → 평행사변형 완성
-    { x: a.x, y: a.y, color: '#6366f1', dashed: true, tail: { x: b.x, y: b.y } },
+    { x: a.x, y: a.y, color: 'var(--c-indigo-500)', dashed: true, tail: { x: b.x, y: b.y } },
     // 결과 벡터 (맨 위)
-    { x: a.x + b.x, y: a.y + b.y, color: '#10b981', label: 'a+b' },
+    { x: a.x + b.x, y: a.y + b.y, color: 'var(--c-emerald-500)', label: 'a+b' },
   ]
 })
 // 드래그는 a, b(앞 두 개)만 반영
@@ -53,14 +53,14 @@ function onAddUpdate(next: Vec[]) {
 const k = ref(2)
 const baseVec = { x: 2, y: 1 }
 const scalarDisplay = computed<Vec[]>(() => [
-  { x: baseVec.x, y: baseVec.y, color: '#94a3b8', label: 'a' },
-  { x: +(baseVec.x * k.value).toFixed(2), y: +(baseVec.y * k.value).toFixed(2), color: '#6366f1', label: 'ka' },
+  { x: baseVec.x, y: baseVec.y, color: 'var(--c-slate-400)', label: 'a' },
+  { x: +(baseVec.x * k.value).toFixed(2), y: +(baseVec.y * k.value).toFixed(2), color: 'var(--c-indigo-500)', label: 'ka' },
 ])
 
 // --- 4. 내적: a, b 드래그 → a·b, 각도 ---
 const dotVecs = ref<Vec[]>([
-  { x: 4, y: 0, color: '#6366f1', label: 'a', draggable: true },
-  { x: 2, y: 3, color: '#ec4899', label: 'b', draggable: true },
+  { x: 4, y: 0, color: 'var(--c-indigo-500)', label: 'a', draggable: true },
+  { x: 2, y: 3, color: 'var(--c-pink-500)', label: 'b', draggable: true },
 ])
 const dA = computed(() => dotVecs.value[0])
 const dB = computed(() => dotVecs.value[1])
@@ -81,7 +81,7 @@ const dotChart = computed(() => ({
     {
       label: '내적의 두 조각 (합 = a·b)',
       data: [dA.value.x * dB.value.x, dA.value.y * dB.value.y],
-      backgroundColor: ['#818cf8', '#34d399'],
+      backgroundColor: ['var(--c-indigo-400)', 'var(--c-emerald-400)'],
       borderRadius: 6,
     },
   ],
@@ -127,8 +127,8 @@ function onSetComplete() {
 
     <p class="leading-relaxed text-slate-700">
       그림으로 보면 <b>꼬리에 꼬리를 잇는</b> 방법(또는 평행사변형)이에요.
-      <b style="color:#6366f1">a</b>, <b style="color:#ec4899">b</b> 끝점을 끌어보세요.
-      초록 화살표 <b style="color:#10b981">a+b</b> 와 점선 평행사변형이 따라옵니다.
+      <b style="color: var(--c-indigo-600)">a</b>, <b style="color: var(--c-pink-700)">b</b> 끝점을 끌어보세요.
+      초록 화살표 <b style="color: var(--c-emerald-700)">a+b</b> 와 점선 평행사변형이 따라옵니다.
     </p>
 
     <VectorCanvas :model-value="addDisplay" :range="8" @update:model-value="onAddUpdate" />
@@ -258,7 +258,7 @@ function onSetComplete() {
             <td class="py-1">같은 쪽 (나란히)</td>
             <td><MathBlock inline expr="0^\circ" /></td>
             <td><b>1</b> (최대)</td>
-            <td class="text-emerald-600">+ (양수)</td>
+            <td class="text-emerald-700">+ (양수)</td>
           </tr>
           <tr class="border-b border-slate-100">
             <td class="py-1">직각 (수직)</td>
@@ -270,7 +270,7 @@ function onSetComplete() {
             <td class="py-1">반대 쪽</td>
             <td><MathBlock inline expr="180^\circ" /></td>
             <td><b>−1</b> (최소)</td>
-            <td class="text-rose-600">− (음수)</td>
+            <td class="text-rose-700">− (음수)</td>
           </tr>
         </tbody>
       </table>
@@ -303,7 +303,7 @@ function onSetComplete() {
     <CosineGraph />
 
     <p class="leading-relaxed text-slate-700">
-      <b style="color:#6366f1">a</b>, <b style="color:#ec4899">b</b> 를 끌면서 내적과 각도가
+      <b style="color: var(--c-indigo-600)">a</b>, <b style="color: var(--c-pink-700)">b</b> 를 끌면서 내적과 각도가
       어떻게 변하는지 보세요. 특히 두 화살표가 직각일 때 내적이 0이 됩니다.
     </p>
     <VectorCanvas v-model="dotVecs" :range="6" />
@@ -318,14 +318,14 @@ function onSetComplete() {
       <p class="mt-1">
         두 벡터 사이 각도 θ ≈
         <b>{{ angle === null ? '—' : angle.toFixed(1) + '°' }}</b>
-        <span v-if="dot === 0" class="font-bold text-emerald-600"> → 수직! (내적 0)</span>
+        <span v-if="dot === 0" class="font-bold text-emerald-700"> → 수직! (내적 0)</span>
       </p>
       <p class="mt-1">
         코사인 유사도 (cos θ) ≈
         <b>{{ cosSim === null ? '—' : cosSim.toFixed(2) }}</b>
         — 1에 가까울수록 "닮음", 0이면 무관, −1이면 정반대.
       </p>
-      <p class="mt-1 text-xs text-slate-400">
+      <p class="mt-1 text-xs text-slate-500">
         (≈ 는 "약, 대략 같음" — 딱 떨어지지 않는 소수라 반올림해 보여준다는 뜻이에요.)
       </p>
     </ConceptCard>
@@ -419,13 +419,13 @@ function onSetComplete() {
             <td class="py-1">액션물 A</td>
             <td><MathBlock inline expr="(5, 0)" /></td>
             <td>5×5 + 1×0 = <b>25</b></td>
-            <td class="font-bold text-emerald-600">✓ 강추</td>
+            <td class="font-bold text-emerald-700">✓ 강추</td>
           </tr>
           <tr>
             <td class="py-1">로맨스물 B</td>
             <td><MathBlock inline expr="(0, 5)" /></td>
             <td>5×0 + 1×5 = <b>5</b></td>
-            <td class="text-slate-400">덜 추천</td>
+            <td class="text-slate-500">덜 추천</td>
           </tr>
         </tbody>
       </table>
@@ -547,7 +547,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch2')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 2 완료. 벡터 연산을 익혔습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">다음은 여러 수를 표로 묶은 '행렬'입니다.</p>
       <RouterLink

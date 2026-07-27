@@ -37,7 +37,7 @@ const lenB = ref(1.5) // |b| (|a| = 1 고정)
 const cosVal = computed(() => Math.cos((theta.value * Math.PI) / 180))
 const dotVal = computed(() => lenB.value * cosVal.value) // |a|=1 이므로 내적 = |b|·cosθ
 const cosTone = computed(() =>
-  cosVal.value > 0.5 ? 'text-emerald-600' : cosVal.value >= 0 ? 'text-amber-600' : 'text-rose-600',
+  cosVal.value > 0.5 ? 'text-emerald-700' : cosVal.value >= 0 ? 'text-amber-700' : 'text-rose-700',
 )
 // a 는 45° 고정, b 는 45°+θ 방향 (화면 y 는 아래로 증가하므로 부호 반전)
 const C2 = { x: 110, y: 116 }
@@ -56,7 +56,7 @@ const bTip = computed(() => {
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 길이 오염 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 길이 오염: 자세히 쓴 죄</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       문서 B는 A와 <b>내용이 같고 3배 자세할 뿐</b>입니다(단어 빈도가 3배). 두 가지 자로 순위를 재 보세요.
     </p>
 
@@ -64,29 +64,29 @@ const bTip = computed(() => {
       <svg viewBox="0 0 260 210" class="w-full max-w-[17rem] shrink-0 rounded-lg bg-slate-50 ring-1 ring-slate-100">
         <defs>
           <marker id="arr-i" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
-            <path d="M0,0 L6,3.5 L0,7 z" fill="#4f46e5" />
+            <path d="M0,0 L6,3.5 L0,7 z" fill="var(--c-indigo-600)" />
           </marker>
           <marker id="arr-e" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
-            <path d="M0,0 L6,3.5 L0,7 z" fill="#059669" />
+            <path d="M0,0 L6,3.5 L0,7 z" fill="var(--c-emerald-600)" />
           </marker>
           <marker id="arr-r" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
-            <path d="M0,0 L6,3.5 L0,7 z" fill="#e11d48" />
+            <path d="M0,0 L6,3.5 L0,7 z" fill="var(--c-rose-600)" />
           </marker>
         </defs>
         <!-- 축 -->
-        <line :x1="O.x" :y1="O.y" x2="250" :y2="O.y" stroke="#cbd5e1" stroke-width="1" />
-        <line :x1="O.x" :y1="O.y" :x2="O.x" y2="15" stroke="#cbd5e1" stroke-width="1" />
-        <text x="188" :y="O.y + 14" font-size="9" fill="#94a3b8">"연차" 단어 수 →</text>
-        <text :x="O.x - 24" y="12" font-size="9" fill="#94a3b8">"신청"↑</text>
+        <line :x1="O.x" :y1="O.y" x2="250" :y2="O.y" stroke="var(--c-slate-300)" stroke-width="1" />
+        <line :x1="O.x" :y1="O.y" :x2="O.x" y2="15" stroke="var(--c-slate-300)" stroke-width="1" />
+        <text x="188" :y="O.y + 14" font-size="9" fill="var(--c-slate-400)">"연차" 단어 수 →</text>
+        <text :x="O.x - 24" y="12" font-size="9" fill="var(--c-slate-400)">"신청"↑</text>
         <!-- 벡터 (긴 것부터 그려 겹침 처리) -->
-        <line :x1="O.x" :y1="O.y" :x2="px(VDOCS[1]).x" :y2="px(VDOCS[1]).y" stroke="#059669" stroke-width="2" stroke-dasharray="4 2" marker-end="url(#arr-e)" />
-        <line :x1="O.x" :y1="O.y" :x2="px(VDOCS[0]).x" :y2="px(VDOCS[0]).y" stroke="#059669" stroke-width="2" marker-end="url(#arr-e)" />
-        <line :x1="O.x" :y1="O.y" :x2="px(VDOCS[2]).x" :y2="px(VDOCS[2]).y" stroke="#e11d48" stroke-width="2" marker-end="url(#arr-r)" />
-        <line :x1="O.x" :y1="O.y" :x2="px(Q).x" :y2="px(Q).y" stroke="#4f46e5" stroke-width="3" marker-end="url(#arr-i)" />
-        <text :x="px(Q).x + 6" :y="px(Q).y + 12" font-size="10" font-weight="bold" fill="#4f46e5">질문</text>
-        <text :x="px(VDOCS[0]).x + 7" :y="px(VDOCS[0]).y + 4" font-size="10" font-weight="bold" fill="#059669">A</text>
-        <text :x="px(VDOCS[1]).x + 7" :y="px(VDOCS[1]).y + 4" font-size="10" font-weight="bold" fill="#059669">B</text>
-        <text :x="px(VDOCS[2]).x - 12" :y="px(VDOCS[2]).y + 2" font-size="10" font-weight="bold" fill="#e11d48">C</text>
+        <line :x1="O.x" :y1="O.y" :x2="px(VDOCS[1]).x" :y2="px(VDOCS[1]).y" stroke="var(--c-emerald-600)" stroke-width="2" stroke-dasharray="4 2" marker-end="url(#arr-e)" />
+        <line :x1="O.x" :y1="O.y" :x2="px(VDOCS[0]).x" :y2="px(VDOCS[0]).y" stroke="var(--c-emerald-600)" stroke-width="2" marker-end="url(#arr-e)" />
+        <line :x1="O.x" :y1="O.y" :x2="px(VDOCS[2]).x" :y2="px(VDOCS[2]).y" stroke="var(--c-rose-600)" stroke-width="2" marker-end="url(#arr-r)" />
+        <line :x1="O.x" :y1="O.y" :x2="px(Q).x" :y2="px(Q).y" stroke="var(--c-indigo-600)" stroke-width="3" marker-end="url(#arr-i)" />
+        <text :x="px(Q).x + 6" :y="px(Q).y + 12" font-size="10" font-weight="bold" fill="var(--c-indigo-600)">질문</text>
+        <text :x="px(VDOCS[0]).x + 7" :y="px(VDOCS[0]).y + 4" font-size="10" font-weight="bold" fill="var(--c-emerald-600)">A</text>
+        <text :x="px(VDOCS[1]).x + 7" :y="px(VDOCS[1]).y + 4" font-size="10" font-weight="bold" fill="var(--c-emerald-600)">B</text>
+        <text :x="px(VDOCS[2]).x - 12" :y="px(VDOCS[2]).y + 2" font-size="10" font-weight="bold" fill="var(--c-rose-600)">C</text>
       </svg>
 
       <div class="min-w-0 flex-1">
@@ -94,7 +94,7 @@ const bTip = computed(() => {
           <button
             type="button"
             class="rounded-lg px-3 py-1.5 text-xs font-semibold transition"
-            :class="metric === 'dist' ? 'bg-slate-700 text-white' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'"
+            :class="metric === 'dist' ? 'bg-slate-700 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
             @click="metric = 'dist'"
           >
             📏 거리로 재기 (짧을수록 가까움)
@@ -102,7 +102,7 @@ const bTip = computed(() => {
           <button
             type="button"
             class="rounded-lg px-3 py-1.5 text-xs font-semibold transition"
-            :class="metric === 'cos' ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'"
+            :class="metric === 'cos' ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
             @click="metric = 'cos'"
           >
             📐 코사인으로 재기 (1에 가까울수록 비슷)
@@ -116,8 +116,8 @@ const bTip = computed(() => {
             class="flex items-center gap-2 rounded-lg p-1.5 text-sm"
             :class="i === 0 || (metric === 'cos' && d.value > 0.99) ? 'bg-amber-50' : ''"
           >
-            <span class="w-8 shrink-0 text-center text-xs font-bold text-slate-400">{{ i + 1 }}위</span>
-            <span class="w-6 shrink-0 text-xs font-bold" :class="d.topic ? 'text-emerald-600' : 'text-rose-600'">{{ d.id }}</span>
+            <span class="w-8 shrink-0 text-center text-xs font-bold text-slate-500">{{ i + 1 }}위</span>
+            <span class="w-6 shrink-0 text-xs font-bold" :class="d.topic ? 'text-emerald-700' : 'text-rose-700'">{{ d.id }}</span>
             <span class="min-w-0 flex-1 truncate text-xs text-slate-600">{{ d.name }}</span>
             <span class="w-14 shrink-0 text-right font-mono text-xs text-slate-500">{{ d.value.toFixed(2) }}</span>
           </div>
@@ -137,17 +137,17 @@ const bTip = computed(() => {
     <!-- ② 각도 놀이터 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 각도 놀이터: 코사인의 눈금 익히기</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       사잇각과 <b>b</b>의 길이를 바꿔 보세요 — 코사인이 무엇에 반응하고 무엇을 무시하는지 드러납니다.
     </p>
 
     <div class="flex flex-col gap-4 sm:flex-row">
       <svg viewBox="0 0 220 220" class="w-full max-w-[15rem] shrink-0 rounded-lg bg-slate-50 ring-1 ring-slate-100">
-        <circle :cx="C2.x" :cy="C2.y" r="50" fill="none" stroke="#e2e8f0" stroke-dasharray="3 3" />
-        <line :x1="C2.x" :y1="C2.y" :x2="aTip.x" :y2="aTip.y" stroke="#4f46e5" stroke-width="3" marker-end="url(#arr-i)" />
-        <line :x1="C2.x" :y1="C2.y" :x2="bTip.x" :y2="bTip.y" stroke="#059669" stroke-width="3" marker-end="url(#arr-e)" />
-        <text :x="aTip.x + 5" :y="aTip.y - 4" font-size="11" font-weight="bold" fill="#4f46e5">a</text>
-        <text :x="bTip.x + 5" :y="bTip.y - 4" font-size="11" font-weight="bold" fill="#059669">b</text>
+        <circle :cx="C2.x" :cy="C2.y" r="50" fill="none" stroke="var(--c-slate-200)" stroke-dasharray="3 3" />
+        <line :x1="C2.x" :y1="C2.y" :x2="aTip.x" :y2="aTip.y" stroke="var(--c-indigo-600)" stroke-width="3" marker-end="url(#arr-i)" />
+        <line :x1="C2.x" :y1="C2.y" :x2="bTip.x" :y2="bTip.y" stroke="var(--c-emerald-600)" stroke-width="3" marker-end="url(#arr-e)" />
+        <text :x="aTip.x + 5" :y="aTip.y - 4" font-size="11" font-weight="bold" fill="var(--c-indigo-600)">a</text>
+        <text :x="bTip.x + 5" :y="bTip.y - 4" font-size="11" font-weight="bold" fill="var(--c-emerald-600)">b</text>
       </svg>
 
       <div class="min-w-0 flex-1 space-y-3">
@@ -167,14 +167,14 @@ const bTip = computed(() => {
 
         <div class="grid grid-cols-2 gap-2">
           <div class="rounded-lg bg-slate-50 p-3 text-center">
-            <p class="text-[11px] text-slate-400">코사인 유사도 cos θ</p>
+            <p class="text-xs text-slate-500">코사인 유사도 cos θ</p>
             <p class="text-xl font-bold" :class="cosTone">{{ cosVal.toFixed(2) }}</p>
-            <p class="text-[11px] text-slate-400">길이를 바꿔도 그대로!</p>
+            <p class="text-xs text-slate-500">길이를 바꿔도 그대로!</p>
           </div>
           <div class="rounded-lg bg-slate-50 p-3 text-center">
-            <p class="text-[11px] text-slate-400">내적 a·b = |b|·cos θ</p>
+            <p class="text-xs text-slate-500">내적 a·b = |b|·cos θ</p>
             <p class="text-xl font-bold text-slate-600">{{ dotVal.toFixed(2) }}</p>
-            <p class="text-[11px] text-slate-400">길이에 따라 변함</p>
+            <p class="text-xs text-slate-500">길이에 따라 변함</p>
           </div>
         </div>
 

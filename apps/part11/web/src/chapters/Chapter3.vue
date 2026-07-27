@@ -226,7 +226,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch3')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">3장 완료 — 도구를 드는 손이 생겼습니다!</p>
       <p class="mt-1 text-sm text-emerald-700">
         걸음(2장)과 도구(3장)를 갖췄으니, 이제 틀린 걸음을 되살리는 첫 번째 무기 —

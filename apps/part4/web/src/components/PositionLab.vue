@@ -80,7 +80,7 @@ const fmt = (v: [number, number]) => `(${v[0].toFixed(1)}, ${v[1].toFixed(1)})`
         </thead>
         <tbody class="font-mono tabular-nums">
           <tr v-for="r in rows" :key="r.slot" class="border-b border-slate-100">
-            <td class="px-2 py-1.5 text-slate-400">{{ r.slot }}</td>
+            <td class="px-2 py-1.5 text-slate-500">{{ r.slot }}</td>
             <td class="px-2 py-1.5 font-sans font-semibold text-slate-700">{{ r.w }}</td>
             <td class="px-2 py-1.5 text-slate-600">{{ fmt(r.word) }}</td>
             <td class="px-2 py-1.5" :class="posOn ? 'text-indigo-600' : 'text-slate-300'">{{ fmt(r.pos) }}</td>

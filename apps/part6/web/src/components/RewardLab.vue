@@ -60,7 +60,7 @@ const obs = computed(() => {
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 라벨러 체험 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 당신이 라벨러입니다: 더 나은 답을 고르세요</p>
-    <p class="mb-3 text-xs text-slate-400">점수를 매기라는 게 아니에요 — 그냥 어느 쪽이 나은지만.</p>
+    <p class="mb-3 text-xs text-slate-500">점수를 매기라는 게 아니에요 — 그냥 어느 쪽이 나은지만.</p>
 
     <div class="space-y-4">
       <div v-for="(pair, i) in PAIRS" :key="i" class="rounded-lg border border-slate-100 p-3">
@@ -74,7 +74,7 @@ const obs = computed(() => {
               : 'border-slate-200 text-slate-600 hover:border-slate-300'"
             @click="pick(i, 0)"
           >
-            <span class="mb-1 block text-[11px] font-bold" :class="picks[i] === 0 ? 'text-indigo-500' : 'text-slate-400'">답변 A {{ picks[i] === 0 ? '— 선택함 ✓' : '' }}</span>
+            <span class="mb-1 block text-xs font-bold" :class="picks[i] === 0 ? 'text-indigo-600' : 'text-slate-500'">답변 A {{ picks[i] === 0 ? '— 선택함 ✓' : '' }}</span>
             {{ pair.a }}
           </button>
           <button
@@ -85,7 +85,7 @@ const obs = computed(() => {
               : 'border-slate-200 text-slate-600 hover:border-slate-300'"
             @click="pick(i, 1)"
           >
-            <span class="mb-1 block text-[11px] font-bold" :class="picks[i] === 1 ? 'text-indigo-500' : 'text-slate-400'">답변 B {{ picks[i] === 1 ? '— 선택함 ✓' : '' }}</span>
+            <span class="mb-1 block text-xs font-bold" :class="picks[i] === 1 ? 'text-indigo-600' : 'text-slate-500'">답변 B {{ picks[i] === 1 ? '— 선택함 ✓' : '' }}</span>
             {{ pair.b }}
           </button>
         </div>
@@ -97,12 +97,12 @@ const obs = computed(() => {
       ✅ <b>선호 데이터 3쌍 완성!</b> 방금 하신 일이 실제 RLHF 데이터 라벨링입니다.
       이런 쌍 수만 개가 모여 보상 모델의 교과서가 돼요.
     </p>
-    <p v-else class="mt-3 text-xs text-slate-400">{{ pickedCount }}/3 선택함</p>
+    <p v-else class="mt-3 text-xs text-slate-500">{{ pickedCount }}/3 선택함</p>
 
     <!-- ② Bradley-Terry 변환기 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 점수 차를 선호 확률로: P(A 승) = σ(r_A − r_B)</p>
-    <p class="mb-3 text-xs text-slate-400">보상 모델이 두 답변에 매긴 점수 차(Δr)를 움직여 보세요.</p>
+    <p class="mb-3 text-xs text-slate-500">보상 모델이 두 답변에 매긴 점수 차(Δr)를 움직여 보세요.</p>
 
     <div class="mb-2 flex flex-wrap items-center gap-2">
       <span class="text-sm text-slate-600">점수 차 Δr =</span>
@@ -125,7 +125,7 @@ const obs = computed(() => {
     <div class="rounded-lg bg-slate-50 p-4">
       <div class="mb-1 flex justify-between text-xs font-semibold">
         <span class="text-indigo-700">A가 선택될 확률 {{ pct }}%</span>
-        <span class="text-slate-400">B {{ 100 - pct }}%</span>
+        <span class="text-slate-500">B {{ 100 - pct }}%</span>
       </div>
       <div class="flex h-4 w-full overflow-hidden rounded-full bg-slate-200">
         <div class="h-full bg-indigo-500 transition-all" :style="{ width: pct + '%' }" />

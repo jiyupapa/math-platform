@@ -58,7 +58,7 @@ const iHat = computed(() => toScreen(a.value, c.value))
 const jHat = computed(() => toScreen(b.value, d.value))
 
 const fill = computed(() =>
-  det.value === 0 ? '#f43f5e' : det.value < 0 ? '#f59e0b' : '#6366f1',
+  det.value === 0 ? 'var(--c-rose-500)' : det.value < 0 ? 'var(--c-amber-500)' : 'var(--c-indigo-500)',
 )
 
 function preset(na: number, nb: number, nc: number, nd: number) {
@@ -79,23 +79,23 @@ function preset(na: number, nb: number, nc: number, nd: number) {
       <svg :width="VS" :height="VS" :viewBox="`0 0 ${VS} ${VS}`" class="mx-auto shrink-0 rounded-lg bg-slate-50">
         <defs>
           <marker id="det-i" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L6,3 L0,6 Z" fill="#10b981" />
+            <path d="M0,0 L6,3 L0,6 Z" fill="var(--c-emerald-500)" />
           </marker>
           <marker id="det-j" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L6,3 L0,6 Z" fill="#ec4899" />
+            <path d="M0,0 L6,3 L0,6 Z" fill="var(--c-pink-500)" />
           </marker>
         </defs>
         <!-- 축 -->
-        <line x1="0" :y1="cx" :x2="VS" :y2="cx" stroke="#e2e8f0" stroke-width="1" />
-        <line :x1="cx" y1="0" :x2="cx" :y2="VS" stroke="#e2e8f0" stroke-width="1" />
+        <line x1="0" :y1="cx" :x2="VS" :y2="cx" stroke="var(--c-slate-200)" stroke-width="1" />
+        <line :x1="cx" y1="0" :x2="cx" :y2="VS" stroke="var(--c-slate-200)" stroke-width="1" />
         <!-- 원래 단위 정사각형 -->
-        <polygon :points="unit" fill="#cbd5e1" fill-opacity="0.3" stroke="#cbd5e1" stroke-width="1" />
+        <polygon :points="unit" fill="var(--c-slate-300)" fill-opacity="0.3" stroke="var(--c-slate-300)" stroke-width="1" />
         <!-- 변환된 평행사변형 -->
         <polygon :points="para" :fill="fill" fill-opacity="0.2" :stroke="fill" stroke-width="2" />
         <!-- 기저벡터 -->
-        <line :x1="origin.X" :y1="origin.Y" :x2="iHat.X" :y2="iHat.Y" stroke="#10b981" stroke-width="2.5" marker-end="url(#det-i)" />
-        <line :x1="origin.X" :y1="origin.Y" :x2="jHat.X" :y2="jHat.Y" stroke="#ec4899" stroke-width="2.5" marker-end="url(#det-j)" />
-        <circle :cx="origin.X" :cy="origin.Y" r="3" fill="#334155" />
+        <line :x1="origin.X" :y1="origin.Y" :x2="iHat.X" :y2="iHat.Y" stroke="var(--c-emerald-500)" stroke-width="2.5" marker-end="url(#det-i)" />
+        <line :x1="origin.X" :y1="origin.Y" :x2="jHat.X" :y2="jHat.Y" stroke="var(--c-pink-500)" stroke-width="2.5" marker-end="url(#det-j)" />
+        <circle :cx="origin.X" :cy="origin.Y" r="3" fill="var(--c-slate-700)" />
       </svg>
 
       <div class="flex-1">
@@ -117,8 +117,8 @@ function preset(na: number, nb: number, nc: number, nd: number) {
           </p>
           <p class="mt-1">
             평행사변형 넓이 = |det| = <b>{{ area }}</b>
-            <span v-if="det === 0" class="font-bold text-rose-600"> · 납작! (되돌릴 수 없음)</span>
-            <span v-else-if="det < 0" class="text-amber-600"> · 뒤집힘</span>
+            <span v-if="det === 0" class="font-bold text-rose-700"> · 납작! (되돌릴 수 없음)</span>
+            <span v-else-if="det < 0" class="text-amber-700"> · 뒤집힘</span>
           </p>
         </div>
 

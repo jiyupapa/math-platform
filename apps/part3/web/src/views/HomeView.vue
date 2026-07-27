@@ -39,7 +39,7 @@ const progress = useProgressStore()
 
     <h2 class="mb-2 text-lg font-semibold">목차</h2>
     <p class="mb-4 text-sm text-slate-500">
-      <span class="rounded-full bg-violet-100 px-2 py-0.5 text-[11px] text-violet-600">심화</span>
+      <span class="rounded-full bg-violet-100 px-2 py-0.5 text-xs text-violet-700">심화</span>
       배지가 붙은 챕터는 AI(트랜스포머) 이해에 필수는 아니에요. 샘플~7장을 먼저 완주하고, 나중에 돌아와도 좋습니다.
     </p>
     <ul class="space-y-2">
@@ -61,10 +61,10 @@ const progress = useProgressStore()
           <span class="min-w-0">
             <span class="font-medium">
               {{ ch.title }}
-              <span v-if="ch.comingSoon" class="text-xs text-slate-400">(예정)</span>
+              <span v-if="ch.comingSoon" class="text-xs text-slate-500">(예정)</span>
               <template v-else>
-                <span v-if="ch.advanced" class="ml-1 rounded-full bg-violet-100 px-2 py-0.5 text-[11px] font-normal text-violet-600">심화</span>
-                <span v-if="ch.minutes" class="ml-1 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-normal text-slate-500">약 {{ ch.minutes }}분</span>
+                <span v-if="ch.advanced" class="ml-1 rounded-full bg-violet-100 px-2 py-0.5 text-xs font-normal text-violet-700">심화</span>
+                <span v-if="ch.minutes" class="ml-1 rounded-full bg-slate-100 px-2 py-0.5 text-xs font-normal text-slate-600">약 {{ ch.minutes }}분</span>
               </template>
             </span>
             <span class="block text-sm text-slate-500">{{ ch.summary }}</span>

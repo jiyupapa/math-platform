@@ -198,7 +198,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch12')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-2xl font-bold text-emerald-600">🎓</div>
+      <div class="mb-1 text-2xl font-bold text-emerald-700">🎓</div>
       <p class="text-lg font-bold text-emerald-800">11부 졸업 — 에이전트와 추론의 수학, 완결!</p>
       <p class="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-emerald-700">
         일의 성공률은 걸음의 곱이고, 되살리는 길은 다시 뽑기·다수결·검수입니다.

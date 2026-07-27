@@ -228,7 +228,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch2')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">2장 완료 — 이제 조련이 왜 필요한지 스스로 답할 수 있어요!</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 3장 — 드디어 가중치를 바꿉니다. 시범(모범 답안)으로 가르치는 SFT,

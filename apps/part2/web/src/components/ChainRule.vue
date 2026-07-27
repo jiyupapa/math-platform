@@ -45,27 +45,27 @@ const fmt = (n: number) => Number(n.toFixed(2)).toString()
     <!-- 기계 사슬 -->
     <div class="flex flex-wrap items-center justify-center gap-2 text-center">
       <div class="rounded-lg bg-slate-100 px-3 py-2">
-        <div class="text-[11px] text-slate-500">입력</div>
+        <div class="text-xs text-slate-600">입력</div>
         <div class="font-mono text-lg font-bold text-slate-800">x = {{ fmt(x0) }}</div>
       </div>
 
       <div class="flex flex-col items-center">
-        <div class="text-[11px] font-medium text-emerald-600">×{{ fmt(gp) }} (속미분 g′)</div>
-        <div class="text-2xl leading-none text-slate-400">→</div>
+        <div class="text-xs font-medium text-emerald-700">×{{ fmt(gp) }} (속미분 g′)</div>
+        <div class="text-2xl leading-none text-slate-500">→</div>
       </div>
 
       <div class="rounded-lg bg-emerald-50 px-3 py-2">
-        <div class="text-[11px] text-emerald-600">{{ innerLabel }}</div>
+        <div class="text-xs text-emerald-700">{{ innerLabel }}</div>
         <div class="font-mono text-lg font-bold text-emerald-700">u = {{ fmt(u) }}</div>
       </div>
 
       <div class="flex flex-col items-center">
-        <div class="text-[11px] font-medium text-rose-600">×{{ fmt(fp) }} (겉미분 f′)</div>
-        <div class="text-2xl leading-none text-slate-400">→</div>
+        <div class="text-xs font-medium text-rose-700">×{{ fmt(fp) }} (겉미분 f′)</div>
+        <div class="text-2xl leading-none text-slate-500">→</div>
       </div>
 
       <div class="rounded-lg bg-rose-50 px-3 py-2">
-        <div class="text-[11px] text-rose-600">{{ outerLabel }}</div>
+        <div class="text-xs text-rose-700">{{ outerLabel }}</div>
         <div class="font-mono text-lg font-bold text-rose-700">y = {{ fmt(y) }}</div>
       </div>
     </div>
@@ -98,8 +98,8 @@ const fmt = (n: number) => Number(n.toFixed(2)).toString()
     <div class="mt-3 rounded-lg bg-slate-50 px-3 py-2 text-sm leading-relaxed text-slate-600">
       x 를 <b>Δ = {{ fmt(dx) }}</b> 만큼 밀면:
       Δx = {{ fmt(dx) }}
-      <span class="text-emerald-600">→ Δu = {{ fmt(dU) }}</span>
-      <span class="text-rose-600">→ Δy = {{ fmt(dY) }}</span>.
+      <span class="text-emerald-700">→ Δu = {{ fmt(dU) }}</span>
+      <span class="text-rose-700">→ Δy = {{ fmt(dY) }}</span>.
       실제 <b>Δy/Δx ≈ {{ fmt(approx) }}</b> — Δ 를 줄이면 위 <b>dy/dx = {{ fmt(total) }}</b> 로 수렴합니다.
     </div>
     <p class="mt-2 px-1 text-xs leading-relaxed text-slate-500">

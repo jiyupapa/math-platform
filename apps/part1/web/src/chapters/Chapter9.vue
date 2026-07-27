@@ -19,8 +19,8 @@ function onSetComplete() {
 
 // ── 데모 A: 선형결합 — u, v 를 드래그하고 c1, c2 슬라이더로 w = c1·u + c2·v 를 만든다
 const comboBase = ref<Vec[]>([
-  { x: 2, y: 1, color: '#6366f1', label: 'u', draggable: true },
-  { x: -1, y: 2, color: '#f59e0b', label: 'v', draggable: true },
+  { x: 2, y: 1, color: 'var(--c-indigo-500)', label: 'u', draggable: true },
+  { x: -1, y: 2, color: 'var(--c-amber-500)', label: 'v', draggable: true },
 ])
 const c1 = ref(1.5)
 const c2 = ref(1)
@@ -34,7 +34,7 @@ const comboVecs = computed<Vec[]>({
       {
         x: c1.value * u.x + c2.value * v.x,
         y: c1.value * u.y + c2.value * v.y,
-        color: '#10b981',
+        color: 'var(--c-emerald-500)',
         label: 'w',
         dashed: true,
       },
@@ -52,8 +52,8 @@ const comboW = computed(() => {
 
 // ── 데모 B: 독립/종속 판별 — u, v 를 드래그하면 실시간으로 판정
 const indepVecs = ref<Vec[]>([
-  { x: 2, y: 1, color: '#6366f1', label: 'u', draggable: true },
-  { x: 4, y: 2, color: '#ef4444', label: 'v', draggable: true },
+  { x: 2, y: 1, color: 'var(--c-indigo-500)', label: 'u', draggable: true },
+  { x: 4, y: 2, color: 'var(--c-red-500)', label: 'v', draggable: true },
 ])
 const indepDet = computed(() => {
   const u = indepVecs.value[0]
@@ -438,7 +438,7 @@ const isIndep = computed(() => Math.abs(indepDet.value) > 1e-9)
       v-if="progress.isDone('ch9')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 9 완료 — '진짜 정보량'을 재는 눈이 생겼습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 직교성과 투영(ch10) — "가장 가까운 답"을 찾는 최소제곱의 원리로 이어집니다.

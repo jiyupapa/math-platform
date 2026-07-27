@@ -16,8 +16,8 @@ const progress = useProgressStore()
 const classChart = {
   labels: ['학생1', '학생2', '학생3', '학생4', '학생5'],
   datasets: [
-    { label: 'A반 (다닥다닥)', data: [68, 69, 70, 71, 72], backgroundColor: '#818cf8' },
-    { label: 'B반 (들쭉날쭉)', data: [40, 55, 70, 85, 100], backgroundColor: '#fbbf24' },
+    { label: 'A반 (다닥다닥)', data: [68, 69, 70, 71, 72], backgroundColor: 'var(--c-indigo-400)' },
+    { label: 'B반 (들쭉날쭉)', data: [40, 55, 70, 85, 100], backgroundColor: 'var(--c-amber-400)' },
   ],
 }
 
@@ -338,7 +338,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch2')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 2 완료. 이제 데이터의 '가운데'와 '퍼짐'을 모두 잴 수 있습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 무대를 옮겨 <b>확률의 기초</b> — 불확실한 세계를 숫자로 다루는 법을 배웁니다.

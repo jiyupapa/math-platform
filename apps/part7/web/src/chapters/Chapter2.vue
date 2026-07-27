@@ -86,9 +86,9 @@ function onSetComplete() {
           </tr>
         </thead>
         <tbody class="text-slate-700">
-          <tr class="border-b border-slate-100"><td class="py-2 pr-3">0°</td><td class="py-2 pr-3 font-mono text-emerald-600">1</td><td class="py-2">같은 방향 — 주제가 같다</td></tr>
-          <tr class="border-b border-slate-100"><td class="py-2 pr-3">90°</td><td class="py-2 pr-3 font-mono text-amber-600">0</td><td class="py-2">직교 — <b>무관</b> (4장에서 이 눈금이 주인공이 됩니다)</td></tr>
-          <tr><td class="py-2 pr-3">180°</td><td class="py-2 pr-3 font-mono text-rose-600">−1</td><td class="py-2">반대 방향 — 정반대</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">0°</td><td class="py-2 pr-3 font-mono text-emerald-700">1</td><td class="py-2">같은 방향 — 주제가 같다</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">90°</td><td class="py-2 pr-3 font-mono text-amber-700">0</td><td class="py-2">직교 — <b>무관</b> (4장에서 이 눈금이 주인공이 됩니다)</td></tr>
+          <tr><td class="py-2 pr-3">180°</td><td class="py-2 pr-3 font-mono text-rose-700">−1</td><td class="py-2">반대 방향 — 정반대</td></tr>
         </tbody>
       </table>
     </div>
@@ -266,7 +266,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch2')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">2장 완료 — 가까움의 자를 손에 넣었어요!</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 3장 — 자를 들고 임베딩 공간을 탐험합니다. 의미에 "방향"이 있다는 것,

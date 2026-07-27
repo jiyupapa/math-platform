@@ -66,7 +66,7 @@ const S = computed(() => {
 function verdict(p: number): { label: string; cls: string } {
   if (p < 0.01) return { label: `p = ${p < 0.0001 ? '< 0.0001' : p.toFixed(4)} — 강한 증거`, cls: 'bg-emerald-100 text-emerald-800' }
   if (p < 0.05) return { label: `p = ${p.toFixed(3)} — 유의 (α=0.05)`, cls: 'bg-emerald-50 text-emerald-700' }
-  return { label: `p = ${p.toFixed(3)} — 판정 불가`, cls: 'bg-slate-100 text-slate-500' }
+  return { label: `p = ${p.toFixed(3)} — 판정 불가`, cls: 'bg-slate-100 text-slate-600' }
 }
 const pct = (v: number) => ((v / n.value) * 100).toFixed(1)
 </script>
@@ -91,13 +91,13 @@ const pct = (v: number) => ((v / n.value) * 100).toFixed(1)
     </div>
 
     <!-- 문항 4분류 -->
-    <div class="mb-1 flex h-8 w-full overflow-hidden rounded-lg text-[10px] font-semibold text-white">
+    <div class="mb-1 flex h-8 w-full overflow-hidden rounded-lg text-xs font-semibold text-white">
       <div class="flex items-center justify-center bg-slate-400" :style="{ width: pct(S.both) + '%' }" :title="`둘 다 맞음 ${S.both}`">둘 다 ✓ {{ S.both }}</div>
       <div class="flex items-center justify-center bg-indigo-500" :style="{ width: pct(S.x) + '%' }" :title="`A만 맞음 ${S.x}`">A만 {{ S.x }}</div>
       <div class="flex items-center justify-center bg-rose-500" :style="{ width: pct(S.y) + '%' }" :title="`B만 맞음 ${S.y}`">B만 {{ S.y }}</div>
-      <div class="flex items-center justify-center bg-slate-200 text-slate-500" :style="{ width: pct(S.none) + '%' }" :title="`둘 다 틀림 ${S.none}`">둘 다 ✗ {{ S.none }}</div>
+      <div class="flex items-center justify-center bg-slate-200 text-slate-600" :style="{ width: pct(S.none) + '%' }" :title="`둘 다 틀림 ${S.none}`">둘 다 ✗ {{ S.none }}</div>
     </div>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       회색 칸(둘 다 맞음/틀림)은 우열 정보가 <b>0</b> — 증거는 색깔 칸(<b>불일치 {{ S.m }}문항</b>)에만 있습니다.
     </p>
 
@@ -108,7 +108,7 @@ const pct = (v: number) => ((v / n.value) * 100).toFixed(1)
         <p class="text-sm font-bold text-slate-700">방식 1 — 따로 보기 (점수만 비교)</p>
         <p class="mt-1 font-mono text-sm text-slate-600">A {{ S.a.toFixed(1) }}점 vs B {{ S.b.toFixed(1) }}점 · z = {{ S.zU.toFixed(2) }}</p>
         <p class="mt-2 rounded-md px-2.5 py-1.5 text-sm font-medium" :class="verdict(S.pU).cls">{{ verdict(S.pU).label }}</p>
-        <p class="mt-1.5 text-xs leading-relaxed text-slate-400">
+        <p class="mt-1.5 text-xs leading-relaxed text-slate-600">
           6장의 방식 — 각 점수의 출렁임(문항 난이도 운)이 통째로 소음에 들어갑니다.
         </p>
       </div>
@@ -118,7 +118,7 @@ const pct = (v: number) => ((v / n.value) * 100).toFixed(1)
           A만 {{ S.x }} vs B만 {{ S.y }} · z = (x−y)/√(x+y) = {{ S.zP.toFixed(2) }}
         </p>
         <p class="mt-2 rounded-md px-2.5 py-1.5 text-sm font-medium" :class="verdict(S.pP).cls">{{ verdict(S.pP).label }}</p>
-        <p class="mt-1.5 text-xs leading-relaxed text-slate-500">
+        <p class="mt-1.5 text-xs leading-relaxed text-slate-600">
           "실력이 같다면 불일치는 50:50 동전" — 거기서 얼마나 쏠렸는지만 봅니다.
         </p>
       </div>
@@ -141,7 +141,7 @@ const pct = (v: number) => ((v / n.value) * 100).toFixed(1)
       <div class="rounded-lg bg-white px-3 py-2 ring-1 ring-slate-200">따로 보기: <b class="font-mono">≈ 3,953문항</b></div>
       <div class="rounded-lg bg-white px-3 py-2 ring-1 ring-indigo-200">쌍대 보기: <b class="font-mono text-indigo-700">≈ 957문항</b></div>
       <span class="font-semibold text-emerald-700">→ 4.1배 절약</span>
-      <span class="text-xs text-slate-400">(절약 배율은 두 모델이 비슷할수록 — 불일치가 적을수록 — 커집니다)</span>
+      <span class="text-xs text-slate-500">(절약 배율은 두 모델이 비슷할수록 — 불일치가 적을수록 — 커집니다)</span>
     </div>
   </div>
 </template>

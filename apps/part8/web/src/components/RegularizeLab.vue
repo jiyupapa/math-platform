@@ -83,7 +83,7 @@ const ridge = computed(() => {
 const verdict = computed(() => {
   const { norm, valErr } = ridge.value
   if (li.value === 0)
-    return { tone: 'text-rose-600', text: `목줄 없음 — 7장의 그 암기 곡선입니다. 계수가 ${norm.toFixed(0)}까지 폭주하며 훈련 오차 0, 검증 ${valErr.toFixed(2)} 폭발.` }
+    return { tone: 'text-rose-700', text: `목줄 없음 — 7장의 그 암기 곡선입니다. 계수가 ${norm.toFixed(0)}까지 폭주하며 훈련 오차 0, 검증 ${valErr.toFixed(2)} 폭발.` }
   if (li.value >= 5)
     return { tone: 'text-sky-700', text: '너무 짧은 목줄 — 곡선이 짓눌려 규칙(굽이)까지 못 배웁니다(과소적합). 훈련·검증 둘 다 나쁨.' }
   return { tone: 'text-emerald-700', text: `목줄이 계수를 ${norm.toFixed(1)}로 묶자 요동이 사라졌어요 — 노이즈는 못 외우고 규칙만 남았습니다(검증 ${valErr.toFixed(3)}).` }
@@ -144,7 +144,7 @@ const lossLine = (ls: number[]) =>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 원점 목줄 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 원점 목줄: 7장의 암기 곡선에 weight decay 채우기</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       7장의 그 점 10개, 그 차수 9 그대로 — 이번엔 손실에 <b>λ×(계수 크기)²</b> 벌점을 더합니다.
       목줄의 세기 λ를 돌려 보세요.
     </p>
@@ -155,25 +155,25 @@ const lossLine = (ls: number[]) =>
     </label>
 
     <svg viewBox="0 0 300 150" class="mt-2 w-full rounded-lg bg-slate-50 ring-1 ring-slate-100">
-      <polyline :points="truePath" fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 3" />
-      <polyline :points="fittedPath" fill="none" stroke="#e11d48" stroke-width="1.8" opacity="0.9" />
-      <circle v-for="(x, i) in TRAIN.xs" :key="i" :cx="px(x)" :cy="py(TRAIN.ys[i]!)" r="3" fill="#4f46e5" />
-      <text x="18" y="12" font-size="8" fill="#94a3b8">- - 숨은 규칙</text>
-      <text x="18" y="22" font-size="8" fill="#e11d48">— 목줄 λ = {{ LABELS[li] }}</text>
+      <polyline :points="truePath" fill="none" stroke="var(--c-slate-400)" stroke-width="1" stroke-dasharray="4 3" />
+      <polyline :points="fittedPath" fill="none" stroke="var(--c-rose-600)" stroke-width="1.8" opacity="0.9" />
+      <circle v-for="(x, i) in TRAIN.xs" :key="i" :cx="px(x)" :cy="py(TRAIN.ys[i]!)" r="3" fill="var(--c-indigo-600)" />
+      <text x="18" y="12" font-size="8" fill="var(--c-slate-400)">- - 숨은 규칙</text>
+      <text x="18" y="22" font-size="8" fill="var(--c-rose-600)">— 목줄 λ = {{ LABELS[li] }}</text>
     </svg>
 
     <div class="mt-2 flex flex-wrap items-center gap-3 rounded-lg bg-slate-50 p-3">
       <div class="text-center">
-        <p class="text-[11px] text-slate-400">훈련 오차</p>
+        <p class="text-xs text-slate-500">훈련 오차</p>
         <p class="font-mono text-lg font-bold text-slate-700">{{ ridge.trainErr.toFixed(4) }}</p>
       </div>
       <div class="text-center">
-        <p class="text-[11px] text-slate-400">검증 오차</p>
-        <p class="font-mono text-lg font-bold" :class="ridge.valErr > 0.3 ? 'text-rose-600' : 'text-emerald-600'">{{ ridge.valErr.toFixed(4) }}</p>
+        <p class="text-xs text-slate-500">검증 오차</p>
+        <p class="font-mono text-lg font-bold" :class="ridge.valErr > 0.3 ? 'text-rose-700' : 'text-emerald-700'">{{ ridge.valErr.toFixed(4) }}</p>
       </div>
       <div class="text-center">
-        <p class="text-[11px] text-slate-400">계수 크기 ‖w‖ (1부 노름)</p>
-        <p class="font-mono text-lg font-bold" :class="ridge.norm > 10 ? 'text-rose-600' : 'text-indigo-600'">{{ ridge.norm > 100 ? ridge.norm.toFixed(0) : ridge.norm.toFixed(2) }}</p>
+        <p class="text-xs text-slate-500">계수 크기 ‖w‖ (1부 노름)</p>
+        <p class="font-mono text-lg font-bold" :class="ridge.norm > 10 ? 'text-rose-700' : 'text-indigo-600'">{{ ridge.norm > 100 ? ridge.norm.toFixed(0) : ridge.norm.toFixed(2) }}</p>
       </div>
       <p class="min-w-0 flex-1 text-xs leading-relaxed" :class="verdict.tone"><b>{{ verdict.text }}</b></p>
     </div>
@@ -181,7 +181,7 @@ const lossLine = (ls: number[]) =>
     <!-- ② 목줄 경주 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 목줄 경주: 벌어짐이 사라진다</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       7장 실험 ②의 그 훈련(차수 9 × 3,000스텝)을 두 번 돌립니다 — 목줄 없이(λ=0) vs 목줄 채우고(λ=0.03).
       조기 종료 없이 <b>끝까지 완주</b>했을 때 검증 손실이 어떻게 되는지 보세요.
     </p>
@@ -197,25 +197,25 @@ const lossLine = (ls: number[]) =>
 
     <template v-if="race">
       <svg viewBox="0 0 300 112" class="w-full rounded-lg bg-slate-50 ring-1 ring-slate-100">
-        <polyline :points="lossLine(race.free.trs)" fill="none" stroke="#4f46e5" stroke-width="1" opacity="0.45" />
-        <polyline :points="lossLine(race.free.vas)" fill="none" stroke="#e11d48" stroke-width="1.5" />
-        <polyline :points="lossLine(race.leashed.vas)" fill="none" stroke="#059669" stroke-width="1.8" />
-        <text x="284" y="14" text-anchor="end" font-size="8" fill="#4f46e5">— 훈련 손실 (λ=0)</text>
-        <text x="284" y="24" text-anchor="end" font-size="8" fill="#e11d48">— 검증, 목줄 없음</text>
-        <text x="284" y="34" text-anchor="end" font-size="8" fill="#059669">— 검증, 목줄 λ=0.03</text>
+        <polyline :points="lossLine(race.free.trs)" fill="none" stroke="var(--c-indigo-600)" stroke-width="1" opacity="0.45" />
+        <polyline :points="lossLine(race.free.vas)" fill="none" stroke="var(--c-rose-600)" stroke-width="1.5" />
+        <polyline :points="lossLine(race.leashed.vas)" fill="none" stroke="var(--c-emerald-600)" stroke-width="1.8" />
+        <text x="284" y="14" text-anchor="end" font-size="8" fill="var(--c-indigo-600)">— 훈련 손실 (λ=0)</text>
+        <text x="284" y="24" text-anchor="end" font-size="8" fill="var(--c-rose-600)">— 검증, 목줄 없음</text>
+        <text x="284" y="34" text-anchor="end" font-size="8" fill="var(--c-emerald-600)">— 검증, 목줄 λ=0.03</text>
       </svg>
 
       <div class="mt-2 flex flex-wrap gap-3 rounded-lg bg-slate-50 p-3 text-center">
         <div>
-          <p class="text-[11px] text-slate-400">목줄 없음 — 마지막 검증</p>
-          <p class="font-mono text-lg font-bold text-rose-600">{{ race.free.vas[STEPS - 1]!.toFixed(3) }} <span class="text-[11px] font-normal text-slate-400">(최저 {{ race.free.vas[race.free.best]!.toFixed(3) }}의 {{ (race.free.vas[STEPS - 1]! / race.free.vas[race.free.best]!).toFixed(1) }}배)</span></p>
+          <p class="text-xs text-slate-500">목줄 없음 — 마지막 검증</p>
+          <p class="font-mono text-lg font-bold text-rose-700">{{ race.free.vas[STEPS - 1]!.toFixed(3) }} <span class="text-xs font-normal text-slate-500">(최저 {{ race.free.vas[race.free.best]!.toFixed(3) }}의 {{ (race.free.vas[STEPS - 1]! / race.free.vas[race.free.best]!).toFixed(1) }}배)</span></p>
         </div>
         <div>
-          <p class="text-[11px] text-slate-400">목줄 λ=0.03 — 마지막 검증</p>
-          <p class="font-mono text-lg font-bold text-emerald-600">{{ race.leashed.vas[STEPS - 1]!.toFixed(3) }} <span class="text-[11px] font-normal text-slate-400">(벌어짐 없음)</span></p>
+          <p class="text-xs text-slate-500">목줄 λ=0.03 — 마지막 검증</p>
+          <p class="font-mono text-lg font-bold text-emerald-700">{{ race.leashed.vas[STEPS - 1]!.toFixed(3) }} <span class="text-xs font-normal text-slate-500">(벌어짐 없음)</span></p>
         </div>
         <div>
-          <p class="text-[11px] text-slate-400">목줄 값 — 마지막 훈련 오차</p>
+          <p class="text-xs text-slate-500">목줄 값 — 마지막 훈련 오차</p>
           <p class="font-mono text-lg font-bold text-slate-600">{{ race.free.trs[STEPS - 1]!.toFixed(3) }} → {{ race.leashed.trs[STEPS - 1]!.toFixed(3) }}</p>
         </div>
       </div>

@@ -239,7 +239,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch8')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 8 완료. 여러 변수도 한 방향씩 미분!</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 편미분들을 모은 <b>그래디언트</b>로 골짜기를 내려가는 <b>경사하강법</b>입니다.

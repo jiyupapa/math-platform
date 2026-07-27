@@ -109,7 +109,7 @@ function reset() {
             <p class="mt-0.5 text-slate-600">💭 생각: {{ s.think }}</p>
             <p class="text-slate-600">🛠️ 행동: {{ s.action }}</p>
             <p class="text-slate-600">👀 관찰: {{ s.obs }}</p>
-            <p class="mt-0.5 border-t border-slate-100 pt-0.5 text-slate-400">🧠 상태: {{ s.state }}</p>
+            <p class="mt-0.5 border-t border-slate-100 pt-0.5 text-slate-500">🧠 상태: {{ s.state }}</p>
           </li>
         </ol>
 

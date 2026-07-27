@@ -89,13 +89,13 @@ function resetStart() {
     <div class="space-y-1.5 rounded-lg bg-slate-50 p-3 text-sm">
       <div v-for="m in MANDATORY" :key="m.name" class="flex items-center gap-2 text-slate-500">
         <input type="checkbox" checked disabled class="h-4 w-4 accent-slate-400" />
-        <span class="flex-1">{{ m.name }} <span class="text-xs text-slate-400">(필수)</span></span>
+        <span class="flex-1">{{ m.name }} <span class="text-xs text-slate-500">(필수)</span></span>
         <span class="font-mono text-xs">{{ m.tokens.toLocaleString() }}tk · +{{ m.score }}</span>
       </div>
 
       <div class="flex flex-wrap items-center gap-2 border-t border-slate-200 pt-2">
         <span class="text-slate-700">이전 궤적(지금까지의 작업 기록)</span>
-        <span class="rounded-full bg-amber-100 px-1.5 text-[11px] font-semibold text-amber-700">밀도 {{ density(TRAJ.full).toFixed(1) }} / 요약 시 {{ density(TRAJ.summary).toFixed(1) }}</span>
+        <span class="rounded-full bg-amber-100 px-1.5 text-xs font-semibold text-amber-700">밀도 {{ density(TRAJ.full).toFixed(1) }} / 요약 시 {{ density(TRAJ.summary).toFixed(1) }}</span>
         <div class="ml-auto flex gap-1">
           <button
             v-for="(v, k) in TRAJ"
@@ -114,7 +114,7 @@ function resetStart() {
         <input v-model="on[o.key]" type="checkbox" class="h-4 w-4 accent-indigo-600" />
         <span class="flex-1" :class="o.score < 0 ? 'text-rose-700' : 'text-slate-700'">{{ o.name }}</span>
         <span
-          class="rounded-full px-1.5 text-[11px] font-semibold"
+          class="rounded-full px-1.5 text-xs font-semibold"
           :class="o.score < 0 ? 'bg-rose-100 text-rose-700' : density(o) >= 9 ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-200 text-slate-600'"
         >밀도 {{ density(o).toFixed(1) }}</span>
         <span class="w-28 shrink-0 text-right font-mono text-xs text-slate-500">{{ o.tokens.toLocaleString() }}tk · {{ o.score > 0 ? '+' : '' }}{{ o.score }}</span>
@@ -149,7 +149,7 @@ function resetStart() {
         ↺ 처음처럼 (다 끌고 다니는 습관)
       </button>
     </div>
-    <p class="mt-2 text-xs text-slate-400">
+    <p class="mt-2 text-xs text-slate-500">
       밀도 높은 것부터 담는 감각이 대체로 통하지만, 칸이 딱 안 맞을 땐 최적과 어긋날 수 있어요
       (이런 문제의 정식 이름: 배낭 문제 knapsack — 여기선 전수 탐색으로 확정).
     </p>

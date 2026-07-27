@@ -226,7 +226,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch5')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">5장 완료 — 지도를 그리고, 속지 않고 읽을 수 있어요!</p>
       <p class="mt-1 text-sm text-emerald-700">
         공간 이야기(3~5장)가 끝났습니다. 다음은 시스템 이야기 — 수만 개 문서 중

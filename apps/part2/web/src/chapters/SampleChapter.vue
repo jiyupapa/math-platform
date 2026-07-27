@@ -27,8 +27,8 @@ const slopeChart = computed(() => {
       {
         label: "접선 기울기 f'(x) = 2x",
         data: xs.map((x) => df(x)),
-        borderColor: '#ef4444',
-        backgroundColor: '#ef4444',
+        borderColor: 'var(--c-red-500)',
+        backgroundColor: 'var(--c-red-500)',
         tension: 0,
       },
     ],

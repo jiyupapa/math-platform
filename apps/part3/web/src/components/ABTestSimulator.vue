@@ -162,21 +162,21 @@ const fmt = (x: number, d = 1) => Number(x.toFixed(d)).toString()
             :y="bar.y"
             :width="bar.w"
             :height="bar.h"
-            :fill="bar.extreme ? '#fda4af' : '#a5b4fc'"
+            :fill="bar.extreme ? 'var(--c-rose-300)' : 'var(--c-indigo-300)'"
           />
           <!-- 기준선 0 -->
-          <line :x1="sx(0)" :y1="10" :x2="sx(0)" :y2="height - 20" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3" />
+          <line :x1="sx(0)" :y1="10" :x2="sx(0)" :y2="height - 20" stroke="var(--c-slate-400)" stroke-width="1" stroke-dasharray="3 3" />
           <!-- 관측 차이 -->
-          <line :x1="sx(obsDiff)" :y1="4" :x2="sx(obsDiff)" :y2="height - 20" stroke="#e11d48" stroke-width="2.5" />
-          <text :x="sx(obsDiff)" y="14" text-anchor="middle" font-size="11" fill="#e11d48" font-weight="bold">
+          <line :x1="sx(obsDiff)" :y1="4" :x2="sx(obsDiff)" :y2="height - 20" stroke="var(--c-rose-600)" stroke-width="2.5" />
+          <text :x="sx(obsDiff)" y="14" text-anchor="middle" font-size="11" fill="var(--c-rose-600)" font-weight="bold">
             관측 {{ obsDiff >= 0 ? '+' : '' }}{{ fmt(obsDiff) }}%p
           </text>
           <!-- 축 라벨 -->
-          <text :x="sx(-range)" :y="height - 6" text-anchor="start" font-size="10" fill="#94a3b8">−{{ fmt(range) }}%p</text>
-          <text :x="sx(0)" :y="height - 6" text-anchor="middle" font-size="10" fill="#94a3b8">0</text>
-          <text :x="sx(range)" :y="height - 6" text-anchor="end" font-size="10" fill="#94a3b8">+{{ fmt(range) }}%p</text>
+          <text :x="sx(-range)" :y="height - 6" text-anchor="start" font-size="10" fill="var(--c-slate-400)">−{{ fmt(range) }}%p</text>
+          <text :x="sx(0)" :y="height - 6" text-anchor="middle" font-size="10" fill="var(--c-slate-400)">0</text>
+          <text :x="sx(range)" :y="height - 6" text-anchor="end" font-size="10" fill="var(--c-slate-400)">+{{ fmt(range) }}%p</text>
         </template>
-        <text v-else :x="size / 2" :y="height / 2" text-anchor="middle" font-size="13" fill="#94a3b8">
+        <text v-else :x="size / 2" :y="height / 2" text-anchor="middle" font-size="13" fill="var(--c-slate-400)">
           버튼을 눌러 "차이가 없다면 어떤 차이까지 우연으로 나오는지" 확인해 보세요
         </text>
       </svg>

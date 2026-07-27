@@ -262,11 +262,11 @@ const legend: { tone: Tone; label: string }[] = [
         {{ l.label }}
       </span>
       <span class="inline-flex items-center gap-1.5">
-        <svg width="26" height="8"><line x1="0" y1="4" x2="26" y2="4" stroke="#94a3b8" stroke-width="1.5" /></svg>
+        <svg width="26" height="8"><line x1="0" y1="4" x2="26" y2="4" stroke="var(--c-slate-400)" stroke-width="1.5" /></svg>
         필수 흐름
       </span>
       <span class="inline-flex items-center gap-1.5">
-        <svg width="26" height="8"><line x1="0" y1="4" x2="26" y2="4" stroke="#14b8a6" stroke-width="1.5" stroke-dasharray="4 3" /></svg>
+        <svg width="26" height="8"><line x1="0" y1="4" x2="26" y2="4" stroke="var(--c-teal-500)" stroke-width="1.5" stroke-dasharray="4 3" /></svg>
         선택 진입
       </span>
     </div>
@@ -282,13 +282,13 @@ const legend: { tone: Tone; label: string }[] = [
         >
           <defs>
             <marker id="arrow-flow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
-              <path d="M0,0.8 L7.2,4 L0,7.2 Z" fill="#94a3b8" />
+              <path d="M0,0.8 L7.2,4 L0,7.2 Z" fill="var(--c-slate-400)" />
             </marker>
             <marker id="arrow-entry" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
-              <path d="M0,0.8 L7.2,4 L0,7.2 Z" fill="#14b8a6" />
+              <path d="M0,0.8 L7.2,4 L0,7.2 Z" fill="var(--c-teal-500)" />
             </marker>
             <marker id="arrow-active" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
-              <path d="M0,0.8 L7.2,4 L0,7.2 Z" fill="#6366f1" />
+              <path d="M0,0.8 L7.2,4 L0,7.2 Z" fill="var(--c-indigo-500)" />
             </marker>
           </defs>
           <path
@@ -296,7 +296,7 @@ const legend: { tone: Tone; label: string }[] = [
             :key="p.from + '-' + p.to"
             :d="p.d"
             fill="none"
-            :stroke="p.active ? '#6366f1' : p.kind === 'flow' ? '#94a3b8' : '#14b8a6'"
+            :stroke="p.active ? 'var(--c-indigo-500)' : p.kind === 'flow' ? 'var(--c-slate-400)' : 'var(--c-teal-500)'"
             :stroke-width="p.active ? 2.5 : 1.5"
             :stroke-dasharray="p.kind === 'entry' ? '5 4' : undefined"
             :marker-end="`url(#arrow-${p.active ? 'active' : p.kind})`"
@@ -306,7 +306,7 @@ const legend: { tone: Tone; label: string }[] = [
 
         <div class="grid gap-0" :style="{ gridTemplateColumns: gridCols }">
           <!-- 헤더 행: 모서리 + 레인(열) 헤더 -->
-          <div class="border-b border-slate-200 pb-2 text-[11px] font-medium text-slate-500">
+          <div class="border-b border-slate-200 pb-2 text-xs font-medium text-slate-500">
             국면 ↓ · 레인 →
           </div>
           <div
@@ -321,7 +321,7 @@ const legend: { tone: Tone; label: string }[] = [
           <template v-for="c in columns" :key="c.id">
             <div class="flex flex-col border-b border-slate-100 pt-3 pr-2">
               <p class="text-sm font-bold text-slate-700">{{ c.title }}</p>
-              <p class="text-[11px] leading-tight text-slate-500">{{ c.sub }}</p>
+              <p class="text-xs leading-tight text-slate-500">{{ c.sub }}</p>
             </div>
             <div
               v-for="lane in visibleLanes"
@@ -338,15 +338,15 @@ const legend: { tone: Tone; label: string }[] = [
                 @click="selected = selected === n.id ? null : n.id"
               >
                 <div class="flex items-center justify-between gap-1">
-                  <span class="font-mono text-[10px] font-bold text-slate-500">{{ viewOf(n.id).label }}</span>
-                  <span class="rounded px-1.5 py-0.5 text-[10px] font-semibold" :class="viewOf(n.id).style.badge">
+                  <span class="font-mono text-xs font-bold text-slate-500">{{ viewOf(n.id).label }}</span>
+                  <span class="rounded px-1.5 py-0.5 text-xs font-semibold" :class="viewOf(n.id).style.badge">
                     {{ viewOf(n.id).state.badge }}
                   </span>
                 </div>
                 <p class="mt-0.5 text-[13px] font-bold leading-tight" :class="viewOf(n.id).style.title">
                   {{ viewOf(n.id).title }}
                 </p>
-                <p class="mt-0.5 truncate text-[11px] text-slate-500">{{ viewOf(n.id).meta }}</p>
+                <p class="mt-0.5 truncate text-xs text-slate-500">{{ viewOf(n.id).meta }}</p>
                 <div v-if="viewOf(n.id).progress" class="mt-1.5 h-1 overflow-hidden rounded-full bg-slate-200">
                   <div
                     class="h-full rounded-full bg-indigo-500"
@@ -365,7 +365,7 @@ const legend: { tone: Tone; label: string }[] = [
       <div class="flex flex-wrap items-start justify-between gap-3">
         <div>
           <div class="mb-1 flex items-center gap-2">
-            <span class="rounded px-1.5 py-0.5 text-[11px] font-semibold" :class="detail.style.badge">
+            <span class="rounded px-1.5 py-0.5 text-xs font-semibold" :class="detail.style.badge">
               {{ detail.state.badge }}
             </span>
             <span v-if="detail.step" class="text-xs text-slate-500">

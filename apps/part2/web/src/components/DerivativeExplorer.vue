@@ -106,26 +106,26 @@ const showYAxis = computed(() => props.xmin <= 0 && props.xmax >= 0)
     <div class="flex justify-center">
       <svg :viewBox="`0 0 ${width} ${topH}`" :width="width" :height="topH"
         class="max-w-full rounded-lg border border-slate-100 bg-slate-50">
-        <g stroke="#e2e8f0" stroke-width="1">
+        <g stroke="var(--c-slate-200)" stroke-width="1">
           <line v-for="t in xticks" :key="'tx' + t" :x1="sx(t)" :y1="0" :x2="sx(t)" :y2="topH" />
         </g>
-        <g stroke="#94a3b8" stroke-width="1.3">
+        <g stroke="var(--c-slate-400)" stroke-width="1.3">
           <line v-if="showTopXAxis" :x1="0" :y1="topXAxis" :x2="width" :y2="topXAxis" />
           <line v-if="showYAxis" :x1="yAxisX" :y1="0" :x2="yAxisX" :y2="topH" />
         </g>
         <!-- x0 세로 안내선 (두 패널 연결) -->
-        <line :x1="sx(x0)" :y1="0" :x2="sx(x0)" :y2="topH" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="4 3" />
+        <line :x1="sx(x0)" :y1="0" :x2="sx(x0)" :y2="topH" stroke="var(--c-indigo-200)" stroke-width="1.5" stroke-dasharray="4 3" />
         <!-- 접선 -->
         <line :x1="sx(xmin)" :y1="syT(tangentY(xmin))" :x2="sx(xmax)" :y2="syT(tangentY(xmax))"
-          stroke="#ef4444" stroke-width="2.5" />
+          stroke="var(--c-red-500)" stroke-width="2.5" />
         <!-- 곡선 -->
-        <polyline :points="curveF" fill="none" stroke="#6366f1" stroke-width="2.5" />
+        <polyline :points="curveF" fill="none" stroke="var(--c-indigo-500)" stroke-width="2.5" />
         <!-- 접점 -->
-        <circle :cx="sx(x0)" :cy="syT(fx0)" r="6" fill="#fff" stroke="#6366f1" stroke-width="3" />
+        <circle :cx="sx(x0)" :cy="syT(fx0)" r="6" fill="var(--c-white)" stroke="var(--c-indigo-500)" stroke-width="3" />
       </svg>
     </div>
 
-    <div class="my-1 text-center text-lg text-slate-300">↕ 같은 x, 위 기울기 = 아래 높이</div>
+    <div class="my-1 text-center text-lg text-slate-500">↕ 같은 x, 위 기울기 = 아래 높이</div>
 
     <!-- 아래: f'(x) 도함수 그래프 -->
     <p class="mb-1 text-center text-sm font-semibold text-slate-600">
@@ -135,19 +135,19 @@ const showYAxis = computed(() => props.xmin <= 0 && props.xmax >= 0)
     <div class="flex justify-center">
       <svg :viewBox="`0 0 ${width} ${botH}`" :width="width" :height="botH"
         class="max-w-full rounded-lg border border-slate-100 bg-slate-50">
-        <g stroke="#e2e8f0" stroke-width="1">
+        <g stroke="var(--c-slate-200)" stroke-width="1">
           <line v-for="t in xticks" :key="'bx' + t" :x1="sx(t)" :y1="0" :x2="sx(t)" :y2="botH" />
         </g>
-        <g stroke="#94a3b8" stroke-width="1.3">
+        <g stroke="var(--c-slate-400)" stroke-width="1.3">
           <line :x1="0" :y1="botXAxis" :x2="width" :y2="botXAxis" />
           <line v-if="showYAxis" :x1="yAxisX" :y1="0" :x2="yAxisX" :y2="botH" />
         </g>
-        <line :x1="sx(x0)" :y1="0" :x2="sx(x0)" :y2="botH" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="4 3" />
+        <line :x1="sx(x0)" :y1="0" :x2="sx(x0)" :y2="botH" stroke="var(--c-indigo-200)" stroke-width="1.5" stroke-dasharray="4 3" />
         <!-- 도함수 곡선 -->
-        <polyline :points="curveDf" fill="none" stroke="#10b981" stroke-width="2.5" />
+        <polyline :points="curveDf" fill="none" stroke="var(--c-emerald-500)" stroke-width="2.5" />
         <!-- 현재 기울기 높이 표시 -->
-        <line :x1="sx(x0)" :y1="botXAxis" :x2="sx(x0)" :y2="syB(slope)" stroke="#ef4444" stroke-width="2" />
-        <circle :cx="sx(x0)" :cy="syB(slope)" r="6" fill="#fff" stroke="#10b981" stroke-width="3" />
+        <line :x1="sx(x0)" :y1="botXAxis" :x2="sx(x0)" :y2="syB(slope)" stroke="var(--c-red-500)" stroke-width="2" />
+        <circle :cx="sx(x0)" :cy="syB(slope)" r="6" fill="var(--c-white)" stroke="var(--c-emerald-500)" stroke-width="3" />
       </svg>
     </div>
 
@@ -160,8 +160,8 @@ const showYAxis = computed(() => props.xmin <= 0 && props.xmax >= 0)
       </label>
     </div>
     <p class="mt-2 px-1 text-xs leading-relaxed text-slate-500">
-      슬라이더를 움직여 보세요. 위 <b class="text-red-500">접선</b>의 기울기 값이 그대로
-      아래 <b class="text-emerald-600">도함수 f'(x)</b> 그래프의 <b>점 높이</b>로 나타납니다.
+      슬라이더를 움직여 보세요. 위 <b class="text-red-600">접선</b>의 기울기 값이 그대로
+      아래 <b class="text-emerald-700">도함수 f'(x)</b> 그래프의 <b>점 높이</b>로 나타납니다.
       "모든 점의 기울기를 모은 것"이 바로 도함수예요.
     </p>
   </div>

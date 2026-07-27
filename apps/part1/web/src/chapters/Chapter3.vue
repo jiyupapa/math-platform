@@ -137,8 +137,8 @@ function onSetComplete() {
     </ConceptCard>
 
     <p class="leading-relaxed text-slate-700">
-      아래에서 <b style="color:#059669">결과 행렬 C의 칸</b>을 눌러보세요. 그 칸이
-      <b style="color:#4f46e5">A의 행</b>과 <b style="color:#db2777">B의 열</b>을 어떻게 내적하는지 보여줍니다.
+      아래에서 <b style="color: var(--c-emerald-700)">결과 행렬 C의 칸</b>을 눌러보세요. 그 칸이
+      <b style="color:var(--c-indigo-600)">A의 행</b>과 <b style="color: var(--c-pink-700)">B의 열</b>을 어떻게 내적하는지 보여줍니다.
     </p>
     <MatrixMultiply :a="matA" :b="matB" />
 
@@ -284,12 +284,14 @@ function onSetComplete() {
     <div class="my-4 flex flex-wrap items-center justify-center gap-6">
       <table class="border-collapse">
         <tbody>
+          <!-- 셀 배경은 gray() 가 런타임에 만드는 회색조라 다크 모드에서도 뒤집히지 않는다(데이터 색).
+               그래서 글자색도 테마를 따라가면 안 된다 — 뒤집히지 않는 고정 토큰을 쓴다. -->
           <tr v-for="(row, i) in imageMatrix" :key="i">
             <td
               v-for="(val, j) in row"
               :key="j"
-              class="h-9 w-9 border border-slate-100 text-center text-[11px]"
-              :style="{ background: gray(val), color: val > 5 ? '#000' : '#fff' }"
+              class="h-9 w-9 border border-slate-100 text-center text-xs"
+              :style="{ background: gray(val), color: val > 5 ? 'var(--c-on-light)' : 'var(--c-on-dark)' }"
             >
               {{ val }}
             </td>
@@ -418,7 +420,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch3')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 3 완료. 행렬을 다룰 수 있습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">다음은 행렬로 연립방정식을 푸는 법입니다.</p>
       <RouterLink

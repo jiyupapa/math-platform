@@ -107,7 +107,7 @@ const pct = (v: number) => (v * 100).toFixed(1)
     <div class="rounded-lg bg-slate-50 p-4">
       <div class="mb-2 flex flex-wrap gap-0.5">
         <span v-for="(c, i) in passCells" :key="i" class="h-4 w-4 rounded-[3px]" :class="CELL_CLASS[c]" />
-        <span v-if="!passCells.length" class="text-xs text-slate-400">통과한 답안이 없습니다</span>
+        <span v-if="!passCells.length" class="text-xs text-slate-500">통과한 답안이 없습니다</span>
       </div>
       <div class="mb-1 flex items-center gap-3">
         <div class="relative h-5 flex-1 overflow-hidden rounded-md bg-white ring-1 ring-slate-200">

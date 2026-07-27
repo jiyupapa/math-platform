@@ -87,7 +87,7 @@ onUnmounted(stopAnim)
         class="max-w-full rounded-lg border border-slate-100 bg-slate-50"
       >
         <!-- 핀 (r번째 줄에 r+1개) -->
-        <g fill="#94a3b8">
+        <g fill="var(--c-slate-400)">
           <template v-for="r in rows" :key="'r' + r">
             <circle
               v-for="i in r"
@@ -105,8 +105,8 @@ onUnmounted(stopAnim)
           :cx="pinX(ball.row, ball.pos)"
           :cy="pinY(ball.row) - 7"
           r="6"
-          fill="#ef4444"
-          stroke="#fff"
+          fill="var(--c-red-500)"
+          stroke="var(--c-white)"
           stroke-width="1.5"
         />
 
@@ -120,7 +120,7 @@ onUnmounted(stopAnim)
             :width="binW"
             :height="binH(c)"
             rx="2"
-            fill="#34d399"
+            fill="var(--c-emerald-400)"
           />
           <text
             v-for="(c, i) in bins"
@@ -129,7 +129,7 @@ onUnmounted(stopAnim)
             :y="pinsBottom + binAreaH + 2"
             font-size="8.5"
             text-anchor="middle"
-            fill="#64748b"
+            fill="var(--c-slate-500)"
           >
             {{ c > 0 ? c : '' }}
           </text>
@@ -140,7 +140,7 @@ onUnmounted(stopAnim)
           :y1="pinsBottom + binAreaH - 12"
           :x2="size - 10"
           :y2="pinsBottom + binAreaH - 12"
-          stroke="#94a3b8"
+          stroke="var(--c-slate-400)"
           stroke-width="1"
         />
       </svg>

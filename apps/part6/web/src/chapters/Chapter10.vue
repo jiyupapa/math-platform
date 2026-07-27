@@ -245,7 +245,7 @@ const JOURNEY = [
       v-if="progress.isDone('ch10')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-2xl font-bold text-emerald-600">🎓</div>
+      <div class="mb-1 text-2xl font-bold text-emerald-700">🎓</div>
       <p class="text-lg font-bold text-emerald-800">6부 완주 — 그리고 시리즈 완주를 축하합니다!</p>
       <p class="mt-2 text-sm leading-relaxed text-emerald-700">
         수학을 포기했던 자리에서 출발해, ChatGPT가 만들어지는 원리를 수식째로 이해하는 곳까지 —

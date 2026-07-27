@@ -201,13 +201,13 @@ const fmt = (v: number, digits = 4) => v.toFixed(digits)
     <div class="flex flex-wrap items-start gap-4">
       <svg :viewBox="`0 0 ${W} ${HH}`" class="h-56 w-full max-w-md rounded-lg bg-slate-50 ring-1 ring-slate-200">
         <!-- 격자 (x: 10^2~10^5) -->
-        <line v-for="e in 4" :key="'x' + e" :x1="gx(10 ** (e + 1))" :x2="gx(10 ** (e + 1))" :y1="PAD.t" :y2="HH - PAD.b" stroke="#e2e8f0" />
+        <line v-for="e in 4" :key="'x' + e" :x1="gx(10 ** (e + 1))" :x2="gx(10 ** (e + 1))" :y1="PAD.t" :y2="HH - PAD.b" stroke="var(--c-slate-200)" />
         <text v-for="e in 4" :key="'xl' + e" :x="gx(10 ** (e + 1))" :y="HH - 10" text-anchor="middle" class="fill-slate-400" font-size="9">
           {{ (10 ** (e + 1)).toLocaleString() }}
         </text>
         <!-- 바닥선 (총 손실 모드) -->
         <template v-if="floorY !== null">
-          <line :x1="PAD.l" :x2="W - PAD.r" :y1="floorY" :y2="floorY" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5 4" />
+          <line :x1="PAD.l" :x2="W - PAD.r" :y1="floorY" :y2="floorY" stroke="var(--c-amber-500)" stroke-width="1.5" stroke-dasharray="5 4" />
           <text :x="W - PAD.r - 2" :y="floorY - 4" text-anchor="end" class="fill-amber-600" font-size="9">바닥 H = {{ fmt(H, 3) }}</text>
         </template>
         <!-- 적합 직선 (초과 모드) -->
@@ -217,7 +217,7 @@ const fmt = (v: number, digits = 4) => v.toFixed(digits)
           :y1="fitLinePts.y1"
           :x2="fitLinePts.x2"
           :y2="fitLinePts.y2"
-          :stroke="predict ? '#e11d48' : '#10b981'"
+          :stroke="predict ? 'var(--c-rose-600)' : 'var(--c-emerald-500)'"
           stroke-width="1.5"
           :stroke-dasharray="predict ? '6 4' : undefined"
         />
@@ -228,16 +228,16 @@ const fmt = (v: number, digits = 4) => v.toFixed(digits)
             :cx="gx(r.d)"
             :cy="gy(r)"
             :r="sel === i ? 6 : 4"
-            :fill="sel === i ? '#4f46e5' : '#818cf8'"
+            :fill="sel === i ? 'var(--c-indigo-600)' : 'var(--c-indigo-400)'"
           />
           <!-- 예측 모드: 마지막 두 점은 '정답 공개'로 표시 -->
-          <circle v-else :cx="gx(r.d)" :cy="gy(r)" r="4" fill="none" stroke="#e11d48" stroke-width="1.5" />
+          <circle v-else :cx="gx(r.d)" :cy="gy(r)" r="4" fill="none" stroke="var(--c-rose-600)" stroke-width="1.5" />
         </g>
       </svg>
 
       <div class="min-w-52 flex-1 space-y-2 text-sm">
         <div class="rounded-lg bg-slate-50 p-3">
-          <p class="text-xs text-slate-400">D = {{ ROWS[sel].d.toLocaleString() }} 토큰으로 배운 뒤</p>
+          <p class="text-xs text-slate-500">D = {{ ROWS[sel].d.toLocaleString() }} 토큰으로 배운 뒤</p>
           <p class="mt-0.5 font-mono font-bold text-slate-800">손실 L = {{ fmt(ROWS[sel].L) }} nat</p>
           <p class="font-mono text-xs text-slate-500">초과 손실 L − H = {{ ROWS[sel].ex.toExponential(2) }}</p>
         </div>

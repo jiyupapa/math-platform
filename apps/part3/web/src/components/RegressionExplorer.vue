@@ -132,15 +132,15 @@ const fmt = (v: number, d = 1) => Number(v.toFixed(d)).toString()
         <rect :x="0" :y="0" :width="size" :height="height" fill="transparent" @pointerdown="addPoint" />
 
         <!-- 격자 -->
-        <g stroke="#e2e8f0" stroke-width="1">
+        <g stroke="var(--c-slate-200)" stroke-width="1">
           <line v-for="t in 5" :key="'gx' + t" :x1="sx(t * 2)" :y1="PAD" :x2="sx(t * 2)" :y2="height - PAD" />
           <line v-for="t in 4" :key="'gy' + t" :x1="PAD" :y1="sy(t * 25)" :x2="size - PAD" :y2="sy(t * 25)" />
         </g>
         <!-- 축 -->
-        <line :x1="PAD" :y1="height - PAD" :x2="size - PAD" :y2="height - PAD" stroke="#94a3b8" stroke-width="1.2" />
-        <line :x1="PAD" :y1="PAD" :x2="PAD" :y2="height - PAD" stroke="#94a3b8" stroke-width="1.2" />
-        <text :x="size - PAD" :y="height - 8" text-anchor="end" font-size="10" fill="#94a3b8">공부 시간(시간) →</text>
-        <text :x="8" :y="PAD - 8" font-size="10" fill="#94a3b8">점수</text>
+        <line :x1="PAD" :y1="height - PAD" :x2="size - PAD" :y2="height - PAD" stroke="var(--c-slate-400)" stroke-width="1.2" />
+        <line :x1="PAD" :y1="PAD" :x2="PAD" :y2="height - PAD" stroke="var(--c-slate-400)" stroke-width="1.2" />
+        <text :x="size - PAD" :y="height - 8" text-anchor="end" font-size="10" fill="var(--c-slate-400)">공부 시간(시간) →</text>
+        <text :x="8" :y="PAD - 8" font-size="10" fill="var(--c-slate-400)">점수</text>
 
         <!-- 잔차 (내 직선 기준) -->
         <g v-for="(p, i) in points" :key="'r' + i">
@@ -149,14 +149,14 @@ const fmt = (v: number, d = 1) => Number(v.toFixed(d)).toString()
             :y1="sy(p.y)"
             :x2="sx(p.x)"
             :y2="sy(Math.min(YMAX, Math.max(0, a * p.x + b)))"
-            stroke="#fb7185"
+            stroke="var(--c-rose-400)"
             stroke-width="1.5"
             stroke-dasharray="3 2"
           />
         </g>
 
         <!-- 내 직선 (파랑) -->
-        <line :x1="sx(0)" :y1="sy(b)" :x2="sx(XMAX)" :y2="sy(a * XMAX + b)" stroke="#6366f1" stroke-width="2.5" />
+        <line :x1="sx(0)" :y1="sy(b)" :x2="sx(XMAX)" :y2="sy(a * XMAX + b)" stroke="var(--c-indigo-500)" stroke-width="2.5" />
         <!-- 최소제곱 직선 (초록) -->
         <line
           v-if="showBest"
@@ -164,7 +164,7 @@ const fmt = (v: number, d = 1) => Number(v.toFixed(d)).toString()
           :y1="sy(stats.bestB)"
           :x2="sx(XMAX)"
           :y2="sy(stats.bestA * XMAX + stats.bestB)"
-          stroke="#10b981"
+          stroke="var(--c-emerald-500)"
           stroke-width="2.5"
           stroke-dasharray="7 4"
         />
@@ -176,8 +176,8 @@ const fmt = (v: number, d = 1) => Number(v.toFixed(d)).toString()
           :cx="sx(p.x)"
           :cy="sy(p.y)"
           r="7"
-          fill="#4f46e5"
-          stroke="#fff"
+          fill="var(--c-indigo-600)"
+          stroke="var(--c-white)"
           stroke-width="2"
           class="cursor-grab"
           @pointerdown.stop="startDrag(i)"

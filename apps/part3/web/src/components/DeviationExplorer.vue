@@ -84,11 +84,11 @@ const fmt = (n: number) => Number(n.toFixed(2)).toString()
           :y1="6"
           :x2="sx(mean)"
           :y2="H - 28"
-          stroke="#ef4444"
+          stroke="var(--c-red-500)"
           stroke-width="2"
           stroke-dasharray="6 4"
         />
-        <text :x="sx(mean)" :y="H - 14" text-anchor="middle" fill="#ef4444" class="text-[10px] font-bold">
+        <text :x="sx(mean)" :y="H - 14" text-anchor="middle" fill="var(--c-red-500)" class="text-xs font-bold">
           평균 {{ fmt(mean) }}
         </text>
 
@@ -99,7 +99,7 @@ const fmt = (n: number) => Number(n.toFixed(2)).toString()
             :y="rowY(i) - 5"
             :width="Math.abs(sx(v) - sx(mean))"
             :height="10"
-            :fill="v >= mean ? '#34d399' : '#fb7185'"
+            :fill="v >= mean ? 'var(--c-emerald-400)' : 'var(--c-rose-400)'"
             opacity="0.55"
             rx="3"
           />
@@ -107,8 +107,8 @@ const fmt = (n: number) => Number(n.toFixed(2)).toString()
             :cx="sx(v)"
             :cy="rowY(i)"
             r="8"
-            fill="#6366f1"
-            stroke="#fff"
+            fill="var(--c-indigo-500)"
+            stroke="var(--c-white)"
             stroke-width="2"
             class="cursor-grab"
             @pointerdown="onDown(i)"
@@ -117,8 +117,8 @@ const fmt = (n: number) => Number(n.toFixed(2)).toString()
             :x="sx(v) + (v >= mean ? 12 : -12)"
             :y="rowY(i) + 3"
             :text-anchor="v >= mean ? 'start' : 'end'"
-            fill="#475569"
-            class="text-[9px]"
+            fill="var(--c-slate-600)"
+            class="text-xs"
           >
             {{ v }} (편차 {{ fmt(v - mean) }})
           </text>
@@ -146,8 +146,8 @@ const fmt = (n: number) => Number(n.toFixed(2)).toString()
     </div>
 
     <p class="mt-2 px-1 text-xs leading-relaxed text-slate-500">
-      점을 좌우로 끌어 보세요. <b class="text-emerald-600">초록 막대</b>는 평균보다 큰 편차(+),
-      <b class="text-rose-500">분홍 막대</b>는 작은 편차(−)입니다. +와 −가 정확히 상쇄돼 편차 합은
+      점을 좌우로 끌어 보세요. <b class="text-emerald-700">초록 막대</b>는 평균보다 큰 편차(+),
+      <b class="text-rose-700">분홍 막대</b>는 작은 편차(−)입니다. +와 −가 정확히 상쇄돼 편차 합은
       늘 0 — 그래서 <b>제곱</b>해서 평균 낸 것이 분산, 그 제곱근이 표준편차 σ 입니다.
       점들을 평균에서 멀리 흩어 놓을수록 σ 가 커지는 걸 확인하세요.
     </p>

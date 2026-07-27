@@ -107,7 +107,7 @@ const fmt = (v: number) => Number(v.toFixed(1)).toString()
             :y1="14"
             :x2="sx(l.x)"
             :y2="sy(0)"
-            stroke="#cbd5e1"
+            stroke="var(--c-slate-300)"
             stroke-width="1"
             stroke-dasharray="3 3"
           />
@@ -118,24 +118,24 @@ const fmt = (v: number) => Number(v.toFixed(1)).toString()
             y="12"
             font-size="9"
             text-anchor="middle"
-            fill="#94a3b8"
+            fill="var(--c-slate-400)"
           >
             {{ l.k > 0 ? `μ+${l.k}σ` : `μ−${-l.k}σ` }}
           </text>
         </g>
         <!-- 중심 μ -->
-        <line :x1="sx(mu)" :y1="14" :x2="sx(mu)" :y2="sy(0)" stroke="#94a3b8" stroke-width="1.2" />
+        <line :x1="sx(mu)" :y1="14" :x2="sx(mu)" :y2="sy(0)" stroke="var(--c-slate-400)" stroke-width="1.2" />
         <!-- 구간 넓이 -->
-        <polygon :points="region" fill="#6366f1" opacity="0.28" />
+        <polygon :points="region" fill="var(--c-indigo-500)" opacity="0.28" />
         <!-- 밀도곡선 -->
-        <polyline :points="curve" fill="none" stroke="#6366f1" stroke-width="2.5" />
+        <polyline :points="curve" fill="none" stroke="var(--c-indigo-500)" stroke-width="2.5" />
         <!-- x축 -->
-        <line :x1="0" :y1="sy(0)" :x2="size" :y2="sy(0)" stroke="#94a3b8" stroke-width="1" />
+        <line :x1="0" :y1="sy(0)" :x2="size" :y2="sy(0)" stroke="var(--c-slate-400)" stroke-width="1" />
         <!-- 구간 경계 -->
-        <line :x1="sx(lo)" :y1="sy(0)" :x2="sx(lo)" :y2="sy(0) + 6" stroke="#4f46e5" stroke-width="2" />
-        <line :x1="sx(hi)" :y1="sy(0)" :x2="sx(hi)" :y2="sy(0) + 6" stroke="#4f46e5" stroke-width="2" />
-        <text :x="sx(lo)" :y="height - 4" font-size="10" text-anchor="middle" fill="#4f46e5">a = {{ fmt(lo) }}</text>
-        <text :x="sx(hi)" :y="height - 4" font-size="10" text-anchor="middle" fill="#4f46e5">b = {{ fmt(hi) }}</text>
+        <line :x1="sx(lo)" :y1="sy(0)" :x2="sx(lo)" :y2="sy(0) + 6" stroke="var(--c-indigo-600)" stroke-width="2" />
+        <line :x1="sx(hi)" :y1="sy(0)" :x2="sx(hi)" :y2="sy(0) + 6" stroke="var(--c-indigo-600)" stroke-width="2" />
+        <text :x="sx(lo)" :y="height - 4" font-size="10" text-anchor="middle" fill="var(--c-indigo-600)">a = {{ fmt(lo) }}</text>
+        <text :x="sx(hi)" :y="height - 4" font-size="10" text-anchor="middle" fill="var(--c-indigo-600)">b = {{ fmt(hi) }}</text>
       </svg>
     </div>
 

@@ -106,7 +106,7 @@ const optimum = exhaustive().total
 function cellClass(id: string, path: string) {
   if (id === path) return 'bg-indigo-600 text-white ring-2 ring-indigo-700'
   if (result.value.visited.has(id)) return 'bg-amber-100 text-amber-800'
-  return 'bg-slate-100 text-slate-400'
+  return 'bg-slate-100 text-slate-600'
 }
 
 // 지수 폭발 미니 계산기
@@ -128,7 +128,7 @@ const paths = computed(() => Math.pow(bf.value, depth.value))
         :class="active === s.key ? 'border-indigo-500 bg-indigo-50 font-semibold text-indigo-700' : 'border-slate-200 text-slate-600 hover:bg-slate-50'"
         @click="active = s.key"
       >
-        {{ s.label }} <span class="text-xs text-slate-400">· {{ s.desc }}</span>
+        {{ s.label }} <span class="text-xs text-slate-600">· {{ s.desc }}</span>
       </button>
     </div>
 
@@ -147,7 +147,7 @@ const paths = computed(() => Math.pow(bf.value, depth.value))
           <div class="space-y-1">
             <div v-for="(b) in [0, 1, 2]" :key="b" class="rounded bg-slate-50 p-1">
               <div
-                class="mb-0.5 flex items-center justify-center rounded py-0.5 text-[11px] font-semibold transition-colors"
+                class="mb-0.5 flex items-center justify-center rounded py-0.5 text-xs font-semibold transition-colors"
                 :class="cellClass(nid(a, b), pathId.l2)"
               >
                 +{{ L2[a][b] }}
@@ -156,7 +156,7 @@ const paths = computed(() => Math.pow(bf.value, depth.value))
                 <div
                   v-for="(c) in [0, 1, 2]"
                   :key="c"
-                  class="flex-1 rounded py-0.5 text-center text-[10px] font-mono transition-colors"
+                  class="flex-1 rounded py-0.5 text-center text-xs font-mono transition-colors"
                   :class="cellClass(nid(a, b, c), pathId.l3)"
                 >
                   {{ L3[a][b][c] }}
@@ -166,7 +166,7 @@ const paths = computed(() => Math.pow(bf.value, depth.value))
           </div>
         </div>
       </div>
-      <p class="text-[11px] text-slate-400">
+      <p class="text-xs text-slate-600">
         <span class="rounded bg-indigo-600 px-1 text-white">진함</span> = 고른 길 ·
         <span class="rounded bg-amber-100 px-1 text-amber-800">노랑</span> = 이 전략이 실제로 확인한 노드 ·
         회색 = 안 본 노드(가지치기)
@@ -176,15 +176,15 @@ const paths = computed(() => Math.pow(bf.value, depth.value))
     <!-- ③ 결과 -->
     <div class="mt-3 grid grid-cols-3 gap-2 text-center">
       <div class="rounded-lg bg-slate-50 p-2">
-        <div class="text-[11px] text-slate-500">찾은 길</div>
+        <div class="text-xs text-slate-600">찾은 길</div>
         <div class="font-mono text-lg font-bold text-slate-800">{{ pathLabel }}</div>
       </div>
       <div class="rounded-lg p-2" :class="result.total === optimum ? 'bg-emerald-50' : 'bg-rose-50'">
-        <div class="text-[11px]" :class="result.total === optimum ? 'text-emerald-600' : 'text-rose-500'">총점 (최적 {{ optimum }})</div>
+        <div class="text-xs" :class="result.total === optimum ? 'text-emerald-700' : 'text-rose-700'">총점 (최적 {{ optimum }})</div>
         <div class="text-lg font-bold" :class="result.total === optimum ? 'text-emerald-700' : 'text-rose-700'">{{ result.total }}</div>
       </div>
       <div class="rounded-lg bg-indigo-50 p-2">
-        <div class="text-[11px] text-indigo-500">방문 노드</div>
+        <div class="text-xs text-indigo-600">방문 노드</div>
         <div class="text-lg font-bold text-indigo-700">{{ result.visited.size }} / 39</div>
       </div>
     </div>

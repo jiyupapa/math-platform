@@ -17,7 +17,7 @@ const HEADS = [
   {
     name: '헤드 1',
     focus: '주어에 민감',
-    color: '#6366f1',
+    color: 'var(--c-indigo-500)',
     attn: [
       [0.6, 0.2, 0.2],
       [0.2, 0.6, 0.2],
@@ -27,7 +27,7 @@ const HEADS = [
   {
     name: '헤드 2',
     focus: '목적어에 민감',
-    color: '#10b981',
+    color: 'var(--c-emerald-500)',
     attn: [
       [0.6, 0.2, 0.2],
       [0.2, 0.6, 0.2],
@@ -84,7 +84,7 @@ const pct = (w: number) => (w * 100).toFixed(0)
         <div class="mb-2 flex items-center gap-2">
           <span class="inline-block h-3 w-3 rounded-full" :style="{ backgroundColor: r.color }" />
           <span class="text-sm font-semibold text-slate-700">{{ r.name }}</span>
-          <span class="text-xs text-slate-400">({{ r.focus }})</span>
+          <span class="text-xs text-slate-500">({{ r.focus }})</span>
         </div>
         <div class="space-y-1.5">
           <div v-for="(w, i) in WORDS" :key="w" class="flex items-center gap-2">

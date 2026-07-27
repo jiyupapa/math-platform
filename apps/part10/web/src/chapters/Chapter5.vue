@@ -207,7 +207,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch5')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">5장 완료 — 성장의 법칙 1막이 끝났습니다!</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 2막, 시험의 통계 — 6장 시험의 오차범위. 워밍업에서 만난 소음을 드디어

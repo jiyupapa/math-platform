@@ -58,8 +58,8 @@ const pct = (v: number) => (v * 100).toFixed(1)
         <div class="mt-2 h-2 w-full overflow-hidden rounded-full bg-white ring-1 ring-slate-200">
           <div class="h-full rounded-full" :class="best === c.key ? 'bg-emerald-400' : 'bg-indigo-300'" :style="{ width: pct(c.value) + '%' }" />
         </div>
-        <p class="mt-1 text-[11px] text-slate-400">{{ c.note }}</p>
-        <p v-if="c.key === 'D'" class="mt-1 text-[11px] font-medium text-indigo-600">
+        <p class="mt-1 text-xs text-slate-500">{{ c.note }}</p>
+        <p v-if="c.key === 'D'" class="mt-1 text-xs font-medium text-indigo-600">
           제출물 신뢰도(통과분이 정답일 확률) {{ pct(precision) }}% — 6장 베이즈
         </p>
       </div>
@@ -79,7 +79,7 @@ const pct = (v: number) => (v * 100).toFixed(1)
         <span class="w-44 shrink-0 text-slate-600">검토자 특이도 t — {{ t.toFixed(2) }}</span>
         <input v-model.number="t" type="range" min="0.5" max="1" step="0.01" class="flex-1 accent-indigo-600" />
       </label>
-      <p class="text-xs text-slate-400">
+      <p class="text-xs text-slate-500">
         민감도 = 맞는 결과를 통과시킬 확률 · 특이도 = 틀린 결과를 걸러낼 확률 (6장의 그 다이얼).
       </p>
     </div>

@@ -114,15 +114,15 @@ function onSetComplete() {
 
     <div class="my-5 rounded-xl border border-slate-200 bg-slate-50 p-5">
       <div class="mx-auto flex max-w-xs flex-col items-center gap-1.5 text-center text-sm">
-        <div class="text-xs text-slate-400">입력 (뜻 + 위치 벡터)</div>
-        <div class="text-slate-300">↓</div>
+        <div class="text-xs text-slate-500">입력 (뜻 + 위치 벡터)</div>
+        <div class="text-slate-500">↓</div>
         <div class="w-full rounded-lg border border-indigo-200 bg-indigo-50 py-2 font-medium text-indigo-800">멀티헤드 어텐션</div>
         <div class="w-full rounded-lg border border-slate-200 bg-white py-1.5 text-xs text-slate-500">＋ Add &amp; Norm (잔차연결 + 층정규화)</div>
-        <div class="text-slate-300">↓</div>
+        <div class="text-slate-500">↓</div>
         <div class="w-full rounded-lg border border-emerald-200 bg-emerald-50 py-2 font-medium text-emerald-800">피드포워드 (FFN)</div>
         <div class="w-full rounded-lg border border-slate-200 bg-white py-1.5 text-xs text-slate-500">＋ Add &amp; Norm (잔차연결 + 층정규화)</div>
-        <div class="text-slate-300">↓</div>
-        <div class="text-xs text-slate-400">출력 → 다음 블록으로</div>
+        <div class="text-slate-500">↓</div>
+        <div class="text-xs text-slate-500">출력 → 다음 블록으로</div>
       </div>
       <p class="mt-4 text-center text-sm font-medium text-slate-600">
         이 블록을 <b>× N번 반복</b> (GPT는 수십 개!) 쌓으면 트랜스포머 본체가 됩니다.
@@ -300,7 +300,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch8')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 8 완료 — 블록이 완성됐습니다 🧱</p>
       <p class="mt-1 text-sm text-emerald-700">
         어텐션 + 잔차 + 정규화 + FFN = 트랜스포머 블록. 이제 이 블록들을 통과한 벡터를

@@ -78,40 +78,40 @@ const pc1Line = computed(() => ({
 <template>
   <div class="my-4 rounded-xl border border-slate-200 bg-white p-4">
     <p class="mb-3 text-sm text-slate-600">
-      데이터 구름에서 <b style="color:#6366f1">PC1</b>(가장 넓게 퍼진 방향)과 <b style="color:#ec4899">PC2</b>(그다음)를
+      데이터 구름에서 <b style="color: var(--c-indigo-600)">PC1</b>(가장 넓게 퍼진 방향)과 <b style="color: var(--c-pink-700)">PC2</b>(그다음)를
       찾았어요. 이게 <b>공분산행렬의 고유벡터</b>입니다. 아래 체크로 차원축소를 보세요.
     </p>
 
     <div class="flex flex-col gap-4 lg:flex-row">
       <svg :width="VS" :height="VS" :viewBox="`0 0 ${VS} ${VS}`" class="mx-auto shrink-0 rounded-lg bg-slate-50">
         <defs>
-          <marker id="pca-1" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#6366f1" /></marker>
-          <marker id="pca-2" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#ec4899" /></marker>
+          <marker id="pca-1" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--c-indigo-500)" /></marker>
+          <marker id="pca-2" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--c-pink-500)" /></marker>
         </defs>
-        <line x1="0" :y1="cc" :x2="VS" :y2="cc" stroke="#eef2f7" stroke-width="1" />
-        <line :x1="cc" y1="0" :x2="cc" :y2="VS" stroke="#eef2f7" stroke-width="1" />
+        <line x1="0" :y1="cc" :x2="VS" :y2="cc" stroke="var(--c-grid)" stroke-width="1" />
+        <line :x1="cc" y1="0" :x2="cc" :y2="VS" stroke="var(--c-grid)" stroke-width="1" />
 
         <!-- PC1 직선 (투영 모드) -->
-        <line v-if="project" :x1="pc1Line.a.X" :y1="pc1Line.a.Y" :x2="pc1Line.b.X" :y2="pc1Line.b.Y" stroke="#c7d2fe" stroke-width="6" stroke-linecap="round" />
+        <line v-if="project" :x1="pc1Line.a.X" :y1="pc1Line.a.Y" :x2="pc1Line.b.X" :y2="pc1Line.b.Y" stroke="var(--c-indigo-200)" stroke-width="6" stroke-linecap="round" />
 
         <!-- 투영선 + 투영점 -->
         <template v-if="project">
-          <line v-for="(p, i) in projected" :key="'pl' + i" :x1="p.orig.X" :y1="p.orig.Y" :x2="p.proj.X" :y2="p.proj.Y" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3" />
-          <circle v-for="(p, i) in projected" :key="'pp' + i" :cx="p.proj.X" :cy="p.proj.Y" r="4" fill="#6366f1" />
+          <line v-for="(p, i) in projected" :key="'pl' + i" :x1="p.orig.X" :y1="p.orig.Y" :x2="p.proj.X" :y2="p.proj.Y" stroke="var(--c-slate-300)" stroke-width="1" stroke-dasharray="3 3" />
+          <circle v-for="(p, i) in projected" :key="'pp' + i" :cx="p.proj.X" :cy="p.proj.Y" r="4" fill="var(--c-indigo-500)" />
         </template>
 
         <!-- 원본 점 -->
-        <circle v-for="(p, i) in projected" :key="'o' + i" :cx="p.orig.X" :cy="p.orig.Y" r="4" :fill="project ? '#cbd5e1' : '#475569'" />
+        <circle v-for="(p, i) in projected" :key="'o' + i" :cx="p.orig.X" :cy="p.orig.Y" r="4" :fill="project ? 'var(--c-slate-300)' : 'var(--c-slate-600)'" />
 
         <!-- 주성분 축 -->
-        <line :x1="m.X" :y1="m.Y" :x2="pc1Tip.X" :y2="pc1Tip.Y" stroke="#6366f1" stroke-width="3" marker-end="url(#pca-1)" />
-        <line :x1="m.X" :y1="m.Y" :x2="pc2Tip.X" :y2="pc2Tip.Y" stroke="#ec4899" stroke-width="3" marker-end="url(#pca-2)" />
-        <circle :cx="m.X" :cy="m.Y" r="3" fill="#334155" />
+        <line :x1="m.X" :y1="m.Y" :x2="pc1Tip.X" :y2="pc1Tip.Y" stroke="var(--c-indigo-500)" stroke-width="3" marker-end="url(#pca-1)" />
+        <line :x1="m.X" :y1="m.Y" :x2="pc2Tip.X" :y2="pc2Tip.Y" stroke="var(--c-pink-500)" stroke-width="3" marker-end="url(#pca-2)" />
+        <circle :cx="m.X" :cy="m.Y" r="3" fill="var(--c-slate-700)" />
       </svg>
 
       <div class="flex-1">
         <div class="rounded-lg bg-slate-50 p-3 text-sm">
-          <p><b style="color:#6366f1">PC1</b> 방향이 담은 정보 비율 ≈ <b>{{ ratio }}%</b></p>
+          <p><b style="color: var(--c-indigo-600)">PC1</b> 방향이 담은 정보 비율 ≈ <b>{{ ratio }}%</b></p>
           <p class="mt-1 text-slate-600">
             → 2D를 PC1 하나(1D)로 줄여도 정보의 <b>{{ ratio }}%</b>가 남아요. (PC2의 {{ 100 - ratio }}%만 버림)
           </p>
@@ -121,7 +121,7 @@ const pc1Line = computed(() => ({
           <input v-model="project" type="checkbox" class="h-4 w-4" />
           <span>PC1으로 투영 (2D → 1D 차원축소)</span>
         </label>
-        <p class="mt-2 text-xs text-slate-400">
+        <p class="mt-2 text-xs text-slate-500">
           체크하면 모든 점이 PC1 직선 위로 모여요 = 축 하나로 데이터를 요약(압축).
         </p>
       </div>

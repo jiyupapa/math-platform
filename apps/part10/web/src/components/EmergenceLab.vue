@@ -68,7 +68,7 @@ const fmtN = (n: number) => (n >= 1e12 ? '1T' : n >= 1e9 ? `${n / 1e9}B` : `${n 
     <!-- ① 과제와 밑바탕 -->
     <p class="mb-1 text-sm font-semibold text-slate-500">① 과제: 8자리 덧셈 — 밑바탕 실력은 매끈하게 좋아진다 (신의 시점 규칙)</p>
     <div class="mb-2 flex flex-wrap items-center gap-1.5">
-      <span class="text-xs text-slate-400">모델 크기 N:</span>
+      <span class="text-xs text-slate-500">모델 크기 N:</span>
       <button
         v-for="(n, i) in NS"
         :key="n"
@@ -90,7 +90,7 @@ const fmtN = (n: number) => (n >= 1e12 ? '1T' : n >= 1e9 ? `${n / 1e9}B` : `${n 
     </div>
     <!-- 자릿수 시각화 -->
     <div class="mb-3 flex items-center gap-1">
-      <span class="mr-1 text-xs text-slate-400">답안지:</span>
+      <span class="mr-1 text-xs text-slate-500">답안지:</span>
       <span
         v-for="i in K"
         :key="i"
@@ -98,7 +98,7 @@ const fmtN = (n: number) => (n >= 1e12 ? '1T' : n >= 1e9 ? `${n / 1e9}B` : `${n 
         :style="{ backgroundColor: `rgba(16,185,129,${0.15 + p * 0.85})` }"
         :title="`자리 ${i} — 맞힐 확률 ${(p * 100).toFixed(0)}%`"
       >{{ i <= Math.round(p * K) ? '✓' : '?' }}</span>
-      <span class="ml-2 text-xs text-slate-400">— 8자리가 <b>전부</b> 맞아야 "정답"인 게 함정</span>
+      <span class="ml-2 text-xs text-slate-500">— 8자리가 <b>전부</b> 맞아야 "정답"인 게 함정</span>
     </div>
 
     <!-- ② 안경 갈아 끼우기 -->
@@ -118,17 +118,17 @@ const fmtN = (n: number) => (n >= 1e12 ? '1T' : n >= 1e9 ? `${n / 1e9}B` : `${n 
 
     <div class="flex flex-wrap items-start gap-4">
       <svg :viewBox="`0 0 ${W} ${H}`" class="h-56 w-full max-w-md rounded-lg bg-slate-50 ring-1 ring-slate-200">
-        <line v-for="e in 6" :key="'x' + e" :x1="gx(10 ** (e + 6))" :x2="gx(10 ** (e + 6))" :y1="PAD.t" :y2="H - PAD.b" stroke="#e2e8f0" />
+        <line v-for="e in 6" :key="'x' + e" :x1="gx(10 ** (e + 6))" :x2="gx(10 ** (e + 6))" :y1="PAD.t" :y2="H - PAD.b" stroke="var(--c-slate-200)" />
         <text v-for="e in 6" :key="'xl' + e" :x="gx(10 ** (e + 6))" :y="H - 10" text-anchor="middle" class="fill-slate-400" font-size="9">
           {{ fmtN(10 ** (e + 6)) }}
         </text>
         <text v-for="(l, i) in yLabels" :key="'yl' + i" :x="PAD.l - 5" :y="yPos(l.t) + 3" text-anchor="end" class="fill-slate-400" font-size="9">{{ l.v }}</text>
-        <path :d="path" fill="none" :stroke="metric === 'exact' ? '#e11d48' : metric === 'perdigit' ? '#10b981' : '#6366f1'" stroke-width="2.5" />
-        <circle :cx="gx(N)" :cy="gy(N)" r="6" fill="#0f172a" stroke="white" stroke-width="1.5" />
+        <path :d="path" fill="none" :stroke="metric === 'exact' ? 'var(--c-rose-600)' : metric === 'perdigit' ? 'var(--c-emerald-500)' : 'var(--c-indigo-500)'" stroke-width="2.5" />
+        <circle :cx="gx(N)" :cy="gy(N)" r="6" fill="var(--c-slate-900)" stroke="var(--c-white)" stroke-width="1.5" />
       </svg>
       <div class="min-w-52 flex-1 space-y-2">
         <p class="rounded-md px-3 py-2 text-sm leading-relaxed" :class="verdict.cls">{{ verdict.text }}</p>
-        <p class="rounded-md bg-slate-100 px-3 py-2 text-xs leading-relaxed text-slate-500">
+        <p class="rounded-md bg-slate-100 px-3 py-2 text-xs leading-relaxed text-slate-600">
           판정 습관: <b>"능력이 갑자기 생겼다"는 그래프를 보면</b> ① y축 지표가 전부-정답형인지
           확인하고 ② 자리당(부분 점수) 지표와 ③ 로그-로그 오차로 다시 그려 봅니다 —
           셋 다 꺾여 있어야 진짜 급변입니다.

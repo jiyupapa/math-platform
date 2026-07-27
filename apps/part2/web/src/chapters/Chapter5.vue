@@ -272,7 +272,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch5')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 5 완료. 곱·몫도 미분할 수 있습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 미분의 <b>가장 중요한 도구</b>이자 역전파의 심장 — <b>연쇄법칙</b>입니다.

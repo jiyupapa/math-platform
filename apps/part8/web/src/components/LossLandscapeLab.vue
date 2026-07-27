@@ -75,10 +75,10 @@ const curGrad = computed(() => {
 const verdict = computed(() => {
   const d7 = Math.hypot(pos.value.x - 6.95, pos.value.y - 4.02)
   const d2 = Math.hypot(pos.value.x - 2.58, pos.value.y - 6.93)
-  if (d7 < 0.6) return { label: '🏁 가장 깊은 골짜기 도착! (손실 0.60 — 전역최소)', tone: 'text-emerald-600' }
+  if (d7 < 0.6) return { label: '🏁 가장 깊은 골짜기 도착! (손실 0.60 — 전역최소)', tone: 'text-emerald-700' }
   if (d2 < 0.6 && curGrad.value.mag < 0.15)
-    return { label: '⚠️ 국소최소에 정착 — 발밑이 평평해 여기가 바닥인 줄 알지만, 더 깊은 곳이 있다!', tone: 'text-rose-600' }
-  if (curGrad.value.mag < 0.35 && curLoss.value > 3) return { label: '🐌 평원 — 발밑 경사가 거의 없어 걸음이 짧다', tone: 'text-amber-600' }
+    return { label: '⚠️ 국소최소에 정착 — 발밑이 평평해 여기가 바닥인 줄 알지만, 더 깊은 곳이 있다!', tone: 'text-rose-700' }
+  if (curGrad.value.mag < 0.35 && curLoss.value > 3) return { label: '🐌 평원 — 발밑 경사가 거의 없어 걸음이 짧다', tone: 'text-amber-700' }
   return { label: '🥾 하산 중…', tone: 'text-slate-600' }
 })
 
@@ -95,7 +95,7 @@ const wIdx = ref(0)
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 안개 낀 산 -->
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 안개 낀 산: 출발점이 운명을 가른다</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       가중치 2개짜리 toy 모델의 손실 지형입니다(진할수록 낮은 손실). 여행자(🥾)는 <b>발밑 경사(화살표)만</b>
       보며 걷습니다 — 안개를 걷어 신의 시점과 비교해 보세요.
     </p>
@@ -127,7 +127,7 @@ const wIdx = ref(0)
         :cx="px(p.x)"
         :cy="py(p.y)"
         r="2.5"
-        :fill="fog ? '#f8fafc' : '#312e81'"
+        :fill="fog ? 'var(--c-slate-50)' : 'var(--c-indigo-900)'"
         :opacity="0.25 + (0.6 * k) / Math.max(1, trail.length - 1)"
       />
       <!-- 발밑 경사 화살표 (내리막 방향) -->
@@ -136,7 +136,7 @@ const wIdx = ref(0)
         :y1="py(pos.y)"
         :x2="px(pos.x) - curGrad.gx * 55"
         :y2="py(pos.y) + curGrad.gy * 55"
-        stroke="#e11d48"
+        stroke="var(--c-rose-600)"
         stroke-width="2.5"
       />
       <text :x="px(pos.x)" :y="py(pos.y) - 8" text-anchor="middle" font-size="14">🥾</text>
@@ -149,7 +149,7 @@ const wIdx = ref(0)
       <button type="button" class="rounded-lg bg-indigo-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-indigo-500" @click="walk(10)">
         10걸음
       </button>
-      <button type="button" class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-500 transition hover:bg-slate-200" @click="pickStart(startIdx)">
+      <button type="button" class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-600 transition hover:bg-slate-200" @click="pickStart(startIdx)">
         처음부터
       </button>
       <button
@@ -164,15 +164,15 @@ const wIdx = ref(0)
 
     <div class="mt-2 grid grid-cols-3 gap-2 text-center">
       <div class="rounded-lg bg-slate-50 p-2">
-        <p class="text-[11px] text-slate-400">걸음 수</p>
+        <p class="text-xs text-slate-500">걸음 수</p>
         <p class="font-mono text-sm font-bold text-slate-700">{{ trail.length - 1 }}</p>
       </div>
       <div class="rounded-lg bg-slate-50 p-2">
-        <p class="text-[11px] text-slate-400">현재 손실 (고도)</p>
+        <p class="text-xs text-slate-500">현재 손실 (고도)</p>
         <p class="font-mono text-sm font-bold text-slate-700">{{ curLoss.toFixed(2) }}</p>
       </div>
       <div class="rounded-lg bg-slate-50 p-2">
-        <p class="text-[11px] text-slate-400">발밑 경사 |∇L|</p>
+        <p class="text-xs text-slate-500">발밑 경사 |∇L|</p>
         <p class="font-mono text-sm font-bold text-slate-700">{{ curGrad.mag.toFixed(3) }}</p>
       </div>
     </div>
@@ -188,7 +188,7 @@ const wIdx = ref(0)
     <!-- ② 조합 폭발 -->
     <hr class="my-5 border-slate-100" />
     <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 안개의 이유: 지도 전체를 그리는 비용</p>
-    <p class="mb-3 text-xs text-slate-400">
+    <p class="mb-3 text-xs text-slate-500">
       "안개를 걷으면 되잖아?" — 가중치마다 딱 10가지 값만 훑어서 지도 전체를 그려 봅시다. 손실 계산이 몇 번 필요할까요?
     </p>
 
@@ -198,7 +198,7 @@ const wIdx = ref(0)
         :key="o.label"
         type="button"
         class="rounded-lg px-3 py-1.5 text-xs font-semibold transition"
-        :class="wIdx === i ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'"
+        :class="wIdx === i ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
         @click="wIdx = i"
       >
         {{ o.label }}
@@ -207,8 +207,8 @@ const wIdx = ref(0)
 
     <div class="flex items-center gap-3 rounded-lg bg-slate-50 p-3">
       <div class="text-center">
-        <p class="text-[11px] text-slate-400">필요한 손실 계산</p>
-        <p class="font-mono text-lg font-bold" :class="W_OPTS[wIdx].dead ? 'text-rose-600' : 'text-emerald-600'">{{ W_OPTS[wIdx].total }}</p>
+        <p class="text-xs text-slate-500">필요한 손실 계산</p>
+        <p class="font-mono text-lg font-bold" :class="W_OPTS[wIdx].dead ? 'text-rose-700' : 'text-emerald-700'">{{ W_OPTS[wIdx].total }}</p>
       </div>
       <p class="flex-1 text-xs leading-relaxed text-slate-600">{{ W_OPTS[wIdx].note }}</p>
     </div>

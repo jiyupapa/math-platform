@@ -83,7 +83,7 @@ function onSetComplete() {
     <div class="my-4 overflow-x-auto">
       <table class="w-full min-w-[24rem] text-center text-sm">
         <thead>
-          <tr class="border-b border-slate-200 text-xs text-slate-400">
+          <tr class="border-b border-slate-200 text-xs text-slate-500">
             <th class="py-1.5 font-medium">상황</th>
             <th class="py-1.5 font-medium">H (비트)</th>
             <th class="py-1.5 font-medium">PPL = 2^H</th>
@@ -318,7 +318,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch7')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 7 완료. 이제 성적표가 읽힙니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 생성의 다이얼 — temperature 가 분포의 엔트로피를 돌리는 원리입니다.

@@ -216,7 +216,7 @@ function segments(text: string): Segment[] {
           <option v-for="m in models" :key="m" :value="m">{{ m }}</option>
         </select>
       </div>
-      <p class="mt-0.5 text-xs text-indigo-500">지금 보는 내용: {{ chapterTitle }}</p>
+      <p class="mt-0.5 text-xs text-indigo-600">지금 보는 내용: {{ chapterTitle }}</p>
     </div>
 
     <!-- Ollama 미실행 안내 -->
@@ -265,7 +265,7 @@ function segments(text: string): Segment[] {
               <RouterLink
                 v-if="seg.link"
                 :to="seg.link"
-                class="font-semibold text-indigo-600 underline decoration-dotted underline-offset-2 hover:text-indigo-500"
+                class="font-semibold text-indigo-600 underline decoration-dotted underline-offset-2 hover:text-indigo-600"
               >{{ seg.text }}</RouterLink>
               <template v-else>{{ seg.text }}</template>
             </template>
@@ -287,7 +287,7 @@ function segments(text: string): Segment[] {
           />
           <button
             v-if="busy"
-            class="rounded-lg bg-rose-100 px-3 py-2 text-sm font-medium text-rose-700 hover:bg-rose-200"
+            class="rounded-lg bg-rose-100 px-3 py-2 text-sm font-medium text-rose-800 hover:bg-rose-200"
             @click="stop"
           >
             중지
@@ -301,7 +301,7 @@ function segments(text: string): Segment[] {
             전송
           </button>
         </div>
-        <div class="mt-1.5 flex items-center justify-between text-[11px] text-slate-400">
+        <div class="mt-1.5 flex items-center justify-between text-xs text-slate-500">
           <span>로컬 AI 답변 — 가끔 틀릴 수 있어요. 본문 설명이 우선!</span>
           <button v-if="messages.length" class="hover:text-slate-600" @click="clearChat">지우기</button>
         </div>

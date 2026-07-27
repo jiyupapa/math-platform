@@ -19,7 +19,7 @@ const coinDist = {
     {
       label: 'P(X=k)',
       data: [0.25, 0.5, 0.25],
-      backgroundColor: ['#c7d2fe', '#6366f1', '#c7d2fe'],
+      backgroundColor: ['var(--c-indigo-200)', 'var(--c-indigo-500)', 'var(--c-indigo-200)'],
     },
   ],
 }
@@ -433,7 +433,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch5')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">
         Phase 5 완료. 결과에 숫자를 붙이고 기댓값으로 미래의 평균까지 계산했습니다.
       </p>

@@ -235,7 +235,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch7')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">7장 완료 — 검색을 채점할 수 있게 됐어요!</p>
       <p class="mt-1 text-sm text-emerald-700">
         재료가 다 모였습니다. 다음은 8장(핵심) — 검색이 프롬프트가 되고 답이 되는 전체 조립,

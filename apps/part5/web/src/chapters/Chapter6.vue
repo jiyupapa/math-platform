@@ -301,7 +301,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch6')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 6 완료. "AI 가 배운다"를 한 줄로 정의했습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         손실 트랙(4~6장) 완주! 다음은 LLM 트랙 — 이렇게 배운 모델의 성적표, <b>퍼플렉시티</b>입니다.

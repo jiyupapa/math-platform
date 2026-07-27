@@ -25,8 +25,8 @@ const coinChart = {
     {
       label: '동전의 엔트로피 H (비트)',
       data: ps.map(binH),
-      borderColor: '#6366f1',
-      backgroundColor: '#6366f1',
+      borderColor: 'var(--c-indigo-500)',
+      backgroundColor: 'var(--c-indigo-500)',
       tension: 0.3,
       pointRadius: ps.map((p) => (p === 0.5 ? 5 : 0)),
     },
@@ -360,7 +360,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch3')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 3 완료. 불확실성의 자, 엔트로피를 얻었습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 시리즈의 심장 — 틀린 지도로 세상을 읽는 비용, <b>크로스 엔트로피</b>입니다.

@@ -275,7 +275,7 @@ function onSetComplete() {
       v-if="progress.isDone('ch9')"
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
-      <div class="mb-1 text-xl font-bold text-emerald-600">✓</div>
+      <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">Phase 9 완료 — AI 학습의 심장, 경사하강을 잡았습니다!</p>
       <p class="mt-1 text-sm text-emerald-700">
         마지막 챕터: 그래디언트를 효율적으로 구하는 방법 — <b>역전파</b>로 모든 걸 잇습니다.

@@ -87,8 +87,8 @@ const fmt = (n: number) => Number(n.toFixed(1)).toString()
             :y="sy(b.count)"
             :width="Math.max(1, sx(b.end) - sx(b.start) - 2)"
             :height="H - PAD_B - sy(b.count)"
-            fill="#818cf8"
-            stroke="#6366f1"
+            fill="var(--c-indigo-400)"
+            stroke="var(--c-indigo-500)"
             stroke-width="1"
             rx="2"
           />
@@ -97,21 +97,21 @@ const fmt = (n: number) => Number(n.toFixed(1)).toString()
             :x="(sx(b.start) + sx(b.end)) / 2"
             :y="sy(b.count) - 4"
             text-anchor="middle"
-            fill="#64748b"
-            class="text-[9px]"
+            fill="var(--c-slate-500)"
+            class="text-xs"
           >
             {{ b.count }}
           </text>
         </g>
 
         <!-- x축 + 눈금 -->
-        <line :x1="PAD_L" :y1="H - PAD_B" :x2="W - 10" :y2="H - PAD_B" stroke="#94a3b8" stroke-width="1.5" />
+        <line :x1="PAD_L" :y1="H - PAD_B" :x2="W - 10" :y2="H - PAD_B" stroke="var(--c-slate-400)" stroke-width="1.5" />
         <g v-for="(b, i) in bins" :key="'t' + i">
-          <text :x="sx(b.start)" :y="H - PAD_B + 14" text-anchor="middle" fill="#94a3b8" class="text-[9px]">
+          <text :x="sx(b.start)" :y="H - PAD_B + 14" text-anchor="middle" fill="var(--c-slate-400)" class="text-xs">
             {{ b.start }}
           </text>
         </g>
-        <text :x="sx(domain.hi)" :y="H - PAD_B + 14" text-anchor="middle" fill="#94a3b8" class="text-[9px]">
+        <text :x="sx(domain.hi)" :y="H - PAD_B + 14" text-anchor="middle" fill="var(--c-slate-400)" class="text-xs">
           {{ domain.hi }}
         </text>
 
@@ -121,11 +121,11 @@ const fmt = (n: number) => Number(n.toFixed(1)).toString()
           :y1="PAD_T"
           :x2="sx(stats.mean)"
           :y2="H - PAD_B"
-          stroke="#ef4444"
+          stroke="var(--c-red-500)"
           stroke-width="1.5"
           stroke-dasharray="5 4"
         />
-        <text :x="sx(stats.mean) + 4" :y="PAD_T + 8" fill="#ef4444" class="text-[9px] font-bold">
+        <text :x="sx(stats.mean) + 4" :y="PAD_T + 8" fill="var(--c-red-500)" class="text-xs font-bold">
           평균 {{ fmt(stats.mean) }}
         </text>
         <line
@@ -133,11 +133,11 @@ const fmt = (n: number) => Number(n.toFixed(1)).toString()
           :y1="PAD_T + 14"
           :x2="sx(stats.median)"
           :y2="H - PAD_B"
-          stroke="#3b82f6"
+          stroke="var(--c-blue-500)"
           stroke-width="1.5"
           stroke-dasharray="5 4"
         />
-        <text :x="sx(stats.median) + 4" :y="PAD_T + 26" fill="#3b82f6" class="text-[9px] font-bold">
+        <text :x="sx(stats.median) + 4" :y="PAD_T + 26" fill="var(--c-blue-500)" class="text-xs font-bold">
           중앙값 {{ fmt(stats.median) }}
         </text>
       </svg>
