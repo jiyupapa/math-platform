@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 통합 포털(part0) — 진단·경로 추천 허브. @series/ui 공용 패키지를 소비.
 import { RouterView, RouterLink } from 'vue-router'
-import { SearchPalette } from '@series/ui'
+import { SearchPalette, ThemeToggle } from '@series/ui'
 import { AuthPanel, currentUser, isAdmin } from '@series/store'
 import { startPortalHydration, progressVersion } from './data/useProgress'
 
@@ -20,35 +20,37 @@ function openSearch() {
            바깥은 flex-wrap 으로 메뉴를 통째로 다음 줄에 내리고, 각 항목은 whitespace-nowrap 으로
            절대 쪼개지지 않게 한다. 로그인·관리자면 항목이 6개까지 늘어나므로 nav 자체도 wrap. -->
       <div class="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-5 py-3">
-        <RouterLink to="/" class="py-1 font-bold whitespace-nowrap text-indigo-700">수포자 사관학교</RouterLink>
+        <!-- inline-flex — 인라인 <a> 는 min-height 가 안 먹어 터치 타깃 규칙(base.css)이 무력해진다 -->
+        <RouterLink to="/" class="inline-flex items-center py-1 font-bold whitespace-nowrap text-indigo-700">수포자 사관학교</RouterLink>
         <nav class="flex flex-wrap items-center gap-x-4 gap-y-1">
           <button
             type="button"
-            class="py-1.5 text-sm font-medium whitespace-nowrap text-slate-600 hover:text-indigo-600 hover:underline"
+            class="inline-flex items-center py-1.5 text-sm font-medium whitespace-nowrap text-slate-600 hover:text-indigo-600 hover:underline"
             @click="openSearch"
           >
             🔎 검색
           </button>
-          <RouterLink to="/map" class="py-1.5 text-sm font-medium whitespace-nowrap text-slate-600 hover:text-indigo-600 hover:underline">
+          <RouterLink to="/map" class="inline-flex items-center py-1.5 text-sm font-medium whitespace-nowrap text-slate-600 hover:text-indigo-600 hover:underline">
             학습 구조도
           </RouterLink>
-          <RouterLink to="/diagnose" class="py-1.5 text-sm font-medium whitespace-nowrap text-indigo-600 hover:underline">
+          <RouterLink to="/diagnose" class="inline-flex items-center py-1.5 text-sm font-medium whitespace-nowrap text-indigo-600 hover:underline">
             경로 진단
           </RouterLink>
           <RouterLink
             v-if="currentUser"
             to="/adoption"
-            class="py-1.5 text-sm font-medium whitespace-nowrap text-slate-600 hover:text-indigo-600 hover:underline"
+            class="inline-flex items-center py-1.5 text-sm font-medium whitespace-nowrap text-slate-600 hover:text-indigo-600 hover:underline"
           >
             도입 현황
           </RouterLink>
           <RouterLink
             v-if="isAdmin"
             to="/qna"
-            class="py-1.5 text-sm font-medium whitespace-nowrap text-slate-600 hover:text-indigo-600 hover:underline"
+            class="inline-flex items-center py-1.5 text-sm font-medium whitespace-nowrap text-slate-600 hover:text-indigo-600 hover:underline"
           >
             🎓 질문 큐
           </RouterLink>
+          <ThemeToggle />
           <AuthPanel align="right" />
         </nav>
       </div>

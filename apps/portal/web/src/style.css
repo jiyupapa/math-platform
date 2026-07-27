@@ -1,10 +1,18 @@
 @import 'tailwindcss';
-/* 공용 패키지(@series/ui) 클래스도 Tailwind 스캔 대상에 포함 (필수). */
+/* 워크스페이스 공용 패키지(@series/ui)의 클래스도 Tailwind 스캔 대상에 포함 —
+   빠지면 패키지 컴포넌트 스타일이 조용히 누락되고 빌드는 통과하므로 필수. */
 @source '../../../../packages/ui/src';
 @import 'katex/dist/katex.min.css';
+/* 시리즈 공용 디자인 기반 — 본문 글줄·제목 위계·포커스·터치 타깃·모션.
+   한 곳에서 고치면 12개 앱에 반영된다(패키지 컴포넌트와 같은 원칙). */
+@import '../../../../packages/ui/src/base.css';
 
 :root {
-  font-family: 'Pretendard', system-ui, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  /* 이모지가 이 시리즈의 사실상 아이콘 세트다(📘 💡 ⚠️ 🎯 🤖 ✏️ ✅ ❌).
+     스택에 이모지 폰트가 없으면 OS 가 임의로 대체해 흑백 글리프로 떨어지는 환경이 생긴다.
+     OS 간 모양 차이 자체는 웹폰트를 싣지 않는 한 없앨 수 없다 — 여기서 막는 건 '잘못된 대체'다. */
+  font-family: 'Pretendard', system-ui, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji';
   color-scheme: light;
 }
 
