@@ -24,5 +24,5 @@ export const searchIndexKey: InjectionKey<string> = Symbol('searchIndexUrl')
 
 // 이 앱의 부 번호 (Supabase annotations.part). NoteMarker 가 사용.
 // **주입한 부에서만 협업 주석이 켜진다** — 미주입이면 NoteMarker 는 아무것도 그리지 않는다.
-// 얇은 슬라이스 게이트: 지금은 part1 만 주입한다(설계: docs/todo_협업주석_260716.md §8).
+// 전 11부(+포털 미주입)가 이 값을 주입한다. 부 번호가 곧 annotations.part 라 틀리면 남의 부 메모가 섞인다.
 export const partNumberKey: InjectionKey<number> = Symbol('partNumber')
