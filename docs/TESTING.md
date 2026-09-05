@@ -98,7 +98,7 @@ npm run dev -w apps/part1/web
 
 ## 3. 노트북 테스트 (선택)
 
-**부별 venv 는 필요 없다.** 8개 부의 의존성은 거의 동일(공통 6개 + part2 `sympy` + part3 `scipy` + part7 `scikit-learn`)하고 서로 충돌이 없으므로,
+**부별 venv 는 필요 없다.** 11개 부의 의존성은 거의 동일(공통 6개 + part2 `sympy` + part3 `scipy` + part7 `scikit-learn`)하고 서로 충돌이 없으므로,
 모노레포답게 **루트에 공용 venv 하나**를 만들어 모든 부의 노트북을 실행한다. 합집합 명세는 루트 `requirements.txt`.
 (부별 `apps/part*/notebooks/requirements.txt` 는 "그 부가 무엇을 쓰는지" 명세로 남겨둔다 — 참고용.)
 
@@ -166,7 +166,7 @@ Get-ChildItem apps\part*\notebooks\*.ipynb | ForEach-Object {
 
 ## 4. 빠른 전체 점검 스크립트
 
-**반복문 필요 없음** — 1절의 이 한 줄이 이미 6앱을 전부 빌드한다(cmd·PowerShell·Git Bash 공통):
+**반복문 필요 없음** — 1절의 이 한 줄이 이미 12앱을 전부 빌드한다(cmd·PowerShell·Git Bash 공통):
 
 ```cmd
 npm run build --workspaces --if-present
@@ -293,7 +293,7 @@ playwright-core 로 띄워 그 안에서 `mermaid.parse` + `mermaid.render` 를 
 
 ## 부록: 현재 상태
 
-- 구조: `apps/part1..11` + `apps/portal` + `packages/ui`(공용 컴포넌트 10종: MathBlock·ConceptCard·DetailsCard·ChartView·NotebookCard·ReviewFlag·PartLink·Quiz·StepQuiz·QuizSet + quizGroup 그룹계약 + injection) + `packages/tutor`(AI 튜터 Ollama 클라이언트) + `packages/store`(Supabase 인증·동기화·협업 주석 — env 미설정 시 no-op).
+- 구조: `apps/part1..11` + `apps/portal` + `packages/ui`(공용 컴포넌트 14종: MathBlock·ConceptCard·DetailsCard·ChartView·NotebookCard·ReviewFlag·PartLink·Quiz·StepQuiz·QuizSet·SearchPalette·ThemeToggle·NoteMarker·NotePanel + quizGroup 그룹계약 + injection·theme·anchor) + `packages/tutor`(AI 튜터 Ollama 클라이언트) + `packages/store`(Supabase 인증·동기화·협업 주석 — env 미설정 시 no-op).
 - 결합해제 주입 계약: `storagePrefixKey`(QuizSet 접두사) · `reviewApiKey`(ReviewFlag) · `notebookResolverKey`(NotebookCard) · `partNumberKey`(협업 주석 게이트 — 부 번호가 틀리면 남의 부 메모가 섞인다) · `searchIndexKey`(통합검색).
 - 검증됨(빌드): 전 11부 + 포털 `vue-tsc + vite` 통과, Tailwind `@source` 로 패키지 클래스 생성 전 부 확인.
 - 미검증(이 문서의 2절이 그 확인 절차): 런타임 동작(퀴즈·진도·복습·튜터).

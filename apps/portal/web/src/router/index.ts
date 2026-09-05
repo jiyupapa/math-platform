@@ -11,6 +11,8 @@ const routes: RouteRecordRaw[] = [
   { path: '/adoption', name: 'adoption', component: () => import('../views/AdoptionView.vue') },
   // 미해결 질문 큐 (협업 주석 P3) — 관리자(VITE_ADMIN_EMAILS)만 헤더에 노출
   { path: '/qna', name: 'qna', component: () => import('../views/QnaView.vue') },
+  // 알 수 없는 경로는 홈으로 (SPA 폴백은 index.html 을 주지만 라우터엔 매치가 없어 빈 화면이 된다)
+  { path: '/:pathMatch(.*)*', redirect: '/' },
 ]
 
 const router = createRouter({

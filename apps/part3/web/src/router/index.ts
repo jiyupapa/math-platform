@@ -71,6 +71,8 @@ const routes: RouteRecordRaw[] = [
     name: 'chapter',
     component: () => import('@/views/ComingSoonView.vue'),
   },
+  // 알 수 없는 경로는 홈으로 (SPA 폴백은 index.html 을 주지만 라우터엔 매치가 없어 빈 화면이 된다)
+  { path: '/:pathMatch(.*)*', redirect: '/' },
 ]
 
 const router = createRouter({
