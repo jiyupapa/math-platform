@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { registerProgressSync } from '@series/store'
-import { availableChapters } from '@/data/chapters'
+import { progressChapters } from '@/data/chapters'
 
 // 학습 진도 스토어. 완료한 챕터 슬러그를 localStorage 에 저장한다.
 const STORAGE_KEY = 'tf-progress-v1'
@@ -54,8 +54,11 @@ export const useProgressStore = defineStore('progress', () => {
     persist()
   }
 
-  const completedCount = computed(() => completed.value.length)
-  const totalCount = computed(() => availableChapters.length)
+  // 진도 대상 챕터와 교집합만 센다 — 샘플 챕터나 이름이 바뀐 옛 slug 가 남아 있어도 진도에 안 잡히게.
+  const completedCount = computed(
+    () => progressChapters.filter((c) => completed.value.includes(c.slug)).length,
+  )
+  const totalCount = computed(() => progressChapters.length)
   const percent = computed(() =>
     totalCount.value === 0 ? 0 : Math.round((completedCount.value / totalCount.value) * 100),
   )

@@ -46,3 +46,6 @@ export const chapters: ChapterMeta[] = [
 ]
 
 export const availableChapters = chapters.filter((c) => !c.comingSoon)
+
+// 학습 진도 산정 대상 — 데모용 샘플(phase 0)은 제외한 실제 학습 챕터만 (포털 진도 지도와 같은 기준)
+export const progressChapters = availableChapters.filter((c) => c.phase >= 1)

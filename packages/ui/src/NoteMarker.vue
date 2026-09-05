@@ -86,7 +86,7 @@ onUnmounted(() => {
   border: 1px solid var(--c-slate-200);
   border-radius: 6px;
   background: none;
-  color: var(--c-slate-400);
+  color: var(--c-slate-500);
   cursor: pointer;
   transition: border-color 0.15s, color 0.15s;
 }

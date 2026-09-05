@@ -212,6 +212,11 @@ end $$;
 
 -- 읽기 인터페이스는 그대로 유지(is_admin·RLS·클라이언트 계약 무변경) — 저장 위치만 테이블로.
 -- security definer: 위에서 RLS 를 전면 거부해 뒀으므로 이 함수만 명단을 읽을 수 있다.
+-- ⚠️ 노출 주의: 이 함수는 authenticated 전원이 직접 호출할 수 있다(is_admin 이 아래에서 이걸 쓰기 때문).
+--    즉 로그인한 @solideos.com 사용자는 select public.admin_emails() 로 **관리자 목록을 읽을 수 있다.**
+--    관리자 이메일은 클라이언트 번들 VITE_ADMIN_EMAILS 에도 들어 있어 비밀이 아니므로 수용 가능한 노출이다.
+--    완전히 감추려면(선택, DB 에서 검증 후 적용): is_admin 을 security definer 로 바꿔 admins 를 직접 읽고
+--    (아래 주석 참조) admin_emails 의 authenticated 실행 권한을 회수한다 — 그러면 목록 반환 경로가 사라진다.
 create or replace function public.admin_emails()
 returns text[]
 language sql
@@ -228,6 +233,13 @@ create or replace function public.is_admin()
 returns boolean language sql stable set search_path = public as $$
   select lower(coalesce(auth.jwt() ->> 'email', '')) = any (public.admin_emails())
 $$;
+-- 목록 노출을 없애는 하드닝(선택 — DB 에서 검증 후 위 두 줄을 대체):
+--   create or replace function public.is_admin()
+--   returns boolean language sql stable security definer set search_path = public as $$
+--     select exists (select 1 from public.admins
+--                    where lower(email) = lower(coalesce(auth.jwt() ->> 'email', '')));
+--   $$;
+--   revoke execute on function public.admin_emails() from authenticated;   -- is_admin 이 더는 안 씀
 
 -- 관리자 추가·삭제는 이 두 줄로 (SQL Editor 에서 실행 — 파일 재실행과 무관하게 유지된다):
 --   insert into public.admins(email) values ('hong@solideos.com') on conflict do nothing;
