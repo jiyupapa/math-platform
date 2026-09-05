@@ -18,7 +18,17 @@ export interface ReviewItem {
 function load(): ReviewItem[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
-    return raw ? (JSON.parse(raw) as ReviewItem[]) : []
+    const parsed: unknown = raw ? JSON.parse(raw) : []
+    if (!Array.isArray(parsed)) return []
+    // 손상된 저장값이 복습 화면을 깨뜨리지 않게 항목 형태 검증
+    return parsed.filter(
+      (i): i is ReviewItem =>
+        !!i &&
+        typeof i === 'object' &&
+        typeof (i as ReviewItem).id === 'string' &&
+        typeof (i as ReviewItem).chapter === 'string' &&
+        typeof (i as ReviewItem).label === 'string',
+    )
   } catch {
     return []
   }

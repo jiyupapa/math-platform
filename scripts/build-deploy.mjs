@@ -1,12 +1,13 @@
 // scripts/build-deploy.mjs
-// 5개 부 + 포털을 "하나의 origin 하위 경로"로 조립한다.
+// 11개 부 + 포털을 "하나의 origin 하위 경로"로 조립한다.
 //   포털 = 루트(/) · 각 부 = /partN/   → 결과: deploy/ (정적 폴더 하나)
 //
 // 왜 필요한가: localStorage 는 origin(주소+포트) 단위로 격리된다(경로 무관).
-//   진도는 la-*, tf-* 등으로 브라우저에 저장되므로, 5개 부 + 포털을 같은 origin 의
+//   진도는 la-*, tf-* 등으로 브라우저에 저장되므로, 11개 부 + 포털을 같은 origin 의
 //   하위 경로로 묶어야 포털이 각 부의 진도를 직접 읽는 "개인화 2층"이 성립한다.
 //   (npm run dev 는 부마다 포트가 달라 서로 다른 origin → 2층 검증 불가. 이 조립본만이 검증 수단.)
 import { execSync } from 'node:child_process'
+import { createHash } from 'node:crypto'
 import { fileURLToPath } from 'node:url'
 import { dirname, join, resolve } from 'node:path'
 import { rmSync, mkdirSync, cpSync, writeFileSync, existsSync, readFileSync } from 'node:fs'
@@ -92,9 +93,23 @@ const connectSrc = ["'self'"]
 if (supabaseOrigin) connectSrc.push(supabaseOrigin, supabaseOrigin.replace(/^https:/, 'wss:'))
 else connectSrc.push('https://*.supabase.co', 'wss://*.supabase.co') // env 미설정 조립본도 안전한 기본값
 if (!connectSrc.includes(ollamaOrigin)) connectSrc.push(ollamaOrigin)
+
+// script-src 는 'self'(외부 .js)만으로는 각 index.html 의 인라인 테마 스크립트를 막는다
+//   (다크 사용자의 첫 프레임 흰 화면 방지 + 매 로드 콘솔 CSP 에러). 그 스크립트를 sha256 해시로 허용한다.
+//   해시는 **실제 산출물에서 계산** — 스크립트를 고치면 자동으로 맞고, 하드코딩처럼 조용히 어긋나지 않는다.
+//   (part1 은 LF·나머지는 CRLF 라 해시가 갈리므로 distinct 전부 넣는다. 브라우저는 태그 사이 원문 바이트로 해시한다.)
+const scriptHashes = new Set()
+for (const app of APPS) {
+  const html = readFileSync(join(deployDir, app.dest, 'index.html'), 'utf8')
+  for (const m of html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi)) {
+    if (!m[1].trim()) continue // src 있는 모듈 스크립트·빈 스크립트 제외
+    scriptHashes.add(`'sha256-${createHash('sha256').update(m[1], 'utf8').digest('base64')}'`)
+  }
+}
+const scriptSrc = ["'self'", ...scriptHashes].join(' ')
 const csp = [
   "default-src 'self'",
-  "script-src 'self'",
+  `script-src ${scriptSrc}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data:",
   "font-src 'self' data:",
@@ -112,7 +127,9 @@ const headers = `/*
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 `
 writeFileSync(join(deployDir, '_headers'), headers)
-console.log(`▶ deploy/_headers 작성 (보안 헤더 — connect-src: ${connectSrc.join(' ')})`)
+console.log(
+  `▶ deploy/_headers 작성 (보안 헤더 — 인라인 스크립트 해시 ${scriptHashes.size}개, connect-src: ${connectSrc.join(' ')})`,
+)
 
 console.log(`
 ✅ 조립 완료 → deploy/

@@ -249,6 +249,42 @@ for (const rel of files) {
   }
 }
 
+// ── <style> 블록 스캔 (스코프드 CSS 의 color) ──────────────────────────────
+// 위 파서는 class·인라인 style 만 본다 — 컴포넌트 <style> 안의 color 는 못 봤다(사각지대).
+//   실제로 NotePanel·AuthPanel·NoteMarker 의 muted 텍스트(slate-400·indigo-500)가 여기로 새
+//   AA 미달이 돼 있었다. 배경을 정적으로 알 수 없으므로 **가장 유리한 배경(흰색)** 으로 본다:
+//   흰색에서도 미달이면 더 어두운 어떤 표면에서도 미달이다(거짓양성 없음). 한계 — 흰색은
+//   통과하나 bg-slate-100 위에선 미달인 경우는 못 잡는다. 그건 브라우저 실측(docs/TESTING.md 5-2)이 맡는다.
+//   라이트 모드 한정: 다크 값은 dark.css 가 역할대로 remap 한다.
+// 밝은 틴트(밝은 색 = 어두운 버튼 위 글자, 예: white text)는 흰 배경 가정이 무의미하므로
+//   luminance 게이트로 제외한다 — "어두운 글자색인데 흰색에서도 모자란" 것만 잡는다.
+const STYLE_BLOCK_COLOR = /(?<![-a-z])color:\s*var\((--c-[a-z]+-\d+)\)/g
+for (const rel of files) {
+  const src = readFileSync(join(root, rel), 'utf8')
+  for (const sb of src.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)) {
+    const base = sb.index + sb[0].indexOf(sb[1])
+    for (const cm of sb[1].matchAll(STYLE_BLOCK_COLOR)) {
+      const name = cm[1]
+      const light = tokenColor(name, false)
+      if (!light) continue
+      if (lum(light) > 0.55) continue // 밝은 틴트 = 어두운 배경용 → 배경 없이는 판단 불가, 제외
+      if (ratio(light, WHITE_LIGHT) >= MIN_RATIO) continue
+      const tk = name.match(/^--c-([a-z]+)-(\d+)$/)
+      const fam = tk[1], step = +tk[2]
+      const cands = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900]
+        .filter((s) => TOK_LIGHT.has(`${fam}-${s}`))
+        .filter((s) => { const c = tokenColor(`--c-${fam}-${s}`, false); return c && ratio(c, WHITE_LIGHT) >= MIN_RATIO })
+        .sort((a, b2) => Math.abs(a - step) - Math.abs(b2 - step))
+      findings.push({
+        file: rel, line: src.slice(0, base + cm.index).split('\n').length, kind: 'style',
+        from: name, to: cands.length ? `--c-${fam}-${cands[0]}` : null,
+        bg: 'bg-white (<style> 최선 가정)', themes: '라이트',
+        ratio: +ratio(light, WHITE_LIGHT).toFixed(2), cls: null,
+      })
+    }
+  }
+}
+
 // ── 리포트 ─────────────────────────────────────────────────────────────
 if (!findings.length) {
   console.log(`✓ 글자 대비 미달 없음 — .vue ${files.length}개, 라이트·다크 양쪽 검사 (기준 ${MIN_RATIO}:1)`)

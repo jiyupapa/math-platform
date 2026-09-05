@@ -131,7 +131,7 @@ function when(iso: string): string {
           </div>
 
           <template v-if="editingId === a.id">
-            <textarea v-model="editBody" class="np-ta" rows="3"></textarea>
+            <textarea v-model="editBody" class="np-ta" rows="3" maxlength="2000"></textarea>
             <div class="np-row">
               <button class="np-go" type="button" :disabled="busy" @click="saveEdit(a.id)">저장</button>
               <button class="np-link" type="button" @click="editingId = null">취소</button>
@@ -167,6 +167,7 @@ function when(iso: string): string {
               v-model="answerBody"
               class="np-ta"
               rows="3"
+              maxlength="4000"
               placeholder="강사 답변 — 질문자와 동료 모두에게 보여요"
             ></textarea>
             <div class="np-row">
@@ -213,6 +214,7 @@ function when(iso: string): string {
           v-model="body"
           class="np-ta"
           rows="3"
+          maxlength="2000"
           :placeholder="
             kind === 'question'
               ? '이 부분에서 막힌 점을 물어보세요 — AI가 바로 답해요'
@@ -266,7 +268,7 @@ function when(iso: string): string {
   flex: none;
   border: none;
   background: none;
-  color: var(--c-slate-400);
+  color: var(--c-slate-500);
   cursor: pointer;
   font-size: 13px;
 }
@@ -278,7 +280,7 @@ function when(iso: string): string {
   padding: 10px 2px;
   font-size: 12px;
   line-height: 1.6;
-  color: var(--c-slate-400);
+  color: var(--c-slate-500);
 }
 .np-list {
   margin: 0 0 10px;
@@ -301,7 +303,7 @@ function when(iso: string): string {
   gap: 6px;
   margin-bottom: 4px;
   font-size: 11px;
-  color: var(--c-slate-400);
+  color: var(--c-slate-500);
 }
 .np-kind {
   padding: 1px 6px;
@@ -394,14 +396,15 @@ function when(iso: string): string {
   border: none;
   background: none;
   font-size: 11px;
-  color: var(--c-indigo-500);
+  /* 본문 링크 텍스트는 indigo-600(라이트 6.3:1) — indigo-500 은 4.47:1 로 AA 미달 */
+  color: var(--c-indigo-600);
   cursor: pointer;
 }
 .np-link:hover {
   text-decoration: underline;
 }
 .np-del {
-  color: var(--c-slate-400);
+  color: var(--c-slate-500);
 }
 .np-del:hover {
   color: var(--c-red-600);
@@ -471,7 +474,7 @@ function when(iso: string): string {
 .np-note {
   margin: 0;
   font-size: 10px;
-  color: var(--c-slate-400);
+  color: var(--c-slate-500);
   text-align: center;
 }
 </style>

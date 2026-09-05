@@ -177,7 +177,7 @@ async function submit() {
 .ap-note {
   margin: 0;
   font-size: 11px;
-  color: var(--c-slate-400);
+  color: var(--c-slate-500);
   text-align: center;
 }
 </style>
