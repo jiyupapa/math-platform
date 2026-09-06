@@ -4,8 +4,9 @@ dist/
 deploy/
 .vite/
 
-# 통합검색 인덱스 (scripts/build-search-index.mjs 로 재생성 — postinstall·deploy:build 가 자동 생성)
+# 통합검색 인덱스·개념 그래프 (scripts/build-search-index.mjs · build-concept-graph.mjs 로 재생성 — postinstall·deploy:build 가 자동 생성)
 apps/*/web/public/search-index.json
+apps/*/web/public/concept-graph.json
 
 # 환경변수 (Supabase URL/anon key 등 로컬 설정) — .env.example 은 커밋, 실제 .env 는 제외
 .env

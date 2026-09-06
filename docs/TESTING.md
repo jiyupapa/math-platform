@@ -277,6 +277,39 @@ playwright-core 로 띄워 그 안에서 `mermaid.parse` + `mermaid.render` 를 
 
 ---
 
+## 5-4. 개념 온톨로지 검사
+
+```bash
+npm run check:ontology                   # 정본(scripts/ontology/concepts.json) + 본문 PartLink 검사 — 커밋 훅이 자동 실행
+npm run check:ontology -- --suggest      # 그래프 간선이 없는 PartLink 쌍(누락 간선 후보) 목록
+npm run check:ontology -- --coverage     # 개념이 하나도 안 붙은 장 목록
+npm run search:index && npm run ontology:graph   # 정본을 고쳤으면 산출물 재생성 (postinstall·deploy:build 도 자동)
+```
+
+**실패(커밋 차단)**: 개념 `id` 중복·형식 위반 / 위치 `part`·`slug` 가 `chapters.ts` 에 없음 / `anchor` 가 그 장의
+`ReviewFlag` id·`anchorId` 에 없음 / `prereq`·`related` 대상 없음·`prereq` 순환 / `definedAt` 누락·비유어 `part` 누락·같은 부
+안에서 비유어 중복 / **본문 `<PartLink>` 가 없는 부·장을 가리킴**(온톨로지와 무관하게 이전엔 아무도 안 잡던 드리프트).
+**경고(통과)**: PartLink 쌍이 그래프에 없음 · README 「부 간 주요 연결 지점」 행이 그래프에 없음 · 개념 없는 장.
+
+순수 파일 검사라 0.5초 안 — 그래서 대비 검사와 함께 커밋 훅에 걸었다. 규칙 정본은 `docs/todo_온톨로지_260906.md` §6.
+
+**화면 소비처(2단계)** — 조립본 스모크(`PORT=4199 node scripts/verify-smoke.mjs`, 4절)가 포털 `/concepts` 렌더,
+개념 지도 노드 ≥ 100, 5부 5장 상단 띠에 'KL 발산' 표시를 함께 검사한다(146건). 띠가 안 보이면 `concept-graph.json`
+누락(→ `npm run ontology:graph`)이거나 챕터 라우트가 아닌 것(홈·복습에는 띠가 없다).
+
+**개인화(3단계)** — `PORT=4199 node scripts/verify-personalization.mjs` (조립본 서빙 상태에서). localStorage 에 복습 북마크·
+진도·진단을 심고 홈의 복습 경로(표시한 개념 전부 · 선수가 앞 · 완료 ✓) · 진단 개념 칩 · 설명 문장 · 개념 지도의 ring·배지를
+검사한다(8건, 백엔드·로그인 불필요). 질문 집계(도입 현황·질문 큐)는 실 Supabase 가 필요해 자동 검사 밖 — `e2e/` 계정으로 눈으로.
+
+⚠️ Git Bash 에서 `npm run build -w apps/portal/web -- --base=/` 처럼 **`/` 로 시작하는 인자**는 MSYS 경로 변환으로
+`/SERVER/Git/` 이 돼 빈 화면이 된다. 수동 빌드는 `MSYS_NO_PATHCONV=1` 을 붙이거나, `npm run deploy:build`(node 가 실행)를 쓴다.
+
+**튜터 접지 확인(수동)**: 어느 부든 튜터에게 **그 부에 없는 개념**을 물어본다(예: 1부에서 "연쇄법칙이 뭐예요?").
+개념 카드가 붙으면 "2부 6장"처럼 다른 부의 위치를 안내해야 한다. 카드가 안 붙는 증상은 `public/concept-graph.json`
+이 없는 것(→ `npm run ontology:graph`)이 대부분이다 — 그래프가 없어도 튜터는 접지 없이 정상 동작한다.
+
+---
+
 ## 6. 문제 해결
 
 - **카드/버튼에 색이 없다 (흰 네모)** — Tailwind `@source` 누락. 각 부 `web/src/style.css` 에

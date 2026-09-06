@@ -31,8 +31,12 @@ const APPS = [
   { name: 'part11', base: '/part11/', dest: 'part11' },
 ]
 
-console.log('▶ 통합검색 인덱스 생성 (각 앱 public/search-index.json)')
+console.log('▶ 개념 온톨로지 검사 (scripts/ontology/concepts.json — 위치·앵커·순환·PartLink)')
+execSync('node scripts/check-ontology.mjs', { cwd: root, stdio: 'inherit' })
+
+console.log('\n▶ 통합검색 인덱스 + 개념 그래프 생성 (각 앱 public/search-index.json · concept-graph.json)')
 execSync('node scripts/build-search-index.mjs', { cwd: root, stdio: 'inherit' })
+execSync('node scripts/build-concept-graph.mjs', { cwd: root, stdio: 'inherit' })
 
 console.log('\n▶ deploy/ 초기화')
 rmSync(deployDir, { recursive: true, force: true })

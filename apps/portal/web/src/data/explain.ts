@@ -1,9 +1,18 @@
 // 3층 — 추천 이유를 강사 말투로 설명(규칙 기반 템플릿).
 // 결정은 recommend.ts(규칙)가 하고, 여기서는 그 결과를 문장으로 풀어줄 뿐이다.
 // Ollama 튜터가 켜져 있으면 이 문장을 더 따뜻하게 다시 말해준다(TutorExplain.vue). 꺼져 있으면 이 템플릿이 최종.
+// missed — 진단에서 헷갈린 개념(온톨로지 3단계, diagnosisConcepts.ts + 그래프의 정의처). 있으면 한 문장 덧붙인다.
 import type { Recommendation } from './recommend'
 
-export function explainTemplate(rec: Recommendation): string {
+export interface MissedConcept {
+  label: string
+  /** 배우는 곳 — "2부 6장" */
+  where: string
+}
+
+const MISSED_MAX = 4
+
+export function explainTemplate(rec: Recommendation, missed: MissedConcept[] = []): string {
   const g = rec.gates
   const parts: string[] = []
 
@@ -26,6 +35,12 @@ export function explainTemplate(rec: Recommendation): string {
 
   if (!g.log?.passed) {
     parts.push('log 감각은 5부에 들어가기 전에 한 번 짚고 갈게요.')
+  }
+
+  if (missed.length) {
+    const shown = missed.slice(0, MISSED_MAX).map((m) => `${m.label}(${m.where})`).join('·')
+    const more = missed.length > MISSED_MAX ? ` 외 ${missed.length - MISSED_MAX}개` : ''
+    parts.push(`진단에서 헷갈린 개념은 ${shown}${more} — 경로에서 그 장을 만나면 천천히 보세요.`)
   }
 
   const hours = Math.round((rec.activeMinutes / 60) * 10) / 10

@@ -328,6 +328,7 @@ localStorage 가 분리돼 **포털이 다른 부의 진도를 읽는 기능**�
 | 저장 접두사 12개 | `la` `diff` `stat` `tf` `it` `tame` `emb` `opt` `num` `scale` `agent` `hub` | 사용자 진도가 끊기고 포털 연동이 깨진다 |
 | `partNumberKey` | 부 번호 = Supabase `annotations.part` | 같은 슬러그를 공유하므로 남의 부 메모가 섞인다 |
 | 앵커 id | `{chapter}-{type}-{slug}`, 배포 후 변경 금지 | 달아 둔 메모가 미아가 된다 |
+| 개념 id | `scripts/ontology/concepts.json` 의 `id` — 배포 후 변경·삭제 금지 | 개념을 참조하는 검색·튜터 카드·(2단계) 딥링크가 고아가 된다 — `check:ontology` 가 위치·앵커·순환은 잡지만 개명은 못 잡는다 |
 | Tailwind `@source` | 각 앱 style.css 에 패키지 경로 | 공용 컴포넌트 스타일이 조용히 사라진다 |
 | `optimizeDeps.exclude` | 전 12앱에 공용 패키지 3종 | 패키지 컴포넌트가 안 뜬다 |
 | 테마 localStorage 키 | `series-theme-v1` — theme.ts · index.html · 문서 3곳 동일 | 첫 페인트에 흰 화면이 번쩍인다 |
@@ -362,6 +363,7 @@ flowchart LR
         d1["todo_supabase백엔드"]
         d2["todo_통합검색"]
         d3["todo_협업주석"]
+        d4["todo_온톨로지"]
     end
 
     subgraph audit["점검 리포트"]
@@ -384,6 +386,7 @@ flowchart LR
 | 언제 무엇을 했나 | `docs/99_history.md` + 부별 `99_history.md` |
 | **전체가 어떻게 이어지나** | **이 문서** |
 | 기능별 설계 근거 | `docs/todo_*.md` |
+| 개념과 관계의 정본 | `scripts/ontology/concepts.json` — 검색 색인·개념 그래프·튜터 카드의 원천 (`npm run check:ontology`) |
 | 품질 점검 결과 | `docs/점검_*.md` |
 | 제작 비용·토큰 | `docs/제작통계_260714.md` — 07-14 스냅샷 |
 | 발표 자료 | `docs/hackathon/` — 1부 단독 출품 시절, 개정 대상 |
@@ -398,6 +401,7 @@ flowchart LR
 | 발표 산출물 개정 | `docs/hackathon/` 이 1부 단독 시절 프레임 |
 | 모바일 실측 | 390px 레이아웃과 터치 포인터 44px 타깃 미확인 |
 | 아이콘 체계 | 이모지 448곳 — 폰트 스택만 고정, OS별 모양 차이는 남음 |
+| 개념 온톨로지 | 1·2·3단계 완료(2026-09-06 — 정본 개념 113 · `check:ontology` · 튜터 개념 카드 · 챕터 띠 · 포털 개념 지도 · 팔레트 이웃 · 복습 경로 · 개념 단위 진단 · 질문 집계). 4단계(콘텐츠, 선택) — `docs/todo_온톨로지_260906.md` §11~§13 |
 
 ---
 

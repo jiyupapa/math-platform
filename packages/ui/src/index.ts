@@ -11,6 +11,25 @@ export { default as ReviewFlag } from './ReviewFlag.vue'
 export { default as PartLink } from './PartLink.vue'
 export { default as SearchPalette } from './SearchPalette.vue'
 
+// 개념 온톨로지 — 장 상단 띠(각 부 App.vue 가 <RouterView> 위에 한 번) + 그래프 로더·조회 헬퍼(포털 개념 지도도 사용)
+export { default as ConceptStrip } from './ConceptStrip.vue'
+export {
+  loadConceptGraph,
+  conceptsDefinedAt,
+  conceptsReusedAt,
+  conceptsAtAnchor,
+  dependentsOf,
+  prereqClosure,
+  chapterLabel,
+  chapterTitle,
+  chapterHref,
+  locKey,
+  type Concept,
+  type ConceptGraph,
+  type ConceptLocation,
+  type ConceptMetaphor,
+} from './conceptGraph'
+
 // 테마(라이트/다크) — 색은 dark.css 가 처리하고, 여기선 선택 상태만 다룬다.
 // 각 앱 main.ts 에서 initTheme() 를 부르고, 헤더/사이드바에 ThemeToggle 을 둔다.
 export { default as ThemeToggle } from './ThemeToggle.vue'
@@ -34,6 +53,7 @@ export {
   reviewApiKey,
   notebookResolverKey,
   searchIndexKey,
+  conceptGraphKey,
   partNumberKey,
   type ReviewApi,
   type NotebookResolver,

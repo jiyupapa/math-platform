@@ -272,6 +272,27 @@ export async function fetchOpenQuestions(): Promise<Annotation[]> {
   return data as Annotation[]
 }
 
+// 주석 위치 집계용(온톨로지 3단계) — 본문 없이 (부·장·항목·종류·해결) 만 읽는다. 포털 도입 현황이 개념으로 묶어
+// "어느 개념에 질문이 몰리나"를 센다. read_all 이라 로그인 전원이 조회 가능하지만 본문·user_id 는 가져오지 않는다.
+export interface AnnotationLocation {
+  part: number
+  chapter: string
+  item_id: string
+  kind: AnnotationKind
+  resolved: boolean
+}
+export async function fetchAnnotationLocations(): Promise<AnnotationLocation[]> {
+  if (!currentUser.value) return []
+  const sb = await getSupabase()
+  if (!sb) return []
+  const { data, error } = await sb
+    .from('annotations')
+    .select('part, chapter, item_id, kind, resolved')
+    .limit(5000)
+  if (error || !data) return []
+  return data as AnnotationLocation[]
+}
+
 // AI 답변 저장 — 패널이 아닌 곳(TutorChat)에서 불릴 수 있어 독립 함수로 둔다.
 // 열려 있는 캐시에도 즉시 반영해 패널이 다시 열릴 때 답이 보이게 한다.
 export async function saveAiAnswer(id: string, answer: string): Promise<boolean> {

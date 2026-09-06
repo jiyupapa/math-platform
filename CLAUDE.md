@@ -44,7 +44,7 @@ npm run build -w apps/part1/web              # 특정 부만 빌드
 
 ## 공용 컴포넌트 — `packages/ui` (@series/ui)
 
-공용 컴포넌트(`MathBlock`·`ConceptCard`·`DetailsCard`·`ChartView`·`NotebookCard`·`ReviewFlag`·`PartLink`·`Quiz`·`StepQuiz`·`QuizSet`)와
+공용 컴포넌트(`MathBlock`·`ConceptCard`·`DetailsCard`·`ChartView`·`NotebookCard`·`ReviewFlag`·`PartLink`·`ConceptStrip`·`SearchPalette`·`Quiz`·`StepQuiz`·`QuizSet`)와
 QuizSet↔StepQuiz 그룹 계약(`quizGroupKey`/`QuizGroup` — `quizGroup.ts`)은
 **`packages/ui` 한 곳에만 있다.** 앱은 `import { Quiz } from '@series/ui'` 로 소비.
 
@@ -55,6 +55,8 @@ QuizSet↔StepQuiz 그룹 계약(`quizGroupKey`/`QuizGroup` — `quizGroup.ts`)�
     각 부 진도(`{prefix}-progress-v1`)를 읽어 지도에 표시하므로 부 접두사 변경은 포털 연동도 깨뜨린다.
   - `reviewApiKey` — ReviewFlag ↔ 각 앱 `review` 스토어.
   - `notebookResolverKey` — NotebookCard ↔ 각 앱 `chapters`(part1·4·5·6·7·8·9·10·11).
+  - `conceptGraphKey` — `ConceptStrip`(장 상단 개념 띠)이 읽는 `concept-graph.json` URL. **미주입이면 `<base>concept-graph.json`**
+    이라 12앱 main.ts 가 안 건드린다. 띠는 각 부 `App.vue` 의 `<RouterView>` 위 한 줄로 마운트되고 챕터 라우트에서만 렌더된다.
   - `partNumberKey` — **협업 주석(NoteMarker/NotePanel) 게이트**: 부 번호를 주입한 부에서만 💬 마커가
     렌더된다(**전 11부 주입 완료**). 값이 곧 Supabase `annotations.part` 라 **부 번호가 틀리면 남의 부
     메모가 섞인다** — 같은 챕터 슬러그(`ch1`)·앵커 id(`ch1-s1`)를 여러 부가 공유하므로 part 가 유일한
@@ -113,6 +115,23 @@ QuizSet↔StepQuiz 그룹 계약(`quizGroupKey`/`QuizGroup` — `quizGroup.ts`)�
   백엔드 없이 빌드해도 깨지지 않는다(로컬 개발의 기본 상태).
   `isAdmin` 의 `VITE_ADMIN_EMAILS` 는 **UI 표시용일 뿐 — 진짜 경계는 서버 `public.admins` 테이블 + RLS**(두 목록을 같게 유지).
   DB 스키마 `supabase/schema.sql`, 설계 `docs/todo_supabase백엔드_260715.md`.
+
+## 개념 온톨로지 — `scripts/ontology/concepts.json`
+
+시리즈의 개념(수학·AI 용어)과 관계(선수 `prereq` · 회수 `usedAt` · 별칭 `aliases` · 비유어 `metaphors`)의 **단일 정본**.
+검색 인덱스(`search-index.json`)와 개념 그래프(`concept-graph.json`)가 여기서 생성되고, 각 부 `TutorChat` 은 그래프에서
+질문에 나온 개념의 카드(정의처·회수처·선수·비유어)를 시스템 프롬프트에 덧붙여 **다른 부 개념도 'N부 M장'으로 안내**한다.
+화면 소비처: 각 장 상단 띠 `ConceptStrip`(packages/ui) · 포털 `/concepts` 개념 지도(`ConceptsView`) · 검색 팔레트 이웃 줄 ·
+포털 홈의 복습 경로(북마크 → 선수 개념)와 진단 개념 칩(`diagnostic.ts` 의 `concepts` 태그) · 도입 현황의 질문 집계 —
+**전부 산출물 JSON 을 fetch** 하므로 정본을 고쳤으면 `npm run ontology:graph` 를 잊지 말 것.
+주석·북마크 앵커를 개념으로 묶는 규칙은 `conceptsAtAnchor`(packages/ui) 한 곳 — 소비처마다 따로 만들지 말 것.
+설계·규칙·단계는 `docs/todo_온톨로지_260906.md`.
+
+- **개념 `id` 는 앵커처럼 배포 후 변경·삭제 금지.** 위치는 `part`+`slug`(chapters.ts 실재)+`anchor`(그 장의 `ReviewFlag` id).
+- **회색 지대 비유어**(짝지을 실무 용어가 없는 것 — 7부 "길이 오염"·8부 "서성임"·9부 "칸")는 넣지 않는다(비유 앵커링 점검 ②).
+- 검사: `npm run check:ontology` (위치·앵커 실재, `prereq` 순환, 본문 `PartLink` 대상 실재 — **pre-commit 이 자동으로 돈다**).
+  `-- --suggest` 는 그래프에 없는 PartLink 쌍(누락 간선 후보), `-- --coverage` 는 개념이 없는 장을 보여 준다.
+- 정본을 고치면 `npm run search:index && npm run ontology:graph` (postinstall·deploy:build 가 자동 실행, 산출물은 gitignore).
 
 ## 시리즈 설계 철학 (모든 부 공통)
 
