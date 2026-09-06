@@ -293,9 +293,14 @@ npm run search:index && npm run ontology:graph   # 정본을 고쳤으면 산출
 
 순수 파일 검사라 0.5초 안 — 그래서 대비 검사와 함께 커밋 훅에 걸었다. 규칙 정본은 `docs/todo_온톨로지_260906.md` §6.
 
-**화면 소비처(2단계)** — 조립본 스모크(`PORT=4199 node scripts/verify-smoke.mjs`, 4절)가 포털 `/concepts` 렌더,
-개념 지도 노드 ≥ 100, 5부 5장 상단 띠에 'KL 발산' 표시를 함께 검사한다(146건). 띠가 안 보이면 `concept-graph.json`
-누락(→ `npm run ontology:graph`)이거나 챕터 라우트가 아닌 것(홈·복습에는 띠가 없다).
+**화면 소비처(2·4단계)** — 조립본 스모크(`PORT=4199 node scripts/verify-smoke.mjs`, 4절)가 포털 `/concepts`·`/glossary` 렌더,
+개념 지도 노드 ≥ 100, 비유어 사전 행 ≥ 60, 5부 5장 상단 띠에 'KL 발산' 표시를 함께 검사한다(148건). 띠가 안 보이면
+`concept-graph.json` 누락(→ `npm run ontology:graph`)이거나 챕터 라우트가 아닌 것(홈·복습에는 띠가 없다).
+
+**노트북 튜터 접지(4단계)** — 각 부 `notebooks/tutor.py` 도 `web/public/concept-graph.json` 을 읽어 개념 카드를 붙인다.
+파일이 없으면(저장소 밖으로 복사·산출물 미생성) 접지 없이 동작하므로, 노트북에서 다른 부 개념을 물었는데 "이 시리즈에
+없다"고 하면 `npm run ontology:graph` 부터. 빠른 확인(Ollama 불필요):
+`cd apps/part1/notebooks && ..\..\..\.venv\Scripts\python.exe -c "from tutor import match_concepts; print([c['id'] for c in match_concepts('KL 발산은 어디서 배워요?')])"`.
 
 **개인화(3단계)** — `PORT=4199 node scripts/verify-personalization.mjs` (조립본 서빙 상태에서). localStorage 에 복습 북마크·
 진도·진단을 심고 홈의 복습 경로(표시한 개념 전부 · 선수가 앞 · 완료 ✓) · 진단 개념 칩 · 설명 문장 · 개념 지도의 ring·배지를

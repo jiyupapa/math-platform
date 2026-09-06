@@ -103,7 +103,7 @@ export const pathSteps: PathStep[] = [
   {
     order: 9, part: 7, title: '(선택·실용) 7부 — 임베딩 기하학', scope: 'ch1~10',
     chapterCount: 10, segments: [{ part: 7, slugs: ch(1, 10) }],
-    minutes: 420, role: '실용', optional: true,
+    minutes: 430, role: '실용', optional: true,
     gain: 'RAG의 수학 — 1부 전반만 마치면 언제든 진입 가능',
   },
   {

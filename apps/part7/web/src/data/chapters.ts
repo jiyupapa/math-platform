@@ -38,7 +38,7 @@ export const chapters: ChapterMeta[] = [
   { slug: 'ch5', phase: 5, title: '지도 그리기 — 차원 축소', summary: 'PCA 재회 + t-SNE·UMAP 감각 — 2D 지도는 왜곡을 동반한다', minutes: 40, notebook: 'ch05_dimreduce.ipynb' },
   { slug: 'ch6', phase: 6, title: '이웃 찾기 — kNN에서 벡터 DB까지', summary: '전수조사의 비용 → 근사 최근접 이웃(ANN), 벡터 DB의 정체', minutes: 40, notebook: 'ch06_ann.ipynb' },
   { slug: 'ch7', phase: 7, title: '청킹과 검색 품질', summary: '문서 쪼개기 트레이드오프, top-k·임계값, recall@k 채점', minutes: 40, notebook: 'ch07_chunking.ipynb' },
-  { slug: 'ch8', phase: 8, title: 'RAG 조립 (핵심) — 검색이 프롬프트가 되기까지', summary: '파이프라인 전체 + 실패 모드, RAG vs 파인튜닝 선택 기준', minutes: 45, notebook: 'ch08_rag_assembly.ipynb' },
+  { slug: 'ch8', phase: 8, title: 'RAG 조립 (핵심) — 검색이 프롬프트가 되기까지', summary: '파이프라인 전체 + 실패 모드, RAG vs 파인튜닝 선택 기준, 벡터로 부족할 때 — 지식 그래프·GraphRAG', minutes: 55, notebook: 'ch08_rag_assembly.ipynb' },
   { slug: 'ch9', phase: 9, title: '임베딩은 어떻게 배우나 — 대조 학습', summary: '"짝은 가깝게, 남은 멀게" — 그리고 또 −log 손실', minutes: 40, notebook: 'ch09_contrastive.ipynb' },
   { slug: 'ch10', phase: 10, title: '🎯 캡스톤 — 사내 FAQ 검색봇', summary: '미니 RAG 전체 조립: 임베딩 → 코사인 → top-k → 답변', minutes: 50, notebook: 'ch10_capstone.ipynb' },
 ]

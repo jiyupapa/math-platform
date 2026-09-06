@@ -59,12 +59,17 @@ await visit('/', '포털 홈')
 await visit('/diagnose', '포털 진단')
 await visit('/map', '포털 학습 구조도')
 await visit('/concepts', '포털 개념 지도')
+await visit('/glossary', '포털 비유어 사전')
 
 // 온톨로지 2단계 — 개념 지도의 노드가 실제로 그려졌는가(그래프 fetch 포함), 챕터 상단 개념 띠가 렌더되는가 (각 1건)
+// 온톨로지 4단계 — 비유어 사전의 행(정본 metaphors)이 채워졌는가 (1건)
 {
   await page.goto(`${BASE}/concepts`, { waitUntil: 'networkidle', timeout: 20000 })
   const nodes = await page.locator('[data-concept-node]').count()
   check('개념 지도 노드', nodes >= 100, nodes < 100 ? `노드 ${nodes}개 (concept-graph.json 누락?)` : '')
+  await page.goto(`${BASE}/glossary`, { waitUntil: 'networkidle', timeout: 20000 })
+  const rows = await page.locator('[data-glossary-row]').count()
+  check('비유어 사전 행', rows >= 60, rows < 60 ? `행 ${rows}개` : '')
   await page.goto(`${BASE}/part5/ch/ch5`, { waitUntil: 'networkidle', timeout: 20000 })
   const strip = await page.locator('[data-concept-strip]').first().innerText().catch(() => '')
   check('개념 띠 (part5/ch5)', /KL 발산/.test(strip), strip ? `내용: ${strip.slice(0, 80)}` : '띠 없음')
@@ -81,5 +86,5 @@ for (let p = 1; p <= 11; p++) {
 }
 
 await browser.close()
-console.log(`\n결과: ${pass} 통과 / ${fails.length} 실패 — 검사 ${pass + fails.length}건 (챕터 ${totalChapters} + 홈 12 + 포털 진단·구조도·개념 지도 3 + 온톨로지 렌더 2)`)
+console.log(`\n결과: ${pass} 통과 / ${fails.length} 실패 — 검사 ${pass + fails.length}건 (챕터 ${totalChapters} + 홈 12 + 포털 진단·구조도·개념 지도·비유어 사전 4 + 온톨로지 렌더 3)`)
 process.exit(fails.length === 0 ? 0 : 1)

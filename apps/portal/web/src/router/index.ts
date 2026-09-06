@@ -9,6 +9,8 @@ const routes: RouteRecordRaw[] = [
   { path: '/map', name: 'map', component: () => import('../views/StructureView.vue') },
   // 개념 지도 — 온톨로지(concept-graph.json) 부별 행 + 선수 사슬 (?c= 딥링크, 각 부 ConceptStrip 이 연다)
   { path: '/concepts', name: 'concepts', component: () => import('../views/ConceptsView.vue') },
+  // 비유어 사전 — 정본 metaphors 를 부별로 (각 부 캡스톤 치환표의 통합판)
+  { path: '/glossary', name: 'glossary', component: () => import('../views/GlossaryView.vue') },
   // 도입 현황 대시보드 (P3) — 로그인 시 헤더에 노출
   { path: '/adoption', name: 'adoption', component: () => import('../views/AdoptionView.vue') },
   // 미해결 질문 큐 (협업 주석 P3) — 관리자(VITE_ADMIN_EMAILS)만 헤더에 노출
