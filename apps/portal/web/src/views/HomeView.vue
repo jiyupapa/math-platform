@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, shallowRef, computed, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
+import { loadConceptGraph, chapterLabel, chapterHref, type Concept, type ConceptGraph } from '@series/ui'
 import { pathSteps, totalChapters, totalHours, type StepRole } from '../data/curriculum'
+import { readReviewPath, type ReviewPath } from '../data/reviewPath'
+import { conceptResults } from '../data/diagnosisConcepts'
 import { loadDiagnosis, loadBaseline, clearDiagnosis, confidenceAvg } from '../data/useDiagnosis'
 import { recommend, type StepStatus } from '../data/recommend'
 import { readAllProgress, readStepProgress } from '../data/useProgress'
@@ -45,7 +48,41 @@ const rec = computed(() => {
   const d = diagnosis.value
   return d ? recommend(d.answers, confidenceAvg(d.confidence)) : null
 })
-const explanation = computed(() => (rec.value ? explainTemplate(rec.value) : ''))
+// 온톨로지 3단계 — 개념 그래프(빌드 산출물 concept-graph.json)는 비동기 로드. 못 읽으면 복습 경로·개념 칩만 빠진다.
+const graph = shallowRef<ConceptGraph | null>(null)
+onMounted(async () => {
+  graph.value = await loadConceptGraph(import.meta.env.BASE_URL + 'concept-graph.json')
+})
+// 복습 경로 — 복습 표시 → 개념 → 선수 개념까지(먼 것부터). 표시가 없으면 카드 없음.
+const reviewPath = computed<ReviewPath | null>(() => (graph.value ? readReviewPath(graph.value) : null))
+// 기본은 앞 10단계 — 표시(★)가 깊은 개념이면 뒤에 숨으므로 '전체 보기'로 펼친다
+const REVIEW_STEPS_MAX = 10
+const showAllReview = ref(false)
+const reviewSteps = computed(() => {
+  const steps = reviewPath.value?.steps ?? []
+  return showAllReview.value ? steps : steps.slice(0, REVIEW_STEPS_MAX)
+})
+// 개념 단위 진단 결과 — 문항의 concepts 태그에서 파생(저장 형식 불변). 그래프가 있어야 이름·배우는 곳을 안다.
+const diagConcepts = computed(() => {
+  const d = diagnosis.value
+  const g = graph.value
+  if (!d || !g) return null
+  const byId = new Map(g.concepts.map((c) => [c.id, c]))
+  const r = conceptResults(d.answers)
+  const pick = (ids: string[]) => ids.map((id) => byId.get(id)).filter((c): c is Concept => !!c)
+  return { correct: pick(r.correct), missed: pick(r.missed) }
+})
+const explanation = computed(() =>
+  rec.value
+    ? explainTemplate(
+        rec.value,
+        (diagConcepts.value?.missed ?? []).map((c) => ({
+          label: c.label,
+          where: chapterLabel(c.definedAt.part, c.definedAt.slug),
+        })),
+      )
+    : '',
+)
 
 // 향상도 — 최초 진단(기준선) 대비 최신 진단. 최초 1회뿐이면(savedAt 동일) 아직 향상도 없음.
 const baseline = ref(loadBaseline())
@@ -159,6 +196,35 @@ function reset() {
             📈 학습을 진행한 뒤 <strong>다시 진단하기</strong>를 누르면, 학습 전과 비교한 향상도가 여기 나타납니다.
           </p>
         </div>
+
+        <!-- 개념 단위 진단 결과 (온톨로지 3단계) — 관문 판정은 그대로, 문항의 개념 태그로 "다시 볼 개념"을 이름 붙인다 -->
+        <div
+          v-if="diagConcepts && (diagConcepts.missed.length || diagConcepts.correct.length)"
+          data-diag-concepts
+          class="mx-auto mt-4 max-w-lg rounded-xl bg-white p-4 text-left shadow-sm ring-1 ring-slate-200"
+        >
+          <p class="text-sm font-semibold text-slate-800">진단을 개념으로 보면</p>
+          <p v-if="diagConcepts.missed.length" class="mt-2 text-sm leading-relaxed text-slate-700">
+            <span class="font-medium text-amber-700">다시 볼 개념</span>
+            <span class="text-slate-500"> — </span>
+            <template v-for="(c, i) in diagConcepts.missed" :key="c.id">
+              <span v-if="i" class="text-slate-500"> · </span>
+              <a
+                :href="chapterHref(c.definedAt.part, c.definedAt.slug, c.definedAt.anchor)"
+                class="font-medium text-indigo-600 hover:underline"
+                :title="c.note"
+                >{{ c.label }}</a
+              ><span class="text-xs text-slate-600">({{ chapterLabel(c.definedAt.part, c.definedAt.slug) }})</span>
+            </template>
+          </p>
+          <p v-if="diagConcepts.correct.length" class="mt-1 text-sm leading-relaxed text-slate-600">
+            <span class="font-medium text-emerald-700">아는 개념</span>
+            <span class="text-slate-500"> — </span>{{ diagConcepts.correct.map((c) => c.label).join(' · ') }}
+          </p>
+          <RouterLink to="/concepts" class="mt-2 inline-block text-xs font-medium text-indigo-600 hover:underline">
+            🧠 개념 지도에서 표시 보기 →
+          </RouterLink>
+        </div>
       </template>
     </section>
 
@@ -212,6 +278,54 @@ function reset() {
           :class="ins.type === 'review' ? 'bg-amber-500' : 'bg-violet-500'"
         >{{ ins.type === 'review' ? '복습하러' : '보러 가기' }} →</span>
       </a>
+    </section>
+
+    <!-- 복습 경로 (온톨로지 3단계) — 복습 표시 → 개념 → 선수 개념까지, 먼 것부터 화살표 순서로 -->
+    <section
+      v-if="reviewPath && reviewPath.steps.length"
+      data-review-path
+      class="mb-6 rounded-xl bg-white p-4 shadow-sm ring-1 ring-amber-200"
+    >
+      <p class="text-xs font-semibold text-amber-700">복습 경로</p>
+      <p class="mt-0.5 break-keep text-sm text-slate-700">
+        복습 표시 {{ reviewPath.bookmarkCount }}곳은 개념 {{ reviewPath.flagged.length }}개예요. 선수 개념까지 이으면
+        {{ reviewPath.steps.length }}단계 — 화살표 순서대로 보면 막힌 곳의 뿌리부터 풀립니다.
+      </p>
+      <ol class="mt-2 flex flex-wrap items-center gap-x-1 gap-y-1.5 text-sm">
+        <li v-for="(s, i) in reviewSteps" :key="s.concept.id" class="flex items-center gap-1">
+          <span v-if="i" class="text-slate-500" aria-hidden="true">→</span>
+          <a
+            :href="chapterHref(s.concept.definedAt.part, s.concept.definedAt.slug, s.concept.definedAt.anchor)"
+            class="rounded-lg border px-2 py-0.5"
+            :class="
+              s.flagged
+                ? 'border-amber-300 bg-amber-50 text-amber-900'
+                : s.mastered
+                  ? 'border-slate-200 bg-slate-50 text-slate-600'
+                  : 'border-indigo-200 bg-indigo-50 text-indigo-900'
+            "
+            :title="s.concept.note"
+          >
+            <span v-if="s.flagged" aria-hidden="true">★ </span><span v-else-if="s.mastered" aria-hidden="true">✓ </span
+            >{{ s.concept.label }}
+            <span class="text-xs text-slate-600">{{ chapterLabel(s.concept.definedAt.part, s.concept.definedAt.slug) }}</span>
+          </a>
+        </li>
+        <li v-if="reviewPath.steps.length > REVIEW_STEPS_MAX" class="text-xs">
+          <button
+            type="button"
+            class="font-medium text-indigo-600 hover:underline"
+            data-review-toggle
+            @click="showAllReview = !showAllReview"
+          >
+            {{ showAllReview ? '접기' : `외 ${reviewPath.steps.length - REVIEW_STEPS_MAX}단계 전체 보기` }}
+          </button>
+        </li>
+      </ol>
+      <p class="mt-2 text-xs text-slate-600">
+        ★ 복습 표시한 개념 · ✓ 이미 완료한 장 · 나머지는 그 사이의 선수 개념<template v-if="reviewPath.unmatched">
+          · 개념으로 못 묶은 표시 {{ reviewPath.unmatched }}곳은 각 부 복습 목록에</template>
+      </p>
     </section>
 
     <!-- Path map -->

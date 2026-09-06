@@ -9,7 +9,9 @@
   ],
   "scripts": {
     "search:index": "node scripts/build-search-index.mjs",
-    "postinstall": "node scripts/build-search-index.mjs",
+    "ontology:graph": "node scripts/build-concept-graph.mjs",
+    "check:ontology": "node scripts/check-ontology.mjs",
+    "postinstall": "node scripts/build-search-index.mjs && node scripts/build-concept-graph.mjs",
     "prepare": "git config core.hooksPath githooks",
     "deploy:build": "node scripts/build-deploy.mjs",
     "deploy:serve": "node scripts/serve-deploy.mjs",

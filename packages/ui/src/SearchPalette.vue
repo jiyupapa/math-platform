@@ -27,6 +27,15 @@ interface SearchEntry {
   keywords: string
   advanced: boolean
   label: string
+  // 개념 엔트리에만 (온톨로지 2단계 — build-search-index.mjs 가 그래프에서 생성)
+  /** 이 위치가 개념의 정의처인가 회수처인가 */
+  role?: 'defined' | 'used'
+  /** 먼저 알아 둘 선수 개념 — "크로스 엔트로피(5부 4장) · 엔트로피(5부 3장)" */
+  prereq?: string
+  /** 다시 만나는 곳 — "6부 6장 · 6부 7장 · 8부 8장" */
+  reuse?: string
+  /** 비유어↔실무어 — "이 과정에서는 '목줄'(6부) · 밖에서는 KL divergence" */
+  terms?: string
 }
 
 // vite/client 타입 의존 없이 안전하게 BASE_URL 접근 (PartLink 와 같은 패턴)
@@ -70,7 +79,20 @@ async function ensureIndex() {
 const results = computed<SearchEntry[]>(() => {
   const q = query.value.trim()
   if (!q || !fuse.value) return []
-  return fuse.value.search(q, { limit: 24 }).map((r) => r.item)
+  const raw = fuse.value.search(q, { limit: 24 }).map((r) => r.item)
+  // 같은 개념의 정의처 엔트리를 회수처 엔트리보다 앞에 — Fuse 점수는 summary 의 우연한 일치("KL 최소화")에 흔들려
+  // "KL 발산"을 치면 5부 6장(회수처)이 5부 5장(정의처)보다 먼저 오곤 한다. 개념의 첫 등장 자리에 정의처를 세운다.
+  const out: SearchEntry[] = []
+  const placed = new Set<string>()
+  for (const e of raw) {
+    if (e.type === 'concept' && !placed.has(e.title)) {
+      placed.add(e.title)
+      const defined = raw.find((x) => x.type === 'concept' && x.title === e.title && x.role === 'defined')
+      if (defined && defined !== e) out.push(defined)
+    }
+    if (!out.includes(e)) out.push(e)
+  }
+  return out
 })
 
 watch(results, () => {
@@ -197,6 +219,17 @@ onBeforeUnmount(() => {
                     <span v-if="r.summary" class="block truncate text-xs text-slate-600">{{
                       r.summary
                     }}</span>
+                    <!-- 개념의 이웃 — 먼저 볼 것 · 다시 만나는 곳 · 밖에서는 (온톨로지) -->
+                    <span
+                      v-if="r.prereq || r.reuse || r.terms"
+                      class="block truncate text-xs text-slate-600"
+                    >
+                      <template v-if="r.prereq">먼저 {{ r.prereq }}</template>
+                      <template v-if="r.prereq && r.reuse"> · </template>
+                      <template v-if="r.reuse">다시 {{ r.reuse }}</template>
+                      <template v-if="(r.prereq || r.reuse) && r.terms"> · </template>
+                      <template v-if="r.terms">{{ r.terms }}</template>
+                    </span>
                   </span>
                 </button>
               </li>

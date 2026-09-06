@@ -2,7 +2,9 @@
 // 미해결 질문 큐 (협업 주석 P3) — 관리자(강사) 전용.
 // 전 부의 kind=question · resolved=false 를 모아, 해당 챕터 항목으로 보내 답하게 한다.
 // 익명 층이라 작성자는 표시하지 않는다(위치·본문·시각만). 답변 작성은 챕터의 💬 패널에서.
-import { ref, onMounted, watch } from 'vue'
+import { ref, shallowRef, onMounted, watch } from 'vue'
+import { RouterLink } from 'vue-router'
+import { loadConceptGraph, conceptsAtAnchor, type ConceptGraph } from '@series/ui'
 import {
   currentUser,
   isBackendEnabled,
@@ -16,13 +18,20 @@ import { PART_META } from '../data/useProgress'
 const loading = ref(true)
 const questions = ref<Annotation[]>([])
 const busyId = ref<string | null>(null)
+// 온톨로지 3단계 — 질문의 앵커를 개념으로 묶어 칩으로(개념 지도 딥링크). 그래프를 못 읽으면 칩만 빠진다.
+const graph = shallowRef<ConceptGraph | null>(null)
+const conceptsOf = (q: Annotation) =>
+  graph.value ? conceptsAtAnchor(graph.value, q.part, q.chapter, q.item_id).slice(0, 2) : []
 
 async function load() {
   loading.value = true
   questions.value = currentUser.value && isAdmin.value ? await fetchOpenQuestions() : []
   loading.value = false
 }
-onMounted(load)
+onMounted(async () => {
+  await load()
+  graph.value = await loadConceptGraph(import.meta.env.BASE_URL + 'concept-graph.json')
+})
 watch(currentUser, () => void load())
 
 const partLabel = (p: number) => PART_META.find((m) => m.part === p)?.label ?? `${p}부`
@@ -73,6 +82,15 @@ async function resolve(q: Annotation) {
           <span class="font-medium text-slate-600">{{ partLabel(q.part) }} · {{ q.chapter }} · {{ q.item_id }}</span>
           <span>{{ when(q.created_at) }}</span>
           <span v-if="q.ai_answer" class="rounded-full bg-indigo-50 px-2 py-0.5 text-indigo-600">🤖 AI 답변 있음</span>
+          <RouterLink
+            v-for="c in conceptsOf(q)"
+            :key="c.id"
+            :to="{ path: '/concepts', query: { c: c.id } }"
+            class="rounded-full bg-indigo-50 px-2 py-0.5 font-medium text-indigo-700 hover:underline"
+            :title="c.note"
+          >
+            🧠 {{ c.label }}
+          </RouterLink>
         </div>
         <p class="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-slate-800">{{ q.body }}</p>
         <div class="mt-3 flex items-center gap-3">

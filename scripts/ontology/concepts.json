@@ -1,0 +1,1704 @@
+[
+  {
+    "id": "vector",
+    "label": "벡터",
+    "aliases": ["vector", "화살표", "좌표 벡터", "성분", "벡터 표기"],
+    "kind": "math",
+    "note": "크기와 방향을 가진 화살표이자 숫자 목록 — AI 가 세상을 읽는 단위",
+    "definedAt": { "part": 1, "slug": "ch1", "anchor": "ch1-s4" },
+    "usedAt": [
+      { "part": 4, "slug": "ch3", "anchor": "ch3-s1", "how": "임베딩 — 단어를 벡터로" },
+      { "part": 7, "slug": "sample", "anchor": "sample-s2", "how": "뜻을 좌표로 — 임베딩의 재등장" },
+      { "part": 8, "slug": "ch5", "anchor": "ch5-ai", "how": "축마다 다른 자 — 좌표축마다 자기 눈금" }
+    ],
+    "prereq": [],
+    "related": ["embedding"],
+    "metaphors": []
+  },
+  {
+    "id": "vector-length",
+    "label": "벡터의 길이",
+    "aliases": ["norm", "노름", "크기", "magnitude", "L2 노름", "벡터 길이"],
+    "kind": "math",
+    "note": "피타고라스로 재는 화살표의 길이 — 정규화의 재료",
+    "definedAt": { "part": 1, "slug": "sample", "anchor": "sample-s3" },
+    "usedAt": [{ "part": 7, "slug": "ch2", "anchor": "ch2-s4", "how": "길이가 점수를 오염시키는 문제와 정규화" }],
+    "prereq": ["vector"],
+    "related": ["cosine-similarity"],
+    "metaphors": []
+  },
+  {
+    "id": "vector-arithmetic",
+    "label": "벡터 덧셈과 스칼라배",
+    "aliases": ["vector addition", "벡터 덧셈", "벡터 뺄셈", "스칼라배", "벡터 연산", "화살표 이어 붙이기"],
+    "kind": "math",
+    "note": "화살표를 이어 붙이고 늘이기 — 의미의 산수와 모멘텀의 재료",
+    "definedAt": { "part": 1, "slug": "ch2", "anchor": "ch2-s1" },
+    "usedAt": [
+      { "part": 4, "slug": "ch4", "anchor": "ch4-s2", "how": "위치 벡터 더하기" },
+      { "part": 7, "slug": "ch3", "anchor": "ch3-s2", "how": "의미의 산수 — 왕 − 남자 + 여자" },
+      { "part": 8, "slug": "ch4", "anchor": "ch4-s1", "how": "상쇄와 증폭의 정체 — 반대 화살표는 지워지고 같은 화살표는 쌓인다" }
+    ],
+    "prereq": ["vector"],
+    "related": ["dot-product", "momentum"],
+    "metaphors": []
+  },
+  {
+    "id": "dot-product",
+    "label": "내적",
+    "aliases": ["dot product", "inner product", "점곱", "스칼라곱", "내적값"],
+    "kind": "math",
+    "note": "두 벡터의 닮은 정도를 숫자 하나로 — 유사도·투영·어텐션의 기초",
+    "definedAt": { "part": 1, "slug": "ch2", "anchor": "ch2-s4" },
+    "usedAt": [
+      { "part": 7, "slug": "ch2", "anchor": "ch2-s2", "how": "방향으로 재기 — 내적의 재등장" },
+      { "part": 4, "slug": "ch6", "anchor": "ch6-s2", "how": "Q·K 점수 = 내적" },
+      { "part": 1, "slug": "ch10", "anchor": "ch10-s2", "how": "직교 = 내적 0" },
+      { "part": 4, "slug": "ch3", "anchor": "ch3-s2", "how": "거리로 비슷함 재기 — 벡터·거리·내적" },
+      { "part": 9, "slug": "ch8", "anchor": "ch8-ai", "how": "추론의 몸통은 곱해서 더하기 — 반올림 티끌이 상쇄되는 무대" }
+    ],
+    "prereq": ["vector"],
+    "related": ["cosine-similarity", "matrix-multiplication"],
+    "metaphors": []
+  },
+  {
+    "id": "cosine-similarity",
+    "label": "코사인 유사도",
+    "aliases": ["cosine similarity", "코사인", "각도 유사도", "유사도"],
+    "kind": "math",
+    "note": "의미 검색의 자 — 각도로 재는 가까움",
+    "definedAt": { "part": 1, "slug": "ch2", "anchor": "ch2-s4" },
+    "usedAt": [
+      { "part": 7, "slug": "ch2", "anchor": "ch2-s2", "how": "의미 검색의 자 — 각도로 재는 가까움" },
+      { "part": 7, "slug": "ch6", "anchor": "ch6-s1", "how": "kNN 전수조사의 점수" },
+      { "part": 11, "slug": "ch3", "anchor": "ch3-ai", "how": "시맨틱 라우팅 — 질문과 도구 설명의 의미가 가까운가" }
+    ],
+    "prereq": ["dot-product", "vector-length"],
+    "related": ["embedding", "vector-db"],
+    "metaphors": []
+  },
+  {
+    "id": "matrix",
+    "label": "행렬",
+    "aliases": ["matrix", "숫자 표", "전치", "transpose", "행과 열"],
+    "kind": "math",
+    "note": "숫자를 표로 — AI 의 데이터와 가중치 그 자체",
+    "definedAt": { "part": 1, "slug": "ch3", "anchor": "ch3-s1" },
+    "usedAt": [
+      { "part": 6, "slug": "ch8", "anchor": "ch8-s1", "how": "70억 개를 다 만질 것인가 — 거대 행렬" },
+      { "part": 9, "slug": "ch1", "anchor": "ch1-s1", "how": "파라미터 = 행렬의 칸 수" }
+    ],
+    "prereq": ["vector"],
+    "related": ["matrix-multiplication"],
+    "metaphors": []
+  },
+  {
+    "id": "matrix-multiplication",
+    "label": "행렬곱",
+    "aliases": ["matrix multiplication", "행렬 곱셈", "행렬 × 벡터", "Wx+b", "행 × 열"],
+    "kind": "math",
+    "note": "행 × 열 — 신경망 한 층의 정체",
+    "definedAt": { "part": 1, "slug": "ch3", "anchor": "ch3-s3" },
+    "usedAt": [
+      { "part": 4, "slug": "ch3", "anchor": "ch3-s1", "how": "임베딩 조회 = 행렬" },
+      { "part": 4, "slug": "ch6", "anchor": "ch6-s2", "how": "어텐션은 결국 행렬곱" },
+      { "part": 1, "slug": "ch5", "anchor": "ch5-s4", "how": "행렬 × 벡터 = 변환을 적용하는 것" }
+    ],
+    "prereq": ["matrix", "dot-product"],
+    "related": ["linear-transformation"],
+    "metaphors": []
+  },
+  {
+    "id": "linear-system",
+    "label": "연립방정식과 가우스 소거법",
+    "aliases": ["linear system", "가우스 소거법", "Gaussian elimination", "행사다리꼴", "row echelon form", "Ax=b"],
+    "kind": "math",
+    "note": "직선들의 교점 찾기 — AI 는 거대한 Ax=b 를 푼다",
+    "definedAt": { "part": 1, "slug": "ch4", "anchor": "ch4-s3" },
+    "usedAt": [{ "part": 1, "slug": "ch6", "anchor": "ch6-s4", "how": "역행렬로 연립방정식 풀기" }],
+    "prereq": ["matrix"],
+    "related": ["determinant-inverse"],
+    "metaphors": [{ "term": "계단", "part": 1, "note": "행사다리꼴(row echelon form)" }]
+  },
+  {
+    "id": "linear-transformation",
+    "label": "선형변환",
+    "aliases": ["linear transformation", "행렬변환", "기저벡터", "회전", "전단"],
+    "kind": "math",
+    "note": "공간을 변형하는 함수 = 행렬곱",
+    "definedAt": { "part": 1, "slug": "ch5", "anchor": "ch5-s1" },
+    "usedAt": [
+      { "part": 4, "slug": "ch6", "anchor": "ch6-s2", "how": "Q·K·V = 선형변환 세 개" },
+      { "part": 4, "slug": "ch8", "anchor": "ch8-s2", "how": "피드포워드 = 선형변환 + 비선형" }
+    ],
+    "prereq": ["matrix-multiplication"],
+    "related": ["eigen"],
+    "metaphors": []
+  },
+  {
+    "id": "determinant-inverse",
+    "label": "행렬식과 역행렬",
+    "aliases": ["determinant", "행렬식", "inverse matrix", "역행렬", "가역성", "항등행렬"],
+    "kind": "math",
+    "note": "넓이 배율과 되돌리는 변환 — 가역성",
+    "definedAt": { "part": 1, "slug": "ch6", "anchor": "ch6-s1" },
+    "usedAt": [],
+    "prereq": ["linear-transformation"],
+    "related": ["linear-system"],
+    "metaphors": []
+  },
+  {
+    "id": "eigen",
+    "label": "고유값과 고유벡터",
+    "aliases": ["eigenvalue", "eigenvector", "고유값", "고유벡터", "람다", "Av=λv"],
+    "kind": "math",
+    "note": "변환에도 방향이 안 꺾이는 축",
+    "definedAt": { "part": 1, "slug": "ch7", "anchor": "ch7-s1" },
+    "usedAt": [{ "part": 1, "slug": "ch8", "anchor": "ch8-s1", "how": "PCA = 공분산의 고유벡터" }],
+    "prereq": ["linear-transformation"],
+    "related": ["svd"],
+    "metaphors": []
+  },
+  {
+    "id": "pca",
+    "label": "PCA",
+    "aliases": ["주성분분석", "principal component analysis", "주성분", "차원축소", "explained variance", "공분산"],
+    "kind": "math",
+    "note": "데이터 구름에서 가장 중요한 방향 찾기 — 차원 축소",
+    "definedAt": { "part": 1, "slug": "ch8", "anchor": "ch8-s1" },
+    "usedAt": [{ "part": 7, "slug": "ch5", "anchor": "ch5-s1", "how": "임베딩 공간의 지도 그리기" }],
+    "prereq": ["eigen", "variance"],
+    "related": ["dimensionality-reduction", "svd"],
+    "metaphors": []
+  },
+  {
+    "id": "rank",
+    "label": "rank",
+    "aliases": ["계수", "랭크", "저차원", "기저", "span", "선형독립", "선형결합"],
+    "kind": "math",
+    "note": "표가 진짜 몇 차원어치 정보인가",
+    "definedAt": { "part": 1, "slug": "ch9", "anchor": "ch9-s6" },
+    "usedAt": [
+      { "part": 6, "slug": "ch8", "anchor": "ch8-s2", "how": "LoRA — 표의 진짜 정보량 (3분 완성)" },
+      { "part": 7, "slug": "ch4", "anchor": "ch4-s3", "how": "임베딩은 무작위가 아니다 — 저차원 구조" }
+    ],
+    "prereq": ["linear-transformation"],
+    "related": ["svd", "lora"],
+    "metaphors": []
+  },
+  {
+    "id": "projection",
+    "label": "직교성과 투영",
+    "aliases": ["projection", "직교", "orthogonal", "투영", "최소제곱", "least squares", "정규직교기저", "그람-슈미트"],
+    "kind": "math",
+    "note": "가장 가까운 답 = 투영 — 최소제곱의 원리",
+    "definedAt": { "part": 1, "slug": "ch10", "anchor": "ch10-s3" },
+    "usedAt": [{ "part": 3, "slug": "ch10", "anchor": "ch10-s6", "how": "최소제곱법 손계산 — 회귀 직선" }],
+    "prereq": ["dot-product"],
+    "related": ["correlation"],
+    "metaphors": []
+  },
+  {
+    "id": "svd",
+    "label": "SVD",
+    "aliases": ["특이값분해", "singular value decomposition", "저랭크 근사", "low-rank approximation", "잠재 요인", "latent factor"],
+    "kind": "math",
+    "note": "ML 에서 가장 중요한 분해 — 추천·차원축소·LoRA",
+    "definedAt": { "part": 1, "slug": "ch11", "anchor": "ch11-s3" },
+    "usedAt": [{ "part": 6, "slug": "ch8", "anchor": "ch8-s3", "how": "거대 행렬의 변화를 저차원으로 근사" }],
+    "prereq": ["eigen", "rank"],
+    "related": ["pca", "lora"],
+    "metaphors": [{ "term": "취향 축", "part": 1, "note": "잠재 요인(latent factor)" }]
+  },
+
+  {
+    "id": "slope",
+    "label": "기울기",
+    "aliases": ["slope", "변화율", "일차함수", "Δy/Δx", "평균변화율"],
+    "kind": "math",
+    "note": "얼마나 가파른가 — 변화율의 첫 모습",
+    "definedAt": { "part": 2, "slug": "ch1", "anchor": "ch1-s4" },
+    "usedAt": [],
+    "prereq": [],
+    "related": ["derivative"],
+    "metaphors": []
+  },
+  {
+    "id": "limit",
+    "label": "극한과 순간변화율",
+    "aliases": ["limit", "극한", "순간변화율", "접선", "tangent", "할선"],
+    "kind": "math",
+    "note": "한없이 가까이 가면 — 할선이 접선으로",
+    "definedAt": { "part": 2, "slug": "ch2", "anchor": "ch2-s3" },
+    "usedAt": [],
+    "prereq": ["slope"],
+    "related": ["derivative"],
+    "metaphors": []
+  },
+  {
+    "id": "derivative",
+    "label": "도함수",
+    "aliases": ["derivative", "미분", "미분계수", "differentiation", "f'(x)", "dy/dx"],
+    "kind": "math",
+    "note": "어느 점에서든 기울기를 알려주는 함수",
+    "definedAt": { "part": 2, "slug": "ch3", "anchor": "ch3-s2" },
+    "usedAt": [
+      { "part": 1, "slug": "ch12", "anchor": "ch12-s2", "how": "행렬미분 — 기울기의 다변수 확장" },
+      { "part": 2, "slug": "sample", "anchor": "sample-s3", "how": "접선 맛보기 — 할선이 접선으로" },
+      { "part": 8, "slug": "ch2", "anchor": "ch2-ai", "how": "기울기가 얼마나 빨리 변하는가 — 곡률" }
+    ],
+    "prereq": ["limit"],
+    "related": ["gradient"],
+    "metaphors": []
+  },
+  {
+    "id": "differentiation-rules",
+    "label": "기본 미분 공식",
+    "aliases": ["미분 공식", "멱법칙 미분", "power rule", "곱의 법칙", "product rule", "몫의 법칙", "quotient rule", "합의 미분"],
+    "kind": "math",
+    "note": "상수·상수배·합·곱·몫 — 손으로 미분하는 규칙 모음",
+    "definedAt": { "part": 2, "slug": "ch4", "anchor": "ch4-s1" },
+    "usedAt": [{ "part": 2, "slug": "ch5", "anchor": "ch5-s2", "how": "곱과 몫의 법칙" }],
+    "prereq": ["derivative"],
+    "related": ["chain-rule"],
+    "metaphors": []
+  },
+  {
+    "id": "chain-rule",
+    "label": "연쇄법칙",
+    "aliases": ["chain rule", "합성함수 미분", "겉미분 속미분", "합성함수"],
+    "kind": "math",
+    "note": "겉미분 × 속미분 — 역전파의 뼈대",
+    "definedAt": { "part": 2, "slug": "ch6", "anchor": "ch6-s2" },
+    "usedAt": [
+      { "part": 2, "slug": "ch10", "anchor": "ch10-s2", "how": "역전파 = 연쇄법칙의 반복 적용" },
+      { "part": 4, "slug": "ch11", "anchor": "ch11-s2", "how": "트랜스포머 학습 — 손실의 기울기를 층마다 되돌리기" },
+      { "part": 2, "slug": "ch7", "anchor": "ch7-s4", "how": "시그모이드·지수함수와 함께" }
+    ],
+    "prereq": ["derivative"],
+    "related": ["backpropagation"],
+    "metaphors": []
+  },
+  {
+    "id": "exp-log",
+    "label": "지수와 로그",
+    "aliases": ["exponential", "logarithm", "지수함수", "자연로그", "ln", "log", "로그 감각", "log₂", "e^x"],
+    "kind": "math",
+    "note": "곱셈을 덧셈으로 — 몇 배 규모인가를 재는 자",
+    "definedAt": { "part": 2, "slug": "ch7", "anchor": "ch7-s1" },
+    "usedAt": [
+      { "part": 5, "slug": "ch1", "anchor": "ch1-s3", "how": "log₂ — 놀람의 단위" },
+      { "part": 9, "slug": "ch3", "anchor": "ch3-s1", "how": "지수 표기가 부동소수점의 뼈대" },
+      { "part": 9, "slug": "ch5", "anchor": "ch5-s1", "how": "exp 폭발 — 오버플로" },
+      { "part": 9, "slug": "ch6", "anchor": "ch6-s2", "how": "log 세계로 피신 — log-sum-exp" },
+      { "part": 10, "slug": "ch2", "anchor": "ch2-s2", "how": "곱의 세계를 직선으로 펴는 종이 — 로그-로그" },
+      { "part": 5, "slug": "ch8", "anchor": "ch8-ai", "how": "소프트맥스의 e 거듭제곱 — 온도로 나눈 지수" },
+      { "part": 11, "slug": "ch2", "anchor": "ch2-ai", "how": "곱을 합으로 펴는 로그 — 사슬 성공률 계산" },
+      { "part": 11, "slug": "ch8", "anchor": "ch8-s3", "how": "지수 폭발 — 갈래 수와 깊이의 거듭제곱" }
+    ],
+    "prereq": [],
+    "related": ["sigmoid", "bit"],
+    "metaphors": []
+  },
+  {
+    "id": "sigmoid",
+    "label": "시그모이드",
+    "aliases": ["sigmoid", "로지스틱 함수", "logistic", "σ", "활성화 함수"],
+    "kind": "math",
+    "note": "어떤 수든 0~1 확률로 — 점수 차를 선호 확률로 바꾸는 함수",
+    "definedAt": { "part": 2, "slug": "ch7", "anchor": "ch7-s3" },
+    "usedAt": [
+      { "part": 6, "slug": "ch4", "anchor": "ch4-s3", "how": "Bradley-Terry — 점수 차를 선호 확률로" },
+      { "part": 6, "slug": "ch7", "anchor": "ch7-s1", "how": "DPO 손실 안의 시그모이드" }
+    ],
+    "prereq": ["exp-log"],
+    "related": ["softmax", "reward-model"],
+    "metaphors": []
+  },
+  {
+    "id": "partial-derivative",
+    "label": "편미분",
+    "aliases": ["partial derivative", "다변수 함수", "∂", "편도함수"],
+    "kind": "math",
+    "note": "입력이 여러 개일 때 한 변수만 — 가중치별 영향",
+    "definedAt": { "part": 2, "slug": "ch8", "anchor": "ch8-s2" },
+    "usedAt": [{ "part": 8, "slug": "ch1", "anchor": "ch1-ai", "how": "발밑 경사의 정체 — 가중치별 편미분을 모은 그래디언트" }],
+    "prereq": ["derivative"],
+    "related": ["gradient"],
+    "metaphors": []
+  },
+  {
+    "id": "gradient",
+    "label": "그래디언트",
+    "aliases": ["gradient", "∇", "기울기 벡터", "가장 가파른 방향", "그라디언트"],
+    "kind": "math",
+    "note": "편미분을 모은 벡터 — 가장 가파른 방향",
+    "definedAt": { "part": 2, "slug": "ch9", "anchor": "ch9-s1" },
+    "usedAt": [
+      { "part": 1, "slug": "ch12", "anchor": "ch12-s4", "how": "행렬미분 — 그래디언트의 심화" },
+      { "part": 4, "slug": "ch11", "anchor": "ch11-s2", "how": "손실의 그래디언트로 가중치 갱신" },
+      { "part": 8, "slug": "ch9", "anchor": "ch9-s2", "how": "그래디언트 클리핑" }
+    ],
+    "prereq": ["partial-derivative", "vector"],
+    "related": ["gradient-descent"],
+    "metaphors": []
+  },
+  {
+    "id": "gradient-descent",
+    "label": "경사하강",
+    "aliases": ["gradient descent", "경사하강법", "학습의 원리", "손실을 줄이는 방향"],
+    "kind": "math",
+    "note": "손실을 줄이는 방향으로 한 걸음씩 — 모델이 배우는 법",
+    "definedAt": { "part": 2, "slug": "ch9", "anchor": "ch9-s2" },
+    "usedAt": [
+      { "part": 1, "slug": "ch12", "anchor": "ch12-s3", "how": "세 부에서 다룸 — 중복 아닌 심화" },
+      { "part": 4, "slug": "ch11", "anchor": "ch11-s2", "how": "트랜스포머 학습에 그대로 꽂힌다" },
+      { "part": 8, "slug": "ch1", "anchor": "ch1-s1", "how": "원리의 실전층 — 학습을 지배하는 다이얼들" },
+      { "part": 6, "slug": "ch3", "anchor": "ch3-s3", "how": "SFT — 반복하면 경사하강" },
+      { "part": 6, "slug": "ch5", "anchor": "ch5-s3", "how": "강화학습 갱신 — 방향만 반대(경사상승)" },
+      { "part": 7, "slug": "ch9", "anchor": "ch9-s2", "how": "대조 학습도 같은 내리막" },
+      { "part": 8, "slug": "sample", "anchor": "sample-s1", "how": "무대 — 2부에서 배운 그 골짜기" },
+      { "part": 10, "slug": "ch4", "anchor": "ch4-ai", "how": "두 항의 줄다리기에서 최저점 찾기" }
+    ],
+    "prereq": ["gradient"],
+    "related": ["learning-rate", "backpropagation", "minibatch-sgd"],
+    "metaphors": []
+  },
+  {
+    "id": "learning-rate",
+    "label": "학습률",
+    "aliases": ["learning rate", "lr", "스텝 크기", "step size", "보폭"],
+    "kind": "ai",
+    "note": "한 걸음의 크기 — 전부를 가르는 다이얼",
+    "definedAt": { "part": 2, "slug": "ch9", "anchor": "ch9-s3" },
+    "usedAt": [
+      { "part": 8, "slug": "ch2", "anchor": "ch2-s2", "how": "보폭의 과학 — 곡률과 lr 의 관계" },
+      { "part": 8, "slug": "ch6", "anchor": "ch6-s1", "how": "학습률 스케줄 — 구간마다 다른 보폭" }
+    ],
+    "prereq": ["gradient-descent"],
+    "related": ["lr-schedule", "adam"],
+    "metaphors": [{ "term": "보폭", "part": 8 }]
+  },
+  {
+    "id": "backpropagation",
+    "label": "역전파",
+    "aliases": ["backpropagation", "backprop", "오차 역전파", "계산그래프", "순전파"],
+    "kind": "ai",
+    "note": "연쇄법칙의 반복 적용 — 학습 신호를 한 번에 되돌리기",
+    "definedAt": { "part": 2, "slug": "ch10", "anchor": "ch10-s2" },
+    "usedAt": [
+      { "part": 4, "slug": "ch11", "anchor": "ch11-s2", "how": "트랜스포머 전체를 한 번에 되돌린다" },
+      { "part": 1, "slug": "ch12", "anchor": "ch12-s5", "how": "행렬 형태의 역전파" },
+      { "part": 5, "slug": "ch4", "anchor": "ch4-ai", "how": "미니 신경망의 (ŷ−y) 기울기" }
+    ],
+    "prereq": ["chain-rule", "gradient"],
+    "related": ["gradient-descent"],
+    "metaphors": []
+  },
+
+  {
+    "id": "mean-median-mode",
+    "label": "평균·중앙값·최빈값",
+    "aliases": ["대푯값", "평균", "mean", "median", "중앙값", "최빈값", "히스토그램"],
+    "kind": "math",
+    "note": "숫자 무더기의 대표 선수 — 데이터 요약의 첫 단계",
+    "definedAt": { "part": 3, "slug": "ch1", "anchor": "ch1-s1" },
+    "usedAt": [{ "part": 8, "slug": "ch3", "anchor": "ch3-s1", "how": "나침반의 정체 — 평균, 그리고 표본" }],
+    "prereq": [],
+    "related": ["variance"],
+    "metaphors": []
+  },
+  {
+    "id": "variance",
+    "label": "분산과 표준편차",
+    "aliases": ["variance", "standard deviation", "표준편차", "편차", "z점수", "표준화", "σ²", "흩어짐"],
+    "kind": "math",
+    "note": "평균에서 얼마나 떨어졌나를 제곱해서 평균 낸 것",
+    "definedAt": { "part": 3, "slug": "ch2", "anchor": "ch2-s3" },
+    "usedAt": [
+      { "part": 1, "slug": "ch8", "anchor": "ch8-s1", "how": "PCA 가 지키는 정보량 = 분산" },
+      { "part": 3, "slug": "ch6", "anchor": "ch6-s6", "how": "표준화 — 모든 정규분포를 하나로" }
+    ],
+    "prereq": ["mean-median-mode"],
+    "related": ["normal-distribution", "correlation"],
+    "metaphors": []
+  },
+  {
+    "id": "probability",
+    "label": "확률의 기초",
+    "aliases": ["probability", "확률", "표본공간", "사건", "경우의 수", "여사건", "덧셈법칙"],
+    "kind": "math",
+    "note": "경우의 수의 비율 — 0 과 1 사이의 숫자로 말하기",
+    "definedAt": { "part": 3, "slug": "ch3", "anchor": "ch3-s2" },
+    "usedAt": [
+      { "part": 4, "slug": "ch9", "anchor": "ch9-s2", "how": "AI 는 확률로 말하는 기계" },
+      { "part": 3, "slug": "sample", "anchor": "sample-s1", "how": "확률은 0 과 1 사이의 숫자 — 동전 던지기 맛보기" }
+    ],
+    "prereq": [],
+    "related": ["probability-distribution"],
+    "metaphors": []
+  },
+  {
+    "id": "independence",
+    "label": "독립 사건과 곱셈법칙",
+    "aliases": ["independence", "독립", "독립 사건", "곱셈법칙", "확률의 곱", "그리고"],
+    "kind": "math",
+    "note": "서로 영향 없는 사건은 확률을 곱한다",
+    "definedAt": { "part": 3, "slug": "ch3", "anchor": "ch3-s7" },
+    "usedAt": [
+      { "part": 3, "slug": "ch4", "anchor": "ch4-s4", "how": "독립의 진짜 뜻 — 조건이 확률을 못 바꾼다" },
+      { "part": 11, "slug": "sample", "anchor": "sample-s2", "how": "한 번은 맞히는데 열 번은 못 맞힌다" },
+      { "part": 11, "slug": "ch2", "anchor": "ch2-s1", "how": "10단계 일의 성공률 = 걸음의 곱" },
+      { "part": 10, "slug": "ch5", "anchor": "ch5-ai", "how": "확률의 거듭제곱이 만드는 극단 — p⁸ 의 착시 계단" }
+    ],
+    "prereq": ["probability"],
+    "related": ["task-chain"],
+    "metaphors": []
+  },
+  {
+    "id": "conditional-probability",
+    "label": "조건부 확률",
+    "aliases": ["conditional probability", "조건확률", "P(A|B)", "조건부"],
+    "kind": "math",
+    "note": "힌트 하나에 확률이 변한다 — LLM 출력·검수의 뼈대",
+    "definedAt": { "part": 3, "slug": "ch4", "anchor": "ch4-s2" },
+    "usedAt": [
+      { "part": 4, "slug": "ch9", "anchor": "ch9-s2", "how": "LLM 출력 = 조건부 확률분포" },
+      { "part": 6, "slug": "ch4", "anchor": "ch4-s3", "how": "선호 확률 — A 가 B 보다 낫다는 조건부 확률" },
+      { "part": 5, "slug": "ch9", "anchor": "ch9-s2", "how": "조건부 엔트로피 H(X|Y)" },
+      { "part": 11, "slug": "ch6", "anchor": "ch6-s2", "how": "검수 통과라는 조건 아래 정답일 확률" },
+      { "part": 11, "slug": "ch3", "anchor": "ch3-s3", "how": "점수가 s 일 때 실제로 맞을 확률 — 교정" }
+    ],
+    "prereq": ["probability"],
+    "related": ["bayes-theorem"],
+    "metaphors": []
+  },
+  {
+    "id": "bayes-theorem",
+    "label": "베이즈 정리",
+    "aliases": ["Bayes theorem", "베이즈", "Bayes", "사후확률", "사전확률", "기저율", "base rate", "나이브 베이즈", "믿음 업데이트"],
+    "kind": "math",
+    "note": "증거를 보고 믿음을 갱신하는 공식",
+    "definedAt": { "part": 3, "slug": "ch4", "anchor": "ch4-s7" },
+    "usedAt": [
+      { "part": 11, "slug": "ch6", "anchor": "ch6-s2", "how": "검수 통과가 정답 확률을 얼마나 올리나 — 베이즈의 정면 회수" },
+      { "part": 11, "slug": "ch12", "anchor": "ch12-ai", "how": "검수의 베이즈 — 도입 판정의 토대" }
+    ],
+    "prereq": ["conditional-probability"],
+    "related": ["verifier"],
+    "metaphors": []
+  },
+  {
+    "id": "probability-distribution",
+    "label": "확률분포",
+    "aliases": ["probability distribution", "분포", "확률변수", "random variable", "베르누이", "이항분포", "binomial", "기하분포", "geometric"],
+    "kind": "math",
+    "note": "값마다 확률을 정리한 표 — 다음 단어를 고르는 기계의 문해력",
+    "definedAt": { "part": 3, "slug": "ch5", "anchor": "ch5-s2" },
+    "usedAt": [
+      { "part": 4, "slug": "ch9", "anchor": "ch9-s2", "how": "출력층 = 단어 위의 확률분포" },
+      { "part": 5, "slug": "ch3", "anchor": "ch3-s1", "how": "엔트로피 = 분포의 평균 놀람" },
+      { "part": 9, "slug": "ch8", "anchor": "ch8-s2", "how": "가중치 분포가 축척과 아웃라이어를 정한다" },
+      { "part": 9, "slug": "ch9", "anchor": "ch9-s1", "how": "빌런의 실체 — 분포의 꼬리" },
+      { "part": 11, "slug": "ch4", "anchor": "ch4-s2", "how": "재시도 — 기하분포" },
+      { "part": 11, "slug": "ch5", "anchor": "ch5-s2", "how": "다수결의 수학 — 이항분포의 재등장" },
+      { "part": 4, "slug": "ch1", "anchor": "ch1-s3", "how": "\"다음 단어를 확률로 고른다\"의 문법" },
+      { "part": 5, "slug": "ch1", "anchor": "ch1-ai", "how": "\"다음 토큰의 확률 q\" — 놀람의 재료" },
+      { "part": 5, "slug": "ch4", "anchor": "ch4-ai", "how": "원핫·확률분포의 문법" }
+    ],
+    "prereq": ["probability"],
+    "related": ["expectation", "normal-distribution"],
+    "metaphors": []
+  },
+  {
+    "id": "expectation",
+    "label": "기댓값",
+    "aliases": ["expectation", "expected value", "기대값", "가중평균", "E[X]"],
+    "kind": "math",
+    "note": "확률로 가중평균한 값 — 복권이 팔수록 남는 이유",
+    "definedAt": { "part": 3, "slug": "ch5", "anchor": "ch5-s3" },
+    "usedAt": [
+      { "part": 6, "slug": "ch5", "anchor": "ch5-s2", "how": "목표는 기대 보상 — 3부의 기댓값이 돌아온다" },
+      { "part": 7, "slug": "ch4", "anchor": "ch4-s1", "how": "고차원에서 내적이 집중되는 이유" },
+      { "part": 5, "slug": "ch3", "anchor": "ch3-s1", "how": "평균 놀람 = 엔트로피" },
+      { "part": 8, "slug": "ch3", "anchor": "ch3-ai", "how": "나침반의 과녁 = 기댓값" }
+    ],
+    "prereq": ["probability-distribution"],
+    "related": ["law-of-large-numbers"],
+    "metaphors": []
+  },
+  {
+    "id": "normal-distribution",
+    "label": "정규분포",
+    "aliases": ["normal distribution", "가우스 분포", "Gaussian", "종 모양", "68-95-99.7", "연속 확률변수"],
+    "kind": "math",
+    "note": "종 모양의 왕 — 우연이 쌓이면 나오는 모양",
+    "definedAt": { "part": 3, "slug": "ch6", "anchor": "ch6-s3" },
+    "usedAt": [
+      { "part": 3, "slug": "ch7", "anchor": "ch7-s3", "how": "중심극한정리 — 표본평균이 종 모양이 되는 이유" },
+      { "part": 9, "slug": "ch8", "anchor": "ch8-s2", "how": "가중치 분포는 대개 종 모양 — 분포의 축복" }
+    ],
+    "prereq": ["probability-distribution", "variance"],
+    "related": ["law-of-large-numbers"],
+    "metaphors": []
+  },
+  {
+    "id": "law-of-large-numbers",
+    "label": "큰 수의 법칙과 중심극한정리",
+    "aliases": ["law of large numbers", "LLN", "중심극한정리", "central limit theorem", "CLT", "표본평균", "표준오차", "σ/√n", "표본"],
+    "kind": "math",
+    "note": "표본이 커지면 평균이 참값에 수렴하고 그 흔들림은 1/√n 으로 준다",
+    "definedAt": { "part": 3, "slug": "ch7", "anchor": "ch7-s1" },
+    "usedAt": [
+      { "part": 7, "slug": "ch4", "anchor": "ch4-s1", "how": "고차원에서 내적이 집중되는 이유" },
+      { "part": 8, "slug": "ch3", "anchor": "ch3-s1", "how": "기울기 = 표본 추정치, 노이즈 ~ 1/√B" },
+      { "part": 11, "slug": "ch5", "anchor": "ch5-s2", "how": "다수결이 커질수록 정확해지는 이유" },
+      { "part": 3, "slug": "ch8", "anchor": "ch8-s3", "how": "표준오차 → 신뢰구간" },
+      { "part": 9, "slug": "ch4", "anchor": "ch4-ai", "how": "티끌 누적의 통계 — √n" }
+    ],
+    "prereq": ["expectation", "normal-distribution"],
+    "related": ["confidence-interval", "minibatch-sgd"],
+    "metaphors": []
+  },
+  {
+    "id": "confidence-interval",
+    "label": "신뢰구간",
+    "aliases": ["confidence interval", "오차범위", "margin of error", "추정", "점추정", "여론조사", "95%"],
+    "kind": "math",
+    "note": "표본으로 전체를 알 때의 ± — 벤치마크 점수에도 붙는다",
+    "definedAt": { "part": 3, "slug": "ch8", "anchor": "ch8-s3" },
+    "usedAt": [
+      { "part": 10, "slug": "ch6", "anchor": "ch6-s1", "how": "심화 트랙의 회수처 — 벤치마크 점수의 ±" },
+      { "part": 11, "slug": "ch11", "anchor": "ch11-s1", "how": "「성공률 97%」의 정체 — 몇 번 시켜 본 결과인가" },
+      { "part": 7, "slug": "ch7", "anchor": "ch7-s3", "how": "recall@k 도 표본 추정치" },
+      { "part": 6, "slug": "ch9", "anchor": "ch9-s2", "how": "성적표 읽기 — 점수의 ±" },
+      { "part": 10, "slug": "sample", "anchor": "sample-ai", "how": "점수는 표본 위의 측정값 — 신뢰구간 회수의 예고" },
+      { "part": 11, "slug": "ch4", "anchor": "ch4-ai", "how": "10부 6장의 반복 측정과 비교 — 거기선 평균으로 소음을, 여기선 반복으로 실패를 줄인다" }
+    ],
+    "prereq": ["law-of-large-numbers"],
+    "related": ["hypothesis-test"],
+    "metaphors": [{ "term": "시험의 오차범위", "part": 10 }]
+  },
+  {
+    "id": "hypothesis-test",
+    "label": "가설검정과 p값",
+    "aliases": ["hypothesis test", "p값", "p-value", "유의성", "유의수준", "significance", "A/B 테스트", "귀무가설"],
+    "kind": "math",
+    "note": "2%p 차이는 증거일까 — 우연으로 설명될 확률을 잰다",
+    "definedAt": { "part": 3, "slug": "ch9", "anchor": "ch9-s2" },
+    "usedAt": [
+      { "part": 10, "slug": "ch7", "anchor": "ch7-s2", "how": "2점 차이가 유의한가 — p값의 실전 복귀" },
+      { "part": 6, "slug": "ch9", "anchor": "ch9-s2", "how": "차이가 우연인가 진짜인가" }
+    ],
+    "prereq": ["confidence-interval"],
+    "related": ["model-comparison-test"],
+    "metaphors": []
+  },
+  {
+    "id": "correlation",
+    "label": "상관과 회귀",
+    "aliases": ["correlation", "상관계수", "상관관계", "회귀", "regression", "산점도", "잔차", "최소제곱법"],
+    "kind": "math",
+    "note": "두 변수가 같이 움직이나 — 그리고 가장 작은 머신러닝",
+    "definedAt": { "part": 3, "slug": "ch10", "anchor": "ch10-s2" },
+    "usedAt": [
+      { "part": 10, "slug": "ch9", "anchor": "ch9-s2", "how": "심판 채점과 사람 채점의 일치도" },
+      { "part": 6, "slug": "ch9", "anchor": "ch9-s2", "how": "벤치마크 점수 ↔ 실사용 만족의 관계" },
+      { "part": 11, "slug": "ch9", "anchor": "ch9-ai", "how": "닮은 표가 함께 틀리는 수학 — 상관" }
+    ],
+    "prereq": ["variance"],
+    "related": ["projection"],
+    "metaphors": []
+  },
+
+  {
+    "id": "tokenization",
+    "label": "토큰화",
+    "aliases": ["tokenization", "토큰", "token", "BPE", "서브워드", "subword", "EOS 토큰", "어휘"],
+    "kind": "ai",
+    "note": "글을 조각으로 — 모델이 읽는 단위",
+    "definedAt": { "part": 4, "slug": "ch2", "anchor": "ch2-s1" },
+    "usedAt": [
+      { "part": 5, "slug": "ch2", "anchor": "ch2-ai", "how": "BPE 토큰화 = 압축" },
+      { "part": 11, "slug": "ch10", "anchor": "ch10-s1", "how": "컨텍스트 예산은 토큰 단위" }
+    ],
+    "prereq": [],
+    "related": ["embedding", "compression"],
+    "metaphors": [{ "term": "마침표", "part": 4, "note": "EOS 토큰(end-of-sequence)" }]
+  },
+  {
+    "id": "embedding",
+    "label": "임베딩",
+    "aliases": ["embedding", "벡터표현", "단어벡터", "word vector", "의미 좌표", "임베딩 벡터"],
+    "kind": "ai",
+    "note": "단어·문장을 공간 위 위치로 — 의미는 위치다",
+    "definedAt": { "part": 4, "slug": "ch3", "anchor": "ch3-s1" },
+    "usedAt": [
+      { "part": 7, "slug": "ch3", "anchor": "ch3-s2", "how": "의미의 산수 — 벡터 연산의 재등장" },
+      { "part": 7, "slug": "sample", "anchor": "sample-s2", "how": "뜻을 좌표로 — 임베딩의 재등장" },
+      { "part": 7, "slug": "ch9", "anchor": "ch9-s1", "how": "임베딩은 어떻게 배우나" },
+      { "part": 7, "slug": "ch1", "anchor": "ch1-ai", "how": "같은 벡터의 두 번째 직업 — 검색의 무대" }
+    ],
+    "prereq": ["vector"],
+    "related": ["cosine-similarity", "rag"],
+    "metaphors": [{ "term": "의미는 위치다", "part": 7 }]
+  },
+  {
+    "id": "positional-encoding",
+    "label": "위치 인코딩",
+    "aliases": ["positional encoding", "위치 벡터", "위치 정보", "순서"],
+    "kind": "ai",
+    "note": "순서를 벡터로 더해 주기",
+    "definedAt": { "part": 4, "slug": "ch4", "anchor": "ch4-s2" },
+    "usedAt": [],
+    "prereq": ["embedding"],
+    "related": ["attention"],
+    "metaphors": []
+  },
+  {
+    "id": "attention",
+    "label": "어텐션의 직관",
+    "aliases": ["attention", "어텐션", "문맥과 집중", "가중 평균", "weighted average"],
+    "kind": "ai",
+    "note": "문맥에서 어디를 볼지 — 관련도로 가중 평균하기",
+    "definedAt": { "part": 4, "slug": "ch5", "anchor": "ch5-s1" },
+    "usedAt": [
+      { "part": 4, "slug": "ch6", "anchor": "ch6-s2", "how": "Q·K·V 와 어텐션 공식 — 결국 행렬곱" },
+      { "part": 5, "slug": "ch9", "anchor": "ch9-ai", "how": "문맥의 가치와 어텐션 — 상호정보량" }
+    ],
+    "prereq": ["vector", "dot-product"],
+    "related": ["self-attention-qkv"],
+    "metaphors": []
+  },
+  {
+    "id": "self-attention-qkv",
+    "label": "Q·K·V 셀프 어텐션",
+    "aliases": ["self-attention", "셀프어텐션", "Q K V", "쿼리 키 밸류", "query key value", "어텐션 공식", "스케일드 닷 프로덕트"],
+    "kind": "ai",
+    "note": "결국 행렬곱 — 트랜스포머의 심장",
+    "definedAt": { "part": 4, "slug": "ch6", "anchor": "ch6-s2" },
+    "usedAt": [
+      { "part": 4, "slug": "ch7", "anchor": "ch7-s1", "how": "여러 관점 — 멀티헤드" },
+      { "part": 7, "slug": "ch2", "anchor": "ch2-ai", "how": "Q·K 점수도 같은 내적" }
+    ],
+    "prereq": ["attention", "dot-product", "matrix-multiplication", "softmax"],
+    "related": ["multi-head-attention", "transformer-block"],
+    "metaphors": []
+  },
+  {
+    "id": "multi-head-attention",
+    "label": "멀티헤드 어텐션",
+    "aliases": ["multi-head attention", "멀티헤드", "여러 관점", "헤드", "concat"],
+    "kind": "ai",
+    "note": "관점 여러 개를 나란히 — 그리고 섞기",
+    "definedAt": { "part": 4, "slug": "ch7", "anchor": "ch7-s1" },
+    "usedAt": [],
+    "prereq": ["self-attention-qkv"],
+    "related": ["transformer-block"],
+    "metaphors": []
+  },
+  {
+    "id": "transformer-block",
+    "label": "트랜스포머 블록",
+    "aliases": ["transformer block", "잔차연결", "residual", "층정규화", "layer norm", "피드포워드", "FFN", "MLP"],
+    "kind": "ai",
+    "note": "어텐션 + 피드포워드 + 잔차·정규화 — 쌓으면 GPT",
+    "definedAt": { "part": 4, "slug": "ch8", "anchor": "ch8-s3" },
+    "usedAt": [],
+    "prereq": ["self-attention-qkv", "linear-transformation"],
+    "related": ["transformer"],
+    "metaphors": []
+  },
+  {
+    "id": "softmax",
+    "label": "softmax",
+    "aliases": ["소프트맥스", "출력 확률", "점수를 확률로", "logits", "로짓"],
+    "kind": "math",
+    "note": "점수를 확률로 — 지수를 쓰고 합으로 나눈다",
+    "definedAt": { "part": 4, "slug": "ch9", "anchor": "ch9-s2" },
+    "usedAt": [
+      { "part": 4, "slug": "sample", "anchor": "sample-s3", "how": "소프트맥스 맛보기" },
+      { "part": 5, "slug": "ch8", "anchor": "ch8-s2", "how": "softmax(z/T) — 온도 다이얼" },
+      { "part": 9, "slug": "ch6", "anchor": "ch6-s2", "how": "안전한 softmax — log-sum-exp" }
+    ],
+    "prereq": ["exp-log"],
+    "related": ["temperature", "log-sum-exp", "sigmoid"],
+    "metaphors": []
+  },
+  {
+    "id": "next-token-prediction",
+    "label": "다음 단어 예측",
+    "aliases": ["next token prediction", "출력층", "언어모델", "language model", "자기회귀", "autoregressive", "다음 토큰"],
+    "kind": "ai",
+    "note": "LLM 의 정체 — 다음 단어를 조건부 확률로 고르는 기계",
+    "definedAt": { "part": 4, "slug": "ch9", "anchor": "ch9-s1" },
+    "usedAt": [
+      { "part": 4, "slug": "ch10", "anchor": "ch10-s2", "how": "자기회귀 생성 — 한 단어씩 이어 붙이기" },
+      { "part": 6, "slug": "ch2", "anchor": "ch2-s1", "how": "이어쓰기 기계가 지시를 못 따르는 이유" },
+      { "part": 5, "slug": "ch6", "anchor": "ch6-s1", "how": "데이터 분포를 흉내내는 훈련" },
+      { "part": 4, "slug": "ch1", "anchor": "ch1-s1", "how": "다음 단어 맞히기 — 큰 그림" }
+    ],
+    "prereq": ["softmax", "conditional-probability"],
+    "related": ["transformer", "sampling"],
+    "metaphors": [{ "term": "이어쓰기 기계", "part": 6 }]
+  },
+  {
+    "id": "transformer",
+    "label": "트랜스포머",
+    "aliases": ["transformer", "GPT 구조", "전체 조립", "디코더", "decoder", "LLM 구조"],
+    "kind": "ai",
+    "note": "임베딩 → 블록 × N → 출력층 — GPT 가 글을 쓰는 법",
+    "definedAt": { "part": 4, "slug": "ch10", "anchor": "ch10-s1" },
+    "usedAt": [
+      { "part": 6, "slug": "sample", "anchor": "sample-s2", "how": "같은 두뇌, 다른 훈련" },
+      { "part": 9, "slug": "ch1", "anchor": "ch1-ai", "how": "파라미터 수 = 행렬 크기의 합" },
+      { "part": 9, "slug": "ch11", "anchor": "ch11-ai", "how": "조립한 기계의 설계도·훈련법·물류가 전부 손에" },
+      { "part": 9, "slug": "sample", "anchor": "sample-ai", "how": "GPT 의 실체는 수십억 개의 숫자 — 유한한 칸" }
+    ],
+    "prereq": ["transformer-block", "next-token-prediction", "embedding"],
+    "related": ["fine-tuning"],
+    "metaphors": []
+  },
+  {
+    "id": "loss-function",
+    "label": "손실함수",
+    "aliases": ["loss function", "loss", "손실", "훈련 손실", "training loss", "MSE"],
+    "kind": "ai",
+    "note": "모델이 얼마나 틀렸나를 숫자 하나로 — 학습의 나침반",
+    "definedAt": { "part": 4, "slug": "ch11", "anchor": "ch11-s1" },
+    "usedAt": [
+      { "part": 1, "slug": "ch12", "anchor": "ch12-s1", "how": "행렬미분의 출발점" },
+      { "part": 2, "slug": "ch9", "anchor": "ch9-s2", "how": "경사하강이 내려가는 지형" },
+      { "part": 5, "slug": "ch4", "anchor": "ch4-ai", "how": "LLM 손실함수의 정체 = 크로스 엔트로피" },
+      { "part": 8, "slug": "ch1", "anchor": "ch1-s1", "how": "손실 지형 — 다이얼들이 붙는 그림" },
+      { "part": 5, "slug": "ch10", "anchor": "ch10-s2", "how": "손실함수를 갈아 끼우다" },
+      { "part": 6, "slug": "ch1", "anchor": "ch1-ai", "how": "1단계 사전학습의 수학 — 손실과 경사하강" },
+      { "part": 9, "slug": "ch7", "anchor": "ch7-ai", "how": "학습 루프 — forward·backward 는 반쪽 자, 누적·갱신은 fp32" },
+      { "part": 10, "slug": "ch10", "anchor": "ch10-ai", "how": "팩트체크의 토대 — 손실과 훈련" },
+      { "part": 10, "slug": "ch3", "anchor": "ch3-ai", "how": "스케일링 법칙이 재는 손실 = 훈련 손실" }
+    ],
+    "prereq": [],
+    "related": ["cross-entropy", "loss-landscape"],
+    "metaphors": []
+  },
+  {
+    "id": "sampling",
+    "label": "샘플링",
+    "aliases": ["sampling", "greedy", "탐욕 디코딩", "top-k", "top-p", "디코딩", "decoding", "nucleus"],
+    "kind": "ai",
+    "note": "확률분포에서 다음 단어를 어떻게 뽑나 — greedy·top-k·top-p",
+    "definedAt": { "part": 4, "slug": "ch12", "anchor": "ch12-s1" },
+    "usedAt": [
+      { "part": 5, "slug": "ch8", "anchor": "ch8-s5", "how": "top-k·top-p 재해석" },
+      { "part": 11, "slug": "ch7", "anchor": "ch7-s2", "how": "한 문장의 다이얼이 과업의 전략으로" },
+      { "part": 11, "slug": "ch8", "anchor": "ch8-ai", "how": "LLM 은 매 단어에서 갈림길을 만난다" },
+      { "part": 11, "slug": "ch1", "anchor": "ch1-ai", "how": "생성 루프가 에이전트 루프의 원형" }
+    ],
+    "prereq": ["next-token-prediction"],
+    "related": ["temperature", "best-of-n"],
+    "metaphors": []
+  },
+  {
+    "id": "temperature",
+    "label": "temperature",
+    "aliases": ["템퍼러처", "온도", "창의성 다이얼", "softmax(z/T)", "T"],
+    "kind": "ai",
+    "note": "생성의 다이얼 — 직관편(4부)·수학편(5부)",
+    "definedAt": { "part": 4, "slug": "ch12", "anchor": "ch12-s2" },
+    "usedAt": [{ "part": 5, "slug": "ch8", "anchor": "ch8-s2", "how": "같은 다이얼의 수학편 — softmax(z/T) 와 양 극단" }],
+    "prereq": ["softmax", "sampling"],
+    "related": ["perplexity"],
+    "metaphors": []
+  },
+
+  {
+    "id": "information-surprise",
+    "label": "놀람과 정보량",
+    "aliases": ["surprisal", "정보량", "놀람", "self-information", "log(1/p)", "희귀 토큰"],
+    "kind": "math",
+    "note": "드문 일일수록 정보가 많다 — I = log₂(1/p)",
+    "definedAt": { "part": 5, "slug": "ch1", "anchor": "ch1-s4" },
+    "usedAt": [
+      { "part": 5, "slug": "ch4", "anchor": "ch4-s4", "how": "원핫이면 −log q(정답)" },
+      { "part": 7, "slug": "ch9", "anchor": "ch9-s2", "how": "또 너였구나, −log" }
+    ],
+    "prereq": ["exp-log", "probability"],
+    "related": ["entropy", "bit"],
+    "metaphors": []
+  },
+  {
+    "id": "bit",
+    "label": "비트",
+    "aliases": ["bit", "이진법", "binary", "정보의 단위", "2진수", "스위치"],
+    "kind": "math",
+    "note": "정보를 재는 자 — 그리고 저장의 단위",
+    "definedAt": { "part": 5, "slug": "ch1", "anchor": "ch1-s2" },
+    "usedAt": [
+      { "part": 9, "slug": "ch2", "anchor": "ch2-s1", "how": "정보의 단위(비트)가 저장의 단위가 된다" },
+      { "part": 5, "slug": "ch2", "anchor": "ch2-s2", "how": "고정 길이 코드 — 비트로 적기" },
+      { "part": 5, "slug": "sample", "anchor": "sample-s3", "how": "스무고개 — 정보 = 줄어드는 불확실성" }
+    ],
+    "prereq": ["exp-log"],
+    "related": ["floating-point", "compression"],
+    "metaphors": [{ "term": "컴퓨터의 손가락", "part": 9 }]
+  },
+  {
+    "id": "compression",
+    "label": "압축과 코드 길이",
+    "aliases": ["compression", "압축", "허프만", "Huffman", "가변 길이 코드", "접두어 코드", "이상적 코드 길이", "모스 부호"],
+    "kind": "math",
+    "note": "자주 나오는 것에 짧은 코드를 — 이상적 코드 길이 = 놀람",
+    "definedAt": { "part": 5, "slug": "ch2", "anchor": "ch2-s5" },
+    "usedAt": [
+      { "part": 5, "slug": "ch6", "anchor": "ch6-s5", "how": "압축 = 지능 담론 완성" },
+      { "part": 11, "slug": "ch10", "anchor": "ch10-s2", "how": "궤적을 요약해 압축 — 손실 압축" },
+      { "part": 9, "slug": "ch9", "anchor": "ch9-ai", "how": "자주 나오는 것에 비트를 아끼는 M 믹스 — 손실 압축" }
+    ],
+    "prereq": ["information-surprise", "bit"],
+    "related": ["tokenization", "entropy"],
+    "metaphors": []
+  },
+  {
+    "id": "entropy",
+    "label": "엔트로피",
+    "aliases": ["entropy", "평균 놀람", "불확실성", "H(X)", "균등분포"],
+    "kind": "math",
+    "note": "평균 놀람 — 분포가 얼마나 예측 불가능한가",
+    "definedAt": { "part": 5, "slug": "ch3", "anchor": "ch3-s1" },
+    "usedAt": [
+      { "part": 5, "slug": "ch6", "anchor": "ch6-s4", "how": "남는 바닥 = 데이터의 엔트로피" },
+      { "part": 5, "slug": "ch9", "anchor": "ch9-s2", "how": "조건부 엔트로피 — 문맥이 줄이는 불확실성" },
+      { "part": 5, "slug": "ch7", "anchor": "ch7-s1", "how": "2^비트 = 갈래 수" }
+    ],
+    "prereq": ["information-surprise", "expectation"],
+    "related": ["cross-entropy", "perplexity"],
+    "metaphors": []
+  },
+  {
+    "id": "cross-entropy",
+    "label": "크로스 엔트로피",
+    "aliases": ["cross entropy", "교차 엔트로피", "−log 손실", "negative log likelihood", "NLL", "원핫", "one-hot", "-log q"],
+    "kind": "math",
+    "note": "틀린 지도로 길을 찾을 때의 요금 — LLM 손실함수의 정체",
+    "definedAt": { "part": 5, "slug": "ch4", "anchor": "ch4-s1" },
+    "usedAt": [
+      { "part": 4, "slug": "ch11", "anchor": "ch11-s1", "how": "손실함수의 정체 — 4부는 '일단 그런 게 있다'" },
+      { "part": 6, "slug": "ch3", "anchor": "ch3-s2", "how": "SFT 의 채점기도 같은 크로스 엔트로피" },
+      { "part": 6, "slug": "ch4", "anchor": "ch4-s4", "how": "보상 모델 학습 — 또 −log 가 나온다" },
+      { "part": 7, "slug": "ch9", "anchor": "ch9-s2", "how": "InfoNCE — 같은 채점 철학의 세 번째 얼굴" },
+      { "part": 9, "slug": "ch6", "anchor": "ch6-ai", "how": "log-sum-exp 가 지키는 손실 계산" }
+    ],
+    "prereq": ["entropy", "loss-function"],
+    "related": ["kl-divergence", "perplexity"],
+    "metaphors": [
+      { "term": "몰빵", "part": 5, "note": "원핫(one-hot)" },
+      { "term": "틀린 지도 요금", "part": 5 }
+    ]
+  },
+  {
+    "id": "kl-divergence",
+    "label": "KL 발산",
+    "aliases": ["KL divergence", "쿨백 라이블러", "KL", "relative entropy", "상대 엔트로피", "KL 페널티", "초과 비트"],
+    "kind": "math",
+    "note": "두 분포가 얼마나 다른가 — 원본에서 멀어지지 않게 묶는 목줄",
+    "definedAt": { "part": 5, "slug": "ch5", "anchor": "ch5-s1" },
+    "usedAt": [
+      { "part": 6, "slug": "ch6", "anchor": "ch6-s2", "how": "RLHF 의 KL 페널티 — 원본에서 멀어지지 않게" },
+      { "part": 6, "slug": "ch7", "anchor": "ch7-s2", "how": "DPO 수식 안의 같은 항" },
+      { "part": 8, "slug": "ch8", "anchor": "ch8-s2", "how": "두 목줄 — 원본 vs 원점" },
+      { "part": 5, "slug": "ch6", "anchor": "ch6-s2", "how": "훈련 = KL 최소화 = CE 최소화" }
+    ],
+    "prereq": ["cross-entropy", "entropy"],
+    "related": ["perplexity", "regularization"],
+    "metaphors": [
+      { "term": "목줄", "part": 6, "note": "KL 페널티" },
+      { "term": "덮개형/집중형", "part": 5, "note": "forward/reverse KL · mode-covering/seeking" }
+    ]
+  },
+  {
+    "id": "maximum-likelihood",
+    "label": "훈련 = 흉내내기",
+    "aliases": ["maximum likelihood", "최대우도", "MLE", "데이터 분포와 모델 분포", "흉내내기", "사전학습 loss"],
+    "kind": "ai",
+    "note": "모델 분포를 데이터 분포에 붙이기 — KL 최소화 = 크로스 엔트로피 최소화",
+    "definedAt": { "part": 5, "slug": "ch6", "anchor": "ch6-s2" },
+    "usedAt": [
+      { "part": 6, "slug": "ch3", "anchor": "ch3-s1", "how": "SFT = 시범 분포 흉내내기" },
+      { "part": 5, "slug": "ch10", "anchor": "ch10-s3", "how": "미니 언어모델 훈련" },
+      { "part": 6, "slug": "ch1", "anchor": "ch1-ai", "how": "사전학습 = 분포 흉내내기" }
+    ],
+    "prereq": ["kl-divergence", "cross-entropy"],
+    "related": ["next-token-prediction"],
+    "metaphors": [{ "term": "흉내내기", "part": 5 }]
+  },
+  {
+    "id": "perplexity",
+    "label": "퍼플렉시티",
+    "aliases": ["perplexity", "PPL", "혼란도", "실질 갈래 수", "2^비트"],
+    "kind": "metric",
+    "note": "모델이 평균 몇 갈래 사이에서 헤매나 — LLM 의 성적표",
+    "definedAt": { "part": 5, "slug": "ch7", "anchor": "ch7-s2" },
+    "usedAt": [
+      { "part": 9, "slug": "ch10", "anchor": "ch10-s1", "how": "양자화 열화를 재는 자" },
+      { "part": 6, "slug": "ch9", "anchor": "ch9-s1", "how": "왜 어려운가 — 퍼플렉시티로는 안 된다" },
+      { "part": 6, "slug": "ch2", "anchor": "ch2-ai", "how": "실질 갈래 수 — 예시가 쌓일수록 갈래가 좁혀져 형식이 안정되는 원리" },
+      { "part": 10, "slug": "ch3", "anchor": "ch3-ai", "how": "바닥을 퍼플렉시티로 읽는 법 — 바닥 PPL ≈ 1.31" },
+      { "part": 10, "slug": "ch5", "anchor": "ch5-ai", "how": "지표 선택이 이야기를 바꾼다 — 같은 모델도 재는 자에 따라" }
+    ],
+    "prereq": ["cross-entropy", "entropy"],
+    "related": ["llm-evaluation"],
+    "metaphors": []
+  },
+  {
+    "id": "conditional-entropy",
+    "label": "조건부 엔트로피와 상호정보량",
+    "aliases": ["conditional entropy", "mutual information", "상호정보량", "H(X|Y)", "I(X;Y)", "문맥의 가치", "결합분포"],
+    "kind": "math",
+    "note": "문맥이 불확실성을 얼마나 줄이나",
+    "definedAt": { "part": 5, "slug": "ch9", "anchor": "ch9-s2" },
+    "usedAt": [],
+    "prereq": ["entropy", "conditional-probability"],
+    "related": ["attention"],
+    "metaphors": []
+  },
+
+  {
+    "id": "fine-tuning",
+    "label": "파인튜닝",
+    "aliases": ["fine-tuning", "post-training", "사후 학습", "정렬", "alignment", "미세조정", "파인 튜닝"],
+    "kind": "ai",
+    "note": "사전학습 → SFT → 선호 학습 — 다음 단어 예측 기계를 비서로",
+    "definedAt": { "part": 6, "slug": "ch1", "anchor": "ch1-s2" },
+    "usedAt": [
+      { "part": 7, "slug": "ch1", "anchor": "ch1-s4", "how": "지식 주입의 두 길 — 조련 vs RAG" },
+      { "part": 7, "slug": "ch8", "anchor": "ch8-s2", "how": "RAG vs 파인튜닝 선택 기준" },
+      { "part": 8, "slug": "ch6", "anchor": "ch6-s2", "how": "낯선 출발 — 파인튜닝의 워밍업" },
+      { "part": 8, "slug": "ch11", "anchor": "ch11-s2", "how": "파인튜닝 설정 파일 완독" }
+    ],
+    "prereq": ["transformer", "gradient-descent"],
+    "related": ["sft", "rlhf", "lora"],
+    "metaphors": [{ "term": "조련", "part": 6, "note": "post-training · 파인튜닝 · 정렬(alignment)" }]
+  },
+  {
+    "id": "context-window",
+    "label": "문맥 창",
+    "aliases": ["context window", "컨텍스트 윈도", "퓨샷", "few-shot", "프롬프트", "in-context learning", "컨텍스트"],
+    "kind": "ai",
+    "note": "모델이 한 번에 보는 글의 길이 — 예시로 분포 밀어 보기의 한계",
+    "definedAt": { "part": 6, "slug": "ch2", "anchor": "ch2-s2" },
+    "usedAt": [
+      { "part": 7, "slug": "ch1", "anchor": "ch1-s4", "how": "지식 주입의 두 길 — 조련 vs 검색 증강" },
+      { "part": 7, "slug": "ch8", "anchor": "ch8-s2", "how": "검색 결과가 프롬프트가 된다" },
+      { "part": 11, "slug": "ch10", "anchor": "ch10-s1", "how": "컨텍스트 예산 — 책상이 넘친다" }
+    ],
+    "prereq": ["next-token-prediction"],
+    "related": ["rag", "context-budget"],
+    "metaphors": []
+  },
+  {
+    "id": "sft",
+    "label": "SFT",
+    "aliases": ["supervised fine-tuning", "지도 미세조정", "instruction tuning", "지시 학습", "지시-응답 데이터"],
+    "kind": "ai",
+    "note": "시범 데이터로 미세조정 — 결국 같은 크로스 엔트로피 학습",
+    "definedAt": { "part": 6, "slug": "ch3", "anchor": "ch3-s1" },
+    "usedAt": [
+      { "part": 8, "slug": "ch6", "anchor": "ch6-ai", "how": "파인튜닝 워밍업의 실전" },
+      { "part": 8, "slug": "ch11", "anchor": "ch11-s1", "how": "미니 조련 튜너" },
+      { "part": 7, "slug": "ch8", "anchor": "ch8-s2", "how": "지식은 RAG 로, 행동은 SFT 로 — 갈림길 판단의 밑천" },
+      { "part": 10, "slug": "ch8", "anchor": "ch8-ai", "how": "훈련 데이터가 어떻게 만들어지는지 — 오염의 경로" }
+    ],
+    "prereq": ["fine-tuning", "cross-entropy"],
+    "related": ["maximum-likelihood"],
+    "metaphors": [{ "term": "시범 보여주기", "part": 6 }]
+  },
+  {
+    "id": "reward-model",
+    "label": "보상 모델",
+    "aliases": ["reward model", "선호 데이터", "preference data", "Bradley-Terry", "브래들리 테리", "선호 쌍", "라벨러"],
+    "kind": "ai",
+    "note": "사람의 취향을 숫자로 — A/B 선호 쌍에서 점수를 배운다",
+    "definedAt": { "part": 6, "slug": "ch4", "anchor": "ch4-s2" },
+    "usedAt": [
+      { "part": 6, "slug": "ch6", "anchor": "ch6-s1", "how": "RLHF 의 등장인물" },
+      { "part": 7, "slug": "ch9", "anchor": "ch9-s3", "how": "쌍 학습 — InfoNCE 의 사촌" }
+    ],
+    "prereq": ["sigmoid", "conditional-probability", "cross-entropy"],
+    "related": ["rlhf", "dpo"],
+    "metaphors": [
+      { "term": "심판", "part": 6 },
+      { "term": "취향 다듬기", "part": 6, "note": "선호 학습(preference optimization)" }
+    ]
+  },
+  {
+    "id": "reinforcement-learning",
+    "label": "강화학습",
+    "aliases": ["reinforcement learning", "RL", "정책", "policy", "보상", "reward", "기대 보상", "policy gradient", "경사상승", "보상 해킹", "reward hacking"],
+    "kind": "ai",
+    "note": "행동·보상·정책 — 보상을 높이는 방향으로 경사 이동",
+    "definedAt": { "part": 6, "slug": "ch5", "anchor": "ch5-s2" },
+    "usedAt": [{ "part": 11, "slug": "ch1", "anchor": "ch1-ai", "how": "루프의 원형과 훈련" }],
+    "prereq": ["expectation", "gradient-descent"],
+    "related": ["rlhf"],
+    "metaphors": []
+  },
+  {
+    "id": "rlhf",
+    "label": "RLHF",
+    "aliases": ["인간 피드백 강화학습", "reinforcement learning from human feedback", "PPO", "β 다이얼", "KL 목줄"],
+    "kind": "ai",
+    "note": "보상 최대화 + KL 페널티 — 원본에서 너무 멀어지지 않게",
+    "definedAt": { "part": 6, "slug": "ch6", "anchor": "ch6-s1" },
+    "usedAt": [
+      { "part": 8, "slug": "ch8", "anchor": "ch8-s2", "how": "원본 목줄 vs 원점 목줄" },
+      { "part": 6, "slug": "ch10", "anchor": "ch10-s2", "how": "졸업 실험 — 파이프라인 전체 조립" }
+    ],
+    "prereq": ["reward-model", "reinforcement-learning", "kl-divergence"],
+    "related": ["dpo"],
+    "metaphors": []
+  },
+  {
+    "id": "dpo",
+    "label": "DPO",
+    "aliases": ["direct preference optimization", "직접 선호 최적화", "암묵적 보상", "implicit reward", "심판 없는 훈련"],
+    "kind": "ai",
+    "note": "보상 모델 없이 선호 쌍에서 바로 배우는 지름길",
+    "definedAt": { "part": 6, "slug": "ch7", "anchor": "ch7-s1" },
+    "usedAt": [{ "part": 6, "slug": "ch10", "anchor": "ch10-s2", "how": "SFT → 보상 → DPO 시뮬레이션" }],
+    "prereq": ["rlhf", "sigmoid"],
+    "related": ["reward-model"],
+    "metaphors": [{ "term": "숨은 점수", "part": 6, "note": "암묵적 보상(implicit reward)" }]
+  },
+  {
+    "id": "lora",
+    "label": "LoRA",
+    "aliases": ["로라", "저차원 적응", "low-rank adaptation", "PEFT", "어댑터", "adapter", "변화분"],
+    "kind": "ai",
+    "note": "거대 행렬을 얼리고 저차원 행렬 두 장만 학습",
+    "definedAt": { "part": 6, "slug": "ch8", "anchor": "ch8-s3" },
+    "usedAt": [
+      { "part": 9, "slug": "ch1", "anchor": "ch1-ai", "how": "7B 와 어댑터의 크기" },
+      { "part": 8, "slug": "ch11", "anchor": "ch11-s2", "how": "설정 파일의 lora_rank" }
+    ],
+    "prereq": ["rank", "svd", "fine-tuning"],
+    "related": ["sft"],
+    "metaphors": [{ "term": "살짝만 조련", "part": 6, "note": "LoRA / PEFT" }]
+  },
+  {
+    "id": "llm-evaluation",
+    "label": "평가와 벤치마크",
+    "aliases": ["benchmark", "벤치마크", "평가", "evaluation", "아첨", "sycophancy", "망각", "거절 과잉", "over-refusal", "리더보드"],
+    "kind": "ai",
+    "note": "조련이 잘 됐나 — 벤치마크·LLM 심판·부작용의 징후",
+    "definedAt": { "part": 6, "slug": "ch9", "anchor": "ch9-s2" },
+    "usedAt": [
+      { "part": 10, "slug": "ch6", "anchor": "ch6-s1", "how": "평가 기초의 심화판 — 점수를 믿는 법" },
+      { "part": 10, "slug": "ch7", "anchor": "ch7-s1", "how": "두 모델 비교" },
+      { "part": 10, "slug": "ch8", "anchor": "ch8-s1", "how": "오염과 벤치마크의 수명" },
+      { "part": 7, "slug": "ch7", "anchor": "ch7-s3", "how": "recall@k 로 검색 채점" },
+      { "part": 8, "slug": "ch7", "anchor": "ch7-s1", "how": "시험은 두 번 본다 — 검증 오차" },
+      { "part": 9, "slug": "ch10", "anchor": "ch10-s2", "how": "양자화 품질 성적표" },
+      { "part": 8, "slug": "ch9", "anchor": "ch9-ai", "how": "eval 점수의 시간축 버전 — eval_loss 곡선" },
+      { "part": 10, "slug": "ch10", "anchor": "ch10-ai", "how": "평가의 기본기" },
+      { "part": 10, "slug": "sample", "anchor": "sample-ai", "how": "\"조련이 잘 됐는지\" → 그 성적표를 얼마나 믿을 수 있는지" }
+    ],
+    "prereq": ["perplexity", "confidence-interval"],
+    "related": ["llm-as-judge", "contamination"],
+    "metaphors": [{ "term": "조련 성적표", "part": 6 }]
+  },
+  {
+    "id": "llm-as-judge",
+    "label": "LLM 심판",
+    "aliases": ["LLM-as-judge", "AI 채점관", "심판 편향", "위치 편향", "position bias", "아레나", "arena", "쌍대 비교 채점"],
+    "kind": "ai",
+    "note": "AI 가 AI 를 채점할 때 — 편향을 심어 보고 감정하는 법",
+    "definedAt": { "part": 6, "slug": "ch9", "anchor": "ch9-s2" },
+    "usedAt": [
+      { "part": 10, "slug": "ch9", "anchor": "ch9-s1", "how": "심판을 심판하기 — 편향 실험과 감정법" },
+      { "part": 11, "slug": "ch11", "anchor": "ch11-ai", "how": "궤적 평가 — 평가 통계의 속편" },
+      { "part": 11, "slug": "ch9", "anchor": "ch9-ai", "how": "검토자를 작성자와 분리하는 원칙 — 심판·선수 분리" }
+    ],
+    "prereq": ["llm-evaluation"],
+    "related": ["correlation", "pass-at-k"],
+    "metaphors": [{ "term": "AI 채점관", "part": 10 }]
+  },
+
+  {
+    "id": "rag",
+    "label": "RAG",
+    "aliases": ["검색 증강 생성", "retrieval augmented generation", "의미 검색", "semantic search", "그라운딩", "grounding", "검색봇"],
+    "kind": "ai",
+    "note": "검색 결과가 프롬프트가 된다 — 회사 문서를 아는 챗봇의 수학",
+    "definedAt": { "part": 7, "slug": "ch1", "anchor": "ch1-s3" },
+    "usedAt": [
+      { "part": 7, "slug": "ch8", "anchor": "ch8-s1", "how": "완전판 지도 — 두 개의 파이프라인" },
+      { "part": 11, "slug": "ch10", "anchor": "ch10-s2", "how": "배낭·압축·검색 — 장기 서고" },
+      { "part": 7, "slug": "ch10", "anchor": "ch10-s1", "how": "사내 FAQ 검색봇 조립" }
+    ],
+    "prereq": ["embedding", "cosine-similarity", "context-window"],
+    "related": ["vector-db", "chunking", "fine-tuning"],
+    "metaphors": []
+  },
+  {
+    "id": "curse-of-dimensionality",
+    "label": "고차원의 저주",
+    "aliases": ["curse of dimensionality", "고차원", "거의 직교", "무작위 기준선", "random baseline", "차원의 저주"],
+    "kind": "math",
+    "note": "차원이 높으면 아무 벡터나 거의 직교 — 그런데도 임베딩이 작동하는 이유",
+    "definedAt": { "part": 7, "slug": "ch4", "anchor": "ch4-s2" },
+    "usedAt": [{ "part": 8, "slug": "ch10", "anchor": "ch10-s2", "how": "고차원 손실 지형의 직관 — 왜 안장점 천지인가" }],
+    "prereq": ["law-of-large-numbers", "expectation", "dot-product"],
+    "related": ["rank", "saddle-point"],
+    "metaphors": [{ "term": "바닥", "part": 7, "note": "무작위 기준선(random baseline)" }]
+  },
+  {
+    "id": "dimensionality-reduction",
+    "label": "차원 축소 지도",
+    "aliases": ["t-SNE", "UMAP", "차원 축소", "지도 그리기", "2D 지도", "시각화"],
+    "kind": "ai",
+    "note": "고차원 임베딩을 2D 지도로 — 항상 왜곡을 동반한다",
+    "definedAt": { "part": 7, "slug": "ch5", "anchor": "ch5-s2" },
+    "usedAt": [],
+    "prereq": ["pca"],
+    "related": ["embedding"],
+    "metaphors": []
+  },
+  {
+    "id": "vector-db",
+    "label": "벡터 DB",
+    "aliases": ["vector database", "ANN", "근사 최근접 이웃", "approximate nearest neighbor", "kNN", "HNSW", "벡터 검색", "이웃 찾기"],
+    "kind": "tool",
+    "note": "전수조사의 비용 → 근사 최근접 이웃 — 벡터 DB 의 정체",
+    "definedAt": { "part": 7, "slug": "ch6", "anchor": "ch6-s2" },
+    "usedAt": [{ "part": 7, "slug": "ch8", "anchor": "ch8-s1", "how": "RAG 파이프라인의 검색 부품" }],
+    "prereq": ["cosine-similarity"],
+    "related": ["rag"],
+    "metaphors": []
+  },
+  {
+    "id": "chunking",
+    "label": "청킹과 검색 품질",
+    "aliases": ["chunking", "청킹", "청크", "top-k 검색", "임계값", "recall@k", "리콜", "검색 품질"],
+    "kind": "ai",
+    "note": "문서 쪼개기의 트레이드오프, top-k·임계값, recall@k 로 채점",
+    "definedAt": { "part": 7, "slug": "ch7", "anchor": "ch7-s1" },
+    "usedAt": [
+      { "part": 7, "slug": "ch8", "anchor": "ch8-s1", "how": "실패 모드 — 검색 miss·청크 경계" },
+      { "part": 11, "slug": "ch10", "anchor": "ch10-s2", "how": "장기 서고에서 꺼내 오기" }
+    ],
+    "prereq": ["rag", "llm-evaluation"],
+    "related": ["vector-db"],
+    "metaphors": [{ "term": "칼질", "part": 7 }]
+  },
+  {
+    "id": "contrastive-learning",
+    "label": "대조 학습",
+    "aliases": ["contrastive learning", "InfoNCE", "짝 학습", "임베딩 학습", "negative", "짝은 가깝게 남은 멀게"],
+    "kind": "ai",
+    "note": "짝은 가깝게, 남은 멀게 — 그리고 또 −log 손실",
+    "definedAt": { "part": 7, "slug": "ch9", "anchor": "ch9-s2" },
+    "usedAt": [],
+    "prereq": ["cross-entropy", "reward-model", "gradient-descent"],
+    "related": ["embedding"],
+    "metaphors": []
+  },
+
+  {
+    "id": "loss-landscape",
+    "label": "손실 지형",
+    "aliases": ["loss landscape", "손실 곡면", "손실 곡선", "곡률", "curvature", "지형", "골짜기"],
+    "kind": "ai",
+    "note": "안개 낀 산 — 다이얼들이 붙는 그림",
+    "definedAt": { "part": 8, "slug": "ch1", "anchor": "ch1-s1" },
+    "usedAt": [
+      { "part": 8, "slug": "ch10", "anchor": "ch10-s1", "how": "기울기 0 의 세 얼굴 — 임계점" },
+      { "part": 8, "slug": "ch9", "anchor": "ch9-s1", "how": "훈련 일지 판독 — 손실 곡선 읽기" },
+      { "part": 8, "slug": "ch2", "anchor": "ch2-s1", "how": "골짜기의 성격 — 곡률" },
+      { "part": 10, "slug": "ch1", "anchor": "ch1-ai", "how": "훈련이 실제로 어떻게 돌아가는지의 지도" }
+    ],
+    "prereq": ["loss-function", "gradient"],
+    "related": ["saddle-point", "loss-spike"],
+    "metaphors": [
+      { "term": "안개 낀 산", "part": 8 },
+      { "term": "골짜기", "part": 2, "note": "최솟값(minimum)" }
+    ]
+  },
+  {
+    "id": "minibatch-sgd",
+    "label": "미니배치 SGD",
+    "aliases": ["stochastic gradient descent", "SGD", "확률적 경사하강", "배치", "batch size", "미니배치", "배치 크기"],
+    "kind": "ai",
+    "note": "기울기 = 표본 추정치 — 흔들리는 나침반",
+    "definedAt": { "part": 8, "slug": "ch3", "anchor": "ch3-s2" },
+    "usedAt": [
+      { "part": 8, "slug": "ch11", "anchor": "ch11-s2", "how": "설정 파일의 batch_size" },
+      { "part": 9, "slug": "ch4", "anchor": "ch4-ai", "how": "같은 무늬의 노이즈 — 1/√B" }
+    ],
+    "prereq": ["gradient-descent", "law-of-large-numbers"],
+    "related": ["momentum"],
+    "metaphors": [{ "term": "흔들리는 나침반", "part": 8 }]
+  },
+  {
+    "id": "momentum",
+    "label": "모멘텀",
+    "aliases": ["momentum", "관성", "지수이동평균", "EMA", "exponential moving average", "속도"],
+    "kind": "ai",
+    "note": "속도를 기억하는 걸음 — 밑의 기계는 지수이동평균",
+    "definedAt": { "part": 8, "slug": "ch4", "anchor": "ch4-s1" },
+    "usedAt": [{ "part": 8, "slug": "ch5", "anchor": "ch5-s2", "how": "Adam 의 부품 — EMA × 2" }],
+    "prereq": ["minibatch-sgd"],
+    "related": ["adam"],
+    "metaphors": [{ "term": "관성", "part": 8 }]
+  },
+  {
+    "id": "adam",
+    "label": "Adam",
+    "aliases": ["아담", "적응적 학습률", "RMSProp", "AdamW", "옵티마이저", "optimizer", "adaptive"],
+    "kind": "ai",
+    "note": "축마다 다른 보폭 — 평소 크기로 나누기",
+    "definedAt": { "part": 8, "slug": "ch5", "anchor": "ch5-s2" },
+    "usedAt": [{ "part": 8, "slug": "ch11", "anchor": "ch11-s2", "how": "설정 파일의 optimizer" }],
+    "prereq": ["momentum"],
+    "related": ["learning-rate"],
+    "metaphors": [
+      { "term": "적응적 보폭", "part": 8 },
+      { "term": "축마다 다른 보폭", "part": 8 }
+    ]
+  },
+  {
+    "id": "lr-schedule",
+    "label": "학습률 스케줄",
+    "aliases": ["lr schedule", "스케줄러", "scheduler", "warmup", "워밍업", "cosine decay", "코사인 감쇠", "정착", "warmup_steps"],
+    "kind": "ai",
+    "note": "첫 구간은 살살, 마지막 구간은 정착 — 여행 일정표",
+    "definedAt": { "part": 8, "slug": "ch6", "anchor": "ch6-s1" },
+    "usedAt": [{ "part": 8, "slug": "ch11", "anchor": "ch11-s2", "how": "설정 파일의 warmup_steps·scheduler" }],
+    "prereq": ["learning-rate"],
+    "related": ["adam"],
+    "metaphors": [{ "term": "여행 일정표", "part": 8 }]
+  },
+  {
+    "id": "overfitting",
+    "label": "과적합과 일반화",
+    "aliases": ["overfitting", "과적합", "일반화", "generalization", "검증 오차", "validation loss", "훈련 오차", "일반화 격차", "generalization gap"],
+    "kind": "ai",
+    "note": "통째로 외운 학생 — 시험은 두 번 본다",
+    "definedAt": { "part": 8, "slug": "ch7", "anchor": "ch7-s1" },
+    "usedAt": [{ "part": 8, "slug": "ch9", "anchor": "ch9-s1", "how": "증상 도감 — 벌어짐의 무늬" }],
+    "prereq": ["loss-function", "llm-evaluation"],
+    "related": ["regularization", "contamination"],
+    "metaphors": [
+      { "term": "통째로 외운 학생", "part": 8 },
+      { "term": "벌어짐", "part": 8, "note": "훈련 오차와 검증 오차의 간격(generalization gap)" }
+    ]
+  },
+  {
+    "id": "regularization",
+    "label": "정규화",
+    "aliases": ["regularization", "weight decay", "가중치 감쇠", "드롭아웃", "dropout", "조기 종료", "early stopping", "안전장치"],
+    "kind": "ai",
+    "note": "멀리 못 가게 묶는 안전장치 — 원점 목줄",
+    "definedAt": { "part": 8, "slug": "ch8", "anchor": "ch8-s1" },
+    "usedAt": [{ "part": 8, "slug": "ch11", "anchor": "ch11-s2", "how": "설정 파일의 weight_decay" }],
+    "prereq": ["overfitting", "kl-divergence"],
+    "related": ["rlhf"],
+    "metaphors": [{ "term": "원점 목줄", "part": 8, "note": "weight decay" }]
+  },
+  {
+    "id": "loss-spike",
+    "label": "손실 스파이크와 곡선 판독",
+    "aliases": ["loss spike", "손실 스파이크", "그래디언트 클리핑", "gradient clipping", "훈련 일지", "훈련 발산", "loss: nan"],
+    "kind": "ai",
+    "note": "훈련 일지의 네 가지 무늬 — 그리고 새 안전핀",
+    "definedAt": { "part": 8, "slug": "ch9", "anchor": "ch9-s1" },
+    "usedAt": [
+      { "part": 9, "slug": "ch5", "anchor": "ch5-ai", "how": "loss: nan 사건의 전말 — 오버플로" },
+      { "part": 9, "slug": "ch7", "anchor": "ch7-s2", "how": "혼합 정밀도 — 스파이크 예방" }
+    ],
+    "prereq": ["loss-landscape", "gradient"],
+    "related": ["overflow-nan", "half-precision"],
+    "metaphors": [{ "term": "훈련 일지", "part": 8 }]
+  },
+  {
+    "id": "saddle-point",
+    "label": "안장점과 평원",
+    "aliases": ["saddle point", "안장점", "국소최소", "local minimum", "평원", "plateau", "임계점", "critical point"],
+    "kind": "math",
+    "note": "기울기 0 의 세 얼굴 — 고차원엔 안장점 천지",
+    "definedAt": { "part": 8, "slug": "ch10", "anchor": "ch10-s1" },
+    "usedAt": [],
+    "prereq": ["loss-landscape", "curse-of-dimensionality"],
+    "related": ["momentum"],
+    "metaphors": [{ "term": "지형의 함정", "part": 8 }]
+  },
+
+  {
+    "id": "parameter-count",
+    "label": "파라미터 수와 메모리",
+    "aliases": ["parameter count", "파라미터", "7B", "가중치 수", "모델 크기", "메모리 용량", "N", "70억 개"],
+    "kind": "ai",
+    "note": "「7B」의 B — 뭐가 70억 개이고 몇 GB 인가",
+    "definedAt": { "part": 9, "slug": "ch1", "anchor": "ch1-s1" },
+    "usedAt": [
+      { "part": 10, "slug": "ch4", "anchor": "ch4-s2", "how": "N 공식이 예산 C≈6ND 로" },
+      { "part": 10, "slug": "ch1", "anchor": "ch1-s2", "how": "이름표 달기 — N · D · C" },
+      { "part": 9, "slug": "ch11", "anchor": "ch11-s1", "how": "7B 는 왜 4GB 인가 — 영수증 완독" },
+      { "part": 11, "slug": "ch7", "anchor": "ch7-ai", "how": "토큰이 곧 메모리·시간·전기라는 물리적 감각" }
+    ],
+    "prereq": ["matrix", "transformer"],
+    "related": ["quantization", "scaling-law"],
+    "metaphors": [{ "term": "숫자의 몸무게", "part": 9 }]
+  },
+  {
+    "id": "floating-point",
+    "label": "부동소수점",
+    "aliases": ["floating point", "fp32", "가수", "지수부", "mantissa", "exponent", "IEEE 754", "실수 표현"],
+    "kind": "math",
+    "note": "과학자들의 숫자 적기 — 눈금이 늘었다 줄었다 하는 고무줄 자",
+    "definedAt": { "part": 9, "slug": "ch3", "anchor": "ch3-s1" },
+    "usedAt": [
+      { "part": 9, "slug": "ch7", "anchor": "ch7-s1", "how": "갈림길 — 눈금이냐, 자 길이냐" },
+      { "part": 9, "slug": "ch4", "anchor": "ch4-s1", "how": "1 근처의 눈금 간격 — 머신 엡실론" },
+      { "part": 9, "slug": "sample", "anchor": "sample-s2", "how": "0.1 + 0.2 는 0.3 이 아니다" }
+    ],
+    "prereq": ["exp-log", "bit"],
+    "related": ["half-precision", "quantization"],
+    "metaphors": [{ "term": "고무줄 자", "part": 9 }]
+  },
+  {
+    "id": "rounding-error",
+    "label": "반올림 오차와 누적",
+    "aliases": ["rounding error", "머신 엡실론", "machine epsilon", "누적 오차", "흡수", "absorption", "반올림"],
+    "kind": "math",
+    "note": "눈금 사이의 오차가 쌓이면 — 같은 모델, 미세하게 다른 답",
+    "definedAt": { "part": 9, "slug": "ch4", "anchor": "ch4-s1" },
+    "usedAt": [],
+    "prereq": ["floating-point"],
+    "related": ["overflow-nan"],
+    "metaphors": [
+      { "term": "1 삼키기", "part": 9, "note": "흡수(absorption)" },
+      { "term": "눈금 사이의 오차", "part": 9 }
+    ]
+  },
+  {
+    "id": "overflow-nan",
+    "label": "오버플로·언더플로·NaN",
+    "aliases": ["overflow", "underflow", "NaN", "inf", "수치 사고", "오버플로", "언더플로"],
+    "kind": "math",
+    "note": "자의 양쪽 끝을 넘어가면 — 수치 사고의 현장",
+    "definedAt": { "part": 9, "slug": "ch5", "anchor": "ch5-s2" },
+    "usedAt": [{ "part": 9, "slug": "ch6", "anchor": "ch6-s1", "how": "환자 — softmax 의 exp 폭발" }],
+    "prereq": ["floating-point", "exp-log"],
+    "related": ["loss-spike", "log-sum-exp"],
+    "metaphors": [{ "term": "자의 끝", "part": 9 }]
+  },
+  {
+    "id": "log-sum-exp",
+    "label": "log-sum-exp",
+    "aliases": ["logsumexp", "LSE", "안전한 softmax", "log 세계", "안전한 확률 계산"],
+    "kind": "math",
+    "note": "log 세계로 이사 — 이론과 구현 사이의 안전한 softmax",
+    "definedAt": { "part": 9, "slug": "ch6", "anchor": "ch6-s2" },
+    "usedAt": [],
+    "prereq": ["softmax", "overflow-nan", "exp-log"],
+    "related": ["cross-entropy"],
+    "metaphors": []
+  },
+  {
+    "id": "half-precision",
+    "label": "반정밀도와 혼합 정밀도",
+    "aliases": ["fp16", "bf16", "half precision", "mixed precision", "혼합 정밀도", "반정밀도"],
+    "kind": "ai",
+    "note": "반쪽 자와 fp32 의 분업 — 모델 카드의 fp16·bf16",
+    "definedAt": { "part": 9, "slug": "ch7", "anchor": "ch7-s2" },
+    "usedAt": [{ "part": 9, "slug": "ch11", "anchor": "ch11-s1", "how": "영수증 완독 — 실행의 물류" }],
+    "prereq": ["floating-point", "loss-spike"],
+    "related": ["quantization"],
+    "metaphors": [{ "term": "반쪽 자", "part": 9 }]
+  },
+  {
+    "id": "quantization",
+    "label": "양자화",
+    "aliases": ["quantization", "int8", "int4", "양자화 스케일", "축척", "아웃라이어", "outlier", "눈금 갈아타기"],
+    "kind": "ai",
+    "note": "지도의 축척 바꾸기 — 가중치 분포가 축척과 아웃라이어를 정한다",
+    "definedAt": { "part": 9, "slug": "ch8", "anchor": "ch8-s1" },
+    "usedAt": [
+      { "part": 9, "slug": "ch9", "anchor": "ch9-s1", "how": "4비트까지 — 빌런의 실체는 분포의 꼬리" },
+      { "part": 9, "slug": "ch10", "anchor": "ch10-s1", "how": "품질 성적표 — 얼마나 잃나" },
+      { "part": 9, "slug": "ch11", "anchor": "ch11-s1", "how": "7B 는 왜 4GB 인가" }
+    ],
+    "prereq": ["floating-point", "probability-distribution"],
+    "related": ["gguf", "perplexity"],
+    "metaphors": [{ "term": "지도의 축척", "part": 9 }]
+  },
+  {
+    "id": "gguf",
+    "label": "블록 양자화와 GGUF",
+    "aliases": ["GGUF", "Q4_K_M", "블록 양자화", "block quantization", "gguf", "ollama 태그", "4비트", "q4"],
+    "kind": "tool",
+    "note": "Ollama 태그 q4_K_M 이 계산으로 읽히는 순간",
+    "definedAt": { "part": 9, "slug": "ch9", "anchor": "ch9-s2" },
+    "usedAt": [{ "part": 9, "slug": "ch11", "anchor": "ch11-s1", "how": "내 PC 에 맞는 모델 고르기" }],
+    "prereq": ["quantization"],
+    "related": ["parameter-count"],
+    "metaphors": []
+  },
+
+  {
+    "id": "ground-truth",
+    "label": "참값",
+    "aliases": ["ground truth", "정답 레이블", "참값", "라벨", "label"],
+    "kind": "ai",
+    "note": "우리가 볼 수 없는 진짜 값 — 시험 점수는 그 추정치",
+    "definedAt": { "part": 10, "slug": "sample", "anchor": "sample-s2" },
+    "usedAt": [
+      { "part": 11, "slug": "sample", "anchor": "sample-s2", "how": "성공률의 참값 vs 몇 번 시켜 본 결과" },
+      { "part": 11, "slug": "ch3", "anchor": "ch3-s2", "how": "혼동 행렬 — 참값 대 판정" }
+    ],
+    "prereq": [],
+    "related": ["confidence-interval"],
+    "metaphors": [
+      { "term": "신의 시점", "part": 10 },
+      { "term": "신의 시점", "part": 11 }
+    ]
+  },
+  {
+    "id": "power-law",
+    "label": "멱법칙과 로그 눈금",
+    "aliases": ["power law", "로그-로그", "log-log", "로그 눈금", "곱의 세계", "직선", "멱함수"],
+    "kind": "math",
+    "note": "곱의 세계를 직선으로 펴는 종이",
+    "definedAt": { "part": 10, "slug": "ch2", "anchor": "ch2-s2" },
+    "usedAt": [
+      { "part": 10, "slug": "ch3", "anchor": "ch3-s2", "how": "법칙의 꼴 — 한 줄로 쓰기" },
+      { "part": 11, "slug": "ch7", "anchor": "ch7-ai", "how": "훈련 컴퓨트 성장의 로그-로그 직선이 비싸질수록 추론 다이얼이 매력적" }
+    ],
+    "prereq": ["exp-log"],
+    "related": ["scaling-law"],
+    "metaphors": [
+      { "term": "로그 안경", "part": 10 },
+      { "term": "곱의 세계", "part": 10 }
+    ]
+  },
+  {
+    "id": "scaling-law",
+    "label": "스케일링 법칙",
+    "aliases": ["scaling law", "손실의 직선", "수확 체감", "N D C", "예측 게임", "스케일링"],
+    "kind": "ai",
+    "note": "키우면 얼마나 좋아지나 — 먹인 만큼 내려가는 손실의 직선",
+    "definedAt": { "part": 10, "slug": "ch3", "anchor": "ch3-s2" },
+    "usedAt": [
+      { "part": 10, "slug": "ch4", "anchor": "ch4-s1", "how": "몸집이 깡패이던 시절 → 황금비" },
+      { "part": 10, "slug": "ch10", "anchor": "ch10-s1", "how": "AI 뉴스 팩트체크 — 검산대" }
+    ],
+    "prereq": ["power-law", "loss-function", "parameter-count"],
+    "related": ["chinchilla", "emergence"],
+    "metaphors": [{ "term": "손실의 직선", "part": 10 }]
+  },
+  {
+    "id": "chinchilla",
+    "label": "Chinchilla",
+    "aliases": ["친칠라", "컴퓨트 최적", "compute optimal", "C≈6ND", "토큰 대 파라미터", "황금비"],
+    "kind": "ai",
+    "note": "몸집과 밥의 황금비 — 예산 C≈6ND 를 어디에 쓸 것인가",
+    "definedAt": { "part": 10, "slug": "ch4", "anchor": "ch4-s2" },
+    "usedAt": [
+      { "part": 10, "slug": "ch10", "anchor": "ch10-s1", "how": "발표 스펙에서 비율부터 계산하는 눈" },
+      { "part": 11, "slug": "ch7", "anchor": "ch7-ai", "how": "같은 예산 배분 문제 — 훈련에선 몸집 vs 밥, 추론에선 직렬 vs 병렬" }
+    ],
+    "prereq": ["scaling-law", "parameter-count"],
+    "related": [],
+    "metaphors": [{ "term": "몸집과 밥의 황금비", "part": 10 }]
+  },
+  {
+    "id": "emergence",
+    "label": "창발",
+    "aliases": ["emergent abilities", "창발 능력", "창발 논쟁", "지표 착시", "emergence"],
+    "kind": "ai",
+    "note": "갑자기 산수를 하기 시작했다? — 착시 계단인지 가리는 법",
+    "definedAt": { "part": 10, "slug": "ch5", "anchor": "ch5-s2" },
+    "usedAt": [{ "part": 11, "slug": "sample", "anchor": "sample-ai", "how": "같은 수학을 반대 방향으로 — p⁸ 의 착시 계단 vs p¹⁰ 의 사슬" }],
+    "prereq": ["scaling-law", "llm-evaluation"],
+    "related": [],
+    "metaphors": [{ "term": "착시 계단", "part": 10 }]
+  },
+  {
+    "id": "model-comparison-test",
+    "label": "두 모델 비교",
+    "aliases": ["쌍대 비교", "paired comparison", "부호 검정", "sign test", "맥니마", "McNemar", "다중 비교", "multiple comparisons", "회색 문항"],
+    "kind": "math",
+    "note": "회색 문항은 증거가 아니다 — 동전에서 얼마나 멀어졌나",
+    "definedAt": { "part": 10, "slug": "ch7", "anchor": "ch7-s2" },
+    "usedAt": [{ "part": 11, "slug": "ch11", "anchor": "ch11-s1", "how": "두 에이전트를 가르는 판정" }],
+    "prereq": ["hypothesis-test"],
+    "related": ["llm-evaluation"],
+    "metaphors": []
+  },
+  {
+    "id": "contamination",
+    "label": "오염",
+    "aliases": ["contamination", "데이터 오염", "기출 유출", "벤치마크 수명", "데이터 누출", "leakage"],
+    "kind": "ai",
+    "note": "시험 문제가 교과서에 실려 있었다면 — 점수 급등의 의심 목록",
+    "definedAt": { "part": 10, "slug": "ch8", "anchor": "ch8-s2" },
+    "usedAt": [{ "part": 10, "slug": "ch10", "anchor": "ch10-s1", "how": "검산대 — 점수 급등 의심" }],
+    "prereq": ["llm-evaluation", "overfitting"],
+    "related": [],
+    "metaphors": [{ "term": "기출 유출", "part": 10 }]
+  },
+
+  {
+    "id": "agent",
+    "label": "에이전트",
+    "aliases": ["agent", "AI 에이전트", "다단계 과업", "루프", "자율", "에이전틱", "agentic"],
+    "kind": "ai",
+    "note": "챗봇에서 에이전트로 — 글을 쓰는 AI 에서 일을 맡는 AI 로",
+    "definedAt": { "part": 11, "slug": "ch1", "anchor": "ch1-s2" },
+    "usedAt": [{ "part": 11, "slug": "ch12", "anchor": "ch12-s1", "how": "이 에이전트, 도입해도 되나 — 검산대" }],
+    "prereq": ["next-token-prediction", "context-window"],
+    "related": ["task-chain", "tool-calling"],
+    "metaphors": [{ "term": "AI 일꾼", "part": 11 }]
+  },
+  {
+    "id": "task-chain",
+    "label": "과업 사슬",
+    "aliases": ["task chain", "사슬 성공률", "확률의 곱", "병목", "다단계 성공률", "사슬"],
+    "kind": "math",
+    "note": "다섯 단계, 다섯 개의 확률 — 성공률은 걸음의 곱",
+    "definedAt": { "part": 11, "slug": "ch2", "anchor": "ch2-s2" },
+    "usedAt": [
+      { "part": 11, "slug": "ch9", "anchor": "ch9-s2", "how": "분업의 수학" },
+      { "part": 11, "slug": "ch12", "anchor": "ch12-s1", "how": "도입 판단의 검산대" }
+    ],
+    "prereq": ["independence", "agent"],
+    "related": ["best-of-n", "search-tree"],
+    "metaphors": [{ "term": "징검다리", "part": 11 }]
+  },
+  {
+    "id": "tool-calling",
+    "label": "도구 호출",
+    "aliases": ["tool calling", "function calling", "함수 호출", "도구 스키마", "교정", "calibration", "혼동 행렬", "confusion matrix", "FN", "FP"],
+    "kind": "ai",
+    "note": "도구함 앞의 일꾼 — 점수를 확률처럼 읽어도 될까(교정)",
+    "definedAt": { "part": 11, "slug": "ch3", "anchor": "ch3-s2" },
+    "usedAt": [{ "part": 11, "slug": "ch6", "anchor": "ch6-s2", "how": "검수자도 하나의 분류기 — 같은 혼동 행렬" }],
+    "prereq": ["agent", "conditional-probability"],
+    "related": ["verifier"],
+    "metaphors": [
+      { "term": "도구를 드는 손", "part": 11 },
+      { "term": "놓침/헛발", "part": 11, "note": "거짓 음성/양성(FN/FP)" }
+    ]
+  },
+  {
+    "id": "best-of-n",
+    "label": "재시도와 Best-of-N",
+    "aliases": ["best of n", "재시도", "retry", "다시 뽑기", "적어도 한 번", "Best-of-N"],
+    "kind": "math",
+    "note": "실패한 일꾼에게 기회를 한 번 더 — 기하분포의 실전 무대",
+    "definedAt": { "part": 11, "slug": "ch4", "anchor": "ch4-s2" },
+    "usedAt": [
+      { "part": 11, "slug": "ch11", "anchor": "ch11-ai", "how": "pass@k 라는 이름의 어원" },
+      { "part": 11, "slug": "ch7", "anchor": "ch7-s3", "how": "예산 10k, 셋이 투표하면" }
+    ],
+    "prereq": ["probability-distribution", "independence", "sampling"],
+    "related": ["self-consistency", "pass-at-k"],
+    "metaphors": [{ "term": "다시 뽑기", "part": 11 }]
+  },
+  {
+    "id": "self-consistency",
+    "label": "self-consistency",
+    "aliases": ["자기 일관성", "다수결", "majority voting", "투표", "다수결 회의"],
+    "kind": "ai",
+    "note": "답이 3:2 로 갈렸다 — 다수결의 수학은 이항분포",
+    "definedAt": { "part": 11, "slug": "ch5", "anchor": "ch5-s2" },
+    "usedAt": [
+      { "part": 11, "slug": "ch7", "anchor": "ch7-s3", "how": "예산 안에서 투표 횟수 정하기" },
+      { "part": 11, "slug": "ch9", "anchor": "ch9-s2", "how": "세 구도의 수학 — 합의" }
+    ],
+    "prereq": ["probability-distribution", "best-of-n"],
+    "related": ["multi-agent"],
+    "metaphors": [{ "term": "다수결 회의", "part": 11 }]
+  },
+  {
+    "id": "verifier",
+    "label": "verifier",
+    "aliases": ["검수자", "검증자", "민감도", "sensitivity", "특이도", "specificity", "정밀도", "precision", "재현율", "recall", "통과 도장"],
+    "kind": "ai",
+    "note": "통과 도장의 무게 — 검수 통과가 정답 확률을 얼마나 올리나",
+    "definedAt": { "part": 11, "slug": "ch6", "anchor": "ch6-s2" },
+    "usedAt": [
+      { "part": 11, "slug": "ch9", "anchor": "ch9-s2", "how": "역할 분리 — 검토자" },
+      { "part": 11, "slug": "ch11", "anchor": "ch11-s1", "how": "성적표의 검수" }
+    ],
+    "prereq": ["bayes-theorem", "tool-calling"],
+    "related": ["multi-agent"],
+    "metaphors": [
+      { "term": "검수자", "part": 11 },
+      { "term": "통과 도장", "part": 11 }
+    ]
+  },
+  {
+    "id": "test-time-compute",
+    "label": "추론 시점 컴퓨트",
+    "aliases": ["test-time compute", "inference-time compute", "추론 스케일링", "생각의 길이", "추론 예산", "토큰 예산", "reasoning", "생각 시간"],
+    "kind": "ai",
+    "note": "생각도 계산이다 — 예산을 길이·재시도·투표 어디에 쓸 것인가",
+    "definedAt": { "part": 11, "slug": "ch7", "anchor": "ch7-s2" },
+    "usedAt": [{ "part": 11, "slug": "ch12", "anchor": "ch12-s1", "how": "비용 검산대" }],
+    "prereq": ["sampling", "best-of-n", "self-consistency"],
+    "related": ["search-tree"],
+    "metaphors": [{ "term": "생각의 길이", "part": 11 }]
+  },
+  {
+    "id": "search-tree",
+    "label": "탐색과 계획",
+    "aliases": ["search tree", "탐색 트리", "빔 서치", "beam search", "지수 폭발", "탐욕", "계획", "planning", "MCTS", "전수 탐색"],
+    "kind": "ai",
+    "note": "좋아 보이는 쪽으로만 가면 — 왜 전수 탐색은 대개 불가능한가",
+    "definedAt": { "part": 11, "slug": "ch8", "anchor": "ch8-s2" },
+    "usedAt": [],
+    "prereq": ["sampling", "task-chain"],
+    "related": ["test-time-compute"],
+    "metaphors": [{ "term": "갈림길 지도", "part": 11 }]
+  },
+  {
+    "id": "multi-agent",
+    "label": "멀티에이전트 협업",
+    "aliases": ["multi-agent", "멀티 에이전트", "분업", "합의", "역할 분리", "서브에이전트", "계획자 실행자 검토자", "오케스트레이션"],
+    "kind": "ai",
+    "note": "사람을 늘리면 나아질까 — 분업·합의·역할 분리의 수학",
+    "definedAt": { "part": 11, "slug": "ch9", "anchor": "ch9-s2" },
+    "usedAt": [],
+    "prereq": ["task-chain", "self-consistency", "verifier"],
+    "related": ["agent"],
+    "metaphors": [{ "term": "여럿이 하기", "part": 11 }]
+  },
+  {
+    "id": "context-budget",
+    "label": "컨텍스트 예산",
+    "aliases": ["context budget", "기억의 경제학", "장기 기억", "요약", "메모리", "컨텍스트 관리", "단기 기억"],
+    "kind": "ai",
+    "note": "책상이 넘친다 — 배낭·압축·검색으로 기억을 관리하기",
+    "definedAt": { "part": 11, "slug": "ch10", "anchor": "ch10-s2" },
+    "usedAt": [],
+    "prereq": ["context-window", "rag", "compression"],
+    "related": ["agent"],
+    "metaphors": [
+      { "term": "배낭", "part": 11 },
+      { "term": "책상이 넘친다", "part": 11 }
+    ]
+  },
+  {
+    "id": "pass-at-k",
+    "label": "pass@k",
+    "aliases": ["패스앳k", "pass at k", "비편향 추정", "궤적 평가", "에이전트 성적표", "성공률"],
+    "kind": "metric",
+    "note": "「성공률 97%」의 정체 — k 번 시도해 한 번이라도 맞힐 확률을 정확히 세는 법",
+    "definedAt": { "part": 11, "slug": "ch11", "anchor": "ch11-s2" },
+    "usedAt": [{ "part": 11, "slug": "ch12", "anchor": "ch12-s1", "how": "도입 판단의 검산대" }],
+    "prereq": ["best-of-n", "confidence-interval", "llm-as-judge", "model-comparison-test"],
+    "related": ["llm-evaluation"],
+    "metaphors": [{ "term": "에이전트의 성적표", "part": 11 }]
+  }
+]

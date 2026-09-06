@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AppSidebar from '@/components/AppSidebar.vue'
 import TutorChat from '@/components/TutorChat.vue'
-import { SearchPalette } from '@series/ui'
+import { ConceptStrip, SearchPalette } from '@series/ui'
 import { ref } from 'vue'
 
 const sidebarOpen = ref(false)
@@ -39,6 +39,8 @@ function openSearch() {
       </header>
 
       <main class="mx-auto w-full max-w-5xl flex-1 px-5 py-8 lg:px-12 xl:px-16">
+        <!-- 이 장의 개념 연결(온톨로지) — 처음 배우는 개념 · 먼저 알아 둘 것 · 다시 만나는 곳. 챕터 라우트에서만 렌더 -->
+        <ConceptStrip />
         <RouterView v-slot="{ Component }">
           <component :is="Component" />
         </RouterView>

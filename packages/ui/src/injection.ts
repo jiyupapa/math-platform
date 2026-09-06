@@ -22,6 +22,10 @@ export const notebookResolverKey: InjectionKey<NotebookResolver> = Symbol('noteb
 // 미주입 시 컴포넌트가 BASE_URL 기준 기본값('<base>search-index.json')으로 폴백한다.
 export const searchIndexKey: InjectionKey<string> = Symbol('searchIndexUrl')
 
+// 개념 그래프(concept-graph.json) URL — build-concept-graph.mjs 가 각 앱 public/ 에 심는다. ConceptStrip 이 사용.
+// 미주입 시 BASE_URL 기준 기본값('<base>concept-graph.json')으로 폴백한다 — 12앱 main.ts 수정 없이 동작.
+export const conceptGraphKey: InjectionKey<string> = Symbol('conceptGraphUrl')
+
 // 이 앱의 부 번호 (Supabase annotations.part). NoteMarker 가 사용.
 // **주입한 부에서만 협업 주석이 켜진다** — 미주입이면 NoteMarker 는 아무것도 그리지 않는다.
 // 전 11부(+포털 미주입)가 이 값을 주입한다. 부 번호가 곧 annotations.part 라 틀리면 남의 부 메모가 섞인다.

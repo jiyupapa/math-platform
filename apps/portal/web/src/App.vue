@@ -33,6 +33,9 @@ function openSearch() {
           <RouterLink to="/map" class="inline-flex items-center py-1.5 text-sm font-medium whitespace-nowrap text-slate-600 hover:text-indigo-600 hover:underline">
             학습 구조도
           </RouterLink>
+          <RouterLink to="/concepts" class="inline-flex items-center py-1.5 text-sm font-medium whitespace-nowrap text-slate-600 hover:text-indigo-600 hover:underline">
+            개념 지도
+          </RouterLink>
           <RouterLink to="/diagnose" class="inline-flex items-center py-1.5 text-sm font-medium whitespace-nowrap text-indigo-600 hover:underline">
             경로 진단
           </RouterLink>

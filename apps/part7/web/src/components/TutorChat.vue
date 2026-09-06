@@ -1,11 +1,12 @@
 <script setup lang="ts">
 // AI 튜터 챗봇 — 로컬 Ollama LLM 사용 (API 키·비용·인터넷 불필요, 오프라인 시연 가능).
 // 현재 보고 있는 챕터의 맥락을 시스템 프롬프트에 주입해, 본문과 일치하는 답을 하도록 유도한다.
-import { ref, computed, nextTick, onUnmounted } from 'vue'
+import { inject, ref, computed, nextTick, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { chapters } from '@/data/chapters'
 import { contextFor, curriculumIndex } from '@/data/tutorContext'
-import { DEFAULT_MODEL, listModels, streamChat, type ChatMessage } from '@series/tutor'
+import { DEFAULT_MODEL, conceptGrounding, listModels, streamChat, type ChatMessage } from '@series/tutor'
+import { partNumberKey } from '@series/ui'
 
 interface UiMessage {
   role: 'user' | 'assistant'
@@ -50,6 +51,12 @@ async function toggle() {
 // 주제 이탈 시 모델이 출력하는 신호. UI 가 감지해 안내 문구로 교체한다.
 const OFFTOPIC = '[OFFTOPIC]'
 
+// 시리즈 개념 그래프(빌드 산출물 concept-graph.json — npm run ontology:graph). 질문에 나온 개념의 카드를
+// 시스템 프롬프트에 덧붙여, 다른 부에서 배우는 개념도 'N부 M장'으로 안내하게 한다. 없으면 접지 없이 동작.
+const CONCEPT_GRAPH_URL = import.meta.env.BASE_URL + 'concept-graph.json'
+// 이 부 번호(main.ts 가 주입) — 카드에 '이 과정 안 / 현재 과정 밖' 을 표시해 다른 부 개념을 지어내지 않게 한다
+const CURRENT_PART = inject(partNumberKey, 0)
+
 // 로컬 모델이 규칙을 어기고 답변 '끝'이나 중간에 [OFFTOPIC] 을 섞어 내보낼 때가 있다.
 // 신호는 화면에 그대로 노출되면 안 되므로 위치와 상관없이 항상 걷어낸다.
 // - 완성된 [OFFTOPIC] 은 제거. 끝에 걸친 부분 마커(예: '[OFFT')는 스트리밍 중 깜빡임을 막으려 잠시 감춘다.
@@ -73,8 +80,8 @@ function systemPrompt(): string {
     `(3) 수식보다 비유·직관 먼저, LaTeX 대신 쉬운 일반 텍스트로. (4) 5문장 이내로 짧게. ` +
     `(5) 아래 챕터 맥락과 네 지식이 다르면 챕터 맥락을 우선. (6) 모르면 모른다고 말하기. ` +
     `(7) 학습자를 절대 무시하지 않고 격려하기.\n` +
-    `(8) 어떤 개념을 어디서 배우는지 물으면 아래 전체 목차에서 찾아 반드시 'N장' 형태로 ` +
-    `안내하기. 목차에 없는 주제는 이 과정에 없다고 솔직히 말하기.\n` +
+    `(8) 어떤 개념을 어디서 배우는지 물으면 아래 전체 목차와 [개념 카드]에서 찾아 반드시 'N부 M장' 형태로 ` +
+    `안내하기(이 과정 안이면 'N장'). 목차에도 개념 카드에도 없는 주제는 이 시리즈에 없다고 솔직히 말하기.\n` +
     `가장 중요한 규칙: 너는 오직 수학·AI(임베딩·RAG·벡터 검색·코사인 유사도·관련 수학·이 앱의 학습 내용·수학 학습 고민)와 ` +
     `간단한 인사에만 답한다. 연예·게임·요리·주식·코딩 대행·글쓰기 대행 등 학습과 무관한 ` +
     `요청이면 다른 말 없이 정확히 ${OFFTOPIC} 이라고만 출력하라.\n` +
@@ -102,7 +109,9 @@ async function send() {
     .slice(0, -1)
     .slice(-7)
     .map((m) => ({ role: m.role, content: m.content }))
-  const payload: ChatMessage[] = [{ role: 'system', content: systemPrompt() }, ...history]
+  // 질문에 나온 개념의 카드(다른 부 위치 포함) — 그래프를 못 읽으면 '' (접지 없이 진행)
+  const grounding = await conceptGrounding(CONCEPT_GRAPH_URL, q, { currentPart: CURRENT_PART })
+  const payload: ChatMessage[] = [{ role: 'system', content: systemPrompt() + grounding }, ...history]
 
   aborter = new AbortController()
   const last = messages.value[messages.value.length - 1]
