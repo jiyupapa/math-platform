@@ -18,7 +18,7 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">8장 · 약 45분 · ⭐ 핵심</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">8장 · 약 55분 · ⭐ 핵심</p>
     <h1 class="mb-4 text-3xl font-bold">RAG 조립 — 검색이 프롬프트가 되기까지</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       부품이 다 모였습니다 — 자(2장), 공간(3~5장), 엔진(6장), 품질계(7장).
@@ -31,6 +31,7 @@ function onSetComplete() {
       세 가지를 가져갑니다 — ① RAG의 <b>두 파이프라인</b>(미리 준비하는 인덱싱 / 실시간 질의)을
       배운 수학과 함께 완전판 지도로, ② 틀린 답의 <b>범인 4종</b>(검색·조각·생성·부재)과
       진단 순서("로그부터"), ③ <b>조련 vs RAG</b> 실무 선택 기준 — 6부와 7부가 여기서 한 몸이 됩니다.
+      덤으로 ④ 벡터로도 안 잡히는 질문의 보강 — <b>관계 지도</b>(지식 그래프)와 GraphRAG.
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 완전판 지도 — 두 개의 파이프라인</h2>
@@ -178,7 +179,83 @@ function onSetComplete() {
       이제 남은 퍼즐은 하나 — 이 모든 것의 토대인 <b>좌표는 누가 그렸나</b>(9장, 대조 학습).
     </ConceptCard>
 
-    <h2 class="mt-8 mb-2 text-xl font-bold">4. 직접 풀어보기</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">4. 벡터로 부족할 때 — 관계 지도(지식 그래프)와 GraphRAG</h2>
+    <ReviewFlag id="ch8-s4" chapter="ch8" label="4. 벡터로 부족할 때 — 관계 지도(지식 그래프)와 GraphRAG" />
+    <p class="leading-relaxed text-slate-700">
+      진료실의 범인 4종을 다 잡아도 남는 질문이 있습니다. "경조사 지원금은 <b>누가 결재</b>하고, 그 사람의
+      <b>상급 부서</b>는 어디죠?" — 코사인 유사도로는 "경조사 지원"에 가까운 조각 하나가 오지만, 답은 그 조각에
+      없어요. 결재자는 <b>직제 문서</b>에, 상급 부서는 <b>조직도</b>에 있으니까요. 의미가 가까운 조각을 찾는
+      검색은 "가까움"만 알 뿐 <b>관계</b>를 모릅니다 — 2장의 자(코사인)는 두 점 사이를 재지, 점과 점을 잇는
+      <b>화살표</b>(지원금 → 결재자 → 소속 부서)를 따라 걷지는 못해요.
+    </p>
+    <p class="mt-2 leading-relaxed text-slate-700">
+      그래서 실무는 좌표 위에 <b>관계 지도</b>를 한 장 더 깝니다. 점(개념·사람·문서)과 화살표(결재한다 ·
+      소속이다 · 먼저 알아야 한다)를 명시적으로 적어 둔 표 — 실무 용어로 <b>지식 그래프</b>(knowledge graph)이고,
+      그 관계를 RAG의 검색 단계에 함께 쓰는 방식이 <b>GraphRAG</b>예요. 질문이 오면 ① 벡터 검색으로
+      <b>출발점</b>을 잡고 ② 관계 화살표를 한두 걸음 따라 걸어 <b>이웃 조각까지</b> 프롬프트에 싣습니다.
+    </p>
+    <div class="my-4 overflow-x-auto">
+      <table class="w-full min-w-[30rem] text-sm">
+        <thead>
+          <tr class="border-b border-slate-200 text-left text-slate-500">
+            <th class="py-2 pr-3">질문</th>
+            <th class="py-2 pr-3">벡터 검색만으로</th>
+            <th class="py-2">관계 지도가 하는 일</th>
+          </tr>
+        </thead>
+        <tbody class="text-slate-700">
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">경조사 지원금은 얼마?</td><td class="py-2 pr-3">✓ 조각 하나로 충분</td><td class="py-2">불필요</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">지원금 결재자의 <b>상급 부서</b>는?</td><td class="py-2 pr-3">첫 조각만 — 답은 두 문서 건너</td><td class="py-2"><b>두 걸음 걷기</b> (결재자 → 소속) — 다단계 질문</td></tr>
+          <tr><td class="py-2 pr-3">출장비 규정을 바꾸면 <b>영향받는 문서</b>는?</td><td class="py-2 pr-3">비슷한 문서만</td><td class="py-2">'참조한다' 화살표를 <b>거꾸로</b> 따라가기</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ConceptCard tone="tip" title="핵심 관찰 — 이 사이트의 튜터가 바로 이 방식입니다">
+      각 부 오른쪽 아래의 AI 튜터에게 "KL 발산은 어디서 배워요?"라고 물으면 5부 5장을 답합니다. 로컬 4B 모델이
+      그걸 아는 건 벡터 DB 덕이 아니라, 시리즈의 개념 113개를 "먼저 알아야 한다 · 다시 쓰인다 · 이 과정에서는
+      이렇게 부른다"는 화살표로 이어 둔 <b>관계 지도</b>(concept-graph.json)에서 질문에 나온 개념의 카드를 꺼내
+      프롬프트에 붙이기 때문이에요. 각 장 위의 개념 띠와 포털의 개념 지도도 같은 파일을 읽습니다 —
+      GraphRAG의 축소판이 이 학습 사이트 안에서 돌고 있는 셈이죠.
+    </ConceptCard>
+
+    <ConceptCard tone="note" title="새 용어: 지식 그래프 / GraphRAG / 다단계 질문">
+      <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
+        <li>
+          <b>지식 그래프</b> (knowledge graph) — 읽는 법: 놀리지 그래프.
+          뜻: 점(개체·개념)과 화살표(관계)로 적은 지식. 이 과정의 비유어는 <b>관계 지도</b>.
+          관계의 <b>종류</b>까지 미리 정해 둔 것을 <b>온톨로지</b>(ontology, 읽는 법: 온톨로지)라고 부릅니다.
+        </li>
+        <li>
+          <b>GraphRAG</b> — 읽는 법: 그래프 래그.
+          뜻: 벡터 검색으로 출발점을 잡고, 그래프의 관계를 따라 이웃을 함께 실어 답하는 RAG.
+          관계·집계 질문에 강하고, 그래프를 만들고 유지하는 비용이 듭니다.
+        </li>
+        <li>
+          <b>다단계 질문</b> (multi-hop question) — 읽는 법: 멀티홉.
+          뜻: 답에 이르려면 조각 두 개 이상을 <b>관계로 이어야</b> 하는 질문. 벡터 검색의 대표적 약점이에요.
+        </li>
+      </ul>
+    </ConceptCard>
+
+    <p class="mt-6 mb-1 text-sm font-semibold text-slate-500">🔎 잠깐 확인!</p>
+    <Quiz
+      question="다음 중 벡터 검색만으로는 부족하고 관계 지도(지식 그래프)가 필요한 질문은?"
+      :choices="['지원금 결재자의 상급 부서는? — 조각 두 개를 관계로 이어야 답이 나온다', '경조사 지원금은 얼마인가?', '출장비 규정 문서의 제목은?', '연차는 며칠인가?']"
+      :answer="0"
+      :hints="['답이 한 조각 안에 있나요, 두 문서 건너에 있나요?']"
+      explanation="결재자(직제)와 소속(조직도)은 서로 다른 문서에 있어 화살표를 두 걸음 따라가야 합니다 — 다단계 질문. 나머지는 조각 하나로 끝나요."
+    />
+
+    <DetailsCard title="➕ 더 깊이: 그래프는 누가 그리나 — 비용과 함정">
+      실무 지식 그래프의 관계는 두 경로로 채웁니다. ① 이미 표가 있는 것 — 직제·조직도·문서의 참조 목록처럼
+      <b>사람이 정한 스키마</b>. ② LLM이 문서에서 뽑은 (주어, 관계, 목적어) <b>3중항</b>. ②는 편하지만 뽑힌
+      관계가 틀릴 수 있어 검수(11부 6장의 검수자)가 필요하고, 관계의 종류를 미리 정한 온톨로지가 없으면 같은
+      관계가 "결재"·"승인"·"결정"으로 흩어져 걷기가 끊깁니다. 그래서 작은 조직의 정석은 <b>이미 표가 있는 관계부터</b> —
+      이 사이트가 개념 113개를 손으로 큐레이션하고 검사기로 지키는 것도 같은 이유예요.
+    </DetailsCard>
+
+    <h2 class="mt-8 mb-2 text-xl font-bold">5. 직접 풀어보기</h2>
     <p class="mb-2 leading-relaxed text-slate-700">
       <b>10문제를 모두 맞히면</b> 이 챕터가 완료됩니다.
     </p>

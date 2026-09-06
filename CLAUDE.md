@@ -121,9 +121,11 @@ QuizSet↔StepQuiz 그룹 계약(`quizGroupKey`/`QuizGroup` — `quizGroup.ts`)�
 시리즈의 개념(수학·AI 용어)과 관계(선수 `prereq` · 회수 `usedAt` · 별칭 `aliases` · 비유어 `metaphors`)의 **단일 정본**.
 검색 인덱스(`search-index.json`)와 개념 그래프(`concept-graph.json`)가 여기서 생성되고, 각 부 `TutorChat` 은 그래프에서
 질문에 나온 개념의 카드(정의처·회수처·선수·비유어)를 시스템 프롬프트에 덧붙여 **다른 부 개념도 'N부 M장'으로 안내**한다.
-화면 소비처: 각 장 상단 띠 `ConceptStrip`(packages/ui) · 포털 `/concepts` 개념 지도(`ConceptsView`) · 검색 팔레트 이웃 줄 ·
-포털 홈의 복습 경로(북마크 → 선수 개념)와 진단 개념 칩(`diagnostic.ts` 의 `concepts` 태그) · 도입 현황의 질문 집계 —
-**전부 산출물 JSON 을 fetch** 하므로 정본을 고쳤으면 `npm run ontology:graph` 를 잊지 말 것.
+화면 소비처: 각 장 상단 띠 `ConceptStrip`(packages/ui) · 포털 `/concepts` 개념 지도(`ConceptsView`) · `/glossary` 비유어 사전
+(`GlossaryView` — 정본 `metaphors` 의 통합 치환표) · 검색 팔레트 이웃 줄 · 포털 홈의 복습 경로(북마크 → 선수 개념)와 진단 개념 칩
+(`diagnostic.ts` 의 `concepts` 태그) · 도입 현황의 질문 집계 · 각 부 `notebooks/tutor.py`(웹과 같은 개념 카드, 파이썬 이식) —
+**전부 산출물 JSON 을 fetch/read** 하므로 정본을 고쳤으면 `npm run ontology:graph` 를 잊지 말 것.
+비유어를 새로 만들면 정본 `metaphors` 에도 넣는다 — 그래야 사전·튜터·검색이 함께 안다(치환표만 고치면 드리프트).
 주석·북마크 앵커를 개념으로 묶는 규칙은 `conceptsAtAnchor`(packages/ui) 한 곳 — 소비처마다 따로 만들지 말 것.
 설계·규칙·단계는 `docs/todo_온톨로지_260906.md`.
 

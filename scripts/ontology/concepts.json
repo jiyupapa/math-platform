@@ -1191,6 +1191,18 @@
     "metaphors": [{ "term": "칼질", "part": 7 }]
   },
   {
+    "id": "knowledge-graph",
+    "label": "지식 그래프와 GraphRAG",
+    "aliases": ["knowledge graph", "GraphRAG", "그래프 RAG", "지식 그래프", "온톨로지", "ontology", "다단계 질문", "multi-hop", "3중항"],
+    "kind": "ai",
+    "note": "벡터로 부족할 때 — 점과 화살표로 적은 관계를 따라 걷는 검색",
+    "definedAt": { "part": 7, "slug": "ch8", "anchor": "ch8-s4" },
+    "usedAt": [{ "part": 11, "slug": "ch3", "anchor": "ch3-concept-tool-schema", "how": "도구 스키마는 작은 온톨로지" }],
+    "prereq": ["rag", "vector-db"],
+    "related": ["context-budget", "tool-calling"],
+    "metaphors": [{ "term": "관계 지도", "part": 7, "note": "지식 그래프(knowledge graph)" }]
+  },
+  {
     "id": "contrastive-learning",
     "label": "대조 학습",
     "aliases": ["contrastive learning", "InfoNCE", "짝 학습", "임베딩 학습", "negative", "짝은 가깝게 남은 멀게"],
@@ -1584,7 +1596,7 @@
     "definedAt": { "part": 11, "slug": "ch3", "anchor": "ch3-s2" },
     "usedAt": [{ "part": 11, "slug": "ch6", "anchor": "ch6-s2", "how": "검수자도 하나의 분류기 — 같은 혼동 행렬" }],
     "prereq": ["agent", "conditional-probability"],
-    "related": ["verifier"],
+    "related": ["verifier", "knowledge-graph"],
     "metaphors": [
       { "term": "도구를 드는 손", "part": 11 },
       { "term": "놓침/헛발", "part": 11, "note": "거짓 음성/양성(FN/FP)" }

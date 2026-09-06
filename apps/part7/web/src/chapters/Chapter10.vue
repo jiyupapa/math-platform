@@ -93,6 +93,7 @@ function onSetComplete() {
           <tr class="border-b border-slate-100"><td class="py-2 pr-3">(무작위) 바닥</td><td class="py-2"><b>무작위 기준선</b> (random baseline) — 이겨야 할 최저선</td></tr>
           <tr class="border-b border-slate-100"><td class="py-2 pr-3">답을 문서에 묶어 두기</td><td class="py-2"><b>그라운딩</b> (grounding) — 억제 대상은 <b>환각</b> (hallucination)</td></tr>
           <tr class="border-b border-slate-100"><td class="py-2 pr-3">짝은 가깝게, 남은 멀게</td><td class="py-2"><b>대조 학습</b> (contrastive learning) — 손실은 <b>InfoNCE</b></td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">관계 지도 / 화살표 따라 걷기</td><td class="py-2"><b>지식 그래프</b> (knowledge graph) / <b>GraphRAG</b> — 관계 종류까지 정한 것은 <b>온톨로지</b> (ontology)</td></tr>
           <tr><td class="py-2 pr-3">지식 주입의 두 길 (조련 vs 지도)</td><td class="py-2"><b>파인튜닝</b> (fine-tuning, 6부) vs <b>RAG</b> (검색 증강 생성, Retrieval-Augmented Generation)</td></tr>
         </tbody>
       </table>

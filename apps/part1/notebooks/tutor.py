@@ -63,13 +63,118 @@ def context_for(slug: str | None) -> str:
     return data['fallback']
 
 
+# ── 개념 카드(온톨로지) — 웹 TutorChat 과 같은 접지 ──────────────────────────
+# 빌드 산출물 web/public/concept-graph.json(npm run ontology:graph)에서 질문에 나온 개념을 찾아
+# 카드(배우는 곳·선수·회수처·비유어)를 시스템 프롬프트 끝에 덧붙인다. 다른 부에서 배우는 개념도
+# 'N부 M장'으로 안내하게 하는 장치. 파일이 없으면 접지 없이 그대로 동작한다(결정적 — 같은 질문 → 같은 카드).
+_GRAPH_JSON = Path(__file__).resolve().parents[1] / 'web' / 'public' / 'concept-graph.json'
+_PART_NO_MATCH = re.search(r'part(\d+)', Path(__file__).resolve().parents[1].name)
+_PART_NO = int(_PART_NO_MATCH.group(1)) if _PART_NO_MATCH else 0
+_graph_cache: dict | None = None
+_graph_loaded = False
+
+
+def _graph() -> dict | None:
+    global _graph_cache, _graph_loaded
+    if not _graph_loaded:
+        _graph_loaded = True
+        try:
+            data = json.loads(_GRAPH_JSON.read_text(encoding='utf-8'))
+            _graph_cache = data if isinstance(data.get('concepts'), list) else None
+        except (OSError, json.JSONDecodeError, AttributeError):
+            _graph_cache = None
+    return _graph_cache
+
+
+def _norm(s: str) -> str:
+    return re.sub(r'\s+', '', s.lower())
+
+
+def _matches(question: str, qn: str, alias: str) -> bool:
+    """ASCII 로만 된 짧은 별칭(lr·log·KL)은 단어 경계로만 — 'blog' 오탐 방지. 한국어는 공백 제거 부분일치."""
+    a = alias.strip()
+    if len(a) < 2:
+        return False
+    if all(32 <= ord(ch) <= 126 for ch in a):
+        return re.search(r'(^|[^a-z0-9])' + re.escape(a.lower()) + r'([^a-z0-9]|$)', question.lower()) is not None
+    return _norm(a) in qn
+
+
+def match_concepts(question: str, max_n: int = 3) -> list[dict]:
+    """질문에 등장한 개념 — 더 긴(더 특정한) 이름이 잡힌 순, 동률이면 id 순."""
+    g = _graph()
+    if not g or not question:
+        return []
+    qn = _norm(question)
+    hits = []
+    for c in g['concepts']:
+        names = [c['label'], *c.get('aliases', []), *(m['term'] for m in c.get('metaphors', []))]
+        best = max((len(_norm(n)) for n in names if _matches(question, qn, n)), default=0)
+        if best:
+            hits.append((-best, c['id'], c))
+    hits.sort(key=lambda t: (t[0], t[1]))
+    return [c for _, _, c in hits[:max_n]]
+
+
+def _where(loc: dict) -> str:
+    slug = loc['slug']
+    return f"{loc['part']}부 {'워밍업' if slug == 'sample' else slug[2:] + '장'}"
+
+
+def concept_cards(concepts: list[dict], question: str = '') -> str:
+    """카드 본문 — 튜터가 'N부 M장' 형태로 안내할 수 있게 위치를 명시한다 (웹 conceptCards 와 같은 문구)."""
+    g = _graph()
+    if not g or not concepts:
+        return ''
+    by_id = {c['id']: c for c in g['concepts']}
+    qn = _norm(question)
+    lines = []
+    for c in concepts:
+        aliases = ', '.join(c.get('aliases', [])[:3])
+        used = ', '.join(
+            _where(u) + (f"({u['how']})" if u.get('how') else '') for u in c.get('usedAt', [])[:4])
+        prereq = ', '.join(
+            f"{by_id[p]['label']}({_where(by_id[p]['definedAt'])})" for p in c.get('prereq', []) if p in by_id)
+        metaphors = ', '.join(f"{m['term']}({m['part']}부)" for m in c.get('metaphors', []))
+        via = [m for m in c.get('metaphors', []) if question and _matches(question, qn, m['term'])]
+        if via:
+            terms = "', '".join(m['term'] for m in via)
+            lead = (f"'{terms}'은(는) {via[0]['part']}부에서 쓰는 비유어이고 실무 용어는 "
+                    f"{c['label']}{'(' + aliases + ')' if aliases else ''}이다. ")
+        else:
+            lead = f"{c['label']}{' (' + aliases + ')' if aliases else ''} — "
+        scope = ''
+        if _PART_NO:
+            scope = ' (이 과정)' if c['definedAt']['part'] == _PART_NO else ' (다른 부)'
+        line = f"- {lead}{c['note']}. 배우는 곳(어디서 배우나 물으면 이것으로 답): {_where(c['definedAt'])}{scope}."
+        if prereq:
+            line += f' 먼저 알아야: {prereq}.'
+        if used:
+            line += f' 그 뒤 다시 쓰이는 곳(참고): {used}.'
+        if metaphors and not via:
+            line += f' 이 시리즈의 비유어: {metaphors}.'
+        lines.append(line)
+    here = (f" 현재 과정은 {_PART_NO}부 — '다른 부' 개념은 내용을 길게 지어내지 말고 배우는 곳을 안내한다."
+            if _PART_NO else '')
+    return ("[개념 카드 — 시리즈 정본에서 자동 첨부. 'N부'는 이 시리즈의 권(1~11부, 각각 별도 과정), "
+            f"'M장'은 그 안의 장.{here} 질문한 개념을 배우는 곳·선수 개념]\n" + '\n'.join(lines))
+
+
+def concept_grounding(question: str | None, max_n: int = 3) -> str:
+    """한 줄로: 그래프 → 질문 매칭 → 카드. 시스템 프롬프트 끝에 그대로 이어 붙인다('' 이면 접지 없음)."""
+    if not question:
+        return ''
+    cards = concept_cards(match_concepts(question, max_n), question)
+    return '\n\n' + cards if cards else ''
+
+
 def chapter_title(slug: str | None) -> str:
     """맥락 문자열 머리의 [ ... ] 에서 챕터 이름을 뽑는다. 예: '1장 좌표와 벡터'."""
     m = re.match(r'\[(.+?)\]', context_for(slug))
     return m.group(1) if m else '전체 과정'
 
 
-def system_prompt(slug: str | None) -> str:
+def system_prompt(slug: str | None, question: str | None = None) -> str:
     data = _shared()
     return (
         "너는 '수포자를 위한 선형대수학' 학습 프로그램의 AI 튜터다. "
@@ -78,13 +183,14 @@ def system_prompt(slug: str | None) -> str:
         '(3) 수식보다 비유·직관 먼저, LaTeX 대신 쉬운 일반 텍스트로. (4) 5문장 이내로 짧게. '
         '(5) 아래 챕터 맥락과 네 지식이 다르면 챕터 맥락을 우선. (6) 모르면 모른다고 말하기. '
         '(7) 학습자를 절대 무시하지 않고 격려하기.\n'
-        "(8) 어떤 개념을 어디서 배우는지 물으면 아래 전체 목차에서 찾아 반드시 'N장' 형태로 "
-        '안내하기. 목차에 없는 주제는 이 과정에 없다고 솔직히 말하기.\n'
+        "(8) 어떤 개념을 어디서 배우는지 물으면 아래 전체 목차와 [개념 카드]에서 찾아 반드시 'N부 M장' 형태로 "
+        "안내하기(이 과정 안이면 'N장'). 목차에도 개념 카드에도 없는 주제는 이 시리즈에 없다고 솔직히 말하기.\n"
         '가장 중요한 규칙: 너는 오직 수학(선형대수·기초 수학·이 프로그램의 학습 내용·수학 학습 고민)과 '
         '간단한 인사에만 답한다. 연예·게임·요리·주식·코딩 대행·글쓰기 대행 등 학습과 무관한 '
         f'요청이면 다른 말 없이 정확히 {OFFTOPIC} 이라고만 출력하라.\n'
         f"{data['curriculumIndex']}\n"
         f'현재 학습자가 보고 있는 챕터 맥락:\n{context_for(slug)}'
+        + concept_grounding(question)
     )
 
 
@@ -173,7 +279,7 @@ def _print_stream(question: str, chapter: str | None, model: str | None) -> None
         return
     use = model or (DEFAULT_MODEL if DEFAULT_MODEL in models else models[0])
     messages = [
-        {'role': 'system', 'content': system_prompt(chapter)},
+        {'role': 'system', 'content': system_prompt(chapter, question)},
         {'role': 'user', 'content': question},
     ]
     # on_text 는 (원문 raw 가 아니라) 신호를 걷어낸 '누적 표시 텍스트'를 받는다.
@@ -502,7 +608,9 @@ def chat(chapter: str | None = None, model: str | None = None, floating: bool = 
     def worker() -> None:
         # 최근 3왕복만 유지해 경량 모델의 컨텍스트를 아낀다 (웹과 동일)
         history = [{'role': m['role'], 'content': m['content']} for m in msgs[:-1]][-7:]
-        payload = [{'role': 'system', 'content': system_prompt(chapter)}, *history]
+        # 마지막 사용자 질문으로 개념 카드를 고른다(msgs[-1] 은 비어 있는 assistant 자리)
+        question = msgs[-2]['content'] if len(msgs) >= 2 else None
+        payload = [{'role': 'system', 'content': system_prompt(chapter, question)}, *history]
         last = msgs[-1]
 
         def on_text(text: str) -> None:
