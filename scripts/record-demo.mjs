@@ -1,7 +1,8 @@
 // scripts/record-demo.mjs — 3분 데모 영상 자동 녹화 → docs/hackathon/demo_3min.mp4 (+ 자막 .srt)
 // 스토리보드 정본: docs/hackathon/13_demo_script.md 의 "3분 영상 축약판".
-// 장면: 문제 제기 → 진단 몽타주(경로 재구성 "55챕터·31.9시간") → 4부 라이브 투어 3장면
-//       → AI 튜터(실답변 + 주제이탈 차단, Ollama 필요) → 숫자 한 장 클로징.
+// 장면: 문제 제기 → 진단 몽타주(경로 재구성 "55챕터·31.9시간" + "다시 볼 개념") → 4부 라이브 투어 3장면
+//       → 개념 지도(어텐션 노드의 선수 사슬·다음 개념 — 온톨로지, 2026-09-07 신설)
+//       → AI 튜터(다른 부 개념 "N부 M장" 안내 실답변 + 주제이탈 차단, Ollama 필요) → 숫자 한 장 클로징.
 //
 // 사용법 (verify-smoke.mjs 와 같은 준비 + Ollama):
 //   1) npm run deploy:build && npm i --no-save playwright-core
@@ -144,6 +145,13 @@ await page.waitForSelector('text=AI 강사가 당신에게 맞춘 경로', { tim
 await sleep(800)
 await cap('118챕터 중 이 사람에겐 55챕터 · 31.9시간 — 아는 단계는 접고, 이유까지 말해 줍니다')
 await sleep(8000)
+// 개념 단위 결과(온톨로지 3단계) — 틀린 문항이 개념 이름으로: 도함수·기본 미분 공식·지수와 로그·놀람과 정보량
+const diagConcepts = page.locator('[data-diag-concepts]')
+if (await diagConcepts.count()) {
+  await move(diagConcepts)
+  await cap('틀린 문항은 점수가 아니라 개념 이름으로 — "다시 볼 개념: 도함수(2부 3장) · 지수와 로그(2부 7장)…"')
+  await sleep(6000)
+}
 await wheel(430, 3, 550)
 await cap('결정은 전부 규칙 기반 — 같은 답이면 언제나 같은 경로, 근거가 화면에 있습니다')
 await wheel(430, 2, 550)
@@ -198,17 +206,35 @@ await page.evaluate(async () => {
 await cap('LLM = 다음 단어를 확률로 고르는 기계 — 방금 그 수학이 1·3·5부 커리큘럼입니다')
 await sleep(4800)
 
-// ═══ S4 AI 튜터 — 실답변 + 주제이탈 차단 (로컬 Ollama) ══════════════════════
+// ═══ S3b 개념 지도 — 방금 본 어텐션이 시리즈 개념 114개 중 어디인가 (온톨로지) ═══
+console.log('▶ S3b 개념 지도')
+await page.goto(`${BASE}/concepts?c=self-attention-qkv`, { waitUntil: 'networkidle' })
+await page.waitForSelector('[data-concept-node]', { timeout: 10000 })
+await sleep(700)
+await cap('방금 본 어텐션은 시리즈 개념 114개의 지도에서 여기 — 실선은 먼저 알아야 할 것, 점선은 다음 개념')
+const selNode = page.locator('[data-concept-node]', { hasText: 'Q·K·V 셀프 어텐션' }).first()
+await move(selNode)
+await sleep(5200)
+await cap('같은 수학이 어디서 다시 나오는지 — 강사도, 튜터도, 각 장의 상단 띠도 이 한 파일을 읽습니다')
+await click(page.locator('[data-concept-node]', { hasText: 'KL 발산' }).first(), 800)
+await sleep(4800)
+
+// ═══ S4 AI 튜터 — 다른 부 개념 "N부 M장" 안내 + 주제이탈 차단 (로컬 Ollama) ═══
 console.log('▶ S4 튜터')
-await cap('막히면 🤖 AI 튜터 — 지금 보는 챕터를 알고 답합니다')
+await page.goto(`${BASE}/part4/ch/ch11`, { waitUntil: 'networkidle' })
+await cap('막히면 🤖 AI 튜터 — 지금 보는 챕터를 알고, 다른 부에서 배우는 개념은 "N부 M장"까지 답합니다')
 await click(page.locator('button[aria-label="AI 튜터 열기"]'), 900)
 const tutorInput = page.locator('input[placeholder="질문을 입력하세요…"]')
 await click(tutorInput, 100)
-await page.keyboard.type('어텐션이 정확히 뭘 계산하는 거예요?', { delay: 45 })
+await page.keyboard.type('손실함수에 나오는 크로스 엔트로피는 어디서 배워요?', { delay: 45 })
 await page.keyboard.press('Enter')
 await page.waitForSelector('button:has-text("중지")', { timeout: 8000 }).catch(() => {})
-await page.waitForSelector('button:has-text("중지")', { state: 'detached', timeout: 40000 }).catch(() => {})
+await page.waitForSelector('button:has-text("중지")', { state: 'detached', timeout: 60000 }).catch(() => {})
+const said5_4 = (await page.locator('div.fixed.bottom-24').getByText('5부 4장').count()) > 0
+console.log(`  튜터 답변에 "5부 4장" ${said5_4 ? '포함 ✓' : '없음 — 자막은 그대로 진행'}`)
 await sleep(4500) // 답변 읽을 시간
+await cap('개념 그래프에서 꺼낸 카드 한 장으로 "5부 4장"을 안내합니다 — 벡터 DB 없이, 4B 로컬 모델로')
+await sleep(4200)
 await cap('학습과 무관한 질문은 어떻게 될까요?')
 await click(tutorInput, 100)
 await page.keyboard.type('저녁 메뉴 추천해줘', { delay: 45 })
@@ -223,7 +249,7 @@ await sleep(5200)
 // ═══ S5 클로징 — 숫자 한 장 ═════════════════════════════════════════════════
 console.log('▶ S5 클로징')
 await page.goto(`${BASE}/`, { waitUntil: 'networkidle' })
-await cap('118 챕터 · 1,600+ 자동채점 문항 · 131 실습 노트북 — 운영비 ₩0')
+await cap('118 챕터 · 1,600+ 자동채점 문항 · 131 실습 노트북 · 개념 114개가 이어진 지도 — 운영비 ₩0')
 await page.locator('text=자동채점 문항').first().scrollIntoViewIfNeeded()
 await sleep(5500)
 await cap('신입 온보딩부터 전사 AI 리터러시까지 — 오늘 바로 도입할 수 있습니다')
