@@ -33,6 +33,8 @@ export {
 // 테마(라이트/다크) — 색은 dark.css 가 처리하고, 여기선 선택 상태만 다룬다.
 // 각 앱 main.ts 에서 initTheme() 를 부르고, 헤더/사이드바에 ThemeToggle 을 둔다.
 export { default as ThemeToggle } from './ThemeToggle.vue'
+// 각 부 사이드바 상단의 포털(시리즈 홈) 링크 — 조립 배포본(/partN/)에서만 렌더, dev 단독 실행에선 숨김.
+export { default as PortalLink } from './PortalLink.vue'
 export { initTheme, setTheme, isDark, cssVar, themeMode, themeVersion, type ThemeMode } from './theme'
 
 // 협업 주석 — ReviewFlag 가 섹션마다 NoteMarker 를 얹으므로 앱이 직접 쓸 일은 아직 없다.

@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { AuthPanel } from '@series/store'
-import { ThemeToggle } from '@series/ui'
+import { ThemeToggle, PortalLink } from '@series/ui'
 import { chapters, availableChapters } from '@/data/chapters'
 import { useProgressStore } from '@/stores/progress'
 import { useReviewStore } from '@/stores/review'
@@ -34,6 +34,8 @@ const latestPhase = computed(() =>
     <!-- 부 고유색 띠 — 11개 앱을 오갈 때 위치를 색으로 먼저 알린다 -->
     <div class="h-1 shrink-0 bg-orange-600" aria-hidden="true" />
     <div class="border-b border-slate-200 px-5 py-5">
+      <!-- 포털(시리즈 홈)로 — 조립 배포본에서만 렌더(단독 dev 서버에는 포털이 없다). packages/ui PortalLink -->
+      <PortalLink />
       <RouterLink to="/" class="block" @click="emit('close')">
         <h1 class="text-lg font-bold leading-tight text-orange-900">수포자를 위한<br />수치 계산</h1>
       </RouterLink>
