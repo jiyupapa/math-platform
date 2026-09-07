@@ -383,6 +383,7 @@ flowchart LR
 | 무슨 부가 있고 어떤 순서로 배우나 | `README.md` |
 | 이 저장소에서 작업하는 규칙 | 루트 `CLAUDE.md` + 부별 `CLAUDE.md` |
 | 어떻게 검증하나 | `docs/TESTING.md` |
+| 처음 어떻게 실행하나 | `docs/실행_가이드.html` — 설치 · 조립본/개발 서버/노트북 · 튜터 · 백엔드 · 온톨로지 확인 체크리스트 |
 | 언제 무엇을 했나 | `docs/99_history.md` + 부별 `99_history.md` |
 | **전체가 어떻게 이어지나** | **이 문서** |
 | 기능별 설계 근거 | `docs/todo_*.md` |
