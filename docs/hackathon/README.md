@@ -11,6 +11,7 @@
 | `13_demo_script.md` | 3분 시연 대본 |
 | `14_비개발자_접근성.md` | 비개발자 접근성 |
 | `presentation_*.md` | 발표 슬라이드별 원고 (index·problem·solution·pipeline·differentiators·demo·roadmap·outline) |
+| `presentation_ontology.html` | **개념 온톨로지 한 장 설명 페이지**(2026-09-06, 심사위원·동료용) — 왜 필요했나·구조도·소비처 9곳·수치·예상 질문·3분 시연 순서. 브라우저로 바로 열림. 공유본은 파일 머리 주석의 링크, 내용 정본은 `../todo_온톨로지_260906.md` |
 | `demo_3min.mp4` · `*.srt` | 시연 영상·자막 |
 | `REVIEW_260703_수포자검수.md` | 수포자 검수 리뷰 |
 | `TODO_260628.md` | (구) 해커톤 추가 작업 브레인스토밍 — `TODO_260708.md` 로 대체됨 |
