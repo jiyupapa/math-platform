@@ -117,5 +117,75 @@ const LABS = [
   await ctx.close()
 }
 
+// ── ⑤ 개념 온톨로지 — 개념 지도(선택 상태) · 비유어 사전 · 챕터 띠 ───────────────────
+{
+  const { ctx, page } = await fresh()
+  await page.goto(`${BASE}/concepts?c=kl-divergence`, { waitUntil: 'networkidle' })
+  await settle(page, 800)
+  await page.locator('div.overflow-x-auto.rounded-2xl').first().screenshot({ path: join(OUT, 'concept_map.png') })
+  console.log('✓ concept_map (KL 발산 선택 — 선수 사슬·다음 개념)')
+  await page.goto(`${BASE}/glossary`, { waitUntil: 'networkidle' })
+  await settle(page, 800)
+  await page.screenshot({ path: join(OUT, 'glossary.png'), clip: { x: 0, y: 0, width: 1440, height: 900 } })
+  console.log('✓ glossary')
+  await page.goto(`${BASE}/part5/ch/ch5`, { waitUntil: 'networkidle' })
+  await settle(page, 800)
+  await page.locator('[data-concept-strip]').screenshot({ path: join(OUT, 'strip_p5ch5.png') })
+  console.log('✓ strip_p5ch5')
+  await ctx.close()
+}
+
+// ── ⑥ 홈 개인화 — 진단 개념 칩 + 복습 경로 (③과 같은 시드) ────────────────────────
+{
+  const { ctx, page } = await fresh()
+  await page.goto(`${BASE}/`, { waitUntil: 'networkidle' })
+  await page.evaluate((d) => {
+    localStorage.setItem('hub-diagnosis-v1', d)
+    localStorage.setItem('hub-baseline-v1', d)
+    localStorage.setItem('la-progress-v1', JSON.stringify(['ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6']))
+    localStorage.setItem('stat-review-v1', JSON.stringify([
+      { id: 'ch4-s2', chapter: 'ch4', label: '조건부 확률의 정의' },
+      { id: 'ch5-s1', chapter: 'ch5', label: '확률변수 — 결과에 숫자 붙이기' },
+    ]))
+    localStorage.setItem('it-review-v1', JSON.stringify([{ id: 'ch5-s1', chapter: 'ch5', label: '1. KL = 초과 비트 정의' }]))
+  }, DIAG)
+  await page.reload({ waitUntil: 'networkidle' })
+  await settle(page, 1000)
+  await page.locator('[data-diag-concepts]').screenshot({ path: join(OUT, 'home_diag_concepts.png') })
+  const toggle = page.locator('[data-review-toggle]')
+  if (await toggle.count()) await toggle.click()
+  await settle(page, 300)
+  await page.locator('[data-review-path]').screenshot({ path: join(OUT, 'review_path.png') })
+  console.log('✓ home_diag_concepts + review_path')
+  await ctx.close()
+}
+
+// ── ⑦ 튜터 부 간 안내 — 1부 튜터에게 5부 개념을 묻는다 (로컬 Ollama 필요 — 없으면 건너뜀) ──
+{
+  const { ctx, page } = await fresh()
+  await page.goto(`${BASE}/part1/ch/ch2`, { waitUntil: 'networkidle' })
+  await page.getByRole('button', { name: 'AI 튜터 열기' }).click()
+  await settle(page, 2000) // 서버·모델 확인
+  const input = page.locator('input[placeholder="질문을 입력하세요…"]')
+  const ready = await input.isEnabled().catch(() => false)
+  if (ready) {
+    await input.fill('KL 발산은 어디서 배워요?')
+    await input.press('Enter')
+    await settle(page, 300)
+    if ((await input.inputValue()) !== '') await page.locator('button:has-text("전송")').first().click().catch(() => {})
+    try {
+      await page.locator('div.fixed.bottom-24').getByText('5부 5장').first().waitFor({ timeout: 90000 })
+      await settle(page, 2500) // 스트리밍 마무리
+      await page.locator('div.fixed.bottom-24').screenshot({ path: join(OUT, 'tutor_crosspart.png') })
+      console.log('✓ tutor_crosspart ("5부 5장" 안내)')
+    } catch {
+      console.log('· tutor_crosspart 건너뜀 — 90초 안에 "5부 5장" 이 안 나옴 (기존 자산 유지)')
+    }
+  } else {
+    console.log('· tutor_crosspart 건너뜀 — Ollama 미연결 (기존 자산 유지)')
+  }
+  await ctx.close()
+}
+
 await browser.close()
 console.log('완료 →', OUT)
