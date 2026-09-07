@@ -65,7 +65,7 @@ async function resolve(q: Annotation) {
       백엔드(Supabase)가 설정되지 않았습니다.
     </p>
     <p v-else-if="!currentUser" class="mt-8 rounded-lg bg-slate-50 px-4 py-6 text-center text-sm text-slate-500">
-      로그인이 필요합니다 — 우측 상단 "진도 지키기".
+      로그인이 필요합니다 — 우측 상단 "로그인".
     </p>
     <p v-else-if="!isAdmin" class="mt-8 rounded-lg bg-slate-50 px-4 py-6 text-center text-sm text-slate-500">
       관리자(강사) 전용 화면입니다.

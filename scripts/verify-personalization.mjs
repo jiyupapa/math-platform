@@ -72,7 +72,7 @@ check('설명 문장에 헷갈린 개념', /진단에서 헷갈린 개념은/.te
 // ③ 개념 지도
 await page.goto(`${BASE}/concepts?c=chain-rule`, { waitUntil: 'networkidle', timeout: 20000 })
 await page.waitForSelector('[data-concept-node]', { timeout: 10000 })
-const amber = await page.locator('[data-concept-node].ring-amber-400').count()
+const amber = await page.locator('[data-concept-node].ring-amber-600').count()
 check('지도 — 헷갈린 개념 ring 4개', amber === 4, `실제 ${amber}`)
 const mapText = await page.locator('main').innerText()
 check('지도 — 상세 배지 + 아는 개념 ✓', /진단에서 헷갈린 개념 — 다시 볼 것/.test(mapText) && /✓ 확률분포/.test(mapText))

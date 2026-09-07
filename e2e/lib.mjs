@@ -192,7 +192,7 @@ export async function loginPage(context, email, password = CONFIG.password) {
   page.on('pageerror', (e) => console.log('    [pageerror]', e.message))
   await page.goto(`${CONFIG.base}/`, { waitUntil: 'domcontentloaded' })
   await sleep(700)
-  await page.click('text=진도 지키기')
+  await page.click('button.ap-link:has-text("로그인")')
   await page.fill('input[type="email"]', email)
   await page.fill('input[type="password"]', password)
   await page.click('.ap-go')

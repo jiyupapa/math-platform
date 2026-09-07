@@ -294,7 +294,8 @@ npm run search:index && npm run ontology:graph   # 정본을 고쳤으면 산출
 순수 파일 검사라 0.5초 안 — 그래서 대비 검사와 함께 커밋 훅에 걸었다. 규칙 정본은 `docs/todo_온톨로지_260906.md` §6.
 
 **화면 소비처(2·4단계)** — 조립본 스모크(`PORT=4199 node scripts/verify-smoke.mjs`, 4절)가 포털 `/concepts`·`/glossary` 렌더,
-개념 지도 노드 ≥ 100, 비유어 사전 행 ≥ 60, 5부 5장 상단 띠에 'KL 발산' 표시를 함께 검사한다(148건). 띠가 안 보이면
+개념 지도 노드 ≥ 100, 1부 노드(`?c=vector`)를 골랐을 때 연결선 호가 보드 위 경계 안에 있는지(꼭대기 y ≥ 0 — 맨 윗줄은 위로
+볼록한 호가 잘리기 쉽다), 비유어 사전 행 ≥ 60, 5부 5장 상단 띠에 'KL 발산' 표시를 함께 검사한다(149건). 띠가 안 보이면
 `concept-graph.json` 누락(→ `npm run ontology:graph`)이거나 챕터 라우트가 아닌 것(홈·복습에는 띠가 없다).
 
 **노트북 튜터 접지(4단계)** — 각 부 `notebooks/tutor.py` 도 `web/public/concept-graph.json` 을 읽어 개념 카드를 붙인다.

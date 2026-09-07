@@ -67,6 +67,14 @@ await visit('/glossary', '포털 비유어 사전')
   await page.goto(`${BASE}/concepts`, { waitUntil: 'networkidle', timeout: 20000 })
   const nodes = await page.locator('[data-concept-node]').count()
   check('개념 지도 노드', nodes >= 100, nodes < 100 ? `노드 ${nodes}개 (concept-graph.json 누락?)` : '')
+  // 맨 윗줄(1부) 노드를 골랐을 때 같은 줄을 잇는 호가 보드 위 경계에 잘리지 않는가 — 호 꼭대기 y ≥ 0 (1건)
+  await page.goto(`${BASE}/concepts?c=vector`, { waitUntil: 'networkidle', timeout: 20000 })
+  await page.waitForSelector('main svg[aria-hidden] path[d^="M"]', { timeout: 5000 }).catch(() => {})
+  const arcTop = await page.evaluate(() => {
+    const ys = [...document.querySelectorAll('main svg[aria-hidden] path[d^="M"]')].map((p) => p.getBBox().y)
+    return ys.length ? Math.min(...ys) : NaN
+  })
+  check('개념 지도 연결선 (1부 노드)', arcTop >= 0, Number.isNaN(arcTop) ? '연결선 없음' : `호 꼭대기 y=${arcTop.toFixed(1)} — 보드 위로 넘침`)
   await page.goto(`${BASE}/glossary`, { waitUntil: 'networkidle', timeout: 20000 })
   const rows = await page.locator('[data-glossary-row]').count()
   check('비유어 사전 행', rows >= 60, rows < 60 ? `행 ${rows}개` : '')
@@ -86,5 +94,5 @@ for (let p = 1; p <= 11; p++) {
 }
 
 await browser.close()
-console.log(`\n결과: ${pass} 통과 / ${fails.length} 실패 — 검사 ${pass + fails.length}건 (챕터 ${totalChapters} + 홈 12 + 포털 진단·구조도·개념 지도·비유어 사전 4 + 온톨로지 렌더 3)`)
+console.log(`\n결과: ${pass} 통과 / ${fails.length} 실패 — 검사 ${pass + fails.length}건 (챕터 ${totalChapters} + 홈 12 + 포털 진단·구조도·개념 지도·비유어 사전 4 + 온톨로지 렌더 4)`)
 process.exit(fails.length === 0 ? 0 : 1)
