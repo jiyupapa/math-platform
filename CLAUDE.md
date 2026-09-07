@@ -44,7 +44,7 @@ npm run build -w apps/part1/web              # 특정 부만 빌드
 
 ## 공용 컴포넌트 — `packages/ui` (@series/ui)
 
-공용 컴포넌트(`MathBlock`·`ConceptCard`·`DetailsCard`·`ChartView`·`NotebookCard`·`ReviewFlag`·`PartLink`·`ConceptStrip`·`SearchPalette`·`Quiz`·`StepQuiz`·`QuizSet`)와
+공용 컴포넌트(`MathBlock`·`ConceptCard`·`DetailsCard`·`ChartView`·`NotebookCard`·`ReviewFlag`·`PartLink`·`PortalLink`·`ConceptStrip`·`SearchPalette`·`Quiz`·`StepQuiz`·`QuizSet`)와
 QuizSet↔StepQuiz 그룹 계약(`quizGroupKey`/`QuizGroup` — `quizGroup.ts`)은
 **`packages/ui` 한 곳에만 있다.** 앱은 `import { Quiz } from '@series/ui'` 로 소비.
 
