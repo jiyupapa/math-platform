@@ -95,17 +95,20 @@ function select(id: string) {
   selected.value = selected.value === id ? null : id
 }
 
-// 노드 모양: 부 색 → 앎(진한 테두리+✓) → 지금 배울 수 있음(ring) → 선택/사슬/다음(outline) → 무관·불일치(흐림)
+// 노드 모양: 부 색(연한 칠) → 앎(부 색으로 꽉 채움+✓) → 지금 배울 수 있음(ring) → 선택/사슬/다음(outline) → 무관·불일치(흐림)
+// 세 상태는 "칠 없음 / ring / 꽉 찬 칠"로 갈린다 — 같은 색의 진하기 차이만으로는 앎과 배울 수 있음이 구별되지 않았다.
 function nodeClass(c: Concept): string {
   const st = PART_STYLE[c.definedAt.part]
   const cls = [isMastered(c) ? st.done : st.node]
-  // ring 색은 하나만 — 진단에서 헷갈린 개념(amber)이 "지금 배울 수 있음"(부 색)보다 우선
-  if (missedIds.has(c.id)) cls.push('ring-2', 'ring-amber-400')
+  // ring 색은 하나만 — 진단에서 헷갈린 개념(amber)이 "지금 배울 수 있음"(부 색)보다 우선.
+  // 6부는 부 색도 amber 라 ring 만으로는 둘이 같아 보인다 → 헷갈린 개념은 ⚠ 접두(아래 템플릿)가 뜻을 나른다.
+  if (missedIds.has(c.id)) cls.push('ring-2', 'ring-amber-600')
   else if (isReady(c)) cls.push('ring-2', st.ring)
+  // outline 은 2px 띄운다 — 꽉 채운 '앎' 노드(4부 indigo·7부 teal)와 같은 색이라 붙여 그리면 안 보인다
   const sel = selected.value
-  if (sel === c.id) cls.push('outline outline-2 outline-indigo-600')
-  else if (sel && chainIds.value.has(c.id)) cls.push('outline outline-2 outline-indigo-400')
-  else if (sel && dependentIds.value.has(c.id)) cls.push('outline outline-2 outline-teal-500')
+  if (sel === c.id) cls.push('outline outline-2 outline-offset-2 outline-indigo-600')
+  else if (sel && chainIds.value.has(c.id)) cls.push('outline outline-2 outline-offset-2 outline-indigo-400')
+  else if (sel && dependentIds.value.has(c.id)) cls.push('outline outline-2 outline-offset-2 outline-teal-500')
   const related = !sel || sel === c.id || chainIds.value.has(c.id) || dependentIds.value.has(c.id)
   if (!matchesQ(c) || !related) cls.push('opacity-35')
   return cls.join(' ')
@@ -144,8 +147,10 @@ async function remeasure() {
 }
 function curve(a: Pos, b: Pos): string {
   if (Math.abs(a.cy - b.cy) < 8) {
-    // 같은 행 — 위로 살짝 볼록한 호
-    const lift = Math.min(40, 14 + Math.abs(a.cx - b.cx) / 8)
+    // 같은 행 — 위로 살짝 볼록한 호. 3차 베지어의 꼭대기는 제어점 높이의 3/4 지점이므로
+    // 맨 윗줄(1부)에서는 보드 위 여백(pt-7) 안에 들어오도록 높이를 깎는다 — 안 깎으면 호가 보드 위 경계에 잘린다.
+    const headroom = (Math.min(a.t, b.t) - 4) / 0.75
+    const lift = Math.max(6, Math.min(40, 14 + Math.abs(a.cx - b.cx) / 8, headroom))
     return `M ${a.cx} ${a.t} C ${a.cx} ${a.t - lift}, ${b.cx} ${b.t - lift}, ${b.cx} ${b.t}`
   }
   const down = a.cy < b.cy
@@ -235,9 +240,9 @@ const outsideTerm = (c: Concept) =>
     <!-- 범례 -->
     <div v-if="graph" class="mb-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-slate-500">
       <span class="inline-flex items-center gap-1.5"><span class="inline-block h-3 w-3 rounded border border-sky-200 bg-sky-50" />부 색(정의처)</span>
-      <span class="inline-flex items-center gap-1.5"><span class="inline-block h-3 w-3 rounded border border-sky-400 bg-sky-100" />✓ 아는 개념 — 배우는 장 완료</span>
-      <span class="inline-flex items-center gap-1.5"><span class="inline-block h-3 w-3 rounded border border-sky-200 bg-white ring-2 ring-sky-400" />지금 배울 수 있음 — 선수 전부 앎</span>
-      <span v-if="missedIds.size" class="inline-flex items-center gap-1.5"><span class="inline-block h-3 w-3 rounded border border-sky-200 bg-white ring-2 ring-amber-400" />진단에서 헷갈린 개념</span>
+      <span class="inline-flex items-center gap-1.5"><span class="inline-block h-3 w-3 rounded border border-sky-700 bg-sky-700" />✓ 아는 개념 — 배우는 장 완료</span>
+      <span class="inline-flex items-center gap-1.5"><span class="inline-block h-3 w-3 rounded border border-sky-200 bg-sky-50 ring-2 ring-sky-600" />지금 배울 수 있음 — 선수 전부 앎</span>
+      <span v-if="missedIds.size" class="inline-flex items-center gap-1.5"><span class="inline-block h-3 w-3 rounded border border-sky-200 bg-sky-50 ring-2 ring-amber-600" />⚠ 진단에서 헷갈린 개념</span>
       <span class="inline-flex items-center gap-1.5">
         <svg width="26" height="8"><line x1="0" y1="4" x2="26" y2="4" stroke="var(--c-indigo-500)" stroke-width="1.5" /></svg>
         먼저 알아야(사슬)
@@ -254,7 +259,8 @@ const outsideTerm = (c: Concept) =>
 
     <!-- 보드 -->
     <div v-else class="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
-      <div ref="boardEl" class="relative p-4">
+      <!-- pt-7: 맨 윗줄 노드끼리 잇는 호가 위로 볼록(최대 30px)하므로 그만큼 여백 — 줄이면 curve() 가 호를 납작하게 깎는다 -->
+      <div ref="boardEl" class="relative px-4 pb-4 pt-7">
         <svg
           class="pointer-events-none absolute top-0 left-0"
           :width="svgSize.w"
@@ -302,7 +308,7 @@ const outsideTerm = (c: Concept) =>
                 :aria-pressed="selected === c.id"
                 @click="select(c.id)"
               >
-                <span v-if="isMastered(c)" aria-hidden="true">✓ </span>{{ c.label }}
+                <span v-if="missedIds.has(c.id)" aria-hidden="true">⚠ </span><span v-if="isMastered(c)" aria-hidden="true">✓ </span>{{ c.label }}
               </button>
             </div>
           </template>

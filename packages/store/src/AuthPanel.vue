@@ -53,7 +53,8 @@ async function submit() {
       <button class="ap-link" type="button" @click="signOut()">로그아웃</button>
     </template>
     <template v-else>
-      <button class="ap-link" type="button" @click="open = !open">진도 지키기</button>
+      <!-- 라벨은 행동('로그인') — 이점('진도 지키기')은 팝오버 안내문이 말한다. 찾는 사람은 '로그인'을 찾는다. -->
+      <button class="ap-link" type="button" :aria-expanded="open" @click="open = !open">로그인</button>
       <div v-if="open" class="ap-pop" :class="{ 'ap-pop-right': props.align === 'right' }">
         <div class="ap-tabs">
           <button type="button" :class="{ on: mode === 'login' }" @click="mode = 'login'">로그인</button>
@@ -69,9 +70,9 @@ async function submit() {
         />
         <p v-if="error" class="ap-err">{{ error }}</p>
         <button class="ap-go" type="button" :disabled="busy" @click="submit">
-          {{ busy ? '처리 중…' : mode === 'signup' ? '가입하고 진도 지키기' : '로그인' }}
+          {{ busy ? '처리 중…' : mode === 'signup' ? '가입하기' : '로그인' }}
         </button>
-        <p class="ap-note">다른 기기·브라우저에서도 진도가 이어져요.</p>
+        <p class="ap-note">로그인하면 다른 기기·브라우저에서도 진도가 이어져요.</p>
       </div>
     </template>
   </div>
