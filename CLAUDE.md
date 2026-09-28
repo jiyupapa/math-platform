@@ -78,6 +78,9 @@ QuizSet↔StepQuiz 그룹 계약(`quizGroupKey`/`QuizGroup` — `quizGroup.ts`)�
 `tokens.css` 를 건드렸으면 먼저 `npm run theme:dark` → 그다음 검사(잊으면 검사기가 "dark.css 가 낡았습니다"로 멈춘다).
 **커밋 훅(`githooks/pre-commit`)이 자동으로 돌려 미달이면 커밋을 막는다** — 빌드는 이걸 못 잡기 때문이다.
 - **THEMED(각 앱에 유지)**: `progress`/`review` 스토어, `TutorChat.vue`(튜터 주제), `notebooks/tutor.py`.
+  단 `TutorChat` 의 **협업 주석 연동('🤖 AI에게 묻기' 수신·'메모에 저장' 제안)은 공용** `useNoteAsk`·`NoteAskSave`
+  (packages/ui `noteAsk.ts`) — 각 부는 창 열기·전송만 연결한다. 튜터를 새로 만들거나 고칠 때 이 연결을 빠뜨리면 그 부에서
+  버튼이 무반응이 된다(2026-09-28 까지 1부에만 있었다). 조립본 스모크가 부마다 1건씩 검사한다.
 - **AI 튜터 클라이언트 = `packages/tutor`(@series/tutor)** — 로컬/원격 Ollama 전송 계층. 서버 주소는 빌드 환경변수
   **`VITE_OLLAMA_URL`** 로 바꾼다(미설정 시 `http://localhost:11434`) → 코드 수정 없이 local↔remote 전환.
   소비처: `TutorChat.vue`(각 부, 주제별) + 포털 `TutorExplain.vue`(추천 설명 재구술 — Ollama 미실행 시 규칙 템플릿 폴백).

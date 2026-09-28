@@ -36,11 +36,12 @@ async function submit() {
   if (!created) return
   body.value = ''
   // 질문은 쓰자마자 AI 에게 넘겨준다 — 사람 답변(P3)을 기다리지 않고 바로 답을 받게.
-  if (created.kind === 'question') askAi(created.id, created.body)
+  if (created.kind === 'question') askAi(created.id, created.body, true)
 }
 
-function askAi(annotationId: string, question: string) {
-  dispatchNoteAsk({ annotationId, question, context: props.label })
+// mine = 답을 이 메모에 저장할 수 있는가(작성자만 — RLS edit_own). 남의 질문엔 튜터가 답만 보여 준다.
+function askAi(annotationId: string, question: string, mine: boolean) {
+  dispatchNoteAsk({ annotationId, question, context: props.label, mine })
 }
 
 function startEdit(id: string, current: string) {
@@ -183,7 +184,7 @@ function when(iso: string): string {
               v-if="a.kind === 'question'"
               class="np-link"
               type="button"
-              @click="askAi(a.id, a.body)"
+              @click="askAi(a.id, a.body, isMine(a))"
             >
               🤖 AI에게 묻기
             </button>

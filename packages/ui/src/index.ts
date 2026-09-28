@@ -41,7 +41,16 @@ export { initTheme, setTheme, isDark, cssVar, themeMode, themeVersion, type Them
 // (임의 항목으로 넓힐 때 콘텐츠가 NoteMarker 를 직접 배치한다.)
 export { default as NoteMarker } from './NoteMarker.vue'
 export { default as NotePanel } from './NotePanel.vue'
-export { NOTE_ASK_EVENT, dispatchNoteAsk, type NoteAskDetail } from './noteAsk'
+// 주석의 '🤖 AI에게 묻기' → 튜터 연동 — 각 부 TutorChat 이 useNoteAsk 로 받고 NoteAskSave 로 저장 제안을 그린다.
+export { default as NoteAskSave } from './NoteAskSave.vue'
+export {
+  NOTE_ASK_EVENT,
+  dispatchNoteAsk,
+  useNoteAsk,
+  type NoteAskDetail,
+  type NoteAskHost,
+  type NoteAskOffer,
+} from './noteAsk'
 
 // 문제(자동채점) 패밀리
 export { default as Quiz } from './Quiz.vue'

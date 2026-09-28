@@ -295,7 +295,8 @@ npm run search:index && npm run ontology:graph   # 정본을 고쳤으면 산출
 
 **화면 소비처(2·4단계)** — 조립본 스모크(`PORT=4199 node scripts/verify-smoke.mjs`, 4절)가 포털 `/concepts`·`/glossary` 렌더,
 개념 지도 노드 ≥ 100, 1부 노드(`?c=vector`)를 골랐을 때 연결선 호가 보드 위 경계 안에 있는지(꼭대기 y ≥ 0 — 맨 윗줄은 위로
-볼록한 호가 잘리기 쉽다), 비유어 사전 행 ≥ 60, 5부 5장 상단 띠에 'KL 발산' 표시를 함께 검사한다(149건). 띠가 안 보이면
+볼록한 호가 잘리기 쉽다), 비유어 사전 행 ≥ 60, 5부 5장 상단 띠에 'KL 발산' 표시를 함께 검사한다. 부마다 협업 주석의
+'🤖 AI에게 묻기' 이벤트에 튜터 창이 열리는지도 1건씩 본다(Ollama 조회를 막아 질문은 안 보냄 — 전체 160건). 띠가 안 보이면
 `concept-graph.json` 누락(→ `npm run ontology:graph`)이거나 챕터 라우트가 아닌 것(홈·복습에는 띠가 없다).
 
 **노트북 튜터 접지(4단계)** — 각 부 `notebooks/tutor.py` 도 `web/public/concept-graph.json` 을 읽어 개념 카드를 붙인다.
