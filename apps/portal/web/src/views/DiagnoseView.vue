@@ -22,7 +22,7 @@ function submit() {
 
 <template>
   <main class="mx-auto max-w-2xl px-5 py-10">
-    <h1 class="mb-1 text-2xl font-bold text-slate-900">경로 진단</h1>
+    <h1 class="mb-1 text-2xl font-bold text-slate-900">출발점 진단</h1>
     <p class="mb-6 text-slate-600">
       아래 문항으로 당신의 출발점을 가늠합니다. 모르면 편하게 찍어도 돼요 — 이건 시험이 아니라
       <strong>당신에게 맞는 경로를 짜기 위한 것</strong>입니다.

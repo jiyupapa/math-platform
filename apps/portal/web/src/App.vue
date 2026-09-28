@@ -40,7 +40,7 @@ function openSearch() {
             비유어 사전
           </RouterLink>
           <RouterLink to="/diagnose" class="inline-flex items-center py-1.5 text-sm font-medium whitespace-nowrap text-indigo-600 hover:underline">
-            경로 진단
+            출발점 진단
           </RouterLink>
           <RouterLink
             v-if="currentUser"

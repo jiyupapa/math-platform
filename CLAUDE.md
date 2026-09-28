@@ -25,20 +25,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 부 목록·주제·완결 상태·시리즈 커리큘럼·추천 학습 경로(1→2→3→4→5 순서가 아님)·부 간 연결은
 루트 `README.md` 가 정본.
 
-**스택**(전 12앱 공통): Vue 3 + TypeScript + Vite + Vue Router + KaTeX +
-Tailwind v4(`@tailwindcss/vite` — **설정 파일 없이** `style.css` 의 `@import 'tailwindcss'` 로 시작).
-각 부는 여기에 **Pinia**(진도·복습 스토어)와 **Chart.js**(vue-chartjs)를 더 쓴다 — **포털만 이 둘이 없다**.
-노트북은 루트 공용 venv 하나: NumPy·Matplotlib·JupyterLab + SciPy(3부)·SymPy(2부)·scikit-learn(7부),
-ipywidgets·requests(AI 튜터). 명세는 루트 `requirements.txt`.
-
 ## 명령어 (npm workspaces — 루트에서 실행)
 
-```bash
-npm install                                  # 최초 1회 (전 워크스페이스 링크)
-npm run build --workspaces --if-present      # 전 앱 빌드 = 검증 (테스트·린트 없음)
-npm run dev   -w apps/part1/web              # 특정 부 개발 서버
-npm run build -w apps/part1/web              # 특정 부만 빌드
-```
 - 검증 수단은 `npm run build`(vue-tsc 타입체크 포함). `noUnusedLocals`/`noUnusedParameters` 가 켜져 있어 미사용 변수도 에러.
 - 노트북: **루트 공용 venv 하나**(`.venv`, 커널 `math-platform`). 설치·실행·검증은 `docs/TESTING.md` 3절.
 
@@ -78,8 +66,6 @@ QuizSet↔StepQuiz 그룹 계약(`quizGroupKey`/`QuizGroup` — `quizGroup.ts`)�
     `.bg-white{background-color:var(--color-white)}` 처럼 변수 참조로 내보내므로, 팔레트 변수(`--color-*`)와
     데모 토큰(`--c-*`) 값만 다시 정의해 전 앱을 한 번에 뒤집는다. **마크업에 `dark:` 를 추가하지 말 것** —
     이 방식과 섞이면 어느 쪽이 이기는지 예측이 어려워진다. 색을 바꾸고 싶으면 `dark.css` 를 고친다.
-    - 생성 규칙: 강조색은 50↔950·100↔900·600↔400·700↔300(500 은 고정), 중립(slate)은 역할 기준으로
-      별도 매핑(파일 상단 주석에 대비 수치와 함께 적어 뒀다).
     - **런타임에 색을 조립하는 곳은 안 따라온다** — 1부 ch3 히트맵 `rgb(c,c,c)`, 8부 손실지형 `hsl(...)`.
       데이터 색이라 의도적으로 그대로 두고, 그 위 글자는 안 뒤집히는 `--c-on-light`/`--c-on-dark` 를 쓴다.
   - 전환 UI 는 `ThemeToggle`(시스템/라이트/다크 순환), 상태는 `theme.ts`. 각 앱 `main.ts` 가 `initTheme()` 호출,
@@ -87,20 +73,7 @@ QuizSet↔StepQuiz 그룹 계약(`quizGroupKey`/`QuizGroup` — `quizGroup.ts`)�
 
 ### 글자색 최소 단계 (WCAG AA 4.5:1)
 
-밝은 배경 위 **본문 글자**에 쓸 수 있는 최소 단계. 계열마다 밝기가 달라 "600이면 안전" 같은 규칙은 틀린다.
-(Tailwind 원본 oklch 를 sRGB 로 변환해 slate-50 배경 기준으로 계산한 값)
-
-| 500 | 600 | 700 |
-|---|---|---|
-| slate | indigo · violet · purple · blue · red | emerald · amber · rose · pink · cyan · sky · teal · orange · fuchsia · green |
-
-- `text-slate-400` 은 흰 배경에서 **2.51:1** — 본문에 쓰지 말 것(장식이어도 500 을 쓴다).
-- `bg-slate-100`/`bg-slate-200` **위**에서는 `text-slate-500` 도 미달(3.86~4.35) → `text-slate-600`.
-- 데모 색과 본문 글자를 맞출 때(`<b style="color: var(--c-indigo-500)">`)도 같은 기준 —
-  그래픽은 500 이어도 되지만(3:1) **글자는 위 표의 단계**를 쓴다.
-- 위 단계보다 **밝은** 색(`text-*-300` 이하)은 어두운 배경 위 글씨일 수 있으니 표만 보고 올리지 말 것.
-
-**표를 외우지 말고 검사기를 돌린다** — `npm run check:contrast` (미달이면 exit 1, `-- --fix` 로 자동 수정).
+**단계를 외우지 말고 검사기를 돌린다** — `npm run check:contrast` (미달이면 exit 1, `-- --fix` 로 자동 수정).
 조상 배경·`:class` 동적 바인딩까지 추적해 **라이트·다크 양쪽**을 본다. 절차·한계는 `docs/TESTING.md` 5절.
 `tokens.css` 를 건드렸으면 먼저 `npm run theme:dark` → 그다음 검사(잊으면 검사기가 "dark.css 가 낡았습니다"로 멈춘다).
 **커밋 훅(`githooks/pre-commit`)이 자동으로 돌려 미달이면 커밋을 막는다** — 빌드는 이걸 못 잡기 때문이다.

@@ -58,7 +58,7 @@ export const lanes: BoardLane[] = [
 ]
 
 export const nodes: BoardNode[] = [
-  { id: 'diagnose', col: 'c0', lane: 'core', title: '경로 진단', sub: '12문항 · 5분 — 아는 만큼 경로가 짧아진다' },
+  { id: 'diagnose', col: 'c0', lane: 'core', title: '출발점 진단', sub: '12문항 · 5분 — 아는 만큼 경로가 짧아진다' },
   { id: 'step1', col: 'c1', lane: 'core', stepOrder: 1 },
   { id: 'step2', col: 'c1', lane: 'core', stepOrder: 2 },
   { id: 'step3', col: 'c2', lane: 'core', stepOrder: 3 },

@@ -13,14 +13,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 공용 컴포넌트 — 모노레포 `packages/ui`
 
-이 부는 모노레포 `C:\STUDY\MATH_PLATFORM` 의 `apps/part1` 이다. 공용 컴포넌트(`Quiz`/`StepQuiz`/`QuizSet`/`quizGroup`·`MathBlock`·`ConceptCard`·`DetailsCard`·`NotebookCard`·`ChartView`·`ReviewFlag`)는 이 부의 `web/src/components/` 가 아니라 **`packages/ui`(@series/ui) 한 곳**에 있다. `import { Quiz } from '@series/ui'` 로 소비하며, **거기서 한 번 고치면 전 부에 반영**된다(옛 "1부=골든카피 → 전파" 및 `check_drift.py` 체제는 폐기됨).
 - 상세·주입 계약(`storagePrefixKey` 등)은 루트 `CLAUDE.md` 참조.
 - THEMED(이 부에 유지): `progress`/`review` 스토어(접두사 **`la`** — 바꾸면 진도 끊김), `TutorChat`, `notebooks/tutor.py`.
-
-## 명령어
-
-- 테스트·린트 설정은 없음. **검증 수단은 `npm run build`** (vue-tsc가 타입/템플릿 오류를 잡음). `noUnusedLocals`/`noUnusedParameters` 가 켜져 있어 미사용 변수도 에러다.
-- 노트북: **루트 공용 venv 하나**(`.venv`, 커널 `math-platform`) 사용. 설치·실행·검증은 루트 `docs/TESTING.md` 3절.
 
 ## 아키텍처
 
@@ -34,13 +28,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `notebooks/tutor.py` — 노트북용 AI 튜터(로컬 Ollama). `chat('chN')` = 플로팅 채팅 위젯, `ask()` = 원샷 질문, `explain()` = 직전 실행 셀 코드 설명. 웹 `TutorChat.vue`·`@series/tutor`(`packages/tutor`의 `ollama.ts`) 와 로직을 맞춘 이식판이므로 한쪽을 고치면 다른 쪽도 확인할 것.
 
 재사용 컴포넌트 — **공용(`ConceptCard`·`MathBlock`·`ChartView`·`Quiz`·`StepQuiz`·`QuizSet`·`quizGroup`)은 `packages/ui`(@series/ui) 에 있다**(수정은 거기서). `VectorCanvas` 등 이 부 전용만 `web/src/components/` 에 있다. 아래는 역할 설명:
-- `ConceptCard.vue` — 설명 카드. `tone` = note/tip/warn/goal.
-- `MathBlock.vue` — KaTeX 수식. `inline` 또는 블록.
-- `ChartView.vue` — vue-chartjs 래퍼. `type` = bar/line/scatter. 필요한 Chart.js 모듈만 등록됨.
 - `VectorCanvas.vue` — SVG 인터랙티브 좌표평면. `v-model` 은 `Vec[]`. 핵심 옵션: `showArrows`(false면 점만), `Vec.tail`(원점 아닌 시작점), `Vec.dashed`(보조선). **드래그 시 성분 = 팁 − 꼬리**로 갱신.
 - `Quiz.vue` — 자동채점. `type` = mc/truefalse/numeric. **truefalse 는 answer 0=참(O), 1=거짓(X)**. `difficulty` 배지(easy/medium/hard), 단계별 힌트, 해설.
-- `StepQuiz.vue` — **계산형(2단계 이상) 문제 전용**. 공식의 중간 단계를 직접 입력·채점. `steps`=`{lhs(KaTeX), answer}[]`, 모두 맞아야 정답. QuizSet 연동. 계산 문제는 최종 답만 받지 말고 이걸로.
-- `QuizSet.vue` + `quizGroup.ts` — Quiz 들을 묶어 풀이 현황 **자동 집계**(provide/inject). 자식 Quiz 가 mount 시 register, 정답 시 report. 전부 풀면 `completed` 이벤트.
 
 **새 챕터 추가 절차**: ① `chapters.ts` 에서 해당 챕터 `comingSoon` 제거 → ② `web/src/chapters/ChapterN.vue` 작성(기존 챕터 구조 따름) → ③ `router/index.ts` 에 `/ch/chN` 라우트 추가 → ④ `notebooks/chNN_*.ipynb` 대응 노트북 작성(맨 위에 AI 튜터 안내 마크다운 + `chat('chN')` 셀 포함) → ⑤ `web/src/data/tutorContext.json` 에 챕터 맥락 추가.
 
