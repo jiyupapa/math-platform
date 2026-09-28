@@ -1,5 +1,6 @@
 // scripts/verify-smoke.mjs
-// 전 부 스모크 E2E — 포털(홈·진단·구조도) + 11개 부의 모든 공개 챕터 라우트가 렌더되고 콘솔 에러가 없는지.
+// 전 부 스모크 E2E — 포털(홈·진단·구조도) + 11개 부의 모든 공개 챕터 라우트가 렌더되고 콘솔 에러가 없는지,
+// 그리고 부마다 협업 주석 → AI 튜터 연동이 살아 있는지(백엔드·Ollama 불필요).
 // 콘텐츠 정정 후 회귀 안전망 (각 부 chapters.ts 에서 슬러그를 동적으로 읽는다).
 //
 // 사용법:
@@ -54,6 +55,29 @@ async function visit(url, name) {
   check(name, main.trim().length > 30 && errs.length === 0, errs.length ? `콘솔 에러 ${errs.length}: ${errs[0]?.slice(0, 120)}` : main.trim().length <= 30 ? '본문 비어 있음' : '')
 }
 
+// 협업 주석 → AI 튜터 연동 (부당 1건). NotePanel 의 '🤖 AI에게 묻기'는 window 이벤트('note-ask-ai')로 그 부의
+// TutorChat 창을 연다(packages/ui/src/noteAsk.ts). 로그인·백엔드 없이 이 계약만 본다 — Ollama 조회를 503 으로 막아
+// 질문은 보내지 않고, 창이 열려 '연결할 수 없어요' 안내가 뜨는지 확인한다.
+// (받는 쪽이 1부에만 있어 2~11부에서 무반응이던 결함을 2026-09-28 공용화로 고쳤다 — 부마다 다시 새지 않게)
+async function checkNoteAsk(p) {
+  await page.route('**/api/tags', (route) =>
+    route.fulfill({ status: 503, headers: { 'Access-Control-Allow-Origin': '*' }, body: '' }),
+  )
+  await page.evaluate(() =>
+    window.dispatchEvent(
+      new CustomEvent('note-ask-ai', {
+        detail: { annotationId: 'smoke', question: '스모크 질문', context: '스모크', mine: false },
+      }),
+    ),
+  )
+  const opened = await page
+    .getByText('로컬 AI(Ollama)에 연결할 수 없어요')
+    .waitFor({ timeout: 5000 })
+    .then(() => true, () => false)
+  await page.unroute('**/api/tags')
+  check(`part${p} 주석→튜터 연동`, opened, opened ? '' : "'note-ask-ai' 이벤트에 튜터 창이 반응하지 않음")
+}
+
 // 포털
 await visit('/', '포털 홈')
 await visit('/diagnose', '포털 진단')
@@ -89,10 +113,11 @@ for (let p = 1; p <= 11; p++) {
   const slugs = slugsOf(p)
   totalChapters += slugs.length
   await visit(`/part${p}/`, `part${p} 홈 (${slugs.length}챕터)`)
+  await checkNoteAsk(p)
   for (const s of slugs) await visit(`/part${p}/ch/${s}`, `part${p}/${s}`)
   process.stdout.write(`  part${p} ✓ (${slugs.length})\n`)
 }
 
 await browser.close()
-console.log(`\n결과: ${pass} 통과 / ${fails.length} 실패 — 검사 ${pass + fails.length}건 (챕터 ${totalChapters} + 홈 12 + 포털 진단·구조도·개념 지도·비유어 사전 4 + 온톨로지 렌더 4)`)
+console.log(`\n결과: ${pass} 통과 / ${fails.length} 실패 — 검사 ${pass + fails.length}건 (챕터 ${totalChapters} + 홈 12 + 포털 진단·구조도·개념 지도·비유어 사전 4 + 온톨로지 렌더 4 + 주석→튜터 연동 11)`)
 process.exit(fails.length === 0 ? 0 : 1)

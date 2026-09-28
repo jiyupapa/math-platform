@@ -6,7 +6,7 @@ import { useRoute } from 'vue-router'
 import { chapters } from '@/data/chapters'
 import { contextFor, curriculumIndex } from '@/data/tutorContext'
 import { DEFAULT_MODEL, conceptGrounding, listModels, streamChat, type ChatMessage } from '@series/tutor'
-import { partNumberKey } from '@series/ui'
+import { partNumberKey, useNoteAsk, NoteAskSave } from '@series/ui'
 
 interface UiMessage {
   role: 'user' | 'assistant'
@@ -99,6 +99,8 @@ async function send() {
   const q = input.value.trim()
   if (!q || busy.value || serverOk.value !== true) return
   input.value = ''
+  // 새 질문이 오면 직전 답변의 '메모에 저장' 제안은 더 이상 유효하지 않다(마지막 답변이 바뀐다).
+  dismissNoteAsk()
   messages.value.push({ role: 'user', content: q })
   messages.value.push({ role: 'assistant', content: '' })
   busy.value = true
@@ -156,8 +158,28 @@ function stop() {
 }
 
 function clearChat() {
-  if (!busy.value) messages.value = []
+  if (!busy.value) {
+    messages.value = []
+    dismissNoteAsk()
+  }
 }
+
+// ── 협업 주석 연동 — NotePanel 의 '🤖 AI에게 묻기' ──
+// 질문 포장·저장 규칙은 공용(@series/ui 의 noteAsk.ts) — 여기서는 이 창의 열기·전송만 빌려 준다.
+const { offer: noteAskOffer, save: saveNoteAnswer, dismiss: dismissNoteAsk } = useNoteAsk({
+  busy: () => busy.value,
+  ready: async () => {
+    open.value = true
+    if (serverOk.value === null) await checkServer()
+    return serverOk.value === true
+  },
+  ask: async (prompt) => {
+    input.value = prompt
+    await send()
+    const last = messages.value[messages.value.length - 1]
+    return last?.role === 'assistant' ? fmt(last.content) : ''
+  },
+})
 
 onUnmounted(() => aborter?.abort())
 
@@ -285,6 +307,8 @@ function segments(text: string): Segment[] {
 
       <!-- 입력 -->
       <div class="border-t border-slate-100 p-3">
+        <!-- 주석에서 넘어온 질문의 답 — 사용자가 누를 때만 그 메모에 저장(동료에게도 보이므로) -->
+        <NoteAskSave :offer="noteAskOffer" :busy="busy" @save="saveNoteAnswer" />
         <div class="flex gap-2">
           <input
             v-model="input"
