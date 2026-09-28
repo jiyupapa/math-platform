@@ -15,8 +15,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## 명령어
 
 모노레포 npm workspaces — `npm install` 은 **루트에서 1회**, 이 부 대상 명령은 루트에서 `-w apps/part2/web` 로 실행한다.
-테스트 러너는 없다. 검증은 `npm run build`(타입체크 포함) 통과 + dev 서버 동작 확인으로 한다.
-노트북은 **루트 공용 venv 하나**(`.venv`, 커널 `math-platform`) 사용 — 설치·검증은 루트 `docs/TESTING.md` 3절.
 
 ## 아키텍처
 
@@ -45,12 +43,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 | 컴포넌트 | 역할 |
 |---------|------|
-| `MathBlock.vue` | KaTeX 수식 렌더 (`inline` prop, `expr`) |
-| `ChartView.vue` | Chart.js 래퍼 (bar/line/scatter) |
-| `ConceptCard.vue` | 설명 카드, `tone`: note/tip/warn/goal |
-| `Quiz.vue` | 자동채점 퀴즈 3종 + 단계별 힌트 + 해설 |
-| `StepQuiz.vue` | 공식 중간단계 입력 채점 (모든 단계 정답 시 통과) |
-| `QuizSet.vue` | Quiz 묶음 진행률 집계 + 완료 처리 |
 | `TangentExplorer.vue` | **미분 전용** 시각화 — 접선/할선 슬라이더 (신규 작성분) |
 
 ### Quiz 집계 메커니즘 (provide/inject)

@@ -17,7 +17,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 명령어
 
-- 테스트·린트 설정은 없음. **검증 수단은 `npm run build`** (vue-tsc가 타입/템플릿 오류를 잡음). `noUnusedLocals`/`noUnusedParameters` 가 켜져 있어 미사용 변수도 에러다.
 - 노트북: **루트 공용 venv 하나**(`.venv`, scipy 포함). 검증 시 **반드시 venv 의 python 을 직접 호출** — 시스템 PATH 의 nbconvert 로 새면 `No module named scipy` 오탐이 난다:
   `.venv\Scripts\python.exe -m jupyter nbconvert --to notebook --execute --stdout --ExecutePreprocessor.kernel_name=math-platform apps\part3\notebooks\chXX.ipynb`. 상세는 루트 `docs/TESTING.md` 3절.
 
@@ -41,13 +40,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   로직을 맞춘 이식판이므로 한쪽을 고치면 다른 쪽도 확인할 것.
 
 재사용 컴포넌트 — **공용(`ConceptCard`·`MathBlock`·`ChartView`·`Quiz`·`StepQuiz`·`QuizSet`·`quizGroup`)은 `packages/ui`(@series/ui) 에 있다**(수정은 거기서). 확률통계 전용 시각화만 `web/src/components/` 에 있다. 아래는 역할 설명:
-- `ConceptCard.vue` — 설명 카드. `tone` = note/tip/warn/goal.
-- `MathBlock.vue` — KaTeX 수식. `inline` 또는 블록.
-- `ChartView.vue` — vue-chartjs 래퍼. `type` = bar/line/scatter. 필요한 Chart.js 모듈만 등록됨.
 - `Quiz.vue` — 자동채점. `type` = mc/truefalse/numeric. **truefalse 는 answer 0=참(O), 1=거짓(X)**.
   `difficulty` 배지(easy/medium/hard), 단계별 힌트, 해설.
-- `StepQuiz.vue` — **계산형(2단계 이상) 문제 전용**. 공식의 중간 단계를 직접 입력·채점.
-  `steps`=`{lhs(KaTeX), answer, tolerance?}[]`, 모두 맞아야 정답. QuizSet 연동. 계산 문제는 최종 답만 받지 말고 이걸로.
 - `QuizSet.vue` + `quizGroup.ts` — Quiz 들을 묶어 풀이 현황 **자동 집계**(provide/inject).
   자식 Quiz 가 mount 시 register, 정답 시 report. 전부 풀면 `completed` 이벤트.
   **uid = question 문자열이므로 한 QuizSet 안에서 question 텍스트가 중복되면 집계가 깨진다.**

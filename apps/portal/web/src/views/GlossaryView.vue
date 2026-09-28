@@ -59,7 +59,7 @@ const partCount = computed(() => new Set(rows.value.map((r) => r.part)).size)
         <h1 class="text-2xl font-bold text-slate-900">비유어 사전</h1>
         <p class="mt-1 break-keep text-sm text-slate-500">
           이 시리즈의 비유어는 학습용 발판이고, 동료·문서·논문 앞에서는 실무 용어로 바꿔 말합니다.
-          각 부 캡스톤의 치환표를 정본에서 한 곳에 모았어요. 실무 용어를 누르면
+          각 부 캡스톤에 흩어져 있던 치환표를 한 곳에 모았어요. 실무 용어를 누르면
           <RouterLink to="/concepts" class="text-indigo-600 hover:underline">개념 지도</RouterLink>에서 그 개념이 열립니다.
         </p>
       </div>
@@ -132,7 +132,7 @@ const partCount = computed(() => new Set(rows.value.map((r) => r.part)).size)
     </section>
 
     <p v-if="graph" class="mt-2 break-keep text-center text-xs text-slate-500">
-      비유어의 짝(실무 용어)은 정본 <code>scripts/ontology/concepts.json</code> 의 <code>metaphors</code> 에서 옵니다 —
+      이 표는 기준 파일 <code>scripts/ontology/concepts.json</code> 의 <code>metaphors</code> 에서 자동으로 만들어져 늘 최신이에요 —
       짝지을 실무 용어가 없는 비유(회색 지대)는 일부러 싣지 않았어요.
     </p>
   </main>

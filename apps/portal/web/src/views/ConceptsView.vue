@@ -207,7 +207,7 @@ const outsideTerm = (c: Concept) =>
       <div>
         <h1 class="text-2xl font-bold text-slate-900">개념 지도</h1>
         <p class="mt-1 text-sm text-slate-500">
-          시리즈의 개념을 부별로 펼쳤습니다. 개념을 누르면 <b class="text-indigo-700">먼저 알아야 하는 사슬</b>과
+          시리즈의 개념을 부별로 펼쳤습니다. 개념을 누르면 <b class="text-indigo-700">먼저 알아야 하는 개념</b>과
           <b class="text-teal-700">그 개념을 쓰는 다음 개념</b>이 이어지고, 아래에 배우는 곳·다시 쓰이는 곳이 열립니다.
           단계 순서는 <RouterLink to="/map" class="text-indigo-600 hover:underline">학습 구조도</RouterLink>에.
         </p>
@@ -245,7 +245,7 @@ const outsideTerm = (c: Concept) =>
       <span v-if="missedIds.size" class="inline-flex items-center gap-1.5"><span class="inline-block h-3 w-3 rounded border border-sky-200 bg-sky-50 ring-2 ring-amber-600" />⚠ 진단에서 헷갈린 개념</span>
       <span class="inline-flex items-center gap-1.5">
         <svg width="26" height="8"><line x1="0" y1="4" x2="26" y2="4" stroke="var(--c-indigo-500)" stroke-width="1.5" /></svg>
-        먼저 알아야(사슬)
+        먼저 알아야 하는 개념
       </span>
       <span class="inline-flex items-center gap-1.5">
         <svg width="26" height="8"><line x1="0" y1="4" x2="26" y2="4" stroke="var(--c-teal-500)" stroke-width="1.5" stroke-dasharray="4 3" /></svg>
@@ -370,7 +370,7 @@ const outsideTerm = (c: Concept) =>
             </li>
           </ul>
           <p v-if="chain.length > directPrereqs.length" class="mt-2 text-xs text-slate-600">
-            사슬 전체 {{ chain.length }}개 — 먼 것부터:
+            출발점까지 거슬러 올라가면 {{ chain.length }}개 — 먼 것부터:
             <template v-for="(c, i) in chain" :key="c.id"><span v-if="i"> → </span><button type="button" class="text-indigo-700 hover:underline" @click="select(c.id)">{{ c.label }}</button></template>
           </p>
         </div>
@@ -399,7 +399,7 @@ const outsideTerm = (c: Concept) =>
       </div>
     </section>
     <p v-else-if="graph" class="mt-4 text-center text-sm text-slate-500">
-      개념을 누르면 배우는 곳 · 먼저 알아야 하는 사슬 · 다시 쓰이는 곳이 여기 열립니다. 주소의 <code>?c=</code> 로 공유할 수 있어요.
+      개념을 누르면 배우는 곳 · 먼저 알아야 하는 개념 · 다시 쓰이는 곳이 여기 열립니다. 주소의 <code>?c=</code> 로 공유할 수 있어요.
     </p>
   </main>
 </template>
