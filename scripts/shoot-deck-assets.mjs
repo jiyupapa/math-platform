@@ -80,8 +80,8 @@ const DIAG = JSON.stringify({
     localStorage.setItem('tf-progress-v1', JSON.stringify(['ch1', 'ch2', 'ch11']))
     localStorage.setItem('num-progress-v1', JSON.stringify(['ch1', 'ch2']))
     localStorage.setItem('stat-review-v1', JSON.stringify([
-      { id: 'ch4-s2', chapter: 'ch4', label: '조건부 확률 — 베이즈 직관' },
-      { id: 'ch5-s1', chapter: 'ch5', label: '확률분포 읽기' },
+      { id: 'ch4-s2', chapter: 'ch4', label: '2. 조건부 확률의 정의' },
+      { id: 'ch5-s1', chapter: 'ch5', label: '1. 확률변수: 결과에 숫자 붙이기' },
     ]))
   }, DIAG)
   await page.reload({ waitUntil: 'networkidle' })
@@ -94,7 +94,7 @@ const DIAG = JSON.stringify({
 // ── ④ 4부 라이브 투어 5컷 — 랩 카드 요소 샷 ─────────────────────────────────
 // 랩 루트는 공통 래퍼 `my-5 rounded-xl border border-slate-200 bg-white` (ConceptCard 는 유색 배경이라 제외됨)
 const LABS = [
-  { ch: 'ch2', name: 'lab_ch2_tokenize', anchor: '문장 — 직접 고치거나' },
+  { ch: 'ch2', name: 'lab_ch2_tokenize', anchor: '문장: 직접 고치거나' },
   { ch: 'ch3', name: 'lab_ch3_embedding', anchor: '단어 지도' },
   { ch: 'ch6', name: 'lab_ch6_attention', anchor: 'Query(질문) 벡터' },
   { ch: 'ch9', name: 'lab_ch9_output', anchor: '마지막 문맥 벡터' },
@@ -117,7 +117,7 @@ const LABS = [
   await ctx.close()
 }
 
-// ── ⑤ 개념 온톨로지 — 개념 지도(선택 상태) · 비유어 사전 · 챕터 띠 ───────────────────
+// ── ⑤ 개념 온톨로지 — 개념 지도(선택 상태) · 용어 대조표 · 챕터 띠 ───────────────────
 {
   const { ctx, page } = await fresh()
   await page.goto(`${BASE}/concepts?c=kl-divergence`, { waitUntil: 'networkidle' })
@@ -144,8 +144,8 @@ const LABS = [
     localStorage.setItem('hub-baseline-v1', d)
     localStorage.setItem('la-progress-v1', JSON.stringify(['ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6']))
     localStorage.setItem('stat-review-v1', JSON.stringify([
-      { id: 'ch4-s2', chapter: 'ch4', label: '조건부 확률의 정의' },
-      { id: 'ch5-s1', chapter: 'ch5', label: '확률변수 — 결과에 숫자 붙이기' },
+      { id: 'ch4-s2', chapter: 'ch4', label: '2. 조건부 확률의 정의' },
+      { id: 'ch5-s1', chapter: 'ch5', label: '1. 확률변수: 결과에 숫자 붙이기' },
     ]))
     localStorage.setItem('it-review-v1', JSON.stringify([{ id: 'ch5-s1', chapter: 'ch5', label: '1. KL = 초과 비트 정의' }]))
   }, DIAG)
