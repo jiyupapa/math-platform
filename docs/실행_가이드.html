@@ -258,7 +258,16 @@ ollama pull gemma3:4b       <span class="c"># 조금 더 크고 답이 안정적
       <b>튜터가 다른 부 개념을 아는 원리</b>
       <p>질문에 나온 개념을 개념 그래프에서 찾아 카드(배우는 곳, 먼저 알아야 하는 개념, 다시 쓰이는 곳, 비유어)를 최대 세 장 시스템 프롬프트에 덧붙입니다. 카드 한 장이 약 100토큰이라 작은 모델에도 부담이 없습니다. 카드가 없으면 예전처럼 "이 과정에 없다"고 답하므로, 그렇게 답하면 <a href="#trouble">12절</a>을 보세요.</p>
     </div>
-    <p class="lead">다른 PC의 Ollama를 쓰려면 빌드 전에 루트 <code>.env</code> 에 <code>VITE_OLLAMA_URL=http://10.0.0.5:11434</code> 처럼 적습니다. 빌드 시점에 값이 박히므로 바꾼 뒤에는 다시 빌드해야 하고, 그 서버는 CORS를 허용해야 합니다.</p>
+    <p class="lead">다른 PC의 Ollama를 쓰려면 빌드 전에 루트 <code>.env</code> 에 <code>VITE_OLLAMA_URL=http://10.0.0.5:11434</code> 처럼 적습니다. 빌드 시점에 값이 박히므로 바꾼 뒤에는 다시 빌드해야 하고, 그 서버도 아래처럼 사이트 주소를 허용해야 합니다.</p>
+    <h3 id="tutor-host">사내 호스트에 올릴 때 (<code>OLLAMA_ORIGINS</code>)</h3>
+    <p>튜터는 브라우저가 각자 PC의 Ollama(<code>http://localhost:11434</code>)를 직접 부릅니다. Ollama는 기본적으로 <b>localhost에서 연 페이지의 요청만</b> 받습니다. 그래서 조립본을 <code>https://math.example.co.kr</code> 같은 사내 주소에 올리면, Ollama가 켜져 있어도 요청이 403으로 막히고 튜터에는 "연결할 수 없어요"가 뜹니다. 로컬 실측으로는 출처가 localhost면 200, 다른 주소면 403이었습니다(2026-09-29).</p>
+    <p>각 PC에서 사이트 주소를 한 번 허용하고 Ollama를 완전히 종료했다가 다시 켜면 됩니다. localhost가 아닌 주소에서 튜터가 연결에 실패하면, 튜터 창이 이 명령을 그 사이트 주소로 채워서 보여 줍니다.</p>
+    <pre><code>setx OLLAMA_ORIGINS "https://math.example.co.kr"             <span class="c"># Windows: 트레이에서 Ollama 종료 후 다시 실행</span>
+launchctl setenv OLLAMA_ORIGINS "https://math.example.co.kr"  <span class="c"># macOS: Ollama 다시 실행(재부팅하면 다시 설정)</span></code></pre>
+    <div class="callout warn">
+      <b>허용할 주소는 사내 호스트 하나만</b>
+      <p><code>OLLAMA_ORIGINS="*"</code> 처럼 열면 아무 웹사이트나 이 PC의 Ollama를 부를 수 있습니다. 올린 뒤에는 실제 호스트에서 튜터를 한 번 열어 확인하세요. 브라우저가 로컬 네트워크 접근을 허용할지 물을 수 있습니다.</p>
+    </div>
   </section>
 
   <section id="notebook">
@@ -308,7 +317,7 @@ npm run deploy:serve</code></pre>
       <table>
         <thead><tr><th>명령</th><th>무엇을 확인하나</th><th>통과 표시</th></tr></thead>
         <tbody>
-          <tr><td><code>npm run check:ontology</code></td><td>정본의 위치·앵커 실재, 선수 관계 순환, 비유어 유일, 본문 상호 링크 146개 실재, README 연결표 대조</td><td>"온톨로지 검사 통과 — 개념 114". 경고 6건은 안내 링크라 정상</td></tr>
+          <tr><td><code>npm run check:ontology</code></td><td>정본의 위치·앵커 실재, 선수 관계 순환, 비유어 유일, 본문 상호 링크 151개 실재, README 연결표 대조</td><td>"온톨로지 검사 통과 — 개념 114". 경고 6건은 안내 링크라 정상</td></tr>
           <tr><td><code>npm run check:ontology -- --suggest</code></td><td>그래프에 없는 본문 링크 쌍 목록</td><td>후보 목록 출력</td></tr>
           <tr><td><code>npm run check:contrast</code></td><td>전 화면의 글자 대비, 라이트·다크 양쪽</td><td>"미달 없음"</td></tr>
           <tr><td><code>npm run build --workspaces --if-present</code></td><td>12개 앱 타입 검사와 빌드</td><td>앱마다 "built in …"</td></tr>
@@ -316,6 +325,8 @@ npm run deploy:serve</code></pre>
           <tr><td><code>$env:PORT=4199; node scripts/verify-smoke.mjs</code></td><td>129개 장과 포털 화면 렌더, 개념 지도 노드, 용어 대조표 행, 챕터 띠, 부마다 주석→AI 튜터 연동</td><td>"160 통과 / 0 실패"</td></tr>
           <tr><td><code>$env:PORT=4199; node scripts/verify-personalization.mjs</code></td><td>복습 표시·진도·진단을 심은 뒤 복습 경로와 다시 볼 개념이 뜨는지</td><td>"8 통과 / 0 실패"</td></tr>
           <tr><td><code>npm run check:mermaid</code></td><td>문서의 다이어그램이 파서를 통과하는지</td><td>"전 블록 파싱·렌더 통과"</td></tr>
+          <tr><td><code>node packages/store/src/syncMerge.test.mjs</code></td><td>진도·복습 동기화의 3-way 병합 규칙</td><td>"9건 전부 통과"</td></tr>
+          <tr><td><code>node apps/portal/web/src/data/diagnostic.test.mjs</code></td><td>진단 정답 위치 분산(늘 같은 번호로는 관문 통과 불가), 옛 답 변환표, 진단 동기화 판정</td><td>"10건 전부 통과"</td></tr>
         </tbody>
       </table>
     </div>
@@ -349,6 +360,8 @@ npm run search:index && npm run ontology:graph   <span class="c"># 2. 산출물 
       <dd>조립본에서만 각 부의 진도를 읽습니다. 진단을 안 했으면 "다시 볼 개념"도 당연히 없습니다.</dd>
       <dt>튜터 창에 "Ollama에 연결할 수 없어요"</dt>
       <dd>Ollama 앱을 켜거나 <code>ollama serve</code>. 모델이 없으면 <code>ollama pull gemma4:e2b</code>. 확인은 <code>curl http://localhost:11434/api/tags</code>.</dd>
+      <dt>사내 주소에서 열면 Ollama가 켜져 있는데도 "연결할 수 없어요"</dt>
+      <dd>Ollama가 localhost가 아닌 출처를 막는 것입니다(403). 7절 <a href="#tutor-host">사내 호스트에 올릴 때</a>대로 <code>OLLAMA_ORIGINS</code> 에 사이트 주소를 넣고 Ollama를 다시 켭니다.</dd>
       <dt>포트가 이미 사용 중이라고 합니다</dt>
       <dd>조립본은 <code>$env:PORT=4300; node scripts/serve-deploy.mjs</code> 처럼 포트를 바꿔 띄웁니다. 개발 서버는 자동으로 다음 포트를 잡습니다.</dd>
       <dt>npm install 끝에 산출물 두 줄이 안 보입니다</dt>

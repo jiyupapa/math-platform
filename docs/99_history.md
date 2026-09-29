@@ -8,6 +8,20 @@
 
 ## 2026-09-29
 
+### 🐞 9/28 전반 점검 결함 #2~#5 해결
+- **#5 진단 정답 편중** — 정답 위치를 관문 안에선 서로 다르게, 전체로는 위치마다 3개로. 늘 같은 번호로는 관문 통과 0.
+  저장 답(보기 번호)은 `ANSWER_FORMAT` 2 + 옛→새 표로 읽을 때 옮겨 기존 진단·기준선·DB 값이 그대로 채점된다.
+- **#2 사내 호스트 튜터** — Ollama 는 localhost 가 아닌 출처를 403 으로 막는다(실측). 공용 `OllamaOriginHint`(packages/ui)를
+  11부 TutorChat·포털 설명 카드의 '연결 안 됨' 화면에 끼워, localhost 가 아닌 주소에서만 그 주소로 채운
+  `OLLAMA_ORIGINS` 설정 명령(Windows·macOS)을 보여 준다. 실행 가이드 7절 '사내 호스트에 올릴 때'·12절 문제 해결, CLAUDE.md.
+- **#3 포털 진단 동기화** — 지우기가 DB 에도(`kvDelete`), `savedAt` 비교(최신은 새것·기준선은 옛것), 주인 표시로 공용 PC 의
+  다른 계정 진단을 올리지 않음, 조회 실패는 건너뜀(`kvRead`). 판정 규칙은 `apps/portal/web/src/data/diagnosisSync.ts`.
+- **#4 동기화 pull 실패** — `packages/store` 진도·복습 조회가 실패하면 null 을 돌려주고 그 병합을 건너뛴다
+  (예전엔 빈 서버로 읽어 로컬 항목이 잠시 사라졌다).
+- 회귀 테스트 `apps/portal/web/src/data/diagnostic.test.mjs`(10건)를 CI 에 추가. 데모 녹화 스크립트의 진단 클릭 번호를 새 배치로.
+- 검증: 12앱 빌드, 대비(356), 온톨로지, syncMerge 9/9, 진단 10/10, 스모크 160/160·2층 16/16·개인화 8/8, 조립본 브라우저 확인 11항목
+  (LAN 주소로 열어 403 → 안내 표시 포함). 로그인 DB 경로(#3·#4)는 운영 DB 라 실행하지 않고 판정 규칙 테스트와 코드 경로로 확인.
+
 ### 🎤 발표 산출물 재생성 — 덱·스크린샷·영상 (`docs/hackathon/`)
 용어 점검(A~D·C4·6부 본편) 뒤 옛 화면 문구가 찍혀 있던 발표 산출물을 체인 순서대로 다시 만들었다.
 - 원본: `scripts/build-pitch-deck.py`(슬라이드 본문·발표자 노트), `record-demo.mjs`(자막 23개), `shoot-deck-assets.mjs`, `11_pitch_deck.md`·`10_spec.md`·`12_metrics.md`·

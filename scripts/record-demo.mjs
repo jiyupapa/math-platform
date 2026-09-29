@@ -123,7 +123,8 @@ console.log('▶ S2 진단')
 await page.goto(`${BASE}/diagnose`, { waitUntil: 'networkidle' })
 await cap('5분 진단: 시험이 아니라, 나에게 맞는 경로를 짜기 위한 12문항')
 // 프로필: 벡터·확률 관문 통과, 미분·log 미통과 (발표 덱 스크린샷과 동일 → "55챕터 · 31.9시간")
-const picks = [1, 1, 2, 2, 1, 1, 0, 0, 2, 3, 0, 0]
+// 화면의 보기 번호다 — 진단 보기 배치(diagnostic.ts ANSWER_FORMAT 2, 2026-09-29) 기준. 예전 배치의 [1,1,2,2,1,1,0,0,2,3,0,0]과 같은 답.
+const picks = [0, 3, 2, 3, 0, 1, 0, 0, 1, 3, 0, 1]
 const items = page.locator('main ol > li')
 for (let i = 0; i < picks.length; i++) {
   if (i === 6) await cap('모르는 건 편하게 골라도 됩니다. 관문 단위로 채점되니까요')
