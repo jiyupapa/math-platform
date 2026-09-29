@@ -37,7 +37,7 @@ const pair = computed(() => {
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <p class="mb-1 text-sm font-semibold text-slate-500">
-      단어 지도 — 점을 <b>두 개</b> 눌러 거리를 재보세요
+      단어 지도: 점을 <b>두 개</b> 눌러 거리를 재 보세요
     </p>
     <p class="mb-3 text-xs text-slate-500">
       가까이 모인 단어일수록 뜻이 비슷합니다. (뜻이 비슷 → 좌표가 가까움)
@@ -101,8 +101,8 @@ const pair = computed(() => {
     >
       <b>{{ selected[0] }}</b> ↔ <b>{{ selected[1] }}</b> 거리 =
       <b class="font-mono">{{ pair.d.toFixed(2) }}</b>
-      <span v-if="pair.same"> — 같은 무리라 <b>가깝습니다</b> (뜻이 비슷). 👍</span>
-      <span v-else> — 다른 무리라 <b>멉니다</b> (뜻이 다름).</span>
+      <span v-if="pair.same">(같은 무리라 <b>가깝습니다</b>. 뜻이 비슷해요 👍)</span>
+      <span v-else>(다른 무리라 <b>멉니다</b>. 뜻이 달라요)</span>
     </div>
     <div v-else class="mt-4 rounded-lg bg-slate-50 px-4 py-3 text-sm text-slate-500">
       점을 두 개 선택하면 거리가 표시됩니다. (하나 더 누르면 가장 오래된 선택이 풀립니다.)

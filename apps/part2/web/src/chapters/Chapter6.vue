@@ -24,7 +24,7 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 6 · 핵심</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">6장 · 핵심</p>
     <h1 class="mb-4 text-3xl font-bold">연쇄법칙 🔗</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       이 챕터가 전체 커리큘럼의 <b>심장</b>입니다. 연쇄법칙은 "함수 안의 함수"를 미분하는 방법이자,
@@ -41,15 +41,15 @@ function onSetComplete() {
     </ConceptCard>
 
     <!-- 1. 합성함수 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">1. 합성함수 — 함수 안의 함수</h2>
-    <ReviewFlag id="ch6-s1" chapter="ch6" label="1. 합성함수 — 함수 안의 함수" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">1. 합성함수: 함수 안의 함수</h2>
+    <ReviewFlag id="ch6-s1" chapter="ch6" label="1. 합성함수: 함수 안의 함수" />
     <p class="leading-relaxed text-slate-700">
       <MathBlock inline expr="(2x+1)^2" /> 같은 식은 <b>두 단계</b>로 이뤄져 있어요:
       먼저 <MathBlock inline expr="2x+1" /> 을 계산하고(속), 그 결과를 <b>제곱</b>합니다(겉).
       이렇게 함수를 <b>겹쳐 넣은</b> 것이 합성함수입니다.
     </p>
 
-    <ConceptCard tone="note" title="새 용어 — 합성함수 / 겉함수·속함수">
+    <ConceptCard tone="note" title="새 용어: 합성함수 / 겉함수·속함수">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li><b>합성함수</b> <MathBlock inline expr="f(g(x))" />: <MathBlock inline expr="g" /> 의 결과를 다시 <MathBlock inline expr="f" /> 에 넣은 함수.</li>
         <li><b>속함수</b> <MathBlock inline expr="g(x)" /> (안쪽, 먼저 계산), <b>겉함수</b> <MathBlock inline expr="f(u)" /> (바깥, 나중 계산).</li>
@@ -75,8 +75,8 @@ function onSetComplete() {
     />
 
     <!-- 2. 연쇄법칙 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">2. 연쇄법칙 — 겉미분 × 속미분</h2>
-    <ReviewFlag id="ch6-s2" chapter="ch6" label="2. 연쇄법칙 — 겉미분 × 속미분" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">2. 연쇄법칙: 겉미분 × 속미분</h2>
+    <ReviewFlag id="ch6-s2" chapter="ch6" label="2. 연쇄법칙: 겉미분 × 속미분" />
     <MathBlock expr="\big(f(g(x))\big)' = f'(g(x))\cdot g'(x)" />
     <p class="leading-relaxed text-slate-700">
       "<b>겉함수를 미분(속은 그대로 둔 채) × 속함수를 미분</b>"입니다.
@@ -129,7 +129,7 @@ function onSetComplete() {
       <MathBlock inline expr="u" /> 가 <MathBlock inline expr="x" /> 보다 <b>3배</b> 빨리 변하고,
       <MathBlock inline expr="y" /> 가 <MathBlock inline expr="u" /> 보다 <b>2배</b> 빨리 변하면,
       <MathBlock inline expr="y" /> 는 <MathBlock inline expr="x" /> 보다 <b>3×2 = 6배</b> 빨리 변합니다.
-      변화율(속도)이 <b>사슬을 따라 곱해지는 것</b> — 그게 연쇄법칙의 전부예요.
+      변화율(속도)이 <b>사슬을 따라 곱해지는 것</b>, 그게 연쇄법칙의 전부예요.
       (분수처럼 <MathBlock inline expr="du" /> 가 "약분"되는 것처럼 외우면 편해요)
     </ConceptCard>
 
@@ -155,8 +155,8 @@ function onSetComplete() {
     <ConceptCard tone="ai" title="역전파는 연쇄법칙의 반복 적용">
       <ul class="list-disc space-y-2 pl-5">
         <li>출력의 기울기에서 시작해 <b>층마다 국소 미분을 곱하며</b> 입력 쪽으로 전파.</li>
-        <li>각 곱셈이 곧 <MathBlock inline expr="\frac{dy}{du}\cdot\frac{du}{dx}" /> — 사슬을 거슬러 올라가는 연쇄법칙.</li>
-        <li>그래서 이번 챕터를 이해하면 "AI가 어떻게 배우는가"의 핵심을 이미 아는 셈입니다. (Phase 10 에서 계산그래프로 다시!)</li>
+        <li>각 곱셈이 곧 <MathBlock inline expr="\frac{dy}{du}\cdot\frac{du}{dx}" />. 사슬을 거슬러 올라가는 연쇄법칙.</li>
+        <li>그래서 이번 챕터를 이해하면 "AI가 어떻게 배우는가"의 핵심을 이미 아는 셈입니다. (10장에서 계산그래프로 다시!)</li>
       </ul>
     </ConceptCard>
 
@@ -174,7 +174,7 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 · 단계별 계산 10문제입니다. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="연쇄법칙 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="연쇄법칙: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -288,15 +288,15 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 6 완료 — 역전파의 심장을 잡았습니다! 🔗</p>
+      <p class="font-semibold text-emerald-800">6장 완료! 역전파의 심장을 잡았습니다! 🔗</p>
       <p class="mt-1 text-sm text-emerald-700">
-        다음은 AI 활성화 함수의 미분 — <b>지수·로그·시그모이드</b>입니다.
+        다음은 AI 활성화 함수의 미분, <b>지수·로그·시그모이드</b>입니다.
       </p>
       <RouterLink
         to="/ch/ch7"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        다음 챕터 — 지수·로그·시그모이드 미분 →
+        다음 챕터: 지수·로그·시그모이드 미분 →
       </RouterLink>
     </div>
   </article>

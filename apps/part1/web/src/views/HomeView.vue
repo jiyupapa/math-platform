@@ -10,7 +10,7 @@ const progress = useProgressStore()
 <template>
   <div>
     <p class="mb-2 text-sm font-medium text-indigo-600">수포자를 위한 선형대수</p>
-    <h1 class="mb-3 text-3xl font-bold">유튜브 추천도, ChatGPT도 — 사실 선형대수입니다</h1>
+    <h1 class="mb-3 text-3xl font-bold">유튜브 추천도, ChatGPT도 사실 선형대수입니다</h1>
     <p class="mb-4 leading-relaxed text-slate-600">
       유튜브·넷플릭스 추천, ChatGPT, 얼굴인식… 매일 쓰는 <b>AI의 정체는 벡터와 행렬 몇 개</b>예요.
       이 사이트는 공식부터 외우지 않습니다. 화살표를 직접 끌어보고, 격자가 휘는 걸 눈으로 보며

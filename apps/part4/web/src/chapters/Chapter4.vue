@@ -34,7 +34,7 @@ const sinCosChart = {
       tension: 0.3,
     },
     {
-      label: '차원2: sin(pos/4) — 느린 파동',
+      label: '차원2: sin(pos/4), 느린 파동',
       data: positions.map((p) => Math.sin(p / 4)),
       borderColor: 'var(--c-amber-500)',
       pointRadius: 2,
@@ -50,10 +50,10 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 4 · 위치 인코딩</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">4장 · 위치 인코딩</p>
     <h1 class="mb-4 text-3xl font-bold">위치 인코딩 — "몇 번째"인지 알려주기</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
-      임베딩으로 각 단어는 <b>뜻(의미 벡터)</b>을 얻었습니다. 그런데 아직 빠진 게 있어요 —
+      임베딩으로 각 단어는 <b>뜻(의미 벡터)</b>을 얻었습니다. 그런데 아직 빠진 게 있어요.
       <b>순서</b>입니다. "나 너 좋아해"와 "너 나 좋아해"는 단어가 똑같은데 뜻은 정반대죠.
       위치 인코딩은 각 토큰에 <b>"몇 번째 자리인지"</b>를 심어 줍니다.
     </p>
@@ -69,7 +69,7 @@ function onSetComplete() {
       <ReviewFlag id="ch4-s1" chapter="ch4" label="1. 순서의 중요성" />
     </h2>
     <p class="leading-relaxed text-slate-700">
-      놀랍게도 트랜스포머의 핵심(어텐션)은 단어들을 <b>순서 없는 한 뭉치</b>로 봅니다 —
+      놀랍게도 트랜스포머의 핵심(어텐션)은 단어들을 <b>순서 없는 한 뭉치</b>로 봅니다.
       여러 단어를 <b>동시에(병렬로)</b> 처리하기 때문이에요. 그래서 순서를 <b>따로 알려주지 않으면</b>
       "나 너 좋아해"와 "너 나 좋아해"를 구분하지 못합니다. 아래에서 <b>위치 정보를 껐다 켜보세요</b>.
     </p>
@@ -104,7 +104,7 @@ function onSetComplete() {
     </p>
     <MathBlock expr="\text{최종 벡터} = \text{단어 임베딩} + \text{위치 벡터}" />
     <p class="mt-1 text-sm text-slate-500">
-      벡터끼리 더할 땐 <b>같은 자리 숫자끼리</b> 더합니다 — 첫째는 첫째끼리, 둘째는 둘째끼리.
+      벡터끼리 더할 땐 <b>같은 자리 숫자끼리</b> 더합니다. 첫째는 첫째끼리, 둘째는 둘째끼리.
       예: <MathBlock inline expr="(2,\ 1) + (0.5,\ 0.3) = (2.5,\ 1.3)" />.
       같은 단어라도 <b>1번째 자리</b>와 <b>2번째 자리</b>에선 더해지는 위치 벡터가 달라, 최종 벡터가 달라집니다.
     </p>
@@ -124,7 +124,7 @@ function onSetComplete() {
     />
 
     <!-- ===== 심화: 사인·코사인 ===== -->
-    <DetailsCard title="➕ 더 깊이 알아보기 — 왜 사인·코사인일까?">
+    <DetailsCard title="➕ 더 깊이 알아보기: 왜 사인·코사인일까?">
       <p class="mb-2">
         실험실에선 위치 벡터를 아무 값으로 넣었지만, 원래 트랜스포머 논문은 이걸
         <b>사인(sin)·코사인(cos) 함수</b>로 만듭니다. 차원마다 <b>파동의 속도(주기)</b>를 다르게 해서요.
@@ -136,7 +136,7 @@ function onSetComplete() {
       </p>
       <p class="mb-3">
         아래는 위치(0~15)에 따라 세 차원의 값이 어떻게 출렁이는지 그린 것입니다. 빠른 파동과 느린 파동을
-        <b>섞으면</b>, 위치마다 <b>겹치지 않는 고유한 조합</b>이 만들어져요 — 마치 <b>시계의 시침·분침·초침</b>
+        <b>섞으면</b>, 위치마다 <b>겹치지 않는 고유한 조합</b>이 만들어져요. 마치 <b>시계의 시침·분침·초침</b>
         위치를 함께 보면 시각이 딱 하나로 정해지는 것과 비슷해요.
       </p>
       <ChartView type="line" :data="sinCosChart" :height="240" />
@@ -162,7 +162,7 @@ function onSetComplete() {
           <b>스스로 알지 못합니다</b>. 그래서 위치 인코딩으로 순서를 <b>따로 주입</b>해야 해요.
         </li>
         <li>
-          방식은 두 가지 — <b>고정된 사인·코사인</b>, 또는 <b>학습되는 위치 임베딩</b>.
+          방식은 두 가지: <b>고정된 사인·코사인</b>, 또는 <b>학습되는 위치 임베딩</b>.
         </li>
       </ul>
       <p class="mt-2 text-sm text-violet-900/80">
@@ -177,7 +177,7 @@ function onSetComplete() {
       <b>10문제를 모두 맞히면</b> 이 챕터가 완료됩니다.
     </p>
 
-    <QuizSet title="위치 인코딩 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="위치 인코딩: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -289,7 +289,7 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 4 완료 — 뜻 + 위치가 모두 담겼습니다</p>
+      <p class="font-semibold text-emerald-800">4장 완료! 뜻 + 위치가 모두 담겼습니다</p>
       <p class="mt-1 text-sm text-emerald-700">
         입력 준비가 끝났어요(토큰화 → 임베딩 → 위치). 다음 챕터(ch5 어텐션의 직관)부터
         드디어 <b>트랜스포머의 심장</b>으로 들어갑니다. 노트북 <code>notebooks/ch04_positional.ipynb</code> 도 함께!

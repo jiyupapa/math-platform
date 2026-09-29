@@ -26,7 +26,7 @@ const palette = ['var(--c-indigo-500)', 'var(--c-emerald-500)', 'var(--c-amber-5
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- 문장 입력 -->
-    <p class="mb-1 text-sm font-semibold text-slate-500">① 문장 — 직접 고치거나 예시를 눌러 보세요</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">① 문장: 직접 고치거나 예시를 눌러 보세요</p>
     <input
       v-model="text"
       type="text"
@@ -63,7 +63,7 @@ const palette = ['var(--c-indigo-500)', 'var(--c-emerald-500)', 'var(--c-amber-5
     <p class="mt-1.5 text-xs text-slate-500">{{ modes.find((m) => m.key === mode)?.desc }}</p>
 
     <!-- 토큰 결과 -->
-    <p class="mt-4 mb-2 text-sm font-semibold text-slate-500">③ 토큰 — 조각 + 사전 ID(번호)</p>
+    <p class="mt-4 mb-2 text-sm font-semibold text-slate-500">③ 토큰: 조각 + 사전 ID(번호)</p>
     <div class="flex flex-wrap gap-2">
       <div
         v-for="(t, i) in tokens"

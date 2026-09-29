@@ -218,8 +218,8 @@ const legend: { tone: Tone; label: string }[] = [
       <div>
         <h1 class="text-2xl font-bold text-slate-900">학습 구조도</h1>
         <p class="mt-1 text-sm text-slate-500">
-          세로는 학습 국면(위→아래), 가로는 트랙 — 필수 경로는 실선, 선택 분기는 점선으로 진입합니다.
-          노드를 누르면 아래에 상세가 열립니다.
+          세로는 학습 단계(위→아래), 가로는 트랙이에요. 필수 경로는 실선, 선택 분기는 점선으로 이어집니다.
+          카드를 누르면 아래에 자세한 내용이 열려요.
         </p>
       </div>
       <div class="flex gap-1 rounded-xl border border-slate-200 bg-white p-1 text-sm">
@@ -243,15 +243,15 @@ const legend: { tone: Tone; label: string }[] = [
     </div>
 
     <div class="mb-4 flex flex-wrap gap-x-5 gap-y-1 text-sm text-slate-600">
-      <span><b class="text-slate-900">{{ nodes.length }}</b> 단계 노드</span>
-      <span><b class="text-slate-900">{{ columns.length }}</b> 학습 국면</span>
+      <span><b class="text-slate-900">{{ nodes.length }}</b> 단계 카드</span>
+      <span><b class="text-slate-900">{{ columns.length }}</b> 학습 단계</span>
       <span>필수 <b class="text-slate-900">{{ totalChapters }}</b>챕터 ≈ <b class="text-slate-900">{{ totalHours }}</b>시간</span>
       <span>선택 분기 {{ optionalTracks }}트랙 <b class="text-slate-900">{{ optionalChapters }}</b>챕터</span>
       <span v-if="rec" class="font-medium text-indigo-700">
-        당신의 경로: {{ rec.activeChapters }}챕터 · 약 {{ hoursOf(rec.activeMinutes) }}시간
+        내 경로: {{ rec.activeChapters }}챕터 · 약 {{ hoursOf(rec.activeMinutes) }}시간
       </span>
       <RouterLink v-else to="/diagnose" class="font-medium text-indigo-600 hover:underline">
-        진단하면 이 지도가 당신의 경로로 다시 칠해집니다 →
+        진단을 마치면 이 지도가 내 경로로 다시 칠해져요 →
       </RouterLink>
     </div>
 
@@ -307,7 +307,7 @@ const legend: { tone: Tone; label: string }[] = [
         <div class="grid gap-0" :style="{ gridTemplateColumns: gridCols }">
           <!-- 헤더 행: 모서리 + 레인(열) 헤더 -->
           <div class="border-b border-slate-200 pb-2 text-xs font-medium text-slate-500">
-            국면 ↓ · 레인 →
+            단계 ↓ · 트랙 →
           </div>
           <div
             v-for="lane in visibleLanes"
@@ -411,7 +411,7 @@ const legend: { tone: Tone; label: string }[] = [
         <div class="rounded-xl bg-slate-50 p-3">
           <p class="text-xs text-slate-500">진입 조건</p>
           <p class="mt-0.5 text-sm font-semibold text-slate-800">
-            {{ detail.node.prereqText ?? '필수 경로 — 앞 단계 순서대로' }}
+            {{ detail.node.prereqText ?? '필수 경로, 앞 단계부터 순서대로' }}
           </p>
         </div>
       </div>
@@ -420,7 +420,7 @@ const legend: { tone: Tone; label: string }[] = [
       </p>
     </section>
     <p v-else class="mt-4 text-center text-sm text-slate-500">
-      노드를 누르면 단계 상세(분량 · 진도 · 진입 조건)가 여기 열립니다.
+      카드를 누르면 단계 상세(분량 · 진도 · 진입 조건)가 여기 열려요.
     </p>
   </main>
 </template>

@@ -63,7 +63,7 @@ const clampPct = (x: number) => Math.max(0, Math.min(100, x))
     <!-- ══ 패널 1: pass@k 계산기 ══ -->
     <div class="rounded-xl border border-slate-200 bg-white p-5">
       <p class="mb-3 text-sm font-semibold text-slate-500">
-        ① pass@k 계산기 — n개 시도 중 c개 성공을 관측했을 때, k번 안에 한 번 맞힐 확률
+        ① pass@k 계산기: n개 시도 중 c개 성공을 관측했을 때, k번 안에 한 번 맞힐 확률
       </p>
 
       <div class="grid gap-3 sm:grid-cols-3">
@@ -99,11 +99,11 @@ const clampPct = (x: number) => Math.max(0, Math.min(100, x))
         :class="gap >= 3 ? 'bg-amber-50 text-amber-800' : 'bg-slate-50 text-slate-500'"
       >
         <template v-if="gap >= 3">
-          두 값이 <b>{{ gap.toFixed(1) }}%p</b> 벌어졌습니다 — 표본 n이 작고 k가 n에 가까울수록
+          두 값이 <b>{{ gap.toFixed(1) }}%p</b> 벌어졌습니다. 표본 n이 작고 k가 n에 가까울수록
           소박한 공식은 빗나갑니다. 성적표엔 <b>비편향 추정</b>을 써야 해요.
         </template>
         <template v-else>
-          지금은 두 값이 가깝네요({{ gap.toFixed(1) }}%p 차이) — n을 줄이거나 k를 키워 보세요.
+          지금은 두 값이 가깝네요({{ gap.toFixed(1) }}%p 차이). n을 줄이거나 k를 키워 보세요.
         </template>
       </p>
 
@@ -127,7 +127,7 @@ const clampPct = (x: number) => Math.max(0, Math.min(100, x))
     <!-- ══ 패널 2: 성적표 오차범위 ══ -->
     <div class="rounded-xl border border-slate-200 bg-white p-5">
       <p class="mb-3 text-sm font-semibold text-slate-500">
-        ② 성적표의 ± — 과업 몇 개로 잰 점수인가 (10부 6장 냅킨 공식 98/√n)
+        ② 성적표의 ±: 과업 몇 개로 잰 점수인가 (10부 6장 냅킨 공식 98/√n)
       </p>
 
       <div class="mb-3 flex flex-wrap items-center gap-1.5">
@@ -172,12 +172,12 @@ const clampPct = (x: number) => Math.max(0, Math.min(100, x))
         :class="overlapsRival ? 'bg-rose-50 text-rose-800' : 'bg-emerald-50 text-emerald-800'"
       >
         <template v-if="overlapsRival">
-          🚫 구간이 경쟁 {{ RIVAL }}%를 <b>덮습니다</b> — 이 과업 수로는 {{ rate }}%짜리와
+          🚫 구간이 경쟁 {{ RIVAL }}%를 <b>덮습니다</b>. 이 과업 수로는 {{ rate }}%짜리와
           {{ RIVAL }}%짜리를 구별할 수 없어요. 데모의 성공률만으론 우열 단정 불가.
         </template>
         <template v-else>
-          ✅ 구간이 경쟁 {{ RIVAL }}%보다 위 — 이 정도 과업 수면 우연으로 보기 어렵습니다.
-          (정식 판정은 10부 7장 쌍대 비교)
+          ✅ 구간이 경쟁 {{ RIVAL }}%보다 위에 있어요. 이 정도 과업 수면 우연으로 보기 어렵습니다.
+          (정식 판정은 10부 7장 짝지은 비교)
         </template>
       </p>
     </div>

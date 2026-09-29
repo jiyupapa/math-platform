@@ -29,7 +29,7 @@ const magnitudes = computed(() => {
 const finalMag = computed(() => magnitudes.value[magnitudes.value.length - 1])
 
 const verdict = computed(() => {
-  if (norm.value) return { text: '안정적으로 유지 — 깊게 쌓을 수 있어요 👍', cls: 'bg-emerald-50 text-emerald-800' }
+  if (norm.value) return { text: '안정적으로 유지돼요. 깊게 쌓을 수 있어요 👍', cls: 'bg-emerald-50 text-emerald-800' }
   if (residual.value) return { text: '값이 폭발합니다 💥 (너무 커짐)', cls: 'bg-rose-50 text-rose-700' }
   return { text: '신호가 점점 사라집니다 🫥 (약해져 학습 불가)', cls: 'bg-amber-50 text-amber-800' }
 })
@@ -77,7 +77,7 @@ const chartOptions = { scales: { y: { beginAtZero: true } } }
       <b class="font-mono">{{ finalMag > 99 ? '100+' : finalMag.toFixed(2) }}</b> · {{ verdict.text }}
     </div>
     <p class="mt-2 text-xs text-slate-500">
-      💡 잔차연결만 켜면 폭발, 둘 다 끄면 소멸, <b>층정규화까지 켜면 안정</b> — 그래서 딥한 트랜스포머가 학습됩니다.
+      💡 잔차연결만 켜면 폭발, 둘 다 끄면 소멸, <b>층정규화까지 켜면 안정</b>. 그래서 딥한 트랜스포머가 학습됩니다.
     </p>
   </div>
 </template>

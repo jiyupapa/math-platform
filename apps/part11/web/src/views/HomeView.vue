@@ -11,11 +11,11 @@ const sampleReady = availableChapters.some((c) => c.slug === 'sample')
 
 <template>
   <div>
-    <p class="mb-2 text-sm font-medium text-indigo-600">수포자를 위한 에이전트와 추론의 수학 — 시리즈 11부 (실용·전략)</p>
+    <p class="mb-2 text-sm font-medium text-indigo-600">수포자를 위한 에이전트와 추론의 수학 · 시리즈 11부 (실용·전략)</p>
     <h1 class="mb-3 text-3xl font-bold">AI에게 일을 맡겨도 될까</h1>
     <p class="mb-4 leading-relaxed text-slate-600">
       한 번 물으면 잘 답하는 AI가, 열 단계짜리 일은 왜 자꾸 중간에 틀어질까요.
-      비밀은 <b>확률의 곱</b>에 있습니다 — 걸음마다 90%여도 열 걸음이면 35%.
+      비밀은 <b>확률의 곱</b>에 있습니다. 걸음마다 90%여도 열 걸음이면 35%.
       이 과정은 그 곱을 되살리는 세 가지 길(<b>다시 뽑기·다수결·검수</b>)과
       생각의 길이(추론 시점 컴퓨트)·비용의 수학을 직접 조작하며,
       "에이전트에게 이 업무를 맡겨도 되나"에 <b>계산으로 답하는 눈</b>을 완성합니다.
@@ -35,7 +35,7 @@ const sampleReady = availableChapters.some((c) => c.slug === 'sample')
         to="/ch/sample"
         class="mt-4 block rounded-lg bg-indigo-600 px-4 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-indigo-500"
       >
-        🚀 워밍업은 공개됐어요 — 사슬 붕괴 목격하기 →
+        🚀 워밍업은 공개됐어요. 사슬 붕괴 목격하기 →
       </RouterLink>
     </div>
     <div v-else class="mb-8 rounded-xl border border-indigo-100 bg-indigo-50 p-5">
@@ -58,7 +58,7 @@ const sampleReady = availableChapters.some((c) => c.slug === 'sample')
           🚀 처음이신가요? 워밍업(한 번은 맞히는데 열 번은 못 맞힌다)부터 시작하세요 →
         </RouterLink>
         <p class="mt-2 text-center text-xs text-indigo-600">
-          조건부 확률·분포도 자체 포함 — 3부 전반(확률 기초)을 봤다면 준비 완료입니다.
+          조건부 확률·분포도 이 과정 안에서 다룹니다. 3부 전반(확률 기초)을 봤다면 준비 완료입니다.
         </p>
       </template>
     </div>

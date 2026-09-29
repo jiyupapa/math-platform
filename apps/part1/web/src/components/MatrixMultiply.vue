@@ -128,7 +128,7 @@ const selValue = computed(() => (sel.value ? result.value[sel.value.i][sel.value
         = <b class="text-emerald-700">{{ selValue }}</b>
       </template>
       <template v-else>
-        👆 초록색 결과({{ labelC }})의 칸을 눌러보세요 — 그 칸이 어떻게 계산되는지 보여줍니다.
+        👆 초록색 결과({{ labelC }})의 칸을 눌러보세요. 그 칸이 어떻게 계산되는지 보여줍니다.
       </template>
     </div>
   </div>

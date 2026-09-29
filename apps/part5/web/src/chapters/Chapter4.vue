@@ -51,29 +51,29 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 4 · ★ 핵심 챕터</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">4장 · ★ 핵심 챕터</p>
     <h1 class="mb-4 text-3xl font-bold">크로스 엔트로피 — 틀린 지도의 비용</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       3장의 엔트로피 H(p) 는 <b>세상 그 자체</b>의 불확실성이었습니다. 그런데 우리(그리고 AI)는
       세상의 진짜 분포 p 를 모른 채, 자기 나름의 <b>지도 q</b> 를 들고 다니죠.
-      틀린 지도를 들고 다니면 얼마나 손해일까요? 그 손해를 재는 자가 오늘의 주인공 —
-      그리고 <b>분류기와 LLM 의 손실함수의 정체</b>입니다.
+      틀린 지도를 들고 다니면 얼마나 손해일까요? 그 손해를 재는 자가 오늘의 주인공이자
+      <b>분류기와 LLM 이 쓰는 손실함수</b>입니다.
     </p>
 
     <ConceptCard tone="goal" title="이 챕터의 목표">
       <ul class="list-disc space-y-1 pl-5">
         <li><MathBlock inline expr="H(p,q) = \sum p \cdot \log_2 \frac{1}{q}" /> 를 <b>"틀린 지도 요금"</b>으로 읽는다</li>
         <li>지도를 직접 주무르며 <b>q = p 에서 최소(= H(p))</b>임을 확인한다</li>
-        <li>정답이 원핫이면 <b>H(p,q) = −log q(정답)</b> — 1장의 놀람과 재회</li>
+        <li>정답이 원핫이면 <b>H(p,q) = −log q(정답)</b>, 곧 1장의 놀람이다</li>
         <li>1부 캡스톤의 <b>MSE 가 사실 우회였던 이유</b>를 안다</li>
       </ul>
     </ConceptCard>
 
     <!-- 1. 지도 비유 -->
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 세상은 p 로 돌아가는데, 요금은 q 로 낸다</h2>
-    <ReviewFlag id="ch4-s1" chapter="ch4" label="1. 틀린 지도 요금 — 정의" />
+    <ReviewFlag id="ch4-s1" chapter="ch4" label="1. 틀린 지도 요금: 정의" />
     <p class="leading-relaxed text-slate-700">
-      2장을 떠올려 보세요. 최적 코드는 분포에 맞춘 지도였습니다 —
+      2장을 떠올려 보세요. 최적 코드는 분포에 맞춘 지도였습니다.
       확률 q 라고 <b>믿는</b> 사건에 <MathBlock inline expr="\log_2 \tfrac{1}{q}" /> 비트짜리 코드를 주죠.
       그런데 내 믿음 q 가 틀렸고, 세상은 사실 p 로 돌아간다면?
       <b>코드 길이는 내 지도 q 가 정하지만, 각 사건이 얼마나 자주 터지는지는 세상 p 가 정합니다.</b>
@@ -81,14 +81,14 @@ function onSetComplete() {
     </p>
     <MathBlock expr="H(p, q) = \sum_{x} \underbrace{p(x)}_{\text{실제 빈도}} \cdot \underbrace{\log_2 \frac{1}{q(x)}}_{\text{내 지도의 코드 길이}}" />
 
-    <ConceptCard tone="note" title="새 기호 — H(p, q) 크로스 엔트로피">
+    <ConceptCard tone="note" title="새 기호: H(p, q) 크로스 엔트로피">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <b>이름</b>: 크로스(교차) 엔트로피 · <b>읽는 법</b>: "에이치 피 큐" ·
           <b>뜻</b>: 진짜 분포가 p 인 세상을, q 에 맞춘 코드(지도)로 부호화할 때의 평균 비용(비트)
         </li>
         <li>
-          "크로스(교차)"인 이유: 한 항 안에서 <b>빈도는 p 에서, 코드 길이는 q 에서</b> —
+          "크로스(교차)"인 이유: 한 항 안에서 <b>빈도는 p 에서, 코드 길이는 q 에서</b> 가져와,
           두 분포가 교차해서 곱해지니까요
         </li>
         <li>
@@ -102,7 +102,7 @@ function onSetComplete() {
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 지도 세 장의 요금표</h2>
     <ReviewFlag id="ch4-s2" chapter="ch4" label="2. 지도 3종 요금 계산" />
     <p class="leading-relaxed text-slate-700">
-      3장의 날씨 세상 — 맑음 1/2 · 흐림 1/4 · 비 1/8 · 눈 1/8 (H(p) = 1.75비트) — 에서
+      3장의 날씨 세상(맑음 1/2 · 흐림 1/4 · 비 1/8 · 눈 1/8, H(p) = 1.75비트)에서
       지도 세 장의 요금을 계산해 봅시다.
     </p>
     <div class="my-4 space-y-3">
@@ -110,7 +110,7 @@ function onSetComplete() {
         <p class="text-sm font-bold text-emerald-900">🎯 지도 A: 세상과 똑같은 지도 (q = p)</p>
         <p class="mt-1 text-sm text-emerald-800">
           코드 길이 1, 2, 3, 3비트 → 요금 = ½×1 + ¼×2 + ⅛×3 + ⅛×3 = <b>1.75비트 = H(p)</b>.
-          2장의 최적 코드 그대로 — 이보다 쌀 수 없는 바닥.
+          2장의 최적 코드 그대로, 이보다 쌀 수 없는 바닥.
         </p>
       </div>
       <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
@@ -134,17 +134,17 @@ function onSetComplete() {
       question="위 날씨 세상에서 '균등 지도'(모든 코드 2비트)의 요금 H(p,q)는 몇 비트일까요?"
       type="numeric"
       :answer="2"
-      :hints="['모든 경우의 코드 길이가 2비트로 같아요.', '확률의 합은 1 — 1 × 2비트.']"
+      :hints="['모든 경우의 코드 길이가 2비트로 같아요.', '확률의 합은 1이니 1 × 2비트.']"
       explanation="어떤 날씨든 2비트를 내니 평균도 2비트. 바닥(1.75)보다 0.25비트 비쌉니다."
     />
 
     <!-- 3. Lab -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">3. 실험실 — 지도를 세상에 맞춰 보세요</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">3. 실험실: 지도를 세상에 맞춰 보세요</h2>
     <ReviewFlag id="ch4-s3" chapter="ch4" label="3. 크로스 엔트로피 실험실" />
     <p class="leading-relaxed text-slate-700">
       직접 해 봅시다. 회색 막대(세상 p)는 고정, <b>보라 막대(내 지도 q)를 드래그</b>해서
       요금 H(p,q) 를 최대한 낮춰 보세요. 언제 최소가 되나요?
-      그리고 "눈이 없는 지도" 버튼도 꼭 눌러 보세요 — 무시무시한 일이 벌어집니다.
+      그리고 "눈이 없는 지도" 버튼도 꼭 눌러 보세요. 무시무시한 일이 벌어집니다.
     </p>
 
     <CrossEntropyLab />
@@ -152,22 +152,22 @@ function onSetComplete() {
     <ConceptCard tone="tip" title="실험에서 확인한 두 가지 법칙">
       <ul class="list-disc space-y-1 pl-5">
         <li>
-          <MathBlock inline expr="H(p,q) \ge H(p)" /> — 어떤 지도도 바닥보다 쌀 수 없고,
-          <b>등호는 오직 q = p 일 때</b>. "비용을 낮추려면 세상을 똑같이 믿어라" —
+          <MathBlock inline expr="H(p,q) \ge H(p)" />: 어떤 지도도 바닥보다 쌀 수 없고,
+          <b>등호는 오직 q = p 일 때</b>. "비용을 낮추려면 세상을 똑같이 믿어라".
           이 한 줄이 6장에서 <b>"AI 학습"의 정의</b>가 됩니다.
         </li>
         <li>
-          일어날 수 있는 일에 <b>q = 0 을 주면 비용 무한대</b> — 그래서 LLM 은 어떤 토큰에도
+          일어날 수 있는 일에 <b>q = 0 을 주면 비용 무한대</b>예요. 그래서 LLM 은 어떤 토큰에도
           확률 0을 주지 않아요(소프트맥스가 항상 양수를 내놓는 이유이기도!)
         </li>
       </ul>
     </ConceptCard>
 
     <!-- 4. 원핫 = -log q -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">4. 정답이 하나뿐이면 — 공식이 반토막 난다</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">4. 정답이 하나뿐이면: 공식이 반토막 난다</h2>
     <ReviewFlag id="ch4-s4" chapter="ch4" label="4. 원핫이면 −log q(정답)" />
     <p class="leading-relaxed text-slate-700">
-      분류 문제와 LLM 학습에서는 세상 p 가 특별합니다 — <b>정답이 하나로 정해져</b> 있죠.
+      분류 문제와 LLM 학습에서는 세상 p 가 특별합니다. <b>정답이 하나로 정해져</b> 있죠.
       "이 사진은 고양이다", "다음 토큰은 '서울'이다". 이런 p 를 <b>원핫(one-hot)</b> 분포라
       부릅니다: 정답 칸만 1, 나머지 전부 0.
     </p>
@@ -178,12 +178,12 @@ function onSetComplete() {
       사실 크로스 엔트로피의 원핫 특수판이었던 거예요.
     </p>
 
-    <ConceptCard tone="note" title="새 용어 — 원핫 (one-hot)">
+    <ConceptCard tone="note" title="새 용어: 원핫 (one-hot)">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li><b>이름</b>: 원핫 인코딩/분포 · <b>읽는 법</b>: "원핫" (hot 한 칸만 켜짐)</li>
-        <li><b>뜻</b>: 한 칸만 1이고 나머지는 0인 확률 분포 — "정답은 이것 하나"라는 확신의 극단</li>
+        <li><b>뜻</b>: 한 칸만 1이고 나머지는 0인 확률 분포. "정답은 이것 하나"라는 확신의 극단</li>
         <li>예: 4지선다 정답이 3번이면 p = (0, 0, 1, 0)</li>
-        <li>3장에서 <b>"몰빵"</b>이라 부르던 그 분포가 바로 이거예요 — 몰빵 = 원핫(H = 0)</li>
+        <li>3장에서 <b>"몰빵"</b>이라 부르던 그 분포가 바로 이거예요. 몰빵 = 원핫(H = 0)</li>
       </ul>
     </ConceptCard>
 
@@ -197,25 +197,25 @@ function onSetComplete() {
     />
 
     <!-- 5. MSE 비교 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">5. MSE 와의 대결 — 1부의 복선을 회수하다</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">5. MSE 와의 대결: 1부의 복선을 풀다</h2>
     <ReviewFlag id="ch4-s5" chapter="ch4" label="5. 크로스 엔트로피 vs MSE" />
     <p class="leading-relaxed text-slate-700">
       1부 캡스톤의 미니 신경망은 손실로 <b>MSE</b> (오차 제곱 평균, <MathBlock inline expr="(\hat{y}-y)^2" />) 를
-      썼습니다. 사실 그건 <b>log 를 피하려던 우회</b>였어요 — 이제 log 가 무섭지 않으니
+      썼습니다. 사실 그건 <b>log 를 피하려던 우회</b>였어요. 이제 log 가 무섭지 않으니
       두 손실을 정면 비교할 수 있습니다. 정답에 준 확률 q 에 따른 손실 곡선:
     </p>
 
     <ChartView type="line" :data="lossChart" :options="lossOptions" :height="280" />
 
-    <ConceptCard tone="tip" title="곡선이 말해주는 것 — 왜 분류엔 크로스 엔트로피인가">
+    <ConceptCard tone="tip" title="곡선이 말해주는 것: 왜 분류엔 크로스 엔트로피인가">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <b>자신 있는 오답을 벌하는 강도</b>: 정답에 q = 0.01 을 준 "확신에 찬 오답"에
-          MSE 는 기껏 (1−0.01)² ≈ 0.98 — 미지근합니다. 크로스 엔트로피는 log₂100 ≈ 6.6비트,
-          q 가 0에 가까울수록 <b>무한대로 폭발</b> — 확률을 다루는 문제에 맞는 눈금이죠.
+          MSE 는 기껏 (1−0.01)² ≈ 0.98로 미지근합니다. 크로스 엔트로피는 log₂100 ≈ 6.6비트,
+          q 가 0에 가까울수록 <b>무한대로 폭발</b>합니다. 확률을 다루는 문제에 맞는 눈금이죠.
         </li>
         <li>
-          <b>기울기의 생사</b>: 잠깐 복습 — <b>시그모이드 σ</b> 는 아무 숫자나 0~1 사이로
+          <b>기울기의 생사</b>: 잠깐 복습하면, <b>시그모이드 σ</b> 는 아무 숫자나 0~1 사이로
           눌러 확률처럼 만들어 주는 S자 함수였습니다(1부 캡스톤).
           1부에서 그 기울기 σ′ 을 "받아 적은 선물"로 배웠죠.
           MSE 를 쓰면 이 σ′ 이 곱해지는데, 양 끝(확신 구간)에서 σ′ ≈ 0 이라 <b>크게 틀렸는데도
@@ -223,36 +223,36 @@ function onSetComplete() {
           출력층 기울기가 (ŷ − y) 로 단순해지고, 틀린 만큼 그대로 배워요.
         </li>
         <li>
-          이 "σ′ 소거의 마법"은 <b>10장 캡스톤</b>에서 1부의 신경망을 가져와 직접 확인합니다 —
-          시리즈 전체의 대단원!
+          이 "σ′ 소거의 마법"은 <b>10장 캡스톤</b>에서 1부의 신경망을 가져와 직접 확인합니다.
+          5부의 대단원!
         </li>
       </ul>
     </ConceptCard>
 
     <DetailsCard title="➕ 더 깊이: 회귀에는 왜 여전히 MSE 를 쓰나요?">
-      집값·온도처럼 <b>연속된 숫자</b>를 맞히는 회귀에서는 MSE 가 자연스러운 선택입니다 —
+      집값·온도처럼 <b>연속된 숫자</b>를 맞히는 회귀에서는 MSE 가 자연스러운 선택입니다.
       사실 "정답이 예측 근처에 정규분포로 흩어져 있다"고 믿을 때의 크로스 엔트로피가
       정확히 MSE 꼴이 돼요(로그를 씌우면 제곱이 나오는 정규분포의 성질, 3부 8장).
-      즉 <b>MSE 도 크로스 엔트로피의 특수판</b> — 문제의 확률 모형이 다를 뿐입니다.
+      즉 <b>MSE 도 크로스 엔트로피의 특수판</b>이고, 문제의 확률 모형이 다를 뿐입니다.
       이 유도는 과정 밖이지만, "손실함수는 전부 한 가족"이라는 큰 그림만 기억하세요.
     </DetailsCard>
 
     <!-- AI 연결 -->
-    <h2 class="mt-10 mb-2 text-xl font-bold">🤖 LLM 손실함수의 정체 — 이제 읽을 수 있다</h2>
+    <h2 class="mt-10 mb-2 text-xl font-bold">🤖 LLM 손실함수의 정체: 이제 읽을 수 있다</h2>
     <ReviewFlag id="ch4-ai" chapter="ch4" label="🤖 LLM 손실함수의 정체" />
     <p class="leading-relaxed text-slate-700">
       이제 딥러닝 문서 어디에나 나오는 "cross-entropy loss"가 무엇인지 정확히 말할 수 있습니다.
     </p>
 
-    <ConceptCard tone="ai" title="🤖 AI 연결 — 분류기와 LLM 의 채점표">
+    <ConceptCard tone="ai" title="🤖 AI 연결: 분류기와 LLM 의 채점표">
       <ul class="list-disc space-y-2 pl-5">
         <li>
-          <b>분류기</b>: 정답 클래스(원핫 p)에 모델이 준 확률 q 로 채점 —
+          <b>분류기</b>: 정답 클래스(원핫 p)에 모델이 준 확률 q 로 채점해요.
           손실 = −log q(정답 클래스). 고양이 사진에 "고양이 70%"라고 답하면 손실 0.51비트.
         </li>
         <li>
           <b>LLM</b>: 문장의 <b>모든 토큰 위치마다</b> "다음 토큰 맞히기" 분류 문제를 풀립니다.
-          위치마다 −log q(정답 토큰)를 재서 <b>평균</b>낸 것이 학습 손실 —
+          위치마다 −log q(정답 토큰)를 재서 <b>평균</b>낸 것이 학습 손실이고,
           훈련 로그의 loss 곡선이 바로 이 값(단위만 nat)입니다.
         </li>
         <li>
@@ -261,14 +261,14 @@ function onSetComplete() {
         </li>
       </ul>
       <p class="mt-2 text-sm">
-        회수하는 수학 — 원핫·확률분포의 문법은 <b><PartLink :part="3" ch="ch5">3부 5장</PartLink></b>,
+        다시 쓰는 수학: 원핫·확률분포의 문법은 <b><PartLink :part="3" ch="ch5">3부 5장</PartLink></b>,
         본문 5절의 미니 신경망과 (ŷ−y) 기울기(ŷ = 와이-햇, <b>모델의 예측값</b>)는
         <b><PartLink :part="1" ch="ch12">1부 12장(캡스톤)</PartLink></b>·<b><PartLink :part="2" ch="ch10">2부
         10장(역전파)</PartLink></b>에서 쌓은 그 기초입니다.
       </p>
     </ConceptCard>
 
-    <ConceptCard tone="warn" title="미리 긋는 경계선 — 크로스 엔트로피 vs KL (5장 예고)">
+    <ConceptCard tone="warn" title="미리 긋는 경계선: 크로스 엔트로피 vs KL (5장 예고)">
       다음 장에서 KL 발산이 나오면 헷갈리기 쉬우니 지금 한 줄로 구분해 둡니다:
       <b>H(p,q) 는 지도 요금 전체</b>(바닥 H(p) 포함),
       <b>KL 은 그중 바가지 초과분만</b> (H(p,q) − H(p)).
@@ -280,7 +280,7 @@ function onSetComplete() {
       question="LLM 의 학습 손실(크로스 엔트로피)을 가장 정확히 설명한 것은?"
       :choices="['각 위치에서 정답 토큰에 준 확률의 −log 를 평균한 것', '모델 출력 분포의 엔트로피', '정답과 예측의 차이를 제곱한 것', '토큰 개수를 센 것']"
       :answer="0"
-      explanation="위치마다 −log q(정답 토큰) — 원핫 크로스 엔트로피 — 를 재서 평균합니다. MSE(제곱)는 1부의 우회였죠."
+      explanation="위치마다 −log q(정답 토큰), 곧 원핫 크로스 엔트로피를 재서 평균합니다. MSE(제곱)는 1부의 우회였죠."
     />
 
     <!-- 연습 문제 -->
@@ -289,7 +289,7 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 10문제입니다. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="크로스 엔트로피 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="크로스 엔트로피: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -310,7 +310,7 @@ function onSetComplete() {
         question="정답이 원핫(정답 칸만 1)이면 크로스 엔트로피는 −log q(정답) 하나로 줄어든다."
         type="truefalse"
         :answer="0"
-        explanation="참. 확률 0인 항들이 전부 사라지고 정답 항만 남습니다 — 1장의 놀람과 같은 식."
+        explanation="참. 확률 0인 항들이 전부 사라지고 정답 항만 남습니다. 1장의 놀람과 같은 식."
       />
       <Quiz
         difficulty="easy"
@@ -346,7 +346,7 @@ function onSetComplete() {
         :choices="['약 10비트로 폭발한다', '약 0.001비트로 미미하다', '정확히 1비트다', '0이다']"
         :answer="0"
         :hints="['−log₂ 0.001 ≈ log₂ 1000.', '2¹⁰ = 1024.']"
-        explanation="log₂1000 ≈ 10비트. MSE 라면 최대 1 근처의 미지근한 벌 — 이 폭발력이 CE 를 쓰는 이유입니다."
+        explanation="log₂1000 ≈ 10비트. MSE 라면 최대 1 근처의 미지근한 벌이에요. 이 폭발력이 CE 를 쓰는 이유입니다."
       />
       <Quiz
         difficulty="medium"
@@ -354,12 +354,12 @@ function onSetComplete() {
         type="truefalse"
         :answer="1"
         :hints="['빈도 담당과 길이 담당이 서로 바뀝니다.']"
-        explanation="거짓. 앞자리가 빈도, 뒷자리가 코드 길이를 맡으므로 순서가 바뀌면 값이 달라집니다 — 5장 비대칭성의 뿌리."
+        explanation="거짓. 앞자리가 빈도, 뒷자리가 코드 길이를 맡으므로 순서가 바뀌면 값이 달라집니다. 5장 비대칭성의 뿌리."
       />
       <!-- 어려움 -->
       <StepQuiz
         difficulty="hard"
-        question="거꾸로 지도의 요금 — 세상 p = (1/2, 1/4, 1/8, 1/8), 지도 q = (1/8, 1/8, 1/4, 1/2) 일 때 H(p,q) 를 항별로 구하세요."
+        question="거꾸로 지도의 요금: 세상 p = (1/2, 1/4, 1/8, 1/8), 지도 q = (1/8, 1/8, 1/4, 1/2) 일 때 H(p,q) 를 항별로 구하세요."
         :steps="[
           { lhs: '\\tfrac{1}{2} \\times \\log_2 8', answer: 1.5 },
           { lhs: '\\tfrac{1}{4} \\times \\log_2 8', answer: 0.75 },
@@ -376,7 +376,7 @@ function onSetComplete() {
         :choices="['σ′ 이 소거되어 기울기가 (ŷ−y) 로 단순해지고, 확신 구간에서도 기울기가 살아있다', '손실이 항상 0이 된다', '계산량이 줄어 GPU 가 필요 없다', '정확도가 무조건 100%가 된다']"
         :answer="0"
         :hints="['1부의 받아 적은 선물 σ′ = σ(1−σ) 을 떠올려 보세요.', 'MSE 는 σ′ 이 곱해져 양 끝에서 기울기가 죽어요.']"
-        explanation="CE + 시그모이드 조합에서 σ′ 이 정확히 소거되어 기울기 = (ŷ−y). 크게 틀리면 크게 배우는 건강한 학습 — 10장 캡스톤에서 직접 확인합니다."
+        explanation="CE + 시그모이드 조합에서 σ′ 이 정확히 소거되어 기울기 = (ŷ−y). 크게 틀리면 크게 배우는 건강한 학습이에요. 10장 캡스톤에서 직접 확인합니다."
       />
     </QuizSet>
 
@@ -387,15 +387,15 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 4 완료. LLM 손실함수의 정체를 알았습니다.</p>
+      <p class="font-semibold text-emerald-800">4장 완료. LLM 손실함수의 정체를 알았습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
-        다음은 실험실 게이지의 "초과분"에 이름을 붙입니다 — RLHF 와 증류의 언어, <b>KL 발산</b>.
+        다음은 실험실 게이지의 "초과분"에 이름을 붙입니다. RLHF 와 증류의 언어, <b>KL 발산</b>.
       </p>
       <RouterLink
         to="/ch/ch5"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        다음 챕터 — KL 발산 →
+        다음 챕터: KL 발산 →
       </RouterLink>
     </div>
   </article>

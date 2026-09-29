@@ -100,4 +100,4 @@ jupyter lab
 | `ch07_perplexity.ipynb` | ch7 | 비트↔갈래 환산·PPL 하강 곡선·nat 단위 |
 | `ch08_temperature.ipynb` | ch8 | H(T) 곡선·T별 100회 생성·top-p 가위 |
 | `ch09_conditional_mutual.ipynb` | ch9 | 실제 텍스트에서 문맥의 가치 실측 |
-| `ch10_capstone.ipynb` | ch10 | 🎓 MSE→CE 교체 + bigram 언어모델 (시리즈 대단원) |
+| `ch10_capstone.ipynb` | ch10 | 🎓 MSE→CE 교체 + bigram 언어모델 (5부 대단원) |

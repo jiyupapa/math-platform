@@ -48,7 +48,7 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 3</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">3장</p>
     <h1 class="mb-4 text-3xl font-bold">행렬과 행렬 연산</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       벡터가 숫자 한 줄이라면, <b>행렬</b>은 숫자를 <b>표(격자)</b>로 묶은 것입니다.
@@ -69,7 +69,7 @@ function onSetComplete() {
     <p class="leading-relaxed text-slate-700">행렬은 숫자를 직사각형 표로 늘어놓고 대괄호로 감싼 것입니다.</p>
     <MathBlock expr="A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix}" />
 
-    <ConceptCard tone="note" title="새 용어 — 행, 열, 크기, 성분">
+    <ConceptCard tone="note" title="새 용어: 행, 열, 크기, 성분">
       <ul class="list-disc space-y-1 pl-5">
         <li><b>행(row)</b>: <b>가로</b> 줄. 위 행렬은 2개 행.</li>
         <li><b>열(column)</b>: <b>세로</b> 줄. 위 행렬은 3개 열. (헷갈리면 "행=가로, 열=세로" 외우기)</li>
@@ -93,8 +93,8 @@ function onSetComplete() {
     />
 
     <!-- 2. 덧셈/스칼라배 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">2. 덧셈과 스칼라배 — 성분끼리</h2>
-    <ReviewFlag id="ch3-s2" chapter="ch3" label="2. 덧셈과 스칼라배 — 성분끼리" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">2. 덧셈과 스칼라배: 성분끼리</h2>
+    <ReviewFlag id="ch3-s2" chapter="ch3" label="2. 덧셈과 스칼라배: 성분끼리" />
     <p class="leading-relaxed text-slate-700">
       행렬 덧셈과 스칼라배는 쉽습니다. 벡터처럼 <b>같은 자리끼리</b> 계산해요.
       (단, 덧셈은 <b>크기가 같아야</b> 가능)
@@ -113,15 +113,15 @@ function onSetComplete() {
     />
 
     <!-- 3. 행렬 곱셈 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">3. 행렬 곱셈 — 행 × 열</h2>
-    <ReviewFlag id="ch3-s3" chapter="ch3" label="3. 행렬 곱셈 — 행 × 열" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">3. 행렬 곱셈: 행 × 열</h2>
+    <ReviewFlag id="ch3-s3" chapter="ch3" label="3. 행렬 곱셈: 행 × 열" />
     <p class="leading-relaxed text-slate-700">
       행렬 곱셈은 살짝 독특합니다. 결과의 한 칸은
       <b>왼쪽 행렬의 한 "행"</b> 과 <b>오른쪽 행렬의 한 "열"</b> 을 <b>내적</b>한 값이에요.
-      (<b>내적</b> = 앞 챕터에서 배운 "성분끼리 곱해서 모두 더하기" — 행과 열을 각각 벡터로 보는 거예요.)
+      (<b>내적</b> = 앞 챕터에서 배운 "성분끼리 곱해서 모두 더하기". 행과 열을 각각 벡터로 보는 거예요.)
     </p>
 
-    <ConceptCard tone="warn" title="새 규칙 — 곱셈은 차원이 맞아야!">
+    <ConceptCard tone="warn" title="새 규칙: 곱셈은 차원이 맞아야!">
       <p class="mb-2 text-sm text-slate-500">
         먼저: <MathBlock inline expr="(m\times n)" /> 의 <b>×는 곱셈이 아니라 "m행 n열"</b>이라는 <b>크기 표기</b>예요 (2×3 = 2행 3열, 6이 아님).
       </p>
@@ -132,7 +132,7 @@ function onSetComplete() {
       </p>
       <MathBlock expr="(m\times \underline{n}) \cdot (\underline{n}\times p) = (m\times p)" />
       <p class="mt-2 text-sm">
-        예: <MathBlock inline expr="(3\times \underline{4}) \cdot (\underline{4}\times 2) = (3\times 2)" /> — 가운데 4가 같아서 곱할 수 있어요.
+        예: <MathBlock inline expr="(3\times \underline{4}) \cdot (\underline{4}\times 2) = (3\times 2)" />. 가운데 4가 같아서 곱할 수 있어요.
       </p>
     </ConceptCard>
 
@@ -159,7 +159,7 @@ function onSetComplete() {
       이게 AI 신경망의 기본 동작이라 특히 중요합니다.
     </p>
 
-    <ConceptCard tone="note" title="새 용어 — 입력(x)과 가중치(W)">
+    <ConceptCard tone="note" title="새 용어: 입력(x)과 가중치(W)">
       <p>아래 그림에 나오는 두 AI 용어를 먼저 짚고 갑시다.</p>
       <ul class="mt-2 list-disc space-y-1 pl-5 text-sm">
         <li>
@@ -173,7 +173,7 @@ function onSetComplete() {
         </li>
         <li>
           <b><MathBlock inline expr="W\vec{x}" /></b>: 입력을 가중치로 섞어 <b>새로운 값(벡터)</b>을
-          만드는 것 — 바로 아래 계산입니다.
+          만드는 것. 바로 아래 계산입니다.
         </li>
       </ul>
     </ConceptCard>
@@ -191,15 +191,15 @@ function onSetComplete() {
       <p class="mt-2">
         <b>요리 비유</b>: 처음엔 소금을 대충 넣고 → 맛보고(예측) → 너무 짜면 다음엔 조금 덜 넣고 →
         반복하다 보면 딱 맞는 양(좋은 가중치)을 찾는 것과 같아요. 이렇게 데이터로 가중치를 맞춰가는 게
-        바로 <b>'학습(training)'</b>입니다. 우리는 그 결과인 <b>행렬 곱셈</b>을 지금 배우는 거예요.
+        바로 <b>'학습(training)'</b>입니다. 지금 배우는 건 그 결과인 <b>행렬 곱셈</b>이에요.
       </p>
     </ConceptCard>
 
     <MatrixMultiply :a="weight" :b="inputVec" label-a="W (가중치)" label-b="x (입력)" label-c="결과" />
 
-    <ConceptCard tone="warn" title="복습 — 이 식의 ×도 곱셈이 아니에요!">
+    <ConceptCard tone="warn" title="복습: 이 식의 ×도 곱셈이 아니에요!">
       <p>
-        1절에서 본 "크기 표기" 약속 그대로예요 —
+        1절에서 본 "크기 표기" 약속 그대로예요.
         <MathBlock inline expr="(2\times 2)\cdot(2\times 1) = (2\times 1)" /> 는 숫자 계산이 아니라
         <b>행렬의 "크기(모양)"가 어떻게 변하는지</b>를 나타낸 식입니다.
       </p>
@@ -220,21 +220,21 @@ function onSetComplete() {
     </ConceptCard>
 
     <!-- 5. 전치 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">5. 전치 — 행과 열 맞바꾸기</h2>
-    <ReviewFlag id="ch3-s5" chapter="ch3" label="5. 전치 — 행과 열 맞바꾸기" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">5. 전치: 행과 열 맞바꾸기</h2>
+    <ReviewFlag id="ch3-s5" chapter="ch3" label="5. 전치: 행과 열 맞바꾸기" />
     <p class="leading-relaxed text-slate-700">
       행렬을 다루다 보면 <b>표를 눕히듯 행과 열을 통째로 맞바꾸고 싶을 때</b>가 자주 있어요.
       그 연산에 이름과 기호가 있습니다 (가운데 화살표 <MathBlock inline expr="\Rightarrow" /> 는
       "이렇게 바뀐다"는 뜻):
     </p>
     <MathBlock expr="A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} \quad\Rightarrow\quad A^{\mathsf T} = \begin{bmatrix} 1 & 3 \\ 2 & 4 \end{bmatrix}" />
-    <ConceptCard tone="note" title="새 용어 — 전치">
+    <ConceptCard tone="note" title="새 용어: 전치">
       <p>
-        <b>전치(transpose, 트랜스포즈)</b>: 기호는 오른쪽 위의 작은 T —
+        <b>전치(transpose, 트랜스포즈)</b>: 기호는 오른쪽 위의 작은 T.
         <MathBlock inline expr="A^{\mathsf T}" /> 라 쓰고 <b>"에이 전치"</b>라 읽어요.
         <b>1행이 1열이 되고, 2행이 2열이 되는</b> 뒤집기입니다 (대각선을 축으로 접는 느낌).
         계산할 것은 없고 <b>자리만 바뀌는</b> 연산이라, 지금은 "이런 표기가 있다"만 기억하면
-        충분해요 — 심화 챕터(10·11)에서 다시 만납니다.
+        충분해요. 심화 챕터(10·11)에서 다시 만납니다.
       </p>
     </ConceptCard>
 
@@ -252,14 +252,14 @@ function onSetComplete() {
         </li>
         <li>
           <b>신경망 한 층</b> = <MathBlock inline expr="W\vec{x} + \vec{b}" />.
-          가중치 행렬 <MathBlock inline expr="W" /> 를 입력 벡터에 곱하는 것 — 방금 한 그 계산이에요!
-          끝의 <MathBlock inline expr="+\vec{b}" /> 는 <b>편향(bias, 바이어스)</b> — 결과를 살짝
+          가중치 행렬 <MathBlock inline expr="W" /> 를 입력 벡터에 곱하는 것이 방금 한 그 계산이에요!
+          끝의 <MathBlock inline expr="+\vec{b}" /> 는 <b>편향(bias, 바이어스)</b>으로, 결과를 살짝
           밀어주는 <b>보정값 벡터</b>인데, 지금은 "덤으로 더해주는 값" 정도로만 알면 충분해요.
         </li>
       </ul>
     </ConceptCard>
 
-    <ConceptCard tone="note" title="헷갈리지 말기 — 데이터 행렬 vs 가중치 행렬">
+    <ConceptCard tone="note" title="헷갈리지 말기: 데이터 행렬 vs 가중치 행렬">
       <p class="mb-2">
         위 셋 다 '행렬'이지만 <b>역할이 달라요</b>. 같은 숫자 표라도 하나는 '담기는 것', 하나는 '처리하는 것'입니다.
       </p>
@@ -285,7 +285,7 @@ function onSetComplete() {
       <table class="border-collapse">
         <tbody>
           <!-- 셀 배경은 gray() 가 런타임에 만드는 회색조라 다크 모드에서도 뒤집히지 않는다(데이터 색).
-               그래서 글자색도 테마를 따라가면 안 된다 — 뒤집히지 않는 고정 토큰을 쓴다. -->
+               그래서 글자색도 테마를 따라가면 안 된다. 뒤집히지 않는 고정 토큰을 쓴다. -->
           <tr v-for="(row, i) in imageMatrix" :key="i">
             <td
               v-for="(val, j) in row"
@@ -318,11 +318,11 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 10문제. <b>모두 맞히면 챕터 완료!</b>
     </p>
     <p class="mb-2 text-sm leading-relaxed text-slate-500">
-      ✍️ 표기 안내: 문제에서 행렬을 한 줄로 <b>[[1,2],[3,4]]</b> 처럼 적어요 —
+      ✍️ 표기 안내: 문제에서 행렬을 한 줄로 <b>[[1,2],[3,4]]</b> 처럼 적어요.
       안쪽 대괄호 하나가 <b>한 행</b>입니다 ([1,2]가 1행, [3,4]가 2행).
     </p>
 
-    <QuizSet title="행렬과 행렬 연산 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="행렬과 행렬 연산: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -421,13 +421,13 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 3 완료. 행렬을 다룰 수 있습니다.</p>
+      <p class="font-semibold text-emerald-800">3장 완료. 행렬을 다룰 수 있습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">다음은 행렬로 연립방정식을 푸는 법입니다.</p>
       <RouterLink
         to="/ch/ch4"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        다음 챕터 — 연립방정식과 가우스 소거법 →
+        다음 챕터: 연립방정식과 가우스 소거법 →
       </RouterLink>
     </div>
   </article>

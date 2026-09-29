@@ -108,7 +108,7 @@ const windowWidth = computed(() => 2 * halfSpan.value)
     </div>
     <p class="mt-2 px-1 text-xs leading-relaxed text-slate-500">
       배율을 키워보세요. 확대할수록 <b class="text-indigo-600">파란 곡선</b>이
-      <b class="text-red-600">빨간 접선</b>과 겹쳐 구분이 안 됩니다 — 아주 가까이서 보면 곡선도
+      <b class="text-red-600">빨간 접선</b>과 겹쳐 구분이 안 됩니다. 아주 가까이서 보면 곡선도
       "거의 직선"이죠. 그 직선의 기울기가 바로 그 점의 <b>순간변화율</b>입니다.
     </p>
   </div>

@@ -20,7 +20,7 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 5 · 어텐션의 직관</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">5장 · 어텐션의 직관</p>
     <h1 class="mb-4 text-3xl font-bold">어텐션 — "어디에 집중할까"</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       드디어 트랜스포머의 <b>심장</b>입니다. 한 단어의 뜻을 제대로 알려면 <b>문맥</b>이 필요해요.
@@ -29,7 +29,7 @@ function onSetComplete() {
     </p>
 
     <ConceptCard tone="goal" title="이 챕터의 목표">
-      어텐션의 핵심 직관 — <b>"집중도(가중치)를 정해 문맥을 가중 평균으로 섞는다"</b> — 를
+      어텐션의 핵심 직관인 <b>"집중도(가중치)를 정해 문맥을 가중 평균으로 섞는다"</b>를
       슬라이더로 직접 조절하며 이해합니다. (점수를 정하는 정확한 방법 Q·K·V 는 다음 챕터에서)
     </ConceptCard>
 
@@ -39,7 +39,7 @@ function onSetComplete() {
       <ReviewFlag id="ch5-s1" chapter="ch5" label="1. 문맥과 집중" />
     </h2>
     <p class="leading-relaxed text-slate-700">
-      "그 <b>사과</b>는 빨갛다"의 "그것", "은행에 갔다"의 "은행"(돈? 나무?) — 단어 하나만 보면 애매합니다.
+      "그 <b>사과</b>는 빨갛다"의 "그것", "은행에 갔다"의 "은행"(돈? 나무?). 단어 하나만 보면 애매합니다.
       어텐션은 각 단어가 다른 단어들에 <b>집중도(가중치)</b>를 나눠 주고, 그만큼 <b>참고</b>해서 뜻을 정해요.
       아래에서 질문 단어를 고르고 <b>관련성 점수를 드래그</b>해 보세요.
     </p>
@@ -48,9 +48,9 @@ function onSetComplete() {
 
     <ConceptCard tone="note" title="새 용어 세 개">
       <ul class="list-disc space-y-1 pl-5 text-sm">
-        <li><b>어텐션(attention)</b> — 각 단어가 <b>다른 단어들을 얼마나 참고할지</b> 정해서 문맥을 반영하는 장치.</li>
-        <li><b>어텐션 가중치 / 집중도(attention weight)</b> — "얼마나 참고할지"의 정도. <b>모두 더하면 1</b>(소프트맥스).</li>
-        <li><b>가중 평균(weighted average)</b> — 그냥 평균이 아니라, <b>중요한 것에 더 큰 몫</b>을 줘서 섞은 평균.</li>
+        <li><b>어텐션(attention)</b>: 각 단어가 <b>다른 단어들을 얼마나 참고할지</b> 정해서 문맥을 반영하는 장치.</li>
+        <li><b>어텐션 가중치 / 집중도(attention weight)</b>: "얼마나 참고할지"의 정도. <b>모두 더하면 1</b>(소프트맥스).</li>
+        <li><b>가중 평균(weighted average)</b>: 그냥 평균이 아니라, <b>중요한 것에 더 큰 몫</b>을 줘서 섞은 평균.</li>
       </ul>
     </ConceptCard>
 
@@ -68,8 +68,8 @@ function onSetComplete() {
       <ReviewFlag id="ch5-s2" chapter="ch5" label="2. 가중 평균" />
     </h2>
     <p class="leading-relaxed text-slate-700">
-      점수(관련성)는 그대로 쓰지 않고, <b>소프트맥스</b>(샘플 챕터!)로 <b>합이 1인 집중도</b>로 바꿉니다.
-      그런 다음 각 단어의 벡터를 그 집중도만큼 섞어요 — 이게 <b>가중 평균</b>입니다.
+      점수(관련성)는 그대로 쓰지 않고, <b>소프트맥스</b>(워밍업!)로 <b>합이 1인 집중도</b>로 바꿉니다.
+      그런 다음 각 단어의 벡터를 그 집중도만큼 섞어요. 이게 <b>가중 평균</b>입니다.
     </p>
     <MathBlock expr="\text{문맥} = w_1 v_1 + w_2 v_2 + \dots \quad (\textstyle\sum w_i = 1,\ w = \text{softmax}(\text{점수}))" />
     <p class="mt-1 text-sm text-slate-500">
@@ -79,11 +79,11 @@ function onSetComplete() {
     <p class="mt-1 text-sm text-slate-500">
       🔑 <MathBlock inline expr="\textstyle\sum" /> 는 <b>시그마</b>라고 읽고 <b>"전부 더하라"</b>는 기호예요.
       즉 <MathBlock inline expr="\textstyle\sum w_i = 1" /> 은 "집중도를 다 더하면 1(=100%)"이라는 뜻.
-      <b>소프트맥스</b>는 (샘플 챕터에서 배웠듯) <b>점수를 합이 1인 비율로 눌러 주는 장치</b>입니다.
+      <b>소프트맥스</b>는 (워밍업에서 배웠듯) <b>점수를 합이 1인 비율로 눌러 주는 장치</b>입니다.
     </p>
 
     <ConceptCard tone="tip" title="이미 배운 소프트맥스가 여기서!">
-      샘플 챕터의 소프트맥스가 바로 이 <b>집중도 만들기</b>에 쓰입니다. 점수가 커도 음수여도,
+      워밍업의 소프트맥스가 바로 이 <b>집중도 만들기</b>에 쓰입니다. 점수가 커도 음수여도,
       소프트맥스가 <b>합 1의 집중도</b>로 바꿔 주니 안심하고 섞을 수 있어요.
     </ConceptCard>
 
@@ -97,9 +97,9 @@ function onSetComplete() {
     />
 
     <!-- ===== 심화 ===== -->
-    <DetailsCard title="➕ 더 깊이 알아보기 — 점수는 누가 정하나? (셀프 어텐션 예고)">
+    <DetailsCard title="➕ 더 깊이 알아보기: 점수는 누가 정하나? (셀프 어텐션 예고)">
       <p class="mb-2">
-        실험실에선 관련성 점수를 <b>우리가 손으로</b> 정했지만, 실제로는 모델이
+        실험실에선 관련성 점수를 <b>손으로</b> 정했지만, 실제로는 모델이
         <b>단어 벡터끼리 비교</b>해서 스스로 점수를 매깁니다. 두 단어 벡터가 <b>잘 맞을수록</b> 높은 점수예요.
       </p>
       <p class="mb-2">
@@ -141,7 +141,7 @@ function onSetComplete() {
       <b>10문제를 모두 맞히면</b> 이 챕터가 완료됩니다. 가중 평균 계산이 나오니 위 공식을 참고하세요.
     </p>
 
-    <QuizSet title="어텐션의 직관 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="어텐션의 직관: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -163,14 +163,14 @@ function onSetComplete() {
         question="집중도가 큰 단어일수록 최종 결과(문맥)에 더 많이 반영된다."
         type="truefalse"
         :answer="0"
-        explanation="맞아요. 그래서 '가중' 평균 — 중요한 것에 더 큰 몫을 줍니다."
+        explanation="맞아요. 그래서 '가중' 평균이에요. 중요한 것에 더 큰 몫을 줍니다."
       />
       <Quiz
         difficulty="easy"
         question="'가중 평균(weighted average)'을 가장 잘 설명한 것은?"
         :choices="[
           '그냥 다 더해 개수로 나눈 것',
-          '각 값에 가중치(몫)를 곱해 더한 것 — 중요한 것에 더 큰 몫',
+          '각 값에 가중치(몫)를 곱해 더한 것, 중요한 것에 더 큰 몫',
           '가장 큰 값만 고른 것',
           '무작위로 하나 고른 것',
         ]"
@@ -234,7 +234,7 @@ function onSetComplete() {
         question="어텐션이 트랜스포머에서 갖는 위상으로 가장 옳은 것은?"
         :choices="[
           '있으면 좋은 보조 장치일 뿐',
-          '문맥을 반영하는 핵심 장치 — 트랜스포머의 심장',
+          '문맥을 반영하는 트랜스포머의 핵심 장치',
           '토큰화를 대신한다',
           '확률을 1로 고정한다',
         ]"
@@ -250,7 +250,7 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 5 완료 — 어텐션의 직관을 잡았습니다</p>
+      <p class="font-semibold text-emerald-800">5장 완료! 어텐션의 직관을 잡았습니다</p>
       <p class="mt-1 text-sm text-emerald-700">
         "집중도로 문맥을 가중 평균"이 핵심이에요. 다음 챕터(ch6)에서 그 집중도를
         <b>Q·K·V</b>로 어떻게 계산하는지 파고듭니다. 노트북 <code>notebooks/ch05_attention_intuition.ipynb</code> 도 함께!

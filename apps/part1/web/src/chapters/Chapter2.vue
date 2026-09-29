@@ -94,7 +94,7 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 2</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">2장</p>
     <h1 class="mb-4 text-3xl font-bold">벡터 연산</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       벡터도 더하고, 빼고, 늘일 수 있습니다. 숫자 계산과 똑같이 <b>성분끼리</b> 하면 돼요.
@@ -117,7 +117,7 @@ function onSetComplete() {
     </p>
     <MathBlock expr="\vec{a} + \vec{b} = (a_x + b_x,\; a_y + b_y)" />
 
-    <ConceptCard tone="note" title="새 기호 — 첨자 (아래 작은 글자)">
+    <ConceptCard tone="note" title="새 기호: 첨자 (아래 작은 글자)">
       <p>
         <MathBlock inline expr="a_x" /> 는 "벡터 a의 x성분"을 뜻합니다. 글자 오른쪽 아래 작은 글자를
         <b>첨자(아래 첨자)</b>라 하고, "에이 엑스"라고 읽어요.
@@ -137,8 +137,8 @@ function onSetComplete() {
       <MathBlock
         inline
         :expr="`(${aV.x}, ${aV.y}) + (${bV.x}, ${bV.y}) = (${aV.x + bV.x}, ${aV.y + bV.y})`"
-      />
-      — x끼리 {{ aV.x }}+{{ bV.x }}={{ aV.x + bV.x }}, y끼리 {{ aV.y }}+{{ bV.y }}={{ aV.y + bV.y }}.
+      />.
+      x끼리 {{ aV.x }}+{{ bV.x }}={{ aV.x + bV.x }}, y끼리 {{ aV.y }}+{{ bV.y }}={{ aV.y + bV.y }}.
     </ConceptCard>
 
     <p class="mt-6 mb-1 text-sm font-semibold text-slate-500">🔎 잠깐 확인!</p>
@@ -150,9 +150,9 @@ function onSetComplete() {
     />
 
     <!-- 2. 스칼라배 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">2. 스칼라배 — 벡터 늘이기/줄이기</h2>
-    <ReviewFlag id="ch2-s2" chapter="ch2" label="2. 스칼라배 — 벡터 늘이기/줄이기" />
-    <ConceptCard tone="note" title="새 용어 — '스칼라배'가 뭐죠?">
+    <h2 class="mt-8 mb-2 text-xl font-bold">2. 스칼라배: 벡터 늘이기/줄이기</h2>
+    <ReviewFlag id="ch2-s2" chapter="ch2" label="2. 스칼라배: 벡터 늘이기/줄이기" />
+    <ConceptCard tone="note" title="새 용어: '스칼라배'가 뭐죠?">
       <p>
         <b>스칼라배</b>를 한 단어로 풀면 <b>"벡터에 스칼라(숫자)를 곱하기"</b>입니다. 쪼개 보면:
       </p>
@@ -200,45 +200,45 @@ function onSetComplete() {
       성분으로는 역시 끼리끼리 빼면 돼요.
     </p>
     <MathBlock expr="\vec{a} - \vec{b} = (a_x - b_x,\; a_y - b_y)" />
-    <ConceptCard tone="note" title="새 기호 — 음의 벡터 −b">
+    <ConceptCard tone="note" title="새 기호: 음의 벡터 −b">
       <MathBlock inline expr="-\vec{b}" /> 는 <MathBlock inline expr="\vec{b}" /> 와 길이는 같고
       <b>방향만 반대</b>인 벡터입니다. (스칼라 −1 을 곱한 것)
     </ConceptCard>
 
     <!-- 4. 내적 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">4. 내적(dot product / inner product) — 두 벡터의 닮은 정도</h2>
-    <ReviewFlag id="ch2-s4" chapter="ch2" label="4. 내적(dot product / inner product) — 두 벡터의 닮은 정도" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">4. 내적(dot product / inner product): 두 벡터의 닮은 정도</h2>
+    <ReviewFlag id="ch2-s4" chapter="ch2" label="4. 내적(dot product / inner product): 두 벡터의 닮은 정도" />
     <p class="leading-relaxed text-slate-700">
       <b>내적</b>은 두 벡터를 곱해 <b>숫자 하나</b>를 만드는 연산입니다. 성분끼리 곱해서 더해요.
     </p>
     <MathBlock expr="\vec{a} \cdot \vec{b} = a_x b_x + a_y b_y" />
 
-    <ConceptCard tone="note" title="새 기호 — 내적 점(·)과 각도 θ">
+    <ConceptCard tone="note" title="새 기호: 내적 점(·)과 각도 θ">
       <ul class="list-disc space-y-2 pl-5">
         <li>
-          <MathBlock inline expr="\vec{a} \cdot \vec{b}" /> — 가운데 점은 <b>내적(dot product)</b> 기호.
+          <MathBlock inline expr="\vec{a} \cdot \vec{b}" />: 가운데 점은 <b>내적(dot product)</b> 기호.
           "에이 닷 비" 또는 "에이 내적 비"라 읽고, 결과는 <b>벡터가 아니라 숫자(스칼라)</b>입니다.
         </li>
         <li>
-          <MathBlock inline expr="\lVert\vec{a}\rVert" /> — 양쪽 <b>이중 막대</b>는 <b>벡터의 길이(노름)</b>예요.
+          <MathBlock inline expr="\lVert\vec{a}\rVert" />: 양쪽 <b>이중 막대</b>는 <b>벡터의 길이(노름)</b>예요.
           "에이의 길이"라 읽고, <MathBlock inline expr="\lVert(3,4)\rVert = \sqrt{3^2+4^2} = 5" /> 처럼 구합니다.
-          여기 나온 두 기호도 짚고 갈게요 — <MathBlock inline expr="3^2" /> ("3의 제곱")은
+          여기 나온 두 기호도 짚고 갈게요. <MathBlock inline expr="3^2" /> ("3의 제곱")은
           3×3 = 9 라는 뜻이고, <MathBlock inline expr="\sqrt{\phantom{9}}" /> (<b>루트</b>, 제곱근)는
           반대로 "제곱하면 이 수가 되는 수"입니다: <MathBlock inline expr="\sqrt{25} = 5" />
           (5×5 = 25 니까요). 계산은 계산기·Python이 다 해주니 <b>뜻만 알면 충분</b>해요.
         </li>
         <li>
-          <MathBlock inline expr="\theta" /> — 그리스 문자 <b>세타</b>. 두 벡터 <b>사이의 각도</b>를 나타냅니다.
+          <MathBlock inline expr="\theta" />: 그리스 문자 <b>세타</b>. 두 벡터 <b>사이의 각도</b>를 나타냅니다.
           관계식: <MathBlock inline expr="\vec{a}\cdot\vec{b} = \lVert\vec{a}\rVert\,\lVert\vec{b}\rVert\cos\theta" />
-          (길이 × 길이 × cos θ). — 여기 나온 <b>cos 은 바로 아래 카드에서 설명</b>하니 잠시만요!
+          (길이 × 길이 × cos θ). 여기 나온 <b>cos 은 바로 아래 카드에서 설명</b>하니 잠시만요!
         </li>
         <li>
-          <b>핵심</b>: 내적이 <b>0이면 두 벡터는 수직</b>(<MathBlock inline expr="\theta = 90^\circ" /> — ° 는 각도 단위 "도")입니다.
+          <b>핵심</b>: 내적이 <b>0이면 두 벡터는 수직</b>(<MathBlock inline expr="\theta = 90^\circ" />, ° 는 각도 단위 "도")입니다.
         </li>
       </ul>
     </ConceptCard>
 
-    <ConceptCard tone="note" title="새 용어 — 코사인(cos)">
+    <ConceptCard tone="note" title="새 용어: 코사인(cos)">
       <p>
         <MathBlock inline expr="\cos\theta" /> ("코사인 세타")는 어렵게 생각할 것 없이,
         <b>두 화살표의 방향이 얼마나 같은지를 −1 ~ 1 사이의 숫자로 알려주는 값</b>입니다.
@@ -277,14 +277,14 @@ function onSetComplete() {
       <p class="mt-3">
         그래서 내적 <MathBlock inline expr="\vec{a}\cdot\vec{b} = \lVert\vec{a}\rVert\lVert\vec{b}\rVert\cos\theta" /> 는
         "두 벡터가 <b>같은 방향일수록 큰 양수</b>, <b>반대 방향일수록 큰 음수</b>, <b>직각이면 0</b>"
-        이 됩니다 — 이게 바로 <b>닮은 정도</b>예요.
+        이 됩니다. 이게 바로 <b>닮은 정도</b>예요.
       </p>
     </ConceptCard>
 
-    <ConceptCard tone="note" title="코사인의 정확한 의미 — 세 가지로 보기">
+    <ConceptCard tone="note" title="코사인의 정확한 의미: 세 가지로 보기">
       <ul class="list-disc space-y-2 pl-5">
         <li>
-          <b>① 직각삼각형 (원래 뜻)</b>: <MathBlock inline expr="\cos\theta = \dfrac{\text{밑변}}{\text{빗변}}" /> —
+          <b>① 직각삼각형 (원래 뜻)</b>: <MathBlock inline expr="\cos\theta = \dfrac{\text{밑변}}{\text{빗변}}" />.
           여기서 밑변은 <b>각 θ 바로 옆에 붙은 변</b>, 빗변은 <b>가장 긴 변</b>. "빗변 대비 옆변의 비율"이에요. 단, 0°~90°만 됩니다.
         </li>
         <li>
@@ -292,7 +292,7 @@ function onSetComplete() {
           모든 각도에서 통하고, x좌표가 −1~1 이라 <b>cos도 항상 −1~1</b>. (아래에서 직접 돌려보세요)
         </li>
         <li>
-          <b>③ 벡터 (정확한 연결식)</b>: <MathBlock inline expr="\cos\theta = \dfrac{\vec{a}\cdot\vec{b}}{\lVert\vec{a}\rVert\,\lVert\vec{b}\rVert}" /> —
+          <b>③ 벡터 (정확한 연결식)</b>: <MathBlock inline expr="\cos\theta = \dfrac{\vec{a}\cdot\vec{b}}{\lVert\vec{a}\rVert\,\lVert\vec{b}\rVert}" />,
           내적을 두 길이의 곱으로 나눈 값. 이게 곧 <b>코사인 유사도</b>.
         </li>
       </ul>
@@ -323,10 +323,10 @@ function onSetComplete() {
       <p class="mt-1">
         코사인 유사도 (cos θ) ≈
         <b>{{ cosSim === null ? '—' : cosSim.toFixed(2) }}</b>
-        — 1에 가까울수록 "닮음", 0이면 무관, −1이면 정반대.
+        (1에 가까울수록 "닮음", 0이면 무관, −1이면 정반대)
       </p>
       <p class="mt-1 text-xs text-slate-500">
-        (≈ 는 "약, 대략 같음" — 딱 떨어지지 않는 소수라 반올림해 보여준다는 뜻이에요.)
+        (≈ 는 "약, 대략 같음"이라는 뜻이에요. 딱 떨어지지 않는 소수라 반올림해 보여 줘요.)
       </p>
     </ConceptCard>
 
@@ -368,7 +368,7 @@ function onSetComplete() {
       </ul>
     </ConceptCard>
 
-    <ConceptCard tone="note" title="새 용어 — 코사인 유사도(cosine similarity)">
+    <ConceptCard tone="note" title="새 용어: 코사인 유사도(cosine similarity)">
       <p class="mb-2">
         내적은 <MathBlock inline expr="\lVert\vec{a}\rVert\lVert\vec{b}\rVert\cos\theta" /> 라서 <b>길이가 곱으로 섞여</b> 있어요.
         그래서 방향이 똑같아도 벡터가 길면 내적이 커집니다.
@@ -383,7 +383,7 @@ function onSetComplete() {
         <p class="mt-1">→ 내적은 엉뚱하게 <b>c가 더 닮았다</b>(14 &gt; 4)고 말해요. c가 단지 <b>길어서</b> 이긴 거예요.</p>
       </div>
       <p class="mb-2">
-        그래서 <b>두 길이로 나눠</b> 크기를 지우면 순수한 방향(<MathBlock inline expr="\cos\theta" />)만 남아요 — 이게 <b>코사인 유사도</b>예요.
+        그래서 <b>두 길이로 나눠</b> 크기를 지우면 순수한 방향(<MathBlock inline expr="\cos\theta" />)만 남아요. 이게 <b>코사인 유사도</b>예요.
       </p>
       <MathBlock expr="\text{cosine similarity} = \frac{\vec{a}\cdot\vec{b}}{\lVert\vec{a}\rVert\,\lVert\vec{b}\rVert} = \cos\theta" />
       <p class="mb-1 text-sm text-slate-500">
@@ -393,14 +393,14 @@ function onSetComplete() {
       <p class="mb-1">
         다시 계산하면 <MathBlock inline expr="\cos(\vec{a},\vec{b}) = 1" />, <MathBlock inline expr="\cos(\vec{a},\vec{c}) \approx 0.71" /> →
         이제 <b>b가 더 닮았다</b>고 올바르게 나와요. (크기에 안 속음)
-        표기 두 개만 짚으면 — <MathBlock inline expr="\cos(\vec{a},\vec{b})" /> 는 "a 와 b
+        표기 두 개만 짚으면, <MathBlock inline expr="\cos(\vec{a},\vec{b})" /> 는 "a 와 b
         <b>사이 각도의</b> 코사인"이라는 뜻이고, <MathBlock inline expr="\approx" /> 는
         "약, 대략 같음"(딱 떨어지지 않는 소수라서)입니다.
       </p>
       <p>값은 항상 −1 ~ 1. <b>1에 가까울수록 비슷</b>, 0이면 무관, −1이면 정반대 의미입니다.</p>
     </ConceptCard>
 
-    <ConceptCard tone="tip" title="예시 — 영화 추천을 내적으로">
+    <ConceptCard tone="tip" title="예시: 영화 추천을 내적으로">
       <p>
         취향을 <b>(액션 선호, 로맨스 선호)</b> 두 숫자로 적어봅시다. 액션을 좋아하는 나:
         <MathBlock inline expr="\vec{u} = (5, 1)" />.
@@ -440,7 +440,7 @@ function onSetComplete() {
     <p class="mt-6 mb-1 text-sm font-semibold text-slate-500">🔎 잠깐 확인!</p>
     <Quiz
       question="내 취향 (5, 1) 과 가장 '비슷한'(내적이 큰) 영화는?"
-      :choices="['(5, 0) — 내적 25', '(0, 5) — 내적 5', '(−5, 0) — 내적 −25']"
+      :choices="['(5, 0): 내적 25', '(0, 5): 내적 5', '(−5, 0): 내적 −25']"
       :answer="0"
       :hints="['각 영화 벡터와 (5,1) 의 내적을 계산해 보세요.', '내적이 클수록 비슷.']"
       explanation="(5,0) 과의 내적이 25로 가장 큽니다 → 가장 비슷."
@@ -452,7 +452,7 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 10문제. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="벡터 연산 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="벡터 연산: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -548,13 +548,13 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 2 완료. 벡터 연산을 익혔습니다.</p>
+      <p class="font-semibold text-emerald-800">2장 완료. 벡터 연산을 익혔습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">다음은 여러 수를 표로 묶은 '행렬'입니다.</p>
       <RouterLink
         to="/ch/ch3"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        다음 챕터 — 행렬과 행렬 연산 →
+        다음 챕터: 행렬과 행렬 연산 →
       </RouterLink>
     </div>
   </article>

@@ -25,7 +25,7 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 1 · 트랜스포머 큰 그림</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">1장 · 트랜스포머 큰 그림</p>
     <h1 class="mb-4 text-3xl font-bold">LLM은 거대한 "다음 단어 맞히기" 게임</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       트랜스포머 내부를 뜯기 전에, 먼저 <b>새가 하늘에서 내려다보듯</b> 전체 흐름을 봅니다.
@@ -34,7 +34,7 @@ function onSetComplete() {
 
     <ConceptCard tone="goal" title="이 챕터의 목표">
       ChatGPT 같은 <b>LLM</b>이 사실은 <b>"다음에 올 단어를 확률로 골라 이어붙이는 일"</b>을
-      반복하는 기계임을 이해합니다. 이 챕터는 <b>큰 그림</b>만 — 세부는 ch2부터.
+      반복하는 기계임을 이해합니다. 이 챕터는 <b>큰 그림</b>만 보고, 세부는 ch2부터.
     </ConceptCard>
 
     <!-- ===== 1. 직관: 다음 단어 맞히기 ===== -->
@@ -49,7 +49,7 @@ function onSetComplete() {
     </p>
     <p class="mt-2 leading-relaxed text-slate-700">
       아래에서 후보 단어를 눌러 직접 문장을 완성해 보세요. 각 후보 옆의 <b>%</b>는
-      (샘플 챕터에서 배운) 소프트맥스가 매긴 확률입니다.
+      (워밍업에서 배운) 소프트맥스가 매긴 확률입니다.
     </p>
 
     <NextWordGame v-model="sentence" />
@@ -57,21 +57,21 @@ function onSetComplete() {
     <ConceptCard tone="note" title="새 용어: 언어 모델링 / 자기회귀">
       <ul class="list-disc space-y-2 pl-5 text-sm">
         <li>
-          <b>언어 모델링</b> (language modeling) — 읽는 법: 언어 모델링, 랭귀지 모델링.
+          <b>언어 모델링</b> (language modeling). 읽는 법: 랭귀지 모델링.
           뜻: 지금 해 본 <b>"다음 단어 맞히기" 과제의 정식 이름</b>입니다. 이 과제를 배운 모델이
           <b>언어 모델</b>(language model, <b>LM</b>)이고, 아주 크게 키운 것이 바로
-          <b>LLM</b>(Large Language Model, 대형 언어 모델) — 이 과정 내내 "게임"이라 부르되,
+          <b>LLM</b>(Large Language Model, 대형 언어 모델)입니다. 이 과정 내내 "게임"이라 부르되,
           밖에서 말할 땐 이 이름을 쓰세요.
         </li>
         <li>
-          <b>자기회귀</b> (autoregressive) — 읽는 법: 자기회귀, 오토리그레시브.
+          <b>자기회귀</b> (autoregressive). 읽는 법: 오토리그레시브.
           뜻: <b>자기가 방금 만든 단어를 다시 입력으로 되먹여</b> 다음 단어를 만드는 방식.
           "자기(auto) + 되돌아감(regressive)". LLM이 글을 쓰는 기본 원리입니다.
         </li>
         <li>
-          <b>EOS 토큰</b> (end-of-sequence token) — 읽는 법: 이오에스 토큰.
+          <b>EOS 토큰</b> (end-of-sequence token). 읽는 법: 이오에스 토큰.
           뜻: 방금 "마침표(문장 끝 신호)"라고 부른 것의 실제 이름. 진짜 모델은 문장부호가 아니라
-          <b>"여기서 끝"이라는 전용 특수 토큰</b>을 뽑으면 생성을 멈춥니다 — 문서·논문에서는
+          <b>"여기서 끝"이라는 전용 특수 토큰</b>을 뽑으면 생성을 멈춥니다. 문서·논문에서는
           <b>EOS</b>(종결 토큰)로 나와요. 이 과정에서는 계속 "마침표"라고 부를게요.
         </li>
       </ul>
@@ -79,8 +79,8 @@ function onSetComplete() {
 
     <ConceptCard tone="tip" title="지금 만든 문장">
       현재 문장은 <b>"{{ sentence.filter((w) => w !== '.').join(' ') }}"</b>
-      <span v-if="sentence[sentence.length - 1] === '.'"> — 마침표까지 나와 완성됐어요.</span>
-      <span v-else> — 아직 만드는 중입니다.</span>
+      <span v-if="sentence[sentence.length - 1] === '.'">(마침표까지 나와 완성됐어요.)</span>
+      <span v-else>(아직 만드는 중입니다.)</span>
       단어 <b>{{ sentence.filter((w) => w !== '.').length }}개</b>를 이어붙였네요.
     </ConceptCard>
 
@@ -94,12 +94,12 @@ function onSetComplete() {
 
     <!-- ===== 2. 전체 파이프라인 ===== -->
     <h2 class="mt-8 mb-2 text-xl font-bold">
-      2. 그 "다음 단어"는 어떻게 정해질까 — 전체 파이프라인
+      2. 그 "다음 단어"는 어떻게 정해질까? 전체 파이프라인
       <ReviewFlag id="ch1-s2" chapter="ch1" label="2. 전체 파이프라인" />
     </h2>
     <p class="leading-relaxed text-slate-700">
       위 게임에선 확률을 그냥 보여줬지만, 실제로 그 확률이 나오기까지 글은 여러 <b>부품(칸)</b>을
-      차례로 통과합니다. 이 흐름 전체를 <b>파이프라인(pipeline)</b>이라고 불러요 —
+      차례로 통과합니다. 이 흐름 전체를 <b>파이프라인(pipeline)</b>이라고 불러요.
       <b>공장 컨베이어벨트</b>처럼 재료가 칸을 하나씩 지나며 다듬어지는 것.
     </p>
 
@@ -109,19 +109,19 @@ function onSetComplete() {
 
     <p class="leading-relaxed text-slate-700">각 칸이 하는 일을 한 줄로 미리 보면(세부는 표시된 챕터에서):</p>
     <ul class="my-3 space-y-1.5 pl-1 text-sm text-slate-700">
-      <li>🔹 <b>토큰화</b> — 글을 <b>토큰</b>(단어·글자 조각)으로 쪼갠다. <span class="text-slate-500">(ch2)</span></li>
-      <li>🔹 <b>임베딩</b> — 각 토큰을 <b>의미를 담은 숫자 벡터</b>(좌표)로 바꾼다. <span class="text-slate-500">(ch3)</span></li>
-      <li>🔹 <b>위치 인코딩</b> — "몇 번째 단어인지" <b>순서 정보</b>를 더한다. <span class="text-slate-500">(ch4)</span></li>
-      <li>🔹 <b>어텐션</b> — 단어들이 <b>서로를 얼마나 참고할지</b> 정한다. <span class="text-slate-500">(ch5·6)</span></li>
-      <li>🔹 <b>피드포워드</b> — 참고한 정보를 <b>한 번 더 가공</b>한다. <span class="text-slate-500">(ch8)</span></li>
-      <li>🔹 <b>출력층</b> — 마지막 점수를 <b>소프트맥스로 확률화</b>해 다음 단어를 고른다. <span class="text-slate-500">(ch9·10)</span></li>
+      <li>🔹 <b>토큰화</b>: 글을 <b>토큰</b>(단어·글자 조각)으로 쪼갠다. <span class="text-slate-500">(ch2)</span></li>
+      <li>🔹 <b>임베딩</b>: 각 토큰을 <b>의미를 담은 숫자 벡터</b>(좌표)로 바꾼다. <span class="text-slate-500">(ch3)</span></li>
+      <li>🔹 <b>위치 인코딩</b>: "몇 번째 단어인지" <b>순서 정보</b>를 더한다. <span class="text-slate-500">(ch4)</span></li>
+      <li>🔹 <b>어텐션</b>: 단어들이 <b>서로를 얼마나 참고할지</b> 정한다. <span class="text-slate-500">(ch5·6)</span></li>
+      <li>🔹 <b>피드포워드</b>: 참고한 정보를 <b>한 번 더 가공</b>한다. <span class="text-slate-500">(ch8)</span></li>
+      <li>🔹 <b>출력층</b>: 마지막 점수를 <b>소프트맥스로 확률화</b>해 다음 단어를 고른다. <span class="text-slate-500">(ch9·10)</span></li>
     </ul>
 
     <ConceptCard tone="note" title="새 용어 세 개">
       <ul class="list-disc space-y-1 pl-5 text-sm">
-        <li><b>토큰(token)</b> — 글을 쪼갠 <b>조각</b>. 단어일 수도, 단어의 일부일 수도. (ch2에서 자세히)</li>
-        <li><b>임베딩(embedding)</b> — 토큰을 <b>숫자 벡터</b>로 바꾼 것. 뜻이 비슷하면 좌표도 가깝다. (ch3)</li>
-        <li><b>파이프라인(pipeline)</b> — 입력이 여러 단계를 <b>차례로 통과</b>하는 처리 흐름.</li>
+        <li><b>토큰(token)</b>: 글을 쪼갠 <b>조각</b>. 단어일 수도, 단어의 일부일 수도. (ch2에서 자세히)</li>
+        <li><b>임베딩(embedding)</b>: 토큰을 <b>숫자 벡터</b>로 바꾼 것. 뜻이 비슷하면 좌표도 가깝다. (ch3)</li>
+        <li><b>파이프라인(pipeline)</b>: 입력이 여러 단계를 <b>차례로 통과</b>하는 처리 흐름.</li>
       </ul>
     </ConceptCard>
 
@@ -147,16 +147,16 @@ function onSetComplete() {
       </p>
       <p class="mt-2">
         이때 "가장 확률 높은 단어"만 늘 고르면 답이 <b>뻔하고 단조로워</b>집니다. 그래서 실제로는
-        확률에 따라 <b>살짝 무작위로</b> 고르기도 해요 — 같은 질문에 매번 조금씩 다른 답이 나오는 이유입니다.
-        (고르는 방법은 Phase 12에서 자세히.)
+        확률에 따라 <b>살짝 무작위로</b> 고르기도 해요. 같은 질문에 매번 조금씩 다른 답이 나오는 이유입니다.
+        (고르는 방법은 12장에서 자세히.)
       </p>
       <p class="mt-2 text-sm text-violet-900/80">
-        회수하는 수학 — "다음 단어를 <b>확률로</b> 고른다"의 문법(확률분포)은
+        다시 쓰는 수학: "다음 단어를 <b>확률로</b> 고른다"의 문법(확률분포)은
         <b><PartLink :part="3" ch="ch5">3부 5장</PartLink></b>에서 쌓은 그 기초입니다.
       </p>
     </ConceptCard>
 
-    <DetailsCard title="➕ 더 깊이 알아보기 — 왜 한 단어씩 만들까?">
+    <DetailsCard title="➕ 더 깊이 알아보기: 왜 한 단어씩 만들까?">
       <p class="mb-2">
         문장을 통째로 만들려면 "이 문장 전체가 얼마나 그럴듯한가"를 한 번에 판단해야 하는데,
         가능한 문장의 수가 <b>천문학적</b>이라 사실상 불가능합니다. 반면 <b>다음 단어 하나</b>만
@@ -178,7 +178,7 @@ function onSetComplete() {
       큰 그림을 잡았는지 확인해 봅시다. <b>10문제를 모두 맞히면</b> 이 챕터가 완료됩니다. 막히면 힌트를 누르세요.
     </p>
 
-    <QuizSet title="트랜스포머 큰 그림 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="트랜스포머 큰 그림: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -244,7 +244,7 @@ function onSetComplete() {
       />
       <Quiz
         difficulty="medium"
-        question="샘플 챕터에서 배운 소프트맥스는, 이 큰 그림에서 어느 칸이 하는 일에 쓰일까요?"
+        question="워밍업에서 배운 소프트맥스는, 이 큰 그림에서 어느 칸이 하는 일에 쓰일까요?"
         :choices="['토큰화', '위치 인코딩', '출력층 (점수를 확률로)', '임베딩']"
         :answer="2"
         :hints="['점수를 확률로 바꾸는 곳.']"
@@ -288,7 +288,7 @@ function onSetComplete() {
         ]"
         :answer="1"
         :hints="['항상 1등만 고르면 답이 뻔해지겠죠.']"
-        explanation="확률 분포에서 살짝 무작위로 고르면 매번 조금씩 다른 답이 나옵니다. (Phase 12에서 자세히)"
+        explanation="확률 분포에서 살짝 무작위로 고르면 매번 조금씩 다른 답이 나옵니다. (12장에서 자세히)"
       />
     </QuizSet>
 
@@ -299,7 +299,7 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 1 완료 — 큰 그림을 잡았습니다</p>
+      <p class="font-semibold text-emerald-800">1장 완료! 큰 그림을 잡았습니다</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음 챕터(ch2 토큰화)부터 이 파이프라인의 칸을 하나씩 확대합니다.
         대응 노트북 <code>notebooks/ch01_big_picture.ipynb</code> 에서 자기회귀 생성을 직접 돌려보세요.

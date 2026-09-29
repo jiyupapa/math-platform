@@ -95,7 +95,7 @@ for (const c of concepts) {
       partTitle: partTitle(l.part),
       slug: l.slug,
       title: c.label,
-      summary: l.role === 'defined' ? c.note : `다시 쓰는 곳 — ${l.how ?? c.note} (처음은 ${defined})`,
+      summary: l.role === 'defined' ? c.note : `${l.how ?? c.note} (다시 쓰는 곳 · 처음은 ${defined})`,
       keywords,
       advanced: meta.advanced,
       label: `${l.part}부 ${chLabel(l.slug)} · ${meta.title}`,

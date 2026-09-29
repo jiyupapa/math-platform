@@ -21,11 +21,11 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 6 · Q·K·V & 셀프 어텐션 (핵심)</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">6장 · Q·K·V & 셀프 어텐션 (핵심)</p>
     <h1 class="mb-4 text-3xl font-bold">Q·K·V — 점수를 스스로 계산하기</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
-      앞 챕터에서 어텐션의 직관을 잡았지만, <b>관련성 점수를 우리가 손으로</b> 넣었죠.
-      실제 모델은 이 점수를 <b>스스로 계산</b>합니다. 그 비결이 각 단어가 만드는 세 벡터 —
+      앞 챕터에서 어텐션의 직관을 잡았지만, <b>관련성 점수를 손으로</b> 넣었죠.
+      실제 모델은 이 점수를 <b>스스로 계산</b>합니다. 그 비결이 각 단어가 만드는 세 벡터인
       <b>Query(질문) · Key(열쇠) · Value(값)</b> 입니다.
     </p>
 
@@ -36,7 +36,7 @@ function onSetComplete() {
 
     <!-- ===== 1. Q·K·V 세 벡터 ===== -->
     <h2 class="mt-8 mb-2 text-xl font-bold">
-      1. 도서관 비유 — 질문·열쇠·값
+      1. 도서관 비유: 질문·열쇠·값
       <ReviewFlag id="ch6-s1" chapter="ch6" label="1. Q·K·V 비유" />
     </h2>
     <p class="leading-relaxed text-slate-700">
@@ -49,9 +49,9 @@ function onSetComplete() {
 
     <ConceptCard tone="note" title="새 용어: Query · Key · Value">
       <ul class="list-disc space-y-1 pl-5 text-sm">
-        <li><b>Query(쿼리, 질문)</b> — 이 단어가 <b>찾고 있는 것</b>. "나는 이런 걸 참고하고 싶어."</li>
-        <li><b>Key(키, 열쇠)</b> — 각 단어가 <b>내세우는 이름표</b>. Query 와 얼마나 맞는지 비교 대상.</li>
-        <li><b>Value(밸류, 값)</b> — 그 단어가 <b>실제로 전달할 내용</b>. 최종적으로 섞이는 재료.</li>
+        <li><b>Query(쿼리, 질문)</b>: 이 단어가 <b>찾고 있는 것</b>. "나는 이런 걸 참고하고 싶어."</li>
+        <li><b>Key(키, 열쇠)</b>: 각 단어가 <b>내세우는 이름표</b>. Query 와 얼마나 맞는지 비교 대상.</li>
+        <li><b>Value(밸류, 값)</b>: 그 단어가 <b>실제로 전달할 내용</b>. 최종적으로 섞이는 재료.</li>
       </ul>
       <p class="mt-2 text-sm text-slate-500">
         세 벡터는 모두 <b>단어 임베딩에서</b> 만들어집니다(자세한 방법은 아래 "더 깊이").
@@ -82,24 +82,24 @@ function onSetComplete() {
       그 벡터의 <b>첫 번째 숫자</b>예요(<MathBlock inline expr="q_2" /> 는 둘째). 같은 자리끼리 곱해 더하는 거죠.
     </p>
     <p class="leading-relaxed text-slate-700">
-      이제 문장 전체로 확장할게요 — <b>Q·K·V 각각은 단어 하나의 벡터가 아니라, 문장 속 모든 단어의
+      이제 문장 전체로 확장할게요. <b>Q·K·V 각각은 단어 하나의 벡터가 아니라, 문장 속 모든 단어의
       Query·Key·Value 벡터를 세로로 쌓은 묶음(행렬)</b>입니다. 그러면 전체 어텐션이 한 줄로 이렇게 써져요:
     </p>
     <MathBlock expr="\text{Attention}(Q,K,V) = \text{softmax}\!\left(\dfrac{Q K^\top}{\sqrt{d}}\right) V" />
     <ConceptCard tone="note" title="공식 뜯어 읽기 (처음 보는 작은 기호까지)">
       <ul class="list-disc space-y-1.5 pl-5 text-sm">
-        <li><MathBlock inline expr="Q K^\top" /> — 모든 Query 와 Key 의 <b>내적(점수)</b> 표.
+        <li><MathBlock inline expr="Q K^\top" />: 모든 Query 와 Key 의 <b>내적(점수)</b> 표.
           작은 <MathBlock inline expr="\top" />(위첨자 T)는 <b>전치</b>라고 읽고, 표의 <b>가로·세로를 뒤집어</b>
           곱셈이 맞아떨어지게 맞춰 주는 표시예요.</li>
-        <li><MathBlock inline expr="\div \sqrt{d}" /> — <b>스케일링</b>(점수가 너무 커지지 않게 나눔).
+        <li><MathBlock inline expr="\div \sqrt{d}" />: <b>스케일링</b>(점수가 너무 커지지 않게 나눔).
           <MathBlock inline expr="\sqrt{\;}" /> 는 <b>제곱근(루트)</b>, <MathBlock inline expr="d" /> 는
           <b>벡터의 차원(숫자 개수)</b>입니다. (자세한 이유는 아래 "더 깊이")</li>
-        <li><MathBlock inline expr="\text{softmax}(\cdots)" /> — 점수를 <b>합 1의 집중도</b>로.</li>
-        <li><MathBlock inline expr="\cdots\, V" /> — 그 집중도로 <b>Value 들을 가중합</b> → 출력(새 문맥 벡터).</li>
+        <li><MathBlock inline expr="\text{softmax}(\cdots)" />: 점수를 <b>합 1의 집중도</b>로.</li>
+        <li><MathBlock inline expr="\cdots\, V" />: 그 집중도로 <b>Value 들을 가중합</b> → 출력(새 문맥 벡터).</li>
       </ul>
     </ConceptCard>
 
-    <DetailsCard title="➕ 손으로 한 바퀴 — 두 단어 문장을 숫자로 끝까지">
+    <DetailsCard title="➕ 손으로 한 바퀴: 두 단어 문장을 숫자로 끝까지">
       <p class="mb-2">
         공식이 눈에 안 들어오면, 2차원(d=2)의 두 단어로 <b>점수 → softmax → 가중합</b>을
         끝까지 한 번만 따라가 보세요. 단어①의 Query 가 <MathBlock inline expr="q = (1, 0)" />,
@@ -108,11 +108,11 @@ function onSetComplete() {
       </p>
       <ul class="list-disc space-y-1.5 pl-5">
         <li><b>① 점수(내적)</b>: <MathBlock inline expr="q \cdot k_1 = 1{\times}2 + 0{\times}0 = 2" />,
-          <MathBlock inline expr="q \cdot k_2 = 0" /> — 단어①은 자기 자신 쪽과 잘 맞네요.</li>
+          <MathBlock inline expr="q \cdot k_2 = 0" />. 단어①은 자기 자신 쪽과 잘 맞네요.</li>
         <li><b>② √d 로 나눔</b>: <MathBlock inline expr="\sqrt{2} \approx 1.41" /> 로 나눠
           점수는 약 <b>1.41 과 0</b>.</li>
         <li><b>③ softmax</b>: 두 점수가 집중도 약 <b>0.8 : 0.2</b> 가 됩니다(합 1).</li>
-        <li><b>④ 가중합</b>: <MathBlock inline expr="0.8{\times}(10,0) + 0.2{\times}(0,10) = (8, 2)" /> —
+        <li><b>④ 가중합</b>: <MathBlock inline expr="0.8{\times}(10,0) + 0.2{\times}(0,10) = (8, 2)" />.
           이 <b>(8, 2)</b> 가 단어①의 <b>새 문맥 벡터</b>입니다. 공식 한 줄이 한 일의 전부예요.</li>
       </ul>
     </DetailsCard>
@@ -127,7 +127,7 @@ function onSetComplete() {
     />
 
     <!-- ===== 심화 ===== -->
-    <DetailsCard title="➕ 더 깊이 알아보기 — Q·K·V는 어디서 오고, 왜 √d로 나눌까?">
+    <DetailsCard title="➕ 더 깊이 알아보기: Q·K·V는 어디서 오고, 왜 √d로 나눌까?">
       <p class="mb-1 font-semibold text-slate-800">① Q·K·V 의 출생</p>
       <p class="mb-3">
         세 벡터는 <b>단어 임베딩</b>에 <b>학습된 가중치 행렬</b> 세 개(<MathBlock inline expr="W_Q, W_K, W_V" />)를
@@ -142,14 +142,14 @@ function onSetComplete() {
         그래서 <MathBlock inline expr="\sqrt{d}" /> 로 나눠 <b>점수 크기를 진정</b>시킵니다.
       </p>
       <div class="rounded-lg bg-white px-4 py-3 text-sm text-slate-600">
-        🎯 그래서 이름이 <b>"Scaled Dot-Product Attention"</b>(스케일드 닷프로덕트 어텐션) —
+        🎯 그래서 이름이 <b>"Scaled Dot-Product Attention"</b>(스케일드 닷프로덕트 어텐션)이에요.
         "크기를 조절한 내적 어텐션"이라는 뜻이에요.
       </div>
     </DetailsCard>
 
     <!-- ===== 3. AI 연결 ===== -->
     <h2 class="mt-8 mb-2 text-xl font-bold">
-      3. 🤖 셀프 어텐션 — 문장이 스스로를 읽는다
+      3. 🤖 셀프 어텐션: 문장이 스스로를 읽는다
       <ReviewFlag id="ch6-s3" chapter="ch6" label="3. AI 연결" />
     </h2>
     <ConceptCard tone="ai" title="모든 단어가 동시에, 서로를 참고">
@@ -160,14 +160,14 @@ function onSetComplete() {
         </li>
         <li>
           이 계산이 <b>모든 단어에 대해 한꺼번에(병렬로)</b> 일어나, 문장 전체가 <b>한 번에</b> 문맥을 반영합니다.
-          (그래서 위치 인코딩이 필요했죠 — ch4)
+          (그래서 위치 인코딩이 필요했죠. ch4)
         </li>
         <li>
           Q·K·V 가 다르기에 "무엇을 <b>묻고</b>, 무엇으로 <b>매칭</b>하고, 무엇을 <b>전달</b>할지"를 유연하게 배웁니다.
         </li>
       </ul>
       <p class="mt-2 text-sm text-violet-900/80">
-        회수하는 수학 — 점수의 정체인 내적은 <b><PartLink :part="1" ch="ch2">1부 2장</PartLink></b>,
+        다시 쓰는 수학: 점수의 정체인 내적은 <b><PartLink :part="1" ch="ch2">1부 2장</PartLink></b>,
         Q·K·V 를 만드는 행렬곱은 <b><PartLink :part="1" ch="ch3">1부 3장</PartLink></b>에서 쌓은 그 기초입니다.
       </p>
       <p class="mt-2 text-sm text-violet-900/80">
@@ -181,7 +181,7 @@ function onSetComplete() {
       <b>10문제를 모두 맞히면</b> 이 챕터가 완료됩니다. 내적 계산이 나오니 위 설명을 참고하세요.
     </p>
 
-    <QuizSet title="Q·K·V & 셀프 어텐션 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="Q·K·V & 셀프 어텐션: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -294,7 +294,7 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 6 완료 — 트랜스포머의 핵심을 통과했습니다 🎉</p>
+      <p class="font-semibold text-emerald-800">6장 완료! 트랜스포머의 핵심을 통과했습니다 🎉</p>
       <p class="mt-1 text-sm text-emerald-700">
         Q·K·V 로 어텐션이 스스로 점수를 낸다는 걸 이해했어요. 다음 챕터(ch7)에서 이 어텐션을
         <b>여러 개 동시에</b> 쓰는 멀티헤드로 갑니다. 노트북 <code>notebooks/ch06_qkv_attention.ipynb</code> 도 함께!

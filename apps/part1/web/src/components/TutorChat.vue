@@ -139,7 +139,7 @@ async function send() {
         `저는 수학 공부를 돕는 튜터라 그 주제는 도와드릴 수 없어요 😊\n` +
         `대신 지금 보고 계신 「${chapterTitle.value}」 내용은 무엇이든 물어보세요!`
     } else {
-      last.content = stripOfftopic(raw).text || '(답변을 생성하지 못했어요 — 다시 시도해 보세요.)'
+      last.content = stripOfftopic(raw).text || '(답변을 생성하지 못했어요. 다시 시도해 보세요.)'
     }
   } catch (e) {
     if ((e as Error).name !== 'AbortError') {
@@ -335,7 +335,7 @@ function segments(text: string): Segment[] {
           </button>
         </div>
         <div class="mt-1.5 flex items-center justify-between text-xs text-slate-500">
-          <span>로컬 AI 답변 — 가끔 틀릴 수 있어요. 본문 설명이 우선!</span>
+          <span>로컬 AI 답변이라 가끔 틀릴 수 있어요. 본문 설명이 우선!</span>
           <button v-if="messages.length" class="hover:text-slate-600" @click="clearChat">지우기</button>
         </div>
       </div>

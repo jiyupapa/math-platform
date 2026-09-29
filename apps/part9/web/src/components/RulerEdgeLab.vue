@@ -34,12 +34,12 @@ const MIN_NORMAL = 2 ** -126
 const journey = computed(() => {
   const v = cur.value
   if (!Number.isFinite(v))
-    return { label: `💥 오버플로 — ${steps.value}번 만에 자의 끝 너머, inf 로 포화`, tone: 'text-rose-700' }
+    return { label: `💥 오버플로: ${steps.value}번 만에 자의 끝 너머, inf 로 포화`, tone: 'text-rose-700' }
   if (v === 0)
-    return { label: `🕳️ 언더플로 — ${steps.value}번 만에 눈금 사이로 소멸, 0`, tone: 'text-rose-700' }
+    return { label: `🕳️ 언더플로: ${steps.value}번 만에 눈금 사이로 소멸, 0`, tone: 'text-rose-700' }
   if (v < MIN_NORMAL)
-    return { label: '⚠️ 비정규 구간 — 숨은 1을 포기하고 낭떠러지 대신 경사로로 버티는 중', tone: 'text-amber-700' }
-  return { label: '✅ 정상 구간 — 아직 자 위에 있습니다', tone: 'text-emerald-700' }
+    return { label: '⚠️ 비정규 구간: 숨은 1을 포기하고 낭떠러지 대신 경사로로 버티는 중', tone: 'text-amber-700' }
+  return { label: '✅ 정상 구간: 아직 자 위에 있습니다', tone: 'text-emerald-700' }
 })
 const fmtV = (v: number) =>
   !Number.isFinite(v) ? 'inf' : v === 0 ? '0' : v >= 1e5 || v < 1e-4 ? v.toExponential(3) : String(v)
@@ -71,9 +71,9 @@ const infectedSum = [3, 5, Number.NaN].reduce((a, b) => a + b, 0)
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 2배 여행 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 2배 여행: 자의 끝은 생각보다 가깝다</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · 2배 여행: 자의 끝은 생각보다 가깝다</p>
     <p class="mb-3 text-xs text-slate-500">
-      1에서 출발해 fp32 로 ×2(또는 ÷2)를 반복합니다 — 몇 걸음 만에 자의 끝에 닿는지 세어 보세요.
+      1에서 출발해 fp32 로 ×2(또는 ÷2)를 반복합니다. 몇 걸음 만에 자의 끝에 닿는지 세어 보세요.
     </p>
 
     <div class="flex flex-wrap gap-2">
@@ -112,18 +112,18 @@ const infectedSum = [3, 5, Number.NaN].reduce((a, b) => a + b, 0)
     </div>
 
     <p class="mt-2 rounded-lg bg-indigo-50 p-3 text-xs leading-relaxed text-indigo-800">
-      👀 위로는 <b>128번</b>(2¹²⁸ 이 최대값 3.4×10³⁸ 을 넘는 순간 — 지수 8비트의 천장),
+      👀 위로는 <b>128번</b>(2¹²⁸ 이 최대값 3.4×10³⁸ 을 넘는 순간, 지수 8비트의 천장),
       아래로는 정규 구간 끝(2⁻¹²⁶, 126번)을 지나 비정규 경사로의 마지막 눈금(2⁻¹⁴⁹, 149번)까지
       버틴 뒤 <b>150번째</b>에 0.
-      자의 끝을 넘으면 컴퓨터는 에러 대신 <b>inf 라는 포화 표식</b>을 남기고 계속 달립니다 —
+      자의 끝을 넘으면 컴퓨터는 에러 대신 <b>inf 라는 포화 표식</b>을 남기고 계속 달립니다.
       그게 더 무서운 점이에요(사고가 조용히 전파되니까).
     </p>
 
     <!-- ② exp 폭발 시계 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — exp 폭발 시계: 지수함수는 자의 끝을 향해 달린다</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · exp 폭발 시계: 지수함수는 자의 끝을 향해 달린다</p>
     <p class="mb-3 text-xs text-slate-500">
-      2부 7장의 그 지수함수 — exp(x)는 x 가 조금만 커져도 폭발적으로 자랍니다.
+      2부 7장의 그 지수함수 exp(x)는 x 가 조금만 커져도 폭발적으로 자랍니다.
       fp32 와 fp64 가 각각 몇에서 터지는지 다이얼을 돌려 보세요.
     </p>
 
@@ -150,16 +150,16 @@ const infectedSum = [3, 5, Number.NaN].reduce((a, b) => a + b, 0)
     </div>
 
     <p v-if="expProbe.boom32" class="mt-2 rounded-lg bg-amber-50 p-3 text-xs leading-relaxed text-amber-800">
-      💡 겨우 <b>x = 89</b> — 어텐션 점수나 로짓이 이 정도로 커지는 건 훈련이 조금만 불안해도
-      일어나는 일입니다. softmax 의 exp 를 그대로 계산하면 여기서 즉사 — 구급대(max 빼기)는
+      💡 겨우 <b>x = 89</b>입니다. 어텐션 점수나 로짓이 이 정도로 커지는 건 훈련이 조금만 불안해도
+      일어나는 일입니다. softmax 의 exp 를 그대로 계산하면 여기서 즉사합니다. 구급대(max 빼기)는
       다음 장(log-sum-exp)에서 만나요.
     </p>
 
     <!-- ③ NaN 공장 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ③ — NaN 공장: 답이 없는 계산의 표식</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ③ · NaN 공장: 답이 없는 계산의 표식</p>
     <p class="mb-3 text-xs text-slate-500">
-      자의 끝(inf·0)끼리 만나면 "답이 없는" 계산이 생깁니다 — 각 카드를 눌러 결과를 확인하세요.
+      자의 끝(inf·0)끼리 만나면 "답이 없는" 계산이 생깁니다. 각 카드를 눌러 결과를 확인하세요.
     </p>
 
     <div class="grid gap-2 sm:grid-cols-4">
@@ -185,7 +185,7 @@ const infectedSum = [3, 5, Number.NaN].reduce((a, b) => a + b, 0)
     </div>
 
     <p class="mt-2 rounded-lg bg-indigo-50 p-3 text-xs leading-relaxed text-indigo-800">
-      👀 훈련 로그의 <b>loss: nan</b> 이 바로 이 전염의 결과입니다 — 수십억 곱셈 중 단 한 곳에서
+      👀 훈련 로그의 <b>loss: nan</b> 이 바로 이 전염의 결과입니다. 수십억 곱셈 중 단 한 곳에서
       inf/0÷0 이 태어나면, 몇 스텝 안에 모델의 모든 숫자가 NaN 으로 물듭니다. 8부 9장에서 본
       스파이크 → NaN 붕괴의 하드웨어 층이 여기예요.
     </p>

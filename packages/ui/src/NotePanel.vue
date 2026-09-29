@@ -114,7 +114,7 @@ function when(iso: string): string {
     <!-- 비로그인: 공유 층이라 열람·작성 모두 로그인 필요 -->
     <p v-if="!currentUser" class="np-empty">
       로그인하면 이 부분에 <b>메모</b>를 남기고 <b>질문</b>할 수 있어요.<br />
-      동료가 남긴 메모도 함께 보여요 — 모두 <b>익명</b>이에요.
+      동료가 남긴 메모도 함께 보여요. 모두 <b>익명</b>이에요.
     </p>
 
     <template v-else>
@@ -169,7 +169,7 @@ function when(iso: string): string {
               class="np-ta"
               rows="3"
               maxlength="4000"
-              placeholder="강사 답변 — 질문자와 동료 모두에게 보여요"
+              placeholder="강사 답변 (질문자와 동료 모두에게 보여요)"
             ></textarea>
             <div class="np-row">
               <button class="np-go" type="button" :disabled="busy || !answerBody.trim()" @click="submitAnswer(a.id)">
@@ -218,7 +218,7 @@ function when(iso: string): string {
           maxlength="2000"
           :placeholder="
             kind === 'question'
-              ? '이 부분에서 막힌 점을 물어보세요 — AI가 바로 답해요'
+              ? '이 부분에서 막힌 점을 물어보세요. AI가 바로 답해요'
               : '이 부분에 남길 메모 (익명으로 동료에게도 보여요)'
           "
         ></textarea>
@@ -226,7 +226,7 @@ function when(iso: string): string {
         <button class="np-go" type="button" :disabled="busy || !body.trim()" @click="submit">
           {{ busy ? '저장 중…' : kind === 'question' ? '질문하고 AI에게 묻기' : '메모 남기기' }}
         </button>
-        <p class="np-note">익명으로 남습니다 — 이름은 표시되지 않아요.</p>
+        <p class="np-note">익명으로 남아요. 이름은 표시되지 않아요.</p>
       </div>
     </template>
   </div>

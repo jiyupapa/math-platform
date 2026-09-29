@@ -90,12 +90,12 @@ const fit = computed(() => {
 const verdict = computed(() => {
   const { trainErr, valErr } = fit.value
   if (n40.value && deg.value >= 8)
-    return { tone: 'text-emerald-700', text: `같은 차수 ${deg.value}인데 — 점이 40개면 다이얼 ${deg.value + 1}개로 다 못 외워요. 암기가 막히니 규칙을 배울 수밖에(검증 ${valErr.toFixed(3)}).` }
+    return { tone: 'text-emerald-700', text: `같은 차수 ${deg.value}인데, 점이 40개면 다이얼 ${deg.value + 1}개로 다 못 외워요. 암기가 막히니 규칙을 배울 수밖에(검증 ${valErr.toFixed(3)}).` }
   if (deg.value <= 1)
-    return { tone: 'text-sky-700', text: '과소적합 — 굽이(규칙)를 담기엔 다이얼이 부족해요. 훈련·검증 둘 다 나쁩니다.' }
+    return { tone: 'text-sky-700', text: '과소적합: 굽이(규칙)를 담기엔 다이얼이 부족해요. 훈련·검증 둘 다 나쁩니다.' }
   if (deg.value >= 8 && !n40.value)
-    return { tone: 'text-rose-700', text: `과적합 — 훈련 오차 ${trainErr.toFixed(4)}: 점 10개를 다이얼 ${deg.value + 1}개로 통째로 외웠어요. 검증(처음 보는 문제)은 ${valErr.toFixed(2)}로 폭발.` }
-  return { tone: 'text-emerald-700', text: '적당한 용량 — 검증 오차가 가장 낮은 동네입니다. 규칙은 담기고 노이즈는 못 외우는 크기.' }
+    return { tone: 'text-rose-700', text: `과적합이에요. 훈련 오차 ${trainErr.toFixed(4)}: 점 10개를 다이얼 ${deg.value + 1}개로 통째로 외웠어요. 검증(처음 보는 문제)은 ${valErr.toFixed(2)}로 폭발.` }
+  return { tone: 'text-emerald-700', text: '적당한 용량: 검증 오차가 가장 낮은 동네입니다. 규칙은 담기고 노이즈는 못 외우는 크기.' }
 })
 
 // SVG 좌표 (x∈[-1,1] → 15..285, y∈[-2,2] → 145..5, 클램프)
@@ -145,10 +145,10 @@ const lossLine = (ls: number[]) =>
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 재단사의 유혹 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 재단사의 유혹: 다이얼을 늘리면 성적이 오를까?</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · 재단사의 유혹: 다이얼을 늘리면 성적이 오를까?</p>
     <p class="mb-3 text-xs text-slate-500">
       숨은 규칙(회색 점선)에서 노이즈 낀 점들이 관측됐어요. 차수 = 곡선의 다이얼(계수) 수 − 1.
-      차수를 올려 <b>훈련 점(●)에 곡선을 맞춰</b> 보세요 — 검증 점수는 봉인된 30개 점으로 따로 매깁니다.
+      차수를 올려 <b>훈련 점(●)에 곡선을 맞춰</b> 보세요. 검증 점수는 봉인된 30개 점으로 따로 매깁니다.
     </p>
 
     <div class="mb-2 flex flex-wrap items-center gap-4">
@@ -201,10 +201,10 @@ const lossLine = (ls: number[]) =>
 
     <!-- ② 벌어짐 감시자 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 벌어짐 감시자: 훈련 일지에 과적합이 남기는 무늬</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · 벌어짐 감시자: 훈련 일지에 과적합이 남기는 무늬</p>
     <p class="mb-3 text-xs text-slate-500">
       실전에선 차수 슬라이더가 아니라 <b>훈련 스텝</b>이 흐릅니다. 아까 그 점 10개에 차수 9(암기 가능 용량)를
-      경사하강으로 3,000스텝 — 두 손실을 함께 기록해 보세요.
+      경사하강으로 3,000스텝 맞추며 두 손실을 함께 기록해 보세요.
     </p>
 
     <button
@@ -221,7 +221,7 @@ const lossLine = (ls: number[]) =>
         <line :x1="cx(run.best)" y1="6" :x2="cx(run.best)" y2="104" stroke="var(--c-emerald-600)" stroke-width="1" stroke-dasharray="3 3" />
         <polyline :points="lossLine(run.trs)" fill="none" stroke="var(--c-indigo-600)" stroke-width="1.5" />
         <polyline :points="lossLine(run.vas)" fill="none" stroke="var(--c-rose-600)" stroke-width="1.5" />
-        <text :x="Math.min(cx(run.best) + 3, 210)" y="14" font-size="8" fill="var(--c-emerald-600)">검증 최저 (스텝 {{ run.best }}) — 멈출 자리</text>
+        <text :x="Math.min(cx(run.best) + 3, 210)" y="14" font-size="8" fill="var(--c-emerald-600)">검증 최저 (스텝 {{ run.best }}): 멈출 자리</text>
         <text x="284" y="96" text-anchor="end" font-size="8" fill="var(--c-indigo-600)">— 훈련 손실</text>
         <text x="284" y="86" text-anchor="end" font-size="8" fill="var(--c-rose-600)">— 검증 손실</text>
       </svg>
@@ -243,9 +243,9 @@ const lossLine = (ls: number[]) =>
 
       <p class="mt-3 rounded-lg bg-emerald-50 p-3 text-sm leading-relaxed text-emerald-800">
         ✅ 경사하강은 <b>큰 패턴(굽이)을 먼저 배우고, 노이즈 암기는 나중에</b> 합니다. 그래서 검증 손실은
-        내려가다가 스텝 {{ run.best }}에서 돌아서요 — 그 뒤로 훈련 손실은 계속 내려갔지만(암기 진행)
+        내려가다가 스텝 {{ run.best }}에서 돌아서요. 그 뒤로 훈련 손실은 계속 내려갔지만(암기 진행)
         검증은 {{ (run.vas[STEPS - 1]! / run.vas[run.best]!).toFixed(1) }}배 나빠졌습니다.
-        <b>두 곡선이 벌어지는 순간이 과적합의 시작</b> — 훈련 일지에서 이 무늬를 보면 멈추는 것이
+        <b>두 곡선이 벌어지는 순간이 과적합의 시작</b>. 훈련 일지에서 이 무늬를 보면 멈추는 것이
         답입니다(조기 종료, 8장).
       </p>
     </template>

@@ -189,8 +189,7 @@ onBeforeUnmount(() => {
 
         <div class="max-h-[60vh] overflow-y-auto">
           <p v-if="loadError" class="px-4 py-6 text-center text-sm text-slate-500">
-            검색 인덱스를 불러오지 못했어요. 조립 배포본(<code>npm run deploy:build</code>)에서
-            동작합니다.
+            검색 목록을 불러오지 못했어요. 새로고침한 뒤 다시 열어 보세요.
           </p>
 
           <template v-else-if="query.trim()">

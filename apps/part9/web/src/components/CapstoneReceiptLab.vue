@@ -28,7 +28,7 @@ interface Tag {
 const TAGS: Tag[] = [
   { name: 'F16', bits: 16, quality: '기준 (원본급)' },
   { name: 'Q8_0', bits: 8.5, quality: '+0.0% (무손실급)' },
-  { name: 'Q4_K_M', bits: 4.85, quality: '+1.2% (무릎 위 — 국민 태그)' },
+  { name: 'Q4_K_M', bits: 4.85, quality: '+1.2% (무릎 위, 국민 태그)' },
   { name: 'Q2_K', bits: 2.6, quality: '+28% (낭떠러지 아래)' },
 ]
 
@@ -54,18 +54,18 @@ const RAMS = [8, 16, 32]
 const ram = ref(8)
 const verdict = computed(() => {
   const t = totalGB.value
-  if (t > ram.value) return { label: '❌ 불가 — RAM 초과', tone: 'text-rose-700', bar: 'bg-rose-400' }
-  if (t > ram.value * 0.85) return { label: '⚠️ 아슬 — 다른 앱을 닫아야 할 수도', tone: 'text-amber-700', bar: 'bg-amber-400' }
-  return { label: '✅ 여유 — 쾌적하게 돕니다', tone: 'text-emerald-700', bar: 'bg-emerald-400' }
+  if (t > ram.value) return { label: '❌ 불가: RAM 초과', tone: 'text-rose-700', bar: 'bg-rose-400' }
+  if (t > ram.value * 0.85) return { label: '⚠️ 아슬: 다른 앱을 닫아야 할 수도', tone: 'text-amber-700', bar: 'bg-amber-400' }
+  return { label: '✅ 여유: 쾌적하게 돕니다', tone: 'text-emerald-700', bar: 'bg-emerald-400' }
 })
 </script>
 
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 모델 영수증 완독기 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 모델 영수증 완독기: 워밍업의 질문에 스스로 답한다</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · 모델 영수증 완독기: 워밍업의 질문에 스스로 답한다</p>
     <p class="mb-3 text-xs text-slate-500">
-      모델과 태그를 고르면 영수증이 한 줄씩 계산됩니다 — 각 줄 옆의 배지는 그 계산을 배운 장.
+      모델과 태그를 고르면 영수증이 한 줄씩 계산됩니다. 각 줄 옆의 배지는 그 계산을 배운 장.
     </p>
 
     <div class="flex flex-wrap gap-2">
@@ -120,16 +120,16 @@ const verdict = computed(() => {
     </div>
 
     <p v-if="spec.name === '7B급' && tag.name === 'Q4_K_M'" class="mt-2 rounded-lg bg-emerald-50 p-3 text-xs leading-relaxed text-emerald-800">
-      🎓 <b>워밍업의 질문, 완독 완료</b> — "7B(개수, 1장 공식) × 4.85비트(칸, 3~9장의 전부)
+      🎓 <b>워밍업의 질문, 완독 완료</b>: "7B(개수, 1장 공식) × 4.85비트(칸, 3~9장의 전부)
       ÷ 8 = 4.0GB(파일)". 이 한 줄을 스스로 계산한 것이 9부의 졸업입니다.
     </p>
 
     <!-- ② 메모리 정산기 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 메모리 정산기: 파일이 들어간다 ≠ 돌아간다</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · 메모리 정산기: 파일이 들어간다 ≠ 돌아간다</p>
     <p class="mb-3 text-xs text-slate-500">
       실행에는 가중치 외에 <b>문맥이 길수록 자라는 KV 캐시</b>(대화의 기억 장부)와 OS·실행기
-      몫이 필요합니다 — 어림 공식: KV/토큰 = 2 × L × d × 2바이트(fp16).
+      몫이 필요합니다. 어림 공식: KV/토큰 = 2 × L × d × 2바이트(fp16).
     </p>
 
     <label class="block text-xs text-slate-500">
@@ -174,10 +174,10 @@ const verdict = computed(() => {
     <p class="mt-1 text-sm font-medium" :class="verdict.tone">{{ verdict.label }}</p>
 
     <p class="mt-2 rounded-lg bg-amber-50 p-3 text-xs leading-relaxed text-amber-800">
-      💡 7B·Q4_K_M 을 두고 문맥만 4K → 32K 로 늘려 보세요 — <b>가중치는 그대로인데 KV 가
+      💡 7B·Q4_K_M 을 두고 문맥만 4K → 32K 로 늘려 보세요. <b>가중치는 그대로인데 KV 가
       2.1GB → 17.2GB</b>로 자라 8GB PC 는 물론 16GB 도 넘어섭니다. "파일이 들어간다"와
       "돌아간다"가 다른 이유, 그리고 긴 문맥이 비싼 이유가 이 장부 하나에 있어요.
-      (최근 모델은 GQA 로 KV 를 4~8분의 1로 줄입니다 — 더 깊이 카드.)
+      (최근 모델은 GQA 로 KV 를 4~8분의 1로 줄입니다. 더 깊이 카드.)
     </p>
   </div>
 </template>

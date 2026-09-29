@@ -66,7 +66,7 @@ const lineX = size / 2 // 세로 결정선 (x=0)
 
 <template>
   <div class="my-4 rounded-xl border border-slate-200 bg-white p-4">
-    <p class="mb-1 text-sm font-semibold text-slate-700">🤖 미니 분류 AI — 데이터를 돌려 두 그룹을 나눠보세요</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🤖 미니 분류 AI: 데이터를 돌려 두 그룹을 나눠 보세요</p>
     <p class="mb-3 text-sm text-slate-500">
       세로 점선이 "분류 기준선"이에요(오른쪽=🔵A, 왼쪽=🟠B). 처음엔 섞여서 틀려요.
       <b>회전 슬라이더</b>로 데이터를 돌려 두 색이 좌우로 갈리게 만들어 보세요.

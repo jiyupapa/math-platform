@@ -20,18 +20,18 @@ export function explainTemplate(rec: Recommendation, missed: MissedConcept[] = [
   if (g.vector?.passed) skipped.push('1부 전반(벡터·행렬)')
   if (g.prob?.passed) skipped.push('3부 전반(확률의 언어)')
   if (skipped.length) {
-    parts.push(`${skipped.join(' 과 ')} 감각이 이미 있어 접었어요.`)
+    parts.push(`${skipped.join('과 ')}은 이미 감각이 있어서 건너뛰었어요.`)
   } else {
     parts.push('기초 감각부터 차근차근 쌓아 갈게요.')
   }
 
   if (g.calculus?.passed) {
-    parts.push('미분(2부)은 기억을 되살리는 빠른 복습으로 충분합니다.')
+    parts.push('미분(2부)은 빠르게 복습하며 기억을 되살리면 충분해요.')
   } else {
-    parts.push('미분(2부)은 "모델이 학습하는 원리"를 위해 제대로 봅니다.')
+    parts.push('미분(2부)은 "모델이 학습하는 원리"라서 제대로 봐요.')
   }
 
-  parts.push('그리고 핵심인 트랜스포머(4부)를 제대로 조립합니다.')
+  parts.push('그리고 핵심인 트랜스포머(4부)를 제대로 조립해요.')
 
   if (!g.log?.passed) {
     parts.push('log 감각은 5부에 들어가기 전에 한 번 짚고 갈게요.')
@@ -40,11 +40,11 @@ export function explainTemplate(rec: Recommendation, missed: MissedConcept[] = [
   if (missed.length) {
     const shown = missed.slice(0, MISSED_MAX).map((m) => `${m.label}(${m.where})`).join('·')
     const more = missed.length > MISSED_MAX ? ` 외 ${missed.length - MISSED_MAX}개` : ''
-    parts.push(`진단에서 헷갈린 개념은 ${shown}${more} — 경로에서 그 장을 만나면 천천히 보세요.`)
+    parts.push(`진단에서 헷갈린 개념: ${shown}${more}. 경로에서 그 장을 만나면 천천히 보세요.`)
   }
 
   const hours = Math.round((rec.activeMinutes / 60) * 10) / 10
-  parts.push(`당신에게 맞춘 경로는 ${rec.activeChapters}챕터, 약 ${hours}시간입니다.`)
+  parts.push(`내게 맞춘 경로는 ${rec.activeChapters}챕터, 약 ${hours}시간이에요.`)
 
   return parts.join(' ')
 }

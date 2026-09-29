@@ -6,7 +6,7 @@ import { ref, computed } from 'vue'
 
 interface Tok {
   text: string
-  /** true = 지시 부분(손실 마스킹 — 채점 안 함) */
+  /** true = 지시 부분(손실 마스킹, 채점 안 함) */
   masked?: boolean
   /** 답변 토큰의 초기 q(모델이 이 정답 토큰에 준 확률) */
   q0?: number
@@ -57,9 +57,9 @@ const fmt = (n: number) => (Math.round(n * 10) / 10).toFixed(1)
 
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험: 미니 SFT 훈련기 — 시범 1개를 가중치에 새겨 보기</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험: 미니 SFT 훈련기: 시범 1개를 가중치에 새겨 보기</p>
     <p class="mb-3 text-xs text-slate-500">
-      토큰마다 손실 = −log₂ q(정답 토큰) · 회색 토큰 = 지시 부분(손실 마스킹 — 채점 안 함)
+      토큰마다 손실 = −log₂ q(정답 토큰) · 회색 토큰 = 지시 부분(손실 마스킹, 채점 안 함)
     </p>
 
     <!-- 토큰별 채점판 -->
@@ -107,15 +107,15 @@ const fmt = (n: number) => (Math.round(n * 10) / 10).toFixed(1)
     </div>
 
     <p v-if="steps === 0" class="rounded-lg bg-amber-50 p-3 text-sm text-amber-800">
-      👀 훈련 전: 모델은 이 모범답안에 확신이 없어요 — 특히 '주시겠어요?'(q=2%)의 손실이 5.6비트로 폭발.
+      👀 훈련 전: 모델은 이 모범답안에 확신이 없어요. 특히 '주시겠어요?'(q=2%)의 손실이 5.6비트로 폭발.
       <b>자신 없던 정답일수록 크게 배웁니다</b>(5부 4장에서 본 −log 의 성질).
     </p>
     <p v-else-if="!done" class="rounded-lg bg-sky-50 p-3 text-sm text-sky-800">
-      👀 스텝마다 q(정답 확률)가 오르고 손실이 내려갑니다 — 손실이 기울기를 낳고, 기울기가 가중치를 미는
+      👀 스텝마다 q(정답 확률)가 오르고 손실이 내려갑니다. 손실이 기울기를 낳고, 기울기가 가중치를 미는
       경사하강(4부 11장)의 한 걸음 한 걸음이에요.
     </p>
     <p v-else class="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">
-      ✅ <b>훈련 완료 — 이 답변이 가중치에 새겨졌어요.</b> 이제 예시(퓨샷)를 붙이지 않아도,
+      ✅ <b>훈련 완료! 이 답변이 가중치에 새겨졌어요.</b> 이제 예시(퓨샷)를 붙이지 않아도,
       문맥이 사라져도 이 행동이 나옵니다. 이게 ch2의 "분포 잠깐 밀기"와 결정적으로 다른 점입니다.
     </p>
   </div>

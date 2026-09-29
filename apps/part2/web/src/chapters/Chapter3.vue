@@ -21,10 +21,10 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 3</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">3장</p>
     <h1 class="mb-4 text-3xl font-bold">미분계수와 도함수의 정의 ✏️</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
-      Phase 2 에서 극한으로 잡은 "한 점의 기울기"에 드디어 <b>이름과 공식</b>을 붙입니다.
+      2장에서 극한으로 잡은 "한 점의 기울기"에 드디어 <b>이름과 공식</b>을 붙입니다.
       한 점에서의 값은 <b>미분계수</b>, 모든 점의 기울기를 모은 함수는 <b>도함수</b>예요.
       이 둘의 차이를 확실히 구분하는 게 이번 챕터의 핵심입니다.
     </p>
@@ -33,24 +33,24 @@ function onSetComplete() {
       <ul class="list-disc space-y-1 pl-5">
         <li><b>미분계수</b> <MathBlock inline expr="f'(a)" /> 의 정의(극한식)를 읽는다</li>
         <li><b>도함수</b> <MathBlock inline expr="f'(x)" /> 가 "기울기를 알려주는 함수"임을 안다</li>
-        <li>정의로부터 <MathBlock inline expr="x^2" /> 의 도함수가 <MathBlock inline expr="2x" /> 임을 유도한다</li>
+        <li>정의에서 출발해 <MathBlock inline expr="x^2" /> 의 도함수가 <MathBlock inline expr="2x" /> 임을 유도한다</li>
         <li>표기법 <MathBlock inline expr="f'(x)" />, <MathBlock inline expr="\dfrac{dy}{dx}" /> 를 읽는다</li>
       </ul>
     </ConceptCard>
 
     <!-- 1. 미분계수 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">1. 미분계수 — 한 점에서의 기울기(값)</h2>
-    <ReviewFlag id="ch3-s1" chapter="ch3" label="1. 미분계수 — 한 점에서의 기울기" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">1. 미분계수: 한 점에서의 기울기(값)</h2>
+    <ReviewFlag id="ch3-s1" chapter="ch3" label="1. 미분계수: 한 점에서의 기울기" />
     <p class="leading-relaxed text-slate-700">
       점 <MathBlock inline expr="x=a" /> 에서의 순간변화율(접선 기울기)을 <b>미분계수</b>라 하고
-      <MathBlock inline expr="f'(a)" /> 로 씁니다. Phase 2 의 극한에 이름을 붙인 것뿐이에요.
+      <MathBlock inline expr="f'(a)" /> 로 씁니다. 2장의 극한에 이름을 붙인 것뿐이에요.
     </p>
     <MathBlock expr="f'(a) = \lim_{h \to 0} \dfrac{f(a+h) - f(a)}{h}" />
 
-    <ConceptCard tone="note" title="새 용어 — 미분계수 f'(a)">
+    <ConceptCard tone="note" title="새 용어: 미분계수 f'(a)">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li><b>읽는 법</b>: "에프 프라임 에이"</li>
-        <li><b>뜻</b>: <MathBlock inline expr="x=a" /> 라는 <b>딱 한 점</b>에서의 접선 기울기 — <b>숫자 하나</b>입니다.</li>
+        <li><b>뜻</b>: <MathBlock inline expr="x=a" /> 라는 <b>딱 한 점</b>에서의 접선 기울기로, <b>숫자 하나</b>입니다.</li>
         <li>예: <MathBlock inline expr="f(x)=x^2" /> 이면 <MathBlock inline expr="f'(1)=2" />, <MathBlock inline expr="f'(3)=6" />.</li>
       </ul>
     </ConceptCard>
@@ -60,17 +60,17 @@ function onSetComplete() {
       question="f(x)=x² 에서 x=1 의 미분계수 f'(1) 은? (접선 기울기)"
       type="numeric"
       :answer="2"
-      :hints="['Phase 2 에서 x=1 의 순간변화율을 구했었죠.', 'x² 의 x=1 접선 기울기 = 2.']"
+      :hints="['2장에서 x=1 의 순간변화율을 구했었죠.', 'x² 의 x=1 접선 기울기 = 2.']"
       explanation="f'(1) = 2. 정의의 극한값이자 x=1 접선의 기울기입니다."
     />
 
     <!-- 2. 도함수 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">2. 도함수 — 기울기를 알려주는 '함수'</h2>
-    <ReviewFlag id="ch3-s2" chapter="ch3" label="2. 도함수 — 기울기를 알려주는 함수" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">2. 도함수: 기울기를 알려주는 '함수'</h2>
+    <ReviewFlag id="ch3-s2" chapter="ch3" label="2. 도함수: 기울기를 알려주는 함수" />
     <p class="leading-relaxed text-slate-700">
       미분계수는 점마다 하나씩 정해집니다. 그럼 이 값들을 <MathBlock inline expr="x" /> 에 대한
       <b>함수</b>로 묶을 수 있겠죠? 그게 <b>도함수</b> <MathBlock inline expr="f'(x)" /> 입니다.
-      아래에서 위 곡선의 점을 움직여 보세요 — 접선 기울기(빨강)가 그대로 아래 <b>도함수 그래프</b>의
+      아래에서 위 곡선의 점을 움직여 보세요. 접선 기울기(빨강)가 그대로 아래 <b>도함수 그래프</b>의
       점 높이로 나타납니다.
     </p>
     <MathBlock expr="f'(x) = \lim_{h \to 0} \dfrac{f(x+h) - f(x)}{h}" />
@@ -89,14 +89,14 @@ function onSetComplete() {
       label-df="f'(x) = 2x"
     />
 
-    <ConceptCard tone="note" title="새 용어 — 도함수 / 미분하다">
+    <ConceptCard tone="note" title="새 용어: 도함수 / 미분하다">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li>
           <b>도함수(derivative)</b> <MathBlock inline expr="f'(x)" />: 각 <MathBlock inline expr="x" /> 에서의
           기울기를 돌려주는 <b>함수</b>. (미분계수는 여기에 특정 값을 넣은 <b>숫자</b>)
         </li>
         <li>
-          <b>미분하다(differentiate)</b>: 함수로부터 그 도함수를 구하는 행위.
+          <b>미분하다(differentiate)</b>: 함수의 도함수를 구하는 일.
           "<MathBlock inline expr="x^2" /> 을 미분하면 <MathBlock inline expr="2x" />" 처럼요.
         </li>
         <li>
@@ -115,15 +115,15 @@ function onSetComplete() {
     />
 
     <!-- 3. 정의로 유도 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">3. 정의로부터 (x²)' = 2x 유도</h2>
-    <ReviewFlag id="ch3-s3" chapter="ch3" label="3. 정의로부터 (x²)'=2x 유도" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">3. 정의에서 (x²)' = 2x 유도하기</h2>
+    <ReviewFlag id="ch3-s3" chapter="ch3" label="3. 정의에서 (x²)'=2x 유도하기" />
     <p class="leading-relaxed text-slate-700">
-      공식을 외우기 전에, <b>정의(극한)</b> 로 직접 한 번 유도해 봅시다. Phase 2 에서 한 계산과 똑같아요.
+      공식을 외우기 전에, <b>정의(극한)</b> 로 직접 한 번 유도해 봅시다. 2장에서 한 계산과 똑같아요.
     </p>
     <MathBlock expr="f'(x) = \lim_{h \to 0} \dfrac{(x+h)^2 - x^2}{h}" />
     <p class="leading-relaxed text-slate-700">
-      <MathBlock inline expr="(x+h)^2" /> 을 Phase 2 처럼 분배법칙(앞 괄호의 각 항을 뒤 괄호의 각 항에
-      곱해 전부 더하기)으로 펼치면 <MathBlock inline expr="(x+h)(x+h) = x\cdot x + x\cdot h + h\cdot x + h\cdot h" /> —
+      <MathBlock inline expr="(x+h)^2" /> 을 2장처럼 분배법칙(앞 괄호의 각 항을 뒤 괄호의 각 항에
+      곱해 전부 더하기)으로 펼치면 <MathBlock inline expr="(x+h)(x+h) = x\cdot x + x\cdot h + h\cdot x + h\cdot h" /> 이고,
       같은 항을 합쳐 <MathBlock inline expr="x^2 + 2xh + h^2" /> 이에요. <MathBlock inline expr="x^2" /> 끼리
       지워지고, 남은 <MathBlock inline expr="2xh + h^2" /> 의 각 항을 <MathBlock inline expr="h" /> 로 나누면:
     </p>
@@ -137,24 +137,24 @@ function onSetComplete() {
     </ConceptCard>
 
     <!-- 4. 표기법 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">4. 표기법 — 같은 뜻, 다른 옷</h2>
-    <ReviewFlag id="ch3-s4" chapter="ch3" label="4. 표기법 — 같은 뜻 다른 옷" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">4. 표기법: 같은 뜻, 다른 옷</h2>
+    <ReviewFlag id="ch3-s4" chapter="ch3" label="4. 표기법: 같은 뜻 다른 옷" />
     <p class="leading-relaxed text-slate-700">
       도함수(미분)를 나타내는 기호는 여러 가지인데, <b>전부 같은 뜻</b>입니다. 상황에 따라 골라 쓸 뿐이에요.
     </p>
 
-    <ConceptCard tone="note" title="새 기호 — 미분 표기 3종">
+    <ConceptCard tone="note" title="새 기호: 미분 표기 3종">
       <ul class="list-disc space-y-2 pl-5">
         <li>
-          <MathBlock inline expr="f'(x)" /> — "에프 프라임 엑스" (라그랑주 표기). 가장 간단.
+          <MathBlock inline expr="f'(x)" />: "에프 프라임 엑스" (라그랑주 표기). 가장 간단.
         </li>
         <li>
-          <MathBlock inline expr="\dfrac{dy}{dx}" /> — "디와이 디엑스" (라이프니츠 표기).
+          <MathBlock inline expr="\dfrac{dy}{dx}" />: "디와이 디엑스" (라이프니츠 표기).
           <MathBlock inline expr="y=f(x)" /> 일 때 "<MathBlock inline expr="x" /> 가 변할 때 <MathBlock inline expr="y" /> 가
           변하는 순간 비율" = 기울기. (분수처럼 생겼지만 하나의 덩어리 기호)
         </li>
         <li>
-          <MathBlock inline expr="\dfrac{d}{dx}f(x)" /> — "디 디엑스 에프엑스".
+          <MathBlock inline expr="\dfrac{d}{dx}f(x)" />: "디 디엑스 에프엑스".
           "<MathBlock inline expr="f(x)" /> 를 <MathBlock inline expr="x" /> 로 미분하라"는 <b>명령</b> 형태.
         </li>
       </ul>
@@ -185,7 +185,7 @@ function onSetComplete() {
       <ul class="list-disc space-y-2 pl-5">
         <li>미분계수(한 점)를 매번 극한으로 구하면 느리고 반복적.</li>
         <li><b>도함수 <MathBlock inline expr="f'(x)" /></b> 를 한 번 구해두면 임의의 <MathBlock inline expr="x" /> 에 대입만 하면 됨.</li>
-        <li>딥러닝 프레임워크의 <b>자동미분(autograd)</b> 이 바로 이 도함수를 자동으로 만들어, 수백만 지점의 기울기를 순식간에 계산합니다. (Phase 9~10)</li>
+        <li>딥러닝 프레임워크의 <b>자동미분(autograd)</b> 이 바로 이 도함수를 자동으로 만들어, 수백만 지점의 기울기를 순식간에 계산합니다. (9~10장)</li>
       </ul>
     </ConceptCard>
 
@@ -203,7 +203,7 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 · 단계별 계산 10문제입니다. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="미분계수와 도함수 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="미분계수와 도함수: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -284,7 +284,7 @@ function onSetComplete() {
         type="numeric"
         :answer="5"
         :hints="['2x = 10 을 푸세요.', '양변을 2 로 나눕니다.']"
-        explanation="2x = 10 → x = 5. 기울기(미분계수)로부터 위치를 거꾸로 찾은 거예요."
+        explanation="2x = 10 → x = 5. 기울기(미분계수)에서 위치를 거꾸로 찾은 거예요."
       />
       <Quiz
         difficulty="hard"
@@ -313,15 +313,15 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 3 완료. 미분계수와 도함수를 구분했습니다.</p>
+      <p class="font-semibold text-emerald-800">3장 완료. 미분계수와 도함수를 구분했습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
-        다음은 매번 극한을 쓰지 않고 빠르게 미분하는 <b>기본 공식(멱법칙 등)</b>입니다.
+        다음은 매번 극한을 쓰지 않고 빠르게 미분하는 <b>기본 공식(거듭제곱 공식 등)</b>입니다.
       </p>
       <RouterLink
         to="/ch/ch4"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        다음 챕터 — 기본 미분 공식 →
+        다음 챕터: 기본 미분 공식 →
       </RouterLink>
     </div>
   </article>

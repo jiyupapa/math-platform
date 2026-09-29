@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 인터랙티브 출력층 실험실.
 // 블록을 다 통과한 '마지막 문맥 벡터'를 슬라이더로 움직이면, 사전 속 각 단어와의 내적으로
-// 점수(logit)가 나오고 → 소프트맥스 → 확률 → 다음 단어가 정해진다. (샘플 챕터 소프트맥스와 직결)
+// 점수(logit)가 나오고 → 소프트맥스 → 확률 → 다음 단어가 정해진다. (워밍업 소프트맥스와 직결)
 import { ref, computed } from 'vue'
 import { softmax, argmax } from '@/utils/softmax'
 
@@ -79,8 +79,8 @@ const pct = (p: number) => (p * 100).toFixed(1)
     <!-- 예측 -->
     <div class="mt-4 rounded-lg bg-violet-50 px-4 py-3 text-sm text-violet-900">
       🎯 "오늘 날씨가 정말 <b class="text-violet-700">{{ VOCAB[top].w }}</b>"
-      <span class="text-violet-600">(확률 {{ pct(probs[top]) }}%)</span>
-      — 문맥 벡터가 가리키는 방향의 단어가 다음 단어로 뽑힙니다.
+      <span class="text-violet-600">(확률 {{ pct(probs[top]) }}%)</span>.
+      문맥 벡터가 가리키는 방향의 단어가 다음 단어로 뽑힙니다.
     </div>
   </div>
 </template>

@@ -8,7 +8,7 @@ const progress = useProgressStore()
 
 <template>
   <div>
-    <p class="mb-2 text-sm font-medium text-indigo-600">수포자를 위한 정보이론 — 시리즈 5부</p>
+    <p class="mb-2 text-sm font-medium text-indigo-600">수포자를 위한 정보이론 · 시리즈 5부</p>
     <h1 class="mb-3 text-3xl font-bold">AI 는 사실 "불확실성을 줄이는 기계"입니다</h1>
     <p class="mb-4 leading-relaxed text-slate-600">
       ChatGPT 의 손실함수(크로스 엔트로피), 성적표(퍼플렉시티), 창의성 다이얼(temperature),

@@ -84,5 +84,12 @@ jupyter lab
 |--------|---------|------|
 | `ch00_sample.ipynb` | 워밍업 | 접선 맛보기 (차분몫·접선·SymPy) |
 | `ch01_functions_slope.ipynb` | ch1 | 함수·그래프·기울기 |
-
-> Phase 2~10 노트북은 각 웹 챕터가 완성될 때 하나씩 추가됩니다.
+| `ch02_limits.ipynb` | ch2 | 변화율과 극한 |
+| `ch03_derivative_definition.ipynb` | ch3 | 미분계수와 도함수의 정의 |
+| `ch04_power_rule.ipynb` | ch4 | 기본 미분 공식 (거듭제곱·상수·합차) |
+| `ch05_product_quotient.ipynb` | ch5 | 곱과 몫의 법칙 |
+| `ch06_chain_rule.ipynb` | ch6 | 연쇄법칙 |
+| `ch07_exp_log_sigmoid.ipynb` | ch7 | 지수·로그·시그모이드 미분 |
+| `ch08_partial_derivatives.ipynb` | ch8 | 다변수 함수와 편미분 |
+| `ch09_gradient_descent.ipynb` | ch9 | 그래디언트와 경사하강법 |
+| `ch10_backprop.ipynb` | ch10 | 역전파 직관 (계산그래프) |

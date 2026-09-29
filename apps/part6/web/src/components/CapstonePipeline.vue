@@ -26,17 +26,17 @@ const picked = ref<number | null>(null)
 const STAGE_INFO = [
   {
     badge: '사전학습',
-    title: '① 베이스 모델 — 이어쓰기 기계',
+    title: '① 베이스 모델: 이어쓰기 기계',
     math: '다음 단어 예측 (4부 · ch0~2)',
     reply: '다음 주 회식 공지 문구 써 줘 라는 요청을 받았을 때 총무 담당자가 흔히 하는 실수 5가지. 첫째, 날짜를 빠뜨리는 것이다. 둘째…',
-    note: '요청을 수행하지 않고 그럴듯한 글을 이어 씁니다 — 우리의 출발점.',
+    note: '요청을 수행하지 않고 그럴듯한 글을 이어 씁니다. 여기가 출발점.',
   },
   {
     badge: 'SFT',
-    title: '② SFT — 시범으로 행동 가르치기',
+    title: '② SFT: 시범으로 행동 가르치기',
     math: '크로스 엔트로피 −log q + 손실 마스킹 (ch3 · 5부 4장)',
     reply: '네, 회식 공지 문구를 작성해 드리겠습니다. 회식이라는 것은 조직 구성원 간의 친목을 도모하는 자리인 만큼, 먼저 일시를 안내드리자면 다음 주 목요일이며, 장소는 회사 앞 한식당으로…',
-    note: '드디어 답변을 합니다! 하지만 아직 다듬어지지 않았어요(장황) — 취향은 다음 단계가 담당.',
+    note: '드디어 답변을 합니다! 하지만 아직 다듬어지지 않았어요(장황). 취향은 다음 단계가 담당.',
   },
 ] as const
 
@@ -61,8 +61,8 @@ const finalStyle = computed(() => (picked.value === null ? '' : CANDIDATES[picke
 
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 졸업 실험: 나만의 챗봇 조련 — 파이프라인을 직접 끝까지</p>
-    <p class="mb-3 text-xs text-slate-500">요청: "{{ PROMPT }}" · ③에서 당신이 고른 선호가 최종 챗봇을 결정합니다.</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 졸업 실험: 나만의 챗봇 조련: 파이프라인을 직접 끝까지</p>
+    <p class="mb-3 text-xs text-slate-500">요청: "{{ PROMPT }}" · ③에서 내가 고른 선호가 최종 챗봇을 결정합니다.</p>
 
     <!-- 진행 표시 -->
     <div class="mb-4 flex flex-wrap items-center gap-1 text-xs">
@@ -89,15 +89,15 @@ const finalStyle = computed(() => (picked.value === null ? '' : CANDIDATES[picke
         class="mt-3 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo-500"
         @click="step === 0 ? toSft() : toPreference()"
       >
-        {{ step === 0 ? '② SFT 시작 — 시범 데이터 투입 ▶' : '③ 선호 수집으로 ▶' }}
+        {{ step === 0 ? '② SFT 시작: 시범 데이터 투입 ▶' : '③ 선호 수집으로 ▶' }}
       </button>
     </template>
 
     <!-- 단계 2: 선호 수집 — 사용자가 라벨러 -->
     <template v-else-if="step === 2">
-      <p class="mb-1 text-sm font-bold text-slate-800">③ 선호 수집 — 이번엔 당신이 라벨러입니다</p>
+      <p class="mb-1 text-sm font-bold text-slate-800">③ 선호 수집: 이번엔 직접 라벨러가 되어 봅니다</p>
       <p class="mb-2 text-xs text-slate-500">🔧 사용한 수학: 선호 쌍 → Bradley-Terry σ(r_A − r_B) (ch4 · 3부 4장 · 2부 7장)</p>
-      <p class="mb-2 text-sm text-slate-600">SFT 모델이 만든 두 후보입니다. <b>어느 쪽이 당신 취향인가요?</b> (정답 없음 — 진심으로 고르세요)</p>
+      <p class="mb-2 text-sm text-slate-600">SFT 모델이 만든 두 후보입니다. <b>어느 쪽이 더 마음에 드나요?</b> (정답 없음, 진심으로 고르세요)</p>
       <div class="grid gap-2 sm:grid-cols-2">
         <button
           v-for="(c, i) in CANDIDATES"
@@ -114,15 +114,15 @@ const finalStyle = computed(() => (picked.value === null ? '' : CANDIDATES[picke
 
     <!-- 단계 3: DPO 완료 -->
     <template v-else>
-      <p class="mb-1 text-sm font-bold text-slate-800">④ DPO — 당신의 선호를 가중치에 새기기</p>
+      <p class="mb-1 text-sm font-bold text-slate-800">④ DPO: 내 선호를 가중치에 새기기</p>
       <p class="mb-2 text-xs text-slate-500">🔧 사용한 수학: −log σ(숨은 점수 마진) + KL 목줄 내장 (ch6~7 · 5부 5장)</p>
       <div class="rounded-lg border border-emerald-200 bg-emerald-50 p-3">
-        <p class="mb-1 text-xs font-semibold text-emerald-700">💬 조련 완료 — 당신의 챗봇의 응답 ({{ finalStyle }})</p>
+        <p class="mb-1 text-xs font-semibold text-emerald-700">💬 조련 완료: 내 챗봇의 응답 ({{ finalStyle }})</p>
         <p class="text-sm leading-relaxed text-slate-800">{{ finalAnswer }}</p>
       </div>
       <p class="mt-2 rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">
-        🎓 <b>완성! 당신의 취향이 이 챗봇을 만들었습니다.</b>
-        옆자리 동료가 다른 후보를 골랐다면 다른 챗봇이 태어났겠죠 — 조련의 마지막 단계가
+        🎓 <b>완성! 내 취향이 이 챗봇을 만들었습니다.</b>
+        옆자리 동료가 다른 후보를 골랐다면 다른 챗봇이 태어났겠죠. 조련의 마지막 단계가
         "정답"이 아니라 <b>"누구의 선호인가"</b>인 이유입니다. 세상의 챗봇들이 서로 다른 성격을 갖는 이유이기도 하고요.
       </p>
       <button

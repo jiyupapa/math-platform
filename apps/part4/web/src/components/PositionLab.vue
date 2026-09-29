@@ -43,7 +43,7 @@ const fmt = (v: [number, number]) => `(${v[0].toFixed(1)}, ${v[1].toFixed(1)})`
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- 순서 선택 -->
-    <p class="mb-2 text-sm font-semibold text-slate-500">① 같은 단어, 다른 순서 — 골라 보세요</p>
+    <p class="mb-2 text-sm font-semibold text-slate-500">① 같은 단어, 다른 순서: 골라 보세요</p>
     <div class="flex flex-wrap gap-2">
       <button
         v-for="o in ORDERS"
@@ -57,7 +57,7 @@ const fmt = (v: [number, number]) => `(${v[0].toFixed(1)}, ${v[1].toFixed(1)})`
       </button>
     </div>
     <p class="mt-1.5 text-xs text-slate-500">
-      뜻: <b>{{ order.meaning }}</b> — 단어는 똑같은데 순서만 바꿔도 뜻이 정반대죠.
+      뜻: <b>{{ order.meaning }}</b>. 단어는 똑같은데 순서만 바꿔도 뜻이 정반대죠.
     </p>
 
     <!-- 위치 토글 -->
@@ -96,7 +96,7 @@ const fmt = (v: [number, number]) => `(${v[0].toFixed(1)}, ${v[1].toFixed(1)})`
       class="mt-4 rounded-lg bg-emerald-50 px-4 py-3 text-sm text-emerald-800"
     >
       ✅ 위치를 더하니 <b>슬롯마다 최종 벡터가 달라</b>집니다. 그래서 "나"가 <b>1번째</b>인지
-      <b>2번째</b>인지 모델이 구분할 수 있어요 — 순서가 살아납니다.
+      <b>2번째</b>인지 모델이 구분할 수 있어요. 순서가 살아납니다.
     </div>
     <div
       v-else

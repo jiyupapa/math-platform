@@ -19,7 +19,7 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 6</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">6장</p>
     <h1 class="mb-4 text-3xl font-bold">행렬식과 역행렬</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       앞 챕터에서 행렬은 <b>공간을 바꾸는 변환</b>이었죠. 이번엔 그 변환이 <b>넓이를 얼마나 바꾸는지(행렬식)</b>,
@@ -43,7 +43,7 @@ function onSetComplete() {
       변환 후 만드는 평행사변형의 넓이가 곧 <b>행렬식의 크기</b>(부호를 뗀 값)입니다.
     </p>
 
-    <ConceptCard tone="note" title="새 용어·기호 — 행렬식 (det)">
+    <ConceptCard tone="note" title="새 용어·기호: 행렬식 (det)">
       <ul class="list-disc space-y-1 pl-5">
         <li>
           <b>행렬식(determinant)</b>: 변환의 <b>넓이 배율</b>. 기호로 <MathBlock inline expr="\det(A)" /> 또는
@@ -79,7 +79,7 @@ function onSetComplete() {
     <ConceptCard tone="note" title="det 값이 말해주는 것">
       <ul class="list-disc space-y-1 pl-5">
         <li>
-          <b>|det| = 넓이 배율</b> (2면 2배, 0.5면 절반). 여기서 막대 | | 는 <b>절댓값</b>(부호 떼기) —
+          <b>|det| = 넓이 배율</b> (2면 2배, 0.5면 절반). 여기서 막대 | | 는 <b>절댓값</b>(부호 떼기)이에요.
           행렬식 표기 <MathBlock inline expr="|A|" /> 와 모양은 같지만 다른 뜻이에요.
           행렬식 <b>값 자체는 음수일 수 있고</b>, 넓이 배율은 부호를 뗀 크기만 봅니다.
         </li>
@@ -108,11 +108,11 @@ function onSetComplete() {
       <b>역행렬 <MathBlock inline expr="A^{-1}" /></b> 이에요. (숫자의 "나누기"에 해당)
     </p>
 
-    <ConceptCard tone="note" title="새 용어·기호 — 항등행렬 I, 역행렬 A⁻¹">
+    <ConceptCard tone="note" title="새 용어·기호: 항등행렬 I, 역행렬 A⁻¹">
       <ul class="list-disc space-y-1 pl-5">
         <li>
           <b>항등행렬 <MathBlock inline expr="I" /></b> (identity): 아무것도 안 바꾸는 행렬.
-          <MathBlock inline expr="\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}" /> — 숫자의 <b>1</b> 같은 존재.
+          <MathBlock inline expr="\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}" /> 로, 숫자의 <b>1</b> 같은 존재예요.
         </li>
         <li>
           <b>역행렬 <MathBlock inline expr="A^{-1}" /></b> ("에이 인버스"): <MathBlock inline expr="A" /> 를
@@ -123,13 +123,13 @@ function onSetComplete() {
           <b>2×2 역행렬 공식</b>:
           <MathBlock inline expr="A^{-1} = \dfrac{1}{ad-bc}\begin{bmatrix} d & -b \\ -c & a \end{bmatrix}" />.
           앞의 <MathBlock inline expr="\tfrac{1}{ad-bc}" /> 의 분모가 <b>행렬식</b>이라, <b>det=0이면 나눌 수 없어 역행렬도 없어요.</b>
-          <span class="text-slate-500">(대괄호 안 숫자 배치는 외울 필요 없어요 — 여기서 기억할 건
+          <span class="text-slate-500">(대괄호 안 숫자 배치는 외울 필요 없어요. 여기서 기억할 건
           <b>분모가 행렬식</b>이라는 사실 하나!)</span>
         </li>
       </ul>
     </ConceptCard>
 
-    <ConceptCard tone="tip" title="계산 예시 — 대각행렬은 쉬워요">
+    <ConceptCard tone="tip" title="계산 예시: 대각행렬은 쉬워요">
       <p class="mb-1">
         대각선만 있는 행렬은 역행렬도 <b>대각 성분의 역수</b>:
       </p>
@@ -155,7 +155,7 @@ function onSetComplete() {
     </p>
     <MathBlock expr="A\vec{x} = \vec{b} \;\Rightarrow\; A^{-1}A\,\vec{x} = A^{-1}\vec{b} \;\Rightarrow\; \vec{x} = A^{-1}\vec{b}" />
     <p class="leading-relaxed text-slate-700">
-      숫자의 <MathBlock inline expr="3x = 6 \Rightarrow x = \tfrac{1}{3}\times 6 = 2" /> 와 똑같은 흐름이에요 —
+      숫자의 <MathBlock inline expr="3x = 6 \Rightarrow x = \tfrac{1}{3}\times 6 = 2" /> 와 똑같은 흐름이에요.
       "나누기" 대신 "역행렬 곱하기"를 하는 거죠.
     </p>
 
@@ -166,8 +166,8 @@ function onSetComplete() {
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <b>선형회귀</b>: 데이터에 가장 잘 맞는 모델 파라미터를 <MathBlock inline expr="\vec{x} = A^{-1}\vec{b}" /> 꼴로
-          구합니다 — 역행렬이 직접 등장.
-          <span class="text-slate-500">(이 풀이 식을 '정규방정식'이라 불러요 — 10장에서 제대로 다룹니다)</span>
+          구합니다. 역행렬이 직접 등장.
+          <span class="text-slate-500">(이 풀이 식을 '정규방정식'이라 불러요. 10장에서 제대로 다룹니다)</span>
         </li>
         <li>
           <b>가역성 판단</b>: 행렬식이 0이거나 0에 가까우면 "<b>정보가 겹쳐 되돌릴 수 없다</b>"는 신호 →
@@ -194,7 +194,7 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 · 단계별 계산 10문제. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="행렬식·역행렬 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="행렬식·역행렬: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -283,7 +283,7 @@ function onSetComplete() {
           '역행렬 [[0.5,0],[0,0.2]] 와 벡터 (6,10) 의 행렬×벡터예요. 첫째 행: 0.5×6 + 0×10.',
           '둘째 행: 0×6 + 0.2×10.',
         ]"
-        explanation="x = A⁻¹b = (3, 2). 검산: A를 적용하면 (2×3, 5×2) = (6, 10) = b ✓ — 역행렬로 연립방정식을 푼 거예요!"
+        explanation="x = A⁻¹b = (3, 2). 검산: A를 적용하면 (2×3, 5×2) = (6, 10) = b ✓. 역행렬로 연립방정식을 푼 거예요!"
       />
     </QuizSet>
 
@@ -299,13 +299,13 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 6 완료. 넓이 배율과 되돌리기를 익혔습니다.</p>
-      <p class="mt-1 text-sm text-emerald-700">다음은 변환에도 방향이 안 바뀌는 특별한 축 — 고유값과 고유벡터입니다.</p>
+      <p class="font-semibold text-emerald-800">6장 완료. 넓이 배율과 되돌리기를 익혔습니다.</p>
+      <p class="mt-1 text-sm text-emerald-700">다음은 변환에도 방향이 안 바뀌는 특별한 축, 고유값과 고유벡터입니다.</p>
       <RouterLink
         to="/ch/ch7"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        다음 챕터 — 고유값과 고유벡터 →
+        다음 챕터: 고유값과 고유벡터 →
       </RouterLink>
     </div>
   </article>

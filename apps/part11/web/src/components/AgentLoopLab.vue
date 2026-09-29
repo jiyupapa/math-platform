@@ -23,7 +23,7 @@ const STEPS = [
   {
     think: '방을 잡는다',
     action: '🗓️ 예약 도구(B동 3호, 화 15시)',
-    obs: '예약 확정 — 번호 R-1027',
+    obs: '예약 확정: 번호 R-1027',
     state: '+ 예약 번호 R-1027',
   },
   {
@@ -35,7 +35,7 @@ const STEPS = [
   {
     think: '정말 잡혔는지 마지막 확인',
     action: '✅ 예약 확인 조회(R-1027)',
-    obs: '상태: 확정 — 이제 보고만 남았다',
+    obs: '상태: 확정. 이제 보고만 남았다',
     state: '완료: 화 15시 · B동 3호 · R-1027 · 4명 초대',
   },
 ]
@@ -56,12 +56,12 @@ function reset() {
 
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
-    <p class="mb-1 text-sm font-semibold text-slate-500">같은 부탁, 두 가지 처리 방식 — 요청: <b class="text-slate-700">{{ REQUEST }}</b></p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">같은 부탁, 두 가지 처리 방식. 요청: <b class="text-slate-700">{{ REQUEST }}</b></p>
 
     <div class="mt-3 grid gap-4 md:grid-cols-2">
       <!-- ① 챗봇 모드 -->
       <div class="rounded-lg border border-slate-200 bg-slate-50 p-4">
-        <p class="mb-2 text-sm font-bold text-slate-700">💬 챗봇 모드 — 한 턴에 답한다</p>
+        <p class="mb-2 text-sm font-bold text-slate-700">💬 챗봇 모드: 한 턴에 답한다</p>
         <button
           v-if="!asked"
           type="button"
@@ -75,7 +75,7 @@ function reset() {
             "네! 다음 주 화요일 오후에 회의실을 예약해 드렸습니다 😊 좋은 회의 되세요!"
           </p>
           <p class="mt-2 rounded-md bg-rose-50 px-3 py-2 text-xs font-medium text-rose-700">
-            ⚠️ 실제로 예약된 것은 없습니다 — 캘린더를 <b>본 적조차 없어요</b>.
+            ⚠️ 실제로 예약된 것은 없습니다. 캘린더를 <b>본 적조차 없어요</b>.
             글로만 배운 지식으로 <b>그럴듯한 문장</b>을 생성했을 뿐입니다.
           </p>
         </template>
@@ -84,7 +84,7 @@ function reset() {
       <!-- ② 에이전트 모드 -->
       <div class="rounded-lg border border-indigo-200 bg-indigo-50/50 p-4">
         <div class="mb-2 flex items-center justify-between">
-          <p class="text-sm font-bold text-indigo-800">🤖 에이전트 모드 — 루프를 돈다</p>
+          <p class="text-sm font-bold text-indigo-800">🤖 에이전트 모드: 루프를 돈다</p>
           <button
             type="button"
             class="rounded-lg px-3 py-1.5 text-sm font-semibold text-white"
@@ -96,7 +96,7 @@ function reset() {
         </div>
 
         <p v-if="idx === 0" class="rounded-md bg-white/70 px-3 py-2 text-xs text-slate-500">
-          버튼을 눌러 루프를 한 스텝씩 진행해 보세요 — 스텝마다 <b>생각 → 행동(도구) → 관찰</b>이 한 바퀴입니다.
+          버튼을 눌러 루프를 한 스텝씩 진행해 보세요. 스텝마다 <b>생각 → 행동(도구) → 관찰</b>이 한 바퀴입니다.
         </p>
 
         <ol class="space-y-2">
@@ -115,16 +115,16 @@ function reset() {
 
         <p v-if="done" class="mt-2 rounded-md bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
           "화요일 15시 <b>B동 3호</b> 예약 완료(R-1027), 4명에게 초대장을 보냈고 확정 상태까지 확인했습니다."
-          — 모든 문장이 <b>도구로 확인한 사실</b>입니다.
+          모든 문장이 <b>도구로 확인한 사실</b>입니다.
         </p>
       </div>
     </div>
 
     <!-- 단계 수 세기 — 워밍업과 연결 -->
     <div v-if="done" class="mt-4 rounded-lg bg-amber-50 px-4 py-3 text-sm text-amber-900">
-      ✏️ <b>단계 수를 세어 보세요 — 5단계.</b> 방금 이 예약 일도 다섯 걸음짜리
+      ✏️ <b>단계 수를 세어 보세요. 5단계.</b> 방금 이 예약 일도 다섯 걸음짜리
       <b>사슬</b>이었습니다. 워밍업의 곱셈을 적용하면: 걸음 정확도 90%일 때 이 일의 성공률은
-      0.9⁵ ≈ <b>59%</b> — 유능해 보이는 루프가 왜 가끔 일을 망치는지, 수학은 이미 알고 있죠.
+      0.9⁵ ≈ <b>59%</b>. 유능해 보이는 루프가 왜 가끔 일을 망치는지, 수학은 이미 알고 있죠.
     </div>
 
     <button

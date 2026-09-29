@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { AuthPanel } from '@series/store'
 import { ThemeToggle, PortalLink } from '@series/ui'
-import { chapters, availableChapters } from '@/data/chapters'
+import { chapters } from '@/data/chapters'
 import { useProgressStore } from '@/stores/progress'
 import { useReviewStore } from '@/stores/review'
 
@@ -12,9 +11,6 @@ const emit = defineEmits<{ close: [] }>()
 
 const progress = useProgressStore()
 const review = useReviewStore()
-
-// 콘텐츠가 공개된 최신 Phase (챕터 추가 시 자동 갱신)
-const latestPhase = computed(() => Math.max(...availableChapters.map((c) => c.phase)))
 </script>
 
 <template>
@@ -116,8 +112,5 @@ const latestPhase = computed(() => Math.max(...availableChapters.map((c) => c.ph
       </ul>
     </nav>
 
-    <div class="border-t border-slate-200 px-5 py-3 text-xs text-slate-500">
-      현재 Phase {{ latestPhase }}까지 공개
-    </div>
   </aside>
 </template>

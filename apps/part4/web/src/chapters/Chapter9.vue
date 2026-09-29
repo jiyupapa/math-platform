@@ -22,17 +22,17 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 9 · 출력층</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">9장 · 출력층</p>
     <h1 class="mb-4 text-3xl font-bold">출력층 — 벡터를 다음 단어 확률로</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       블록들을 다 통과하면, 마지막 자리에는 <b>문맥이 잔뜩 담긴 벡터</b> 하나가 남습니다.
-      이 벡터를 <b>사전 전체 단어의 점수</b>로 바꾸고 <b>소프트맥스</b>로 확률을 내면 — 드디어
-      <b>다음 단어</b>가 정해집니다. 샘플 챕터에서 만졌던 그 소프트맥스가 여기서 일해요.
+      이 벡터를 <b>사전 전체 단어의 점수</b>로 바꾸고 <b>소프트맥스</b>로 확률을 내면 드디어
+      <b>다음 단어</b>가 정해집니다. 워밍업에서 만졌던 그 소프트맥스가 여기서 일해요.
     </p>
 
     <ConceptCard tone="goal" title="이 챕터의 목표">
       마지막 벡터가 어떻게 <b>어휘 전체의 점수(logits) → 확률</b>로 바뀌어 다음 단어가 뽑히는지,
-      벡터를 직접 움직이며 이해합니다. (샘플 챕터 소프트맥스와 하나로 이어집니다)
+      벡터를 직접 움직이며 이해합니다. (워밍업 소프트맥스와 하나로 이어집니다)
     </ConceptCard>
 
     <!-- ===== 1. 벡터 → 단어별 점수 ===== -->
@@ -50,9 +50,9 @@ function onSetComplete() {
 
     <ConceptCard tone="note" title="용어 다시 보기: 로짓(logit)과 어휘">
       <ul class="list-disc space-y-1 pl-5 text-sm">
-        <li><b>출력층(output layer / LM head)</b> — 문맥 벡터를 <b>어휘 크기만큼의 점수</b>로 바꾸는 마지막 층.
+        <li><b>출력층(output layer / LM head)</b>: 문맥 벡터를 <b>어휘 크기만큼의 점수</b>로 바꾸는 마지막 층.
           (LM head = Language Model head, "언어모델의 머리"라는 뜻)</li>
-        <li><b>logit(로짓)</b> — 소프트맥스 전의 <b>날것 점수</b>(샘플 챕터에서 배운 그것!). 단어마다 하나씩.</li>
+        <li><b>logit(로짓)</b>: 소프트맥스 전의 <b>날것 점수</b>(워밍업에서 배운 그것!). 단어마다 하나씩.</li>
         <li>사전이 <b>5만 단어</b>면, 출력층은 벡터 하나에서 <b>5만 개의 점수</b>를 뽑습니다.</li>
       </ul>
     </ConceptCard>
@@ -72,14 +72,14 @@ function onSetComplete() {
     </h2>
     <p class="leading-relaxed text-slate-700">
       단어별 점수(logits)를 그대로 쓰지 않고, <b>소프트맥스</b>로 <b>합이 1인 확률 분포</b>로 바꿉니다.
-      이게 바로 샘플 챕터의 공식이에요 — 똑같습니다.
+      이게 바로 워밍업의 공식이에요. 똑같습니다.
     </p>
     <MathBlock expr="P(\text{단어}_i) = \text{softmax}(z_i) = \dfrac{e^{z_i}}{\sum_j e^{z_j}}" />
     <p class="mt-1 text-sm text-slate-500">
       <MathBlock inline expr="z_i" /> = <MathBlock inline expr="i" />번째 단어의 점수(logit).
-      기억나죠? — <MathBlock inline expr="e^{\;}" /> 는 <b>지수</b>(2.718을 거듭제곱, 항상 양수),
-      <MathBlock inline expr="\textstyle\sum_j" /> 는 <b>시그마</b>("모든 단어를 더하기"). 샘플 챕터의 그 공식 그대로입니다.
-      이제 이 확률에서 다음 단어를 고르면 됩니다(고르는 방법은 Phase 12).
+      기억나죠? <MathBlock inline expr="e^{\;}" /> 는 <b>지수</b>(2.718을 거듭제곱, 항상 양수),
+      <MathBlock inline expr="\textstyle\sum_j" /> 는 <b>시그마</b>("모든 단어를 더하기"). 워밍업의 그 공식 그대로입니다.
+      이제 이 확률에서 다음 단어를 고르면 됩니다(고르는 방법은 12장).
     </p>
 
     <ConceptCard tone="tip" title="한 바퀴가 완성됐어요">
@@ -93,11 +93,11 @@ function onSetComplete() {
       question="단어별 점수(logits)를 다음 단어 '확률'로 바꾸는 장치는?"
       :choices="['소프트맥스', '토큰화', '위치 인코딩', '잔차연결']"
       :answer="0"
-      :hints="['샘플 챕터에서 배운 그것.']"
+      :hints="['워밍업에서 배운 그것.']"
       explanation="소프트맥스입니다. 점수를 합 1의 확률 분포로 바꿔 다음 단어를 고릅니다."
     />
 
-    <DetailsCard title="➕ 더 깊이 알아보기 — 입력 임베딩과 출력층이 사실 '한 몸'일 수 있다">
+    <DetailsCard title="➕ 더 깊이 알아보기: 입력 임베딩과 출력층이 사실 '한 몸'일 수 있다">
       <p class="mb-2">
         출력층은 "문맥 벡터 · 단어 벡터"로 점수를 냅니다. 그런데 이 <b>단어 벡터</b>는
         <b>입력 임베딩</b>(ch3)과 <b>같은 것을 재사용</b>하는 경우가 많아요. 이를
@@ -108,7 +108,7 @@ function onSetComplete() {
         <li><b>성능</b>: "단어를 벡터로 넣는 규칙"과 "벡터를 단어로 읽는 규칙"이 <b>일관</b>돼 학습에 유리.</li>
       </ul>
       <div class="rounded-lg bg-white px-4 py-3 text-sm text-slate-600">
-        🎯 즉 <b>입구(임베딩)와 출구(출력층)</b>가 같은 사전을 공유하는 셈 — 들어갈 때와 나올 때 같은 지도.
+        🎯 즉 <b>입구(임베딩)와 출구(출력층)</b>가 같은 사전을 공유하는 셈이에요. 들어갈 때와 나올 때 같은 지도.
       </div>
     </DetailsCard>
 
@@ -125,7 +125,7 @@ function onSetComplete() {
         </li>
         <li>
           "가장 확률 높은 단어"만 고르면 뻔해지고, <b>확률에 따라 살짝 무작위</b>로 고르면 다양해집니다.
-          이 <b>고르는 방법</b>이 Phase 12(샘플링·temperature)입니다.
+          이 <b>고르는 방법</b>이 12장(샘플링·temperature)입니다.
         </li>
         <li>
           정리하면 <b>입력 → (토큰화·임베딩·위치·블록) → 출력층 → 확률 → 단어 → 반복</b>.
@@ -133,11 +133,11 @@ function onSetComplete() {
         </li>
       </ul>
       <p class="mt-2 text-sm text-violet-900/80">
-        회수하는 수학 — 출력층이 내놓는 <b>확률분포</b>의 문법은
+        다시 쓰는 수학: 출력층이 내놓는 <b>확률분포</b>의 문법은
         <b><PartLink :part="3" ch="ch5">3부 5장</PartLink></b>에서 쌓은 그 기초입니다.
       </p>
       <p class="mt-2 text-sm text-violet-900/80">
-        🎉 다음 챕터가 이 과정의 <b>전체 조립</b> — 이 학습의 <b>궁극 목표</b>입니다!
+        🎉 다음 챕터가 이 과정의 <b>전체 조립</b>, 이 학습의 <b>궁극 목표</b>입니다!
       </p>
     </ConceptCard>
 
@@ -145,7 +145,7 @@ function onSetComplete() {
     <h2 class="mt-8 mb-2 text-xl font-bold">4. 직접 풀어보기</h2>
     <p class="mb-2 leading-relaxed text-slate-700"><b>10문제를 모두 맞히면</b> 이 챕터가 완료됩니다.</p>
 
-    <QuizSet title="출력층 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="출력층: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -159,11 +159,11 @@ function onSetComplete() {
         question="단어별 점수(logits)를 다음 단어 확률로 바꾸는 것은?"
         :choices="['소프트맥스', '토큰화', '어텐션', '잔차연결']"
         :answer="0"
-        explanation="소프트맥스. 샘플 챕터에서 배운 바로 그 장치입니다."
+        explanation="소프트맥스. 워밍업에서 배운 바로 그 장치입니다."
       />
       <Quiz
         difficulty="easy"
-        question="출력층에서 나오는 점수(logit)는 샘플 챕터에서 배운 '로짓'과 같은 개념이다."
+        question="출력층에서 나오는 점수(logit)는 워밍업에서 배운 '로짓'과 같은 개념이다."
         type="truefalse"
         :answer="0"
         explanation="맞아요. 소프트맥스 전의 날것 점수 = 로짓. 출력층이 단어마다 하나씩 냅니다."
@@ -194,7 +194,7 @@ function onSetComplete() {
         :choices="['1개', '2개', '5만 개', '무한개']"
         :answer="2"
         :hints="['단어마다 점수 하나씩.']"
-        explanation="어휘 크기만큼 — 5만 개. 그 5만 개를 소프트맥스해 확률로 만듭니다."
+        explanation="어휘 크기만큼, 곧 5만 개. 그 5만 개를 소프트맥스해 확률로 만듭니다."
       />
       <Quiz
         difficulty="medium"
@@ -214,7 +214,7 @@ function onSetComplete() {
           '아무것도 안 한다',
         ]"
         :answer="0"
-        explanation="고른 단어를 붙이고 다시 예측 — ch1의 자기회귀 생성입니다."
+        explanation="고른 단어를 붙이고 다시 예측하는 것, ch1의 자기회귀 생성입니다."
       />
 
       <!-- 어려움 -->
@@ -241,7 +241,7 @@ function onSetComplete() {
           '멀티헤드 분할',
         ]"
         :answer="0"
-        explanation="출력층이 낸 확률로 다음 단어를 고르고 반복 — 그게 자기회귀 생성입니다."
+        explanation="출력층이 낸 확률로 다음 단어를 고르고 반복하는 것, 그게 자기회귀 생성입니다."
       />
     </QuizSet>
 
@@ -252,10 +252,10 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 9 완료 — 벡터가 다음 단어가 됐습니다</p>
+      <p class="font-semibold text-emerald-800">9장 완료! 벡터가 다음 단어가 됐습니다</p>
       <p class="mt-1 text-sm text-emerald-700">
-        입력부터 다음 단어까지 조각이 전부 모였어요. 다음 챕터(ch10)에서 이 모두를 <b>한 흐름</b>으로 잇습니다
-        — <b>이 학습의 궁극 목표</b>! 노트북 <code>notebooks/ch09_output_layer.ipynb</code> 도 함께!
+        입력부터 다음 단어까지 조각이 전부 모였어요. 다음 챕터(ch10)에서 이 모두를 <b>한 흐름</b>으로 잇습니다.
+        <b>이 학습의 궁극 목표</b>예요! 노트북 <code>notebooks/ch09_output_layer.ipynb</code> 도 함께!
       </p>
     </div>
   </article>

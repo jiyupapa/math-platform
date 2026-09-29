@@ -37,14 +37,14 @@ const pct = (v: number) => (v * 100).toFixed(1)
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 한 표의 정답률 -->
-    <p class="mb-1 text-sm font-semibold text-slate-500">① 한 표의 정답률 — 풀이 하나가 정답을 맞힐 확률</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">① 한 표의 정답률: 풀이 하나가 정답을 맞힐 확률</p>
     <div class="mb-4 flex items-center gap-3">
       <input v-model.number="p" type="range" min="0.3" max="0.95" step="0.05" class="flex-1 accent-indigo-600" />
       <span class="w-14 shrink-0 text-right font-mono text-sm font-bold" :class="p < 0.5 ? 'text-rose-700' : 'text-slate-800'">{{ Math.round(p * 100) }}%</span>
     </div>
 
     <!-- ② 투표자 수 -->
-    <p class="mb-1 text-sm font-semibold text-slate-500">② 투표자 수 — 같은 문제를 몇 번 풀게 할까 (동수가 없게 홀수만)</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">② 투표자 수: 같은 문제를 몇 번 풀게 할까 (동수가 없게 홀수만)</p>
     <div class="mb-3 flex flex-wrap items-center gap-1.5">
       <button
         v-for="v in KS"
@@ -77,7 +77,7 @@ const pct = (v: number) => (v * 100).toFixed(1)
         :class="p < 0.5 ? 'bg-rose-50 text-rose-800' : gain > 0.05 ? 'bg-emerald-50 text-emerald-800' : 'bg-slate-100 text-slate-600'"
       >
         <template v-if="p < 0.5">
-          ⚠️ 역전 — 한 표가 50% 미만이면 다수결은 <b>틀린 답으로 수렴</b>합니다
+          ⚠️ 역전: 한 표가 50% 미만이면 다수결은 <b>틀린 답으로 수렴</b>합니다
           ({{ Math.round(p * 100) }}% → {{ pct(withCorr) }}%). 못하는 일꾼을 모아 봐야 더 못해져요.
         </template>
         <template v-else-if="gain > 0.05">
@@ -89,7 +89,7 @@ const pct = (v: number) => (v * 100).toFixed(1)
     </div>
 
     <!-- ③ 상관 다이얼 -->
-    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">③ 표끼리 닮은 정도(상관) — 확률 ρ로 전원이 한 표를 그대로 복사한다면</p>
+    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">③ 표끼리 닮은 정도(상관): 확률 ρ로 전원이 한 표를 그대로 복사한다면</p>
     <div class="rounded-lg bg-slate-50 p-4">
       <div class="flex items-center gap-3">
         <span class="text-xs text-slate-500">독립</span>
@@ -98,10 +98,10 @@ const pct = (v: number) => (v * 100).toFixed(1)
         <span class="w-12 shrink-0 text-right font-mono text-sm font-bold text-slate-800">ρ={{ rho.toFixed(1) }}</span>
       </div>
       <p class="mt-2 text-sm" :class="rho > 0 ? 'text-rose-700' : 'text-slate-500'">
-        <template v-if="rho === 0">지금은 모든 표가 독립 — 이항 다수결의 이론값 그대로입니다.</template>
+        <template v-if="rho === 0">지금은 모든 표가 독립이라 이항 다수결의 이론값 그대로입니다.</template>
         <template v-else>
           독립이라면 <b>{{ pct(indep) }}%</b>였을 다수결이, 표끼리 닮으면(ρ={{ rho.toFixed(1) }})
-          <b>{{ pct(withCorr) }}%</b>로 깎입니다 — ρ=1이면 회의는 그냥 <b>한 표</b>({{ Math.round(p * 100) }}%)와 같아요.
+          <b>{{ pct(withCorr) }}%</b>로 깎입니다. ρ=1이면 회의는 그냥 <b>한 표</b>({{ Math.round(p * 100) }}%)와 같아요.
         </template>
       </p>
     </div>
@@ -109,7 +109,7 @@ const pct = (v: number) => (v * 100).toFixed(1)
     <!-- ④ 곡선 보기 -->
     <label class="mt-4 flex cursor-pointer items-center gap-2 text-sm text-slate-700">
       <input v-model="showCurve" type="checkbox" class="h-4 w-4 accent-indigo-600" />
-      <span><b>표 수별 이론값 보기</b> — 독립 가정(ρ=0)에서 다수결 정답률이 어떻게 크는지</span>
+      <span><b>표 수별 이론값 보기</b>: 독립 가정(ρ=0)에서 다수결 정답률이 어떻게 크는지</span>
     </label>
     <div v-if="showCurve" class="mt-2 space-y-1.5 rounded-md bg-amber-50 px-3 py-2">
       <div v-for="row in curveRows" :key="row.kv" class="flex items-center gap-2 text-sm text-amber-900">
@@ -120,8 +120,8 @@ const pct = (v: number) => (v * 100).toFixed(1)
         <span class="w-14 shrink-0 font-mono text-xs">{{ row.pct.toFixed(1) }}%</span>
       </div>
       <p class="pt-1 text-xs text-amber-800">
-        <template v-if="p >= 0.5">표가 늘수록 좋아지지만 <b>수확은 체감</b>합니다 — 그리고 표 하나하나가 전부 비용(토큰)이에요.</template>
-        <template v-else>50% 미만에선 표가 늘수록 <b>나빠집니다</b> — 다수결의 전제 조건을 확인하세요.</template>
+        <template v-if="p >= 0.5">표가 늘수록 좋아지지만 <b>수확은 체감</b>합니다. 그리고 표 하나하나가 전부 비용(토큰)이에요.</template>
+        <template v-else>50% 미만에선 표가 늘수록 <b>나빠집니다</b>. 다수결의 전제 조건을 확인하세요.</template>
       </p>
     </div>
   </div>

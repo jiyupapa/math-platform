@@ -161,10 +161,10 @@ const resultLabel: Record<Turn['result'], string> = {
     <div v-else class="mt-3 rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-sm">
       <p class="font-semibold text-emerald-800">
         <template v-if="hitDirectly">🎉 {{ secret }} 을(를) 질문 {{ turns.length }}번 만에 찾았어요!</template>
-        <template v-else>🎉 질문 {{ turns.length }}번 만에 후보가 1개 — 물어볼 것도 없이 정답은 {{ secret }}!</template>
+        <template v-else>🎉 질문 {{ turns.length }}번 만에 후보가 1개! 물어볼 것도 없이 정답은 {{ secret }}!</template>
       </p>
       <p class="mt-1 text-emerald-700">
-        반반 전략이면 <b>어떤 숫자든 최대 {{ BEST }}번</b>이면 충분해요 —
+        반반 전략이면 <b>어떤 숫자든 최대 {{ BEST }}번</b>이면 충분해요.
         {{ N }} → 32 → 16 → 8 → 4 → 2 → 1, 절반으로 {{ BEST }}번 접으면 끝.
         이 "{{ BEST }}"이 바로 이 게임에 숨어 있는 정보량({{ BEST }}비트)입니다. 1장에서 자세히!
       </p>
@@ -172,7 +172,7 @@ const resultLabel: Record<Turn['result'], string> = {
 
     <!-- 질문 기록: 질문마다 후보가 어떻게 줄었나 -->
     <div v-if="turns.length" class="mt-3">
-      <p class="mb-1 text-xs font-semibold text-slate-500">질문 기록 — 후보가 얼마나 줄었나</p>
+      <p class="mb-1 text-xs font-semibold text-slate-500">질문 기록: 후보가 얼마나 줄었나</p>
       <ul class="space-y-1">
         <li
           v-for="(t, i) in turns"

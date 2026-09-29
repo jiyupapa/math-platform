@@ -98,7 +98,7 @@ const activeParts = computed(() => parts.value.length)
   <main class="mx-auto w-full max-w-3xl px-5 py-8">
     <h1 class="text-xl font-bold text-slate-800">도입 현황</h1>
     <p class="mt-1 text-sm text-slate-500">
-      사내 학습자들의 진도 집계 — 부별 진입·완주·이탈 지점. (익명 집계, 개인 정보 없음)
+      사내 학습자들의 진도 집계: 부별 진입·완주·이탈 지점 (익명 집계, 개인 정보 없음)
     </p>
 
     <!-- 상태 안내 -->
@@ -184,7 +184,7 @@ const activeParts = computed(() => parts.value.length)
         <h2 class="text-sm font-semibold text-slate-700">질문이 몰리는 개념</h2>
         <p class="mt-1 text-xs text-slate-500">
           챕터에 남긴 메모·질문의 위치를 개념으로 묶었습니다(본문은 읽지 않음). 같은 개념이 여러 부의 장에서 질문을 모으면
-          "부" 열이 2 이상 — 그 개념은 설명을 보강할 후보예요.
+          "부" 열이 2 이상이 되고, 그런 개념은 설명을 보강할 후보입니다.
         </p>
         <p v-if="!locations.length" class="mt-3 rounded-lg bg-slate-50 px-4 py-6 text-center text-sm text-slate-500">
           아직 메모·질문이 없어요. 동료들이 챕터의 💬 에 남기면 여기에 개념별로 쌓입니다.

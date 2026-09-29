@@ -22,7 +22,7 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 7</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">7장</p>
     <h1 class="mb-4 text-3xl font-bold">지수·로그·시그모이드 미분 📶</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       이제 AI에 직접 쓰이는 함수들을 미분합니다. 미분해도 자기 자신인 신기한 <MathBlock inline expr="e^x" />,
@@ -32,24 +32,24 @@ function onSetComplete() {
 
     <ConceptCard tone="goal" title="이 챕터의 목표">
       <ul class="list-disc space-y-1 pl-5">
-        <li><MathBlock inline expr="(e^x)' = e^x" /> — 미분해도 자기 자신인 성질을 이해한다</li>
+        <li><MathBlock inline expr="(e^x)' = e^x" />: 미분해도 자기 자신인 성질을 이해한다</li>
         <li><MathBlock inline expr="(\ln x)' = \dfrac{1}{x}" /> 를 안다</li>
         <li>시그모이드 <MathBlock inline expr="\sigma'(x) = \sigma(x)\,(1-\sigma(x))" /> 와 <b>기울기 소실</b>을 이해한다</li>
       </ul>
     </ConceptCard>
 
     <!-- 1. 지수함수 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">1. 지수함수 eˣ — 미분해도 자기 자신</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">1. 지수함수 eˣ: 미분해도 자기 자신</h2>
     <ReviewFlag id="ch7-s1" chapter="ch7" label="1. 지수함수 eˣ" />
     <p class="leading-relaxed text-slate-700">
       <MathBlock inline expr="e" /> 는 <b>자연상수</b>(약 2.718)라는 특별한 숫자예요.
       지금까지(4장)의 <MathBlock inline expr="x^n" /> 은 <b>밑</b>이 변수였지만, <MathBlock inline expr="e^x" /> 는
-      반대로 <b>지수 자리에 <MathBlock inline expr="x" /></b> 가 올라간 새 형태 — <MathBlock inline expr="e" /> 를 밑으로 하는
+      반대로 <b>지수 자리에 <MathBlock inline expr="x" /></b> 가 올라간 새 형태, 곧 <MathBlock inline expr="e" /> 를 밑으로 하는
       <b>지수함수</b>입니다. 그런데 이 <MathBlock inline expr="e^x" /> 는 <b>미분해도 똑같이 <MathBlock inline expr="e^x" /></b> 가 됩니다.
     </p>
     <MathBlock expr="(e^x)' = e^x" />
     <p class="leading-relaxed text-slate-700">
-      아래에서 확인하세요 — <MathBlock inline expr="e^x" /> 는 위 곡선의 <b>접선 기울기</b>가 아래
+      아래에서 확인하세요. <MathBlock inline expr="e^x" /> 는 위 곡선의 <b>접선 기울기</b>가 아래
       도함수 그래프에서 <b>똑같은 곡선</b>으로 나타납니다. (즉 어느 점에서든 기울기 = 그 점의 높이!)
     </p>
 
@@ -67,11 +67,11 @@ function onSetComplete() {
       label-df="f'(x) = eˣ (자기 자신!)"
     />
 
-    <ConceptCard tone="note" title="새 기호 — e 와 지수함수 eˣ">
+    <ConceptCard tone="note" title="새 기호: e 와 지수함수 eˣ">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li><b>자연상수 <MathBlock inline expr="e" /></b> ≈ 2.718. 원주율 <MathBlock inline expr="\pi" /> 처럼 수학에 자연히 등장하는 상수.</li>
         <li><MathBlock inline expr="e^x" /> 는 <code>exp(x)</code> 로도 씁니다. 항상 <b>양수</b>이고 <b>계속 증가</b>해요.</li>
-        <li>핵심 성질: <MathBlock inline expr="(e^x)' = e^x" /> — <b>기울기 = 함숫값</b>. 이 성질 때문에 계산이 아주 편해집니다.</li>
+        <li>핵심 성질: <MathBlock inline expr="(e^x)' = e^x" />, 곧 <b>기울기 = 함숫값</b>. 이 성질 때문에 계산이 아주 편해집니다.</li>
       </ul>
     </ConceptCard>
 
@@ -80,7 +80,7 @@ function onSetComplete() {
       question="지수함수 eˣ 는 미분해도 자기 자신 eˣ 이다."
       type="truefalse"
       :answer="0"
-      explanation="참입니다. (eˣ)' = eˣ — 미분의 세계에서 아주 특별한 함수예요."
+      explanation="참입니다. (eˣ)' = eˣ. 미분의 세계에서 아주 특별한 함수예요."
     />
 
     <!-- 2. 로그 -->
@@ -88,7 +88,7 @@ function onSetComplete() {
     <ReviewFlag id="ch7-s2" chapter="ch7" label="2. 자연로그 ln x" />
     <p class="leading-relaxed text-slate-700">
       <b>자연로그</b> <MathBlock inline expr="\ln x" /> 는 <MathBlock inline expr="e^x" /> 의 <b>역함수</b>(거꾸로
-      함수 — 출력에서 입력을 되찾아 주는 함수)
+      함수, 곧 출력에서 입력을 되찾아 주는 함수)
       (밑이 <MathBlock inline expr="e" /> 인 로그)입니다. 미분은 아주 깔끔해요:
     </p>
     <MathBlock expr="(\ln x)' = \dfrac{1}{x} \qquad (x > 0)" />
@@ -98,7 +98,7 @@ function onSetComplete() {
       <MathBlock inline expr="x=4" /> 에서 <MathBlock inline expr="1/4" /> …).
     </p>
 
-    <ConceptCard tone="note" title="새 기호 — 자연로그 ln">
+    <ConceptCard tone="note" title="새 기호: 자연로그 ln">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li><MathBlock inline expr="\ln x" /> = "엘엔 엑스". <MathBlock inline expr="e^{(\ln x)} = x" /> 가 되는 값(지수를 거꾸로 찾기).</li>
         <li>미분: <MathBlock inline expr="(\ln x)' = 1/x" />. 예: <MathBlock inline expr="x=2" /> 에서 기울기 <MathBlock inline expr="1/2" />.</li>
@@ -117,7 +117,7 @@ function onSetComplete() {
     />
 
     <!-- 3. 시그모이드 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">3. 시그모이드 σ — 뉴런의 스위치</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">3. 시그모이드 σ: 뉴런의 스위치</h2>
     <ReviewFlag id="ch7-s3" chapter="ch7" label="3. 시그모이드 σ" />
     <p class="leading-relaxed text-slate-700">
       <b>시그모이드</b> <MathBlock inline expr="\sigma" />(그리스문자 "시그마") <MathBlock inline expr="\sigma(x)=\dfrac{1}{1+e^{-x}}" /> 는
@@ -132,12 +132,12 @@ function onSetComplete() {
 
     <SigmoidExplorer />
 
-    <ConceptCard tone="note" title="새 용어 — 시그모이드 / 활성화 함수">
+    <ConceptCard tone="note" title="새 용어: 시그모이드 / 활성화 함수">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li><b>시그모이드 <MathBlock inline expr="\sigma" /></b>: 출력이 항상 0~1. 큰 양수 → 1, 큰 음수 → 0, 0 → 0.5.</li>
         <li><b>활성화 함수</b>: 뉴런의 출력을 "얼마나 켜졌는지"로 바꿔주는 함수.</li>
         <li>
-          미분 <MathBlock inline expr="\sigma'=\sigma(1-\sigma)" /> 는 <b>자기 값으로 자기 기울기를 표현</b> —
+          미분 <MathBlock inline expr="\sigma'=\sigma(1-\sigma)" /> 는 <b>자기 값으로 자기 기울기를 표현</b>해요.
           이미 계산한 <MathBlock inline expr="\sigma" /> 를 재활용하니 역전파가 빠릅니다.
         </li>
       </ul>
@@ -152,14 +152,14 @@ function onSetComplete() {
         { lhs: `\\sigma'(0) = \\sigma(1-\\sigma) = 0.5\\times 0.5`, answer: 0.25, tolerance: 0.001 },
       ]"
       :hints="['e⁰ = 1 이므로 σ(0) = 1/2.', 'σ′ = σ(1−σ).']"
-      explanation="σ(0)=0.5, σ'(0)=0.5×0.5=0.25 — 시그모이드 기울기의 최댓값입니다."
+      explanation="σ(0)=0.5, σ'(0)=0.5×0.5=0.25. 시그모이드 기울기의 최댓값입니다."
     />
 
     <!-- 4. 연쇄법칙 결합 -->
     <h2 class="mt-8 mb-2 text-xl font-bold">4. 연쇄법칙과 함께 (eˣ 응용)</h2>
     <ReviewFlag id="ch7-s4" chapter="ch7" label="4. 연쇄법칙과 함께" />
     <p class="leading-relaxed text-slate-700">
-      지수·로그도 <b>합성</b>되면 Phase 6 의 연쇄법칙을 씁니다. 예를 들어 <MathBlock inline expr="e^{2x}" /> 는
+      지수·로그도 <b>합성</b>되면 6장의 연쇄법칙을 씁니다. 예를 들어 <MathBlock inline expr="e^{2x}" /> 는
       속함수 <MathBlock inline expr="2x" />, 겉함수 <MathBlock inline expr="e^u" />:
     </p>
     <MathBlock expr="(e^{2x})' = e^{2x}\cdot(2x)' = 2\,e^{2x}" />
@@ -174,7 +174,7 @@ function onSetComplete() {
     <h2 class="mt-10 mb-2 text-xl font-bold">🤖 활성화 함수의 미분이 학습을 좌우한다</h2>
     <ReviewFlag id="ch7-ai" chapter="ch7" label="🤖 활성화 함수의 미분" />
     <p class="leading-relaxed text-slate-700">
-      역전파는 각 층의 국소 미분을 곱해 전파한다고 했죠(Phase 6). 그 국소 미분 중 하나가 바로
+      역전파는 각 층의 국소 미분을 곱해 전파한다고 했죠(6장). 그 국소 미분 중 하나가 바로
       <b>활성화 함수의 미분</b>입니다. 시그모이드의 <MathBlock inline expr="\sigma'=\sigma(1-\sigma)" /> 가
       곳곳에서 곱해져요.
     </p>
@@ -183,7 +183,7 @@ function onSetComplete() {
       <ul class="list-disc space-y-2 pl-5">
         <li><MathBlock inline expr="\sigma'" /> 의 최댓값은 <b>0.25</b>(x=0), 양 끝에서는 거의 <b>0</b>.</li>
         <li>층이 깊으면 0.25 이하의 값이 <b>계속 곱해져</b> 기울기가 급격히 작아짐 → <b>기울기 소실</b>.</li>
-        <li>그래서 깊은 신경망은 시그모이드 대신 <b>ReLU</b>(렐루 — 0 이하는 0, 양수는 그대로 통과시키는 활성화 함수) 같은 함수를 많이 씁니다. (미분값이 0 또는 1 로 단순)</li>
+        <li>그래서 깊은 신경망은 시그모이드 대신 <b>ReLU</b>(렐루. 0 이하는 0, 양수는 그대로 통과시키는 활성화 함수) 같은 함수를 많이 씁니다. (미분값이 0 또는 1 로 단순)</li>
       </ul>
     </ConceptCard>
 
@@ -201,7 +201,7 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 · 단계별 계산 10문제입니다. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="지수·로그·시그모이드 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="지수·로그·시그모이드: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -304,15 +304,15 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 7 완료. AI 활성화 함수를 미분했습니다.</p>
+      <p class="font-semibold text-emerald-800">7장 완료. AI 활성화 함수를 미분했습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
-        다음은 변수가 여러 개인 함수의 미분 — <b>편미분</b>입니다. (가중치별 기울기!)
+        다음은 변수가 여러 개인 함수의 미분, <b>편미분</b>입니다. (가중치별 기울기!)
       </p>
       <RouterLink
         to="/ch/ch8"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        다음 챕터 — 다변수 함수와 편미분 →
+        다음 챕터: 다변수 함수와 편미분 →
       </RouterLink>
     </div>
   </article>

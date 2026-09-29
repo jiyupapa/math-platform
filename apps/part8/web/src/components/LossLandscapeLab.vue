@@ -75,18 +75,18 @@ const curGrad = computed(() => {
 const verdict = computed(() => {
   const d7 = Math.hypot(pos.value.x - 6.95, pos.value.y - 4.02)
   const d2 = Math.hypot(pos.value.x - 2.58, pos.value.y - 6.93)
-  if (d7 < 0.6) return { label: '🏁 가장 깊은 골짜기 도착! (손실 0.60 — 전역최소)', tone: 'text-emerald-700' }
+  if (d7 < 0.6) return { label: '🏁 가장 깊은 골짜기 도착! (손실 0.60, 전역최소)', tone: 'text-emerald-700' }
   if (d2 < 0.6 && curGrad.value.mag < 0.15)
-    return { label: '⚠️ 국소최소에 정착 — 발밑이 평평해 여기가 바닥인 줄 알지만, 더 깊은 곳이 있다!', tone: 'text-rose-700' }
-  if (curGrad.value.mag < 0.35 && curLoss.value > 3) return { label: '🐌 평원 — 발밑 경사가 거의 없어 걸음이 짧다', tone: 'text-amber-700' }
+    return { label: '⚠️ 국소최소에 정착: 발밑이 평평해 여기가 바닥인 줄 알지만, 더 깊은 곳이 있다!', tone: 'text-rose-700' }
+  if (curGrad.value.mag < 0.35 && curLoss.value > 3) return { label: '🐌 평원: 발밑 경사가 거의 없어 걸음이 짧다', tone: 'text-amber-700' }
   return { label: '🥾 하산 중…', tone: 'text-slate-600' }
 })
 
 // ── ② 조합 폭발 계산기 ─────────────────────────────────────────
 const W_OPTS = [
   { w: 2, label: '가중치 2개 (오늘의 toy)', total: '10² = 100번', note: '즉시 끝. 그래서 오늘은 신의 시점(지도 전체)을 보여드릴 수 있었어요.', dead: false },
-  { w: 10, label: '가중치 10개', total: '10¹⁰ = 100억 번', note: '벌써 하루 종일 계산할 양 — 겨우 가중치 10개인데요.', dead: true },
-  { w: 1e9, label: '가중치 10억 개 (실제 LLM급)', total: '10^(10억) 번', note: '1 뒤에 0이 10억 개 — 우주의 원자 수(약 10⁸⁰)와는 비교조차 불가능합니다. 지형 전체를 그리는 일은 영원히 없어요.', dead: true },
+  { w: 10, label: '가중치 10개', total: '10¹⁰ = 100억 번', note: '벌써 하루 종일 계산할 양이에요. 겨우 가중치 10개인데요.', dead: true },
+  { w: 1e9, label: '가중치 10억 개 (실제 LLM급)', total: '10^(10억) 번', note: '1 뒤에 0이 10억 개. 우주의 원자 수(약 10⁸⁰)와는 비교조차 불가능합니다. 지형 전체를 그리는 일은 영원히 없어요.', dead: true },
 ]
 const wIdx = ref(0)
 </script>
@@ -94,10 +94,10 @@ const wIdx = ref(0)
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 안개 낀 산 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 안개 낀 산: 출발점이 운명을 가른다</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · 안개 낀 산: 출발점이 운명을 가른다</p>
     <p class="mb-3 text-xs text-slate-500">
       가중치 2개짜리 toy 모델의 손실 지형입니다(진할수록 낮은 손실). 여행자(🥾)는 <b>발밑 경사(화살표)만</b>
-      보며 걷습니다 — 안개를 걷어 신의 시점과 비교해 보세요.
+      보며 걷습니다. 안개를 걷어 신의 시점과 비교해 보세요.
     </p>
 
     <div class="mb-2 flex flex-wrap gap-2">
@@ -179,17 +179,17 @@ const wIdx = ref(0)
     <p class="mt-2 rounded-lg bg-slate-50 p-3 text-sm font-medium" :class="verdict.tone">{{ verdict.label }}</p>
 
     <p class="mt-3 rounded-lg bg-indigo-50 p-3 text-xs leading-relaxed text-indigo-800">
-      💡 세 출발점을 모두 시험해 보세요 — 남쪽 기슭은 몇 걸음 만에 🚩 전역최소, 서쪽 능선은 🕳️
+      💡 세 출발점을 모두 시험해 보세요. 남쪽 기슭은 몇 걸음 만에 🚩 전역최소, 서쪽 능선은 🕳️
       <b>국소최소에 정착</b>(발밑 경사가 0이라 자기가 바닥인 줄 압니다), 북동쪽 평원은 발밑이
-      거의 평평해 <b>하염없이 기어갑니다</b>. 그리고 안개를 껴 보면 — 여행자는 이 모든 걸
+      거의 평평해 <b>하염없이 기어갑니다</b>. 그리고 안개를 껴 보면, 여행자는 이 모든 걸
       <b>모른 채</b> 발밑만 보고 걷고 있었다는 게 보여요.
     </p>
 
     <!-- ② 조합 폭발 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 안개의 이유: 지도 전체를 그리는 비용</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · 안개의 이유: 지도 전체를 그리는 비용</p>
     <p class="mb-3 text-xs text-slate-500">
-      "안개를 걷으면 되잖아?" — 가중치마다 딱 10가지 값만 훑어서 지도 전체를 그려 봅시다. 손실 계산이 몇 번 필요할까요?
+      "안개를 걷으면 되잖아?" 가중치마다 딱 10가지 값만 훑어서 지도 전체를 그려 봅시다. 손실 계산이 몇 번 필요할까요?
     </p>
 
     <div class="mb-3 flex flex-wrap gap-2">
@@ -214,7 +214,7 @@ const wIdx = ref(0)
     </div>
 
     <p class="mt-3 rounded-lg bg-amber-50 p-3 text-xs leading-relaxed text-amber-800">
-      💡 반면 <b>발밑 기울기 한 번</b>은 역전파(2부 10장) 한 번 — 순전파의 2~3배 비용이면 수십억
+      💡 반면 <b>발밑 기울기 한 번</b>은 역전파(2부 10장) 한 번으로 충분합니다. 순전파의 2~3배 비용이면 수십억
       가중치 전부의 경사가 나옵니다. 그래서 훈련은 언제나 <b>안개 속의 하산</b>일 수밖에 없고,
       이 과정의 다이얼들은 전부 "<b>안개 속에서 잘 걷는 기술</b>"입니다.
     </p>

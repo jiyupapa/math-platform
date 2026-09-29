@@ -24,10 +24,10 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 5</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">5장</p>
     <h1 class="mb-4 text-3xl font-bold">곱과 몫의 법칙 ✖️➗</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
-      멱법칙·합차로 다항식은 척척 미분했죠. 그런데 <b>두 함수가 곱해지거나 나눠진</b> 식은
+      거듭제곱·합차 공식으로 다항식은 척척 미분했죠. 그런데 <b>두 함수가 곱해지거나 나눠진</b> 식은
       "각각 미분해서 곱하면" 되지 않습니다. 왜 안 되는지 보고, 올바른 규칙 두 가지를 배웁니다.
     </p>
 
@@ -44,7 +44,7 @@ function onSetComplete() {
     <ReviewFlag id="ch5-s1" chapter="ch5" label="1. 곱의 함정" />
     <p class="leading-relaxed text-slate-700">
       자연스러운 오해부터 짚어봅시다. <MathBlock inline expr="x \cdot x" /> 를 생각하면,
-      "각각 미분해 곱하면" <MathBlock inline expr="1 \cdot 1 = 1" /> 이 되어야 할 텐데 —
+      "각각 미분해 곱하면" <MathBlock inline expr="1 \cdot 1 = 1" /> 이 되어야 할 텐데,
       실제로 <MathBlock inline expr="x\cdot x = x^2" /> 이고 그 미분은 <MathBlock inline expr="2x" /> 입니다.
     </p>
 
@@ -109,14 +109,14 @@ function onSetComplete() {
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 몫의 법칙</h2>
     <ReviewFlag id="ch5-s3" chapter="ch5" label="3. 몫의 법칙" />
     <p class="leading-relaxed text-slate-700">
-      나눗셈(분수) 꼴은 이렇게 미분합니다. 왜 이런 모양이냐면 —
+      나눗셈(분수) 꼴은 이렇게 미분합니다. 왜 이런 모양이냐면,
       <MathBlock inline expr="\tfrac{f}{g} = f \times \tfrac{1}{g}" /> 로 바꿔 놓고 방금 배운
       <b>곱의 법칙</b>을 적용하면 이 공식이 저절로 나옵니다(1/g 의 미분이 −g′/g² 이라 부호와
       분모 제곱이 생겨요). 유도를 다 따라갈 필요는 없고, <b>순서와 부호, 분모의 제곱</b>에 주의하세요.
     </p>
     <MathBlock expr="\left(\dfrac{f}{g}\right)' = \dfrac{f'\,g - f\,g'}{g^2}" />
 
-    <ConceptCard tone="note" title="새 규칙 — 몫의 법칙 (외우는 요령)">
+    <ConceptCard tone="note" title="새 규칙: 몫의 법칙 (외우는 요령)">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li><b>분자</b>: (아래 그대로 × 위 미분) 이 아니라 <b>위미분×아래 − 위×아래미분</b> = <MathBlock inline expr="f'g - fg'" />. <b>빼는 순서 중요!</b></li>
         <li><b>분모</b>: 아래 함수의 <b>제곱</b> <MathBlock inline expr="g^2" />.</li>
@@ -170,7 +170,7 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 · 단계별 계산 10문제입니다. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="곱과 몫의 법칙 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="곱과 몫의 법칙: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -273,15 +273,15 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 5 완료. 곱·몫도 미분할 수 있습니다.</p>
+      <p class="font-semibold text-emerald-800">5장 완료. 곱·몫도 미분할 수 있습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
-        다음은 미분의 <b>가장 중요한 도구</b>이자 역전파의 심장 — <b>연쇄법칙</b>입니다.
+        다음은 미분의 <b>가장 중요한 도구</b>이자 역전파의 핵심인 <b>연쇄법칙</b>입니다.
       </p>
       <RouterLink
         to="/ch/ch6"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        다음 챕터 — 연쇄법칙 (핵심) →
+        다음 챕터: 연쇄법칙 (핵심) →
       </RouterLink>
     </div>
   </article>

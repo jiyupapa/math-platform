@@ -54,7 +54,7 @@ export const useProgressStore = defineStore('progress', () => {
     persist()
   }
 
-  // 진도 대상 챕터와 교집합만 센다 — 샘플 챕터나 이름이 바뀐 옛 slug 가 남아 있어도 진도에 안 잡히게.
+  // 진도 대상 챕터와 교집합만 센다 — 워밍업나 이름이 바뀐 옛 slug 가 남아 있어도 진도에 안 잡히게.
   const completedCount = computed(
     () => progressChapters.filter((c) => completed.value.includes(c.slug)).length,
   )

@@ -139,7 +139,7 @@ def concept_cards(concepts: list[dict], question: str = '') -> str:
         via = [m for m in c.get('metaphors', []) if question and _matches(question, qn, m['term'])]
         if via:
             terms = "', '".join(m['term'] for m in via)
-            lead = (f"'{terms}'은(는) {via[0]['part']}부에서 쓰는 비유어이고 실무 용어는 "
+            lead = (f"'{terms}'은(는) {via[0]['part']}부에서 쓰는 비유이고 실무 용어는 "
                     f"{c['label']}{'(' + aliases + ')' if aliases else ''}이다. ")
         else:
             lead = f"{c['label']}{' (' + aliases + ')' if aliases else ''} — "
@@ -152,7 +152,7 @@ def concept_cards(concepts: list[dict], question: str = '') -> str:
         if used:
             line += f' 그 뒤 다시 쓰이는 곳(참고): {used}.'
         if metaphors and not via:
-            line += f' 이 시리즈의 비유어: {metaphors}.'
+            line += f' 이 시리즈의 비유: {metaphors}.'
         lines.append(line)
     here = (f" 현재 과정은 {_PART_NO}부 — '다른 부' 개념은 내용을 길게 지어내지 말고 배우는 곳을 안내한다."
             if _PART_NO else '')

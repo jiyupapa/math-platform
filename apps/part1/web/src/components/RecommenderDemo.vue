@@ -31,7 +31,7 @@ const top = computed(() => ranked.value[0])
 
 <template>
   <div class="my-4 rounded-xl border border-slate-200 bg-white p-4">
-    <p class="mb-3 text-sm font-semibold text-slate-700">추천 시스템 체험 — 취향을 조절하면 순위가 바뀝니다</p>
+    <p class="mb-3 text-sm font-semibold text-slate-700">추천 시스템 체험: 취향을 조절하면 순위가 바뀝니다</p>
 
     <!-- 취향 슬라이더 -->
     <div class="mb-4 grid gap-3 sm:grid-cols-2">
@@ -75,8 +75,8 @@ const top = computed(() => ranked.value[0])
       <b>({{ action }}, {{ romance }})</b> 과 영화 <b>({{ top.a }}, {{ top.r }})</b> 의 내적:
       <span class="font-mono">
         {{ action }}×{{ top.a }} + {{ romance }}×{{ top.r }} = {{ top.score }}
-      </span>
-      — 내적이 클수록 "취향과 닮음" → 위로 추천. AI 추천은 이걸 수백만 항목에 순식간에 할 뿐이에요.
+      </span>.
+      내적이 클수록 "취향과 닮음" → 위로 추천. AI 추천은 이걸 수백만 항목에 순식간에 할 뿐이에요.
     </div>
   </div>
 </template>

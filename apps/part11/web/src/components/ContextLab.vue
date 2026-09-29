@@ -30,7 +30,7 @@ const OPTS: OptItem[] = [
   { key: 'C', name: '관련 문서 C (관련성 낮음)', tokens: 1500, score: 4 },
   { key: 'E1', name: '모범 예시 1개', tokens: 1200, score: 11 },
   { key: 'E2', name: '예시 2개째 (수확 체감)', tokens: 1200, score: 5 },
-  { key: 'JUNK', name: '잡동사니 — 지난 잡담 로그', tokens: 800, score: -3 },
+  { key: 'JUNK', name: '잡동사니: 지난 잡담 로그', tokens: 800, score: -3 },
 ]
 
 const trajMode = ref<TrajMode>('full')
@@ -71,7 +71,7 @@ function resetStart() {
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 예산 게이지 -->
-    <p class="mb-1 text-sm font-semibold text-slate-500">① 책상 크기 — 컨텍스트 예산 8,000토큰</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">① 책상 크기: 컨텍스트 예산 8,000토큰</p>
     <div class="mb-1 h-4 w-full overflow-hidden rounded-full bg-slate-100 ring-1 ring-slate-200">
       <div
         class="h-full rounded-full transition-all"
@@ -81,7 +81,7 @@ function resetStart() {
     </div>
     <p class="mb-4 text-sm" :class="over ? 'font-semibold text-rose-700' : 'text-slate-500'">
       {{ tokens.toLocaleString() }} / {{ BUDGET.toLocaleString() }} 토큰
-      <template v-if="over"> — 예산 초과! 책상이 넘칩니다. 무언가를 내려놓으세요.</template>
+      <template v-if="over"> (예산 초과! 책상이 넘칩니다. 무언가를 내려놓으세요.)</template>
     </p>
 
     <!-- ② 항목 고르기 -->
@@ -122,14 +122,14 @@ function resetStart() {
     </div>
 
     <!-- ③ 점수판 -->
-    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">③ 과업 성공 점수 (교육용 toy 모형 — 실전은 빼 보고 재는 실측)</p>
+    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">③ 과업 성공 점수 (교육용 toy 모형: 실전은 빼 보고 재는 실측)</p>
     <p
       class="rounded-md px-3 py-2 text-sm font-medium"
       :class="over ? 'bg-rose-50 text-rose-800' : isOptimal ? 'bg-emerald-50 text-emerald-800' : 'bg-slate-100 text-slate-700'"
     >
-      <template v-if="over">🚫 예산 초과 — 점수 무효. 모델에 넣을 수 없는 구성입니다.</template>
-      <template v-else-if="isOptimal">🏆 {{ score }}점 — 8,000토큰 예산의 최적 조합! 원본 궤적(+20)을 버리고 요약(+14)을 고른 게 열쇠였어요.</template>
-      <template v-else>현재 {{ score }}점 — 더 올릴 수 있을까요? (힌트: 밀도 배지)</template>
+      <template v-if="over">🚫 예산 초과: 점수 무효. 모델에 넣을 수 없는 구성입니다.</template>
+      <template v-else-if="isOptimal">🏆 {{ score }}점, 8,000토큰 예산의 최적 조합! 원본 궤적(+20)을 버리고 요약(+14)을 고른 게 열쇠였어요.</template>
+      <template v-else>현재 {{ score }}점. 더 올릴 수 있을까요? (힌트: 밀도 배지)</template>
     </p>
 
     <!-- ④ 버튼 -->
@@ -151,7 +151,7 @@ function resetStart() {
     </div>
     <p class="mt-2 text-xs text-slate-500">
       밀도 높은 것부터 담는 감각이 대체로 통하지만, 칸이 딱 안 맞을 땐 최적과 어긋날 수 있어요
-      (이런 문제의 정식 이름: 배낭 문제 knapsack — 여기선 전수 탐색으로 확정).
+      (이런 문제의 정식 이름: 배낭 문제 knapsack, 여기선 전수 탐색으로 확정).
     </p>
   </div>
 </template>

@@ -125,7 +125,7 @@ const fmt = (v: number) => Number(v.toFixed(2)).toString()
     </div>
 
     <p class="mt-2 px-1 text-xs leading-relaxed text-slate-500">
-      막대 하나 = "성공이 정확히 k 번일 확률". <b>n 을 크게</b> 밀어보세요 — 막대들이 점점
+      막대 하나 = "성공이 정확히 k 번일 확률". <b>n 을 크게</b> 밀어보세요. 막대들이 점점
       좌우대칭 <b>종 모양</b>으로 정돈됩니다(다음 챕터의 정규분포!). p 를 움직이면 산이 좌우로 이동해요.
     </p>
   </div>

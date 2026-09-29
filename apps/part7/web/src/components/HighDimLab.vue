@@ -81,9 +81,9 @@ function addRandom() {
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 차원별 분포 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 무작위 두 벡터의 각도: 차원을 올려 보세요</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · 무작위 두 벡터의 각도: 차원을 올려 보세요</p>
     <p class="mb-3 text-xs text-slate-500">
-      각 차원에서 무작위 벡터 300쌍을 뽑아 코사인 유사도의 분포를 그렸습니다 (시드 고정 — 항상 같은 결과).
+      각 차원에서 무작위 벡터 300쌍을 뽑아 코사인 유사도의 분포를 그렸습니다 (시드 고정, 항상 같은 결과).
     </p>
 
     <div class="mb-3 flex flex-wrap gap-2">
@@ -131,20 +131,20 @@ function addRandom() {
 
     <p class="mt-3 rounded-lg p-3 text-sm" :class="dim >= 128 ? 'bg-indigo-50 text-indigo-800' : 'bg-slate-50 text-slate-600'">
       <template v-if="dim === 2">
-        2차원에선 코사인이 −1부터 1까지 <b>골고루</b> 나옵니다 — 아무 각도나 나와요. 이게 우리의 직관이죠.
+        2차원에선 코사인이 −1부터 1까지 <b>골고루</b> 나옵니다. 아무 각도나 나와요. 이게 익숙한 직관이죠.
       </template>
       <template v-else-if="dim < 128">
         분포가 0 주위로 <b>모이기 시작</b>합니다. σ가 이론값 1/√d를 따라 줄어드는 걸 확인하세요.
       </template>
       <template v-else>
-        {{ dim }}차원 — 거의 모든 쌍이 <b>cos ≈ 0(직교)</b>입니다. 무작위로는 300쌍을 뽑아도
+        {{ dim }}차원에서는 거의 모든 쌍이 <b>cos ≈ 0(직교)</b>입니다. 무작위로는 300쌍을 뽑아도
         |cos|가 {{ st.maxAbs.toFixed(2) }}를 못 넘어요. <b>고차원에서 "우연히 비슷하기"는 거의 불가능합니다.</b>
       </template>
     </p>
 
     <!-- ② 신호 vs 바닥 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 신호 vs 바닥: 그런데도 검색이 되는 이유 (256차원)</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · 신호 vs 바닥: 그런데도 검색이 되는 이유 (256차원)</p>
     <p class="mb-3 text-xs text-slate-500">
       질문 벡터 하나를 고정하고, <b>학습으로 관련지어진 문서 1개</b>와 <b>무작위 문서 무더기</b>의 점수를 비교합니다.
     </p>
@@ -178,7 +178,7 @@ function addRandom() {
     </div>
 
     <p class="mt-3 rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">
-      ✅ 무작위 문서는 수천 개를 던져도 <b>{{ poolMax.toFixed(2) }}</b> 언저리가 한계 —
+      ✅ 무작위 문서는 수천 개를 던져도 <b>{{ poolMax.toFixed(2) }}</b> 언저리가 한계예요.
       1/√256 ≈ 0.06의 몇 배 수준이죠. 반면 학습으로 관련지어진 문서는 <b>{{ relatedCos.toFixed(2) }}</b>로
       바닥에서 <b>확실하게 솟아</b> 있습니다. 임베딩 검색이 고차원에서 작동하는 이유:
       <b>임베딩은 무작위가 아니라, 관련된 것들이 정렬되도록 학습된 벡터</b>이기 때문입니다(학습법은 9장).

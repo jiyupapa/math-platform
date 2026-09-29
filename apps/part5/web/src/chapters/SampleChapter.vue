@@ -1,6 +1,6 @@
 <script setup lang="ts">
-// Phase 0 샘플 챕터 — 공통 컴포넌트를 모두 사용해 "한 챕터의 완성형"을 보여준다.
-// 실제 Phase 1~10 챕터도 이 구조를 그대로 따른다.
+// 워밍업 챕터 — 공통 컴포넌트를 모두 사용해 "한 챕터의 완성형"을 보여준다.
+// 실제 1~10장 챕터도 이 구조를 그대로 따른다.
 import { ConceptCard } from '@series/ui'
 import { DetailsCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
@@ -46,19 +46,19 @@ function onSetComplete() {
     <p class="mb-1 text-sm font-medium text-indigo-600">워밍업 · 10분 몸풀기</p>
     <h1 class="mb-4 text-3xl font-bold">스무고개 — 질문 하나의 가치</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
-      본격적인 학습 전 몸풀기입니다. 앞으로 모든 챕터가 이 페이지처럼 진행돼요 —
+      본격적인 학습 전 몸풀기입니다. 앞으로 모든 챕터가 이 페이지처럼 진행돼요.
       설명 카드를 읽고, 게임과 그래프를 직접 만져 보고, 문제를 풀면 진도가 채워집니다.
       막히면 <b>힌트</b>가 있고, 두 번 틀리면 <b>해설</b>도 열 수 있으니 부담 없이 시작하세요.
     </p>
 
     <ConceptCard tone="goal" title="이 챕터의 목표">
-      수식 없이 게임 하나로 이 과정 전체의 핵심 문장을 얻습니다 —
+      수식 없이 게임 하나로 이 과정 전체의 핵심 문장을 얻습니다.
       <b>"정보란 줄어드는 불확실성이다."</b>
       그리고 좋은 질문 하나가 <b>후보를 절반으로</b> 줄인다는 걸 몸으로 체감합니다.
     </ConceptCard>
 
-    <h2 class="mt-8 mb-2 text-xl font-bold">1. 일단 게임부터 — 업다운 스무고개</h2>
-    <ReviewFlag id="sample-s1" chapter="sample" label="1. 일단 게임부터 — 업다운 스무고개" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">1. 일단 게임부터: 업다운 스무고개</h2>
+    <ReviewFlag id="sample-s1" chapter="sample" label="1. 일단 게임부터: 업다운 스무고개" />
     <p class="leading-relaxed text-slate-700">
       제가 1~64 중에 숫자 하나를 숨겼습니다. 여러분이 숫자를 물으면
       저는 <b>UP(더 커요) / DOWN(더 작아요) / 정답</b> 셋 중 하나로만 답해요.
@@ -67,7 +67,7 @@ function onSetComplete() {
 
     <TwentyQuestions />
 
-    <ConceptCard tone="tip" title="핵심 관찰 — 질문마다 '남은 후보' 칸을 보세요">
+    <ConceptCard tone="tip" title="핵심 관찰: 질문마다 '남은 후보' 칸을 보세요">
       어떤 질문은 후보를 <b>절반으로 싹둑</b> 자르고(가운데 묻기),
       어떤 질문은 <b>거의 못 줄입니다</b>(구석 찍기).
       질문의 가치 = <b>그 질문이 후보를 얼마나 줄이는가</b>. 이게 이 과정 전체의 출발점이에요.
@@ -79,11 +79,11 @@ function onSetComplete() {
       question="질문 한 번에 남은 후보가 64개에서 32개가 됐다면, 그 질문은 후보를 반반으로 가르는 질문이었다."
       type="truefalse"
       :answer="0"
-      explanation="맞아요. 64의 절반이 32 — 어느 쪽 답이 나와도 후보가 절반만 남는 질문이었다는 뜻입니다."
+      explanation="맞아요. 64의 절반이 32. 어느 쪽 답이 나와도 후보가 절반만 남는 질문이었다는 뜻입니다."
     />
 
-    <h2 class="mt-8 mb-2 text-xl font-bold">2. 찍기 vs 반반 — 전략을 그래프로 비교</h2>
-    <ReviewFlag id="sample-s2" chapter="sample" label="2. 찍기 vs 반반 — 전략 비교" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">2. 찍기 vs 반반: 전략을 그래프로 비교</h2>
+    <ReviewFlag id="sample-s2" chapter="sample" label="2. 찍기 vs 반반: 전략 비교" />
     <p class="leading-relaxed text-slate-700">
       "정답이 7인가요?"처럼 <b>하나씩 찍으면</b> 틀릴 때마다 후보가 딱 1개씩만 줄어요.
       운이 나쁘면 63번을 물어야 합니다. 반면 <b>가운데를 묻는 반반 질문</b>은
@@ -92,7 +92,7 @@ function onSetComplete() {
 
     <ChartView type="line" :data="strategyChart" :height="260" />
     <p class="mt-1 text-sm text-slate-500">
-      가로축: 질문 횟수 · 세로축: 남은 후보 수. 반반 전략(보라)은 6번 만에 1개로 —
+      가로축: 질문 횟수 · 세로축: 남은 후보 수. 반반 전략(보라)은 6번 만에 1개로 줄지만,
       찍기(주황)는 6번을 써도 58개가 남습니다.
     </p>
 
@@ -103,7 +103,7 @@ function onSetComplete() {
       </p>
       <ul class="mt-2 list-disc pl-5 text-sm">
         <li><b>이름</b>: 불확실성 (uncertainty)</li>
-        <li><b>읽는 법</b>: 불확실성 — 기호는 아직 없어요, 3장에서 H 로 만납니다</li>
+        <li><b>기호</b>: 아직 없어요. 3장에서 H 로 만납니다</li>
         <li><b>뜻</b>: 정답이 무엇인지 모르는 정도. 남은 후보가 많을수록 큽니다</li>
       </ul>
     </ConceptCard>
@@ -140,14 +140,14 @@ function onSetComplete() {
       틀리면 54개가 남아요. 상대(정답)가 어디에 숨었는지 모르니 <b>최악의 경우</b>를 기준으로 보면,
       치우친 질문의 최악(54개)이 반반 질문의 최악(32개)보다 나쁩니다.
       어떤 답이 나와도 손해 보지 않는 질문 = 정확히 반으로 가르는 질문.
-      "몇 번 접나"에는 사실 이름이 있는데(로그, log₂), 1장에서 게임으로 다시 만나요 — 지금은 예고만!
+      "몇 번 접나"에는 사실 이름이 있는데(로그, log₂), 1장에서 게임으로 다시 만나요. 지금은 예고만!
     </DetailsCard>
 
-    <ConceptCard tone="ai" title="🤖 AI 연결 — AI 는 불확실성을 줄이는 기계">
+    <ConceptCard tone="ai" title="🤖 AI 연결: AI 는 불확실성을 줄이는 기계">
       ChatGPT 가 다음 단어를 고르는 일은 <b>후보 수만 개짜리 스무고개</b>입니다.
       "나는 아침에 ___" 다음에 올 단어의 후보는 원래 수만 개지만, 앞 문맥이
       UP/DOWN 답변처럼 후보를 확 줄여 줘요. AI 가 "배운다"는 것도, "잘한다"는 것도
-      전부 <b>불확실성을 얼마나 줄이는가</b>로 측정합니다 — 이 자(측정 도구)를 만드는 게 이 과정이에요.
+      전부 <b>불확실성을 얼마나 줄이는가</b>로 측정합니다. 이 자(측정 도구)를 만드는 게 이 과정이에요.
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">4. 직접 풀어보기</h2>
@@ -157,7 +157,7 @@ function onSetComplete() {
       <b>10문제를 모두 맞히면</b> 이 챕터가 완료됩니다.
     </p>
 
-    <QuizSet title="스무고개 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="스무고개: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -223,7 +223,7 @@ function onSetComplete() {
         question="반반 질문을 했는데 남은 후보 수가 오히려 늘어나는 경우도 있다."
         type="truefalse"
         :answer="1"
-        explanation="거짓입니다. 질문의 답을 들으면 후보는 절대 늘지 않아요 — 잘 줄거나(좋은 질문), 조금 줄거나(나쁜 질문)입니다."
+        explanation="거짓입니다. 질문의 답을 들으면 후보는 절대 늘지 않아요. 잘 줄거나(좋은 질문), 조금 줄거나(나쁜 질문)입니다."
       />
       <!-- 어려움 -->
       <Quiz
@@ -231,16 +231,16 @@ function onSetComplete() {
         question="후보가 128개라면 반반 전략으로 최대 몇 번 만에 정답을 확정할 수 있을까요?"
         type="numeric"
         :answer="7"
-        :hints="['128 은 64의 두 배 — 접기가 한 번 더 필요해요.', '128 → 64 → 32 → … → 1']"
-        explanation="128 = 2⁷ 이므로 7번. 후보가 두 배가 되어도 질문은 딱 한 번만 더 필요합니다 — 이 신기한 성질이 1장의 주인공(log)이에요."
+        :hints="['128 은 64의 두 배라 접기가 한 번 더 필요해요.', '128 → 64 → 32 → … → 1']"
+        explanation="128 = 2⁷ 이므로 7번. 후보가 두 배가 되어도 질문은 딱 한 번만 더 필요합니다. 이 신기한 성질이 1장의 주인공(log)이에요."
       />
       <Quiz
         difficulty="hard"
         question="후보 20개. 질문 A는 '10 이하인가요?', 질문 B는 '정답이 7인가요?'. 최악의 경우를 대비한다면 어느 질문이 좋을까요?"
-        :choices="['A — 최악이라도 10개만 남는다', 'B — 맞으면 한 번에 끝나니까', '둘 다 똑같다', '후보가 20개면 어떤 질문도 소용없다']"
+        :choices="['A: 최악이라도 10개만 남는다', 'B: 맞으면 한 번에 끝나니까', '둘 다 똑같다', '후보가 20개면 어떤 질문도 소용없다']"
         :answer="0"
         :hints="['각 질문의 최악의 경우에 남는 후보 수를 비교해 보세요.']"
-        explanation="A는 어떤 답이 나와도 10개만 남습니다. B는 맞으면 1개(대박)지만 틀리면 19개 — 최악 기준으로는 A가 압도적으로 좋아요."
+        explanation="A는 어떤 답이 나와도 10개만 남습니다. B는 맞으면 1개(대박)지만 틀리면 19개예요. 최악 기준으로는 A가 압도적으로 좋아요."
       />
     </QuizSet>
 
@@ -251,16 +251,16 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">워밍업 완료 — 준비 끝!</p>
+      <p class="font-semibold text-emerald-800">워밍업 완료! 준비 끝!</p>
       <p class="mt-1 text-sm text-emerald-700">
-        본 학습도 정확히 이렇게 진행됩니다. 다음은 1장 — "절반으로 몇 번 접나"에
+        본 학습도 정확히 이렇게 진행됩니다. 다음은 1장, "절반으로 몇 번 접나"에
         이름(log₂)과 단위(비트)를 붙입니다.
       </p>
       <RouterLink
         to="/ch/ch1"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        1장 — 놀람의 크기 →
+        1장: 놀람의 크기 →
       </RouterLink>
     </div>
   </article>

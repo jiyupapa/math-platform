@@ -72,8 +72,8 @@ const rows = computed<RulerRow[]>(() => [
 ])
 function verdict(v: number): { label: string; tone: string } {
   if (Number.isNaN(v)) return { label: 'NaN', tone: 'text-rose-700' }
-  if (!Number.isFinite(v)) return { label: '💥 inf — 자의 끝 너머(오버플로)', tone: 'text-rose-700' }
-  if (v === 0 && x.value !== 0) return { label: '🕳️ 0 — 사라짐(언더플로 소실)', tone: 'text-rose-700' }
+  if (!Number.isFinite(v)) return { label: '💥 inf: 자의 끝 너머(오버플로)', tone: 'text-rose-700' }
+  if (v === 0 && x.value !== 0) return { label: '🕳️ 0: 사라짐(언더플로 소실)', tone: 'text-rose-700' }
   const rel = Math.abs((v - x.value) / x.value)
   if (rel === 0) return { label: '✅ 오차 없음', tone: 'text-emerald-700' }
   return { label: `상대 오차 ≈ ${(rel * 100).toExponential(1)}%`, tone: rel > 1e-3 ? 'text-amber-700' : 'text-emerald-700' }
@@ -104,11 +104,11 @@ const rescue = computed(() => {
   const storedF16 = toF16(scaled) // fp16 칸에 저장 (backward 가 사는 곳)
   const restored = storedF16 / S // 옵티마이저 직전 복원 (fp32 세계)
   let state: { label: string; tone: string }
-  if (!Number.isFinite(storedF16)) state = { label: '💥 스케일 과대 — 위로 터짐(오버플로)! S 를 줄이세요', tone: 'text-rose-700' }
-  else if (storedF16 === 0) state = { label: '🕳️ 소실 — fp16 이 담기엔 너무 작음. S 를 키우세요', tone: 'text-rose-700' }
+  if (!Number.isFinite(storedF16)) state = { label: '💥 스케일 과대: 위로 터짐(오버플로)! S 를 줄이세요', tone: 'text-rose-700' }
+  else if (storedF16 === 0) state = { label: '🕳️ 소실: fp16 이 담기엔 너무 작음. S 를 키우세요', tone: 'text-rose-700' }
   else {
     const rel = Math.abs((restored - g) / g) * 100
-    state = { label: `✅ 생존 — 복원 오차 ${rel < 0.001 ? '≈0' : rel.toPrecision(2)}%`, tone: 'text-emerald-700' }
+    state = { label: `✅ 생존: 복원 오차 ${rel < 0.001 ? '≈0' : rel.toPrecision(2)}%`, tone: 'text-emerald-700' }
   }
   return { g, S, scaled, storedF16, restored, state }
 })
@@ -118,9 +118,9 @@ const fmtE = (v: number) => (!Number.isFinite(v) ? 'inf' : v === 0 ? '0' : v.toE
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 세 자 대조기 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 세 자 대조기: 16비트를 나누는 두 철학</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · 세 자 대조기: 16비트를 나누는 두 철학</p>
     <p class="mb-3 text-xs text-slate-500">
-      같은 수를 세 자에 담아 봅니다 — fp16 은 눈금(가수 10비트)을, bf16 은 자 길이(지수
+      같은 수를 세 자에 담아 봅니다. fp16 은 눈금(가수 10비트)을, bf16 은 자 길이(지수
       8비트 = fp32 와 동일)를 택했습니다. 프리셋을 눌러 각 자의 강점·약점을 찾아보세요.
     </p>
 
@@ -154,19 +154,19 @@ const fmtE = (v: number) => (!Number.isFinite(v) ? 'inf' : v === 0 ? '0' : v.toE
     </div>
 
     <p v-if="inputText === '70000'" class="mt-2 rounded-lg bg-amber-50 p-3 text-xs leading-relaxed text-amber-800">
-      💡 fp16 의 자는 <b>65,504</b>에서 끝납니다 — 70,000은 벌써 inf! bf16 은 fp32 와 같은 자
+      💡 fp16 의 자는 <b>65,504</b>에서 끝납니다. 70,000은 벌써 inf! bf16 은 fp32 와 같은 자
       (3.4×10³⁸)라 여유만만이죠. 대신 0.1 프리셋에서 봤듯 bf16 의 눈금은 fp16 보다도 성깁니다.
     </p>
     <p v-if="inputText === '0.00000002'" class="mt-2 rounded-lg bg-amber-50 p-3 text-xs leading-relaxed text-amber-800">
-      💡 2×10⁻⁸ — 작은 gradient 가 흔히 갖는 크기입니다. fp16 에선 <b>0 으로 소실</b>(자의 아래끝
+      💡 2×10⁻⁸ 은 작은 gradient 가 흔히 갖는 크기입니다. fp16 에선 <b>0 으로 소실</b>(자의 아래끝
       너머), bf16 은 멀쩡. fp16 시대에 loss scaling(실험 ③)이 발명된 이유가 이 줄에 있어요.
     </p>
 
     <!-- ② 누적 실험 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 누적 실험: "저장은 반쪽, 누적은 fp32"의 이유</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · 누적 실험: "저장은 반쪽, 누적은 fp32"의 이유</p>
     <p class="mb-3 text-xs text-slate-500">
-      1.0 에 0.0001 을 N번 더합니다 — fp16 의 1 근처 눈금 간격은 <b>≈0.001</b>이라, 4장의 흡수가
+      1.0 에 0.0001 을 N번 더합니다. fp16 의 1 근처 눈금 간격은 <b>≈0.001</b>이라, 4장의 흡수가
       이번엔 일상적인 크기에서 벌어져요.
     </p>
 
@@ -177,12 +177,12 @@ const fmtE = (v: number) => (!Number.isFinite(v) ? 'inf' : v === 0 ? '0' : v.toE
 
     <div class="mt-2 grid gap-2 sm:grid-cols-3">
       <div class="rounded-lg bg-rose-50 p-3">
-        <p class="text-xs text-rose-700">순수 fp16 — 누적기도 반쪽 자</p>
+        <p class="text-xs text-rose-700">순수 fp16: 누적기도 반쪽 자</p>
         <p class="break-all font-mono text-lg font-bold text-rose-700">{{ accum.pure }}</p>
         <p class="text-xs text-rose-700">0.0001 이 눈금 절반(0.00049)보다 작아 매번 흡수</p>
       </div>
       <div class="rounded-lg bg-emerald-50 p-3">
-        <p class="text-xs text-emerald-700">혼합 — 저장 fp16, 누적기 fp32</p>
+        <p class="text-xs text-emerald-700">혼합: 저장 fp16, 누적기 fp32</p>
         <p class="break-all font-mono text-lg font-bold text-emerald-700">{{ accum.mixed.toFixed(4) }}</p>
         <p class="text-xs text-emerald-700">같은 fp16 값을 더했는데 살아남는다</p>
       </div>
@@ -194,16 +194,16 @@ const fmtE = (v: number) => (!Number.isFinite(v) ? 'inf' : v === 0 ? '0' : v.toE
     </div>
 
     <p class="mt-2 rounded-lg bg-indigo-50 p-3 text-xs leading-relaxed text-indigo-800">
-      👀 <b>혼합 정밀도의 심장이 이것입니다</b> — 무겁고 많은 것(가중치·활성값의 저장, 곱셈)은
+      👀 <b>혼합 정밀도의 심장이 이것입니다</b>: 무겁고 많은 것(가중치·활성값의 저장, 곱셈)은
       반쪽 자로, <b>티끌이 쌓이는 곳(누적기·옵티마이저·master weights)은 fp32 로.</b>
       GPU 텐서 코어도 fp16 곱셈의 결과를 <b>내부에선 fp32 로 누적</b>합니다.
     </p>
 
     <!-- ③ loss scaling 구급차 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ③ — loss scaling 구급차: 작은 gradient 살리기</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ③ · loss scaling 구급차: 작은 gradient 살리기</p>
     <p class="mb-3 text-xs text-slate-500">
-      fp16 의 아래끝(≈6×10⁻⁸) 근처의 gradient 는 그냥 저장하면 0 — <b>확대(×S) → fp16 저장 →
+      fp16 의 아래끝(≈6×10⁻⁸) 근처의 gradient 는 그냥 저장하면 0이 되니, <b>확대(×S) → fp16 저장 →
       복원(÷S)</b> 3단계로 구출합니다. 스케일 S 를 골라 보세요.
     </p>
 
@@ -233,7 +233,7 @@ const fmtE = (v: number) => (!Number.isFinite(v) ? 'inf' : v === 0 ? '0' : v.toE
     <p class="mt-2 text-sm font-medium" :class="rescue.state.tone">{{ rescue.state.label }}</p>
 
     <p class="mt-2 rounded-lg bg-amber-50 p-3 text-xs leading-relaxed text-amber-800">
-      💡 S 도 다이얼입니다 — 너무 작으면 소실이 그대로, 너무 크면 큰 gradient 가 <b>위로
+      💡 S 도 다이얼입니다. 너무 작으면 소실이 그대로, 너무 크면 큰 gradient 가 <b>위로
       터집니다</b>(gradient 10⁰ × 65,536 을 시도해 보세요). 그래서 실전 구현은 inf 가 뜨면
       S 를 반으로 줄이고, 한동안 무사하면 다시 키우는 <b>동적(dynamic) loss scaling</b> 을 씁니다.
     </p>

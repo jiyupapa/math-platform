@@ -18,7 +18,7 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 10 · 마지막</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">10장 · 마지막</p>
     <h1 class="mb-4 text-3xl font-bold">미분의 응용 — 역전파 직관 🎓</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       드디어 마지막입니다. <b>역전파(backpropagation)</b>는 지금까지 배운 미분을 <b>전부</b> 엮어,
@@ -35,7 +35,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <!-- 1. 계산그래프 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">1. 계산그래프 — 큰 계산을 작은 노드로</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">1. 계산그래프: 큰 계산을 작은 노드로</h2>
     <ReviewFlag id="ch10-s1" chapter="ch10" label="1. 계산그래프" />
     <p class="leading-relaxed text-slate-700">
       복잡한 식도 <b>덧셈·곱셈·제곱</b> 같은 <b>작은 연산 노드</b>들의 연결로 쪼갤 수 있어요.
@@ -43,7 +43,7 @@ function onSetComplete() {
     </p>
     <MathBlock expr="p = x\cdot y,\qquad q = p + z,\qquad L = q^2" />
 
-    <ConceptCard tone="note" title="새 용어 — 계산그래프 / 국소 미분">
+    <ConceptCard tone="note" title="새 용어: 계산그래프 / 국소 미분">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li><b>계산그래프(computational graph)</b>: 계산을 노드(연산)와 화살표(값의 흐름)로 나타낸 그림.</li>
         <li><b>국소 미분(local derivative)</b>: 각 노드가 자기 입력에 대해 갖는 간단한 미분. (제곱→2q, 덧셈→1, 곱셈→상대편 값)</li>
@@ -62,13 +62,13 @@ function onSetComplete() {
 
     <Backprop />
 
-    <ConceptCard tone="note" title="새 용어 — 순전파 / 역전파 / 상류 기울기">
+    <ConceptCard tone="note" title="새 용어: 순전파 / 역전파 / 상류 기울기">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li><b>순전파(forward)</b>: 입력 → 출력으로 값을 계산.</li>
-        <li><b>역전파(backward)</b>: 출력의 기울기에서 시작해 입력 쪽으로 전파. 맨 처음 값은 <MathBlock inline expr="\partial L/\partial L = 1" /> — 출력 <MathBlock inline expr="L" /> 을 <b>자기 자신으로 미분</b>하면 1이라 여기서 출발해요.</li>
+        <li><b>역전파(backward)</b>: 출력의 기울기에서 시작해 입력 쪽으로 전파. 맨 처음 값은 <MathBlock inline expr="\partial L/\partial L = 1" /> 인데, 출력 <MathBlock inline expr="L" /> 을 <b>자기 자신으로 미분</b>하면 1이라 여기서 출발해요.</li>
         <li>
           <b>상류 기울기</b> × <b>국소 미분</b> = 그 노드를 지난 기울기. 이걸 이어붙이는 게 곧
-          <b>연쇄법칙</b>(Phase 6)이에요. 덧셈 노드는 <b>복사</b>, 곱셈 노드는 <b>상대편 값 곱하기</b>.
+          <b>연쇄법칙</b>(6장)이에요. 덧셈 노드는 <b>복사</b>, 곱셈 노드는 <b>상대편 값 곱하기</b>.
         </li>
       </ul>
     </ConceptCard>
@@ -98,7 +98,7 @@ function onSetComplete() {
     <ConceptCard tone="goal" title="역전파 = 그래디언트를 싸게 구하는 법">
       <ul class="list-disc space-y-2 pl-5">
         <li>순전파 1번 + 역전파 1번 = <b>전체 그래디언트 <MathBlock inline expr="\nabla L" /></b> 완성.</li>
-        <li>이 <MathBlock inline expr="\nabla L" /> 을 Phase 9 의 경사하강 <MathBlock inline expr="w \leftarrow w - \eta\nabla L" /> 에 넣어 가중치를 갱신.</li>
+        <li>이 <MathBlock inline expr="\nabla L" /> 을 9장의 경사하강 <MathBlock inline expr="w \leftarrow w - \eta\nabla L" /> 에 넣어 가중치를 갱신.</li>
         <li>딥러닝 학습 = (순전파 → 역전파 → 갱신) 을 수없이 반복. 그게 전부예요!</li>
       </ul>
     </ConceptCard>
@@ -115,8 +115,8 @@ function onSetComplete() {
     <h2 class="mt-10 mb-2 text-xl font-bold">🤖 지금까지 배운 미분이 전부 여기 모인다</h2>
     <ReviewFlag id="ch10-ai" chapter="ch10" label="🤖 전체 그림 총정리" />
     <p class="leading-relaxed text-slate-700">
-      축하합니다 — 이제 "AI가 어떻게 배우는가"의 수학을 <b>처음부터 끝까지</b> 꿰뚫었습니다.
-      우리가 걸어온 길을 되짚어 볼게요:
+      축하합니다. 이제 "AI가 어떻게 배우는가"의 수학을 <b>처음부터 끝까지</b> 꿰뚫었습니다.
+      지금까지 걸어온 길을 되짚어 볼게요:
     </p>
 
     <ConceptCard tone="ai" title="한 장으로 보는 여정">
@@ -140,16 +140,16 @@ function onSetComplete() {
         '아무 데도 쓰지 않는다',
       ]"
       :answer="0"
-      explanation="역전파로 ∇L 을 구하고, 경사하강으로 가중치를 갱신 — 이 반복이 학습입니다."
+      explanation="역전파로 ∇L 을 구하고, 경사하강으로 가중치를 갱신하는 것, 이 반복이 학습입니다."
     />
 
     <!-- 5. 연습 -->
     <h2 class="mt-10 mb-2 text-xl font-bold">4. 직접 풀어보기</h2>
     <p class="mb-2 leading-relaxed text-slate-700">
-      객관식 · 참/거짓 · 숫자입력 · 단계별 계산 10문제입니다. <b>모두 맞히면 챕터 완료 — 그리고 완주!</b>
+      객관식 · 참/거짓 · 숫자입력 · 단계별 계산 10문제입니다. <b>모두 맞히면 챕터 완료, 그리고 완주!</b>
     </p>
 
-    <QuizSet title="역전파 직관 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="역전파 직관: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -236,7 +236,7 @@ function onSetComplete() {
           '그래프를 삭제한다',
         ]"
         :answer="0"
-        explanation="∇L 로 경사하강하여 가중치를 갱신 — 이 반복이 딥러닝 학습입니다."
+        explanation="∇L 로 경사하강하여 가중치를 갱신하는 것, 이 반복이 딥러닝 학습입니다."
       />
     </QuizSet>
 
@@ -253,7 +253,7 @@ function onSetComplete() {
       <div class="mb-1 text-3xl">🎓🎉</div>
       <p class="text-lg font-bold text-emerald-800">전 과정 완주! 축하합니다!</p>
       <p class="mt-2 text-sm leading-relaxed text-emerald-700">
-        접선의 기울기에서 시작해 역전파까지 — 이제 <b>AI가 학습하는 원리</b>를 미분으로 이해하는
+        접선의 기울기에서 시작해 역전파까지, 이제 <b>AI가 학습하는 원리</b>를 미분으로 이해하는
         기반을 완성했습니다. 수포자는 이제 안녕! 🙌
       </p>
       <RouterLink

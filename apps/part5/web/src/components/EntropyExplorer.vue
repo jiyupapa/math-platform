@@ -91,7 +91,7 @@ function surprise(p: number): number {
 <template>
   <div class="my-4 rounded-xl border border-slate-200 bg-white p-4">
     <p class="mb-3 text-sm font-semibold text-slate-700">
-      🧭 엔트로피 탐험대 — 막대를 위아래로 드래그해 보세요
+      🧭 엔트로피 탐험대: 막대를 위아래로 드래그해 보세요
     </p>
 
     <!-- 프리셋 -->
@@ -142,7 +142,7 @@ function surprise(p: number): number {
       </g>
     </svg>
     <p class="mt-0.5 text-xs text-slate-500">
-      막대 높이는 상대적 빈도 — 확률(%)은 네 막대의 비율로 자동 계산됩니다.
+      막대 높이는 상대적 빈도예요. 확률(%)은 네 막대의 비율로 자동 계산됩니다.
     </p>
 
     <!-- H 게이지 -->

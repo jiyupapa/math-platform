@@ -185,7 +185,7 @@ const fmt = (x: number, d = 1) => Number(x.toFixed(d)).toString()
     <p class="mt-2 px-1 text-xs leading-relaxed text-slate-500">
       파란 막대 = <b>차이가 전혀 없는 세상</b>에서 우연만으로 생긴 "B − A" 차이들.
       빨간 선(관측 차이)보다 극단적인 영역(분홍)의 비율이 <b>p값</b>이에요.
-      전환율은 그대로 두고 <b>표본 n 만 키워서</b> 다시 돌려보세요 — 같은 차이도 p값이 훅 작아집니다.
+      전환율은 그대로 두고 <b>표본 n 만 키워서</b> 다시 돌려보세요. 같은 차이도 p값이 훅 작아집니다.
     </p>
   </div>
 </template>

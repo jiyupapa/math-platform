@@ -24,8 +24,8 @@ function submit() {
   <main class="mx-auto max-w-2xl px-5 py-10">
     <h1 class="mb-1 text-2xl font-bold text-slate-900">출발점 진단</h1>
     <p class="mb-6 text-slate-600">
-      아래 문항으로 당신의 출발점을 가늠합니다. 모르면 편하게 찍어도 돼요 — 이건 시험이 아니라
-      <strong>당신에게 맞는 경로를 짜기 위한 것</strong>입니다.
+      아래 문항으로 어디서부터 시작하면 좋을지 알아봐요. 몰라도 괜찮으니 편하게 골라 주세요.
+      시험이 아니라 <strong>나에게 맞는 학습 순서를 짜기 위한 것</strong>이에요.
     </p>
 
     <!-- 진행 표시 -->
@@ -96,9 +96,9 @@ function submit() {
         :class="allAnswered ? 'bg-indigo-600 hover:bg-indigo-700' : 'cursor-not-allowed bg-slate-300'"
         @click="submit"
       >
-        결과 보기 — 내 경로 짜기 →
+        결과 보고 내 경로 짜기 →
       </button>
-      <span v-if="!allAnswered" class="text-sm text-slate-500">모든 문항에 답하면 활성화돼요</span>
+      <span v-if="!allAnswered" class="text-sm text-slate-500">모든 문항에 답하면 누를 수 있어요</span>
     </div>
   </main>
 </template>

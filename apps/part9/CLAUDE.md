@@ -14,7 +14,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 핵심 한 줄: **"숫자를 담는 자에는 눈금이 있다 — 눈금의 촘촘함이 품질과 몸무게를 정한다."**
 
 > **상태: ✅ 완결 (2026-07-12) — 전 12챕터(워밍업 + 1~11장) 공개. 스캐폴드부터 완결까지 하루.**
-> 챕터 구성·회수하는 수학 매핑은 루트 `README.md` "9부 챕터 구성" 표가 정본.
+> 챕터 구성·다시 쓰는 수학 매핑은 루트 `README.md` "9부 챕터 구성" 표가 정본.
 > 진행 상태 추적은 `docs/00_plan.md`.
 
 ## 공용 컴포넌트 — 모노레포 `packages/ui`
@@ -41,7 +41,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
    범위(dynamic range, 지수 비트)·가장 가까운 눈금으로=반올림 오차(rounding error)·자의 끝=
    오버플로(overflow)·반쪽 자=반정밀도(half precision, fp16·bf16)·눈금 갈아타기·축척 스티커=
    양자화(quantization)·스케일 팩터(scale factor)·숫자의 몸무게=메모리 풋프린트(memory footprint).
-3. **"회수하는 수학" 연결 필수** — 각 장이 어느 부의 어느 개념을 회수하는지(루트 README 표)
+3. **"다시 쓰는 수학" 연결 필수** — 각 장이 어느 부의 어느 개념을 다시 쓰는지(루트 README 표)
    `ConceptCard` 로 명시: 2장=5부 1~2장(비트·압축), 3장=2부 7장(지수·로그), 4장=3부 5·7장(오차
    누적·√n), 5장=2부 7장·8부 9장(exp 폭발·스파이크), 6장=4부 9장(softmax)·5부 4장(−log),
    8~9장=3부 5장(분포·아웃라이어), 10장=5부 7장(퍼플렉시티)·6부 9장(평가), 11장=전 시리즈.

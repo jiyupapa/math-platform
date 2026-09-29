@@ -209,7 +209,7 @@ const outsideTerm = (c: Concept) =>
         <p class="mt-1 text-sm text-slate-500">
           시리즈의 개념을 부별로 펼쳤습니다. 개념을 누르면 <b class="text-indigo-700">먼저 알아야 하는 개념</b>과
           <b class="text-teal-700">그 개념을 쓰는 다음 개념</b>이 이어지고, 아래에 배우는 곳·다시 쓰이는 곳이 열립니다.
-          단계 순서는 <RouterLink to="/map" class="text-indigo-600 hover:underline">학습 구조도</RouterLink>에.
+          단계 순서는 <RouterLink to="/map" class="text-indigo-600 hover:underline">학습 구조도</RouterLink>에서 볼 수 있습니다.
         </p>
       </div>
       <label class="flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm">
@@ -217,7 +217,7 @@ const outsideTerm = (c: Concept) =>
         <input
           v-model="q"
           type="search"
-          placeholder="개념 · 별칭 · 비유어 (예: 목줄, KL, 보폭)"
+          placeholder="개념 · 다른 이름 · 비유 (예: 목줄, KL, 보폭)"
           class="w-56 bg-transparent text-slate-800 placeholder:text-slate-500 focus:outline-none"
           aria-label="개념 찾기"
         />
@@ -229,7 +229,7 @@ const outsideTerm = (c: Concept) =>
       <span><b class="text-slate-900">{{ concepts.length }}</b> 개념</span>
       <span>선수 관계 <b class="text-slate-900">{{ edgeCount }}</b></span>
       <span>다시 쓰이는 곳 <b class="text-slate-900">{{ reuseCount }}</b></span>
-      <span>비유어 <b class="text-slate-900">{{ metaphorCount }}</b></span>
+      <span>비유 <b class="text-slate-900">{{ metaphorCount }}</b></span>
       <span v-if="hasProgress" class="font-medium text-indigo-700">
         아는 개념 {{ masteredCount }} · 지금 배울 수 있는 개념 {{ readyCount }}
       </span>
@@ -239,9 +239,9 @@ const outsideTerm = (c: Concept) =>
 
     <!-- 범례 -->
     <div v-if="graph" class="mb-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-slate-500">
-      <span class="inline-flex items-center gap-1.5"><span class="inline-block h-3 w-3 rounded border border-sky-200 bg-sky-50" />부 색(정의처)</span>
-      <span class="inline-flex items-center gap-1.5"><span class="inline-block h-3 w-3 rounded border border-sky-700 bg-sky-700" />✓ 아는 개념 — 배우는 장 완료</span>
-      <span class="inline-flex items-center gap-1.5"><span class="inline-block h-3 w-3 rounded border border-sky-200 bg-sky-50 ring-2 ring-sky-600" />지금 배울 수 있음 — 선수 전부 앎</span>
+      <span class="inline-flex items-center gap-1.5"><span class="inline-block h-3 w-3 rounded border border-sky-200 bg-sky-50" />부 색(처음 배우는 부)</span>
+      <span class="inline-flex items-center gap-1.5"><span class="inline-block h-3 w-3 rounded border border-sky-700 bg-sky-700" />✓ 아는 개념 (배우는 장을 마침)</span>
+      <span class="inline-flex items-center gap-1.5"><span class="inline-block h-3 w-3 rounded border border-sky-200 bg-sky-50 ring-2 ring-sky-600" />지금 배울 수 있음 (먼저 알아야 할 개념을 모두 앎)</span>
       <span v-if="missedIds.size" class="inline-flex items-center gap-1.5"><span class="inline-block h-3 w-3 rounded border border-sky-200 bg-sky-50 ring-2 ring-amber-600" />⚠ 진단에서 헷갈린 개념</span>
       <span class="inline-flex items-center gap-1.5">
         <svg width="26" height="8"><line x1="0" y1="4" x2="26" y2="4" stroke="var(--c-indigo-500)" stroke-width="1.5" /></svg>
@@ -304,7 +304,7 @@ const outsideTerm = (c: Concept) =>
                 data-concept-node
                 class="rounded-lg border px-2.5 py-1 text-left text-[13px] font-medium leading-tight shadow-sm transition hover:-translate-y-0.5 hover:shadow"
                 :class="nodeClass(c)"
-                :title="`${c.note} — ${chapterLabel(c.definedAt.part, c.definedAt.slug)}`"
+                :title="`${c.note} (${chapterLabel(c.definedAt.part, c.definedAt.slug)})`"
                 :aria-pressed="selected === c.id"
                 @click="select(c.id)"
               >
@@ -327,7 +327,7 @@ const outsideTerm = (c: Concept) =>
             <span class="rounded bg-slate-100 px-1.5 py-0.5 font-semibold text-slate-600">{{ KIND_LABEL[selectedConcept.kind] }}</span>
             <span v-if="isMastered(selectedConcept)" class="rounded bg-emerald-50 px-1.5 py-0.5 font-semibold text-emerald-700">✓ 아는 개념</span>
             <span v-else-if="isReady(selectedConcept)" class="rounded bg-indigo-50 px-1.5 py-0.5 font-semibold text-indigo-700">지금 배울 수 있어요</span>
-            <span v-if="missedIds.has(selectedConcept.id)" class="rounded bg-amber-50 px-1.5 py-0.5 font-semibold text-amber-700">진단에서 헷갈린 개념 — 다시 볼 것</span>
+            <span v-if="missedIds.has(selectedConcept.id)" class="rounded bg-amber-50 px-1.5 py-0.5 font-semibold text-amber-700">진단에서 헷갈린 개념 · 다시 볼 것</span>
           </div>
           <h2 class="text-lg font-bold text-slate-900">{{ selectedConcept.label }}</h2>
           <p v-if="selectedConcept.aliases.length" class="mt-0.5 text-xs text-slate-500">{{ selectedConcept.aliases.join(' · ') }}</p>
@@ -337,7 +337,7 @@ const outsideTerm = (c: Concept) =>
               이 시리즈에서는
               <template v-for="(m, i) in selectedConcept.metaphors" :key="m.term + m.part">
                 <span v-if="i"> · </span>
-                <b class="text-slate-800">‘{{ m.term }}’</b>({{ m.part }}부<template v-if="m.note"> — {{ m.note }}</template>)
+                <b class="text-slate-800">‘{{ m.term }}’</b>({{ m.part }}부<template v-if="m.note">, {{ m.note }}</template>)
               </template>
             </template>
             <template v-if="selectedConcept.metaphors.length && outsideTerm(selectedConcept)"> · </template>
@@ -360,7 +360,7 @@ const outsideTerm = (c: Concept) =>
       <div class="mt-3 grid gap-3 md:grid-cols-3">
         <div class="rounded-xl bg-slate-50 p-3">
           <p class="text-xs font-semibold text-slate-600">먼저 알아야 {{ directPrereqs.length ? `(${directPrereqs.length})` : '' }}</p>
-          <p v-if="!directPrereqs.length" class="mt-1 text-sm text-slate-600">없음 — 출발점 개념</p>
+          <p v-if="!directPrereqs.length" class="mt-1 text-sm text-slate-600">없음 (출발점 개념)</p>
           <ul v-else class="mt-1 space-y-0.5 text-sm">
             <li v-for="p in directPrereqs" :key="p.id">
               <button type="button" class="text-left text-indigo-700 hover:underline" @click="select(p.id)">
@@ -370,13 +370,13 @@ const outsideTerm = (c: Concept) =>
             </li>
           </ul>
           <p v-if="chain.length > directPrereqs.length" class="mt-2 text-xs text-slate-600">
-            출발점까지 거슬러 올라가면 {{ chain.length }}개 — 먼 것부터:
+            출발점까지 거슬러 올라가면 {{ chain.length }}개, 먼 것부터:
             <template v-for="(c, i) in chain" :key="c.id"><span v-if="i"> → </span><button type="button" class="text-indigo-700 hover:underline" @click="select(c.id)">{{ c.label }}</button></template>
           </p>
         </div>
         <div class="rounded-xl bg-slate-50 p-3">
           <p class="text-xs font-semibold text-slate-600">이 개념을 쓰는 다음 개념 {{ dependents.length ? `(${dependents.length})` : '' }}</p>
-          <p v-if="!dependents.length" class="mt-1 text-sm text-slate-600">없음 — 이 갈래의 끝</p>
+          <p v-if="!dependents.length" class="mt-1 text-sm text-slate-600">없음 (이 갈래의 끝)</p>
           <ul v-else class="mt-1 space-y-0.5 text-sm">
             <li v-for="d in dependents" :key="d.id">
               <button type="button" class="text-left text-teal-700 hover:underline" @click="select(d.id)">
@@ -388,11 +388,11 @@ const outsideTerm = (c: Concept) =>
         </div>
         <div class="rounded-xl bg-slate-50 p-3">
           <p class="text-xs font-semibold text-slate-600">다시 쓰이는 곳 {{ selectedConcept.usedAt.length ? `(${selectedConcept.usedAt.length})` : '' }}</p>
-          <p v-if="!selectedConcept.usedAt.length" class="mt-1 text-sm text-slate-600">아직 다른 장에 회수처가 없어요</p>
+          <p v-if="!selectedConcept.usedAt.length" class="mt-1 text-sm text-slate-600">아직 다른 장에서 다시 쓰이지 않아요</p>
           <ul v-else class="mt-1 space-y-0.5 text-sm">
             <li v-for="u in selectedConcept.usedAt" :key="u.part + u.slug">
               <a :href="chapterHref(u.part, u.slug, u.anchor)" class="font-medium text-indigo-700 hover:underline">{{ chapterLabel(u.part, u.slug) }}</a>
-              <span v-if="u.how" class="text-slate-700"> — {{ u.how }}</span>
+              <span v-if="u.how" class="text-slate-700"> ({{ u.how }})</span>
             </li>
           </ul>
         </div>

@@ -77,7 +77,7 @@ const fmt = (v: number) => (v >= 10 ? v.toFixed(1) : v.toFixed(1))
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 신의 시점 -->
-    <p class="mb-1 text-sm font-semibold text-slate-500">① 걸음 정확도 (신의 시점 — 한 단계를 맞힐 확률을 미리 정해 둡니다)</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">① 걸음 정확도 (신의 시점: 한 단계를 맞힐 확률을 미리 정해 둡니다)</p>
     <div class="mb-4 flex flex-wrap items-center gap-1.5">
       <button
         v-for="v in PS"
@@ -93,7 +93,7 @@ const fmt = (v: number) => (v >= 10 ? v.toFixed(1) : v.toFixed(1))
     </div>
 
     <!-- ② 일 맡기기 -->
-    <p class="mb-1 text-sm font-semibold text-slate-500">② 심부름 맡기기 — 몇 단계짜리 일인지 고르고, 다시 맡겨 보세요</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">② 심부름 맡기기: 몇 단계짜리 일인지 고르고, 다시 맡겨 보세요</p>
     <div class="mb-2 flex flex-wrap items-center gap-1.5">
       <button
         v-for="v in STEPS"
@@ -128,14 +128,14 @@ const fmt = (v: number) => (v >= 10 ? v.toFixed(1) : v.toFixed(1))
         class="rounded-md px-3 py-2 text-sm font-medium"
         :class="failedAt === 0 ? 'bg-emerald-50 text-emerald-800' : 'bg-rose-50 text-rose-800'"
       >
-        <template v-if="failedAt === 0">🎉 이번엔 끝까지 해냈습니다 — 하지만 아래 20회 요약을 보세요.</template>
-        <template v-else>😱 {{ failedAt }}단계에서 미끄러졌습니다 — 앞의 {{ failedAt - 1 }}걸음이 전부 물거품이 됐어요.</template>
+        <template v-if="failedAt === 0">🎉 이번엔 끝까지 해냈습니다. 하지만 아래 20회 요약을 보세요.</template>
+        <template v-else>😱 {{ failedAt }}단계에서 미끄러졌습니다. 앞의 {{ failedAt - 1 }}걸음이 전부 물거품이 됐어요.</template>
       </p>
-      <p class="text-xs text-slate-500">한 단계라도 틀리면 일 전체가 실패로 칩니다 — 잘못된 표가 들어간 보고서처럼요.</p>
+      <p class="text-xs text-slate-500">한 단계라도 틀리면 일 전체가 실패로 칩니다. 잘못된 표가 들어간 보고서처럼요.</p>
     </div>
 
     <!-- ③ 20회 요약 -->
-    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">③ 같은 일을 20번 맡기면 — 몇 번이나 해내나</p>
+    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">③ 같은 일을 20번 맡기면: 몇 번이나 해내나</p>
     <div class="rounded-lg bg-slate-50 p-4">
       <div class="mb-2 flex flex-wrap gap-1">
         <span
@@ -147,7 +147,7 @@ const fmt = (v: number) => (v >= 10 ? v.toFixed(1) : v.toFixed(1))
         >{{ ok ? 'O' : '✗' }}</span>
       </div>
       <p class="text-sm text-slate-700">
-        걸음 정확도 <b>{{ pPct }}%</b> · <b>{{ n }}단계</b> 일을 20번 —
+        걸음 정확도 <b>{{ pPct }}%</b> · <b>{{ n }}단계</b> 일을 20번 맡기면
         성공 <b class="text-emerald-700">{{ summary.wins }}번</b> (이론값 {{ fmt(theory) }}%).
         <template v-if="theory < 40">걸음은 믿음직한데 일은 복불복이네요.</template>
         <template v-else-if="theory < 75">아직 안심하긴 이릅니다.</template>
@@ -158,7 +158,7 @@ const fmt = (v: number) => (v >= 10 ? v.toFixed(1) : v.toFixed(1))
     <!-- ④ 이론 곡선 -->
     <label class="mt-4 flex cursor-pointer items-center gap-2 text-sm text-slate-700">
       <input v-model="showTheory" type="checkbox" class="h-4 w-4 accent-indigo-600" />
-      <span><b>이론 성공률 보기</b> — 걸음 정확도를 단계 수만큼 곱하면 (정확한 수학은 2장에서)</span>
+      <span><b>이론 성공률 보기</b>: 걸음 정확도를 단계 수만큼 곱하면 (정확한 수학은 2장에서)</span>
     </label>
     <div v-if="showTheory" class="mt-2 space-y-1.5 rounded-md bg-amber-50 px-3 py-2">
       <div v-for="row in theoryRows" :key="row.s" class="flex items-center gap-2 text-sm text-amber-900">
@@ -169,7 +169,7 @@ const fmt = (v: number) => (v >= 10 ? v.toFixed(1) : v.toFixed(1))
         <span class="w-14 shrink-0 font-mono text-xs">{{ fmt(row.pct) }}%</span>
       </div>
       <p class="pt-1 text-xs text-amber-800">
-        {{ pPct }}%짜리 걸음은 <b>{{ halfSteps }}단계</b>부터 성공률이 절반 아래로 떨어집니다 —
+        {{ pPct }}%짜리 걸음은 <b>{{ halfSteps }}단계</b>부터 성공률이 절반 아래로 떨어집니다.
         일이 길수록 곱이 무섭게 깎여요.
       </p>
     </div>

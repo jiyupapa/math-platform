@@ -26,14 +26,14 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 11 · 학습 (심화)</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">11장 · 학습 (심화)</p>
     <h1 class="mb-4 text-3xl font-bold">학습 — 무작위 가중치가 똑똑해지기까지</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       ch10의 미니 트랜스포머는 <b>무작위 가중치</b>라 엉터리 단어를 뱉었죠. <b>학습(training)</b>은
       그 무작위 숫자들을 <b>다음 단어 맞히기 연습</b>으로 조금씩 다듬어 똑똑하게 만드는 과정입니다.
     </p>
     <p class="mb-2 leading-relaxed text-slate-600">
-      🔑 <b>가중치(weight)</b> = 모델 안에서 <b>학습으로 바뀌는 모든 숫자</b>예요 — 임베딩, Q·K·V,
+      🔑 <b>가중치(weight)</b> = 모델 안에서 <b>학습으로 바뀌는 모든 숫자</b>예요. 임베딩, Q·K·V,
       FFN 값 전부. 학습이란 결국 <b>이 숫자들을 조금씩 좋게 바꾸는 일</b>입니다.
     </p>
 
@@ -44,7 +44,7 @@ function onSetComplete() {
 
     <!-- ===== 1. 손실 ===== -->
     <h2 class="mt-8 mb-2 text-xl font-bold">
-      1. 손실 — 얼마나 틀렸나
+      1. 손실: 얼마나 틀렸나
       <ReviewFlag id="ch11-s1" chapter="ch11" label="1. 손실" />
     </h2>
     <p class="leading-relaxed text-slate-700">
@@ -54,8 +54,8 @@ function onSetComplete() {
     </p>
     <p class="mt-1 text-sm text-slate-500">
       🔑 <MathBlock inline expr="\ln" /> 은 <b>로그</b>라는 함수인데, 지금은 <b>계산법을 몰라도
-      됩니다</b>(정식 소개는 2부 7장 — 지수·로그 미분).
-      이 <MathBlock inline expr="-\ln(p)" /> 가 하는 일은 딱 하나 — <b>정답 확률 p가 1이면 손실 0, p가 작아질수록
+      됩니다</b>(정식 소개는 2부 7장, 지수·로그 미분).
+      이 <MathBlock inline expr="-\ln(p)" /> 가 하는 일은 딱 하나: <b>정답 확률 p가 1이면 손실 0, p가 작아질수록
       손실이 확 커지는</b> 변환이에요. 아래 슬라이더를 움직이면 그 모양이 그대로 보입니다.
     </p>
 
@@ -70,16 +70,16 @@ function onSetComplete() {
       </div>
       <p class="mt-2 text-sm">
         손실 = <b class="font-mono">{{ ceLoss.toFixed(2) }}</b>
-        <span v-if="p > 0.9" class="text-emerald-700"> — 정답을 거의 확신! 손실이 0에 가깝습니다. 👍</span>
-        <span v-else-if="p < 0.15" class="text-rose-700"> — 정답을 거의 놓침! 손실이 큽니다.</span>
-        <span v-else class="text-slate-500"> — 정답 확률을 1(100%)로 올릴수록 손실은 0으로 갑니다.</span>
+        <span v-if="p > 0.9" class="text-emerald-700">(정답을 거의 확신! 손실이 0에 가깝습니다. 👍)</span>
+        <span v-else-if="p < 0.15" class="text-rose-700">(정답을 거의 놓침! 손실이 큽니다.)</span>
+        <span v-else class="text-slate-500">(정답 확률을 1(100%)로 올릴수록 손실은 0으로 갑니다.)</span>
       </p>
     </div>
 
     <ConceptCard tone="note" title="새 용어: 손실 · 크로스 엔트로피">
       <ul class="list-disc space-y-1 pl-5 text-sm">
-        <li><b>손실(loss)</b> — 모델 예측이 정답과 <b>얼마나 다른지</b>를 나타내는 숫자. <b>작을수록 좋음</b>.</li>
-        <li><b>크로스 엔트로피(cross-entropy)</b> — 다음 단어 예측에 쓰는 손실. <b>정답 단어의 확률이 낮을수록</b>
+        <li><b>손실(loss)</b>: 모델 예측이 정답과 <b>얼마나 다른지</b>를 나타내는 숫자. <b>작을수록 좋음</b>.</li>
+        <li><b>크로스 엔트로피(cross-entropy)</b>: 다음 단어 예측에 쓰는 손실. <b>정답 단어의 확률이 낮을수록</b>
           손실이 커집니다(<MathBlock inline expr="-\ln p" />).</li>
       </ul>
     </ConceptCard>
@@ -94,7 +94,7 @@ function onSetComplete() {
 
     <!-- ===== 2. 경사하강 ===== -->
     <h2 class="mt-8 mb-2 text-xl font-bold">
-      2. 경사하강 — 손실을 줄이는 방향으로
+      2. 경사하강: 손실을 줄이는 방향으로
       <ReviewFlag id="ch11-s2" chapter="ch11" label="2. 경사하강" />
     </h2>
     <p class="leading-relaxed text-slate-700">
@@ -107,9 +107,9 @@ function onSetComplete() {
 
     <ConceptCard tone="note" title="새 용어 세 개">
       <ul class="list-disc space-y-1 pl-5 text-sm">
-        <li><b>경사하강(gradient descent)</b> — 기울기 반대 방향으로 조금씩 가중치를 바꿔 손실을 줄이는 방법.</li>
-        <li><b>기울기(gradient)</b> — 손실이 가장 빠르게 <b>커지는 방향</b>. 그 반대로 가면 가장 빠르게 줄어듭니다.</li>
-        <li><b>학습률(learning rate)</b> — 한 걸음의 크기. <b>너무 크면 발산</b>, 너무 작으면 느립니다.</li>
+        <li><b>경사하강(gradient descent)</b>: 기울기 반대 방향으로 조금씩 가중치를 바꿔 손실을 줄이는 방법.</li>
+        <li><b>기울기(gradient)</b>: 손실이 가장 빠르게 <b>커지는 방향</b>. 그 반대로 가면 가장 빠르게 줄어듭니다.</li>
+        <li><b>학습률(learning rate)</b>: 한 걸음의 크기. <b>너무 크면 발산</b>, 너무 작으면 느립니다.</li>
       </ul>
     </ConceptCard>
 
@@ -127,7 +127,7 @@ function onSetComplete() {
       explanation="걸음이 너무 크면 최소를 지나쳐 오히려 손실이 커지며 발산할 수 있습니다."
     />
 
-    <DetailsCard title="➕ 더 깊이 알아보기 — 역전파와 사전학습·파인튜닝">
+    <DetailsCard title="➕ 더 깊이 알아보기: 역전파와 사전학습·파인튜닝">
       <p class="mb-1 font-semibold text-slate-800">① 역전파(backpropagation)</p>
       <p class="mb-3">
         트랜스포머엔 가중치가 <b>수억~수천억 개</b>입니다. 각 가중치를 얼마나 바꿀지(=각자의 기울기)를
@@ -158,15 +158,15 @@ function onSetComplete() {
           그 과정에서 <b>부수적으로</b> 학습돼요.
         </li>
         <li>
-          이 학습을 <b>수조 개 단어</b>에, 가중치 <b>수천억 개</b>로 하면 — 그게 오늘날의 거대 LLM입니다.
+          이 학습을 <b>수조 개 단어</b>에, 가중치 <b>수천억 개</b>로 하면, 그게 오늘날의 거대 LLM입니다.
           "모델을 키운다"는 건 데이터·가중치·계산을 함께 늘리는 것.
         </li>
         <li>
-          그래도 원리는 이 챕터 그대로 — <b>손실을 재고, 경사하강으로 조금씩 줄이기</b>의 반복입니다.
+          그래도 원리는 이 챕터 그대로, <b>손실을 재고, 경사하강으로 조금씩 줄이기</b>의 반복입니다.
         </li>
       </ul>
       <p class="mt-2 text-sm text-violet-900/80">
-        회수하는 수학 — 경사하강은 <b><PartLink :part="2" ch="ch9">2부 9장</PartLink></b>,
+        다시 쓰는 수학: 경사하강은 <b><PartLink :part="2" ch="ch9">2부 9장</PartLink></b>,
         손실 −ln(p) 의 로그는 <b><PartLink :part="2" ch="ch7">2부 7장</PartLink></b>에서 쌓은 그 기초입니다.
       </p>
       <p class="mt-2 text-sm text-violet-900/80">
@@ -178,7 +178,7 @@ function onSetComplete() {
     <h2 class="mt-8 mb-2 text-xl font-bold">4. 직접 풀어보기</h2>
     <p class="mb-2 leading-relaxed text-slate-700"><b>10문제를 모두 맞히면</b> 이 챕터가 완료됩니다.</p>
 
-    <QuizSet title="학습 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="학습: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -277,9 +277,9 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 11 완료 — 모델이 똑똑해지는 원리</p>
+      <p class="font-semibold text-emerald-800">11장 완료! 모델이 똑똑해지는 원리</p>
       <p class="mt-1 text-sm text-emerald-700">
-        손실을 재고 경사하강으로 줄이기 — 그게 학습입니다. 마지막 챕터
+        손실을 재고 경사하강으로 줄이기, 그게 학습입니다. 마지막 챕터
         <RouterLink to="/ch/ch12" class="text-emerald-800 underline">ch12 샘플링</RouterLink>에서
         똑똑해진 모델이 다음 단어를 <b>어떻게 고르는지</b> 봅니다. 노트북
         <code>notebooks/ch11_training.ipynb</code> 도 함께!

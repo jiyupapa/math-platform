@@ -132,7 +132,7 @@ function reset() {
         <p class="text-sm font-semibold text-emerald-800">
           🎯 다음 단어 = "<b>{{ nextWord }}</b>" → "오늘 날씨가 정말 <b>{{ nextWord }}</b>"
         </p>
-        <p class="mt-1 text-xs text-emerald-700">이 단어를 붙이고 다시 처음부터 — 그게 자기회귀 생성(아래)!</p>
+        <p class="mt-1 text-xs text-emerald-700">이 단어를 붙이고 다시 처음부터, 그게 자기회귀 생성(아래)!</p>
       </div>
     </div>
 

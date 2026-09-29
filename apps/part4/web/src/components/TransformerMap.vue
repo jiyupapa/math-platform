@@ -25,7 +25,7 @@ const stages: Stage[] = [
   <div class="rounded-2xl border border-slate-200 bg-white p-5">
     <p class="mb-1 text-sm font-semibold text-indigo-600">트랜스포머 한눈에 보기</p>
     <p class="mb-4 text-sm text-slate-500">
-      LLM 이 글을 읽고 <b>다음 단어</b>를 내놓기까지의 흐름입니다. 우리는 이 조각들을 하나씩 정복합니다.
+      LLM 이 글을 읽고 <b>다음 단어</b>를 내놓기까지의 흐름입니다. 이 조각들을 하나씩 익혀 갑니다.
     </p>
     <div class="flex flex-wrap items-stretch gap-2">
       <template v-for="(s, i) in stages" :key="s.label">
@@ -53,7 +53,7 @@ const stages: Stage[] = [
       </template>
     </div>
     <p class="mt-4 text-xs text-slate-500">
-      💡 샘플 챕터의 <b>소프트맥스</b>는 맨 끝 "출력층"에서 점수를 확률로 바꾸는 바로 그 장치입니다.
+      💡 워밍업의 <b>소프트맥스</b>는 맨 끝 "출력층"에서 점수를 확률로 바꾸는 바로 그 장치입니다.
     </p>
   </div>
 </template>

@@ -18,19 +18,19 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 8</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">8장</p>
     <h1 class="mb-4 text-3xl font-bold">표본으로 전체 알기 — 추정과 신뢰구간 📊</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
-      "지지율 47%, 오차범위 ±3.1%p" — 뉴스에서 매일 보는 문장이지만 정확히 읽을 줄 아는 사람은
+      "지지율 47%, 오차범위 ±3.1%p." 뉴스에서 매일 보는 문장이지만 정확히 읽을 줄 아는 사람은
       드뭅니다. 이번 챕터에서는 6장(정규분포의 95%)과 7장(표준오차)을 조립해서, <b>일부만 조사하고
       전체를 책임감 있게 말하는 법</b>을 배웁니다. 이 챕터가 끝나면 저 문장이 완전히 읽힐 거예요.
     </p>
 
-    <ConceptCard tone="note" title="새 단위 — %p (퍼센트포인트)">
+    <ConceptCard tone="note" title="새 단위: %p (퍼센트포인트)">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li><b>읽는 법</b>: "퍼센트포인트" · <b>뜻</b>: 퍼센트(%)끼리 뺀 <b>차이</b>를 나타내는 단위.</li>
         <li>지지율이 45% 에서 47% 가 되면 <b>2%p</b> 오른 것입니다 (47 − 45 = 2).</li>
-        <li>"2% 올랐다"와는 다릅니다 — 45% 의 2% 는 겨우 0.9%p 거든요. 그래서 %끼리의
+        <li>"2% 올랐다"와는 다릅니다. 45% 의 2% 는 겨우 0.9%p 거든요. 그래서 %끼리의
           차이를 말할 때는 꼭 <b>%p</b> 를 씁니다. 오차범위 ±3.1%p 도 "지지율에서 3.1 을
           더하고 뺀 범위"라는 뜻이에요.</li>
       </ul>
@@ -45,20 +45,20 @@ function onSetComplete() {
     </ConceptCard>
 
     <!-- 1. 모집단과 표본 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">1. 모집단과 표본 — 국 한 숟갈로 간 보기</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">1. 모집단과 표본: 국 한 숟갈로 간 보기</h2>
     <ReviewFlag id="ch8-s1" chapter="ch8" label="1. 모집단과 표본" />
     <p class="leading-relaxed text-slate-700">
       찌개 간을 볼 때 냄비를 다 마시지 않죠. <b>잘 저은 뒤 한 숟갈</b>이면 충분합니다.
-      통계도 똑같아요 — 전 국민 5천만 명의 생각(전체)을 알고 싶지만 다 물어볼 수 없으니,
+      통계도 똑같아요. 전 국민 5천만 명의 생각(전체)을 알고 싶지만 다 물어볼 수 없으니,
       <b>무작위로 뽑은 1,000명</b>(한 숟갈)으로 전체를 추측합니다. 여기서 용어 네 개만 정리해 둡시다.
     </p>
 
-    <ConceptCard tone="note" title="새 용어 4종 — 모집단 · 표본 · 모수 · 통계량">
+    <ConceptCard tone="note" title="새 용어 4종: 모집단 · 표본 · 모수 · 통계량">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li><b>모집단(population)</b>: 알고 싶은 <b>전체</b>. 예: 전체 유권자.</li>
         <li><b>표본(sample)</b>: 실제로 조사한 <b>일부</b>. 예: 응답자 1,000명. (무작위로 뽑아야 '잘 저은 국'이 됩니다)</li>
-        <li><b>모수(parameter)</b>: 모집단의 참값. 예: 진짜 지지율, 모평균 <MathBlock inline expr="\mu" />. — <b>신만 아는 숫자</b>예요.</li>
-        <li><b>통계량(statistic)</b>: 표본에서 계산한 값. 예: 표본 지지율, 표본평균 <MathBlock inline expr="\bar{x}" />. — 우리가 아는 건 이것뿐.</li>
+        <li><b>모수(parameter)</b>: 모집단의 참값. 예: 진짜 지지율, 모평균 <MathBlock inline expr="\mu" />. <b>신만 아는 숫자</b>예요.</li>
+        <li><b>통계량(statistic)</b>: 표본에서 계산한 값. 예: 표본 지지율, 표본평균 <MathBlock inline expr="\bar{x}" />. 손에 쥔 건 이것뿐.</li>
       </ul>
     </ConceptCard>
 
@@ -81,10 +81,10 @@ function onSetComplete() {
     </p>
     <p class="leading-relaxed text-slate-700">
       그래서 통계학자는 정직하게 <b>범위로</b> 말합니다: "참값은 대략 <b>이 구간 안</b>에 있을 겁니다.
-      이 방법은 100번 중 95번 맞습니다." — 이것이 <b>구간추정</b>, 그 구간이 <b>신뢰구간</b>입니다.
+      이 방법은 100번 중 95번 맞습니다." 이것이 <b>구간추정</b>, 그 구간이 <b>신뢰구간</b>입니다.
     </p>
 
-    <ConceptCard tone="note" title="새 용어 — 점추정 / 구간추정 / 신뢰구간">
+    <ConceptCard tone="note" title="새 용어: 점추정 / 구간추정 / 신뢰구간">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li><b>점추정</b>: 모수를 숫자 하나로 추측. (간단하지만 오차를 말해주지 않음)</li>
         <li><b>구간추정</b>: 모수가 들어있을 법한 <b>범위</b>로 추측.</li>
@@ -93,7 +93,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <!-- 3. 공식 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">3. 95% 신뢰구간 — 배운 부품 두 개로 조립</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">3. 95% 신뢰구간: 배운 부품 두 개로 조립</h2>
     <ReviewFlag id="ch8-s3" chapter="ch8" label="3. 95% 신뢰구간 공식" />
     <p class="leading-relaxed text-slate-700">
       공식은 이미 다 배운 부품의 조립입니다. 7장의 중심극한정리에 따르면 표본평균
@@ -111,7 +111,7 @@ function onSetComplete() {
       </ul>
       <p class="mt-2 text-sm text-slate-500">
         (엄밀히는 모집단의 σ 를 모르므로 표본의 표준편차로 대신하지만, 이 과정에서는 σ 를 아는 경우로
-        단순화합니다 — n 이 크면 결과가 거의 같아요.)
+        단순화합니다. n 이 크면 결과가 거의 같아요.)
       </p>
     </ConceptCard>
 
@@ -143,7 +143,7 @@ function onSetComplete() {
     <ReviewFlag id="ch8-s4" chapter="ch8" label="4. 신뢰구간 100개 시뮬레이션" />
     <p class="leading-relaxed text-slate-700">
       "95% 신뢰"가 무슨 뜻인지 눈으로 봅시다. 아래 시뮬레이터는 <b>참값 μ=50 을 아는 신의 시점</b>에서,
-      표본조사를 100번 반복해 신뢰구간을 100개 만듭니다. 몇 개가 참값을 놓치는지 세어 보세요 —
+      표본조사를 100번 반복해 신뢰구간을 100개 만듭니다. 몇 개가 참값을 놓치는지 세어 보세요.
       95% 수준이면 <b>놓침이 평균 5개꼴</b>이어야 합니다.
     </p>
 
@@ -159,7 +159,7 @@ function onSetComplete() {
     />
 
     <!-- 5. 95%의 진짜 뜻 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">5. "95%" 의 진짜 뜻 — 가장 흔한 오해</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">5. "95%" 의 진짜 뜻: 가장 흔한 오해</h2>
     <ReviewFlag id="ch8-s5" chapter="ch8" label="5. 95% 신뢰의 정확한 의미" />
 
     <ConceptCard tone="warn" title="'이 구간에 참값이 있을 확률 95%' 가 아닙니다">
@@ -170,18 +170,18 @@ function onSetComplete() {
         </li>
         <li>
           95% 는 <b>구간을 만드는 방법의 성적표</b>입니다: 같은 방법으로 표본을 100번 뽑아 구간을
-          100개 만들면 <b>그중 약 95개가 참값을 포함</b>한다 — 방금 시뮬레이터에서 본 그대로예요.
+          100개 만들면 <b>그중 약 95개가 참값을 포함</b>한다. 방금 시뮬레이터에서 본 그대로예요.
         </li>
-        <li>우연인 것은 (신이 정해둔) 참값이 아니라 <b>우리가 뽑은 표본과 구간</b> 쪽입니다.</li>
+        <li>우연인 것은 (신이 정해둔) 참값이 아니라 <b>뽑힌 표본과 구간</b> 쪽입니다.</li>
       </ul>
     </ConceptCard>
 
     <!-- 6. 여론조사 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">6. 여론조사 읽는 법 — ±3.1%p 직접 계산</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">6. 여론조사 읽는 법: ±3.1%p 직접 계산</h2>
     <ReviewFlag id="ch8-s6" chapter="ch8" label="6. 여론조사 오차범위 계산" />
     <p class="leading-relaxed text-slate-700">
       지지율 같은 비율 조사에서 비율의 표준오차는 <MathBlock inline expr="\sqrt{p(1-p)/n}" /> 입니다.
-      5장에서 <b>성공 횟수의 분산이 <MathBlock inline expr="np(1-p)" /></b> 였죠 — 비율은 횟수를
+      5장에서 <b>성공 횟수의 분산이 <MathBlock inline expr="np(1-p)" /></b> 였죠. 비율은 횟수를
       <MathBlock inline expr="n" /> 으로 나눈 값인데, 값을 n으로 나누면 흩어짐(표준편차)도 n분의 1이
       되므로 그 제곱인 <b>분산은 <MathBlock inline expr="n^2" /> 으로</b> 나뉩니다. 그래서
       <MathBlock inline expr="np(1-p) \div n^2 = p(1-p)/n" /> 이 비율의 분산이
@@ -204,7 +204,7 @@ function onSetComplete() {
     />
 
     <p class="leading-relaxed text-slate-700">
-      이제 뉴스를 읽어 봅시다. <b>A 후보 47%, B 후보 45%, 오차범위 ±3.1%p</b> — 두 후보의 차이(2%p)가
+      이제 뉴스를 읽어 봅시다. <b>A 후보 47%, B 후보 45%, 오차범위 ±3.1%p</b>. 두 후보의 차이(2%p)가
       오차범위보다 작으니, 참 지지율은 B 가 앞설 가능성도 얼마든지 있습니다. 이럴 때 쓰는 표현이
       <b>"오차범위 내 접전"</b>이에요. 그리고 오차를 절반(±1.55%p)으로 줄이고 싶으면? 7장에서 배웠듯
       <MathBlock inline expr="\sqrt{n}" /> 때문에 표본이 <b>4배(4,000명)</b> 필요합니다.
@@ -222,10 +222,10 @@ function onSetComplete() {
     <ConceptCard tone="ai" title="벤치마크 점수를 통계학자의 눈으로">
       <ul class="list-disc space-y-2 pl-5">
         <li>
-          테스트셋이 1,000개라면 정확도의 오차범위는 대략 ±2~3%p — <b>모델 A 87.3% vs 모델 B 86.9%</b>
+          테스트셋이 1,000개라면 정확도의 오차범위는 대략 ±2~3%p라서 <b>모델 A 87.3% vs 모델 B 86.9%</b>
           같은 차이는 <b>오차범위 내 접전</b>일 수 있습니다. 소수점 경쟁은 통계적으로 무의미할 수 있어요.
         </li>
-        <li>테스트셋이 클수록(√n) 성능 추정이 정밀해집니다 — 벤치마크가 수만 문제로 만들어지는 이유.</li>
+        <li>테스트셋이 클수록(√n) 성능 추정이 정밀해집니다. 벤치마크가 수만 문제로 만들어지는 이유.</li>
         <li>
           논문·리더보드에서 성능에 <b>± 오차</b>나 신뢰구간을 붙이는 것이 좋은 관행이고,
           그 차이가 진짜인지 판별하는 정식 도구가 다음 챕터의 <b>가설검정</b>입니다.
@@ -239,7 +239,7 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 · 단계별 계산 10문제입니다. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="추정과 신뢰구간 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="추정과 신뢰구간: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -302,7 +302,7 @@ function onSetComplete() {
         question="구간 [168.4, 171.6] 을 이미 얻었다면 '참 평균이 이 구간에 있을 확률은 95%' 라고 말하는 것이 정확한 표현이다."
         type="truefalse"
         :answer="1"
-        :hints="['참값은 이미 정해진 숫자 — 우연인 건 구간 쪽.']"
+        :hints="['참값은 이미 정해진 숫자예요. 우연인 건 구간 쪽.']"
         explanation="거짓입니다. 얻어진 구간과 참값의 관계는 이미 결정돼 있어요(포함이거나 아니거나). 95% 는 방법의 적중률입니다."
       />
       <Quiz
@@ -334,7 +334,7 @@ function onSetComplete() {
         :answer="1.55"
         :tolerance="0.06"
         :hints="['n 이 4배 → 오차는 절반.', '3.1 ÷ 2.']"
-        explanation="√4 = 2 배 정밀해지므로 3.1 ÷ 2 ≈ ±1.55%p. 표본을 4배 늘려야 오차가 겨우 절반 — √n 의 저주입니다."
+        explanation="√4 = 2 배 정밀해지므로 3.1 ÷ 2 ≈ ±1.55%p. 표본을 4배 늘려야 오차가 겨우 절반, 이것이 √n 의 저주입니다."
       />
     </QuizSet>
 
@@ -351,16 +351,16 @@ function onSetComplete() {
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">
-        Phase 8 완료. 이제 여론조사와 벤치마크 점수를 통계학자의 눈으로 읽을 수 있습니다.
+        8장 완료. 이제 여론조사와 벤치마크 점수를 통계학자의 눈으로 읽을 수 있습니다.
       </p>
       <p class="mt-1 text-sm text-emerald-700">
-        다음은 "그 차이, 우연 아니야?"를 판정하는 <b>가설검정과 p값</b> — A/B 테스트의 심장입니다.
+        다음은 "그 차이, 우연 아니야?"를 판정하는 <b>가설검정과 p값</b>. A/B 테스트의 핵심입니다.
       </p>
       <RouterLink
         to="/ch/ch9"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        다음 챕터 — 가설검정과 p값 →
+        다음 챕터: 가설검정과 p값 →
       </RouterLink>
     </div>
   </article>

@@ -46,7 +46,7 @@ const parts = [
 
 <template>
   <div class="rounded-xl border border-slate-200 bg-white p-5">
-    <h2 class="text-lg font-bold">이 과정을 완료하면 — AI(신경망)의 구조를 이해하게 됩니다</h2>
+    <h2 class="text-lg font-bold">이 과정을 완료하면: AI(신경망)의 구조를 이해하게 됩니다</h2>
     <p class="mb-3 mt-1 text-sm text-slate-600">
       아래가 AI의 뼈대인 <b>신경망</b>이에요. 그 부품 하나하나가 전부 <b>선형대수</b>입니다.
       챕터를 완료할 때마다 해당 부품이 <span class="font-semibold text-emerald-700">활성화됩니다</span>.

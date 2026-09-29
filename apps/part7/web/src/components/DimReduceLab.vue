@@ -73,12 +73,12 @@ const DOCS5 = [
   { id: 'C', name: '보안 규정 문서들', x: 240, y: 120 },
 ]
 const PAIR_DATA: Record<string, { map: number; real: number; note: string; twist: boolean }> = {
-  'A-B': { map: 3.0, real: 0.9, note: '지도에서도 가깝고 실제로도 가깝습니다 — 이웃 관계는 대체로 믿을 만해요.', twist: false },
+  'A-B': { map: 3.0, real: 0.9, note: '지도에서도 가깝고 실제로도 가깝습니다. 이웃 관계는 대체로 믿을 만해요.', twist: false },
   'B-C': { map: 3.0, real: 0.7, note: '이 쌍도 지도와 실제가 대체로 일치합니다.', twist: false },
   'A-C': {
     map: 6.0,
     real: 0.75,
-    note: '반전! 지도에선 제일 멀어 보이지만, 실제 고차원 거리는 0.75로 A-B(0.90)보다 오히려 가깝습니다 — 클러스터 사이 거리는 지도의 거짓말일 수 있어요.',
+    note: '반전! 지도에선 제일 멀어 보이지만, 실제 고차원 거리는 0.75로 A-B(0.90)보다 오히려 가깝습니다. 클러스터 사이 거리는 지도의 거짓말일 수 있어요.',
     twist: true,
   },
 }
@@ -89,9 +89,9 @@ const pair = computed(() => (pickedPair.value ? { key: pickedPair.value, ...PAIR
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① PCA 축 고르기 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — PCA 되어 보기: 그림자가 가장 넓게 지는 축 찾기</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · PCA 되어 보기: 그림자가 가장 넓게 지는 축 찾기</p>
     <p class="mb-3 text-xs text-slate-500">
-      2차원 점 구름을 1차원(축 하나)으로 요약한다면 — 어느 방향의 축이 정보를 제일 덜 잃을까요?
+      2차원 점 구름을 1차원(축 하나)으로 요약한다면, 어느 방향의 축이 정보를 제일 덜 잃을까요?
       축을 돌리며 <b>투영(그림자)의 퍼짐</b>을 관찰하세요.
     </p>
 
@@ -140,14 +140,14 @@ const pair = computed(() => (pickedPair.value ? { key: pickedPair.value, ...PAIR
     </div>
 
     <p v-if="isBest" class="mt-3 rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">
-      ✅ 약 {{ bestDeg }}° — 점 구름이 가장 길게 늘어선 방향입니다. <b>PCA(주성분 분석)가 하는 일이
+      ✅ 약 {{ bestDeg }}°, 점 구름이 가장 길게 늘어선 방향입니다. <b>PCA(주성분 분석)가 하는 일이
       정확히 이것</b>이에요: 분산(퍼짐)이 최대인 방향을 1축으로, 그다음 방향을 2축으로…
       수백 차원 임베딩을 2D로 그릴 때 "제일 덜 잃는 두 축"을 고르는 원리입니다(1부 8장 재회).
     </p>
 
     <!-- ② 지도의 거짓말 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 지도의 거짓말: 2D 거리 vs 실제 거리</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · 지도의 거짓말: 2D 거리 vs 실제 거리</p>
     <p class="mb-3 text-xs text-slate-500">
       수백 차원의 사내 문서 임베딩을 t-SNE풍 2D 지도로 그렸습니다(미리 준비됨). 클러스터 쌍을 눌러
       <b>지도상 거리</b>와 <b>실제(고차원) 거리</b>를 비교해 보세요.

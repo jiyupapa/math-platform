@@ -12,7 +12,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 핵심 한 줄: **"학습은 안개 낀 산을 내려가는 여행이다 — 보폭·관성·일정표가 도착지를 정한다."**
 
 > **상태: ✅ 완결 (2026-07-12) — 전 12챕터(워밍업 + 1~11장) 공개.**
-> 챕터 구성·회수하는 수학 매핑은 루트 `README.md` "8부 챕터 구성" 표가 정본.
+> 챕터 구성·다시 쓰는 수학 매핑은 루트 `README.md` "8부 챕터 구성" 표가 정본.
 
 ## 공용 컴포넌트 — 모노레포 `packages/ui`
 
@@ -37,7 +37,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
    보폭=학습률(learning rate)·안개 낀 산=손실 지형(loss landscape)·흔들리는 나침반=미니배치
    SGD·관성=모멘텀(momentum)·여행 일정표=학습률 스케줄(lr schedule)·통째로 외움=과적합
    (overfitting)·안전장치=정규화(regularization).
-3. **"회수하는 수학" 연결 필수** — 각 장이 어느 부의 어느 개념을 회수하는지(루트 README 표)
+3. **"다시 쓰는 수학" 연결 필수** — 각 장이 어느 부의 어느 개념을 다시 쓰는지(루트 README 표)
    `ConceptCard` 로 명시: 2장=2부 9장 경사하강, 3장=3부 5·7장(표본·1/√B), 8장=6부 6장 KL 목줄,
    10장=7부 4·5장(고차원·PCA 슬라이스), 6·11장=6부 3장(SFT 설정 직결).
 4. 문제 표준: 본문 미니체크 2~3개 + 챕터 끝 10문제 `QuizSet`(완료 시 진도 처리). 계산형은 `StepQuiz`.

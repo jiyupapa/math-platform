@@ -71,7 +71,7 @@ const dotY = computed(() => yOf(showBits.value))
 
 <template>
   <div class="my-4 rounded-xl border border-slate-200 bg-white p-4">
-    <p class="mb-3 text-sm font-semibold text-slate-700">😲 놀람 게이지 — 확률을 움직여 보세요</p>
+    <p class="mb-3 text-sm font-semibold text-slate-700">😲 놀람 게이지: 확률을 움직여 보세요</p>
 
     <!-- 프리셋 -->
     <div class="mb-3 flex flex-wrap gap-1.5">
@@ -124,7 +124,7 @@ const dotY = computed(() => yOf(showBits.value))
     </div>
     <p class="mt-1 text-xs text-slate-500" style="padding-left: 6.75rem">
       = 반반 질문 약 {{ Math.ceil(showBits) }}번 어치의 정보
-      <template v-if="showP === 1">— 이미 아는 일이라 정보가 0!</template>
+      <template v-if="showP === 1">(이미 아는 일이라 정보가 0!)</template>
     </p>
 
     <!-- I(p) 곡선 -->

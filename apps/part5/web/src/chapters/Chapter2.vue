@@ -21,17 +21,17 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 2</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">2장</p>
     <h1 class="mb-4 text-3xl font-bold">아껴 쓰는 비트 — 압축의 원리</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
-      1장에서 정보를 비트로 재는 자를 만들었죠. 이번엔 그 자로 <b>절약</b>을 해 봅니다 —
+      1장에서 정보를 비트로 재는 자를 만들었죠. 이번엔 그 자로 <b>절약</b>을 해 봅니다.
       같은 메시지를 더 적은 비트로 보내는 기술, 즉 <b>압축</b>입니다.
       zip 파일과 GPT 토큰화가 같은 원리 위에 있다는 걸 보게 될 거예요.
     </p>
 
     <ConceptCard tone="goal" title="이 챕터의 목표">
       <ul class="list-disc space-y-1 pl-5">
-        <li>압축의 제1원리 — <b>자주 나오면 짧게, 드물면 길게</b></li>
+        <li>압축의 제1원리: <b>자주 나오면 짧게, 드물면 길게</b></li>
         <li>구분자 없이도 해독되는 <b>접두어 코드</b>의 규칙을 안다</li>
         <li>평균 코드 길이를 계산하고, <b>이상적 코드 길이 = 놀람</b>임을 본다</li>
         <li>GPT 의 <b>BPE 토큰화가 곧 압축</b>임을 안다 (4부 2장 재회)</li>
@@ -39,7 +39,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <!-- 1. 모스 부호 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">1. 1837년에 이미 알고 있었다 — 모스 부호</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">1. 1837년에 이미 알고 있었다: 모스 부호</h2>
     <ReviewFlag id="ch2-s1" chapter="ch2" label="1. 모스 부호" />
     <p class="leading-relaxed text-slate-700">
       전신 기사들은 글자 하나하나를 짧은 신호(·)와 긴 신호(−)로 보냈습니다.
@@ -47,7 +47,7 @@ function onSetComplete() {
       영어에서 <b>가장 자주 나오는 E 는 "·" 딱 하나</b>, 드물게 나오는 <b>Q 는 "− − · −" 네 개</b>.
     </p>
     <div class="my-4 rounded-xl border border-slate-200 bg-slate-50 p-4 text-center">
-      <p class="font-bold text-slate-800">압축의 제1원리 — 자주 나오면 짧게, 드물면 길게</p>
+      <p class="font-bold text-slate-800">압축의 제1원리: 자주 나오면 짧게, 드물면 길게</p>
       <p class="mt-1 text-sm text-slate-500">이 한 문장이 zip · jpg · mp3 · GPT 토큰화의 공통 조상입니다.</p>
     </div>
 
@@ -56,11 +56,11 @@ function onSetComplete() {
       question="모스 부호에서 E 의 신호가 가장 짧은 이유는?"
       :choices="['영어에서 가장 자주 나오는 글자라서', '알파벳 순서가 빨라서', '발음이 짧아서', '특별한 이유 없음']"
       :answer="0"
-      explanation="자주 나오는 글자에 짧은 코드를 줘야 전체 신호가 짧아집니다 — 압축의 제1원리."
+      explanation="자주 나오는 글자에 짧은 코드를 줘야 전체 신호가 짧아집니다. 압축의 제1원리."
     />
 
     <!-- 2. 고정 길이 코드 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">2. 출발점 — 모두에게 똑같은 길이 주기</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">2. 출발점: 모두에게 똑같은 길이 주기</h2>
     <ReviewFlag id="ch2-s2" chapter="ch2" label="2. 고정 길이 코드" />
     <p class="leading-relaxed text-slate-700">
       글자 A, B, C, D 네 개만 쓰는 세상을 상상합시다. 0과 1로 보내려면 가장 단순한 방법은
@@ -73,7 +73,7 @@ function onSetComplete() {
       <span class="rounded-lg bg-slate-100 px-3 py-1.5">D = <code class="font-mono font-bold">11</code></span>
     </div>
     <p class="leading-relaxed text-slate-700">
-      글자당 정확히 <b>2비트</b>입니다. 왜 2일까요? 1장의 자로 재면 —
+      글자당 정확히 <b>2비트</b>입니다. 왜 2일까요? 1장의 자로 재면,
       후보 4개를 구분하려면 반반 질문 <MathBlock inline expr="\log_2 4 = 2" /> 번이 필요하니까요.
       글자가 8개면 3비트, 256개면 8비트(그래서 1바이트가 8비트!).
       이 방식을 <b>고정 길이 코드</b>라 합니다. 공평하지만… 아직 아낄 줄을 모릅니다.
@@ -102,27 +102,27 @@ function onSetComplete() {
       <span class="rounded-lg bg-indigo-50 px-3 py-1.5">D (1/8) = <code class="font-mono font-bold">111</code></span>
     </div>
     <p class="leading-relaxed text-slate-700">
-      평균을 내 봅시다. 3부에서 배운 <b>기대값</b> 그대로 — 각 길이에 확률을 곱해 더합니다:
+      평균을 내 봅시다. 3부에서 배운 <b>기대값</b> 그대로, 각 길이에 확률을 곱해 더합니다:
     </p>
     <MathBlock expr="\text{평균 길이} = \tfrac{1}{2}\!\times\!1 + \tfrac{1}{4}\!\times\!2 + \tfrac{1}{8}\!\times\!3 + \tfrac{1}{8}\!\times\!3 = 1.75 \text{비트}" />
     <p class="mt-1 leading-relaxed text-slate-700">
       고정 2비트에서 <b>1.75비트로, 12.5% 절약</b>! 1000글자면 250비트를 아낍니다.
     </p>
 
-    <ConceptCard tone="note" title="새 용어 — 접두어 코드 (prefix code)">
+    <ConceptCard tone="note" title="새 용어: 접두어 코드 (prefix code)">
       <p>
-        "코드 길이가 제각각이면 어디서 끊어 읽지?" — 좋은 질문! 위 코드는 구분자 없이
+        "코드 길이가 제각각이면 어디서 끊어 읽지?" 좋은 질문! 위 코드는 구분자 없이
         이어 붙여도 해독이 됩니다. 비결은 <b>어떤 글자의 코드도 다른 글자 코드의
         앞부분(접두어)이 아니게</b> 만든 것.
       </p>
       <ul class="mt-2 list-disc space-y-1 pl-5 text-sm">
-        <li><b>이름</b>: 접두어 코드 (prefix code) — "앞부분 겹침 금지 코드"</li>
+        <li><b>이름</b>: 접두어 코드 (prefix code), 곧 "앞부분 겹침 금지 코드"</li>
         <li>
           <b>해독 요령</b>: 왼쪽부터 읽다가 아는 코드가 완성되는 순간 끊는다.
           예: <code class="rounded bg-slate-100 px-1 font-mono">0 10 0 111</code> → A B A D
         </li>
         <li>
-          A = <code class="font-mono">0</code> 인데 B = <code class="font-mono">01</code> 이면 실격 —
+          A = <code class="font-mono">0</code> 인데 B = <code class="font-mono">01</code> 이면 실격이에요.
           0을 읽고 "A 인가, B 의 시작인가" 구분이 안 되니까요
         </li>
       </ul>
@@ -133,14 +133,14 @@ function onSetComplete() {
       question="A=0, B=10, C=110, D=111 코드에서, 비트열 「10」 을 읽으면 어디서 끊어야 할지 헷갈린다."
       type="truefalse"
       :answer="1"
-      explanation="거짓. 접두어 코드라 헷갈리지 않아요 — 1을 읽으면 아직 미완성, 0이 오는 순간 「10 = B」로 확정됩니다. 다른 코드 중 10으로 시작하는 것이 없거든요."
+      explanation="거짓. 접두어 코드라 헷갈리지 않아요. 1을 읽으면 아직 미완성, 0이 오는 순간 「10 = B」로 확정됩니다. 다른 코드 중 10으로 시작하는 것이 없거든요."
     />
 
     <!-- 4. CodeBuilder -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">4. 코드 공방 — 직접 만들어 보기</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">4. 코드 공방: 직접 만들어 보기</h2>
     <ReviewFlag id="ch2-s4" chapter="ch2" label="4. 코드 공방 (허프만 직관)" />
     <p class="leading-relaxed text-slate-700">
-      "그럼 어떤 분포든 <b>가장 좋은 코드</b>는 어떻게 찾지?" — 1952년 대학원생 허프만이
+      "그럼 어떤 분포든 <b>가장 좋은 코드</b>는 어떻게 찾지?" 1952년 대학원생 허프만이
       숙제로 풀어낸 문제입니다. 요령은 간단해요: <b>가장 드문 두 글자를 묶어서 긴 코드 쪽으로
       보내는 걸 반복</b>하면 끝. 아래 공방이 그 <b>허프만 코드</b>를 실시간으로 만들어 줍니다.
       슬라이더를 움직이며 관찰해 보세요.
@@ -150,14 +150,14 @@ function onSetComplete() {
 
     <ConceptCard tone="tip" title="관찰 포인트 3가지">
       <ul class="list-disc space-y-1 pl-5">
-        <li><b>치우칠수록 절약이 커진다</b> — "극단" 프리셋에서 최대</li>
-        <li><b>균등이면 절약 0</b> — 모두 25%면 2비트씩이 이미 최선</li>
-        <li><b>코드 길이가 놀람을 따라간다</b> — 확률 낮은 글자일수록 긴 코드 (다음 절!)</li>
+        <li><b>치우칠수록 절약이 커진다</b>: "극단" 프리셋에서 최대</li>
+        <li><b>균등이면 절약 0</b>: 모두 25%면 2비트씩이 이미 최선</li>
+        <li><b>코드 길이가 놀람을 따라간다</b>: 확률 낮은 글자일수록 긴 코드 (다음 절!)</li>
       </ul>
     </ConceptCard>
 
     <!-- 5. 코드 길이 = 놀람 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">5. 우연이 아니다 — 이상적 코드 길이 = 놀람</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">5. 우연이 아니다: 이상적 코드 길이 = 놀람</h2>
     <ReviewFlag id="ch2-s5" chapter="ch2" label="5. 이상적 코드 길이 = 놀람" />
     <p class="leading-relaxed text-slate-700">
       3절의 코드를 다시 보세요. A (확률 1/2) 의 코드 길이는 1비트 = <MathBlock inline expr="\log_2 2" />.
@@ -166,16 +166,16 @@ function onSetComplete() {
     </p>
     <MathBlock expr="\text{글자 } x \text{ 의 이상적 코드 길이} = \log_2 \frac{1}{p(x)} = \text{놀람 } I(x)" />
     <p class="mt-1 leading-relaxed text-slate-700">
-      직관은 이렇습니다 — 코드는 사실 <b>스무고개 질문의 기록</b>이에요. "A 인가요?"(반반 질문)에
+      직관은 이렇습니다. 코드는 사실 <b>스무고개 질문의 기록</b>이에요. "A 인가요?"(반반 질문)에
       예면 <code class="rounded bg-slate-100 px-1 font-mono">0</code>, 아니면 다음 질문으로.
       확률 1/8짜리 글자를 확정하려면 반반 질문 3번이 필요하니 코드도 3비트가 되는 거죠.
     </p>
 
-    <ConceptCard tone="warn" title="압축의 한계 — 공짜 점심은 없다">
+    <ConceptCard tone="warn" title="압축의 한계: 공짜 점심은 없다">
       그렇다면 아무리 머리를 굴려도, 글자당 평균 비트를
       <b>평균 놀람</b> <MathBlock inline expr="\textstyle\sum p \cdot \log_2 \frac{1}{p}" /> (여기서
-      <MathBlock inline expr="\textstyle\sum" /> 는 "모든 경우를 <b>다 더하라</b>"는 기호 — 3장에서 정식으로 소개해요) 아래로는
-      줄일 수 없다는 뜻입니다 — 각 글자가 실어 나르는 놀람만큼의 비트는 반드시 필요하니까요.
+      <MathBlock inline expr="\textstyle\sum" /> 는 "모든 경우를 <b>다 더하라</b>"는 기호로, 3장에서 정식으로 소개해요) 아래로는
+      줄일 수 없다는 뜻입니다. 각 글자가 실어 나르는 놀람만큼의 비트는 반드시 필요하니까요.
       섀넌이 증명한 이 <b>넘을 수 없는 바닥</b>에는 이름이 있습니다.
       다음 챕터의 주인공, <b>엔트로피</b>입니다.
     </ConceptCard>
@@ -184,12 +184,12 @@ function onSetComplete() {
       <ul class="list-disc space-y-2 pl-5">
         <li>
           확률이 1/2, 1/4, 1/8 처럼 <b>2의 거듭제곱의 역수</b>면 허프만 코드가 바닥(평균 놀람)에
-          정확히 붙습니다 — 3절 예시의 1.75비트가 그 경우예요.
+          정확히 붙습니다. 3절 예시의 1.75비트가 그 경우예요.
         </li>
         <li>
           확률이 어중간하면(예: 0.6) 이상적 길이가 log₂(1/0.6) ≈ 0.74비트처럼 <b>소수</b>가 되는데,
           코드 길이는 정수만 가능해서 살짝 손해를 봅니다. 여러 글자를 묶어 부호화하거나
-          산술 부호화(arithmetic coding) 같은 기법으로 바닥에 무한히 가까워질 수 있어요 — 이 과정 밖의 이야기!
+          산술 부호화(arithmetic coding) 같은 기법으로 바닥에 무한히 가까워질 수 있어요. 이 과정 밖의 이야기!
         </li>
       </ul>
     </DetailsCard>
@@ -208,11 +208,11 @@ function onSetComplete() {
     <ReviewFlag id="ch2-ai" chapter="ch2" label="🤖 BPE 토큰화 = 압축" />
     <p class="leading-relaxed text-slate-700">
       4부 2장에서 배운 <b>BPE 토큰화</b>를 기억하나요? "자주 붙어 나오는 글자 쌍을 병합해
-      토큰 하나로 만든다"를 반복하는 알고리즘이었죠. 이 챕터를 배운 지금 다시 보면 —
+      토큰 하나로 만든다"를 반복하는 알고리즘이었죠. 이 챕터를 배운 지금 다시 보면,
       그게 바로 <b>압축의 제1원리</b>입니다.
     </p>
 
-    <ConceptCard tone="ai" title="🤖 AI 연결 — 자주 나오면 짧게, 토큰화 편">
+    <ConceptCard tone="ai" title="🤖 AI 연결: 자주 나오면 짧게, 토큰화 편">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <b>BPE = 허프만의 사촌</b>: 허프만은 자주 나오는 글자에 짧은 비트를, BPE 는 자주 나오는
@@ -221,12 +221,12 @@ function onSetComplete() {
         </li>
         <li>
           <b>토큰 수 = 압축된 길이</b>: 같은 뜻이라도 영어보다 한국어가 토큰이 많이 드는 것,
-          API 요금이 토큰 단위인 것 — 전부 "이 텍스트를 몇 칸으로 압축했나"의 이야기입니다.
+          API 요금이 토큰 단위인 것까지 전부 "이 텍스트를 몇 칸으로 압축했나"의 이야기입니다.
         </li>
         <li>
           <b>"압축 = 지능" 담론</b>: 잘 압축하려면 무엇이 자주 나올지 <b>잘 예측</b>해야 합니다.
           거꾸로 잘 예측하는 모델은 훌륭한 압축기가 되죠. "LLM 은 인터넷의 압축 파일"이라는
-          말이 여기서 나옵니다 — 6장에서 이 연결이 완성돼요.
+          말이 여기서 나옵니다. 6장에서 이 연결이 완성돼요.
         </li>
       </ul>
     </ConceptCard>
@@ -245,7 +245,7 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 10문제입니다. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="아껴 쓰는 비트 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="아껴 쓰는 비트: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -267,14 +267,14 @@ function onSetComplete() {
         :choices="['어떤 코드도 다른 코드의 앞부분이면 안 된다', '모든 코드의 길이가 같아야 한다', '코드에 0을 쓰면 안 된다', '글자마다 구분자를 넣어야 한다']"
         :answer="0"
         :hints="['구분자 없이 이어 붙여도 해독되게 하는 규칙이에요.']"
-        explanation="앞부분(접두어) 겹침 금지 — 그래야 왼쪽부터 읽으며 아는 코드가 완성되는 순간 끊을 수 있습니다."
+        explanation="앞부분(접두어) 겹침 금지예요. 그래야 왼쪽부터 읽으며 아는 코드가 완성되는 순간 끊을 수 있습니다."
       />
       <Quiz
         difficulty="easy"
         question="모든 글자가 똑같은 빈도로 나오면, 가변 길이 코드로도 고정 길이보다 아낄 수 없다."
         type="truefalse"
         :answer="0"
-        explanation="참. 코드 공방에서 균등 프리셋의 절약이 0%였죠 — 치우침이 없으면 아낄 거리도 없습니다."
+        explanation="참. 코드 공방에서 균등 프리셋의 절약이 0%였죠. 치우침이 없으면 아낄 거리도 없습니다."
       />
       <!-- 보통 -->
       <StepQuiz
@@ -340,15 +340,15 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 2 완료. 비트를 아끼는 법을 배웠습니다.</p>
+      <p class="font-semibold text-emerald-800">2장 완료. 비트를 아끼는 법을 배웠습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
-        다음은 이 과정의 심장 — 압축의 한계이자 평균 놀람, <b>엔트로피</b>입니다.
+        다음은 이 과정의 핵심, 압축의 한계이자 평균 놀람인 <b>엔트로피</b>입니다.
       </p>
       <RouterLink
         to="/ch/ch3"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        다음 챕터 — 엔트로피 →
+        다음 챕터: 엔트로피 →
       </RouterLink>
     </div>
   </article>

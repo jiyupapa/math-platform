@@ -46,7 +46,7 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 1</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">1장</p>
     <h1 class="mb-4 text-3xl font-bold">좌표와 벡터란 무엇인가</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       선형대수학의 모든 그림은 <b>좌표평면</b> 위에서 시작합니다. 이번 챕터에서는 점이 어디에 있는지
@@ -70,7 +70,7 @@ function onSetComplete() {
     </p>
 
     <!-- anchor-id = 협업 주석 임의 항목 앵커(P0) — 네이밍 정본 {chapter}-{type}-{slug} -->
-    <ConceptCard tone="note" title="새 용어 — 축과 원점" anchor-id="ch1-concept-axes">
+    <ConceptCard tone="note" title="새 용어: 축과 원점" anchor-id="ch1-concept-axes">
       <ul class="list-disc space-y-1 pl-5">
         <li><b>x축 (가로축)</b>: 좌우 방향 기준선. 오른쪽이 +, 왼쪽이 −</li>
         <li><b>y축 (세로축)</b>: 위아래 방향 기준선. 위가 +, 아래가 −</li>
@@ -89,7 +89,7 @@ function onSetComplete() {
       가로로 얼마(x), 세로로 얼마(y) 떨어졌는지가 곧 좌표입니다.
     </p>
 
-    <ConceptCard tone="note" title="새 기호 — 순서쌍 (x, y)">
+    <ConceptCard tone="note" title="새 기호: 순서쌍 (x, y)">
       <p>
         <MathBlock inline expr="(x, y)" /> 처럼 괄호 안에 숫자 두 개를 쉼표로 나열한 것을
         <b>순서쌍</b>이라 합니다.
@@ -107,7 +107,7 @@ function onSetComplete() {
     <VectorCanvas v-model="point" :range="5" :show-arrows="false" />
 
     <ConceptCard tone="tip" title="지금 점의 좌표">
-      현재 점 <b>P</b> 는 <b>({{ p.x }}, {{ p.y }})</b> —
+      현재 점 <b>P</b> 는 <b>({{ p.x }}, {{ p.y }})</b>입니다.
       원점에서 가로로 <b>{{ p.x }}</b>, 세로로 <b>{{ p.y }}</b> 만큼 떨어져 있습니다.
     </ConceptCard>
 
@@ -121,14 +121,14 @@ function onSetComplete() {
     />
 
     <!-- 3. 사분면 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">3. 사분면 — 평면의 네 구역</h2>
-    <ReviewFlag id="ch1-s3" chapter="ch1" label="3. 사분면 — 평면의 네 구역" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">3. 사분면: 평면의 네 구역</h2>
+    <ReviewFlag id="ch1-s3" chapter="ch1" label="3. 사분면: 평면의 네 구역" />
     <p class="leading-relaxed text-slate-700">
       x축과 y축은 평면을 네 칸으로 나눕니다. 이 네 칸을 <b>사분면</b>이라 하고,
       오른쪽 위부터 시계 반대 방향으로 1, 2, 3, 4사분면이라 부릅니다.
     </p>
 
-    <ConceptCard tone="note" title="새 용어 — 사분면(四分面)">
+    <ConceptCard tone="note" title="새 용어: 사분면(四分面)">
       각 사분면은 x, y의 부호로 구분됩니다.
       <ul class="mt-2 list-disc space-y-1 pl-5 text-sm">
         <li><b>1사분면</b>: (+, +) 오른쪽 위</li>
@@ -153,23 +153,23 @@ function onSetComplete() {
     <h2 class="mt-8 mb-2 text-xl font-bold">4. 점에서 벡터로</h2>
     <ReviewFlag id="ch1-s4" chapter="ch1" label="4. 점에서 벡터로" />
     <p class="leading-relaxed text-slate-700">
-      이제 핵심입니다. 원점에서 어떤 점까지 <b>화살표</b>를 그으면, 그것이 바로 <b>벡터</b>입니다.
+      이제 핵심입니다. 원점에서 어떤 점까지 <b>화살표</b>를 그으면, 그 화살표가 바로 <b>벡터</b>입니다.
       점이 "어디에 있나"라면, 벡터는 "원점에서 그쪽으로 얼마만큼 가라"는 <b>이동 지시</b>예요.
       아래 화살표 끝을 끌어보세요.
     </p>
 
     <VectorCanvas v-model="vec" :range="5" />
 
-    <ConceptCard tone="note" title="새 기호 — 벡터 표기와 성분">
+    <ConceptCard tone="note" title="새 기호: 벡터 표기와 성분">
       <ul class="list-disc space-y-2 pl-5">
         <li>
-          <MathBlock inline expr="\vec{a}" /> — 글자 위 화살표는 "이건 벡터"라는 표시 (읽기: "벡터 에이")
+          <MathBlock inline expr="\vec{a}" />: 글자 위 화살표는 "이건 벡터"라는 표시 (읽기: "벡터 에이")
         </li>
         <li>
           벡터는 성분으로 이렇게도 씁니다:
           <MathBlock inline expr="\vec{a} = (4, 3)" /> 또는 세로로
           <MathBlock inline expr="\vec{a} = \begin{pmatrix} 4 \\ 3 \end{pmatrix}" />.
-          가로로 쓰면 <b>(4, 3)</b>, 세로로 위아래 쌓으면 <b>열벡터</b>라 불러요 —
+          가로로 쓰면 <b>(4, 3)</b>, 세로로 위아래 쌓으면 <b>열벡터</b>라 불러요.
           <b>둘은 똑같은 벡터</b>고 쓰는 방향만 다를 뿐이에요. (뒤 챕터에선 세로 형태도 자주 써요)
         </li>
         <li>
@@ -181,7 +181,7 @@ function onSetComplete() {
 
     <ConceptCard tone="tip" title="점과 벡터의 관계">
       점 <MathBlock inline expr="P(4, 3)" /> 와 벡터 <MathBlock inline expr="\vec{a}=(4,3)" /> 는
-      숫자가 똑같습니다. <b>점은 위치, 벡터는 원점에서 그 점으로 가는 화살표</b> — 보는 관점만 다를 뿐이에요.
+      숫자가 똑같습니다. <b>점은 위치, 벡터는 원점에서 그 점으로 가는 화살표</b>로, 보는 관점만 다를 뿐이에요.
     </ConceptCard>
 
     <p class="mt-6 mb-1 text-sm font-semibold text-slate-500">🔎 잠깐 확인!</p>
@@ -217,7 +217,7 @@ function onSetComplete() {
       </ul>
     </ConceptCard>
 
-    <ConceptCard tone="note" title="새 용어 — 특징 벡터 · 임베딩">
+    <ConceptCard tone="note" title="새 용어: 특징 벡터 · 임베딩">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li>
           <b>특징 벡터(feature vector)</b>: 한 대상의 성질들을 숫자로 나열한 벡터.
@@ -244,7 +244,7 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 10문제입니다. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="좌표와 벡터 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="좌표와 벡터: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -338,13 +338,13 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 1 완료. 좌표와 벡터의 기초를 다졌습니다.</p>
+      <p class="font-semibold text-emerald-800">1장 완료. 좌표와 벡터의 기초를 다졌습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">다음은 벡터끼리 더하고 빼는 연산입니다.</p>
       <RouterLink
         to="/ch/ch2"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        다음 챕터 — 벡터 연산 →
+        다음 챕터: 벡터 연산 →
       </RouterLink>
     </div>
   </article>

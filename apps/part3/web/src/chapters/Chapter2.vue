@@ -28,12 +28,12 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 2</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">2장</p>
     <h1 class="mb-4 text-3xl font-bold">흩어짐 재기 — 분산과 표준편차 📏</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       1장에서 데이터의 "가운데"를 잡았습니다. 그런데 가운데가 같아도 데이터의 <b>모양</b>은
       전혀 다를 수 있어요. 이번 챕터는 "평균에서 <b>얼마나 퍼져 있나</b>"를 숫자 하나로 재는
-      도구 — <b>분산</b>과 <b>표준편차</b> — 를 만듭니다. 이 도구는 6장(정규분포)부터
+      도구인 <b>분산</b>과 <b>표준편차</b>를 만듭니다. 이 도구는 6장(정규분포)부터
       끝까지 계속 쓰이는 통계의 기둥이에요.
     </p>
 
@@ -50,7 +50,7 @@ function onSetComplete() {
     <ReviewFlag id="ch2-s1" chapter="ch2" label="1. 평균이 같으면 같은 데이터일까?" />
     <p class="leading-relaxed text-slate-700">
       두 반의 시험 점수입니다. A반은 [68, 69, 70, 71, 72], B반은 [40, 55, 70, 85, 100].
-      <b>평균은 둘 다 정확히 70점</b>이에요. 하지만 그래프를 보면 완전히 다른 반이죠 —
+      <b>평균은 둘 다 정확히 70점</b>이에요. 하지만 그래프를 보면 완전히 다른 반이죠.
       A반은 모두 비슷비슷, B반은 최상위권부터 최하위권까지 들쭉날쭉합니다.
     </p>
 
@@ -71,16 +71,16 @@ function onSetComplete() {
     />
 
     <!-- 2. 편차 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">2. 편차 — 평균에서 얼마나 떨어졌나</h2>
-    <ReviewFlag id="ch2-s2" chapter="ch2" label="2. 편차 — 평균에서 얼마나 떨어졌나" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">2. 편차: 평균에서 얼마나 떨어졌나</h2>
+    <ReviewFlag id="ch2-s2" chapter="ch2" label="2. 편차: 평균에서 얼마나 떨어졌나" />
     <p class="leading-relaxed text-slate-700">
       흩어짐을 재는 첫 재료는 <b>각 값이 평균에서 얼마나 떨어져 있는지</b>입니다.
       B반(평균 70)의 편차를 구해 보면: 40−70=<b>−30</b>, 55−70=<b>−15</b>, 70−70=<b>0</b>,
       85−70=<b>+15</b>, 100−70=<b>+30</b>.
     </p>
 
-    <ConceptCard tone="note" title="새 용어 — 편차">
-      <b>편차(deviation)</b> = 값 − 평균. 부호가 방향을 알려줍니다 —
+    <ConceptCard tone="note" title="새 용어: 편차">
+      <b>편차(deviation)</b> = 값 − 평균. 부호가 방향을 알려줍니다.
       <b>+</b>는 평균보다 위, <b>−</b>는 평균보다 아래. 숫자의 크기가 떨어진 거리예요.
     </ConceptCard>
 
@@ -89,15 +89,15 @@ function onSetComplete() {
     </p>
     <MathBlock expr="(-30) + (-15) + 0 + 15 + 30 = 0" />
 
-    <ConceptCard tone="warn" title="함정 — 편차의 합은 언제나 0">
+    <ConceptCard tone="warn" title="함정: 편차의 합은 언제나 0">
       +편차와 −편차가 정확히 상쇄되어, <b>어떤 데이터든 편차의 합(그리고 평균)은 항상 0</b>입니다.
-      평균이 애초에 "무게중심"이었으니 당연한 결과죠. 흩어짐을 재려면 <b>부호를 없애야</b> 합니다 —
+      평균이 애초에 "무게중심"이었으니 당연한 결과죠. 흩어짐을 재려면 <b>부호를 없애야</b> 합니다.
       수학이 고른 방법은 <b>제곱</b>이에요.
     </ConceptCard>
 
     <!-- 3. 분산 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">3. 제곱해서 평균 내기 — 분산</h2>
-    <ReviewFlag id="ch2-s3" chapter="ch2" label="3. 제곱해서 평균 내기 — 분산" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">3. 제곱해서 평균 내기: 분산</h2>
+    <ReviewFlag id="ch2-s3" chapter="ch2" label="3. 제곱해서 평균 내기: 분산" />
     <p class="leading-relaxed text-slate-700">
       편차를 <b>제곱</b>하면 −30 도 +30 도 똑같이 900 이 됩니다(부호 소멸!).
       제곱한 편차들의 <b>평균</b>이 바로 <b>분산</b>이에요. B반으로 계산하면:
@@ -105,16 +105,16 @@ function onSetComplete() {
     <MathBlock expr="\text{분산} = \dfrac{(-30)^2 + (-15)^2 + 0^2 + 15^2 + 30^2}{5} = \dfrac{900 + 225 + 0 + 225 + 900}{5} = \dfrac{2250}{5} = 450" />
     <p class="leading-relaxed text-slate-700">
       같은 방법으로 A반은 편차가 [−2, −1, 0, 1, 2] 이니 분산 = (4+1+0+1+4) ÷ 5 = <b>2</b>.
-      450 대 2 — 흩어짐의 차이가 드디어 숫자로 잡혔습니다!
+      450 대 2. 흩어짐의 차이가 드디어 숫자로 잡혔습니다!
     </p>
 
-    <ConceptCard tone="note" title="새 기호 — 분산 공식 읽기">
+    <ConceptCard tone="note" title="새 기호: 분산 공식 읽기">
       <MathBlock expr="\sigma^2 = \dfrac{1}{n}\sum_{i=1}^{n}(x_i - \bar{x})^2" />
       <ul class="list-disc space-y-1 pl-5 text-sm">
-        <li><MathBlock inline expr="\sigma^2" /> — "시그마 제곱". <b>분산(variance)</b>의 기호입니다.</li>
-        <li><MathBlock inline expr="(x_i - \bar{x})" /> — <MathBlock inline expr="i" />번째 값의 <b>편차</b> (값 − 평균).</li>
-        <li><MathBlock inline expr="(\cdots)^2" /> — 편차를 <b>제곱</b>해 부호를 없앰.</li>
-        <li><MathBlock inline expr="\frac{1}{n}\sum" /> — 전부 더해 <MathBlock inline expr="n" />으로 나눔 = <b>평균</b>.</li>
+        <li><MathBlock inline expr="\sigma^2" />: "시그마 제곱". <b>분산(variance)</b>의 기호입니다.</li>
+        <li><MathBlock inline expr="(x_i - \bar{x})" />: <MathBlock inline expr="i" />번째 값의 <b>편차</b> (값 − 평균).</li>
+        <li><MathBlock inline expr="(\cdots)^2" />: 편차를 <b>제곱</b>해 부호를 없앰.</li>
+        <li><MathBlock inline expr="\frac{1}{n}\sum" />: 전부 더해 <MathBlock inline expr="n" />으로 나눔 = <b>평균</b>.</li>
         <li>말로 풀면: <b>"편차 제곱의 평균"</b>. 그게 전부예요.</li>
       </ul>
     </ConceptCard>
@@ -129,26 +129,26 @@ function onSetComplete() {
     />
 
     <!-- 4. 표준편차 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">4. 단위 되돌리기 — 표준편차</h2>
-    <ReviewFlag id="ch2-s4" chapter="ch2" label="4. 단위 되돌리기 — 표준편차" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">4. 단위 되돌리기: 표준편차</h2>
+    <ReviewFlag id="ch2-s4" chapter="ch2" label="4. 단위 되돌리기: 표준편차" />
     <p class="leading-relaxed text-slate-700">
-      분산 450 에는 어색한 점이 하나 있어요. 편차를 제곱했기 때문에 단위도 제곱 —
+      분산 450 에는 어색한 점이 하나 있어요. 편차를 제곱했기 때문에 단위도 제곱이 돼서,
       점수 데이터라면 <b>"점²"</b>이라는 이상한 단위가 됩니다. 그래서 마지막에
       <b>제곱근(√, 루트)</b>을 씌워 원래 단위로 되돌린 것이 <b>표준편차</b>입니다:
     </p>
     <MathBlock expr="\sigma = \sqrt{\text{분산}} \qquad \text{B반: } \sigma = \sqrt{450} \approx 21.2\text{점}, \quad \text{A반: } \sigma = \sqrt{2} \approx 1.4\text{점}" />
 
-    <ConceptCard tone="note" title="새 기호 — σ (표준편차)">
-      <MathBlock inline expr="\sigma" /> &nbsp;<b>읽는 법</b>: "시그마" (소문자 — 대문자
+    <ConceptCard tone="note" title="새 기호: σ (표준편차)">
+      <MathBlock inline expr="\sigma" /> &nbsp;<b>읽는 법</b>: "시그마" (소문자예요. 대문자
       <MathBlock inline expr="\Sigma" /> 는 "다 더하라"였고, 소문자는 표준편차입니다) ·
-      <b>뜻</b>: <b>표준편차(standard deviation)</b> = √분산. 해석은 간단해요 —
+      <b>뜻</b>: <b>표준편차(standard deviation)</b> = √분산. 해석은 간단해요.
       <b>"이 데이터는 평균에서 대략 σ 만큼 떨어져 있다"</b>. B반은 "평균 70점, 대략 ±21점씩
       흩어짐", A반은 "평균 70점, 대략 ±1.4점 안에 옹기종기".
     </ConceptCard>
 
     <!-- 5. 인터랙티브 -->
     <h2 class="mt-8 mb-2 text-xl font-bold">5. 직접 움직여 보기</h2>
-    <ReviewFlag id="ch2-s5" chapter="ch2" label="5. 직접 움직여 보기 — 편차와 σ" />
+    <ReviewFlag id="ch2-s5" chapter="ch2" label="5. 직접 움직여 보기: 편차와 σ" />
     <p class="leading-relaxed text-slate-700">
       점을 끌어서 흩어 보세요. 편차 막대(초록 = +, 분홍 = −)가 길어질수록 분산·표준편차가
       커집니다. 몇 가지 실험을 해보세요: ① 모든 점을 한곳에 모으면 σ 는? ② 편차 합은
@@ -171,8 +171,8 @@ function onSetComplete() {
     />
 
     <!-- 6. z점수 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">6. z점수 — 다른 시험끼리 공평하게 비교하기</h2>
-    <ReviewFlag id="ch2-s6" chapter="ch2" label="6. z점수 — 공평한 비교" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">6. z점수: 다른 시험끼리 공평하게 비교하기</h2>
+    <ReviewFlag id="ch2-s6" chapter="ch2" label="6. z점수: 공평한 비교" />
     <p class="leading-relaxed text-slate-700">
       수학 시험에서 70점(반 평균 60, σ 10), 영어 시험에서 80점(반 평균 75, σ 5)을 받았어요.
       점수만 보면 영어를 더 잘 본 것 같지만... 공평한 비교는 <b>"평균에서 표준편차 몇 개만큼
@@ -183,12 +183,12 @@ function onSetComplete() {
       둘 다 z = 1, 즉 <b>"평균보다 표준편차 1개만큼 위"</b>로 완전히 같은 성취였네요!
     </p>
 
-    <ConceptCard tone="note" title="새 용어 — z점수 (표준화)">
+    <ConceptCard tone="note" title="새 용어: z점수 (표준화)">
       <MathBlock expr="z = \dfrac{x - \bar{x}}{\sigma}" />
       <b>z점수(z-score)</b>: 값에서 평균을 빼고 표준편차로 나눈 것. "평균에서 σ 몇 개만큼
       떨어졌나"를 나타내는 <b>단위 없는 숫자</b>라, 점수·키·몸무게처럼 단위와 스케일이 다른
       값들끼리도 비교할 수 있어요. 이렇게 바꾸는 과정을 <b>표준화(standardization)</b>라고
-      합니다 — 6장 정규분포에서 주인공으로 다시 만나요.
+      합니다. 6장 정규분포에서 주인공으로 다시 만나요.
     </ConceptCard>
 
     <p class="mt-6 mb-1 text-sm font-semibold text-slate-500">🔎 잠깐 확인!</p>
@@ -197,14 +197,14 @@ function onSetComplete() {
       type="numeric"
       :answer="2"
       :hints="['z = (값 − 평균) ÷ σ.', '(90 − 80) ÷ 5 = ?']"
-      explanation="(90 − 80) ÷ 5 = 2. 평균보다 표준편차 2개만큼 위 — 꽤 상위권이라는 뜻입니다."
+      explanation="(90 − 80) ÷ 5 = 2. 평균보다 표준편차 2개만큼 위, 곧 꽤 상위권이라는 뜻입니다."
     />
 
     <!-- AI 연결 -->
     <h2 class="mt-10 mb-2 text-xl font-bold">🤖 표준화가 AI 학습을 안정시킨다</h2>
     <ReviewFlag id="ch2-ai" chapter="ch2" label="🤖 표준화가 AI 학습을 안정시킨다" />
     <p class="leading-relaxed text-slate-700">
-      AI 모델에 들어가는 입력 데이터는 스케일이 제각각입니다 — 키는 150~190(cm), 연봉은
+      AI 모델에 들어가는 입력 데이터는 스케일이 제각각입니다. 키는 150~190(cm), 연봉은
       30,000,000~100,000,000(원). 이대로 학습시키면 연봉처럼 <b>숫자가 큰 특성이 계산을
       독점</b>해서 학습이 뒤뚱거려요. 그래서 실무에서는 모든 특성을 <b>z점수로 표준화</b>해
       "평균 0, 표준편차 1" 로 맞춘 뒤 학습시킵니다. 이걸 <b>특성 스케일링(feature scaling)</b>
@@ -213,7 +213,7 @@ function onSetComplete() {
 
     <ConceptCard tone="ai" title="분산·표준편차 → AI">
       <ul class="list-disc space-y-2 pl-5">
-        <li><b>표준화(z점수)</b>는 데이터 전처리의 기본기 — 2부에서 다루는 경사하강법(손실이
+        <li><b>표준화(z점수)</b>는 데이터 전처리의 기본기예요. 2부에서 다루는 경사하강법(손실이
           줄어드는 방향으로 조금씩 이동하는 학습법)이
           울퉁불퉁하지 않은 매끈한 골짜기를 내려가게 도와줍니다.</li>
         <li><b>분산 = 불확실성의 언어</b>. 모델 예측이 얼마나 오락가락하는지, 데이터가 얼마나
@@ -227,7 +227,7 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 · 단계별 계산 10문제입니다. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="분산과 표준편차 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="분산과 표준편차: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -323,7 +323,7 @@ function onSetComplete() {
           { lhs: 'z_{\\text{영어}} = (78 - 70) \\div 4', answer: 2 },
         ]"
         :hints="['각각 z = (점수 − 평균) ÷ σ 를 계산하세요.', '점수 자체는 수학(85)이 높지만…']"
-        explanation="수학 z = 1.5, 영어 z = 2. 점수는 낮아도 영어(z=2)가 상대적으로 훨씬 잘 본 시험입니다 — 이게 표준화의 힘!"
+        explanation="수학 z = 1.5, 영어 z = 2. 점수는 낮아도 영어(z=2)가 상대적으로 훨씬 잘 본 시험입니다. 이게 표준화의 힘!"
       />
     </QuizSet>
 
@@ -339,15 +339,15 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 2 완료. 이제 데이터의 '가운데'와 '퍼짐'을 모두 잴 수 있습니다.</p>
+      <p class="font-semibold text-emerald-800">2장 완료. 이제 데이터의 '가운데'와 '퍼짐'을 모두 잴 수 있습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
-        다음은 무대를 옮겨 <b>확률의 기초</b> — 불확실한 세계를 숫자로 다루는 법을 배웁니다.
+        다음은 무대를 옮겨 <b>확률의 기초</b>, 곧 불확실한 세계를 숫자로 다루는 법을 배웁니다.
       </p>
       <RouterLink
         to="/ch/ch3"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        다음 챕터 — 확률의 기초 →
+        다음 챕터: 확률의 기초 →
       </RouterLink>
     </div>
   </article>

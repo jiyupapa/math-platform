@@ -239,7 +239,7 @@ const fmt = (v: number, d = 1) => Number(v.toFixed(d)).toString()
     </div>
 
     <p class="mt-2 px-1 text-xs leading-relaxed text-slate-500">
-      빨간 점선 = <b>잔차</b>(실제 − 내 직선의 예측). SSE = 잔차 제곱의 합 — 슬라이더로 SSE 를
+      빨간 점선 = <b>잔차</b>(실제 − 내 직선의 예측). SSE = 잔차 제곱의 합. 슬라이더로 SSE 를
       최대한 줄여본 뒤 <b>최적 직선</b>과 비교해 보세요. 점을 끌어 옮기거나 빈 곳을 눌러
       점을 추가하면(최대 15개) 직선과 r 이 실시간으로 다시 계산됩니다.
     </p>

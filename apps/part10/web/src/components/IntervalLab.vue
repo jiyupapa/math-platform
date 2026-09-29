@@ -69,9 +69,9 @@ const lbRows = computed(() =>
 const lbVerdict = computed(() => {
   const r = lbRows.value
   const sep = (i: number) => r[i].s - r[i].h > r[i + 1].s + r[i + 1].h
-  if (!sep(0) && !sep(1) && !sep(2)) return '이 문항 수로는 어느 순위도 확정할 수 없습니다 — 전부 소음 범위 안.'
-  if (!sep(0) && sep(1) && sep(2)) return '3·4위는 갈렸지만 0.6점 차 1·2위는 여전히 겹칩니다 — 10,000문항으로도!'
-  return '구간이 갈린 쌍만 순위를 말할 수 있습니다 — 겹친 쌍은 판정 보류(정식 도구는 7장).'
+  if (!sep(0) && !sep(1) && !sep(2)) return '이 문항 수로는 어느 순위도 확정할 수 없습니다. 전부 소음 범위 안.'
+  if (!sep(0) && sep(1) && sep(2)) return '3·4위는 갈렸지만 0.6점 차 1·2위는 여전히 겹칩니다. 10,000문항으로도!'
+  return '구간이 갈린 쌍만 순위를 말할 수 있습니다. 겹친 쌍은 판정 보류(정식 도구는 7장).'
 })
 const lx = (v: number) => 90 + ((v - 0.6) / 0.16) * 380
 </script>
@@ -79,7 +79,7 @@ const lx = (v: number) => 90 + ((v - 0.6) / 0.16) * 380
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 계산기 -->
-    <p class="mb-1 text-sm font-semibold text-slate-500">① 오차범위 계산기 — ± = 1.96 × √( p̂(1−p̂) / n )</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">① 오차범위 계산기: ± = 1.96 × √( p̂(1−p̂) / n )</p>
     <div class="mb-2 flex flex-wrap items-center gap-1.5">
       <span class="text-xs text-slate-500">문항 수 n:</span>
       <button
@@ -102,13 +102,13 @@ const lx = (v: number) => 90 + ((v - 0.6) / 0.16) * 380
         <span class="ml-2 text-xs text-slate-500">→ [{{ (phatPct - hw).toFixed(1) }}, {{ (phatPct + hw).toFixed(1) }}]</span>
       </div>
       <span v-if="isPollTwin" class="rounded-lg bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-800">
-        📺 여론조사의 그 문장 — "n=1,004명, 95% 신뢰수준, ±3.1%p"와 같은 공식!
+        📺 여론조사의 그 문장("n=1,004명, 95% 신뢰수준, ±3.1%p")과 같은 공식!
       </span>
       <span v-else class="text-xs text-slate-500">어림: ± ≈ 98/√n %p (p̂=50% 기준) = {{ (98 / Math.sqrt(n)).toFixed(1) }}%p</span>
     </div>
 
     <!-- ② 참값 담기 -->
-    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">② "95%"의 진짜 뜻 — 참 실력 70%(신의 시점)로 시험 100회, 구간이 참값을 담나</p>
+    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">② "95%"의 진짜 뜻: 참 실력 70%(신의 시점)로 시험 100회, 구간이 참값을 담나</p>
     <div class="mb-2 flex items-center gap-1.5 text-xs">
       <span class="text-slate-500">시험 문항 수:</span>
       <button
@@ -139,13 +139,13 @@ const lx = (v: number) => 90 + ((v - 0.6) / 0.16) * 380
       </g>
     </svg>
     <p class="mt-2 rounded-md bg-indigo-50 px-3 py-2 text-sm text-indigo-900">
-      100번 중 참값을 놓친 구간(빨강) = <b>{{ missCount }}회</b> — 이론값은 약 5회.
+      100번 중 참값을 놓친 구간(빨강) = <b>{{ missCount }}회</b>. 이론값은 약 5회.
       "95% 신뢰"란 <b>이 절차의 명중률</b>이지, 특정 구간 하나가 맞을 확률이 아닙니다.
-      (100문항 2회, 1,000문항 7회 — 놓침 횟수 자체도 표본이라 출렁여요. 워밍업의 교훈!)
+      (100문항 2회, 1,000문항 7회. 놓침 횟수 자체도 표본이라 출렁여요. 워밍업의 교훈!)
     </p>
 
     <!-- ③ 리더보드 밴드 -->
-    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">③ 리더보드에 밴드 씌우기 — 위 ①의 문항 수(n = {{ n.toLocaleString() }})가 그대로 적용됩니다</p>
+    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">③ 리더보드에 밴드 씌우기: 위 ①의 문항 수(n = {{ n.toLocaleString() }})가 그대로 적용됩니다</p>
     <svg viewBox="0 0 560 130" class="w-full rounded-lg bg-slate-50 ring-1 ring-slate-200">
       <g v-for="(m, i) in lbRows" :key="m.name">
         <text x="8" :y="20 + i * 28" class="fill-slate-600" font-size="11" font-weight="bold">{{ m.name }}</text>

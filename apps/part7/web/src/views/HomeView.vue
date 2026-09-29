@@ -11,10 +11,10 @@ const sampleReady = availableChapters.some((c) => c.slug === 'sample')
 
 <template>
   <div>
-    <p class="mb-2 text-sm font-medium text-indigo-600">수포자를 위한 임베딩 기하학 — 시리즈 7부 (실용 확장)</p>
+    <p class="mb-2 text-sm font-medium text-indigo-600">수포자를 위한 임베딩 기하학 · 시리즈 7부 (실용 확장)</p>
     <h1 class="mb-3 text-3xl font-bold">AI는 어떻게 "비슷한 문서"를 찾아낼까</h1>
     <p class="mb-4 leading-relaxed text-slate-600">
-      "AI가 우리 회사 문서를 아는 것처럼 답한다" — 그 기능(RAG)의 심장은 놀랍게도
+      "AI가 우리 회사 문서를 아는 것처럼 답한다." 그 기능(RAG)의 핵심은 놀랍게도
       <b>가까움을 계산하는 기하학</b>입니다. 이 과정은 1부에서 배운 <b>내적</b> 하나에서 출발해,
       코사인 유사도 → 고차원 공간 → 벡터 DB → <b>사내 FAQ 검색봇 조립</b>까지 갑니다.
       핵심 한 줄: <b>"의미는 위치다."</b>
@@ -25,14 +25,14 @@ const sampleReady = availableChapters.some((c) => c.slug === 'sample')
       <p class="font-medium text-amber-900">🚧 7부는 지금 만드는 중입니다</p>
       <p class="mt-1 text-sm text-amber-700">
         아래 목차는 확정된 로드맵입니다. 챕터가 공개되면 (예정) 표시가 사라지고 바로 학습할 수 있어요.
-        선수 지식은 <b>1부 전반(특히 2장 내적)</b>뿐 — 시리즈에서 진입 장벽이 가장 낮은 실용 트랙입니다.
+        선수 지식은 <b>1부 전반(특히 2장 내적)</b>뿐이라, 시리즈에서 진입 장벽이 가장 낮은 실용 트랙입니다.
       </p>
       <RouterLink
         v-if="sampleReady && !progress.isDone('sample')"
         to="/ch/sample"
         class="mt-4 block rounded-lg bg-indigo-600 px-4 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-indigo-500"
       >
-        🚀 워밍업은 공개됐어요 — 비슷한 문장 찾기 체험하기 →
+        🚀 워밍업은 공개됐어요. 비슷한 문장 찾기 체험하기 →
       </RouterLink>
     </div>
     <div v-else class="mb-8 rounded-xl border border-indigo-100 bg-indigo-50 p-5">
@@ -55,7 +55,7 @@ const sampleReady = availableChapters.some((c) => c.slug === 'sample')
           🚀 처음이신가요? 워밍업(비슷한 문장 찾기)부터 시작하세요 →
         </RouterLink>
         <p class="mt-2 text-center text-xs text-indigo-600">
-          1부 전반(벡터·내적)만 알면 충분합니다 — 실용 트랙이라 언제든 진입할 수 있어요.
+          1부 전반(벡터·내적)만 알면 충분합니다. 실용 트랙이라 언제든 진입할 수 있어요.
         </p>
       </template>
     </div>

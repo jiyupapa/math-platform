@@ -21,7 +21,7 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 3 · 임베딩</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">3장 · 임베딩</p>
     <h1 class="mb-4 text-3xl font-bold">임베딩 — 단어를 "의미 좌표"로</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       앞 챕터에서 토큰은 <b>번호(ID)</b>를 받았습니다. 그런데 번호 <b>#1000</b>과 <b>#1001</b>이
@@ -41,7 +41,7 @@ function onSetComplete() {
     </h2>
     <p class="leading-relaxed text-slate-700">
       임베딩(embedding)은 각 토큰에 <b>숫자 여러 개로 된 좌표</b>를 붙입니다. 이 좌표를
-      <b>벡터(vector)</b>라고 불러요. 핵심 규칙은 단 하나 —
+      <b>벡터(vector)</b>라고 불러요. 핵심 규칙은 단 하나:
       <b>뜻이 비슷하면 좌표도 가깝게</b> 놓습니다. 아래 지도에서 점 두 개를 눌러 거리를 재보세요.
     </p>
 
@@ -49,10 +49,10 @@ function onSetComplete() {
 
     <ConceptCard tone="note" title="새 용어 세 개">
       <ul class="list-disc space-y-1 pl-5 text-sm">
-        <li><b>임베딩(embedding)</b> — 토큰을 <b>의미가 담긴 숫자 벡터(좌표)</b>로 바꾸는 것(또는 그 벡터).</li>
-        <li><b>벡터(vector)</b> — <b>숫자 여러 개를 늘어놓은 것</b>. 예: <MathBlock inline expr="(-3.0,\ 2.6)" /> 은
+        <li><b>임베딩(embedding)</b>: 토큰을 <b>의미가 담긴 숫자 벡터(좌표)</b>로 바꾸는 것(또는 그 벡터).</li>
+        <li><b>벡터(vector)</b>: <b>숫자 여러 개를 늘어놓은 것</b>. 예: <MathBlock inline expr="(-3.0,\ 2.6)" /> 은
           평면 위 한 점(좌표)입니다.</li>
-        <li><b>차원(dimension)</b> — 벡터에 든 <b>숫자의 개수</b>. 위 지도는 숫자 2개라 <b>2차원</b>.
+        <li><b>차원(dimension)</b>: 벡터에 든 <b>숫자의 개수</b>. 위 지도는 숫자 2개라 <b>2차원</b>.
           (진짜 LLM 은 보통 <b>수백~수천 차원</b>)</li>
       </ul>
     </ConceptCard>
@@ -67,7 +67,7 @@ function onSetComplete() {
 
     <!-- ===== 2. 거리 = 비슷함 ===== -->
     <h2 class="mt-8 mb-2 text-xl font-bold">
-      2. 가까울수록 비슷하다 — 거리로 재기
+      2. 가까울수록 비슷하다. 거리로 재기
       <ReviewFlag id="ch3-s2" chapter="ch3" label="2. 거리로 비슷함 재기" />
     </h2>
     <p class="leading-relaxed text-slate-700">
@@ -77,10 +77,10 @@ function onSetComplete() {
     </p>
     <MathBlock expr="\text{거리} = \sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2}" />
     <p class="mt-1 text-sm text-slate-500">
-      두 점의 <b>x 차이</b>와 <b>y 차이</b>를 각각 제곱해 더한 뒤 루트 — 직각삼각형의 빗변 길이와 같아요.
+      두 점의 <b>x 차이</b>와 <b>y 차이</b>를 각각 제곱해 더한 뒤 루트를 씌운 값으로, 직각삼각형의 빗변 길이와 같아요.
     </p>
 
-    <ConceptCard tone="note" title="새 기호 풀이 — 처음 보는 기호 세 개">
+    <ConceptCard tone="note" title="새 기호 풀이: 처음 보는 기호 세 개">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <MathBlock inline expr="\sqrt{\;}" /> &nbsp;
@@ -118,7 +118,7 @@ function onSetComplete() {
     />
 
     <!-- ===== 심화: 임베딩 산수 ===== -->
-    <DetailsCard title="➕ 더 깊이 알아보기 — 임베딩의 마법 같은 산수">
+    <DetailsCard title="➕ 더 깊이 알아보기: 임베딩의 마법 같은 산수">
       <p class="mb-2">
         임베딩이 뜻을 <b>방향</b>으로도 담는다는 유명한 예가 있습니다:
       </p>
@@ -180,7 +180,7 @@ function onSetComplete() {
         </li>
       </ul>
       <p class="mt-2 text-sm text-violet-900/80">
-        회수하는 수학 — 벡터·거리·내적은 <b><PartLink :part="1" ch="ch2">1부 2장</PartLink></b>에서
+        다시 쓰는 수학: 벡터·거리·내적은 <b><PartLink :part="1" ch="ch2">1부 2장</PartLink></b>에서
         쌓은 그 기초입니다.
       </p>
       <p class="mt-2 text-sm text-violet-900/80">
@@ -194,7 +194,7 @@ function onSetComplete() {
       <b>10문제를 모두 맞히면</b> 이 챕터가 완료됩니다. 거리 계산은 위 공식(피타고라스)을 쓰세요.
     </p>
 
-    <QuizSet title="임베딩 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="임베딩: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -259,7 +259,7 @@ function onSetComplete() {
         question="임베딩 좌표(값)는 어떻게 정해질까요?"
         :choices="[
           '사람이 단어마다 손으로 입력한다',
-          '수많은 문장 데이터로부터 학습된다',
+          '수많은 문장 데이터에서 학습된다',
           '사전 순서대로 자동으로 매겨진다',
           '항상 무작위로 고정된다',
         ]"
@@ -298,7 +298,7 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 3 완료 — 단어가 의미 좌표가 됐습니다</p>
+      <p class="font-semibold text-emerald-800">3장 완료! 단어가 의미 좌표가 됐습니다</p>
       <p class="mt-1 text-sm text-emerald-700">
         이제 각 토큰이 <b>의미 벡터</b>를 가집니다. 다음 챕터(ch4 위치 인코딩)에서
         <b>순서 정보</b>를 더해요. 대응 노트북 <code>notebooks/ch03_embedding.ipynb</code> 도 함께!

@@ -56,7 +56,7 @@ function days(v: number): string {
 
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
-    <p class="mb-1 text-sm font-semibold text-slate-500">① 재료 고르기 — 프리셋을 누르거나 다이얼을 직접 돌려 보세요</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">① 재료 고르기: 프리셋을 누르거나 다이얼을 직접 돌려 보세요</p>
     <div class="mb-3 flex flex-wrap gap-1.5">
       <button
         v-for="p in PRESETS"
@@ -74,22 +74,22 @@ function days(v: number): string {
     <div class="space-y-3 rounded-lg bg-slate-50 p-4">
       <div>
         <div class="mb-1 flex items-baseline justify-between text-sm">
-          <span class="font-semibold text-indigo-800">파라미터 N <span class="font-normal text-slate-500">— 모델의 몸집</span></span>
+          <span class="font-semibold text-indigo-800">파라미터 N <span class="font-normal text-slate-500">(모델의 몸집)</span></span>
           <span class="font-mono font-bold text-slate-800">{{ param(N) }} <span class="text-xs font-normal text-slate-500">= {{ big(N) }} 개</span></span>
         </div>
         <input v-model.number="nIdx" type="range" :min="0" :max="N_STEPS.length - 1" step="1" class="w-full accent-indigo-600" />
       </div>
       <div>
         <div class="mb-1 flex items-baseline justify-between text-sm">
-          <span class="font-semibold text-emerald-800">데이터 D <span class="font-normal text-slate-500">— 먹인 토큰 수</span></span>
+          <span class="font-semibold text-emerald-800">데이터 D <span class="font-normal text-slate-500">(먹인 토큰 수)</span></span>
           <span class="font-mono font-bold text-slate-800">{{ tokens(D) }} <span class="text-xs font-normal text-slate-500">= {{ big(D) }} 토큰</span></span>
         </div>
         <input v-model.number="dIdx" type="range" :min="0" :max="D_STEPS.length - 1" step="1" class="w-full accent-emerald-600" />
       </div>
-      <p class="text-xs text-slate-500">다이얼 눈금이 10배씩 뛰는 것에 주목 — 이 "곱의 세계"가 2장의 주인공입니다.</p>
+      <p class="text-xs text-slate-500">다이얼 눈금이 10배씩 뛰는 것에 주목하세요. 이 "곱의 세계"가 2장의 주인공입니다.</p>
     </div>
 
-    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">② 훈련 예산 계산서 — 컴퓨트 C ≈ 6 × N × D</p>
+    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">② 훈련 예산 계산서: 컴퓨트 C ≈ 6 × N × D</p>
     <div class="rounded-lg bg-slate-50 p-4">
       <div class="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-sm text-slate-700">
         <span>C ≈ 6 ×</span>
@@ -115,21 +115,21 @@ function days(v: number): string {
       </div>
       <p class="mt-2 text-sm text-slate-600">
         <template v-if="gpuDays >= 3652">
-          🏭 GPU 1장으론 10년 이상 — <b>이래서 대형 모델 훈련은 수천 장짜리 공장 일</b>입니다.
+          🏭 GPU 1장으론 10년 이상. <b>이래서 대형 모델 훈련은 수천 장짜리 공장 일</b>입니다.
         </template>
         <template v-else-if="gpuDays >= 365">
-          🏢 1장으론 1년 이상 — 수백 장을 묶어야 현실적인 기간이 됩니다.
+          🏢 1장으론 1년 이상. 수백 장을 묶어야 현실적인 기간이 됩니다.
         </template>
         <template v-else-if="gpuDays >= 30">
-          🖥️ 1장으로 몇 달 — 연구실 규모의 훈련입니다.
+          🖥️ 1장으로 몇 달. 연구실 규모의 훈련입니다.
         </template>
-        <template v-else>💻 1장으로 며칠 — 개인·소규모로도 닿는 규모네요.</template>
+        <template v-else>💻 1장으로 며칠. 개인·소규모로도 닿는 규모네요.</template>
       </p>
     </div>
 
     <p class="mt-3 rounded-md bg-indigo-50 px-3 py-2 text-sm text-indigo-900">
-      💡 N을 한 칸(≈2배) 올리고 D도 한 칸 올려 보세요 — C는 <b>곱</b>이라 둘 다 2배면 <b>4배</b>가 됩니다.
-      같은 예산 C로 "크게 잠깐 vs 작게 오래" 중 뭐가 나은가 — 그 답(황금비)이 4장입니다.
+      💡 N을 한 칸(≈2배) 올리고 D도 한 칸 올려 보세요. C는 <b>곱</b>이라 둘 다 2배면 <b>4배</b>가 됩니다.
+      같은 예산 C로 "크게 잠깐 vs 작게 오래" 중 뭐가 나은가? 그 답(황금비)이 4장입니다.
     </p>
   </div>
 </template>

@@ -206,7 +206,7 @@ const showYAxis = computed(() => props.xmin <= 0 && props.xmax >= 0)
     </div>
     <p v-if="showSecant" class="mt-2 px-1 text-xs leading-relaxed text-slate-500">
       간격 <b>h</b> 를 점점 줄여보세요. 노란 할선(평균변화율)이 빨간 접선(순간변화율)에
-      점점 가까워집니다 — 이게 바로 "극한으로 미분을 정의한다"의 그림입니다.
+      점점 가까워집니다. 이게 바로 "극한으로 미분을 정의한다"의 그림입니다.
     </p>
   </div>
 </template>

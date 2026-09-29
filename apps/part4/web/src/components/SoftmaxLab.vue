@@ -46,7 +46,7 @@ function pct(p: number) {
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- 입력: 점수 슬라이더 -->
-    <p class="mb-1 text-sm font-semibold text-slate-500">① 점수(logit) — 슬라이더를 움직여 보세요</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">① 점수(logit): 슬라이더를 움직여 보세요</p>
     <p class="mb-4 text-xs text-slate-500">
       각 후보 단어에 매겨진 "어울리는 정도" 점수입니다. 크게/작게 바꾸면 아래 확률이 즉시 변합니다.
     </p>
@@ -73,7 +73,7 @@ function pct(p: number) {
     <div class="my-4 text-center text-sm font-semibold text-indigo-600">↓ 소프트맥스 ↓</div>
 
     <!-- 출력: 확률 막대 -->
-    <p class="mb-3 text-sm font-semibold text-slate-500">② 확률 — 합은 항상 100%</p>
+    <p class="mb-3 text-sm font-semibold text-slate-500">② 확률: 합은 항상 100%</p>
     <div class="space-y-2">
       <div v-for="(t, i) in modelValue" :key="i" class="flex items-center gap-3">
         <span class="w-20 shrink-0 text-right text-sm" :class="i === winner ? 'font-bold text-slate-800' : 'text-slate-500'">

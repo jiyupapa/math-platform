@@ -20,11 +20,11 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 8 · 트랜스포머 블록</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">8장 · 트랜스포머 블록</p>
     <h1 class="mb-4 text-3xl font-bold">트랜스포머 블록 — 조각을 하나로 묶기</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
-      멀티헤드 어텐션만으로는 <b>깊게 쌓기</b>가 어렵습니다. 여기에 세 부품 —
-      <b>잔차연결 · 층정규화 · 피드포워드</b> — 을 더해 하나의 <b>블록</b>을 만들고,
+      멀티헤드 어텐션만으로는 <b>깊게 쌓기</b>가 어렵습니다. 여기에 세 부품인
+      <b>잔차연결 · 층정규화 · 피드포워드</b>를 더해 하나의 <b>블록</b>을 만들고,
       그 블록을 <b>여러 번 쌓아</b> 트랜스포머를 완성합니다.
     </p>
 
@@ -35,18 +35,18 @@ function onSetComplete() {
 
     <!-- ===== 1. 잔차연결 + 층정규화 ===== -->
     <h2 class="mt-8 mb-2 text-xl font-bold">
-      1. 깊게 쌓으려면 — 잔차연결 & 층정규화
+      1. 깊게 쌓으려면: 잔차연결 & 층정규화
       <ReviewFlag id="ch8-s1" chapter="ch8" label="1. 잔차연결·층정규화" />
     </h2>
     <p class="leading-relaxed text-slate-700">
       층을 많이 쌓으면 신호가 <b>사라지거나 폭발</b>해 학습이 안 됩니다. 두 장치가 이를 막아요:
     </p>
     <ul class="my-3 space-y-1.5 pl-1 text-sm text-slate-700">
-      <li>🛣️ <b>잔차연결(residual)</b> — 서브층의 <b>입력을 출력에 다시 더함</b>
+      <li>🛣️ <b>잔차연결(residual)</b>: 서브층의 <b>입력을 출력에 다시 더함</b>
         (<MathBlock inline expr="\text{출력} = \text{입력} + f(\text{입력})" />). 여기서
         <MathBlock inline expr="f(\text{입력})" /> 은 "입력을 <b>서브층(어텐션·FFN)에 통과시킨 결과</b>"라는 뜻이에요.
         <b>고속도로</b>처럼 원래 정보(신호)가 층을 건너뛰어 곧장 흐릅니다.</li>
-      <li>📏 <b>층정규화(layer norm)</b> — 벡터 값의 <b>크기를 일정 범위로 맞춤</b>.
+      <li>📏 <b>층정규화(layer norm)</b>: 벡터 값의 <b>크기를 일정 범위로 맞춤</b>.
         <b>눈금 맞추기</b>처럼 값이 너무 커지거나 작아지지 않게 안정화합니다.</li>
     </ul>
     <p class="leading-relaxed text-slate-700">
@@ -58,8 +58,8 @@ function onSetComplete() {
 
     <ConceptCard tone="note" title="새 용어 둘">
       <ul class="list-disc space-y-1 pl-5 text-sm">
-        <li><b>잔차연결 / 스킵연결(residual/skip connection)</b> — 입력을 출력에 <b>더해</b> 지름길을 내는 것.</li>
-        <li><b>층정규화(layer normalization)</b> — 벡터의 값 분포를 <b>일정하게</b> 맞춰 학습을 안정화하는 것.</li>
+        <li><b>잔차연결 / 스킵연결(residual/skip connection)</b>: 입력을 출력에 <b>더해</b> 지름길을 내는 것.</li>
+        <li><b>층정규화(layer normalization)</b>: 벡터의 값 분포를 <b>일정하게</b> 맞춰 학습을 안정화하는 것.</li>
       </ul>
     </ConceptCard>
 
@@ -79,7 +79,7 @@ function onSetComplete() {
 
     <!-- ===== 2. 피드포워드 ===== -->
     <h2 class="mt-8 mb-2 text-xl font-bold">
-      2. 피드포워드 — 단어별로 한 번 더 생각
+      2. 피드포워드: 단어별로 한 번 더 생각
       <ReviewFlag id="ch8-s2" chapter="ch8" label="2. 피드포워드" />
     </h2>
     <p class="leading-relaxed text-slate-700">
@@ -138,13 +138,13 @@ function onSetComplete() {
       explanation="거짓입니다. 같은 구조의 블록을 여러 층(수십 개) 쌓아 올립니다."
     />
 
-    <DetailsCard title="➕ 더 깊이 알아보기 — FFN이 사실 파라미터의 대부분">
+    <DetailsCard title="➕ 더 깊이 알아보기: FFN이 사실 파라미터의 대부분">
       <p class="mb-2">
         피드포워드는 보통 차원을 <b>4배로 넓혔다가</b>(예: 512 → 2048) 다시 <b>원래로 줄입니다</b>.
         이 넓은 중간층 때문에, 트랜스포머 <b>파라미터의 약 2/3</b> 가 사실 FFN 에 있습니다.
       </p>
       <p class="mb-2">
-        넓혔다 줄이는 사이에 <b>비선형 함수</b>(<b>ReLU·GELU</b> — "렐루·겔루", 입력이 음수면 꺾어 눌러
+        넓혔다 줄이는 사이에 <b>비선형 함수</b>(<b>ReLU·GELU</b>, 읽기는 "렐루·겔루". 입력이 음수면 꺾어 눌러
         <b>직선을 구부리는</b> 함수)를 끼워, 단순한 직선 변환으로는 못 만드는
         <b>복잡한 패턴</b>을 학습합니다. 어텐션이 "무엇을 볼지"라면, FFN 은 "본 것을 어떻게 해석할지"예요.
       </p>
@@ -165,7 +165,7 @@ function onSetComplete() {
           뒤 층은 문장·논리 수준의 관계를 잡는 식이죠.
         </li>
         <li>
-          <b>잔차연결</b> 덕분에 수십~수백 층도 <b>학습이 가능</b>해졌습니다 — 트랜스포머 이전엔 이렇게
+          <b>잔차연결</b> 덕분에 수십~수백 층도 <b>학습이 가능</b>해졌습니다. 트랜스포머 이전엔 이렇게
           깊은 신경망을 안정적으로 훈련하기 어려웠어요.
         </li>
         <li>
@@ -182,7 +182,7 @@ function onSetComplete() {
     <h2 class="mt-8 mb-2 text-xl font-bold">5. 직접 풀어보기</h2>
     <p class="mb-2 leading-relaxed text-slate-700"><b>10문제를 모두 맞히면</b> 이 챕터가 완료됩니다.</p>
 
-    <QuizSet title="트랜스포머 블록 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="트랜스포머 블록: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -301,7 +301,7 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 8 완료 — 블록이 완성됐습니다 🧱</p>
+      <p class="font-semibold text-emerald-800">8장 완료! 블록이 완성됐습니다 🧱</p>
       <p class="mt-1 text-sm text-emerald-700">
         어텐션 + 잔차 + 정규화 + FFN = 트랜스포머 블록. 이제 이 블록들을 통과한 벡터를
         <b>다음 단어 확률</b>로 바꿀 차례예요(ch9 출력층). 노트북 <code>notebooks/ch08_transformer_block.ipynb</code> 도 함께!

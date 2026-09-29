@@ -128,7 +128,7 @@ export function conceptCards(
     // 질문이 비유어로 들어왔으면 "비유어 → 실무어" 치환부터 — 모델이 비유어를 자기 부 개념으로 오해하지 않게
     const viaMetaphor = question ? c.metaphors.filter((m) => matches(question, qn, m.term)) : []
     const lead = viaMetaphor.length
-      ? `'${viaMetaphor.map((m) => m.term).join("', '")}'은(는) ${viaMetaphor[0].part}부에서 쓰는 비유어이고 실무 용어는 ` +
+      ? `'${viaMetaphor.map((m) => m.term).join("', '")}'은(는) ${viaMetaphor[0].part}부에서 쓰는 비유이고 실무 용어는 ` +
         `${c.label}${aliases ? `(${aliases})` : ''}이다. `
       : `${c.label}${aliases ? ` (${aliases})` : ''} — `
     // 지시문을 카드 안에 넣으면 모델이 그대로 따라 읽는다(실측) — 카드엔 표식만, 지시는 헤더에
@@ -138,7 +138,7 @@ export function conceptCards(
       ` 배우는 곳(어디서 배우나 물으면 이것으로 답): ${where(c.definedAt)}${scope}.` +
       (prereq ? ` 먼저 알아야: ${prereq}.` : '') +
       (used ? ` 그 뒤 다시 쓰이는 곳(참고): ${used}.` : '') +
-      (metaphors && !viaMetaphor.length ? ` 이 시리즈의 비유어: ${metaphors}.` : '')
+      (metaphors && !viaMetaphor.length ? ` 이 시리즈의 비유: ${metaphors}.` : '')
     )
   })
   const here = cur

@@ -212,7 +212,7 @@ cd math-platform</code></pre>
           <tr><td>1</td><td><b>검색의 이웃 줄</b></td><td>아무 화면에서 <code>Ctrl+K</code>, <b>조련</b> 입력</td><td>6부 결과 아래에 "이 과정에서는 '조련'(6부) · 밖에서는 fine-tuning" 같은 줄이 붙습니다. <b>KL 발산</b>을 치면 5부 5장이 회수처보다 먼저 옵니다.</td></tr>
           <tr><td>2</td><td><b>챕터 띠</b></td><td><a href="http://localhost:4173/part5/ch/ch5">/part5/ch/ch5</a> 상단</td><td>"이 장에서 처음 배우는 개념 KL 발산 · 먼저 알아 두면 크로스 엔트로피(5부 4장) · 다음에 다시 만나는 곳 6부 6장 …". 다른 부 링크는 새 탭으로 열립니다.</td></tr>
           <tr><td>3</td><td><b>개념 지도</b></td><td><a href="http://localhost:4173/concepts?c=kl-divergence">/concepts?c=kl-divergence</a></td><td>KL 발산이 선택된 채 열리고, 먼저 알아야 하는 사슬은 실선, 그 개념을 쓰는 다음 개념은 점선으로 이어집니다. 아래 상세 패널에 배우는 곳과 다시 쓰이는 곳.</td></tr>
-          <tr><td>4</td><td><b>비유어 사전</b></td><td><a href="http://localhost:4173/glossary">/glossary</a></td><td>부별 표 65행. '목줄' → KL 발산, '보폭' → 학습률처럼 비유어와 실무 용어가 짝지어져 있고 검색창으로 거를 수 있습니다.</td></tr>
+          <tr><td>4</td><td><b>용어 대조표</b></td><td><a href="http://localhost:4173/glossary">/glossary</a></td><td>부별 표 65행. '목줄' → KL 발산, '보폭' → 학습률처럼 이 과정의 비유와 실무 용어가 짝지어져 있고 검색창으로 거를 수 있습니다.</td></tr>
           <tr><td>5</td><td><b>튜터의 부 간 안내</b> <span class="tag w">Ollama</span></td><td><a href="http://localhost:4173/part1/ch/ch2">/part1/ch/ch2</a> 오른쪽 아래 🤖</td><td>"KL 발산은 어디서 배워요?"에 <b>5부 5장</b>과 먼저 볼 개념을 답합니다. 1부 튜터인데 5부를 안내하는 것이 핵심입니다.</td></tr>
           <tr><td>6</td><td><b>다시 볼 개념</b></td><td><a href="http://localhost:4173/diagnose">/diagnose</a> 12문항, 몇 개는 일부러 틀리기</td><td>제출 뒤 포털 홈에 "진단을 개념으로 보면 · 다시 볼 개념: 연쇄법칙(2부 6장) …" 카드가 뜨고, 개념 지도에서 그 개념에 주황 테두리가 붙습니다.</td></tr>
           <tr><td>7</td><td><b>복습 경로</b></td><td>아무 챕터의 소제목 옆 <b>☆ 복습에 추가</b>를 두세 곳 누른 뒤 포털 홈</td><td>"복습 경로" 카드에 ★표시한 개념부터 선수 개념까지 화살표 순서로 이어집니다. 완료한 장의 개념은 ✓.</td></tr>
@@ -233,7 +233,7 @@ cd math-platform</code></pre>
     <p class="lead">챕터나 컴포넌트를 고치면서 바로 보고 싶을 때 씁니다. 저장하면 화면이 즉시 바뀝니다.</p>
     <pre><code><span class="c"># 5부(정보이론)만</span>
 npm run dev -w apps/part5/web
-<span class="c"># 포털만 (개념 지도 · 비유어 사전 · 진단 확인 가능, 진도 겹치기는 불가)</span>
+<span class="c"># 포털만 (개념 지도 · 용어 대조표 · 진단 확인 가능, 진도 겹치기는 불가)</span>
 npm run dev -w apps/portal/web
 <span class="c"># 메뉴로 고르기</span>
 start.cmd          <span class="c"># Windows</span>
@@ -313,7 +313,7 @@ npm run deploy:serve</code></pre>
           <tr><td><code>npm run check:contrast</code></td><td>전 화면의 글자 대비, 라이트·다크 양쪽</td><td>"미달 없음"</td></tr>
           <tr><td><code>npm run build --workspaces --if-present</code></td><td>12개 앱 타입 검사와 빌드</td><td>앱마다 "built in …"</td></tr>
           <tr><td><code>$env:PORT=4199; node scripts/serve-deploy.mjs</code></td><td>검증용 조립본 서버 (별도 터미널에 띄워 둠)</td><td></td></tr>
-          <tr><td><code>$env:PORT=4199; node scripts/verify-smoke.mjs</code></td><td>129개 장과 포털 화면 렌더, 개념 지도 노드, 비유어 사전 행, 챕터 띠, 부마다 주석→AI 튜터 연동</td><td>"160 통과 / 0 실패"</td></tr>
+          <tr><td><code>$env:PORT=4199; node scripts/verify-smoke.mjs</code></td><td>129개 장과 포털 화면 렌더, 개념 지도 노드, 용어 대조표 행, 챕터 띠, 부마다 주석→AI 튜터 연동</td><td>"160 통과 / 0 실패"</td></tr>
           <tr><td><code>$env:PORT=4199; node scripts/verify-personalization.mjs</code></td><td>복습 표시·진도·진단을 심은 뒤 복습 경로와 다시 볼 개념이 뜨는지</td><td>"8 통과 / 0 실패"</td></tr>
           <tr><td><code>npm run check:mermaid</code></td><td>문서의 다이어그램이 파서를 통과하는지</td><td>"전 블록 파싱·렌더 통과"</td></tr>
         </tbody>
@@ -383,7 +383,7 @@ npm run search:index && npm run ontology:graph   <span class="c"># 2. 산출물 
         <thead><tr><th>화면</th><th>조립본 주소 (4173)</th></tr></thead>
         <tbody>
           <tr><td>포털 홈 · 진단 · 학습 구조도</td><td><code>/</code> · <code>/diagnose</code> · <code>/map</code></td></tr>
-          <tr><td>개념 지도 · 비유어 사전 · 도입 현황</td><td><code>/concepts</code> · <code>/glossary</code> · <code>/adoption</code></td></tr>
+          <tr><td>개념 지도 · 용어 대조표 · 도입 현황</td><td><code>/concepts</code> · <code>/glossary</code> · <code>/adoption</code></td></tr>
           <tr><td>각 부 홈 · 챕터 · 복습</td><td><code>/part5/</code> · <code>/part5/ch/ch5</code> · <code>/part5/review</code></td></tr>
           <tr><td>온톨로지를 가르치는 절</td><td><code>/part7/ch/ch8#ch8-s4</code> · <code>/part11/ch/ch3</code></td></tr>
         </tbody>

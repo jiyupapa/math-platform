@@ -41,7 +41,7 @@ function preset(v: number) {
 
 <template>
   <div class="my-4 rounded-xl border border-slate-200 bg-white p-4">
-    <p class="mb-1 text-sm font-semibold text-slate-700">⭕ 단위원 — 점의 x좌표가 곧 cos θ</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">⭕ 단위원: 점의 x좌표가 곧 cos θ</p>
     <p class="mb-3 text-sm text-slate-500">
       반지름 1인 원에서 각도 θ만큼 돈 점의 <b>가로 위치(x좌표)가 cos θ</b>예요. 돌려보세요.
     </p>

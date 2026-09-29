@@ -30,9 +30,9 @@ const precision = computed(
 )
 
 const cards = computed(() => [
-  { key: 'A', name: '혼자 10단계', desc: '한 명이 처음부터 끝까지', value: SOLO, note: '0.9¹⁰ — 워밍업의 그 수' },
-  { key: 'B', name: '2명 분업 + 전달 2회', desc: `5단계씩 나눠 맡고 주고받기 (q=${q.value.toFixed(2)})`, value: divide.value, note: boost.value ? '0.92¹⁰ × q² — 걸음이 좋아진 분업' : '0.9¹⁰ × q² — 전달도 걸음이다' },
-  { key: 'C', name: '분업 + 정성 들인 전달', desc: '전달 정확도 99%로 고정한 비교 기준', value: divideRef99.value, note: boost.value ? '0.92¹⁰ × 0.99²' : '0.9¹⁰ × 0.99² — 그래도 혼자보다 낮다' },
+  { key: 'A', name: '혼자 10단계', desc: '한 명이 처음부터 끝까지', value: SOLO, note: '0.9¹⁰, 워밍업의 그 수' },
+  { key: 'B', name: '2명 분업 + 전달 2회', desc: `5단계씩 나눠 맡고 주고받기 (q=${q.value.toFixed(2)})`, value: divide.value, note: boost.value ? '0.92¹⁰ × q² (걸음이 좋아진 분업)' : '0.9¹⁰ × q² (전달도 걸음이다)' },
+  { key: 'C', name: '분업 + 정성 들인 전달', desc: '전달 정확도 99%로 고정한 비교 기준', value: divideRef99.value, note: boost.value ? '0.92¹⁰ × 0.99²' : '0.9¹⁰ × 0.99² (그래도 혼자보다 낮다)' },
   { key: 'D', name: '작성 1 + 검토 1', desc: `검토 통과만 제출, 거부 시 재작성 1회 (s=${s.value.toFixed(2)}, t=${t.value.toFixed(2)})`, value: review.value, note: '구조가 만든 역전' },
 ])
 const best = computed(() => cards.value.reduce((a, b) => (b.value > a.value ? b : a)).key)
@@ -60,23 +60,23 @@ const pct = (v: number) => (v * 100).toFixed(1)
         </div>
         <p class="mt-1 text-xs text-slate-500">{{ c.note }}</p>
         <p v-if="c.key === 'D'" class="mt-1 text-xs font-medium text-indigo-600">
-          제출물 신뢰도(통과분이 정답일 확률) {{ pct(precision) }}% — 6장 베이즈
+          제출물 신뢰도(통과분이 정답일 확률) {{ pct(precision) }}% (6장 베이즈)
         </p>
       </div>
     </div>
 
-    <p class="mb-1 text-sm font-semibold text-slate-500">② 다이얼 — 전달과 검토의 품질</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">② 다이얼: 전달과 검토의 품질</p>
     <div class="space-y-2 rounded-lg bg-slate-50 p-4 text-sm">
       <label class="flex items-center gap-3">
-        <span class="w-44 shrink-0 text-slate-600">전달 정확도 q — {{ q.toFixed(2) }}</span>
+        <span class="w-44 shrink-0 text-slate-600">전달 정확도 q = {{ q.toFixed(2) }}</span>
         <input v-model.number="q" type="range" min="0.9" max="1" step="0.01" class="flex-1 accent-indigo-600" />
       </label>
       <label class="flex items-center gap-3">
-        <span class="w-44 shrink-0 text-slate-600">검토자 민감도 s — {{ s.toFixed(2) }}</span>
+        <span class="w-44 shrink-0 text-slate-600">검토자 민감도 s = {{ s.toFixed(2) }}</span>
         <input v-model.number="s" type="range" min="0.7" max="1" step="0.01" class="flex-1 accent-indigo-600" />
       </label>
       <label class="flex items-center gap-3">
-        <span class="w-44 shrink-0 text-slate-600">검토자 특이도 t — {{ t.toFixed(2) }}</span>
+        <span class="w-44 shrink-0 text-slate-600">검토자 특이도 t = {{ t.toFixed(2) }}</span>
         <input v-model.number="t" type="range" min="0.5" max="1" step="0.01" class="flex-1 accent-indigo-600" />
       </label>
       <p class="text-xs text-slate-500">
@@ -89,20 +89,20 @@ const pct = (v: number) => (v * 100).toFixed(1)
       :class="best === 'D' ? 'bg-emerald-50 text-emerald-800' : 'bg-amber-50 text-amber-800'"
     >
       <template v-if="best === 'D'">
-        지금 1등은 <b>D(작성+검토)</b> — 머릿수를 늘린 B·C가 아니라 <b>구조를 바꾼 팀</b>이 이깁니다.
+        지금 1등은 <b>D(작성+검토)</b>. 머릿수를 늘린 B·C가 아니라 <b>구조를 바꾼 팀</b>이 이깁니다.
         전달(q)이 1이 아닌 한, 분업은 확률로는 혼자를 넘지 못해요(q² &lt; 1).
       </template>
       <template v-else>
-        분업이 앞섰네요 — 걸음 정확도가 올라간 효과입니다. 같은 걸음이라면 분업은 전달의 곱만큼 항상 손해예요.
+        분업이 앞섰네요. 걸음 정확도가 올라간 효과입니다. 같은 걸음이라면 분업은 전달의 곱만큼 항상 손해예요.
       </template>
     </p>
 
     <label class="mt-4 flex cursor-pointer items-center gap-2 text-sm text-slate-700">
       <input v-model="boost" type="checkbox" class="h-4 w-4 accent-indigo-600" />
-      <span><b>분업의 숨은 이득 켜기</b> — 각자 맡은 몫이 작아져(서류 더미 축소, 10장) 걸음 정확도가 90 → 92%로 오른다면?</span>
+      <span><b>분업의 숨은 이득 켜기</b>: 각자 맡은 몫이 작아져(서류 더미 축소, 10장) 걸음 정확도가 90 → 92%로 오른다면?</span>
     </label>
     <p v-if="boost" class="mt-2 rounded-md bg-indigo-50 px-3 py-2 text-sm text-indigo-800">
-      걸음이 92%로 오르면 분업(전달 99%)이 <b>{{ pct(0.92 ** 10 * 0.99 ** 2) }}%</b> — 혼자(34.9%)를 드디어 넘습니다.
+      걸음이 92%로 오르면 분업(전달 99%)이 <b>{{ pct(0.92 ** 10 * 0.99 ** 2) }}%</b>로 혼자(34.9%)를 드디어 넘습니다.
       분업의 진짜 이득은 전달이 아니라 <b>걸음 자체를 좋게 만드는 것</b>(작은 컨텍스트·전문화)과 <b>병렬 시간</b>이에요.
     </p>
   </div>

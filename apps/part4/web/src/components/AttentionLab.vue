@@ -105,8 +105,8 @@ const pct = (w: number) => (w * 100).toFixed(0)
       <span class="text-violet-600">({{ pct(weights[top]) }}%)</span>합니다.
       <div class="mt-1 text-violet-700">
         섞인 문맥 벡터(가중 평균) =
-        <span class="font-mono">({{ context[0].toFixed(2) }}, {{ context[1].toFixed(2) }})</span>
-        — 집중도가 큰 단어 쪽으로 결과가 끌려갑니다.
+        <span class="font-mono">({{ context[0].toFixed(2) }}, {{ context[1].toFixed(2) }})</span>.
+        집중도가 큰 단어 쪽으로 결과가 끌려갑니다.
       </div>
     </div>
   </div>

@@ -19,7 +19,7 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 1</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">1장</p>
     <h1 class="mb-4 text-3xl font-bold">데이터를 한눈에 — 평균·중앙값·최빈값 📊</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       통계의 첫걸음은 거창한 공식이 아니라 <b>"숫자 무더기를 한눈에 보이게 요약하기"</b>입니다.
@@ -36,8 +36,8 @@ function onSetComplete() {
     </ConceptCard>
 
     <!-- 1. 대푯값 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">1. 대푯값 — 숫자 무더기의 대표 선수</h2>
-    <ReviewFlag id="ch1-s1" chapter="ch1" label="1. 대푯값 — 숫자 무더기의 대표 선수" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">1. 대푯값: 숫자 무더기의 대표 선수</h2>
+    <ReviewFlag id="ch1-s1" chapter="ch1" label="1. 대푯값: 숫자 무더기의 대표 선수" />
     <p class="leading-relaxed text-slate-700">
       친구가 "너희 반 시험 어땠어?"라고 물으면 40명의 점수를 다 불러주진 않죠.
       "평균 72점 정도?" 한마디로 요약합니다. 이렇게 <b>데이터 전체를 대표하는 숫자 하나</b>를
@@ -45,22 +45,22 @@ function onSetComplete() {
       이번 챕터의 핵심입니다.
     </p>
 
-    <ConceptCard tone="note" title="새 용어 — 대푯값">
+    <ConceptCard tone="note" title="새 용어: 대푯값">
       <b>대푯값(representative value)</b>: 데이터 전체를 하나의 숫자로 요약한 값.
       대표적으로 <b>평균 · 중앙값 · 최빈값</b> 세 가지가 있고, 데이터 성격에 따라
       어울리는 대표가 달라집니다.
     </ConceptCard>
 
     <!-- 2. 평균 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">2. 평균 — 다 더해서 나누기</h2>
-    <ReviewFlag id="ch1-s2" chapter="ch1" label="2. 평균 — 다 더해서 나누기" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">2. 평균: 다 더해서 나누기</h2>
+    <ReviewFlag id="ch1-s2" chapter="ch1" label="2. 평균: 다 더해서 나누기" />
     <p class="leading-relaxed text-slate-700">
-      가장 익숙한 대푯값입니다. <b>전부 더한 다음 개수로 나눈다</b> — 이게 전부예요.
+      가장 익숙한 대푯값입니다. <b>전부 더한 다음 개수로 나눈다</b>. 이게 전부예요.
       예를 들어 다섯 명의 점수가 4, 7, 7, 9, 13 이라면:
     </p>
     <MathBlock expr="\text{평균} = \dfrac{4 + 7 + 7 + 9 + 13}{5} = \dfrac{40}{5} = 8" />
 
-    <ConceptCard tone="note" title="새 기호 — x̄ 와 Σ">
+    <ConceptCard tone="note" title="새 기호: x̄ 와 Σ">
       <ul class="list-disc space-y-2 pl-5 text-sm">
         <li>
           <MathBlock inline expr="\bar{x}" /> &nbsp;<b>읽는 법</b>: "엑스 바" ·
@@ -71,16 +71,16 @@ function onSetComplete() {
           <MathBlock inline expr="\sum" /> &nbsp;<b>읽는 법</b>: "시그마(Sigma)" ·
           <b>뜻</b>: "<b>다 더하라</b>"는 명령. <MathBlock inline expr="\sum_{i=1}^{n} x_i" /> 는
           "1번째부터 <MathBlock inline expr="n" />번째 데이터까지 전부 더하라"입니다.
-          그래서 평균 공식은 <MathBlock inline expr="\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i" /> —
+          그래서 평균 공식은 <MathBlock inline expr="\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i" /> 이고,
           말로 풀면 그냥 "다 더해서 <MathBlock inline expr="n" /> 으로 나눠라"예요.
         </li>
       </ul>
     </ConceptCard>
 
-    <ConceptCard tone="tip" title="평균의 이미지 — 시소의 받침점">
+    <ConceptCard tone="tip" title="평균의 이미지: 시소의 받침점">
       수직선 위에 데이터를 같은 무게의 구슬로 올려놓으면, <b>평균은 시소가 수평이 되는
       받침점(무게중심)</b>입니다. 그래서 아주 무거운 구슬(극단값) 하나가 멀리 놓이면
-      받침점이 그쪽으로 훅 끌려가요 — 잠시 뒤에 눈으로 확인합니다.
+      받침점이 그쪽으로 훅 끌려가요. 잠시 뒤에 눈으로 확인합니다.
     </ConceptCard>
 
     <p class="mt-6 mb-1 text-sm font-semibold text-slate-500">🔎 잠깐 확인!</p>
@@ -93,19 +93,19 @@ function onSetComplete() {
     />
 
     <!-- 3. 중앙값 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">3. 중앙값 — 줄 세워서 한가운데</h2>
-    <ReviewFlag id="ch1-s3" chapter="ch1" label="3. 중앙값 — 줄 세워서 한가운데" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">3. 중앙값: 줄 세워서 한가운데</h2>
+    <ReviewFlag id="ch1-s3" chapter="ch1" label="3. 중앙값: 줄 세워서 한가운데" />
     <p class="leading-relaxed text-slate-700">
       <b>중앙값</b>은 데이터를 <b>작은 것부터 큰 것까지 줄 세운 뒤 딱 가운데 서 있는 값</b>입니다.
       [4, 7, <b>7</b>, 9, 13] 처럼 5개면 3번째 값인 <b>7</b>이 중앙값. 값의 크기가 아니라
       <b>순번</b>만 보기 때문에, 양 끝의 값이 아무리 커지거나 작아져도 흔들리지 않아요.
     </p>
 
-    <ConceptCard tone="note" title="새 용어 — 중앙값 (짝수 개일 때 주의)">
+    <ConceptCard tone="note" title="새 용어: 중앙값 (짝수 개일 때 주의)">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li><b>중앙값(median)</b>: 크기순으로 정렬했을 때 한가운데 값.</li>
         <li>
-          데이터가 <b>짝수 개</b>면 한가운데가 두 개죠 — 그 <b>둘의 평균</b>을 씁니다.
+          데이터가 <b>짝수 개</b>면 한가운데가 두 개죠. 그 <b>둘의 평균</b>을 씁니다.
           예: [2, 4, 6, 10] → 가운데 두 값 4와 6 의 평균 = <b>5</b>.
         </li>
         <li>계산 전에 <b>반드시 정렬</b>부터! [7, 1, 5] 의 중앙값은 1이 아니라, 정렬한 [1, 5, 7] 의 가운데인 5 입니다.</li>
@@ -122,30 +122,30 @@ function onSetComplete() {
     />
 
     <!-- 4. 최빈값 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">4. 최빈값 — 가장 자주 나오는 값</h2>
-    <ReviewFlag id="ch1-s4" chapter="ch1" label="4. 최빈값 — 가장 자주 나오는 값" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">4. 최빈값: 가장 자주 나오는 값</h2>
+    <ReviewFlag id="ch1-s4" chapter="ch1" label="4. 최빈값: 가장 자주 나오는 값" />
     <p class="leading-relaxed text-slate-700">
       <b>최빈값</b>은 말 그대로 <b>가장 빈번하게 등장하는 값</b>입니다. [4, <b>7, 7</b>, 9, 13] 에서는
       7 이 두 번 나오니 최빈값은 7. 신발 가게 사장님에게 가장 중요한 건 평균 사이즈(265.3mm 같은,
-      아무도 안 신는 값)가 아니라 <b>가장 많이 팔리는 사이즈</b>죠 — 그게 최빈값입니다.
+      아무도 안 신는 값)가 아니라 <b>가장 많이 팔리는 사이즈</b>죠. 그게 최빈값입니다.
       숫자가 아닌 데이터(가장 흔한 혈액형, 가장 많이 팔린 색상)에도 쓸 수 있는 유일한 대푯값이에요.
     </p>
 
     <!-- 5. 인터랙티브 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">5. 직접 움직여 보기 — 평균은 끌려가고 중앙값은 버틴다</h2>
-    <ReviewFlag id="ch1-s5" chapter="ch1" label="5. 직접 움직여 보기 — 평균 vs 중앙값" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">5. 직접 움직여 보기: 평균은 끌려가고 중앙값은 버틴다</h2>
+    <ReviewFlag id="ch1-s5" chapter="ch1" label="5. 직접 움직여 보기: 평균 vs 중앙값" />
     <p class="leading-relaxed text-slate-700">
       아래 수직선의 보라 점(데이터)을 끌어 보세요. 특히 <b>⚡ 이상치 만들기</b> 버튼을 눌러
-      점 하나를 95 로 보냈을 때 — <b class="text-rose-700">빨간 받침점(평균)</b>과
+      점 하나를 95 로 보냈을 때 <b class="text-rose-700">빨간 받침점(평균)</b>과
       <b class="text-blue-600">파란 삼각형(중앙값)</b> 중 누가 크게 움직이나요?
     </p>
 
     <MeanMedianExplorer />
 
-    <ConceptCard tone="note" title="새 용어 — 이상치">
+    <ConceptCard tone="note" title="새 용어: 이상치">
       <b>이상치(outlier)</b>: 나머지 값들과 동떨어진 극단적인 값. 입력 실수일 수도, 진짜 특이한
       사례(회장님 연봉)일 수도 있어요. 평균은 이상치에 <b>크게 끌려가고</b>, 중앙값은
-      <b>거의 영향받지 않습니다</b> — 이런 성질을 "중앙값은 <b>강건(robust)</b>하다"고 말해요.
+      <b>거의 영향받지 않습니다</b>. 이런 성질을 "중앙값은 <b>강건(robust)</b>하다"고 말해요.
     </ConceptCard>
 
     <!-- 6. 평균의 함정 -->
@@ -157,11 +157,11 @@ function onSetComplete() {
     </p>
     <MathBlock expr="\text{평균} = \dfrac{3000 + 3500 + 4000 + 4500 + 300000}{5} = \dfrac{315000}{5} = 63000\text{만원} = 6.3\text{억}" />
     <p class="leading-relaxed text-slate-700">
-      "우리 회사 평균 연봉은 6.3억입니다!" — 거짓말은 아니지만 <b>아무도 6.3억을 받지 않죠</b>.
-      중앙값은 정렬해서 가운데인 <b>4000만원</b> — 이쪽이 "보통 직원"의 현실에 훨씬 가깝습니다.
+      "우리 회사 평균 연봉은 6.3억입니다!" 거짓말은 아니지만 <b>아무도 6.3억을 받지 않죠</b>.
+      중앙값은 정렬해서 가운데인 <b>4000만원</b>으로, "보통 직원"의 현실에 훨씬 가깝습니다.
     </p>
 
-    <ConceptCard tone="warn" title="함정 — 평균만 보면 속는다">
+    <ConceptCard tone="warn" title="함정: 평균만 보면 속는다">
       연봉·집값·유튜브 조회수처럼 <b>한쪽으로 극단값이 있는 데이터</b>에서 평균은 소수의 거대한
       값에 끌려 올라갑니다. 뉴스의 "평균 ○○"이 내 체감과 다르다면 <b>중앙값</b>을 찾아보세요.
       통계가 거짓말을 한 게 아니라, <b>대표 선수를 잘못 뽑은 것</b>뿐입니다.
@@ -177,21 +177,21 @@ function onSetComplete() {
     />
 
     <!-- 7. 히스토그램 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">7. 히스토그램 — 데이터의 "모양" 보기</h2>
-    <ReviewFlag id="ch1-s7" chapter="ch1" label="7. 히스토그램 — 데이터의 모양 보기" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">7. 히스토그램: 데이터의 "모양" 보기</h2>
+    <ReviewFlag id="ch1-s7" chapter="ch1" label="7. 히스토그램: 데이터의 모양 보기" />
     <p class="leading-relaxed text-slate-700">
       대푯값이 데이터를 숫자 하나로 줄인다면, <b>히스토그램</b>은 데이터 전체의 <b>모양</b>을
       보여줍니다. 값들을 구간별로 묶어 "각 구간에 몇 개 들어 있나"를 막대로 세운 그림이에요.
       아래에서 <b>계급 폭 슬라이더</b>를 움직여 보세요.
     </p>
 
-    <ConceptCard tone="note" title="새 용어 — 히스토그램과 계급">
+    <ConceptCard tone="note" title="새 용어: 히스토그램과 계급">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li><b>계급(bin)</b>: 데이터를 묶는 구간. 예: 키 160~165cm, 165~170cm, …</li>
         <li><b>도수(frequency)</b>: 각 계급에 들어 있는 데이터의 개수.</li>
         <li><b>히스토그램(histogram)</b>: 계급을 가로축, 도수를 막대 높이로 그린 그림. 데이터의
           <b>분포</b>(어떤 값 근처에 얼마나 모여 있는지를 나타내는 전체적인 '모양')가 한눈에
-          보입니다 — 가운데가 볼록한지, 한쪽으로 치우쳤는지.</li>
+          보입니다. 가운데가 볼록한지, 한쪽으로 치우쳤는지.</li>
       </ul>
     </ConceptCard>
 
@@ -209,7 +209,7 @@ function onSetComplete() {
     <h2 class="mt-10 mb-2 text-xl font-bold">🤖 데이터 요약은 모든 머신러닝의 첫 단계</h2>
     <ReviewFlag id="ch1-ai" chapter="ch1" label="🤖 데이터 요약은 ML 의 첫 단계" />
     <p class="leading-relaxed text-slate-700">
-      AI 개발자가 데이터를 받으면 제일 먼저 하는 일이 바로 오늘 배운 것들입니다 —
+      AI 개발자가 데이터를 받으면 제일 먼저 하는 일이 바로 오늘 배운 것들입니다.
       평균·중앙값을 찍어 보고, 히스토그램으로 분포 모양을 보고, 이상치를 찾아내는 것.
       이 과정을 <b>탐색적 데이터 분석(EDA)</b>이라고 불러요. 데이터의 생김새를 모르고
       모델부터 만드는 건, 재료를 안 보고 요리하는 것과 같거든요.
@@ -218,7 +218,7 @@ function onSetComplete() {
     <ConceptCard tone="ai" title="평균 = 가장 단순한 예측 모델 (베이스라인)">
       <ul class="list-disc space-y-2 pl-5">
         <li>내일 방문자 수를 예측해야 한다면? 가장 단순한 모델은 <b>"무조건 지금까지의 평균"</b>이라고
-          답하는 것 — 이걸 <b>베이스라인(baseline)</b>이라고 합니다.</li>
+          답하는 것. 이걸 <b>베이스라인(baseline)</b>이라고 합니다.</li>
         <li>어떤 화려한 AI 모델도 <b>이 평균 예측보다 나아야</b> 존재 가치가 있어요.
           "모델 성능이 베이스라인을 이겼나?"가 ML 의 국룰 질문입니다.</li>
         <li>10장에서 만들 첫 머신러닝 모델(회귀)도 결국 "평균보다 얼마나 더 잘 맞히나"의 게임이에요.</li>
@@ -231,7 +231,7 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 · 단계별 계산 10문제입니다. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="평균·중앙값·최빈값 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="평균·중앙값·최빈값: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -262,7 +262,7 @@ function onSetComplete() {
         type="numeric"
         :answer="5"
         :hints="['먼저 크기순으로 정렬하세요: 1, 5, 7.', '정렬한 뒤 가운데 값은?']"
-        explanation="정렬하면 [1, 5, 7] — 가운데 값은 5 입니다. 정렬을 잊지 마세요!"
+        explanation="정렬하면 [1, 5, 7]이고, 가운데 값은 5 입니다. 정렬을 잊지 마세요!"
       />
       <!-- 보통 -->
       <StepQuiz
@@ -303,7 +303,7 @@ function onSetComplete() {
         ]"
         :answer="0"
         :hints="['평균은 극단값에 끌려가고, 중앙값은 버팁니다.']"
-        explanation="극단적으로 큰 값은 평균을 끌어올리지만 중앙값은 거의 그대로 — 그래서 평균 ≫ 중앙값이 됩니다."
+        explanation="극단적으로 큰 값은 평균을 끌어올리지만 중앙값은 거의 그대로예요. 그래서 평균 ≫ 중앙값이 됩니다."
       />
       <!-- 어려움 -->
       <Quiz
@@ -339,15 +339,15 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 1 완료. 데이터의 "대표"를 뽑을 수 있게 됐습니다.</p>
+      <p class="font-semibold text-emerald-800">1장 완료. 데이터의 "대표"를 뽑을 수 있게 됐습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
-        그런데 평균이 같아도 데이터 모양이 전혀 다를 수 있어요. 다음은 <b>흩어짐 재기 — 분산과 표준편차</b>입니다.
+        그런데 평균이 같아도 데이터 모양이 전혀 다를 수 있어요. 다음은 <b>흩어짐 재기, 분산과 표준편차</b>입니다.
       </p>
       <RouterLink
         to="/ch/ch2"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        다음 챕터 — 흩어짐 재기 →
+        다음 챕터: 흩어짐 재기 →
       </RouterLink>
     </div>
   </article>

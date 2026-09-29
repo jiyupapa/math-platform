@@ -124,7 +124,7 @@ const fix = ref(false)
 watch(tab, () => {
   fix.value = false
 })
-const FIX_LABELS = ['✂️ 처방 적용 — 클리핑 |g| ≤ 3', '💊 처방 적용 — 보폭 ×100', '🔍 원인 보기 — lr 일정표 겹치기', '🦮 처방 적용 — weight decay λ=0.03']
+const FIX_LABELS = ['✂️ 처방 적용: 클리핑 |g| ≤ 3', '💊 처방 적용: 보폭 ×100', '🔍 원인 보기: lr 일정표 겹치기', '🦮 처방 적용: weight decay λ=0.03']
 
 const spikeNo = spikeSim(901, [55, 120], false)
 const spikeYes = spikeSim(901, [55, 120], true)
@@ -144,10 +144,10 @@ const gallery = computed(() => {
     if (fix.value) curves.push({ pts: spikeYes, color: 'var(--c-emerald-600)', width: 1.8 })
     return {
       y, curves, yLabel: '손실 (log)',
-      cause: '원인: 드문 이상치 배치 — 순간 기울기가 폭주해 보폭 × 기울기가 골짜기를 건너뜀(2장 경계 초과). 초반에만 몰리면 워밍업 부족(6장).',
+      cause: '원인: 드문 이상치 배치. 순간 기울기가 폭주해 보폭 × 기울기가 골짜기를 건너뜀(2장 경계 초과). 초반에만 몰리면 워밍업 부족(6장).',
       verdict: fix.value
-        ? `클리핑이 이상치 걸음의 크기를 잘라 스파이크가 ${spikeCut}분의 1로 — 방향은 그대로, 크기만 제한(초록). 설정: max_grad_norm.`
-        : '봉우리가 두 번 솟았죠 — 회복은 했지만 위험 신호입니다. 처방을 적용해 보세요.',
+        ? `클리핑이 이상치 걸음의 크기를 잘라 스파이크가 ${spikeCut}분의 1로 줄었어요. 방향은 그대로, 크기만 제한(초록). 설정: max_grad_norm.`
+        : '봉우리가 두 번 솟았죠. 회복은 했지만 위험 신호입니다. 처방을 적용해 보세요.',
     }
   }
   if (tab.value === 1) {
@@ -156,10 +156,10 @@ const gallery = computed(() => {
     if (fix.value) curves.push({ pts: platFix, color: 'var(--c-emerald-600)', width: 1.8 })
     return {
       y, curves, yLabel: '손실 (log)',
-      cause: '원인 후보 둘: ① 보폭 과소(2장 소심이 — 기울기는 멀쩡한데 걸음이 티끌) ② 진짜 지형 평원(1장 — 기울기 자체가 0 근처, 10장에서 재회). 구분법: 개입해 보기.',
+      cause: '원인 후보 둘: ① 보폭 과소(2장 소심이: 기울기는 멀쩡한데 걸음이 티끌) ② 진짜 지형 평원(1장: 기울기 자체가 0 근처, 10장에서 다시 등장). 구분법: 개입해 보기.',
       verdict: fix.value
-        ? `보폭 ×100에 즉시 반응 — 범인은 보폭 과소였습니다(초록: ${platFix[159]!.toFixed(4)}까지 하강). 반응이 없었다면 지형 평원 쪽.`
-        : `160스텝 동안 ${platFlat[0]!.toFixed(0)} → ${platFlat[159]!.toFixed(0)} — 거의 제자리. 처방(개입 실험)을 적용해 보세요.`,
+        ? `보폭 ×100에 즉시 반응했으니 범인은 보폭 과소였습니다(초록: ${platFix[159]!.toFixed(4)}까지 하강). 반응이 없었다면 지형 평원 쪽.`
+        : `160스텝 동안 ${platFlat[0]!.toFixed(0)} → ${platFlat[159]!.toFixed(0)}, 거의 제자리. 처방(개입 실험)을 적용해 보세요.`,
     }
   }
   if (tab.value === 2) {
@@ -168,10 +168,10 @@ const gallery = computed(() => {
     if (fix.value) curves.push({ pts: Array.from({ length: 160 }, (_, t) => stairLr(t)), color: 'var(--c-sky-500)', width: 1.2 })
     return {
       y, curves, yLabel: '손실 (log)',
-      cause: '이건 병이 아닙니다 — 스텝 감쇠 일정표(6장)의 지문이에요. 서성임 반경 ∝ 보폭이라, lr이 뚝 떨어질 때마다 손실도 한 단 내려앉습니다.',
+      cause: '이건 병이 아닙니다. 스텝 감쇠 일정표(6장)의 지문이에요. 서성임 반경 ∝ 보폭이라, lr이 뚝 떨어질 때마다 손실도 한 단 내려앉습니다.',
       verdict: fix.value
-        ? '하늘색 = lr 일정표(0.3 → 0.09 → 0.027). 손실의 계단과 정확히 같은 시점 — 무늬의 주인은 일정표였습니다.'
-        : '일정한 간격으로 뚝, 뚝 — 원인 보기를 눌러 일정표와 겹쳐 보세요.',
+        ? '하늘색 = lr 일정표(0.3 → 0.09 → 0.027). 손실의 계단과 정확히 같은 시점이죠. 무늬의 주인은 일정표였습니다.'
+        : '일정한 간격으로 뚝, 뚝. 원인 보기를 눌러 일정표와 겹쳐 보세요.',
     }
   }
   const y = linY(1.2)
@@ -181,11 +181,11 @@ const gallery = computed(() => {
   ]
   if (fix.value) curves.push({ pts: divLeash.vas, color: 'var(--c-emerald-600)', width: 1.8 })
   return {
-    y, curves, yLabel: '손실 (선형) — 훈련(보라)·검증(빨강)',
-    cause: `원인: 과적합 시작(7장) — 훈련은 계속 내려가는데 검증이 돌아서서 ${divRatio}배 되오름. 규칙 학습이 끝나고 암기가 시작된 순간.`,
+    y, curves, yLabel: '손실 (선형): 훈련(보라)·검증(빨강)',
+    cause: `원인: 과적합 시작(7장). 훈련은 계속 내려가는데 검증이 돌아서서 ${divRatio}배 되오름. 규칙 학습이 끝나고 암기가 시작된 순간.`,
     verdict: fix.value
-      ? '목줄(8장)을 채우자 검증(초록)이 끝까지 최저 수준 — 벌어짐 자체가 사라졌습니다. 조기 종료·데이터 늘리기도 같은 병의 처방.'
-      : '두 곡선이 벌어지는 지점이 보이죠 — 처방을 적용해 보세요.',
+      ? '목줄(8장)을 채우자 검증(초록)이 끝까지 최저 수준이에요. 벌어짐 자체가 사라졌습니다. 조기 종료·데이터 늘리기도 같은 병의 처방.'
+      : '두 곡선이 벌어지는 지점이 보이죠. 처방을 적용해 보세요.',
   }
 })
 
@@ -205,12 +205,12 @@ function withVal(train: number[], seed: number): { train: number[]; val: number[
 const div1 = divergeSim(55, 56, 0)
 const div2 = divergeSim(301, 302, 0)
 const ROUNDS: Round[] = [
-  { kind: 1, ...withVal(plateauSim(911, 0.0006), 71), log: true, note: '높은 손실에서 거의 제자리 — 보폭 과소 또는 지형 평원. 개입(lr↑)으로 구분.' },
-  { kind: 0, ...withVal(spikeSim(902, [80], false), 72), log: true, note: '스텝 80의 고립된 봉우리 — 이상치 배치·순간 경계 초과. 클리핑이 보험.' },
-  { kind: 3, train: div1.trs, val: div1.vas, log: false, note: '훈련↓ 검증↑ — 과적합 시작. 조기 종료·weight decay·데이터 늘리기.' },
-  { kind: 2, ...withVal(stairSim(941), 73), log: true, note: '일정 간격의 계단 — 스텝 감쇠 일정표의 지문. 병이 아니라 정상 무늬.' },
-  { kind: 0, ...withVal(spikeSim(903, [40, 115], false), 74), log: true, note: '두 번의 봉우리, 회복은 함 — 반복되면 lr↓ 또는 max_grad_norm 설정.' },
-  { kind: 3, train: div2.trs, val: div2.vas, log: false, note: '중반부터 벌어짐 — eval_loss가 돌아서는 순간이 멈출 자리였습니다.' },
+  { kind: 1, ...withVal(plateauSim(911, 0.0006), 71), log: true, note: '높은 손실에서 거의 제자리. 보폭 과소 또는 지형 평원. 개입(lr↑)으로 구분.' },
+  { kind: 0, ...withVal(spikeSim(902, [80], false), 72), log: true, note: '스텝 80의 고립된 봉우리. 이상치 배치·순간 경계 초과. 클리핑이 보험.' },
+  { kind: 3, train: div1.trs, val: div1.vas, log: false, note: '훈련↓ 검증↑, 과적합 시작. 조기 종료·weight decay·데이터 늘리기.' },
+  { kind: 2, ...withVal(stairSim(941), 73), log: true, note: '일정 간격의 계단. 스텝 감쇠 일정표의 지문. 병이 아니라 정상 무늬.' },
+  { kind: 0, ...withVal(spikeSim(903, [40, 115], false), 74), log: true, note: '두 번의 봉우리, 회복은 함. 반복되면 lr↓ 또는 max_grad_norm 설정.' },
+  { kind: 3, train: div2.trs, val: div2.vas, log: false, note: '중반부터 벌어짐. eval_loss가 돌아서는 순간이 멈출 자리였습니다.' },
 ]
 const round = ref(0)
 const answered = ref<number | null>(null)
@@ -236,7 +236,7 @@ function next() {
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 증상 도감 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 증상 도감: 4대 무늬와 처방</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · 증상 도감: 4대 무늬와 처방</p>
     <p class="mb-3 text-xs text-slate-500">
       전부 앞 장들의 무대에서 실제로 돌린 훈련입니다. 증상을 하나씩 보고 <b>처방을 적용</b>해 보세요.
     </p>
@@ -280,7 +280,7 @@ function next() {
 
     <!-- ② 판독 훈련소 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 판독 훈련소: 일지 6장, 당신의 진단은?</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · 판독 훈련소: 일지 6장을 진단해 보세요</p>
     <p class="mb-3 text-xs text-slate-500">
       새 훈련 일지 6장(전부 실제 시뮬, <span class="text-indigo-600">보라 = 훈련</span> ·
       <span class="text-rose-700">빨강 = 검증</span>)을 진단하세요.
@@ -311,7 +311,7 @@ function next() {
       </div>
 
       <div v-if="answered !== null" class="mt-2 rounded-lg p-3 text-xs leading-relaxed" :class="answered === cur.kind ? 'bg-emerald-50 text-emerald-800' : 'bg-rose-50 text-rose-800'">
-        {{ answered === cur.kind ? '✅ 정답! ' : `❌ 정답은 ${TABS[cur.kind]} — ` }}{{ cur.note }}
+        {{ answered === cur.kind ? '✅ 정답! ' : `❌ 정답은 ${TABS[cur.kind]}. ` }}{{ cur.note }}
         <button type="button" class="ml-2 rounded-md bg-white/70 px-2 py-0.5 font-semibold text-slate-600 ring-1 ring-slate-200 hover:bg-white" @click="next">
           {{ round >= ROUNDS.length - 1 ? '결과 보기' : '다음 일지 →' }}
         </button>
@@ -319,9 +319,9 @@ function next() {
     </template>
 
     <div v-else class="rounded-lg bg-indigo-50 p-4 text-sm leading-relaxed text-indigo-900">
-      🩺 판독 결과: <b>{{ score }} / {{ ROUNDS.length }}</b> —
+      🩺 판독 결과: <b>{{ score }} / {{ ROUNDS.length }}</b>.
       <template v-if="score >= 5">곡선만 보고 다이얼을 지목할 수 있게 됐습니다. 실전 일지 앞에서도 같은 순서로: 모양 → 시점 → 용의자 → 개입.</template>
-      <template v-else>도감(실험 ①)을 다시 훑고 재도전해 보세요 — 무늬와 시점이 힌트의 전부입니다.</template>
+      <template v-else>도감(실험 ①)을 다시 훑고 재도전해 보세요. 무늬와 시점이 힌트의 전부입니다.</template>
       <button type="button" class="ml-2 rounded-md bg-white/70 px-2 py-0.5 text-xs font-semibold text-slate-600 ring-1 ring-slate-200 hover:bg-white" @click="round = 0; answered = null; score = 0; done = false">다시 풀기</button>
     </div>
   </div>

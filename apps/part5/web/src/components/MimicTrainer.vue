@@ -100,7 +100,7 @@ const floorY = CH - CPAD - (H_P / LOSS_MAX) * (CH - 2 * CPAD)
 <template>
   <div class="my-4 rounded-xl border border-slate-200 bg-white p-4">
     <p class="mb-1 text-sm font-semibold text-slate-700">
-      🏋️ 흉내내기 훈련소 — "나는 아침에 ___" 다음 단어를 배우는 미니 모델
+      🏋️ 흉내내기 훈련소: "나는 아침에 ___" 다음 단어를 배우는 미니 모델
     </p>
     <p class="mb-3 text-xs text-slate-500">
       학습 버튼 = 진짜 경사하강 한 걸음 (로짓에 기울기 q−p 의 반대 방향을 더함)
@@ -180,14 +180,14 @@ const floorY = CH - CPAD - (H_P / LOSS_MAX) * (CH - 2 * CPAD)
       </div>
       <div class="rounded-lg bg-slate-50 p-2">
         <p class="text-lg font-bold tabular-nums text-slate-600">{{ H_P }}</p>
-        <p class="text-xs text-slate-500">바닥 H(p) — 세상의 엔트로피</p>
+        <p class="text-xs text-slate-500">바닥 H(p): 세상의 엔트로피</p>
       </div>
       <div class="rounded-lg p-2" :class="converged ? 'bg-emerald-50' : 'bg-amber-50'">
         <p class="text-lg font-bold tabular-nums" :class="converged ? 'text-emerald-700' : 'text-amber-700'">
           {{ excess.toFixed(3) }}
         </p>
         <p class="text-xs" :class="converged ? 'text-emerald-700' : 'text-amber-700'">
-          초과분 D(p‖q) — 배움이 줄이는 것
+          초과분 D(p‖q): 배움이 줄이는 것
         </p>
       </div>
     </div>
@@ -196,13 +196,13 @@ const floorY = CH - CPAD - (H_P / LOSS_MAX) * (CH - 2 * CPAD)
     <svg v-if="history.length >= 2" :viewBox="`0 0 ${CW} ${CH}`" class="mt-2 w-full max-w-lg">
       <line :x1="CPAD" :y1="floorY" :x2="CW - CPAD" :y2="floorY" stroke="var(--c-slate-400)" stroke-width="1" stroke-dasharray="4 3" />
       <text :x="CW - CPAD" :y="floorY - 4" text-anchor="end" font-size="9" fill="var(--c-slate-400)">
-        바닥 H(p) = {{ H_P }}비트 — 이 아래로는 못 간다
+        바닥 H(p) = {{ H_P }}비트 (이 아래로는 못 간다)
       </text>
       <path :d="curvePath()" fill="none" stroke="var(--c-indigo-500)" stroke-width="2" />
     </svg>
 
     <p v-if="converged" class="mt-2 text-xs font-semibold text-emerald-700">
-      🎉 학습 완료 — 모델이 세상을 똑같이 믿게 됐고(q = p), 손실은 0이 아니라 바닥 H(p)에서 멈췄습니다.
+      🎉 학습 완료! 모델이 세상을 똑같이 믿게 됐고(q = p), 손실은 0이 아니라 바닥 H(p)에서 멈췄습니다.
       남은 1.75비트는 모델 탓이 아니라 세상 자체의 불확실성이에요.
     </p>
   </div>

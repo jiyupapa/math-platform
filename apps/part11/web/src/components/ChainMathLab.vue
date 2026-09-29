@@ -36,7 +36,7 @@ const pct = (v: number) => (v * 100).toFixed(1)
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 사슬 조작 -->
-    <p class="mb-1 text-sm font-semibold text-slate-500">① 가상 업무 "주간 보고서" — 다섯 단계의 정확도를 직접 움직여 보세요</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">① 가상 업무 "주간 보고서": 다섯 단계의 정확도를 직접 움직여 보세요</p>
     <div class="space-y-2 rounded-lg bg-slate-50 p-4">
       <div v-for="(name, i) in NAMES" :key="name" class="flex items-center gap-3">
         <span
@@ -70,11 +70,11 @@ const pct = (v: number) => (v * 100).toFixed(1)
       <span class="font-mono text-lg font-bold text-indigo-800">{{ pct(total) }}%</span>
     </div>
     <p class="mt-1 text-xs text-slate-500">
-      기본값 기준 0.99 × 0.95 × 0.90 × 0.99 × 0.70 = 58.7% — 네 단계가 우등생이어도 한 단계가 전체를 끌어내립니다.
+      기본값 기준 0.99 × 0.95 × 0.90 × 0.99 × 0.70 = 58.7%. 네 단계가 우등생이어도 한 단계가 전체를 끌어내립니다.
     </p>
 
     <!-- ③ 개선 실험 -->
-    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">② 같은 노력, 다른 효과 — 어느 단계를 개선할까</p>
+    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">② 같은 노력, 다른 효과: 어느 단계를 개선할까</p>
     <div class="flex flex-wrap gap-2">
       <button
         type="button"
@@ -104,17 +104,17 @@ const pct = (v: number) => (v * 100).toFixed(1)
       :class="lastExp === 'bottleneck' ? 'bg-emerald-50 text-emerald-800' : 'bg-amber-50 text-amber-800'"
     >
       <template v-if="lastExp === 'bottleneck'">
-        58.7% → <b>{{ pct(total) }}%</b> (+16.7%p) — 병목 하나를 고쳤을 뿐인데 성공률이 껑충 뛰었습니다.
+        58.7% → <b>{{ pct(total) }}%</b> (+16.7%p). 병목 하나를 고쳤을 뿐인데 성공률이 껑충 뛰었습니다.
       </template>
       <template v-else>
-        58.7% → <b>{{ pct(total) }}%</b> (+0.5%p) — 이미 좋은 단계를 더 갈고닦아도 전체는 거의 그대로예요.
+        58.7% → <b>{{ pct(total) }}%</b> (+0.5%p). 이미 좋은 단계를 더 갈고닦아도 전체는 거의 그대로예요.
       </template>
     </p>
 
     <!-- ④ 로그 보기 -->
     <label class="mt-4 flex cursor-pointer items-center gap-2 text-sm text-slate-700">
       <input v-model="showLog" type="checkbox" class="h-4 w-4 accent-indigo-600" />
-      <span><b>로그로 보기</b> — 곱의 세계를 합의 세계로 (막대 = 각 단계의 −log₁₀, 클수록 감쇠 기여가 큼)</span>
+      <span><b>로그로 보기</b>: 곱의 세계를 합의 세계로 (막대 = 각 단계의 −log₁₀, 클수록 감쇠 기여가 큼)</span>
     </label>
     <div v-if="showLog" class="mt-2 space-y-1.5 rounded-md bg-amber-50 px-3 py-2">
       <div v-for="row in logRows" :key="row.name" class="flex items-center gap-2 text-sm text-amber-900">
@@ -125,7 +125,7 @@ const pct = (v: number) => (v * 100).toFixed(1)
         <span class="w-16 shrink-0 font-mono text-xs">{{ row.nlog.toFixed(4) }}</span>
       </div>
       <p class="pt-1 text-xs text-amber-800">
-        막대의 합 = {{ nlogSum.toFixed(4) }} = 전체의 −log₁₀ — 곱셈이 <b>덧셈</b>이 되어
+        막대의 합 = {{ nlogSum.toFixed(4) }} = 전체의 −log₁₀. 곱셈이 <b>덧셈</b>이 되어
         "누가 성공률을 갉아먹는지"를 한눈에 비교할 수 있어요. 가장 긴 막대가 병목입니다.
       </p>
     </div>

@@ -36,10 +36,10 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 2</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">2장</p>
     <h1 class="mb-4 text-3xl font-bold">변화율과 극한 🎯</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
-      직선의 기울기는 어디서나 같았죠(Phase 1). 그런데 <b>곡선</b>은 위치마다 가팔라지는 정도가
+      직선의 기울기는 어디서나 같았죠(1장). 그런데 <b>곡선</b>은 위치마다 가팔라지는 정도가
       다릅니다. "바로 이 순간, 이 점에서 얼마나 빨리 변하나?"를 재려면 <b>극한(limit)</b>이라는
       새 도구가 필요합니다. 이번 챕터가 미분의 진짜 출발점이에요.
     </p>
@@ -53,17 +53,17 @@ function onSetComplete() {
     </ConceptCard>
 
     <!-- 1. 평균변화율 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">1. 평균변화율 — 구간의 기울기</h2>
-    <ReviewFlag id="ch2-s1" chapter="ch2" label="1. 평균변화율 — 구간의 기울기" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">1. 평균변화율: 구간의 기울기</h2>
+    <ReviewFlag id="ch2-s1" chapter="ch2" label="1. 평균변화율: 구간의 기울기" />
     <p class="leading-relaxed text-slate-700">
       두 점 사이의 <b>평균변화율</b>은 그 두 점을 잇는 직선(<b>할선</b>)의 기울기입니다.
-      Phase 1 의 "세로 변화 ÷ 가로 변화"와 똑같아요. 예를 들어 <MathBlock inline expr="f(x)=x^2" /> 에서
+      1장의 "세로 변화 ÷ 가로 변화"와 똑같아요. 예를 들어 <MathBlock inline expr="f(x)=x^2" /> 에서
       <MathBlock inline expr="x=1" /> 부터 <MathBlock inline expr="x=3" /> 까지 (여기서
       <MathBlock inline expr="f(3)=3^2=9" />, <MathBlock inline expr="f(1)=1^2=1" />):
     </p>
     <MathBlock expr="\dfrac{f(3) - f(1)}{3 - 1} = \dfrac{9 - 1}{2} = 4" />
 
-    <ConceptCard tone="note" title="새 용어 — 평균변화율 / 차분몫">
+    <ConceptCard tone="note" title="새 용어: 평균변화율 / 차분몫">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li>
           <b>평균변화율(average rate of change)</b>: 구간 전체에서 "평균적으로" 얼마나 변했나.
@@ -72,7 +72,7 @@ function onSetComplete() {
         <li>
           간격을 <MathBlock inline expr="h" /> 로 쓰면 <MathBlock inline expr="x" /> 부터
           <MathBlock inline expr="x+h" /> 까지의 평균변화율은
-          <MathBlock inline expr="\dfrac{f(x+h)-f(x)}{h}" /> — 이 식을 <b>차분몫</b>이라고 부릅니다.
+          <MathBlock inline expr="\dfrac{f(x+h)-f(x)}{h}" />. 이 식을 <b>차분몫</b>이라고 부릅니다.
         </li>
       </ul>
     </ConceptCard>
@@ -91,7 +91,7 @@ function onSetComplete() {
     <ReviewFlag id="ch2-s2" chapter="ch2" label="2. 한 점의 기울기라는 문제" />
     <p class="leading-relaxed text-slate-700">
       그런데 "<b>딱 한 점</b>에서의 기울기"를 구하려 하면 곤란해집니다. 두 점이 같은 점이 되면
-      가로 변화 <MathBlock inline expr="\Delta x" /> 도, 세로 변화 <MathBlock inline expr="\Delta y" /> 도 모두 0 —
+      가로 변화 <MathBlock inline expr="\Delta x" /> 도, 세로 변화 <MathBlock inline expr="\Delta y" /> 도 모두 0이라서,
       <MathBlock inline expr="\tfrac{0}{0}" /> 은 계산할 수 없죠.
     </p>
 
@@ -100,15 +100,15 @@ function onSetComplete() {
       그래서 "겹치기" 대신 <b>"한없이 가까이 보내기"</b>라는 우회로가 필요해요. 그게 극한입니다.
     </ConceptCard>
 
-    <ConceptCard tone="note" title="새 용어 — 순간변화율 / 접선">
+    <ConceptCard tone="note" title="새 용어: 순간변화율 / 접선">
       <b>순간변화율(instantaneous rate of change)</b>: 바로 그 <b>한 점</b>에서의 변화율.
-      기하학적으로는 그 점 <b>접선</b>(곡선에 그 점에서 살짝 닿기만 하는 직선 — 할선의 두 점을 한없이
+      기하학적으로는 그 점 <b>접선</b>(곡선에 그 점에서 살짝 닿기만 하는 직선. 할선의 두 점을 한없이
       가까이 붙였을 때의 극한이에요)<b>의 기울기</b>이고, 이것이 곧 <b>미분값</b>입니다.
     </ConceptCard>
 
     <!-- 3. 극한 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">3. 극한 — 한없이 가까이 가면?</h2>
-    <ReviewFlag id="ch2-s3" chapter="ch2" label="3. 극한 — 한없이 가까이 가면?" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">3. 극한: 한없이 가까이 가면?</h2>
+    <ReviewFlag id="ch2-s3" chapter="ch2" label="3. 극한: 한없이 가까이 가면?" />
     <p class="leading-relaxed text-slate-700">
       직접 0 을 넣는 대신, 간격 <MathBlock inline expr="h" /> 를 <b>점점 0 에 가깝게</b> 하면서
       평균변화율이 어떤 값에 <b>다가가는지</b> 봅니다. <MathBlock inline expr="f(x)=x^2" /> 의
@@ -117,12 +117,12 @@ function onSetComplete() {
     <MathBlock expr="\dfrac{f(1+h)-f(1)}{h} = \dfrac{(1+h)^2 - 1}{h}" />
     <p class="leading-relaxed text-slate-700">
       여기서 <MathBlock inline expr="(1+h)^2" /> 은 <MathBlock inline expr="(1+h)\times(1+h)" /> 를 펼친 것.
-      펼치기는 중학교의 <b>분배법칙</b> 그대로예요 — 앞 괄호의 각 항(1과 h)을 뒤 괄호의 각 항에 곱해 전부 더합니다:
+      펼치기는 중학교의 <b>분배법칙</b> 그대로예요. 앞 괄호의 각 항(1과 h)을 뒤 괄호의 각 항에 곱해 전부 더합니다:
     </p>
     <MathBlock expr="(1+h)(1+h) = 1\cdot 1 + 1\cdot h + h\cdot 1 + h\cdot h = 1 + 2h + h^2" />
     <p class="leading-relaxed text-slate-700">
       가운데 <MathBlock inline expr="1\cdot h" /> 와 <MathBlock inline expr="h\cdot 1" /> 은 같은 값이라 합치면
-      <MathBlock inline expr="2h" /> — 그래서 <MathBlock inline expr="(1+h)^2 = 1 + 2h + h^2" /> 입니다.
+      <MathBlock inline expr="2h" /> 가 돼요. 그래서 <MathBlock inline expr="(1+h)^2 = 1 + 2h + h^2" /> 입니다.
       이걸 넣고 <MathBlock inline expr="-1" /> 로 지우면
       <MathBlock inline expr="1" /> 끼리 사라지고, 남은 항을 <MathBlock inline expr="h" /> 로 나눌 수 있어요:
     </p>
@@ -159,7 +159,7 @@ function onSetComplete() {
 
     <MathBlock expr="\lim_{h \to 0} \dfrac{f(1+h)-f(1)}{h} = \lim_{h \to 0} (2 + h) = 2" />
 
-    <ConceptCard tone="note" title="새 기호 — 극한 lim 과 수렴">
+    <ConceptCard tone="note" title="새 기호: 극한 lim 과 수렴">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <MathBlock inline expr="\lim_{h\to 0} (\cdots)" /> &nbsp; <b>읽는 법</b>: "리미트 에이치가 0 으로" ·
@@ -213,7 +213,7 @@ function onSetComplete() {
         { lhs: '0.21 \\div 0.1', answer: 2.1, tolerance: 0.001 },
       ]"
       :hints="['먼저 두 함숫값 f(1), f(1.1) 을 구하세요.', '평균변화율 = (세로 변화) ÷ (가로 변화 h).']"
-      explanation="2.1 = 2 + 0.1 이죠? h 를 더 줄이면 2 에 더 가까워집니다 — 극한은 2."
+      explanation="2.1 = 2 + 0.1 이죠? h 를 더 줄이면 2 에 더 가까워집니다. 극한은 2."
     />
 
     <!-- 5. 극한 줌인 -->
@@ -247,7 +247,7 @@ function onSetComplete() {
       <ul class="list-disc space-y-2 pl-5">
         <li><b>극한</b>으로 "한 점의 기울기"를 정의하고 → 이것이 <b>미분(순간변화율)</b>.</li>
         <li>손실곡선 위 현재 지점의 미분값(기울기)이 <b>내려갈 방향</b>을 알려줍니다.</li>
-        <li>그 방향으로 조금씩 이동 = <b>경사하강법</b>(Phase 9). 미분이 그 나침반이에요.</li>
+        <li>그 방향으로 조금씩 이동 = <b>경사하강법</b>(9장). 미분이 그 나침반이에요.</li>
       </ul>
     </ConceptCard>
 
@@ -265,7 +265,7 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 · 단계별 계산 10문제입니다. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="변화율과 극한 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="변화율과 극한: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -370,7 +370,7 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 2 완료. 극한으로 '순간의 기울기'를 잡았습니다.</p>
+      <p class="font-semibold text-emerald-800">2장 완료. 극한으로 '순간의 기울기'를 잡았습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 이 극한을 공식으로 굳힌 <b>미분계수와 도함수의 정의</b>입니다.
       </p>
@@ -378,7 +378,7 @@ function onSetComplete() {
         to="/ch/ch3"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        다음 챕터 — 미분계수와 도함수의 정의 →
+        다음 챕터: 미분계수와 도함수의 정의 →
       </RouterLink>
     </div>
   </article>

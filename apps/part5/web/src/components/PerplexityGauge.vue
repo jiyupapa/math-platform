@@ -54,7 +54,7 @@ function barColor(l: number): string {
 <template>
   <div class="my-4 rounded-xl border border-slate-200 bg-white p-4">
     <p class="mb-3 text-sm font-semibold text-slate-700">
-      📊 퍼플렉시티 채점기 — 토큰별 확률 q 를 움직여 성적이 어떻게 변하는지 보세요
+      📊 퍼플렉시티 채점기: 토큰별 확률 q 를 움직여 성적이 어떻게 변하는지 보세요
     </p>
 
     <!-- 예문 선택 -->
@@ -124,7 +124,7 @@ function barColor(l: number): string {
       고민하는 것과 같은 수준입니다
     </p>
     <p class="mt-1.5 text-xs text-slate-500">
-      💡 실험: 어려운 토큰(국밥·삶았다) 하나의 q 를 조금만 올려도 PPL 이 확 내려가요 —
+      💡 실험: 어려운 토큰(국밥·삶았다) 하나의 q 를 조금만 올려도 PPL 이 확 내려가요.
       성적은 어려운 토큰이 지배합니다.
     </p>
   </div>

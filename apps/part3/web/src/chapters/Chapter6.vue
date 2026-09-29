@@ -19,11 +19,11 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 6</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">6장</p>
     <h1 class="mb-4 text-3xl font-bold">정규분포 🔔</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
-      5장 마지막에 이항분포의 막대들이 점점 <b>종 모양</b>으로 정돈되는 걸 봤죠. 그 곡선의 정체가
-      바로 <b>정규분포</b> — 키, 시험 점수, 측정 오차, 그리고 AI 의 노이즈까지, 세상 곳곳에서
+      5장 마지막에 이항분포의 막대들이 점점 <b>종 모양</b>으로 정돈되는 걸 봤죠. 그 곡선이
+      바로 <b>정규분포</b>입니다. 키, 시험 점수, 측정 오차, 그리고 AI 의 노이즈까지, 세상 곳곳에서
       나타나는 통계학에서 가장 유명한 분포입니다.
     </p>
 
@@ -36,17 +36,17 @@ function onSetComplete() {
     </ConceptCard>
 
     <!-- 1. 연속 확률변수 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">1. 연속 확률변수 — "정확히 그 값"의 확률은 0</h2>
-    <ReviewFlag id="ch6-s1" chapter="ch6" label="1. 연속 확률변수 — 정확히 그 값의 확률은 0" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">1. 연속 확률변수: "정확히 그 값"의 확률은 0</h2>
+    <ReviewFlag id="ch6-s1" chapter="ch6" label="1. 연속 확률변수: 정확히 그 값의 확률은 0" />
     <p class="leading-relaxed text-slate-700">
       주사위 눈이나 앞면 수는 1, 2, 3… 처럼 <b>뚝뚝 끊어진 값</b>이었어요. 그런데 <b>키</b>는
       170cm 와 171cm 사이에 170.5, 170.53, 170.5312… 값이 <b>이어져</b> 있습니다. 이런 확률변수를
       <b>연속 확률변수</b>라고 해요.
     </p>
 
-    <ConceptCard tone="warn" title="함정 주의 — 한 점의 확률은 0">
+    <ConceptCard tone="warn" title="함정 주의: 한 점의 확률은 0">
       "키가 <b>정확히</b> 170.000000…cm 일 확률"은 0 입니다. 소수점 아래로 무한히 정확하게 딱
-      맞을 수는 없으니까요. 그래서 연속 확률변수는 <b>구간</b>으로 말합니다 —
+      맞을 수는 없으니까요. 그래서 연속 확률변수는 <b>구간</b>으로 말합니다.
       "169cm 와 171cm <b>사이</b>일 확률은 15%" 처럼요.
     </ConceptCard>
 
@@ -55,7 +55,7 @@ function onSetComplete() {
       question="연속 확률변수에서는 '정확히 한 값'이 나올 확률이 0 이라서, 확률을 구간으로 말한다."
       type="truefalse"
       :answer="0"
-      explanation="참입니다. 연속인 값은 무한히 잘게 이어져 있어 한 점의 확률은 0 — 그래서 '구간의 확률'로만 말할 수 있어요."
+      explanation="참입니다. 연속인 값은 무한히 잘게 이어져 있어 한 점의 확률은 0이에요. 그래서 '구간의 확률'로만 말할 수 있어요."
     />
 
     <!-- 2. 확률 = 넓이 -->
@@ -67,7 +67,7 @@ function onSetComplete() {
     </p>
     <MathBlock expr="P(a \le X \le b) = (a \text{ 부터 } b \text{ 까지 곡선 아래 넓이})" />
 
-    <ConceptCard tone="note" title="새 개념 — 넓이로 확률 재기 (적분 직관)">
+    <ConceptCard tone="note" title="새 개념: 넓이로 확률 재기 (적분 직관)">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li>
           <b>밀도곡선(확률밀도)</b>: 연속 확률변수의 "확률 지형도". 곡선 전체 아래 넓이는
@@ -79,33 +79,33 @@ function onSetComplete() {
           기다란 S 모양은 Sum(합)의 S 예요.
         </li>
         <li>
-          안심하세요 — 이 과정에서 적분 <b>계산 기법은 전혀 필요 없습니다</b>. "적분 = 곡선 아래
+          안심하세요. 이 과정에서 적분 <b>계산 기법은 전혀 필요 없습니다</b>. "적분 = 곡선 아래
           넓이 = 확률"이라는 직관이면 AI 논문의 적분 기호도 읽을 수 있어요.
         </li>
       </ul>
     </ConceptCard>
 
     <!-- 3. 정규분포 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">3. 정규분포 — 종 모양의 왕</h2>
-    <ReviewFlag id="ch6-s3" chapter="ch6" label="3. 정규분포 — 종 모양의 왕" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">3. 정규분포: 종 모양의 왕</h2>
+    <ReviewFlag id="ch6-s3" chapter="ch6" label="3. 정규분포: 종 모양의 왕" />
     <p class="leading-relaxed text-slate-700">
       밀도곡선 중 가장 유명한 것이 <b>정규분포</b>입니다. 좌우대칭 종(bell) 모양이고, 딱 두 숫자로
-      완전히 결정돼요 — 어디가 중심인지(<MathBlock inline expr="\mu" />), 얼마나 퍼졌는지(<MathBlock inline expr="\sigma" />).
+      완전히 결정돼요. 어디가 중심인지(<MathBlock inline expr="\mu" />), 얼마나 퍼졌는지(<MathBlock inline expr="\sigma" />).
     </p>
 
-    <ConceptCard tone="note" title="새 기호 — N(μ, σ²)">
+    <ConceptCard tone="note" title="새 기호: N(μ, σ²)">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li>
           <MathBlock inline expr="N(\mu, \sigma^2)" /> &nbsp;<b>읽는 법</b>: "평균 뮤, 분산 시그마제곱인
           정규분포(Normal distribution)".
         </li>
-        <li><MathBlock inline expr="\mu" />(뮤) = 종의 <b>중심</b>(봉우리 위치) — 평균이자 중앙값.</li>
+        <li><MathBlock inline expr="\mu" />(뮤) = 종의 <b>중심</b>(봉우리 위치)로, 평균이자 중앙값.</li>
         <li>
-          <MathBlock inline expr="\sigma" />(시그마) = 종의 <b>폭</b> — 2장에서 배운 표준편차 그대로예요.
+          <MathBlock inline expr="\sigma" />(시그마) = 종의 <b>폭</b>으로, 2장에서 배운 표준편차 그대로예요.
           σ 가 크면 낮고 넓게, 작으면 높고 좁게.
         </li>
         <li>
-          괄호 둘째 자리에는 σ 가 아니라 <b>σ² (분산)</b>을 쓰는 관례입니다 — 그래서 표준편차가
+          괄호 둘째 자리에는 σ 가 아니라 <b>σ² (분산)</b>을 쓰는 관례입니다. 그래서 표준편차가
           5 인 키 분포를 <MathBlock inline expr="N(170, 5^2)" /> 처럼 <b>제곱 꼴로</b> 적어요.
         </li>
         <li>예: 성인 키 ≈ <MathBlock inline expr="N(170, 5^2)" />, 시험 점수, 측정 오차, 공장 부품의 치수….</li>
@@ -138,7 +138,7 @@ function onSetComplete() {
     />
 
     <!-- 5. 68-95-99.7 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">5. 68-95-99.7 규칙 — 정규분포의 줄자</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">5. 68-95-99.7 규칙: 정규분포의 줄자</h2>
     <ReviewFlag id="ch6-s5" chapter="ch6" label="5. 68-95-99.7 규칙" />
     <p class="leading-relaxed text-slate-700">
       모든 정규분포는 모양이 같아서, <b>σ 를 줄자 삼아</b> 넓이를 잴 수 있습니다. 위 탐험기의
@@ -146,7 +146,7 @@ function onSetComplete() {
     </p>
     <MathBlock expr="\mu \pm 1\sigma \approx 68\%, \qquad \mu \pm 2\sigma \approx 95\%, \qquad \mu \pm 3\sigma \approx 99.7\%" />
     <p class="leading-relaxed text-slate-700">
-      키가 <MathBlock inline expr="N(170, 5^2)" /> 이라면 — 68%의 사람이 165~175cm,
+      키가 <MathBlock inline expr="N(170, 5^2)" /> 이라면 68%의 사람이 165~175cm,
       95%가 160~180cm, 거의 전부(99.7%)가 155~185cm 안에 있다는 뜻입니다. 숫자 세 개로
       분포 전체의 감이 잡히죠.
     </p>
@@ -156,25 +156,25 @@ function onSetComplete() {
       question="시험 점수가 N(100, 10²) 를 따를 때, 80점~120점 사이에 드는 비율은 약 몇 %? (숫자만)"
       type="numeric"
       :answer="95"
-      :hints="['80 = 100 − 2×10, 120 = 100 + 2×10 — 즉 μ±2σ 구간입니다.', '68-95-99.7 중 ±2σ 는?']"
+      :hints="['80 = 100 − 2×10, 120 = 100 + 2×10, 즉 μ±2σ 구간입니다.', '68-95-99.7 중 ±2σ 는?']"
       explanation="80~120점은 μ±2σ 구간이므로 약 95% 입니다."
     />
 
     <!-- 6. 표준화 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">6. 표준화 — 모든 정규분포를 하나로</h2>
-    <ReviewFlag id="ch6-s6" chapter="ch6" label="6. 표준화 — 모든 정규분포를 하나로" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">6. 표준화: 모든 정규분포를 하나로</h2>
+    <ReviewFlag id="ch6-s6" chapter="ch6" label="6. 표준화: 모든 정규분포를 하나로" />
     <p class="leading-relaxed text-slate-700">
       2장에서 배운 <b>z 점수</b>가 여기서 다시 등장합니다. 값에서 평균을 빼고 σ 로 나누면
       "평균에서 <b>표준편차 몇 개</b>만큼 떨어졌나"가 되죠:
     </p>
     <MathBlock expr="z = \frac{x - \mu}{\sigma}" />
 
-    <ConceptCard tone="note" title="새 용어 — 표준정규분포">
+    <ConceptCard tone="note" title="새 용어: 표준정규분포">
       <b>표준정규분포(standard normal)</b>: 평균 0, 표준편차 1 로 표준화한 정규분포
       <MathBlock inline expr="N(0, 1)" />. <b>어떤</b> 정규분포든 z 점수로 바꾸면 전부 이 하나가
-      됩니다 — 그래서 표(또는 함수) 하나로 모든 정규분포의 넓이를 구할 수 있어요.
+      됩니다. 그래서 표(또는 함수) 하나로 모든 정규분포의 넓이를 구할 수 있어요.
       68-95-99.7 규칙도 z 로 말하면 "|z| ≤ 1, 2, 3" 입니다. 막대 두 개는 <b>절댓값</b> 기호(읽기:
-      "z의 절댓값") — 부호(±)를 떼고 <b>크기만</b> 남긴다는 뜻이에요(예: |−2| = 2). 그러니
+      "z의 절댓값"). 부호(±)를 떼고 <b>크기만</b> 남긴다는 뜻이에요(예: |−2| = 2). 그러니
       "|z| ≤ 2" 는 "평균에서 어느 쪽으로든 2σ 이내"가 됩니다.
     </ConceptCard>
 
@@ -189,25 +189,25 @@ function onSetComplete() {
       ]"
       :hints="[
         '먼저 z 점수를 구하세요: (값 − 평균) ÷ σ.',
-        'z = 2 는 μ±2σ 의 경계 — 안쪽이 95%.',
+        'z = 2 는 μ±2σ 의 경계예요. 안쪽이 95%.',
         '바깥 5% 는 왼쪽 끝과 오른쪽 끝에 반씩 나뉩니다.',
       ]"
       explanation="z = 2 이므로 μ±2σ 바깥 5% 중 오른쪽 절반, 즉 상위 약 2.5% 입니다. z 점수 하나로 '상위 몇 %'가 바로 나와요."
     />
 
     <!-- 7. 갈톤 보드 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">7. 갈톤 보드 — 우연이 쌓이면 종 모양</h2>
-    <ReviewFlag id="ch6-s7" chapter="ch6" label="7. 갈톤 보드 — 우연이 쌓이면 종 모양" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">7. 갈톤 보드: 우연이 쌓이면 종 모양</h2>
+    <ReviewFlag id="ch6-s7" chapter="ch6" label="7. 갈톤 보드: 우연이 쌓이면 종 모양" />
     <p class="leading-relaxed text-slate-700">
       왜 세상 곳곳이 정규분포일까요? 힌트가 되는 장치가 <b>갈톤 보드</b>입니다. 공이 핀에 부딪힐
-      때마다 왼쪽/오른쪽으로 반반 확률로 튀는데 — 이런 <b>작은 우연이 여러 번 쌓인 결과</b>는
+      때마다 왼쪽/오른쪽으로 반반 확률로 튀는데, 이런 <b>작은 우연이 여러 번 쌓인 결과</b>는
       가운데가 두터운 종 모양이 됩니다. 공을 직접 떨어뜨려 보세요.
     </p>
 
     <GaltonBoard :rows="10" />
 
     <p class="leading-relaxed text-slate-700">
-      키도 마찬가지예요 — 수많은 유전자와 환경 요인이라는 작은 우연들이 더해진 결과라서 종 모양이
+      키도 마찬가지예요. 수많은 유전자와 환경 요인이라는 작은 우연들이 더해진 결과라서 종 모양이
       됩니다. "우연들의 합은 정규분포"라는 이 놀라운 사실의 정식 이름이 <b>중심극한정리</b>,
       바로 다음 챕터의 주인공입니다.
     </p>
@@ -229,7 +229,7 @@ function onSetComplete() {
         </li>
         <li><b>디퓨전 모델</b>: 순수 정규분포 노이즈에서 시작해 노이즈를 걷어내며 이미지를 생성.</li>
         <li>
-          <b>오차 모델링</b>: 예측과 실제의 차이(오차)를 정규분포로 가정하는 것이 통계·ML 의 표준 —
+          <b>오차 모델링</b>: 예측과 실제의 차이(오차)를 정규분포로 가정하는 것이 통계·ML 의 표준이에요.
           작은 요인들이 겹친 오차는 종 모양이 되기 때문(갈톤 보드!).
         </li>
       </ul>
@@ -249,7 +249,7 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 · 단계별 계산 10문제입니다. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="정규분포 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="정규분포: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -268,7 +268,7 @@ function onSetComplete() {
           '꼬리의 개수를 정한다',
         ]"
         :answer="0"
-        :hints="['μ 는 평균 — 탐험기에서 μ 를 밀면 무엇이 변했나요?']"
+        :hints="['μ 는 평균이에요. 탐험기에서 μ 를 밀면 무엇이 변했나요?']"
         explanation="μ 는 중심 위치입니다. 폭은 σ 가 정하고, 전체 넓이는 항상 1 로 고정이에요."
       />
       <Quiz
@@ -303,7 +303,7 @@ function onSetComplete() {
         question="어떤 정규분포든 z = (x−μ)/σ 로 바꾸면 표준정규분포 N(0,1) 이 된다."
         type="truefalse"
         :answer="0"
-        explanation="참입니다. 그래서 표(함수) 하나로 모든 정규분포의 넓이를 계산할 수 있어요 — 표준화의 힘입니다."
+        explanation="참입니다. 그래서 표(함수) 하나로 모든 정규분포의 넓이를 계산할 수 있어요. 표준화의 힘입니다."
       />
       <Quiz
         difficulty="medium"
@@ -359,16 +359,16 @@ function onSetComplete() {
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">
-        Phase 6 완료. 종 모양의 정체와 σ 줄자 사용법을 익혔습니다.
+        6장 완료. 종 모양의 정체와 σ 줄자 사용법을 익혔습니다.
       </p>
       <p class="mt-1 text-sm text-emerald-700">
-        다음은 "왜 어디서나 종 모양인가"의 답 — <b>큰 수의 법칙과 중심극한정리</b>입니다.
+        다음은 "왜 어디서나 종 모양인가"의 답, <b>큰 수의 법칙과 중심극한정리</b>입니다.
       </p>
       <RouterLink
         to="/ch/ch7"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        다음 챕터 — 큰 수의 법칙과 중심극한정리 (핵심) →
+        다음 챕터: 큰 수의 법칙과 중심극한정리 (핵심) →
       </RouterLink>
     </div>
   </article>

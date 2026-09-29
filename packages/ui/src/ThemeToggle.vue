@@ -28,7 +28,7 @@ function cycle() {
   <button
     type="button"
     class="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-medium text-slate-600 transition-colors hover:bg-slate-100"
-    :title="`화면 테마: ${current.text} (${current.hint}) — 누르면 ${next.text}`"
+    :title="`화면 테마: ${current.text} (${current.hint}) · 누르면 ${next.text}`"
     :aria-label="`화면 테마 ${current.text}. 누르면 ${next.text}로 바뀝니다`"
     @click="cycle"
   >

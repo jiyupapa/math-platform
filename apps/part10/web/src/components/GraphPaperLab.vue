@@ -80,7 +80,7 @@ const fmtFactor = computed(() => {
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 종이 갈아끼우기 -->
-    <p class="mb-1 text-sm font-semibold text-slate-500">① 종이 갈아끼우기 — 곡선과 종이를 바꿔 가며 "직선이 되는 짝"을 찾아보세요</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">① 종이 갈아끼우기: 곡선과 종이를 바꿔 가며 "직선이 되는 짝"을 찾아보세요</p>
     <div class="mb-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
       <div class="flex items-center gap-1.5">
         <span class="text-xs text-slate-500">곡선:</span>
@@ -161,19 +161,19 @@ const fmtFactor = computed(() => {
           class="rounded-md px-3 py-2 text-sm font-medium"
           :class="isStraight ? 'bg-emerald-50 text-emerald-800' : 'bg-slate-100 text-slate-600'"
         >
-          <template v-if="isStraight">📏 직선! — 이 곡선의 "맞는 종이"를 찾았습니다.</template>
-          <template v-else>휘어 있네요 — 다른 종이로 갈아끼워 보세요.</template>
+          <template v-if="isStraight">📏 직선! 이 곡선의 "맞는 종이"를 찾았습니다.</template>
+          <template v-else>휘어 있네요. 다른 종이로 갈아끼워 보세요.</template>
         </p>
         <ul class="space-y-1 text-xs leading-relaxed text-slate-500">
           <li>보통 종이에서 직선 = <b>일차</b>(같은 간격만큼 더해짐)</li>
           <li>반로그(y만 로그)에서 직선 = <b>지수</b>(같은 간격마다 같은 배수)</li>
-          <li>로그-로그(둘 다 로그)에서 직선 = <b>거듭제곱(멱법칙)</b> — 스케일링 법칙의 종이!</li>
+          <li>로그-로그(둘 다 로그)에서 직선 = <b>거듭제곱(멱법칙)</b>, 스케일링 법칙의 종이!</li>
         </ul>
       </div>
     </div>
 
     <!-- ② 기울기 다이얼 -->
-    <p class="mt-5 mb-1 text-sm font-semibold text-slate-500">② 기울기 b 다이얼 — 로그-로그 직선의 기울기가 말하는 것 (y = xᵇ)</p>
+    <p class="mt-5 mb-1 text-sm font-semibold text-slate-500">② 기울기 b 다이얼: 로그-로그 직선의 기울기가 말하는 것 (y = xᵇ)</p>
     <div class="flex flex-wrap items-start gap-4 rounded-lg bg-slate-50 p-4">
       <svg :viewBox="`0 0 ${W} ${H}`" class="h-52 w-full max-w-sm rounded-lg bg-white ring-1 ring-slate-200">
         <line v-for="i in 4" :key="'gx' + i" :x1="PAD.l + ((i - 1) / 3) * (W - PAD.l - PAD.r)" :x2="PAD.l + ((i - 1) / 3) * (W - PAD.l - PAD.r)" :y1="PAD.t" :y2="H - PAD.b" stroke="var(--c-slate-200)" />
@@ -194,7 +194,7 @@ const fmtFactor = computed(() => {
         </p>
         <p class="mt-2 text-xs leading-relaxed text-slate-500">
           b &gt; 1 가속 성장 · 0 &lt; b &lt; 1 성장하되 <b>수확 체감</b> · b &lt; 0 감소.
-          3장에서 잴 손실 곡선의 기울기는 <b>작은 음수</b>(대략 −0.05 ~ −0.1)입니다 —
+          3장에서 잴 손실 곡선의 기울기는 <b>작은 음수</b>(대략 −0.05 ~ −0.1)입니다.
           "10배 부어야 조금 내려간다"의 수학.
         </p>
       </div>

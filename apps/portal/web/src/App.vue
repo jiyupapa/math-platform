@@ -37,7 +37,7 @@ function openSearch() {
             개념 지도
           </RouterLink>
           <RouterLink to="/glossary" class="inline-flex items-center py-1.5 text-sm font-medium whitespace-nowrap text-slate-600 hover:text-indigo-600 hover:underline">
-            비유어 사전
+            용어 대조표
           </RouterLink>
           <RouterLink to="/diagnose" class="inline-flex items-center py-1.5 text-sm font-medium whitespace-nowrap text-indigo-600 hover:underline">
             출발점 진단
@@ -54,7 +54,7 @@ function openSearch() {
             to="/qna"
             class="inline-flex items-center py-1.5 text-sm font-medium whitespace-nowrap text-slate-600 hover:text-indigo-600 hover:underline"
           >
-            🎓 질문 큐
+            🎓 답변 대기 질문
           </RouterLink>
           <ThemeToggle />
           <AuthPanel align="right" />
@@ -67,7 +67,7 @@ function openSearch() {
     <!-- 사이트 푸터 — main 밖에 둬야 contentinfo 랜드마크가 생긴다(main/section 안이면 generic).
          전 페이지 공통으로 참인 문장만 둔다(페이지별 안내는 각 뷰에). -->
     <footer class="mx-auto max-w-3xl break-keep px-5 pb-10 text-center text-xs text-slate-500">
-      진도는 배포본(같은 주소)에서 각 부와 통합됩니다.
+      각 부에서 공부한 진도가 이 지도에 함께 표시돼요.
     </footer>
 
     <!-- 통합검색 팔레트 (⌘K / Ctrl+K · 상단 🔎 검색) -->

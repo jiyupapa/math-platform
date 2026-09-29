@@ -20,7 +20,7 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 12 · 샘플링 (심화 · 마지막)</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">12장 · 샘플링 (심화 · 마지막)</p>
     <h1 class="mb-4 text-3xl font-bold">샘플링 — 다음 단어를 고르는 법</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       출력층(ch9)이 다음 단어의 <b>확률 분포</b>를 줬습니다. 그런데 <b>실제로 어떤 단어를 고를까요?</b>
@@ -38,7 +38,7 @@ function onSetComplete() {
       <ReviewFlag id="ch12-s1" chapter="ch12" label="1. greedy vs 샘플링" />
     </h2>
     <p class="leading-relaxed text-slate-700">
-      가장 간단한 방법은 <b>greedy(탐욕적)</b> — 늘 <b>확률 1등</b> 단어를 고르는 것. 확실하지만
+      가장 간단한 방법은 <b>greedy(탐욕적)</b>로, 늘 <b>확률 1등</b> 단어를 고르는 것. 확실하지만
       <b>매번 똑같고 뻔한</b> 답이 나오죠. 대신 <b>확률에 따라 무작위로</b> 고르면(샘플링) 답이
       다양해집니다. 아래에서 <b>🎲 뽑기</b>를 여러 번 눌러 보세요.
     </p>
@@ -47,8 +47,8 @@ function onSetComplete() {
 
     <ConceptCard tone="note" title="새 용어: greedy · 샘플링">
       <ul class="list-disc space-y-1 pl-5 text-sm">
-        <li><b>greedy(탐욕적) 디코딩</b> — 매 스텝 <b>확률이 가장 높은</b> 단어만 고르기. 결정적(항상 같은 답).</li>
-        <li><b>샘플링(sampling)</b> — 확률 분포에 따라 <b>무작위로</b> 단어 고르기. 같은 질문에도 답이 달라집니다.</li>
+        <li><b>greedy(탐욕적) 디코딩</b>: 매 스텝 <b>확률이 가장 높은</b> 단어만 고르기. 결정적(항상 같은 답).</li>
+        <li><b>샘플링(sampling)</b>: 확률 분포에 따라 <b>무작위로</b> 단어 고르기. 같은 질문에도 답이 달라집니다.</li>
       </ul>
     </ConceptCard>
 
@@ -62,19 +62,19 @@ function onSetComplete() {
 
     <!-- ===== 2. temperature ===== -->
     <h2 class="mt-8 mb-2 text-xl font-bold">
-      2. temperature — 분포를 뾰족하게? 평평하게?
+      2. temperature: 분포를 뾰족하게? 평평하게?
       <ReviewFlag id="ch12-s2" chapter="ch12" label="2. temperature" />
     </h2>
     <p class="leading-relaxed text-slate-700">
       <b>temperature(온도)</b>는 소프트맥스 전에 점수를 <b>T로 나눠</b> 분포 모양을 바꿉니다
-      (<MathBlock inline expr="\text{softmax}(z / T)" />). 왜 나누면 평평해질까요? —
+      (<MathBlock inline expr="\text{softmax}(z / T)" />). 왜 나누면 평평해질까요?
       <b>큰 수로 나누면 점수들 사이의 차이가 줄어들기</b> 때문이에요. 차이가 줄면 확률도 고만고만해져 평평해집니다.
       ('온도'라 부르는 건, 온도가 높으면 입자가 활발히 움직이듯 <b>단어 선택도 활발(무작위)해진다</b>는 비유예요.)
     </p>
     <ul class="my-3 space-y-1.5 pl-1 text-sm text-slate-700">
-      <li>🔹 <b>T &lt; 1 (낮음)</b> — 분포가 <b>뾰족</b>해짐. 1등에 더 쏠려 <b>안전·일관</b>되지만 뻔함. (T→0이면 greedy)</li>
-      <li>🔹 <b>T = 1</b> — 원래 분포 그대로.</li>
-      <li>🔹 <b>T &gt; 1 (높음)</b> — 분포가 <b>평평</b>해짐. 낮은 확률 단어도 잘 뽑혀 <b>다양·창의적</b>이지만 위험.</li>
+      <li>🔹 <b>T &lt; 1 (낮음)</b>: 분포가 <b>뾰족</b>해짐. 1등에 더 쏠려 <b>안전·일관</b>되지만 뻔함. (T→0이면 greedy)</li>
+      <li>🔹 <b>T = 1</b>: 원래 분포 그대로.</li>
+      <li>🔹 <b>T &gt; 1 (높음)</b>: 분포가 <b>평평</b>해짐. 낮은 확률 단어도 잘 뽑혀 <b>다양·창의적</b>이지만 위험.</li>
     </ul>
     <p class="text-sm text-slate-500">위 실험실의 temperature 슬라이더를 좌우로 움직이며 막대 모양 변화를 확인하세요.</p>
 
@@ -94,15 +94,15 @@ function onSetComplete() {
 
     <!-- ===== 3. top-k / top-p ===== -->
     <h2 class="mt-8 mb-2 text-xl font-bold">
-      3. top-k · top-p — 엉뚱한 후보 잘라내기
+      3. top-k · top-p: 엉뚱한 후보 잘라내기
       <ReviewFlag id="ch12-s3" chapter="ch12" label="3. top-k·top-p" />
     </h2>
     <p class="leading-relaxed text-slate-700">
       temperature를 높이면 <b>말도 안 되는 단어</b>까지 뽑힐 수 있어요. 그래서 <b>후보를 미리 잘라</b>냅니다:
     </p>
     <ul class="my-3 space-y-1.5 pl-1 text-sm text-slate-700">
-      <li>🔸 <b>top-k</b> — 확률 <b>상위 k개</b> 단어만 남기고 나머지는 버린 뒤, 그중에서 고름. (고정 개수)</li>
-      <li>🔸 <b>top-p (뉴클리어스)</b> — 확률 높은 순으로 더해 <b>누적이 p(예: 0.9)</b>가 될 때까지의 단어만 후보로.
+      <li>🔸 <b>top-k</b>: 확률 <b>상위 k개</b> 단어만 남기고 나머지는 버린 뒤, 그중에서 고름. (고정 개수)</li>
+      <li>🔸 <b>top-p (뉴클리어스)</b>: 확률 높은 순으로 더해 <b>누적이 p(예: 0.9)</b>가 될 때까지의 단어만 후보로.
         (상황에 따라 <b>개수가 유동적</b>)</li>
     </ul>
     <p class="text-sm text-slate-500">
@@ -111,7 +111,7 @@ function onSetComplete() {
       "지금 몇 개"가 함께 떠서, 분포에 따라 <b>후보 수가 달라지는</b> 걸 눈으로 볼 수 있어요.
     </p>
 
-    <DetailsCard title="➕ 더 깊이 알아보기 — top-p 자세히 & 실전 팁">
+    <DetailsCard title="➕ 더 깊이 알아보기: top-p 자세히 & 실전 팁">
       <p class="mb-1 font-semibold text-slate-800">top-k 와 top-p 의 차이</p>
       <p class="mb-2">
         <b>top-k</b>는 언제나 <b>정확히 k개</b>를 남깁니다. 그런데 모델이 아주 확신할 땐 1개면 충분하고,
@@ -155,7 +155,7 @@ function onSetComplete() {
     <h2 class="mt-8 mb-2 text-xl font-bold">5. 직접 풀어보기</h2>
     <p class="mb-2 leading-relaxed text-slate-700"><b>10문제를 모두 맞히면</b> 이 챕터가 완료됩니다.</p>
 
-    <QuizSet title="샘플링 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="샘플링: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -270,22 +270,22 @@ function onSetComplete() {
       class="mt-8 rounded-2xl border-2 border-indigo-300 bg-indigo-50 p-6 text-center"
     >
       <div class="mb-2 text-4xl">🎉🎓🏁</div>
-      <p class="text-lg font-bold text-indigo-800">전 과정 완주 — 트랜스포머 정복!</p>
+      <p class="text-lg font-bold text-indigo-800">전 과정 완주: 트랜스포머 정복!</p>
       <p class="mx-auto mt-2 max-w-xl text-sm text-indigo-900/80">
-        소프트맥스 한 조각에서 시작해, 토큰화·임베딩·위치·어텐션·블록·출력층을 거쳐, 학습과 샘플링까지 —
+        소프트맥스 한 조각에서 시작해, 토큰화·임베딩·위치·어텐션·블록·출력층을 거쳐, 학습과 샘플링까지,
         <b>LLM의 처음부터 끝까지</b>를 손으로 만지며 이해했습니다. 이제 여러분은
         <b>"ChatGPT가 어떻게 돌아가는지"</b>를 스스로 설명할 수 있어요.
       </p>
       <p class="mt-3 text-sm font-medium text-indigo-800">
-        🎯 궁극 목표 달성 — LLM은 "다음 단어를 확률로 고르는 기계", 그 핵심 부품이 트랜스포머.
+        🎯 궁극 목표 달성! LLM은 "다음 단어를 확률로 고르는 기계"이고, 그 핵심 부품이 트랜스포머.
       </p>
       <RouterLink to="/" class="mt-4 inline-block rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700">
-        처음으로 — 전체 여정 돌아보기
+        처음으로: 전체 여정 돌아보기
       </RouterLink>
     </div>
 
     <div v-else class="mt-8 rounded-xl border border-slate-200 bg-slate-50 p-5 text-center text-sm text-slate-500">
-      위 10문제를 모두 풀면 <b>전 과정(Phase 0~12)</b>이 완료됩니다. 대응 노트북
+      위 10문제를 모두 풀면 <b>전 과정(워밍업~12장)</b>이 완료됩니다. 대응 노트북
       <code>notebooks/ch12_sampling.ipynb</code>에서 temperature·top-k·top-p를 직접 돌려 보세요!
     </div>
   </article>

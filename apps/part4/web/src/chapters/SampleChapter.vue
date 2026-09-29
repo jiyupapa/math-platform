@@ -1,6 +1,6 @@
 <script setup lang="ts">
-// Phase 0 샘플 챕터 — 공통 컴포넌트를 모두 사용해 "한 챕터의 완성형"을 보여준다.
-// 실제 Phase 1~10 챕터도 이 구조를 그대로 따른다.
+// 워밍업 — 공통 컴포넌트를 모두 사용해 "한 챕터의 완성형"을 보여준다.
+// 실제 1~10장 챕터도 이 구조를 그대로 따른다.
 // 주제: 소프트맥스(softmax) — 트랜스포머가 점수를 확률로 바꾸는 바로 그 장치.
 import { ref, computed } from 'vue'
 import { ConceptCard } from '@series/ui'
@@ -34,7 +34,7 @@ const expChartData = computed(() => ({
   labels: tokens.value.map((t) => t.label),
   datasets: [
     {
-      label: 'e^(점수) — 정규화 전 지수값',
+      label: 'e^(점수): 정규화 전 지수값',
       data: tokens.value.map((t) => Math.exp(t.logit)),
       backgroundColor: ['var(--c-indigo-400)', 'var(--c-emerald-400)', 'var(--c-amber-400)', 'var(--c-pink-400)'],
       borderRadius: 6,
@@ -49,10 +49,10 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 0 · 샘플 챕터</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">워밍업 · 10분 몸풀기</p>
     <h1 class="mb-4 text-3xl font-bold">소프트맥스 맛보기 — 점수를 확률로</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
-      이 페이지는 학습 프로그램의 "한 챕터"가 어떻게 생겼는지 보여주는 견본입니다.
+      앞으로 공부할 챕터가 어떻게 생겼는지 미리 둘러보는 워밍업이에요.
       설명 카드, 수식, 차트, 실시간 조작 실험, 자동채점 문제가 모두 들어 있습니다.
     </p>
 
@@ -73,7 +73,7 @@ function onSetComplete() {
       <b>0~1 사이로, 모두 더하면 1(=100%)</b>이 되도록 부드럽게 바꿔줍니다.
     </p>
     <p class="mt-2 leading-relaxed text-slate-700">
-      이렇게 만들어진 확률 묶음을 <b>확률 분포(distribution)</b>라고 불러요 —
+      이렇게 만들어진 확률 묶음을 <b>확률 분포(distribution)</b>라고 불러요.
       <b>각 후보의 확률을 모아놓은 것</b>이고, <b>다 더하면 1</b>이 되는 게 특징입니다.
       (앞으로 자주 나올 말이니 기억해 두세요.)
     </p>
@@ -108,16 +108,16 @@ function onSetComplete() {
     />
 
     <!-- 심화 곁가지 (본류를 다 본 뒤, 궁금한 사람만) -->
-    <DetailsCard title="➕ 더 깊이 알아보기 — 로짓의 정체">
+    <DetailsCard title="➕ 더 깊이 알아보기: 로짓의 정체">
       <p class="mb-2">
         <b>① 로짓은 혼자선 의미가 약합니다.</b> 점수 <MathBlock inline expr="3" /> 이 높은지 낮은지는
         <b>다른 단어들의 점수와 비교</b>해야만 알 수 있어요. 그래서 모든 점수에 같은 수를 더해도 확률이
-        안 변하는 겁니다 — 중요한 건 <b>절대값이 아니라 차이</b>.
+        안 변하는 겁니다. 중요한 건 <b>절대값이 아니라 차이</b>.
       </p>
 
       <p class="mb-1 mt-3 font-semibold text-slate-800">② 왜 이름이 "로짓(logit)"일까?</p>
       <p class="mb-2">
-        원래 뜻은 <b>로그 오즈(log-odds)</b> — 확률을 거꾸로 펼쳐 놓은 값입니다.
+        원래 뜻은 <b>로그 오즈(log-odds)</b>로, 확률을 거꾸로 펼쳐 놓은 값입니다.
       </p>
       <ul class="mb-2 list-disc space-y-1 pl-5 text-sm">
         <li>
@@ -128,21 +128,21 @@ function onSetComplete() {
       </ul>
 
       <div class="mb-2 rounded-lg bg-white px-4 py-3 text-sm">
-        <p class="mb-1 font-semibold text-slate-800">잠깐 — 로그(log)가 뭐죠?</p>
+        <p class="mb-1 font-semibold text-slate-800">잠깐: 로그(log)가 뭐죠?</p>
         <p>
           <b>로그는 지수(거듭제곱)의 반대</b>예요. 지수 <MathBlock inline expr="e^{x}" /> 가
           "<MathBlock inline expr="e" />(≈2.72)를 <MathBlock inline expr="x" />번 곱하기"라면,
           로그는 거꾸로 <b>"<MathBlock inline expr="e" /> 를 몇 제곱해야 이 수가 되지?"</b> 를 알아냅니다.
           (예: <MathBlock inline expr="\ln(1)=0" />, <MathBlock inline expr="\ln(2.72)\approx 1" />,
           <MathBlock inline expr="\ln(7.39)\approx 2" />.) 여기 로그는 밑이
-          <MathBlock inline expr="e" /> 인 <b>자연로그 <MathBlock inline expr="\ln" /></b> 입니다 —
+          <MathBlock inline expr="e" /> 인 <b>자연로그 <MathBlock inline expr="\ln" /></b> 입니다.
           소프트맥스가 <MathBlock inline expr="e" /> 를 쓰니 짝을 맞춘 거예요.
         </p>
       </div>
 
       <p class="mb-2">
         오즈는 항상 <b>0보다 큰 값</b>이라 그대로는 음수가 못 됩니다. 그런데 로그를 씌우면
-        <b>−무한대 ~ +무한대</b>로 쫙 펼쳐져요. 그래서 로짓이 음수도 되는 겁니다 —
+        <b>−무한대 ~ +무한대</b>로 쫙 펼쳐져요. 그래서 로짓이 음수도 되는 겁니다.
         <b>반반(50%)이면 0, 유리하면 +, 불리하면 −.</b>
       </p>
       <div class="mb-2 overflow-x-auto">
@@ -167,7 +167,7 @@ function onSetComplete() {
 
       <p class="mb-2">
         그래서 <b>로짓과 확률은 동전의 양면</b>이에요. 로그로 펼쳐 놓은 값을
-        <b>지수 <MathBlock inline expr="e^{z}" /> 로 되돌려</b> 다시 0~1 확률로 누르는 것 —
+        <b>지수 <MathBlock inline expr="e^{z}" /> 로 되돌려</b> 다시 0~1 확률로 누르는 것,
         그게 바로 소프트맥스가 하는 일입니다. (로그와 지수는 서로를 푸는 짝이라,
         공식에 <MathBlock inline expr="e" /> 가 등장하는 이유이기도 해요.)
       </p>
@@ -176,12 +176,12 @@ function onSetComplete() {
       <p class="mb-2">
         샘플에선 후보가 4개라 로짓도 4개지만, 진짜 LLM은 <b>단어 사전 전체</b>(예: 5만 개 단어)에 대해
         점수를 하나씩 뽑습니다. 즉 <b>로짓은 단어 사전 크기만큼</b>(약 5만 개) 나오고, 이를 소프트맥스에
-        통과시켜 "다음 단어가 각 단어일 확률" 5만 개를 얻습니다. (Phase 9 출력층에서 자세히)
+        통과시켜 "다음 단어가 각 단어일 확률" 5만 개를 얻습니다. (9장 출력층에서 자세히)
       </p>
 
       <div class="mt-3 rounded-lg bg-white px-4 py-3 text-sm text-slate-600">
         🎯 <b>한 컷 비유</b>: 로짓은 <b>시험 원점수</b>, 확률은 <b>반에서 차지하는 몫(%)</b>.
-        원점수 80점이 잘한 건지는 반 평균과 비교해야 알 수 있죠 — 소프트맥스가 그 비교·환산을 해줍니다.
+        원점수 80점이 잘한 건지는 반 평균과 비교해야 알 수 있죠. 소프트맥스가 그 비교·환산을 해줍니다.
       </div>
     </DetailsCard>
 
@@ -224,7 +224,7 @@ function onSetComplete() {
       한 줄로 읽으면: <b>"내 점수의 지수"</b>를 <b>"모두의 점수의 지수를 더한 값"</b>으로 나눈다.
     </p>
 
-    <ConceptCard tone="note" title="새 기호 풀이 — 처음 보는 기호 네 개">
+    <ConceptCard tone="note" title="새 기호 풀이: 처음 보는 기호 네 개">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <MathBlock inline expr="z_i" /> &nbsp;
@@ -248,9 +248,9 @@ function onSetComplete() {
           <MathBlock inline expr="\sum_{j} e^{z_j}" /> &nbsp;
           <b>이름</b>: 시그마(합) 기호 · <b>읽는 법</b>: "시그마 제이(j), 이의 지(z)제이 제곱의 합" ·
           <b>뜻</b>: <MathBlock inline expr="\textstyle\sum" /> 는 <b>"전부 더해라"</b>는 명령.
-          여기선 <b>모든 단어</b>의 지수값을 더한 것 — 즉 분모는 "전체 합"입니다.
+          여기선 <b>모든 단어</b>의 지수값을 더한 것, 즉 분모는 "전체 합"입니다.
           <br /><b>왜 분자는 <MathBlock inline expr="i" />, 분모는 <MathBlock inline expr="j" />?</b>
-          — <MathBlock inline expr="j" /> 도 <MathBlock inline expr="i" /> 와 똑같은 "몇 번째" 번호표인데,
+          <MathBlock inline expr="j" /> 도 <MathBlock inline expr="i" /> 와 똑같은 "몇 번째" 번호표인데,
           분모는 <b>나 하나</b>가 아니라 <b>모두</b>를 훑어 더해야 해서 글자만 다르게 빌려 쓴 거예요.
         </li>
       </ul>
@@ -271,7 +271,7 @@ function onSetComplete() {
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li>모든 점수에 <b>같은 수</b>를 더하거나 빼도 <b>확률은 그대로</b>입니다(분자·분모에서 약분됨).
           점수의 <b>절대값</b>이 아니라 <b>차이</b>가 확률을 결정해요.</li>
-        <li>확률이 가장 큰 단어가 "정답"은 아닙니다 — 그냥 <b>가장 그럴듯한 후보</b>일 뿐.</li>
+        <li>확률이 가장 큰 단어가 "정답"은 아닙니다. 그냥 <b>가장 그럴듯한 후보</b>일 뿐.</li>
       </ul>
     </ConceptCard>
 
@@ -285,16 +285,16 @@ function onSetComplete() {
         <li>
           <b>출력층 (다음 단어 예측)</b>: 모델이 수만 개 단어 각각에 점수를 매기면,
           소프트맥스가 이를 <b>확률 분포</b>로 바꿉니다. 그중에서 다음 단어를 고르죠.
-          (Phase 9·10에서 자세히)
+          (9·10장에서 자세히)
         </li>
         <li>
           <b>어텐션 (attention)</b>: 한 단어가 다른 단어들을 "얼마나 참고할지" 가중치를 정할 때도
-          소프트맥스로 <b>합이 1인 집중도</b>를 만듭니다. (Phase 5·6에서 자세히)
+          소프트맥스로 <b>합이 1인 집중도</b>를 만듭니다. (5·6장에서 자세히)
         </li>
       </ul>
       <p class="mt-2 text-sm text-violet-900/80">
         즉, 소프트맥스는 트랜스포머의 <b>중간(어텐션)과 출구(다음 단어)</b> 양쪽에서 똑같이 쓰입니다.
-        샘플 챕터 하나로 벌써 트랜스포머의 핵심 장치를 만진 셈이에요.
+        워밍업 하나로 벌써 트랜스포머의 핵심 장치를 만진 셈이에요.
       </p>
     </ConceptCard>
 
@@ -305,7 +305,7 @@ function onSetComplete() {
       <b>10문제를 모두 맞히면</b> 이 챕터가 완료됩니다. 막히면 힌트를 누르세요.
     </p>
 
-    <QuizSet title="소프트맥스 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="소프트맥스: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -331,7 +331,7 @@ function onSetComplete() {
         question="다른 조건이 같다면, 점수가 가장 큰 단어가 확률도 가장 크다."
         type="truefalse"
         :answer="0"
-        explanation="참입니다. 소프트맥스는 순서를 뒤집지 않아요 — 큰 점수 → 큰 확률."
+        explanation="참입니다. 소프트맥스는 순서를 뒤집지 않아요. 큰 점수 → 큰 확률."
       />
       <Quiz
         difficulty="easy"
@@ -418,7 +418,7 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">샘플 챕터 완료</p>
+      <p class="font-semibold text-emerald-800">워밍업 완료</p>
       <p class="mt-1 text-sm text-emerald-700">
         왼쪽 진도 표시줄이 채워졌습니다. 실제 챕터도 이렇게 진행됩니다.
         대응 노트북 <code>notebooks/ch00_sample.ipynb</code> 에서 같은 계산을 손으로 해보세요.

@@ -23,17 +23,17 @@ const fmtNum = (n: number) =>
 
 const obs = computed(() => {
   if (r.value <= 2)
-    return 'r 이 아주 작으면 극단적으로 가볍지만, 배울 수 있는 변화의 "방향 수"도 그만큼 적어요 — 복잡한 조련에는 용량이 모자랄 수 있습니다.'
+    return 'r 이 아주 작으면 극단적으로 가볍지만, 배울 수 있는 변화의 "방향 수"도 그만큼 적어요. 복잡한 조련에는 용량이 모자랄 수 있습니다.'
   if (r.value <= 16)
     return '실무에서 가장 흔한 구간(r 4~16). 조련이 만드는 변화 대부분을 담으면서도 수백 배 가볍습니다.'
-  return 'r 을 키우면 용량은 늘지만 절약 배율이 줄어요 — 전체 파인튜닝에 다가가는 중. 필요한 만큼만 쓰는 게 요령.'
+  return 'r 을 키우면 용량은 늘지만 절약 배율이 줄어요. 전체 파인튜닝에 다가가는 중. 필요한 만큼만 쓰는 게 요령.'
 })
 </script>
 
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① rank 미니 실험 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 이 표(행렬)의 진짜 정보량은 몇 개일까요?</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ①: 이 표(행렬)의 진짜 정보량은 몇 개일까요?</p>
     <p class="mb-3 text-xs text-slate-500">숫자 16개짜리 표입니다. 행들을 가만히 비교해 보세요.</p>
 
     <div class="mb-3 inline-block overflow-hidden rounded-lg border border-slate-200">
@@ -61,14 +61,14 @@ const obs = computed(() => {
       <p v-else class="rounded-lg bg-amber-50 p-3 text-sm text-amber-800">
         👀 모든 행이 <b>기준 행 하나의 배수</b>였어요! 숫자는 16개지만 진짜 정보는
         기준 행 4개 + 배수 4개 = <b>8개뿐</b>. 이런 표의 <b>rank(진짜 정보의 방향 수)는 1</b>입니다.
-        표가 아무리 커도 rank 가 낮으면 — <b>얇은 두 조각(열 하나 × 행 하나)의 곱</b>으로
+        표가 아무리 커도 rank 가 낮으면 <b>얇은 두 조각(열 하나 × 행 하나)의 곱</b>으로
         통째로 복원할 수 있어요. 이게 LoRA 의 심장입니다.
       </p>
     </div>
 
     <!-- ② LoRA 파라미터 계산기 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — LoRA 파라미터 계산기: 얼마나 가벼워지나</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · LoRA 파라미터 계산기: 얼마나 가벼워지나</p>
     <p class="mb-3 text-xs text-slate-500">거대 행렬 W(d×d)는 얼리고 🧊, 변화분 ΔW = B(d×r)·A(r×d)만 학습합니다.</p>
 
     <div class="mb-3 flex flex-wrap items-center gap-2 text-sm">
@@ -102,7 +102,7 @@ const obs = computed(() => {
     <div class="mb-3 flex items-end gap-3">
       <div class="flex flex-col items-center">
         <div class="flex h-28 w-28 items-center justify-center rounded-lg border-2 border-sky-200 bg-sky-50 text-3xl">🧊</div>
-        <span class="mt-1 text-xs text-slate-500">W (얼림 — 학습 안 함)</span>
+        <span class="mt-1 text-xs text-slate-500">W (얼림, 학습 안 함)</span>
       </div>
       <span class="pb-10 text-lg text-slate-500">+</span>
       <div class="flex items-end gap-1">
