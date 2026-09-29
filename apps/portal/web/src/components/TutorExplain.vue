@@ -2,6 +2,7 @@
 // 3층 LLM — 로컬 Ollama 튜터가 추천을 강사 말투로 다시 설명(선택).
 // Ollama 미실행 시 조용히 폴백(위 템플릿 설명으로 갈음). 결정은 규칙 엔진이 하므로 LLM 은 '설명만'.
 import { ref } from 'vue'
+import { OllamaOriginHint } from '@series/ui'
 import { DEFAULT_MODEL, listModels, streamChat, type ChatMessage } from '@series/tutor'
 
 const props = defineProps<{ summary: string }>()
@@ -55,6 +56,7 @@ async function ask() {
     <p v-if="state === 'offline'" class="mt-2 text-xs text-slate-500">
       로컬 튜터(Ollama)가 꺼져 있어요. 대신 위 안내를 참고해 주세요. (켜면 더 자세히 설명해 드려요)
     </p>
+    <OllamaOriginHint v-if="state === 'offline'" />
     <p v-else-if="state === 'error'" class="mt-2 text-xs text-slate-500">
       튜터 응답에 문제가 있었어요. 위 안내를 참고하세요.
     </p>

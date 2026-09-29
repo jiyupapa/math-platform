@@ -30,12 +30,23 @@ export async function fetchMyProgress(): Promise<{ part: number; slug: string }[
 }
 
 // ── kv (진단결과 등 조회 불필요 blob) — 통째로 저장/복원 ──
-export async function kvGet<T = unknown>(key: string): Promise<T | null> {
+/** kv 한 칸 조회. 없으면 `{ value: null }`, 조회 실패(네트워크·권한·비로그인)면 `null`.
+ *  실패를 '없음'으로 읽으면 로컬 값으로 서버를 덮거나 서버 값을 잃는다 — 병합하는 쪽은 이걸 쓴다. */
+export async function kvRead<T = unknown>(key: string): Promise<{ value: T | null } | null> {
   const sb = await getSupabase()
   if (!sb || !currentUser.value) return null
   const { data, error } = await sb.from('kv').select('value').eq('key', key).maybeSingle()
-  if (error || !data) return null
-  return (data as { value: T }).value
+  if (error) return null
+  return { value: data ? (data as { value: T }).value : null }
+}
+export async function kvGet<T = unknown>(key: string): Promise<T | null> {
+  return (await kvRead<T>(key))?.value ?? null
+}
+export async function kvDelete(key: string): Promise<void> {
+  const sb = await getSupabase()
+  if (!sb || !currentUser.value) return
+  const { error } = await sb.from('kv').delete().match({ user_id: currentUser.value.id, key })
+  if (error) console.warn('[store] kv delete:', error.message)
 }
 export async function kvSet(key: string, value: unknown): Promise<void> {
   const sb = await getSupabase()
@@ -83,7 +94,8 @@ interface SyncSpec<T> {
   tag: string
   bridge: { get: () => T[]; set: (items: T[]) => void }
   idOf: (item: T) => string
-  pull: () => Promise<T[]>
+  /** 서버 집합. 조회 실패면 null — '서버가 비었다'와 구분해야 한다(아래 참고). */
+  pull: () => Promise<T[] | null>
   upsert: (item: T) => Promise<void>
   remove: (id: string) => Promise<void>
 }
@@ -101,6 +113,9 @@ function registerSetSync<T>(spec: SyncSpec<T>): void {
       const differentUser = bl !== null && bl.user !== user.id // 공용 PC: 다른 계정 → 남의 로컬 폐기
       const sameUser = bl !== null && bl.user === user.id
       const remote = await pull()
+      // 조회 실패를 빈 서버로 읽으면 base 의 모든 항목이 '서버에서 지워짐'으로 판정돼 로컬에서 사라진다
+      // (서버는 멀쩡하고 다음 동기화 때 돌아오지만, 그 사이 진도가 빈 것처럼 보인다). 실패면 이번 병합은 건너뛴다.
+      if (remote === null) return
       const remoteMap = new Map(remote.map((it) => [idOf(it), it]))
       const localItems = differentUser ? [] : bridge.get() // 첫 로그인(bl 없음)이면 익명 로컬을 마이그레이션
       const localMap = new Map(localItems.map((it) => [idOf(it), it]))
@@ -145,11 +160,11 @@ function registerSetSync<T>(spec: SyncSpec<T>): void {
 }
 
 // ── 진도 (part 별 완료 슬러그) ─────────────────────────────
-async function pullProgress(part: number): Promise<string[]> {
+async function pullProgress(part: number): Promise<string[] | null> {
   const sb = await getSupabase()
-  if (!sb || !currentUser.value) return []
+  if (!sb || !currentUser.value) return null
   const { data, error } = await sb.from('progress').select('slug').eq('part', part)
-  if (error || !data) return []
+  if (error || !data) return null
   return (data as { slug: string }[]).map((r) => r.slug)
 }
 async function upsertProgress(part: number, slug: string): Promise<void> {
@@ -187,11 +202,11 @@ interface ReviewRow {
   chapter: string
   label: string
 }
-async function pullReviews(part: number): Promise<ReviewRow[]> {
+async function pullReviews(part: number): Promise<ReviewRow[] | null> {
   const sb = await getSupabase()
-  if (!sb || !currentUser.value) return []
+  if (!sb || !currentUser.value) return null
   const { data, error } = await sb.from('reviews').select('item_id, chapter, label').eq('part', part)
-  if (error || !data) return []
+  if (error || !data) return null
   return (data as { item_id: string; chapter: string; label: string }[]).map((r) => ({
     id: r.item_id,
     chapter: r.chapter,

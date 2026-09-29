@@ -25,3 +25,5 @@ jobs:
         run: npm run check:contrast
       - name: 동기화 병합 단위 테스트
         run: node packages/store/src/syncMerge.test.mjs
+      - name: 입장 진단 회귀 테스트 (정답 위치 분산 · 옛 답 변환표 · 진단 동기화 판정)
+        run: node apps/portal/web/src/data/diagnostic.test.mjs

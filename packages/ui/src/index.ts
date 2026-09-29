@@ -43,6 +43,8 @@ export { default as NoteMarker } from './NoteMarker.vue'
 export { default as NotePanel } from './NotePanel.vue'
 // 주석의 '🤖 AI에게 묻기' → 튜터 연동 — 각 부 TutorChat 이 useNoteAsk 로 받고 NoteAskSave 로 저장 제안을 그린다.
 export { default as NoteAskSave } from './NoteAskSave.vue'
+// 튜터 '연결 안 됨' 안내 보강 — localhost 가 아닌 주소(사내 호스트)에서만 OLLAMA_ORIGINS 설정법을 보여 준다.
+export { default as OllamaOriginHint } from './OllamaOriginHint.vue'
 export {
   NOTE_ASK_EVENT,
   dispatchNoteAsk,

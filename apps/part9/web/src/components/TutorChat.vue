@@ -6,7 +6,7 @@ import { useRoute } from 'vue-router'
 import { chapters } from '@/data/chapters'
 import { contextFor, curriculumIndex } from '@/data/tutorContext'
 import { DEFAULT_MODEL, conceptGrounding, listModels, streamChat, type ChatMessage } from '@series/tutor'
-import { partNumberKey, useNoteAsk, NoteAskSave } from '@series/ui'
+import { partNumberKey, useNoteAsk, NoteAskSave, OllamaOriginHint } from '@series/ui'
 
 interface UiMessage {
   role: 'user' | 'assistant'
@@ -257,6 +257,8 @@ function segments(text: string): Segment[] {
         <li>Ollama 앱을 실행하세요 (또는 터미널에서 <code class="rounded bg-slate-100 px-1">ollama serve</code>)</li>
         <li>모델이 없다면: <code class="rounded bg-slate-100 px-1">ollama pull gemma4:e2b</code></li>
       </ol>
+      <!-- 사내 호스트(localhost 아님)에서만: 켜져 있어도 출처 차단(CORS)이면 여기로 온다 -->
+      <OllamaOriginHint />
       <button
         class="mt-1 rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-500"
         @click="checkServer"

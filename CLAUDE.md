@@ -87,6 +87,8 @@ QuizSet↔StepQuiz 그룹 계약(`quizGroupKey`/`QuizGroup` — `quizGroup.ts`)�
   버튼이 무반응이 된다(2026-09-28 까지 1부에만 있었다). 조립본 스모크가 부마다 1건씩 검사한다.
 - **AI 튜터 클라이언트 = `packages/tutor`(@series/tutor)** — 로컬/원격 Ollama 전송 계층. 서버 주소는 빌드 환경변수
   **`VITE_OLLAMA_URL`** 로 바꾼다(미설정 시 `http://localhost:11434`) → 코드 수정 없이 local↔remote 전환.
+  **사내 호스트(localhost 아닌 주소)에 올리면 각 PC 의 Ollama 가 그 출처를 403 으로 막는다** — `OLLAMA_ORIGINS` 설정법은
+  `docs/실행_가이드.html` 7절, 튜터 '연결 안 됨' 화면의 공용 `OllamaOriginHint`(packages/ui)가 localhost 가 아닐 때만 같은 안내를 띄운다.
   소비처: `TutorChat.vue`(각 부, 주제별) + 포털 `TutorExplain.vue`(추천 설명 재구술 — Ollama 미실행 시 규칙 템플릿 폴백).
 - **백엔드 층 = `packages/store`(@series/store)** — Supabase 클라이언트 하나로 ① 인증(`AuthPanel`·`initAuth`·`isAllowedEmail`),
   ② 진도·복습 크로스기기 동기화(`registerProgressSync`/`registerReviewSync` — 각 앱 THEMED 스토어가 등록),

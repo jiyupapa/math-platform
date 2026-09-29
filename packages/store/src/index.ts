@@ -10,7 +10,9 @@ export {
   fetchAdoptionStats,
   fetchMyProgress,
   kvGet,
+  kvRead,
   kvSet,
+  kvDelete,
   type AdoptionStats,
 } from './sync'
 // 협업 주석(메모·질문) — 공유 층, 익명. 설계: docs/todo_협업주석_260716.md
