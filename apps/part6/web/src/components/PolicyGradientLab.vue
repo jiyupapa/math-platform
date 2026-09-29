@@ -38,7 +38,7 @@ function experience(i: number) {
   weights.value = weights.value.map((w, j) => (j === i ? w * Math.exp(LR * a.reward) : w))
   tries.value++
   const dir = a.reward > 0 ? `확률 ↑ (보상 +${a.reward})` : `확률 ↓ (보상 ${a.reward})`
-  lastLog.value = `시도 ${tries.value}: 모델이 ${a.key}(${a.style})를 생성 → 심판(보상 모델) 점수 ${a.reward > 0 ? '+' : ''}${a.reward} → ${a.key}의 ${dir}`
+  lastLog.value = `시도 ${tries.value}: 모델이 ${a.key}(${a.style})를 생성 → 보상 점수 ${a.reward > 0 ? '+' : ''}${a.reward} → ${a.key}의 ${dir}`
 }
 function reset() {
   weights.value = ACTIONS.map(() => 1)
@@ -49,7 +49,7 @@ function reset() {
 
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험: 미니 정책 훈련기 — 정답 없이 점수만으로 배우기</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험: 미니 정책 훈련기: 정답 없이 점수만으로 배우기</p>
     <p class="mb-3 text-xs text-slate-500">
       요청: "고마워!" · 답변 카드를 누르면 "이번에 모델이 그 답을 생성했다"고 치고, 보상에 따라 정책(확률)이 갱신됩니다.
     </p>
@@ -65,7 +65,7 @@ function reset() {
         <div class="mb-1 flex items-center justify-between gap-2">
           <span class="text-xs font-bold text-slate-500">{{ a.key }} · {{ a.style }}</span>
           <span class="flex items-center gap-2">
-            <span class="rounded bg-slate-100 px-1.5 py-0.5 text-xs text-slate-600">심판 점수 {{ a.reward > 0 ? '+' : '' }}{{ a.reward }}</span>
+            <span class="rounded bg-slate-100 px-1.5 py-0.5 text-xs text-slate-600">보상 점수 {{ a.reward > 0 ? '+' : '' }}{{ a.reward }}</span>
             <span class="text-sm font-bold text-indigo-700">π = {{ pct(probs[i]) }}%</span>
           </span>
         </div>
@@ -94,11 +94,11 @@ function reset() {
 
     <p v-if="lastLog" class="mt-2 rounded-lg bg-sky-50 p-3 text-sm text-sky-800">⚙️ {{ lastLog }}</p>
     <p v-if="tries === 0" class="mt-2 rounded-lg bg-amber-50 p-3 text-sm text-amber-800">
-      👀 지금 정책은 세 답변을 <b>같은 확률(33%)</b>로 냅니다 — 아직 아무 경험이 없으니까요.
-      C(무성의)를 눌러 보세요. <b>나쁜 경험도 배움이 됩니다</b> — C의 확률이 내려가며 E[r]이 올라요.
+      👀 지금 정책은 세 답변을 <b>같은 확률(33%)</b>로 냅니다. 아직 아무 경험이 없으니까요.
+      C(무성의)를 눌러 보세요. <b>나쁜 경험도 배움이 됩니다</b>. C의 확률이 내려가며 E[r]이 올라요.
     </p>
     <p v-else-if="expectedReward > 2.5" class="mt-2 rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">
-      ✅ <b>정책이 좋은 답 쪽으로 수렴했어요.</b> 아무도 "정답은 A야"라고 말해 준 적이 없습니다 —
+      ✅ <b>정책이 좋은 답 쪽으로 수렴했어요.</b> 아무도 "정답은 A야"라고 말해 준 적이 없습니다.
       점수의 방향만 따라왔을 뿐. 이게 강화학습입니다.
     </p>
   </div>

@@ -52,7 +52,7 @@ function surprise(p: number): number {
 <template>
   <div class="my-4 rounded-xl border border-slate-200 bg-white p-4">
     <p class="mb-3 text-sm font-semibold text-slate-700">
-      🔧 코드 공방 — 글자 빈도를 조절해 보세요
+      🔧 코드 공방: 글자 빈도를 조절해 보세요
     </p>
 
     <!-- 프리셋 -->

@@ -148,7 +148,7 @@ const fmt = (n: number) => Number(n.toFixed(2)).toString()
     <p class="mt-2 px-1 text-xs leading-relaxed text-slate-500">
       점을 좌우로 끌어 보세요. <b class="text-emerald-700">초록 막대</b>는 평균보다 큰 편차(+),
       <b class="text-rose-700">분홍 막대</b>는 작은 편차(−)입니다. +와 −가 정확히 상쇄돼 편차 합은
-      늘 0 — 그래서 <b>제곱</b>해서 평균 낸 것이 분산, 그 제곱근이 표준편차 σ 입니다.
+      늘 0입니다. 그래서 <b>제곱</b>해서 평균 낸 것이 분산, 그 제곱근이 표준편차 σ 입니다.
       점들을 평균에서 멀리 흩어 놓을수록 σ 가 커지는 걸 확인하세요.
     </p>
   </div>

@@ -151,7 +151,7 @@ const fmt = (n: number) => Number(n.toFixed(3)).toString()
 
     <p class="mt-2 px-1 text-xs leading-relaxed text-slate-500">
       파란 선 = 지금까지의 <b>앞면 비율</b>, 주황 점선 = 이론값 <b>0.5</b>.
-      처음엔 크게 출렁이지만 던질수록 0.5 근처에서 잠잠해집니다 — 7장에서 배울 <b>큰 수의 법칙</b>이에요.
+      처음엔 크게 출렁이지만 던질수록 0.5 근처에서 잠잠해집니다. 7장에서 배울 <b>큰 수의 법칙</b>이에요.
     </p>
   </div>
 </template>

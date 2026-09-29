@@ -12,11 +12,11 @@ const boundary = computed(() => 2 / c1.value)
 const oneShot = computed(() => 1 / c1.value)
 const verdict1 = computed(() => {
   const f = factor.value
-  if (f < 0.02) return { label: '🎯 한 방 도착권 — 수축 인자 ≈ 0', tone: 'text-emerald-700' }
-  if (f < 0.6) return { label: '🏃 빠른 수렴 — 스텝마다 오차가 확확 준다', tone: 'text-emerald-700' }
-  if (f < 1 - 1e-9) return { label: '🐢 수렴은 하지만 느림 — 오차가 조금씩만 준다', tone: 'text-sky-700' }
-  if (Math.abs(f - 1) < 1e-9) return { label: '♾️ 경계 — 같은 오차로 영원히 진동', tone: 'text-amber-700' }
-  return { label: '💥 폭발 — 스텝마다 오차가 커진다', tone: 'text-rose-700' }
+  if (f < 0.02) return { label: '🎯 한 방 도착권: 수축 인자 ≈ 0', tone: 'text-emerald-700' }
+  if (f < 0.6) return { label: '🏃 빠른 수렴: 스텝마다 오차가 확확 준다', tone: 'text-emerald-700' }
+  if (f < 1 - 1e-9) return { label: '🐢 수렴은 하지만 느림: 오차가 조금씩만 준다', tone: 'text-sky-700' }
+  if (Math.abs(f - 1) < 1e-9) return { label: '♾️ 경계: 같은 오차로 영원히 진동', tone: 'text-amber-700' }
+  return { label: '💥 폭발: 스텝마다 오차가 커진다', tone: 'text-rose-700' }
 })
 // 12스텝 손실 스파크라인 (출발 오차 8, 손실 = (c/2)·오차²)
 const spark = computed(() => {
@@ -57,7 +57,7 @@ const triedCount = computed(() => Object.keys(tried.value).length)
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 수축 인자 기계 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 수축 인자 기계: 운명은 곱셈 하나로 결정된다</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · 수축 인자 기계: 운명은 곱셈 하나로 결정된다</p>
     <p class="mb-3 text-xs text-slate-500">
       이차 골짜기에서 한 스텝마다 오차(목표까지의 거리)에는 <b>1 − 보폭×곡률</b>이 곱해집니다.
       두 다이얼을 돌려 이 배율의 절대값을 지켜보세요.
@@ -99,17 +99,17 @@ const triedCount = computed(() => Object.keys(tried.value).length)
     <p class="mt-2 rounded-lg bg-slate-50 p-3 text-sm font-medium" :class="verdict1.tone">{{ verdict1.label }}</p>
 
     <p class="mt-3 rounded-lg bg-indigo-50 p-3 text-xs leading-relaxed text-indigo-800">
-      💡 곡률을 <b>2.0</b>에 두면 경계가 정확히 <b>1.00</b> — 워밍업의 그 미스터리가 풀립니다
-      (그 골짜기의 곡률이 2였던 거예요). 그리고 곡률을 올려 보세요 — <b>경계가 내려옵니다</b>:
+      💡 곡률을 <b>2.0</b>에 두면 경계가 정확히 <b>1.00</b>. 워밍업의 그 미스터리가 풀립니다
+      (그 골짜기의 곡률이 2였던 거예요). 그리고 곡률을 올려 보세요. <b>경계가 내려옵니다</b>:
       가파른 골짜기일수록 허용되는 보폭이 작다는 것, 이게 이 장의 심장입니다.
     </p>
 
     <!-- ② lr 스위프 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 실전 상황: 곡률을 모르는 골짜기에서 보폭 고르기</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · 실전 상황: 곡률을 모르는 골짜기에서 보폭 고르기</p>
     <p class="mb-3 text-xs text-slate-500">
       이번 골짜기의 곡률은 <b>비공개</b>입니다(실전이 늘 그렇듯). 후보 보폭들을 10스텝씩 시험해
-      좋은 보폭을 찾아보세요 — 후보가 로그 스케일(×3씩)인 것에 주목.
+      좋은 보폭을 찾아보세요. 후보가 로그 스케일(×3씩)인 것에 주목.
     </p>
 
     <div class="mb-3 flex flex-wrap gap-2">
@@ -140,12 +140,12 @@ const triedCount = computed(() => Object.keys(tried.value).length)
       class="mt-3 rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-amber-400"
       @click="revealed = true"
     >
-      🔍 지형 공개 — 곡률은 얼마였나
+      🔍 지형 공개: 곡률은 얼마였나
     </button>
     <p v-if="revealed" class="mt-3 rounded-lg bg-emerald-50 p-3 text-sm leading-relaxed text-emerald-800">
-      ✅ 곡률 c = <b>0.8</b> — 그래서 경계는 2/0.8 = <b>2.5</b>(3.0이 폭발한 이유),
+      ✅ 곡률 c = <b>0.8</b>. 그래서 경계는 2/0.8 = <b>2.5</b>(3.0이 폭발한 이유),
       한 방 도착은 1/0.8 = <b>1.25</b>(1.0이 가장 좋았던 이유)였습니다.
-      실전에서도 이렇게 <b>로그 스케일로 훑어 자릿수부터 찾는 것</b>(lr 스위프)이 표준 요령이에요 —
+      실전에서도 이렇게 <b>로그 스케일로 훑어 자릿수부터 찾는 것</b>(lr 스위프)이 표준 요령이에요.
       0.01과 0.03의 차이보다 0.01과 1.0의 차이가 운명을 가르니까요.
     </p>
   </div>

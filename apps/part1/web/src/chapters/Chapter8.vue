@@ -19,7 +19,7 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 8 · 응용과 마무리</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">8장 · 응용과 마무리</p>
     <h1 class="mb-4 text-3xl font-bold">응용 — PCA로 데이터 요약하기</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       지금까지 배운 벡터·행렬·고유벡터가 한데 모이는 챕터입니다. <b>PCA</b>는 복잡한 데이터에서
@@ -45,7 +45,7 @@ function onSetComplete() {
 
     <PCADemo />
 
-    <ConceptCard tone="note" title="새 용어 — PCA · 주성분 · 공분산">
+    <ConceptCard tone="note" title="새 용어: PCA · 주성분 · 공분산">
       <ul class="list-disc space-y-1 pl-5">
         <li>
           <b>PCA(주성분 분석, Principal Component Analysis)</b>: 데이터가 가장 넓게 퍼진 방향들을 찾아
@@ -55,11 +55,11 @@ function onSetComplete() {
           <b>주성분(principal component)</b>: 그 방향들. <b>PC1</b>이 가장 중요(정보 최다), PC2가 그다음.
         </li>
         <li>
-          <b>공분산(covariance)</b>: 두 특징이 <b>함께 변하는 정도</b> — 한쪽이 커질 때 다른 쪽도 커지면 양수, 반대로 움직이면 음수예요.
+          <b>공분산(covariance)</b>: 두 특징이 <b>함께 변하는 정도</b>. 한쪽이 커질 때 다른 쪽도 커지면 양수, 반대로 움직이면 음수예요.
           <span class="text-slate-500">(예: 회원 데이터에서 키가 큰 사람일수록 몸무게도 크다면, 키·몸무게의 공분산은 양수)</span>
           이 값들을 모은 게 <b>공분산행렬</b>이고,
           그 <b>고유벡터가 주성분</b>, <b>고유값이 그 방향의 퍼진 정도(정보량)</b>예요.
-          <span class="text-slate-500">("퍼진 정도"의 통계 정식 이름이 <b>분산(variance)</b>이에요 —
+          <span class="text-slate-500">("퍼진 정도"의 통계 정식 이름이 <b>분산(variance)</b>이에요.
           그래서 실무·라이브러리에서는 "정보 비율"을 <b>설명된 분산 비율(explained variance ratio)</b>이라
           부릅니다. 이 이름으로 검색하면 같은 개념이 나와요.)</span>
         </li>
@@ -75,17 +75,17 @@ function onSetComplete() {
     />
 
     <!-- 2. 차원축소 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">2. 차원축소 — 덜 중요한 축 버리기</h2>
-    <ReviewFlag id="ch8-s2" chapter="ch8" label="2. 차원축소 — 덜 중요한 축 버리기" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">2. 차원축소: 덜 중요한 축 버리기</h2>
+    <ReviewFlag id="ch8-s2" chapter="ch8" label="2. 차원축소: 덜 중요한 축 버리기" />
     <p class="leading-relaxed text-slate-700">
       주성분을 알면, <b>덜 중요한 축(작은 고유값)</b>을 버리고 <b>중요한 축만</b> 남길 수 있어요.
-      위 데모에서 "PC1으로 투영"을 켜면 2D 점들이 직선 하나(1D)로 모이죠 — 그게 <b>차원축소</b>입니다.
+      위 데모에서 "PC1으로 투영"을 켜면 2D 점들이 직선 하나(1D)로 모이죠. 그게 <b>차원축소</b>입니다.
       (<b>투영</b> = 점을 축 위로 <b>그림자처럼 내려찍는 것</b>. 자세한 수학은 심화 ch10의 주제라, 여기선 이 그림이면 충분해요.)
     </p>
     <ConceptCard tone="tip" title="정보는 얼마나 남을까?">
       <p class="mb-2">
         고유값이 <MathBlock inline expr="\lambda_1, \lambda_2" /> (아래 첨자 1·2는 "첫째·둘째"
-        순번 — <MathBlock inline expr="\lambda_1" /> 이 큰 쪽) 이면, PC1이 담은 정보 비율은
+        순번이고, <MathBlock inline expr="\lambda_1" /> 이 큰 쪽) 이면, PC1이 담은 정보 비율은
         <MathBlock inline expr="\dfrac{\lambda_1}{\lambda_1 + \lambda_2}" /> 예요.
       </p>
       <p class="text-sm text-slate-600">
@@ -123,18 +123,18 @@ function onSetComplete() {
     />
 
     <!-- 4. 전체 마무리 -->
-    <h2 class="mt-10 mb-2 text-xl font-bold">전체 정리 — 선형대수에서 AI까지</h2>
-    <ReviewFlag id="ch8-summary" chapter="ch8" label="전체 정리 — 선형대수에서 AI까지" />
+    <h2 class="mt-10 mb-2 text-xl font-bold">전체 정리: 선형대수에서 AI까지</h2>
+    <ReviewFlag id="ch8-summary" chapter="ch8" label="전체 정리: 선형대수에서 AI까지" />
     <ConceptCard tone="note" title="지금까지의 여정 (1~8)">
       <ul class="list-disc space-y-1 pl-5 text-sm">
-        <li><b>1 벡터</b> — 데이터를 숫자로 표현 (AI 입력의 기본 단위)</li>
-        <li><b>2 내적</b> — 닮은 정도·유사도 (추천·검색·어텐션)</li>
-        <li><b>3 행렬·행렬곱</b> — 데이터×가중치 (신경망 층)</li>
-        <li><b>4 연립방정식</b> — 최적값 찾기 (선형회귀)</li>
-        <li><b>5 선형변환</b> — 공간을 바꾸기 (신경망이 데이터를 변형)</li>
-        <li><b>6 행렬식·역행렬</b> — 되돌리기·가역성</li>
-        <li><b>7 고유값·고유벡터</b> — 변환의 핵심 축</li>
-        <li><b>8 PCA</b> — 고유벡터로 데이터 요약·차원축소</li>
+        <li><b>1 벡터</b>: 데이터를 숫자로 표현 (AI 입력의 기본 단위)</li>
+        <li><b>2 내적</b>: 닮은 정도·유사도 (추천·검색·어텐션)</li>
+        <li><b>3 행렬·행렬곱</b>: 데이터×가중치 (신경망 층)</li>
+        <li><b>4 연립방정식</b>: 최적값 찾기 (선형회귀)</li>
+        <li><b>5 선형변환</b>: 공간을 바꾸기 (신경망이 데이터를 변형)</li>
+        <li><b>6 행렬식·역행렬</b>: 되돌리기·가역성</li>
+        <li><b>7 고유값·고유벡터</b>: 변환의 핵심 축</li>
+        <li><b>8 PCA</b>: 고유벡터로 데이터 요약·차원축소</li>
       </ul>
       <p class="mt-2">
         이 도구들이 모여 <b>신경망·추천·차원축소</b> 같은 AI를 이룹니다. 홈 화면의
@@ -142,8 +142,8 @@ function onSetComplete() {
       </p>
     </ConceptCard>
 
-    <ConceptCard tone="tip" title="다음 단계 — AI 심화 (9~12)">
-      <b>핵심 토대(1~8)는 여기서 완성</b>입니다 — 축하해요! 이어지는 <b>심화 챕터 4개</b>까지
+    <ConceptCard tone="tip" title="다음 단계: AI 심화 (9~12)">
+      <b>핵심 토대(1~8)는 여기서 완성</b>입니다. 축하해요! 이어지는 <b>심화 챕터 4개</b>까지
       마치면 완주(진도 100%)예요: <b>기저·차원·계수(rank)</b>, <b>직교성과 투영</b>,
       <b>특이값분해(SVD)</b>, <b>그래디언트와 행렬미분</b>. 지금까지와 같은 방식(직관 먼저,
       계산은 배운 것만)으로 이어지고, SVD와 그래디언트는 추천시스템·딥러닝 학습의 실전 핵심입니다.
@@ -155,7 +155,7 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 · 단계별 계산 10문제. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="PCA·응용 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="PCA·응용: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -170,7 +170,7 @@ function onSetComplete() {
         question="주성분(가장 중요한 축)은 무엇으로 찾을까요?"
         :choices="['공분산행렬의 고유벡터', '행렬식', '역행렬']"
         :answer="0"
-        :hints="['ch7 복습 — 변환에도 안 꺾이는 그 축이요.']"
+        :hints="['ch7 복습: 변환에도 안 꺾이는 그 축이요.']"
         explanation="공분산행렬의 고유벡터가 주성분, 고유값이 그 방향의 정보량입니다."
       />
       <Quiz
@@ -195,7 +195,7 @@ function onSetComplete() {
         question="2D 데이터에서 첫 번째 주성분(PC1)은?"
         :choices="['데이터가 가장 넓게 퍼진 방향', '항상 x축과 같음', '가장 좁은 방향']"
         :answer="0"
-        :hints="['데모의 길쭉한 데이터 구름 — 긴 쪽 방향이 PC1이었죠.']"
+        :hints="['데모의 길쭉한 데이터 구름에서 긴 쪽 방향이 PC1이었죠.']"
         explanation="PC1은 분산(퍼짐)이 가장 큰 방향입니다."
       />
       <Quiz
@@ -219,7 +219,7 @@ function onSetComplete() {
         question="PCA는 ch7의 고유값·고유벡터를 데이터(공분산행렬)에 적용한 것이다."
         type="truefalse"
         :answer="0"
-        :hints="['주성분 = 공분산행렬의 고유벡터 — 2번 문제에서 확인했죠.']"
+        :hints="['주성분 = 공분산행렬의 고유벡터. 2번 문제에서 확인했죠.']"
         explanation="참. PCA의 수학적 핵심이 바로 고유분해입니다."
       />
       <!-- 어려움 -->
@@ -246,7 +246,7 @@ function onSetComplete() {
           '분모 = 전체 고유값 합 (6+3+1).',
           '(분자 ÷ 분모) × 100 이 %.',
         ]"
-        explanation="(6+3) ÷ (6+3+1) × 100 = 90%. 축 3개를 2개로 줄여도 정보의 90%가 남아요 — '수백 차원 → 2~3차원'이 통하는 이유입니다."
+        explanation="(6+3) ÷ (6+3+1) × 100 = 90%. 축 3개를 2개로 줄여도 정보의 90%가 남아요. '수백 차원 → 2~3차원'이 통하는 이유입니다."
       />
     </QuizSet>
 
@@ -262,7 +262,7 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 8 완료 — 핵심 과정(1~8)을 마쳤습니다.</p>
+      <p class="font-semibold text-emerald-800">8장 완료! 핵심 과정(1~8)을 마쳤습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
         수포자에서 시작해 선형대수로 AI의 토대를 갖췄습니다. 더 깊이 가려면 심화(9~12)로 이어가세요.
       </p>
@@ -270,7 +270,7 @@ function onSetComplete() {
         to="/ch/ch9"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        심화 시작 — 기저·차원·rank →
+        심화 시작: 기저·차원·rank →
       </RouterLink>
     </div>
   </article>

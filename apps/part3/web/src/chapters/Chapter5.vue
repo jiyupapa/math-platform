@@ -35,7 +35,7 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 5</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">5장</p>
     <h1 class="mb-4 text-3xl font-bold">확률변수와 확률분포 🎲</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       지금까지는 "앞면이 나온다", "양성이 나온다" 같은 <b>사건</b>의 확률을 다뤘어요. 이번엔 결과에
@@ -52,15 +52,15 @@ function onSetComplete() {
     </ConceptCard>
 
     <!-- 1. 확률변수 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">1. 확률변수 — 결과에 숫자 붙이기</h2>
-    <ReviewFlag id="ch5-s1" chapter="ch5" label="1. 확률변수 — 결과에 숫자 붙이기" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">1. 확률변수: 결과에 숫자 붙이기</h2>
+    <ReviewFlag id="ch5-s1" chapter="ch5" label="1. 확률변수: 결과에 숫자 붙이기" />
     <p class="leading-relaxed text-slate-700">
-      동전을 던지면 결과는 "앞" 또는 "뒤" — 글자죠. 여기에 <b>앞면 = 1, 뒷면 = 0</b> 이라고 숫자를
+      동전을 던지면 결과는 "앞" 또는 "뒤", 곧 글자죠. 여기에 <b>앞면 = 1, 뒷면 = 0</b> 이라고 숫자를
       붙여봅시다. 주사위 2개라면 "3과 4가 나옴" 대신 <b>합 = 7</b> 이라는 숫자로 요약할 수 있고요.
       이렇게 <b>시행의 결과마다 숫자를 하나씩 붙인 것</b>이 확률변수입니다.
     </p>
 
-    <ConceptCard tone="note" title="새 용어 — 확률변수 X">
+    <ConceptCard tone="note" title="새 용어: 확률변수 X">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li>
           <b>확률변수(random variable)</b>: 시행 결과마다 숫자를 붙인 것. 보통 대문자
@@ -83,8 +83,8 @@ function onSetComplete() {
     />
 
     <!-- 2. 확률분포 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">2. 확률분포 — 값마다 확률을 정리한 표</h2>
-    <ReviewFlag id="ch5-s2" chapter="ch5" label="2. 확률분포 — 값마다 확률을 정리한 표" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">2. 확률분포: 값마다 확률을 정리한 표</h2>
+    <ReviewFlag id="ch5-s2" chapter="ch5" label="2. 확률분포: 값마다 확률을 정리한 표" />
     <p class="leading-relaxed text-slate-700">
       동전 2개를 던져 <b>앞면 수 X</b> 를 세봅시다. 나올 수 있는 결과는 (뒤뒤)(뒤앞)(앞뒤)(앞앞)
       네 가지로 모두 같은 확률 <MathBlock inline expr="\tfrac{1}{4}" /> 이에요. X 값으로 묶으면:
@@ -122,10 +122,10 @@ function onSetComplete() {
 
     <ChartView type="bar" :data="coinDist" :options="coinDistOptions" :height="220" />
 
-    <ConceptCard tone="note" title="새 용어 — 확률분포">
+    <ConceptCard tone="note" title="새 용어: 확률분포">
       <b>확률분포(probability distribution)</b>: 확률변수가 가질 수 있는 <b>각 값에 확률을 짝지어
       정리한 것</b>(표 또는 그래프). 확률을 전부 더하면 반드시 <b>1</b> 이 됩니다.
-      3장에서 본 주사위 2개의 합이 7 근처에 몰리던 삼각형 모양 — 그게 바로 "합"이라는 확률변수의
+      3장에서 본 주사위 2개의 합이 7 근처에 몰리던 삼각형 모양, 그게 바로 "합"이라는 확률변수의
       확률분포였어요.
     </ConceptCard>
 
@@ -139,8 +139,8 @@ function onSetComplete() {
     />
 
     <!-- 3. 기댓값 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">3. 기댓값 — 확률로 가중평균한 값</h2>
-    <ReviewFlag id="ch5-s3" chapter="ch5" label="3. 기댓값 — 확률로 가중평균한 값" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">3. 기댓값: 확률로 가중평균한 값</h2>
+    <ReviewFlag id="ch5-s3" chapter="ch5" label="3. 기댓값: 확률로 가중평균한 값" />
     <p class="leading-relaxed text-slate-700">
       "주사위를 던지면 <b>평균적으로</b> 얼마가 나올까?" 1장에서 평균은 데이터를 다 더해 개수로
       나눴죠. 아직 던지지 않은 주사위에는 데이터가 없는 대신 <b>확률</b>이 있습니다. 그래서
@@ -151,7 +151,7 @@ function onSetComplete() {
       expr="E[X] = 1\cdot\tfrac{1}{6} + 2\cdot\tfrac{1}{6} + 3\cdot\tfrac{1}{6} + 4\cdot\tfrac{1}{6} + 5\cdot\tfrac{1}{6} + 6\cdot\tfrac{1}{6} = \tfrac{21}{6} = 3.5"
     />
 
-    <ConceptCard tone="note" title="새 기호 — 기댓값 E[X]">
+    <ConceptCard tone="note" title="새 기호: 기댓값 E[X]">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li>
           <MathBlock inline expr="E[X]" /> &nbsp;<b>읽는 법</b>: "엑스의 기댓값(expected value)" ·
@@ -159,7 +159,7 @@ function onSetComplete() {
         </li>
         <li>
           <MathBlock inline expr="\sum" />(시그마)는 "전부 더하라"는 기호. 즉 <b>값 × 확률을 모든 값에
-          대해 더한 것</b> — 확률을 가중치로 쓴 <b>가중평균</b>입니다.
+          대해 더한 것</b>, 곧 확률을 가중치로 쓴 <b>가중평균</b>입니다.
         </li>
         <li>
           1장의 평균과 한 몸: 데이터가 이미 있으면 <b>평균</b>, 확률분포로 미리 계산하면
@@ -186,10 +186,10 @@ function onSetComplete() {
         { lhs: 'E[X] = 100 + 100 + 0', answer: 200 },
       ]"
       :hints="['각 상금에 그 상금이 나올 확률을 곱하세요.', '기댓값 = (값 × 확률)을 전부 더한 것. 꽝은 0원이라 더해도 0.']"
-      explanation="기대 상금은 200원 — 복권 가격 1000원의 5분의 1입니다. 사는 사람은 평균적으로 장당 800원씩 잃고, 파는 쪽은 그만큼 법니다. 카지노·보험·뽑기가 모두 이 원리로 설계돼요."
+      explanation="기대 상금은 200원으로 복권 가격 1000원의 5분의 1입니다. 사는 사람은 평균적으로 장당 800원씩 잃고, 파는 쪽은 그만큼 법니다. 카지노·보험·뽑기가 모두 이 원리로 설계돼요."
     />
 
-    <ConceptCard tone="warn" title="함정 주의 — 기댓값은 '한 번의 결과'가 아니다">
+    <ConceptCard tone="warn" title="함정 주의: 기댓값은 '한 번의 결과'가 아니다">
       복권 한 장을 사면 결과는 10만 원, 1만 원, 0원 중 하나일 뿐, <b>200원이 나오는 일은 없습니다</b>.
       기댓값은 "<b>아주 많이 반복했을 때</b>의 평균"이에요. 한두 번의 운과 헷갈리지 마세요.
     </ConceptCard>
@@ -198,8 +198,8 @@ function onSetComplete() {
     <h2 class="mt-8 mb-2 text-xl font-bold">5. 분포의 흩어짐도 기댓값으로</h2>
     <ReviewFlag id="ch5-s5" chapter="ch5" label="5. 분포의 흩어짐도 기댓값으로" />
     <p class="leading-relaxed text-slate-700">
-      2장에서 분산 = "편차 제곱의 평균"이었죠. 확률분포에서도 똑같습니다 — 평균 자리에 기댓값을
-      쓰면 끝이에요. 기댓값을 <MathBlock inline expr="\mu" /> (그리스 문자, "뮤"라고 읽어요 —
+      2장에서 분산 = "편차 제곱의 평균"이었죠. 확률분포에서도 똑같습니다. 평균 자리에 기댓값을
+      쓰면 끝이에요. 기댓값을 <MathBlock inline expr="\mu" /> (그리스 문자, "뮤"라고 읽어요.
       평균을 나타내는 단골 기호로 6장에서 다시 만납니다) 라 할 때:
     </p>
     <MathBlock expr="\text{Var}(X) = E\big[(X - \mu)^2\big]" />
@@ -212,23 +212,23 @@ function onSetComplete() {
     <h2 class="mt-8 mb-2 text-xl font-bold">6. 베르누이 시행과 이항분포</h2>
     <ReviewFlag id="ch5-s6" chapter="ch5" label="6. 베르누이 시행과 이항분포" />
     <p class="leading-relaxed text-slate-700">
-      세상에서 가장 많이 등장하는 확률변수는 의외로 단순한 것에서 나옵니다 — <b>성공 아니면 실패,
+      세상에서 가장 많이 등장하는 확률변수는 의외로 단순한 것에서 나옵니다. <b>성공 아니면 실패,
       딱 두 가지뿐인 시행</b>이에요. 동전(앞/뒤), 광고(클릭/무시), 검사(양성/음성) 전부 이 모양이죠.
     </p>
 
-    <ConceptCard tone="note" title="새 용어 — 베르누이 시행">
+    <ConceptCard tone="note" title="새 용어: 베르누이 시행">
       <b>베르누이 시행(Bernoulli trial)</b>: 결과가 <b>성공/실패 둘뿐</b>인 시행 1번. 성공 확률을
       <MathBlock inline expr="p" /> 로 씁니다. 성공 = 1, 실패 = 0 으로 숫자를 붙이면 가장 단순한
       확률변수가 돼요 (기댓값은 <MathBlock inline expr="E[X] = 1\cdot p + 0\cdot(1-p) = p" />).
     </ConceptCard>
 
     <p class="leading-relaxed text-slate-700">
-      이 시행을 <b>n 번 반복</b>해서 <b>성공 횟수</b>를 세면? 그것이 <b>이항분포</b>입니다.
-      "동전 10번 중 앞면 몇 번?", "광고 100명 노출 중 클릭 몇 번?" — 전부 이항분포가 답해요.
+      이 시행을 <b>n 번 반복</b>해서 <b>성공 횟수</b>를 세면? 그 횟수가 따르는 분포가 <b>이항분포</b>입니다.
+      "동전 10번 중 앞면 몇 번?", "광고 100명 노출 중 클릭 몇 번?" 전부 이항분포가 답해요.
       공식을 보기 전에 재료 하나만 챙깁시다: <b>조합</b>.
     </p>
 
-    <ConceptCard tone="note" title="새 기호 — 조합 C(n, k)">
+    <ConceptCard tone="note" title="새 기호: 조합 C(n, k)">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li>
           <MathBlock inline expr="\binom{n}{k}" /> &nbsp;<b>읽는 법</b>: "엔 초이스 케이(n choose k)" ·
@@ -263,7 +263,7 @@ function onSetComplete() {
       type="numeric"
       :answer="6"
       :hints="['직접 나열해 보세요: 12, 13, 14, 23, 24, 34.', '4개 중 2개를 고르는 짝의 개수입니다.']"
-      explanation="{1·2}{1·3}{1·4}{2·3}{2·4}{3·4} — 6가지입니다."
+      explanation="{1·2}{1·3}{1·4}{2·3}{2·4}{3·4}, 모두 6가지입니다."
     />
 
     <!-- 7. 인터랙티브 -->
@@ -271,7 +271,7 @@ function onSetComplete() {
     <ReviewFlag id="ch5-s7" chapter="ch5" label="7. 이항분포 탐험기" />
     <p class="leading-relaxed text-slate-700">
       아래에서 <b>n 슬라이더를 천천히 오른쪽으로</b> 밀어보세요. 들쭉날쭉하던 막대들이 점점
-      좌우대칭 <b>종 모양</b>으로 정돈됩니다 — 다음 챕터 주인공(정규분포)의 예고편이에요.
+      좌우대칭 <b>종 모양</b>으로 정돈됩니다. 다음 챕터 주인공(정규분포)의 예고편이에요.
       p 를 움직이면 산봉우리가 <MathBlock inline expr="E[X] = np" /> 를 따라 이동합니다.
     </p>
 
@@ -292,7 +292,7 @@ function onSetComplete() {
     <ReviewFlag id="ch5-ai" chapter="ch5" label="🤖 분류 AI 의 출력이 바로 확률분포" />
     <p class="leading-relaxed text-slate-700">
       사진을 보고 동물을 맞히는 AI 의 출력을 열어보면 "고양이"라는 답 하나가 아니라
-      <b>고양이 70%, 개 25%, 새 5%</b> — 값마다 확률이 붙어 있고 합치면 1. 정확히 이 챕터의
+      <b>고양이 70%, 개 25%, 새 5%</b>. 값마다 확률이 붙어 있고 합치면 1. 정확히 이 챕터의
       <b>확률분포</b>입니다(3장의 소프트맥스가 이 모양을 만들어 줘요).
     </p>
 
@@ -300,9 +300,9 @@ function onSetComplete() {
       <ul class="list-disc space-y-2 pl-5">
         <li><b>분류 모델의 출력</b> = 클래스들 위의 확률분포. "정답일 확률"로 말하는 것이 AI 의 기본 화법.</li>
         <li>
-          <b>학습의 목표도 기댓값</b>: 데이터가 우연히 뽑히니 손실(틀린 정도)도 확률변수 —
+          <b>학습의 목표도 기댓값</b>: 데이터가 우연히 뽑히니 손실(틀린 정도)도 확률변수라서,
           AI 는 <b>손실의 기댓값(기대 손실)</b>을 최소화하도록 학습합니다(그 도구가 2부의
-          경사하강법 — 손실이 줄어드는 방향으로 조금씩 이동하는 학습법).
+          경사하강법, 곧 손실이 줄어드는 방향으로 조금씩 이동하는 학습법).
         </li>
         <li><b>클릭률 예측·추천</b>도 베르누이(클릭/무시)의 p 를 추정하는 문제예요.</li>
       </ul>
@@ -322,7 +322,7 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 · 단계별 계산 10문제입니다. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="확률변수와 확률분포 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="확률변수와 확률분포: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -390,7 +390,7 @@ function onSetComplete() {
         ]"
         :answer="1"
         :hints="['탐험기에서 n 슬라이더를 밀었을 때를 떠올리세요.']"
-        explanation="n 이 커질수록 종 모양(정규분포)에 가까워집니다 — 6장에서 이 곡선의 정체를 배워요."
+        explanation="n 이 커질수록 종 모양(정규분포)에 가까워집니다. 6장에서 이 곡선의 정체를 배워요."
       />
       <Quiz
         difficulty="medium"
@@ -410,7 +410,7 @@ function onSetComplete() {
           { lhs: 'E[X] = 500 + 475', answer: 975 },
         ]"
         :hints="['각 가치 × 그 확률을 먼저 계산하세요.', '두 결과를 더하면 기댓값입니다.']"
-        explanation="기대 가치는 975원. 뽑기 가격이 1000원이라면 평균적으로 뽑을수록 손해라는 뜻이죠 — 복권과 같은 구조입니다."
+        explanation="기대 가치는 975원. 뽑기 가격이 1000원이라면 평균적으로 뽑을수록 손해라는 뜻이죠. 복권과 같은 구조입니다."
       />
       <Quiz
         difficulty="hard"
@@ -435,16 +435,16 @@ function onSetComplete() {
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">
-        Phase 5 완료. 결과에 숫자를 붙이고 기댓값으로 미래의 평균까지 계산했습니다.
+        5장 완료. 결과에 숫자를 붙이고 기댓값으로 미래의 평균까지 계산했습니다.
       </p>
       <p class="mt-1 text-sm text-emerald-700">
-        다음은 이항분포가 다가가던 그 종 모양의 정체 — <b>정규분포</b>입니다.
+        다음은 이항분포가 다가가던 그 종 모양, <b>정규분포</b>입니다.
       </p>
       <RouterLink
         to="/ch/ch6"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        다음 챕터 — 정규분포 (핵심) →
+        다음 챕터: 정규분포 (핵심) →
       </RouterLink>
     </div>
   </article>

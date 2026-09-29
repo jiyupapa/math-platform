@@ -59,10 +59,10 @@ interface Box {
   note: string
 }
 const BOXES: Box[] = [
-  { key: 'fp32', label: 'fp32 (4바이트)', bytes: 4, note: '학습용 기본 칸 — 3장의 주인공' },
-  { key: 'fp16', label: 'fp16 (2바이트)', bytes: 2, note: '반쪽 자 — 7장' },
-  { key: 'int8', label: 'int8 (1바이트)', bytes: 1, note: '정수 칸 양자화 — 8장' },
-  { key: 'int4', label: 'int4 (0.5바이트)', bytes: 0.5, note: 'Ollama 태그 q4 의 그 4 — 9장' },
+  { key: 'fp32', label: 'fp32 (4바이트)', bytes: 4, note: '학습용 기본 칸 (3장의 주인공)' },
+  { key: 'fp16', label: 'fp16 (2바이트)', bytes: 2, note: '반쪽 자 (7장)' },
+  { key: 'int8', label: 'int8 (1바이트)', bytes: 1, note: '정수 칸 양자화 (8장)' },
+  { key: 'int4', label: 'int4 (0.5바이트)', bytes: 0.5, note: 'Ollama 태그 q4 의 그 4 (9장)' },
 ]
 const boxKey = ref('fp16')
 const box = computed(() => BOXES.find((b) => b.key === boxKey.value)!)
@@ -80,9 +80,9 @@ function ramVerdict(ram: number): { label: string; tone: string } {
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 부품별 저울 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 부품별 저울: 모델의 숫자는 어디에 몇 개 있나</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · 부품별 저울: 모델의 숫자는 어디에 몇 개 있나</p>
     <p class="mb-3 text-xs text-slate-500">
-      4부에서 조립한 부품 그대로입니다 — 임베딩 표(V×d) + 블록마다 어텐션(4d²)·FFN(8d²).
+      4부에서 조립한 부품 그대로입니다. 임베딩 표(V×d) + 블록마다 어텐션(4d²)·FFN(8d²).
       다이얼을 돌려 숫자가 어디서 불어나는지 보세요.
     </p>
 
@@ -144,22 +144,22 @@ function ramVerdict(ram: number): { label: string; tone: string } {
     </div>
 
     <p v-if="activePreset === 'gpt2'" class="mt-3 rounded-lg bg-emerald-50 p-3 text-xs leading-relaxed text-emerald-800">
-      ✅ 검산 성공 — 실제 GPT-2 소형의 공개 값은 <b>124M</b>입니다. 우리의 세 줄짜리 근사 공식이
+      ✅ 검산 성공: 실제 GPT-2 소형의 공개 값은 <b>124M</b>입니다. 세 줄짜리 근사 공식이
       오차 1% 미만으로 맞혔어요(생략한 bias·LayerNorm 이 그 티끌). "B·M 숫자"는 신비한 스펙이
       아니라 <b>부품별 곱셈 몇 번</b>이라는 뜻입니다.
     </p>
     <p v-if="activePreset === 'seven'" class="mt-3 rounded-lg bg-indigo-50 p-3 text-xs leading-relaxed text-indigo-800">
-      👀 총 ≈ <b>6.57B</b> — 시중 "7B 모델"의 정체가 이 근사 공식 안에 있습니다.
+      👀 총 ≈ <b>6.57B</b>. 시중 "7B 모델"의 속사정이 이 근사 공식 안에 있습니다.
       그리고 막대를 보세요: 임베딩 표(V·d)는 조연이고, 몸무게의 몸통은 <b>블록의 d² 행렬들</b>이에요
       (d 를 두 배로 하면 블록은 네 배가 됩니다).
     </p>
 
     <!-- ② 몸무게 계산기 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 몸무게 계산기: 파일 크기 = 개수 × 칸 크기</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · 몸무게 계산기: 파일 크기 = 개수 × 칸 크기</p>
     <p class="mb-3 text-xs text-slate-500">
       위에서 센 파라미터를 그대로 가져와, 숫자 하나를 담는 <b>칸의 크기</b>만 바꿔 봅니다.
-      워밍업에서 본 그 칸입니다 — 몇 바이트짜리 칸에 담을까?
+      워밍업에서 본 그 칸입니다. 몇 바이트짜리 칸에 담을까?
     </p>
 
     <div class="flex flex-wrap gap-2">
@@ -181,7 +181,7 @@ function ramVerdict(ram: number): { label: string; tone: string } {
         {{ parts.total.toLocaleString('en-US') }} 개 × {{ box.bytes }} 바이트
       </p>
       <p class="font-mono text-2xl font-bold text-slate-700">≈ {{ fileGB < 0.1 ? fileGB.toFixed(3) : fileGB.toFixed(1) }} GB</p>
-      <p class="mt-1 text-xs text-slate-500">(십진 GB = 10억 바이트 기준 — 파일 관리자의 GiB 표기와 약 7% 다른 이유는 아래 "더 깊이")</p>
+      <p class="mt-1 text-xs text-slate-500">(십진 GB = 10억 바이트 기준. 파일 관리자의 GiB 표기와 약 7% 다른 이유는 아래 "더 깊이")</p>
     </div>
 
     <div class="mt-2 grid gap-2 sm:grid-cols-3">
@@ -191,13 +191,13 @@ function ramVerdict(ram: number): { label: string; tone: string } {
       </div>
     </div>
     <p class="mt-1 text-xs text-slate-500">
-      ※ 가중치만의 판정입니다 — 실제로는 OS·브라우저·문맥(KV 캐시) 몫이 더 필요해요(11장 캡스톤에서 정산).
+      ※ 가중치만의 판정입니다. 실제로는 OS·브라우저·문맥(KV 캐시) 몫이 더 필요해요(11장 캡스톤에서 정산).
     </p>
 
     <p v-if="activePreset === 'seven' && boxKey === 'int4'" class="mt-3 rounded-lg bg-amber-50 p-3 text-xs leading-relaxed text-amber-800">
-      💡 이것이 <b>Ollama 태그 q4 의 정체</b>입니다 — 7B급을 4비트(0.5바이트) 칸에 담으면
-      ≈ 3.3GB, 8GB 노트북에도 들어가죠. (실제 파일이 이 계산보다 조금 큰 4GB 안팎인 이유 —
-      숫자 외에 축척 스티커 등이 함께 담기기 때문 — 는 9장에서 정산합니다.)
+      💡 이것이 <b>Ollama 태그 q4 의 정체</b>입니다. 7B급을 4비트(0.5바이트) 칸에 담으면
+      ≈ 3.3GB, 8GB 노트북에도 들어가죠. (실제 파일이 이 계산보다 조금 큰 4GB 안팎인 이유는
+      숫자 외에 축척 스티커 등이 함께 담기기 때문인데, 9장에서 정산합니다.)
     </p>
   </div>
 </template>

@@ -100,7 +100,7 @@ const fmt = (n: number) => Number(n.toFixed(2)).toString()
       Δx = {{ fmt(dx) }}
       <span class="text-emerald-700">→ Δu = {{ fmt(dU) }}</span>
       <span class="text-rose-700">→ Δy = {{ fmt(dY) }}</span>.
-      실제 <b>Δy/Δx ≈ {{ fmt(approx) }}</b> — Δ 를 줄이면 위 <b>dy/dx = {{ fmt(total) }}</b> 로 수렴합니다.
+      실제 <b>Δy/Δx ≈ {{ fmt(approx) }}</b>. Δ 를 줄이면 위 <b>dy/dx = {{ fmt(total) }}</b> 로 수렴합니다.
     </div>
     <p class="mt-2 px-1 text-xs leading-relaxed text-slate-500">
       변화가 사슬을 타고 흐를 때, 각 단계의 <b>변화율이 곱해집니다</b>.

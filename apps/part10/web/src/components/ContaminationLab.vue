@@ -27,7 +27,7 @@ const bars = computed(() => [
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 오염 다이얼 -->
     <p class="mb-1 text-sm font-semibold text-slate-500">
-      ① 오염 다이얼 — 벤치마크 문항 중 몇 %가 훈련 데이터에 새어 들어갔나 (신의 시점: 진짜 실력 60%)
+      ① 오염 다이얼: 벤치마크 문항 중 몇 %가 훈련 데이터에 새어 들어갔나 (신의 시점: 진짜 실력 60%)
     </p>
     <div class="mb-2 flex items-center gap-3">
       <input v-model.number="fPct" type="range" min="0" max="100" step="5" class="w-full max-w-sm accent-rose-500" />
@@ -37,13 +37,12 @@ const bars = computed(() => [
 
     <!-- 헤드라인 -->
     <p class="mb-3 rounded-lg bg-slate-900 px-4 py-2.5 font-medium text-white">
-      📰 "신모델, 벤치마크에서 <b class="text-amber-300">{{ observed.toFixed(1) }}점</b>
-      {{ fPct > 0 ? `— 전 세대(60점) 대비 +${drop.toFixed(1)}점 도약!` : '기록' }}"
+      📰 "신모델, 벤치마크에서 <b class="text-amber-300">{{ observed.toFixed(1) }}점</b>{{ fPct > 0 ? `, 전 세대(60점) 대비 +${drop.toFixed(1)}점 도약!` : ' 기록' }}"
       <span v-if="fPct > 0" class="ml-2 text-xs text-slate-500">← 진짜 실력은 그대로 60인데요.</span>
     </p>
 
     <!-- 세 가지 시험 -->
-    <p class="mb-1 text-sm font-semibold text-slate-500">② 같은 모델, 세 가지 시험 — 낙차가 오염의 지문입니다</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">② 같은 모델, 세 가지 시험: 낙차가 오염의 지문입니다</p>
     <div class="space-y-2 rounded-lg bg-slate-50 p-4">
       <div v-for="b in bars" :key="b.name" class="flex items-center gap-3">
         <span class="w-56 shrink-0 text-xs font-medium text-slate-600">{{ b.name }}</span>
@@ -58,7 +57,7 @@ const bars = computed(() => [
     </div>
 
     <!-- ③ 낙차 역산 -->
-    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">③ 낙차로 오염률 역산 — 탐정의 산수</p>
+    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">③ 낙차로 오염률 역산: 탐정의 산수</p>
     <div class="flex flex-wrap items-center gap-3 rounded-lg p-3" :class="fPct > 0 ? 'bg-amber-50' : 'bg-slate-50'">
       <div class="rounded-lg bg-white px-3 py-2 text-sm ring-1 ring-slate-200">
         낙차 Δ = {{ observed.toFixed(1) }} − {{ TRUE_P }} = <b class="font-mono">{{ drop.toFixed(1) }}%p</b>
@@ -67,10 +66,10 @@ const bars = computed(() => [
       <div class="rounded-lg bg-white px-3 py-2 text-sm ring-1 ring-slate-200">
         추정 오염률 f̂ = Δ ÷ 35 = <b class="font-mono text-rose-700">{{ fHat.toFixed(0) }}%</b>
       </div>
-      <span v-if="Math.round(fHat) === fPct" class="text-sm font-semibold text-emerald-700">✓ 다이얼과 일치 — 낙차가 오염률을 자백합니다</span>
+      <span v-if="Math.round(fHat) === fPct" class="text-sm font-semibold text-emerald-700">✓ 다이얼과 일치: 낙차가 오염률을 자백합니다</span>
     </div>
     <p class="mt-2 rounded-md bg-slate-100 px-3 py-2 text-xs leading-relaxed text-slate-600">
-      ⚠️ 핵심: 이 부풀림은 <b>소음이 아니라 편향</b>이라 — 문항 수를 아무리 늘려도(6장의 √n)
+      ⚠️ 핵심: 이 부풀림은 <b>소음이 아니라 편향</b>이라, 문항 수를 아무리 늘려도(6장의 √n)
       사라지지 않습니다. 오차범위 밖의 "유의한 도약"도 오염이면 진짜가 아니에요.
       (35 = 암기 95 − 실력 60, 즉 유출 문항당 부풀림 폭)
     </p>

@@ -17,7 +17,7 @@ const ITEMS: Item[] = [
   { t: '월 매출 3.2억이 12% 성장하면 내년은?', k: 'calc', s: 0.92 },
   { t: '회의실 대여료 시간당 45,000원, 6.5시간이면?', k: 'calc', s: 0.88 },
   { t: '환율 1,383원일 때 2,900달러는 원화로?', k: 'calc', s: 0.83 },
-  { t: '작년 1,240에서 올해 1,517 — 몇 % 늘었는지 계산해 줘', k: 'calc', s: 0.74 },
+  { t: '작년 1,240에서 올해 1,517로, 몇 % 늘었는지 계산해 줘', k: 'calc', s: 0.74 },
   { t: '세 분기 성장률 4%, 7%, 5.5%의 평균 구해줘', k: 'calc', s: 0.61 },
   { t: '이 숫자들 합계가 맞는지 봐줘', k: 'calc', s: 0.48 },
   { t: '인원 23명이 3개 조로 나뉘면 조당 몇 명꼴?', k: 'calc', s: 0.42 },
@@ -85,7 +85,7 @@ const STATUS_TEXT: Record<Status, string> = {
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 임계값 -->
     <p class="mb-1 text-sm font-semibold text-slate-500">
-      ① 임계값 다이얼 — 신뢰도 점수가 이 값 이상이면 계산 도구를 호출합니다
+      ① 임계값 다이얼: 신뢰도 점수가 이 값 이상이면 계산 도구를 호출합니다
     </p>
     <div class="mb-1 flex items-center gap-3">
       <input v-model.number="threshold" type="range" min="0" max="1" step="0.01" class="flex-1 accent-indigo-600" />
@@ -101,11 +101,11 @@ const STATUS_TEXT: Record<Status, string> = {
       >
         {{ v.toFixed(2) }} 로
       </button>
-      <span class="self-center text-slate-500">— 세 지점을 오가며 오류의 종류를 비교해 보세요</span>
+      <span class="self-center text-slate-500">세 지점을 오가며 오류의 종류를 비교해 보세요</span>
     </div>
 
     <!-- ② 질문 20개 -->
-    <p class="mb-1 text-sm font-semibold text-slate-500">② 오늘 들어온 질문 20개 — 라우터의 확신 점수와 판정</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">② 오늘 들어온 질문 20개: 라우터의 확신 점수와 판정</p>
     <div class="max-h-72 space-y-1 overflow-y-auto rounded-lg bg-slate-50 p-3">
       <div
         v-for="(r, i) in rows"
@@ -130,7 +130,7 @@ const STATUS_TEXT: Record<Status, string> = {
     </div>
 
     <!-- ③ 집계 -->
-    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">③ 집계 — 미니 혼동 행렬</p>
+    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">③ 집계: 미니 혼동 행렬</p>
     <div class="grid gap-3 sm:grid-cols-2">
       <div class="overflow-hidden rounded-lg ring-1 ring-slate-200">
         <table class="w-full text-center text-sm">
@@ -157,14 +157,14 @@ const STATUS_TEXT: Record<Status, string> = {
       </div>
       <div class="flex flex-col justify-center rounded-lg bg-slate-50 p-3 text-sm text-slate-700">
         <p>
-          20개 중 올바른 판정 <b class="text-emerald-700">{{ agg.ok }}개</b> —
+          20개 중 올바른 판정 <b class="text-emerald-700">{{ agg.ok }}개</b>,
           놓침 <b class="text-rose-700">{{ agg.fn }}</b> · 헛발 <b class="text-amber-700">{{ agg.fp }}</b>
         </p>
         <p class="mt-1 text-xs text-slate-500">
-          <template v-if="agg.fn === 0 && agg.fp === 0">완벽 — 하지만 이 데이터에선 불가능할 텐데요…?</template>
-          <template v-else-if="agg.fn === 0">놓침 0 — 대신 헛발을 감수한 설정입니다.</template>
-          <template v-else-if="agg.fp === 0">헛발 0 — 대신 놓침을 감수한 설정입니다.</template>
-          <template v-else>두 오류가 공존 — 임계값을 움직여 저울질해 보세요.</template>
+          <template v-if="agg.fn === 0 && agg.fp === 0">완벽! 하지만 이 데이터에선 불가능할 텐데요…?</template>
+          <template v-else-if="agg.fn === 0">놓침 0. 대신 헛발을 감수한 설정입니다.</template>
+          <template v-else-if="agg.fp === 0">헛발 0. 대신 놓침을 감수한 설정입니다.</template>
+          <template v-else>두 오류가 공존합니다. 임계값을 움직여 저울질해 보세요.</template>
         </p>
       </div>
     </div>
@@ -172,7 +172,7 @@ const STATUS_TEXT: Record<Status, string> = {
     <!-- ④ 교정 미리보기 -->
     <label class="mt-4 flex cursor-pointer items-center gap-2 text-sm text-slate-700">
       <input v-model="showCal" type="checkbox" class="h-4 w-4 accent-indigo-600" />
-      <span><b>점수 구간별 실제 비율 보기</b> — 점수를 확률처럼 읽어도 될까 (교정 미리보기)</span>
+      <span><b>점수 구간별 실제 비율 보기</b>: 점수를 확률처럼 읽어도 될까 (교정 미리보기)</span>
     </label>
     <div v-if="showCal" class="mt-2 space-y-1.5 rounded-md bg-amber-50 px-3 py-2">
       <div v-for="row in calRows" :key="row.label" class="flex items-center gap-2 text-sm text-amber-900">
@@ -183,7 +183,7 @@ const STATUS_TEXT: Record<Status, string> = {
         <span class="w-24 shrink-0 font-mono text-xs">{{ row.pos }}/{{ row.n }}{{ row.n ? ` (${Math.round((row.pos / row.n) * 100)}%)` : '' }}</span>
       </div>
       <p class="pt-1 text-xs text-amber-800">
-        점수 0.4~0.6 구간의 질문은 실제로 <b>절반(2/4)</b>만 계산 문제 — 점수가 "실제로 맞을
+        점수 0.4~0.6 구간의 질문은 실제로 <b>절반(2/4)</b>만 계산 문제예요. 점수가 "실제로 맞을
         확률"과 얼추 맞아떨어질 때 <b>교정이 잘 됐다</b>고 합니다(본문 3절).
       </p>
     </div>

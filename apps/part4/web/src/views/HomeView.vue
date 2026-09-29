@@ -31,7 +31,7 @@ const progress = useProgressStore()
         <b>① 웹</b>에서 슬라이더·드래그로 감을 잡고, 챕터마다 있는 <b>② Python 노트북</b>
         (<code class="rounded bg-white/70 px-1">notebooks/</code>)에서 같은 예제를 직접 계산해 굳혀요.
         각 챕터 끝에 짝 노트북 안내가 있습니다. 막히면 <b>우하단 🤖 AI 튜터</b>에게 물어보세요
-        <span class="text-emerald-700">(노트북·튜터는 선택 — 웹만으로도 완주 가능)</span>.
+        <span class="text-emerald-700">(노트북·튜터는 선택, 웹만으로도 완주 가능)</span>.
       </p>
     </div>
 

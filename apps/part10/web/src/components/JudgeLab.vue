@@ -84,20 +84,20 @@ const bar = (v: number) => `${v}%`
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 편향 주입 -->
     <p class="mb-1 text-sm font-semibold text-slate-500">
-      ① AI 심판에게 편향 심기 — 신의 시점: 진짜 A 승률 {{ ((TRUE_WINS / N) * 100).toFixed(1) }}% ({{ TRUE_WINS }}/200판)
+      ① AI 심판에게 편향 심기. 신의 시점: 진짜 A 승률 {{ ((TRUE_WINS / N) * 100).toFixed(1) }}% ({{ TRUE_WINS }}/200판)
     </p>
     <div class="mb-2 flex flex-wrap gap-x-5 gap-y-1.5 text-sm">
       <label class="flex cursor-pointer items-center gap-1.5">
         <input v-model="pos" type="checkbox" class="h-4 w-4 accent-rose-500" />
-        <span><b>위치 편향</b> — 먼저 보인 답 선호 (+0.3)</span>
+        <span><b>위치 편향</b>: 먼저 보인 답 선호 (+0.3)</span>
       </label>
       <label class="flex cursor-pointer items-center gap-1.5">
         <input v-model="len" type="checkbox" class="h-4 w-4 accent-amber-500" />
-        <span><b>길이 편향</b> — 긴 답 선호 (+0.2×길이차)</span>
+        <span><b>길이 편향</b>: 긴 답 선호 (+0.2×길이차)</span>
       </label>
       <label class="flex cursor-pointer items-center gap-1.5">
         <input v-model="self" type="checkbox" class="h-4 w-4 accent-violet-500" />
-        <span><b>자기 선호</b> — 심판이 B의 형제 모델 (B에 +0.15)</span>
+        <span><b>자기 선호</b>: 심판이 B의 형제 모델 (B에 +0.15)</span>
       </label>
     </div>
 
@@ -147,23 +147,23 @@ const bar = (v: number) => `${v}%`
         </span>
         <span class="rounded-md bg-slate-200 px-2 py-1 text-slate-600">사람(정답)과 일치율 {{ result.agree.toFixed(1) }}%</span>
         <span v-if="mode === 'crossed'" class="rounded-md bg-amber-100 px-2 py-1 text-amber-800">
-          판정 불가 {{ result.undecided }}판 — 순서를 바꾸니 판정이 뒤집힌 판 ({{ ((result.undecided / N) * 100).toFixed(0) }}%)
+          판정 불가 {{ result.undecided }}판: 순서를 바꾸니 판정이 뒤집힌 판 ({{ ((result.undecided / N) * 100).toFixed(0) }}%)
         </span>
       </div>
       <p class="rounded-md bg-white px-3 py-2 text-xs leading-relaxed text-slate-500 ring-1 ring-slate-100">
         <template v-if="mode === 'single' && pos">
-          위치 편향이 판을 흔들고 있습니다 — "교차 채점"으로 바꿔 위치를 지워 보세요.
+          위치 편향이 판을 흔들고 있습니다. "교차 채점"으로 바꿔 위치를 지워 보세요.
         </template>
         <template v-else-if="mode === 'crossed' && self">
-          위치는 지웠지만 아직 진짜와 어긋납니다 — <b>자기 선호는 순서 뒤집기로 못 지웁니다</b>.
+          위치는 지웠지만 아직 진짜와 어긋납니다. <b>자기 선호는 순서 뒤집기로 못 지웁니다</b>.
           자기 선호를 꺼 보세요(= 이해관계 없는 심판으로 교체).
         </template>
         <template v-else-if="mode === 'crossed' && !self && Math.abs(distortion) < 2.5">
-          진짜 승률에 근접했습니다 — 위치는 교차로, 자기 선호는 심판 교체로. 남은 길이 편향은
+          진짜 승률에 근접했습니다. 위치는 교차로, 자기 선호는 심판 교체로. 남은 길이 편향은
           채점 기준(루브릭)으로 다스립니다.
         </template>
         <template v-else-if="!pos && len && !self && mode === 'single'">
-          집계 승률은 진짜와 같아 보이죠? 그런데 일치율이 95% — <b>개별 판정 10판이 조용히
+          집계 승률은 진짜와 같아 보이죠? 그런데 일치율이 95%예요. <b>개별 판정 10판이 조용히
           뒤집혔습니다</b>. 집계가 맞다고 채점이 옳은 게 아닙니다.
         </template>
         <template v-else>편향 토글과 채점 방식을 바꿔 가며 왜곡·일치율의 변화를 관찰해 보세요.</template>

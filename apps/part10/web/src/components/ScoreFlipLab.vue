@@ -73,15 +73,15 @@ const fmt = (v: number) => (Number.isInteger(v) ? String(v) : v.toFixed(1))
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 신의 시점 -->
-    <p class="mb-1 text-sm font-semibold text-slate-500">① 진짜 실력 (신의 시점 — 현실에선 아무도 모르는 값)</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">① 진짜 실력 (신의 시점: 현실에선 아무도 모르는 값)</p>
     <div class="mb-4 flex flex-wrap gap-3 text-sm">
-      <div class="rounded-lg bg-indigo-50 px-3 py-1.5 font-medium text-indigo-800">모델 A — 진짜 실력 72%</div>
-      <div class="rounded-lg bg-rose-50 px-3 py-1.5 font-medium text-rose-800">모델 B — 진짜 실력 70%</div>
+      <div class="rounded-lg bg-indigo-50 px-3 py-1.5 font-medium text-indigo-800">모델 A: 진짜 실력 72%</div>
+      <div class="rounded-lg bg-rose-50 px-3 py-1.5 font-medium text-rose-800">모델 B: 진짜 실력 70%</div>
       <div class="self-center text-xs text-slate-500">→ A가 2%p 더 잘함 (이걸 시험으로 알아내야 함)</div>
     </div>
 
     <!-- ② 시험 치기 -->
-    <p class="mb-1 text-sm font-semibold text-slate-500">② 벤치마크 시험 치기 — 문항 수를 고르고, 다시 채점해 보세요</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">② 벤치마크 시험 치기: 문항 수를 고르고, 다시 채점해 보세요</p>
     <div class="mb-2 flex flex-wrap items-center gap-1.5">
       <button
         v-for="v in NS"
@@ -130,14 +130,14 @@ const fmt = (v: number) => (Number.isInteger(v) ? String(v) : v.toFixed(1))
         class="rounded-md px-3 py-2 text-sm font-medium"
         :class="verdict === 'flip' ? 'bg-rose-50 text-rose-800' : verdict === 'tie' ? 'bg-slate-100 text-slate-600' : 'bg-emerald-50 text-emerald-800'"
       >
-        <template v-if="verdict === 'flip'">😱 역전 — 이번 시험에선 B가 이겼습니다. 진짜 실력은 A가 높은데도요!</template>
-        <template v-else-if="verdict === 'tie'">🤝 동점 — 이 시험으로는 우열을 가릴 수 없네요.</template>
-        <template v-else>✅ 이번 시험은 진짜 실력 순서대로 나왔습니다 — 하지만 아래 20회 요약을 보세요.</template>
+        <template v-if="verdict === 'flip'">😱 역전! 이번 시험에선 B가 이겼습니다. 진짜 실력은 A가 높은데도요!</template>
+        <template v-else-if="verdict === 'tie'">🤝 동점. 이 시험으로는 우열을 가릴 수 없네요.</template>
+        <template v-else>✅ 이번 시험은 진짜 실력 순서대로 나왔습니다. 하지만 아래 20회 요약을 보세요.</template>
       </p>
     </div>
 
     <!-- ③ 20회 요약 -->
-    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">③ 같은 시험을 20번 다시 내면 — 누가 이기나</p>
+    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">③ 같은 시험을 20번 다시 내면: 누가 이기나</p>
     <div class="rounded-lg bg-slate-50 p-4">
       <div class="mb-2 flex flex-wrap gap-1">
         <span
@@ -149,26 +149,26 @@ const fmt = (v: number) => (Number.isInteger(v) ? String(v) : v.toFixed(1))
         >{{ m === 'T' ? '=' : m }}</span>
       </div>
       <p class="text-sm text-slate-700">
-        <b>{{ n.toLocaleString() }}문항</b> 시험 20번 중 — 실력이 낮은
+        <b>{{ n.toLocaleString() }}문항</b> 시험 20번 중 실력이 낮은
         <b class="text-rose-700">B가 이긴 시험 {{ summary.flips }}번</b><template v-if="summary.ties"> · 동점 {{ summary.ties }}번</template>.
         <template v-if="summary.flips >= 6">순위가 거의 동전 던지기입니다.</template>
         <template v-else-if="summary.flips >= 1">아직 가끔 뒤집힙니다.</template>
-        <template v-else>이제 순위가 안정적이네요 — 문항 수의 힘.</template>
+        <template v-else>이제 순위가 안정적이네요. 문항 수의 힘.</template>
       </p>
     </div>
 
     <!-- ④ 오차범위 미리보기 -->
     <label class="mt-4 flex cursor-pointer items-center gap-2 text-sm text-slate-700">
       <input v-model="showBand" type="checkbox" class="h-4 w-4 accent-indigo-600" />
-      <span><b>±오차범위 밴드 보기</b> — 여론조사의 그 "±3.1%p"와 같은 것 (정확한 공식은 6장에서)</span>
+      <span><b>±오차범위 밴드 보기</b>: 여론조사의 그 "±3.1%p"와 같은 것 (정확한 공식은 6장에서)</span>
     </label>
     <p v-if="showBand" class="mt-2 rounded-md bg-amber-50 px-3 py-2 text-sm text-amber-800">
       <template v-if="bandsOverlap">
-        두 밴드가 <b>겹칩니다</b> — 이번 점수 차이는 오차범위 안, 즉 <b>소음일 수 있어요</b>.
+        두 밴드가 <b>겹칩니다</b>. 이번 점수 차이는 오차범위 안, 즉 <b>소음일 수 있어요</b>.
         문항 수를 늘려 밴드가 좁아지는 걸 확인해 보세요.
       </template>
       <template v-else>
-        두 밴드가 <b>겹치지 않네요</b> — 이 정도면 점수 차이를 우연으로 보기 어렵습니다. (판정의 정식 도구는 7장)
+        두 밴드가 <b>겹치지 않네요</b>. 이 정도면 점수 차이를 우연으로 보기 어렵습니다. (판정의 정식 도구는 7장)
       </template>
     </p>
   </div>

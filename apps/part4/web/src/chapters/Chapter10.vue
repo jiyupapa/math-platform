@@ -34,11 +34,11 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 10 · 🎯 전체 조립 (궁극 목표)</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">10장 · 🎯 전체 조립 (궁극 목표)</p>
     <h1 class="mb-4 text-3xl font-bold">GPT가 문장을 쓰는 법 — 전부 이어보기</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
-      드디어 <b>궁극 목표</b>에 도착했습니다. 지금까지 만든 조각들 — 토큰화·임베딩·위치·어텐션·블록·출력층 —
-      을 <b>한 흐름</b>으로 잇고, 그걸 <b>반복</b>하면 LLM이 글을 씁니다. 처음의 그 한 문장,
+      드디어 <b>궁극 목표</b>에 도착했습니다. 지금까지 만든 조각들(토큰화·임베딩·위치·어텐션·블록·출력층)을
+      <b>한 흐름</b>으로 잇고, 그걸 <b>반복</b>하면 LLM이 글을 씁니다. 처음의 그 한 문장,
       <b>"LLM은 다음 단어를 확률로 고르는 기계"</b>가 이제 온전히 이해될 거예요.
     </p>
 
@@ -54,7 +54,7 @@ function onSetComplete() {
     </h2>
     <p class="leading-relaxed text-slate-700">
       아래 <b>"다음 단계 →"</b>를 눌러, "오늘 날씨가 정말"이 각 부품을 통과해 <b>다음 단어</b>가
-      나오기까지를 하나씩 따라가 보세요. 각 단계는 우리가 배운 챕터 그대로입니다.
+      나오기까지를 하나씩 따라가 보세요. 각 단계는 앞에서 배운 챕터 그대로입니다.
     </p>
 
     <PipelineLab />
@@ -107,19 +107,19 @@ function onSetComplete() {
       </p>
       <p class="mt-2 text-sm text-violet-900/80">
         ChatGPT의 술술 나오는 답변도, 사실은 이 과정을 <b>수백~수천 번</b> 반복한 결과예요.
-        거대해 보였던 AI의 정체가, 우리가 하나씩 만져본 조각들의 <b>조립</b>이었던 겁니다.
+        거대해 보였던 AI가 사실은 하나씩 만져본 조각들의 <b>조립</b>이었던 겁니다.
       </p>
     </ConceptCard>
 
     <!-- 전체 여정 요약 -->
     <div class="my-5 rounded-xl border border-slate-200 bg-slate-50 p-5">
-      <p class="mb-3 text-sm font-semibold text-slate-600">📚 우리가 지나온 길</p>
+      <p class="mb-3 text-sm font-semibold text-slate-600">📚 지금까지 지나온 길</p>
       <ol class="space-y-1.5">
         <li v-for="(j, i) in journey" :key="j.ch" class="flex items-start gap-2 text-sm">
           <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded bg-indigo-100 text-xs font-bold text-indigo-700">{{ i + 1 }}</span>
           <span>
             <RouterLink :to="`/ch/${j.ch}`" class="font-medium text-indigo-700 hover:underline">{{ j.name }}</RouterLink>
-            <span class="text-slate-500"> — {{ j.role }}</span>
+            <span class="text-slate-500"> ({{ j.role }})</span>
           </span>
         </li>
       </ol>
@@ -128,10 +128,10 @@ function onSetComplete() {
       </p>
     </div>
 
-    <DetailsCard title="➕ 더 깊이 알아보기 — 여기서 더 나아가면">
+    <DetailsCard title="➕ 더 깊이 알아보기: 여기서 더 나아가면">
       <ul class="mb-2 list-disc space-y-1.5 pl-5 text-sm">
         <li><b>GPT는 '디코더-only' 트랜스포머</b>입니다. 앞 단어만 보고 다음을 예측하도록
-          뒤를 가리는(마스킹) 방식이라, 우리가 배운 흐름이 곧 GPT의 뼈대예요.</li>
+          뒤를 가리는(마스킹) 방식이라, 지금까지 배운 흐름이 곧 GPT의 뼈대예요.</li>
         <li><b>학습(ch11 예정)</b>: 이 모든 가중치(임베딩·Q·K·V·FFN…)는 처음엔 무작위입니다.
           엄청난 양의 글로 "다음 단어 맞히기"를 연습하며 <b>손실을 줄이는 방향</b>으로 조금씩 조정돼요.</li>
         <li><b>샘플링(ch12 예정)</b>: 확률에서 <b>어떻게 고르느냐</b>(temperature·top-k·top-p)에 따라
@@ -143,12 +143,12 @@ function onSetComplete() {
     </DetailsCard>
 
     <!-- ===== 종합 문제 ===== -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">4. 종합 문제 — 전체 복습</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">4. 종합 문제: 전체 복습</h2>
     <p class="mb-2 leading-relaxed text-slate-700">
       전 과정을 아우르는 <b>종합 10문제</b>입니다. 모두 맞히면 <b>궁극 목표 달성</b>! 🏁
     </p>
 
-    <QuizSet title="전체 조립 — 종합 10문제" @completed="onSetComplete">
+    <QuizSet title="전체 조립: 종합 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -244,7 +244,7 @@ function onSetComplete() {
       />
       <Quiz
         difficulty="hard"
-        question="샘플 챕터에서 배운 '소프트맥스'는 트랜스포머의 어디에서 쓰이나요?"
+        question="워밍업에서 배운 '소프트맥스'는 트랜스포머의 어디에서 쓰이나요?"
         :choices="[
           '어텐션의 집중도 만들기 + 출력층의 다음 단어 확률',
           '토큰화에서만',
@@ -253,7 +253,7 @@ function onSetComplete() {
         ]"
         :answer="0"
         :hints="['입구(어텐션)와 출구(출력층) 양쪽.']"
-        explanation="소프트맥스는 어텐션 집중도와 출력층 확률 — 두 곳에서 핵심으로 쓰입니다."
+        explanation="소프트맥스는 어텐션 집중도와 출력층 확률, 두 곳에서 핵심으로 쓰입니다."
       />
     </QuizSet>
 
@@ -264,9 +264,9 @@ function onSetComplete() {
       class="mt-8 rounded-xl border-2 border-emerald-300 bg-emerald-50 p-6 text-center"
     >
       <div class="mb-2 text-4xl">🎓🏁</div>
-      <p class="text-lg font-bold text-emerald-800">궁극 목표 달성 — 트랜스포머를 이해했습니다!</p>
+      <p class="text-lg font-bold text-emerald-800">궁극 목표 달성: 트랜스포머를 이해했습니다!</p>
       <p class="mx-auto mt-2 max-w-lg text-sm text-emerald-700">
-        토큰 하나가 벡터가 되고, 서로를 참고하고, 블록을 지나, 다음 단어의 확률이 되기까지 —
+        토큰 하나가 벡터가 되고, 서로를 참고하고, 블록을 지나, 다음 단어의 확률이 되기까지,
         <b>LLM의 속을 처음부터 끝까지</b> 따라왔습니다. 이제 ChatGPT를 봐도 "아, 저건 다음 단어를
         확률로 고르는 거지"라고 말할 수 있어요.
       </p>

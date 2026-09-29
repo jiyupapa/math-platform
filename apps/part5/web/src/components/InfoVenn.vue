@@ -48,7 +48,7 @@ const presets = [
 <template>
   <div class="my-4 rounded-xl border border-slate-200 bg-white p-4">
     <p class="mb-3 text-sm font-semibold text-slate-700">
-      🔵 정보 벤다이어그램 — 예보와 날씨의 연관도를 조절해 보세요
+      🔵 정보 벤다이어그램: 예보와 날씨의 연관도를 조절해 보세요
     </p>
 
     <!-- 프리셋 + 슬라이더 -->
@@ -157,28 +157,28 @@ const presets = [
     <div class="mt-3 grid grid-cols-3 gap-2 text-center">
       <div class="rounded-lg bg-emerald-50 p-2">
         <p class="text-lg font-bold tabular-nums text-emerald-700">1.000</p>
-        <p class="text-xs text-emerald-700">H(X) — 예보 없이 남는 불확실성</p>
+        <p class="text-xs text-emerald-700">H(X): 예보 없이 남는 불확실성</p>
       </div>
       <div class="rounded-lg bg-slate-50 p-2">
         <p class="text-lg font-bold tabular-nums text-slate-700">{{ condH.toFixed(3) }}</p>
-        <p class="text-xs text-slate-500">H(X|Y) — 예보를 본 뒤 남는 것</p>
+        <p class="text-xs text-slate-500">H(X|Y): 예보를 본 뒤 남는 것</p>
       </div>
       <div class="rounded-lg bg-violet-50 p-2">
         <p class="text-lg font-bold tabular-nums text-violet-700">{{ I.toFixed(3) }}</p>
-        <p class="text-xs text-violet-600">I(X;Y) — 예보가 준 정보 (겹침)</p>
+        <p class="text-xs text-violet-600">I(X;Y): 예보가 준 정보 (겹침)</p>
       </div>
     </div>
 
     <p class="mt-2 text-xs" :class="s <= 0.02 ? 'font-semibold text-violet-600' : 'text-slate-500'">
       <template v-if="s <= 0.02">
-        🙃 항상 반대로 말하는 예보 — 그런데 I = 1비트 만점! 틀리는 걸 알면 뒤집어 들으면
+        🙃 항상 반대로 말하는 예보. 그런데 I = 1비트 만점! 틀리는 걸 알면 뒤집어 들으면
         되니까요. 상호정보량은 "맞느냐"가 아니라 <b>"얽혀 있느냐"</b>를 잽니다.
       </template>
       <template v-else-if="s >= 0.98">
-        🔗 완벽한 예보 — 겹침이 원 전체(I = 1비트), 예보만 보면 날씨를 다 압니다 (H(X|Y) = 0).
+        🔗 완벽한 예보: 겹침이 원 전체(I = 1비트), 예보만 보면 날씨를 다 압니다 (H(X|Y) = 0).
       </template>
       <template v-else-if="Math.abs(s - 0.5) < 0.02">
-        🎲 동전 던지기 예보 — 두 원이 떨어져 있어요(I = 0). 봐도 아무것도 안 줄어듭니다.
+        🎲 동전 던지기 예보: 두 원이 떨어져 있어요(I = 0). 봐도 아무것도 안 줄어듭니다.
       </template>
       <template v-else>
         겹침(보라) = 예보가 대신 알려주는 부분 · 초승달(초록) = 예보를 봐도 남는 불확실성.

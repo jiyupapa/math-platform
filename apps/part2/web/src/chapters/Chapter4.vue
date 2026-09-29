@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// Phase 4 · 기본 미분 공식 (멱법칙·상수·상수배·합차)
+// Phase 4 · 기본 미분 공식 (거듭제곱·상수·상수배·합차 공식)
 import { ConceptCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import PowerRule from '@/components/PowerRule.vue'
@@ -18,7 +18,7 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 4</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">4장</p>
     <h1 class="mb-4 text-3xl font-bold">기본 미분 공식 ⚡</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       지금까지는 미분할 때마다 극한을 직접 계산했죠. 매번 그러면 너무 느려요.
@@ -28,15 +28,15 @@ function onSetComplete() {
 
     <ConceptCard tone="goal" title="이 챕터의 목표">
       <ul class="list-disc space-y-1 pl-5">
-        <li><b>멱법칙</b> <MathBlock inline expr="(x^n)' = n\,x^{n-1}" /> 로 거듭제곱을 즉시 미분한다</li>
+        <li><b>거듭제곱 미분 공식</b> <MathBlock inline expr="(x^n)' = n\,x^{n-1}" /> 로 거듭제곱을 즉시 미분한다</li>
         <li><b>상수의 미분은 0</b>, <b>상수배</b>는 그대로 앞으로 뺀다</li>
         <li><b>합·차</b>는 항마다 따로 미분해 더한다 → 다항식을 통째로 미분한다</li>
       </ul>
     </ConceptCard>
 
-    <!-- 1. 멱법칙 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">1. 멱법칙 — 미분의 핵심 공식</h2>
-    <ReviewFlag id="ch4-s1" chapter="ch4" label="1. 멱법칙" />
+    <!-- 1. 거듭제곱 공식 -->
+    <h2 class="mt-8 mb-2 text-xl font-bold">1. 거듭제곱 미분 공식: 미분의 핵심</h2>
+    <ReviewFlag id="ch4-s1" chapter="ch4" label="1. 거듭제곱 미분 공식" />
     <p class="leading-relaxed text-slate-700">
       가장 많이 쓰는 공식입니다. <MathBlock inline expr="x" /> 의 거듭제곱은 이렇게 미분해요:
     </p>
@@ -51,9 +51,9 @@ function onSetComplete() {
 
     <PowerRule :max-n="5" />
 
-    <ConceptCard tone="note" title="새 용어 — 멱법칙(power rule)">
+    <ConceptCard tone="note" title="새 용어: 거듭제곱 미분 공식(power rule)">
       <ul class="list-disc space-y-1 pl-5 text-sm">
-        <li><b>멱(冪)</b> = 거듭제곱. 멱법칙 = "거듭제곱을 미분하는 규칙".</li>
+        <li><b>거듭제곱 미분 공식</b> = xⁿ 처럼 거듭제곱 꼴을 미분하는 규칙(영어로 power rule). 줄여서 <b>거듭제곱 공식</b>이라고도 해요.</li>
         <li>방법: <b>지수를 앞으로 내려 계수(항 앞에 곱해진 수)로</b> 쓰고, <b>지수는 1 줄인다</b>.</li>
         <li>
           예: <MathBlock inline expr="(x^2)'=2x" />, <MathBlock inline expr="(x^3)'=3x^2" />,
@@ -71,7 +71,7 @@ function onSetComplete() {
       question="x³ 을 미분하면 3x² 이다. 이때 x² 앞에 붙는 계수는?"
       type="numeric"
       :answer="3"
-      :hints="['멱법칙: 지수 3 이 앞으로 내려옵니다.']"
+      :hints="['거듭제곱 공식: 지수 3 이 앞으로 내려옵니다.']"
       explanation="(x³)' = 3x². 지수 3 이 내려와 계수가 되고, 지수는 2 로 줄었어요."
     />
 
@@ -84,7 +84,7 @@ function onSetComplete() {
     </p>
     <MathBlock expr="(c)' = 0 \qquad (c\text{ 는 상수})" />
 
-    <ConceptCard tone="note" title="왜 0 일까? — 수평선은 기울기가 0">
+    <ConceptCard tone="note" title="왜 0 일까? 수평선은 기울기가 0">
       상수함수 <MathBlock inline expr="y=5" /> 의 그래프는 <b>납작한 수평선</b>입니다.
       수평선은 어디서나 <b>기울기가 0</b> 이죠. 그래서 상수의 미분은 0 이에요.
       (<MathBlock inline expr="x" /> 가 변해도 값이 안 변하니 "변화율 0")
@@ -100,14 +100,14 @@ function onSetComplete() {
     />
 
     <!-- 3. 상수배 규칙 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">3. 상수배 — 계수는 그대로 앞으로</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">3. 상수배: 계수는 그대로 앞으로</h2>
     <ReviewFlag id="ch4-s3" chapter="ch4" label="3. 상수배 규칙" />
     <p class="leading-relaxed text-slate-700">
       함수 앞에 곱해진 <b>상수(계수)</b>는 미분할 때 <b>그대로 앞에 남습니다</b>.
     </p>
     <MathBlock expr="(c\cdot f(x))' = c\cdot f'(x)" />
 
-    <ConceptCard tone="note" title="새 용어 — 계수 / 상수배 규칙">
+    <ConceptCard tone="note" title="새 용어: 계수 / 상수배 규칙">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li><b>계수(coefficient)</b>: 항 앞에 곱해진 수. <MathBlock inline expr="3x^2" /> 에서 3.</li>
         <li>
@@ -128,7 +128,7 @@ function onSetComplete() {
     />
 
     <!-- 4. 합·차 규칙 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">4. 합·차 — 항마다 따로 미분</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">4. 합·차: 항마다 따로 미분</h2>
     <ReviewFlag id="ch4-s4" chapter="ch4" label="4. 합·차 규칙" />
     <p class="leading-relaxed text-slate-700">
       여러 항이 더해지거나 빼진 식은 <b>각 항을 따로따로 미분해서 다시 더하면</b> 됩니다.
@@ -137,12 +137,12 @@ function onSetComplete() {
     <MathBlock expr="(f \pm g)' = f' \pm g'" />
 
     <p class="leading-relaxed text-slate-700">
-      멱법칙·상수·상수배·합차를 모두 합치면, 예를 들어:
+      거듭제곱·상수·상수배·합차 공식을 모두 합치면, 예를 들어:
     </p>
     <MathBlock expr="(x^3 + 2x^2 + 5x + 7)' = 3x^2 + 4x + 5" />
 
     <ConceptCard tone="tip" title="다항식 미분 순서">
-      항을 하나씩 보며: <b>거듭제곱은 멱법칙, 계수는 그대로, 상수는 0.</b>
+      항을 하나씩 보며: <b>거듭제곱 항은 공식대로, 계수는 그대로, 상수는 0.</b>
       <MathBlock inline expr="x^3\to 3x^2" />, <MathBlock inline expr="2x^2\to 4x" />,
       <MathBlock inline expr="5x\to 5" />, <MathBlock inline expr="7\to 0" />.
       마지막에 다 더하면 끝!
@@ -172,9 +172,9 @@ function onSetComplete() {
 
     <ConceptCard tone="ai" title="합 규칙이 계산을 쪼갤 수 있게 해준다">
       <ul class="list-disc space-y-2 pl-5">
-        <li><b>합의 미분 = 미분의 합</b> — 큰 문제를 작은 항들로 나눠 각각 미분.</li>
+        <li><b>합의 미분 = 미분의 합</b>: 큰 문제를 작은 항들로 나눠 각각 미분.</li>
         <li>역전파에서 여러 갈래로 흘러온 기울기를 <b>더해서</b> 합치는 것이 바로 이 규칙.</li>
-        <li>멱법칙 같은 기본 공식은 프레임워크가 각 연산마다 내장해 두고 자동으로 적용합니다.</li>
+        <li>거듭제곱 미분 같은 기본 공식은 프레임워크가 각 연산마다 내장해 두고 자동으로 적용합니다.</li>
       </ul>
     </ConceptCard>
 
@@ -183,7 +183,7 @@ function onSetComplete() {
       question="여러 항의 합으로 된 함수는, 각 항을 따로 미분한 뒤 더하면 전체 도함수가 된다."
       type="truefalse"
       :answer="0"
-      explanation="참입니다. (f ± g)' = f' ± g' — 합의 미분은 미분의 합."
+      explanation="참입니다. (f ± g)' = f' ± g'. 합의 미분은 미분의 합."
     />
 
     <!-- 6. 연습 -->
@@ -192,11 +192,11 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 · 단계별 계산 10문제입니다. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="기본 미분 공식 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="기본 미분 공식: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
-        question="멱법칙은 '지수가 앞으로 내려와 계수가 되고, 지수는 1 줄어든다'는 규칙이다."
+        question="거듭제곱 미분 공식은 '지수가 앞으로 내려와 계수가 되고, 지수는 1 줄어든다'는 규칙이다."
         type="truefalse"
         :answer="0"
         explanation="참입니다. (xⁿ)' = n·xⁿ⁻¹."
@@ -222,13 +222,13 @@ function onSetComplete() {
         question="(x)' 즉 x 의 미분값은? (x = x¹)"
         type="numeric"
         :answer="1"
-        :hints="['멱법칙에서 n=1: 1·x⁰ = 1.']"
+        :hints="['거듭제곱 공식에서 n=1: 1·x⁰ = 1.']"
         explanation="(x)' = 1. 기울기 1 인 직선이니까요."
       />
       <!-- 보통 -->
       <StepQuiz
         difficulty="medium"
-        question="f(x)=x³ 을 멱법칙으로 미분한 뒤 f'(2) 를 단계별로 구하세요."
+        question="f(x)=x³ 을 거듭제곱 공식으로 미분한 뒤 f'(2) 를 단계별로 구하세요."
         :steps="[
           { lhs: `\\text{앞으로 내려오는 계수}`, answer: 3 },
           { lhs: `\\text{새 지수 } 3 - 1`, answer: 2 },
@@ -283,7 +283,7 @@ function onSetComplete() {
     <!-- 노트북 안내 -->
     <ConceptCard tone="tip" title="🐍 Python으로도 해보기">
       <code>notebooks/ch04_power_rule.ipynb</code> 에서 SymPy 로 여러 거듭제곱·다항식을 미분해보고,
-      손으로 멱법칙을 적용한 결과와 같은지 검산합니다.
+      손으로 거듭제곱 공식을 적용한 결과와 같은지 검산합니다.
     </ConceptCard>
 
     <div
@@ -291,7 +291,7 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 4 완료. 이제 다항식은 암산으로 미분!</p>
+      <p class="font-semibold text-emerald-800">4장 완료. 이제 다항식은 암산으로 미분!</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 곱해지거나 나눠진 함수를 미분하는 <b>곱·몫의 법칙</b>입니다.
       </p>
@@ -299,7 +299,7 @@ function onSetComplete() {
         to="/ch/ch5"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        다음 챕터 — 곱과 몫의 법칙 →
+        다음 챕터: 곱과 몫의 법칙 →
       </RouterLink>
     </div>
   </article>

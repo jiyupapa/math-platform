@@ -69,7 +69,7 @@ function pick(i: number) {
 
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 의미 지도 관찰: 클러스터, 그리고 숨은 방향</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · 의미 지도 관찰: 클러스터, 그리고 숨은 방향</p>
     <p class="mb-3 text-xs text-slate-500">
       미리 준비한 toy 임베딩 12단어입니다. 먼저 <b>모여 있는 무리</b>(클러스터)를 눈으로 확인하고, 버튼을 눌러 보세요.
     </p>
@@ -127,15 +127,15 @@ function pick(i: number) {
 
     <p v-if="showArrows" class="mt-3 rounded-lg bg-rose-50 p-3 text-sm text-rose-800">
       👀 세 화살표(남자→여자, 왕자→공주, 왕→여왕)가 <b>모두 같은 방향, 같은 길이</b>입니다.
-      "남성을 여성으로 바꾼다"는 <b>뜻의 변화</b>가 이 공간에서는 <b>일정한 방향 이동</b>이에요 —
+      "남성을 여성으로 바꾼다"는 <b>뜻의 변화</b>가 이 공간에서는 <b>일정한 방향 이동</b>이에요.
       위치만 뜻을 담는 게 아니라, <b>방향도 뜻을 담습니다.</b>
     </p>
 
     <!-- ② 의미의 산수 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 의미의 산수: 화살표로 계산하는 뜻</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · 의미의 산수: 화살표로 계산하는 뜻</p>
     <p class="mb-3 text-xs text-slate-500">
-      방향이 뜻을 담는다면 — 벡터 덧셈·뺄셈(1부 2장)으로 뜻을 <b>계산</b>할 수 있을 겁니다. 골라 보세요.
+      방향이 뜻을 담는다면 벡터 덧셈·뺄셈(1부 2장)으로 뜻을 <b>계산</b>할 수 있을 겁니다. 골라 보세요.
     </p>
 
     <div class="mb-3 flex flex-wrap gap-2">
@@ -156,7 +156,7 @@ function pick(i: number) {
         ({{ calc.A.x }}, {{ calc.A.y }}) − ({{ calc.B.x }}, {{ calc.B.y }}) + ({{ calc.C.x }}, {{ calc.C.y }})
         = <b>({{ calc.res.x }}, {{ calc.res.y }})</b>
       </p>
-      <p class="mt-1 text-xs text-slate-500">지도 위 점선 동그라미가 그 지점입니다 — 거기 뭐가 있죠?</p>
+      <p class="mt-1 text-xs text-slate-500">지도 위 점선 동그라미가 그 지점입니다. 거기 뭐가 있죠?</p>
       <button
         v-if="!revealed"
         type="button"
@@ -166,8 +166,8 @@ function pick(i: number) {
         가장 가까운 단어 찾기
       </button>
       <p v-else class="mt-3 rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">
-        ✅ 최근접 단어: <b>{{ calc.nearest }}</b>{{ calc.nearest === calc.expect ? ' — 산수가 뜻을 맞혔습니다!' : '' }}
-        "{{ calc.a }}에서 {{ calc.b }}의 성분을 빼고 {{ calc.c }}의 성분을 더하면 {{ calc.nearest }}" —
+        ✅ 최근접 단어: <b>{{ calc.nearest }}</b>{{ calc.nearest === calc.expect ? '. 산수가 뜻을 맞혔습니다!' : '' }}
+        "{{ calc.a }}에서 {{ calc.b }}의 성분을 빼고 {{ calc.c }}의 성분을 더하면 {{ calc.nearest }}",
         벡터 뺄셈 <b>{{ calc.c }} − {{ calc.b }}</b>가 담고 있던 방향이 {{ calc.a }}에게 그대로 적용된 거예요.
       </p>
     </div>

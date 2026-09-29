@@ -96,7 +96,7 @@ const loss2 = computed(() => -Math.log2(prob.value))
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 대조 학습 시뮬 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 지도가 스스로 정리된다: 짝은 끌고, 남은 밀고</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · 지도가 스스로 정리된다: 짝은 끌고, 남은 밀고</p>
     <p class="mb-3 text-xs text-slate-500">
       (질문, 정답 문서) 쌍 3개가 뒤죽박죽 흩어져 있습니다. 같은 색이 짝이에요 (⭐ = 질문, ● = 문서).
       학습 스텝을 눌러 보세요.
@@ -152,8 +152,8 @@ const loss2 = computed(() => -Math.log2(prob.value))
     </div>
 
     <p v-if="organized" class="mt-3 rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">
-      ✅ 지도가 정리됐습니다 — 짝은 붙고({{ metrics.pairAvg.toFixed(1) }}), 남은 떨어지고({{ metrics.nonAvg.toFixed(1) }}),
-      손실은 바닥으로. 아무도 좌표를 손으로 정해 주지 않았어요 — <b>"짝은 끌고 남은 민다"는 규칙만
+      ✅ 지도가 정리됐습니다. 짝은 붙고({{ metrics.pairAvg.toFixed(1) }}), 남은 떨어지고({{ metrics.nonAvg.toFixed(1) }}),
+      손실은 바닥으로. 아무도 좌표를 손으로 정해 주지 않았어요. <b>"짝은 끌고 남은 민다"는 규칙만
       반복했을 뿐인데 클러스터가 생겼습니다.</b> 3장에서 본 그 구조의 탄생 현장입니다.
     </p>
     <p v-else-if="steps > 0" class="mt-3 rounded-lg bg-slate-50 p-3 text-sm text-slate-600">
@@ -162,7 +162,7 @@ const loss2 = computed(() => -Math.log2(prob.value))
 
     <!-- ② −log 손실 재회 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 손실의 얼굴: 정답과 오답의 차이가 전부다</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · 손실의 얼굴: 정답과 오답의 차이가 전부다</p>
     <p class="mb-3 text-xs text-slate-500">
       질문 하나, 후보 문서 4개(정답 1 + 오답 3). 유사도 두 개를 움직여 "정답을 고를 확률"과 손실을 보세요.
     </p>
@@ -195,8 +195,8 @@ const loss2 = computed(() => -Math.log2(prob.value))
     </div>
 
     <p class="mt-3 rounded-lg bg-indigo-50 p-3 text-xs leading-relaxed text-indigo-800">
-      💡 s₊ = s₋로 맞춰 보세요 — 모델이 정답·오답을 <b>전혀 구분 못 하면</b> P = 1/4(4지선다 찍기),
-      손실은 정확히 <b>2비트</b>가 됩니다. 차이(마진)를 벌릴수록 손실이 뚝 — 절대값이 아니라
+      💡 s₊ = s₋로 맞춰 보세요. 모델이 정답·오답을 <b>전혀 구분 못 하면</b> P = 1/4(4지선다 찍기),
+      손실은 정확히 <b>2비트</b>가 됩니다. 차이(마진)를 벌릴수록 손실이 뚝 떨어집니다. 절대값이 아니라
       <b>정답과 오답의 간격</b>이 전부라는 것, 그리고 이 −log 얼굴… 5부 4장(크로스 엔트로피)과
       6부 4장(보상 모델)에서 만난 <b>그 함수 가족</b>입니다.
     </p>

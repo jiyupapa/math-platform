@@ -14,11 +14,10 @@ const chapter = computed(() => chapters.find((c) => c.slug === route.params.slug
       {{ chapter ? chapter.title : '준비 중인 챕터' }}
     </h1>
     <p class="mb-6 text-slate-500">
-      {{ chapter ? `Phase ${chapter.phase} · ${chapter.summary}` : '곧 만나요!' }}
+      {{ chapter ? `${chapter.phase}장 · ${chapter.summary}` : '곧 만나요!' }}
     </p>
     <p class="mb-8 text-sm text-slate-500">
-      8부의 모든 챕터가 공개돼 있어요 — 이 주소에 해당하는 챕터를 찾지 못했습니다.
-      목차에서 원하는 챕터를 골라 주세요.
+      8부의 모든 챕터가 공개돼 있어요. 이 주소에 맞는 챕터를 찾지 못했으니 목차에서 골라 주세요.
     </p>
     <RouterLink
       to="/"

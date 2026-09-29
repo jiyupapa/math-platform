@@ -243,7 +243,7 @@ const fmt = (v: number) => (Number.isFinite(v) ? Number(v.toFixed(3)).toString()
     <p class="mt-2 px-1 text-xs leading-relaxed text-slate-500">
       점선 초록 = 모평균 위치, 점선 빨강 = 이론 정규곡선.
       <b>n = 1</b> 이면 히스토그램이 모집단 모양을 그대로 닮지만, <b>n 을 키우면</b> 어떤 모집단이든
-      종 모양으로 모이고 폭도 <b>σ/√n</b> 으로 좁아집니다 — 이것이 중심극한정리예요.
+      종 모양으로 모이고 폭도 <b>σ/√n</b> 으로 좁아집니다. 이것이 중심극한정리예요.
     </p>
   </div>
 </template>

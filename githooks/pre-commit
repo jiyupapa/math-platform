@@ -1,5 +1,6 @@
 #!/bin/sh
-# 커밋 전 게이트 — ① 개념 온톨로지 검사(0.5초) ② 글자 대비(라이트·다크) 검사(0.2초).
+# 커밋 전 게이트 — ① 개념 온톨로지 검사(0.5초) ② 글자 대비(라이트·다크) 검사(0.2초)
+#                  ③ 풀이 기록 이관 표 검사(문항 문구·세트 제목을 바꿨으면 quizAliases.ts 에 옛 → 새가 있는가).
 #
 # 왜 커밋 훅인가: 이 검사는 "한 번 청소하고 끝"이 되지 않는다. 챕터를 추가할 때마다
 #   text-emerald-600 처럼 계열별로 미달인 색이 다시 들어온다(사람이 외울 수 있는 규칙이 아니다).
@@ -34,6 +35,17 @@ if ! node scripts/check-contrast.mjs; then
   echo "   자동 수정:  npm run check:contrast -- --fix"
   echo "   토큰을 추가했다면 먼저:  npm run theme:dark"
   echo "   기준·한계:  docs/TESTING.md 5절"
+  echo "─────────────────────────────────────────────────────────────"
+  exit 1
+fi
+
+if ! node scripts/quiz-aliases.mjs --check; then
+  echo ""
+  echo "─────────────────────────────────────────────────────────────"
+  echo " 커밋을 중단했습니다 — 문항 문구나 문제 세트 제목이 바뀌었는데 이관 표에 없습니다."
+  echo ""
+  echo "   갱신:  node scripts/quiz-aliases.mjs   (packages/ui/src/quizAliases.ts 를 함께 커밋)"
+  echo "   이유:  QuizSet 은 세트 제목·문항 문구를 키로 풀이 기록을 저장한다 — 표가 없으면 학습자 기록이 끊긴다"
   echo "─────────────────────────────────────────────────────────────"
   exit 1
 fi

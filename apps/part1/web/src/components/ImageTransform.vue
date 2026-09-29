@@ -42,7 +42,7 @@ function preset(na: number, nb: number, nc: number, nd: number) {
   <div class="my-4 rounded-xl border border-slate-200 bg-white p-4">
     <p class="mb-1 text-sm font-semibold text-slate-700">🖼️ 같은 행렬을 진짜 이미지에</p>
     <p class="mb-3 text-sm text-slate-500">
-      CSS의 <code>matrix(a, c, b, d)</code> 는 우리가 배운 <b>2×2 행렬과 똑같아요</b>. 사진 편집·게임·컴퓨터비전이
+      CSS의 <code>matrix(a, c, b, d)</code> 는 앞에서 배운 <b>2×2 행렬과 똑같아요</b>. 사진 편집·게임·컴퓨터비전이
       바로 이 변환을 씁니다. 슬라이더를 움직이거나 본인 사진을 올려보세요.
     </p>
 

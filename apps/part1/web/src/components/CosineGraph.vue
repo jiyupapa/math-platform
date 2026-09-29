@@ -55,7 +55,7 @@ const by = computed(() => vc - vr * Math.sin(rad.value))
 
 <template>
   <div class="my-4 rounded-xl border border-slate-200 bg-white p-4">
-    <p class="mb-1 text-sm font-semibold text-slate-700">📐 코사인 그래프 — 각도를 움직여보세요</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">📐 코사인 그래프: 각도를 움직여 보세요</p>
     <p class="mb-3 text-sm text-slate-500">
       두 벡터 사이 각도 θ가 커질수록 cos θ 가 1 → 0 → −1 로 줄어요. 그게 곧 "닮은 정도".
     </p>

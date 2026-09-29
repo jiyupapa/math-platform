@@ -25,8 +25,8 @@ export const chapters: ChapterMeta[] = [
   {
     slug: 'sample',
     phase: 0,
-    title: '샘플 챕터 — 소프트맥스 맛보기',
-    summary: 'Phase 0 패턴 검증용. 모든 공통 컴포넌트를 한 화면에서 보여줍니다.',
+    title: '워밍업 — 소프트맥스 맛보기',
+    summary: '10분 몸풀기. 점수를 확률로 바꾸는 소프트맥스를 직접 조작하며 이 앱의 학습 방식을 체험해요.',
     notebook: 'ch00_sample.ipynb',
     minutes: 10,
   },

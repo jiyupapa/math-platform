@@ -57,7 +57,7 @@ const pct = (w: number) => (w * 100).toFixed(0)
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- Query 설정 -->
-    <p class="mb-2 text-sm font-semibold text-slate-500">① Query(질문) 벡터 — "내가 찾는 것"</p>
+    <p class="mb-2 text-sm font-semibold text-slate-500">① Query(질문) 벡터: "내가 찾는 것"</p>
     <div class="mb-2 flex flex-wrap gap-2">
       <span class="text-xs text-slate-500 self-center">이 단어의 질문 불러오기:</span>
       <button
@@ -121,8 +121,8 @@ const pct = (w: number) => (w * 100).toFixed(0)
       <span class="text-violet-600">(집중도 {{ pct(weights[top]) }}%)</span>.
       <div class="mt-1 text-violet-700">
         출력 = 집중도로 Value 가중합 =
-        <span class="font-mono">({{ output[0].toFixed(2) }}, {{ output[1].toFixed(2) }})</span>
-        — 이게 이 자리의 <b>새 문맥 벡터</b>가 됩니다.
+        <span class="font-mono">({{ output[0].toFixed(2) }}, {{ output[1].toFixed(2) }})</span>.
+        이게 이 자리의 <b>새 문맥 벡터</b>가 됩니다.
       </div>
     </div>
   </div>

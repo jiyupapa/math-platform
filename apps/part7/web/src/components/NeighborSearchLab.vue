@@ -89,7 +89,7 @@ const py = (v: number) => 275 - v * 25
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 전수조사의 비용 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 전수조사(kNN)의 청구서</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ①: 전수조사(kNN)의 청구서</p>
     <p class="mb-3 text-xs text-slate-500">
       가장 정직한 검색: 질문과 <b>모든 문서</b>의 유사도를 재서 1등을 뽑기. 문서가 늘면 무슨 일이 생길까요?
       (가정: 512차원 내적 초당 500만 번)
@@ -125,20 +125,20 @@ const py = (v: number) => 275 - v * 25
 
     <p class="mt-3 rounded-lg p-3 text-sm" :class="cost.dead ? 'bg-rose-50 text-rose-700' : 'bg-emerald-50 text-emerald-800'">
       <template v-if="!cost.dead">
-        ✅ 이 규모에서 전수조사는 <b>충분히 빠릅니다</b> — 사내 문서 수준이면 정직한 kNN이 최선일 때가 많아요.
+        ✅ 이 규모에서 전수조사는 <b>충분히 빠릅니다</b>. 사내 문서 수준이면 정직한 kNN이 최선일 때가 많아요.
       </template>
       <template v-else>
-        ⚠️ 질문 하나에 <b>{{ cost.perQuery }}</b> — 챗봇으로는 죽은 제품입니다. 문서 수에 정비례하는
+        ⚠️ 질문 하나에 <b>{{ cost.perQuery }}</b> 걸리면 챗봇으로는 죽은 제품입니다. 문서 수에 정비례하는
         비용(선형)이 문제예요. <b>미리 정리해 두고 일부만 보는</b> 방법이 필요합니다 → 실험 ②.
       </template>
     </p>
 
     <!-- ② 구역 나누기 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 구역 나누기: 빨라지는 대신 무엇을 잃나</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · 구역 나누기: 빨라지는 대신 무엇을 잃나</p>
     <p class="mb-3 text-xs text-slate-500">
       문서들을 미리 구역(클러스터)으로 정리해 두고, 질문이 떨어진 구역만 조사합니다.
-      질문과 탐색 범위를 바꿔 보세요 — <b>× 표시</b>는 구역의 중심입니다.
+      질문과 탐색 범위를 바꿔 보세요. <b>× 표시</b>는 구역의 중심입니다.
     </p>
 
     <div class="mb-2 flex flex-wrap gap-2">
@@ -203,7 +203,7 @@ const py = (v: number) => 275 - v * 25
 
     <p class="mt-3 rounded-lg p-3 text-sm" :class="result.hit ? 'bg-emerald-50 text-emerald-800' : 'bg-rose-50 text-rose-700'">
       <template v-if="mode === 'full'">
-        ✅ 전수조사는 항상 진짜 1등을 찾습니다 — 대신 {{ POINTS.length }}번 전부 비교했죠.
+        ✅ 전수조사는 항상 진짜 1등을 찾습니다. 대신 {{ POINTS.length }}번 전부 비교했죠.
       </template>
       <template v-else-if="result.hit">
         ✅ 구역 탐색으로 비교를 {{ result.comparisons }}번으로 줄이고도 진짜 1등을 찾았습니다.
@@ -211,7 +211,7 @@ const py = (v: number) => 275 - v * 25
       </template>
       <template v-else>
         ⚠️ 놓쳤습니다! 질문이 구역 <b>경계</b>에 있어서, 진짜 1등(빨간 점선 링)은 <b>조사하지 않은 옆
-        구역</b> 소속이었어요. 이것이 근사(approximate)의 대가 — <b>"구역 2개"로 늘려 보세요.</b>
+        구역</b> 소속이었어요. 이것이 근사(approximate)의 대가예요. <b>"구역 2개"로 늘려 보세요.</b>
       </template>
     </p>
   </div>

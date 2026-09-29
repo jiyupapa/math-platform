@@ -40,7 +40,7 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 2 · 토큰화</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">2장 · 토큰화</p>
     <h1 class="mb-4 text-3xl font-bold">토큰화 — 글을 조각으로 쪼개기</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       파이프라인의 <b>맨 첫 칸</b>입니다. 컴퓨터는 글자 자체를 다루지 못하고 <b>숫자</b>만 압니다.
@@ -67,9 +67,9 @@ function onSetComplete() {
 
     <ConceptCard tone="note" title="새 용어 세 개">
       <ul class="list-disc space-y-1 pl-5 text-sm">
-        <li><b>토큰(token)</b> — 글을 쪼갠 <b>한 조각</b>. 단어 하나일 수도, 단어의 일부일 수도 있습니다.</li>
-        <li><b>토큰화(tokenization)</b> — 글을 토큰으로 <b>쪼개는 과정</b>.</li>
-        <li><b>사전(vocabulary)</b> — 모델이 아는 <b>토큰 전체 목록</b>. 각 토큰에 고유 ID 가 매겨져 있습니다.
+        <li><b>토큰(token)</b>: 글을 쪼갠 <b>한 조각</b>. 단어 하나일 수도, 단어의 일부일 수도 있습니다.</li>
+        <li><b>토큰화(tokenization)</b>: 글을 토큰으로 <b>쪼개는 과정</b>.</li>
+        <li><b>사전(vocabulary)</b>: 모델이 아는 <b>토큰 전체 목록</b>. 각 토큰에 고유 ID 가 매겨져 있습니다.
           (진짜 LLM 은 보통 <b>약 5만~10만 개</b>)</li>
       </ul>
     </ConceptCard>
@@ -92,10 +92,10 @@ function onSetComplete() {
       차이가 확 드러나요:
     </p>
     <ul class="my-3 space-y-1.5 pl-1 text-sm text-slate-700">
-      <li>🔸 <b>단어 단위</b> — 사전에 <b>통째로</b> 있어야 함. 없으면 <b class="text-rose-700">[UNK]</b>(모르는 단어)로
+      <li>🔸 <b>단어 단위</b>: 사전에 <b>통째로</b> 있어야 함. 없으면 <b class="text-rose-700">[UNK]</b>(모르는 단어)로
         뭉개져 뜻을 잃습니다. 새 단어·오타에 취약해요.</li>
-      <li>🔸 <b>글자 단위</b> — [UNK] 는 거의 없지만, 토큰 수가 <b>확 늘어</b>납니다(계산량↑).</li>
-      <li>🔸 <b>서브워드</b> — 자주 쓰는 말은 통째로, 드문 말은 <b>조각</b>으로. 두 문제를 절충한
+      <li>🔸 <b>글자 단위</b>: [UNK] 는 거의 없지만, 토큰 수가 <b>확 늘어</b>납니다(계산량↑).</li>
+      <li>🔸 <b>서브워드</b>: 자주 쓰는 말은 통째로, 드문 말은 <b>조각</b>으로. 두 문제를 절충한
         <b>현대 LLM 의 표준</b>입니다.</li>
     </ul>
 
@@ -156,7 +156,7 @@ function onSetComplete() {
       </p>
     </ConceptCard>
 
-    <DetailsCard title="➕ 더 깊이 알아보기 — BPE는 어떻게 조각을 정할까?">
+    <DetailsCard title="➕ 더 깊이 알아보기: BPE는 어떻게 조각을 정할까?">
       <p class="mb-2">
         서브워드 사전은 사람이 정하지 않고 <b>데이터에서 학습</b>합니다. 대표 방법이
         <b>BPE(Byte Pair Encoding)</b>예요. 아이디어는 단순합니다:
@@ -168,7 +168,7 @@ function onSetComplete() {
       </ul>
       <p class="mb-2 text-sm">
         말로만 들으면 추상적이니, 미니 말뭉치 <b>"바나나 바나나 나나"</b>로 직접 돌려 봅시다.
-        (병합 규칙은 단 하나 — <b>가장 자주 붙어 나오는 쌍부터 합친다</b>, 그래서 "탐욕(greedy)"
+        (병합 규칙은 단 하나: <b>가장 자주 붙어 나오는 쌍부터 합친다</b>, 그래서 "탐욕(greedy)"
         알고리즘이라 부릅니다.)
       </p>
       <div class="mb-2 overflow-x-auto rounded-lg bg-white px-4 py-3">
@@ -179,21 +179,21 @@ function onSetComplete() {
             </tr>
           </thead>
           <tbody>
-            <tr class="border-b border-slate-100"><td class="py-1.5 pr-3">시작</td><td class="py-1.5 pr-3 font-mono">바·나·나 / 바·나·나 / 나·나</td><td class="py-1.5 pr-3">(나,나) — 3회</td><td class="py-1.5">새 토큰 <b>"나나"</b></td></tr>
-            <tr class="border-b border-slate-100"><td class="py-1.5 pr-3">1</td><td class="py-1.5 pr-3 font-mono">바·나나 / 바·나나 / 나나</td><td class="py-1.5 pr-3">(바,나나) — 2회</td><td class="py-1.5">새 토큰 <b>"바나나"</b></td></tr>
+            <tr class="border-b border-slate-100"><td class="py-1.5 pr-3">시작</td><td class="py-1.5 pr-3 font-mono">바·나·나 / 바·나·나 / 나·나</td><td class="py-1.5 pr-3">(나,나) 3회</td><td class="py-1.5">새 토큰 <b>"나나"</b></td></tr>
+            <tr class="border-b border-slate-100"><td class="py-1.5 pr-3">1</td><td class="py-1.5 pr-3 font-mono">바·나나 / 바·나나 / 나나</td><td class="py-1.5 pr-3">(바,나나) 2회</td><td class="py-1.5">새 토큰 <b>"바나나"</b></td></tr>
             <tr><td class="py-1.5 pr-3">2</td><td class="py-1.5 pr-3 font-mono">바나나 / 바나나 / 나나</td><td class="py-1.5 pr-3">더 없음</td><td class="py-1.5">사전 완성: 낱글자 + 나나 + 바나나</td></tr>
           </tbody>
         </table>
       </div>
       <p class="mb-2 text-sm">
-        완성된 사전으로 <b>처음 보는 단어</b>도 처리됩니다 — "바나다"는 사전에 통째로 없지만
+        완성된 사전으로 <b>처음 보는 단어</b>도 처리됩니다. "바나다"는 사전에 통째로 없지만
         <b>바 + 나 + 다</b> 세 조각으로 쪼개져 [UNK] 없이 살아남아요. 자주 본 "바나나"는 1토큰,
-        처음 보는 "바나다"는 3토큰 — <b>흔한 건 짧게, 드문 건 잘게</b>가 이렇게 실현됩니다.
+        처음 보는 "바나다"는 3토큰. <b>흔한 건 짧게, 드문 건 잘게</b>가 이렇게 실현됩니다.
       </p>
       <div class="rounded-lg bg-white px-4 py-3 text-sm text-slate-600">
         🎯 <b>결과</b>: "the", "ing", "은/는" 처럼 <b>자주 나오는 조각</b>은 통째 토큰이 되고,
         드문 단어는 그 조각들로 쪼개집니다. 실제 GPT 계열의 사전(수만~수십만 토큰)도 정확히
-        이 반복을 수만 번 돌려 만든 것 — 노트북에서 10줄짜리 미니 BPE 를 직접 돌려 봅니다.
+        이 반복을 수만 번 돌려 만든 것이에요. 노트북에서 10줄짜리 미니 BPE 를 직접 돌려 봅니다.
       </div>
     </DetailsCard>
 
@@ -203,7 +203,7 @@ function onSetComplete() {
       <b>10문제를 모두 맞히면</b> 이 챕터가 완료됩니다. 토큰 수 세기 문제는 위 실험실에서 직접 세어 봐도 좋아요.
     </p>
 
-    <QuizSet title="토큰화 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="토큰화: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -249,7 +249,7 @@ function onSetComplete() {
         question="같은 문장 '나는 밥을 먹었다' 를 글자 단위로 토큰화하면 몇 개일까요?"
         type="numeric"
         :answer="7"
-        :hints="['나·는·밥·을·먹·었·다 — 글자 하나씩.']"
+        :hints="['나·는·밥·을·먹·었·다. 글자 하나씩.']"
         explanation="나,는,밥,을,먹,었,다 → 7개. 글자 단위는 토큰 수가 많아집니다."
       />
       <Quiz
@@ -304,7 +304,7 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 2 완료 — 글이 숫자가 됐습니다</p>
+      <p class="font-semibold text-emerald-800">2장 완료! 글이 숫자가 됐습니다</p>
       <p class="mt-1 text-sm text-emerald-700">
         이제 토큰 ID 를 얻었으니, 다음 챕터(ch3 임베딩)에서 이 ID 를
         <b>의미를 담은 숫자 벡터</b>로 바꿉니다. 대응 노트북 <code>notebooks/ch02_tokenization.ipynb</code> 도 함께!

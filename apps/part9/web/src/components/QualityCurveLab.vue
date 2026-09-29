@@ -86,10 +86,10 @@ const game = computed(() => {
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 무릎 곡선 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 무릎 곡선: 우리 미니 모델의 성적표</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · 무릎 곡선: 우리 미니 모델의 성적표</p>
     <p class="mb-3 text-xs text-slate-500">
       bigram 미니 언어모델(어휘 12자)의 로짓을 b비트로 양자화하고, 원본(fp) 분포를 기준으로
-      퍼플렉시티를 잽니다 — 열화의 정체는 5부의 KL(초과 비트)이라 0 아래로 내려갈 수 없어요.
+      퍼플렉시티를 잽니다. 열화의 정체는 5부의 KL(초과 비트)이라 0 아래로 내려갈 수 없어요.
     </p>
 
     <svg viewBox="0 0 320 120" class="w-full rounded-lg bg-slate-50 ring-1 ring-slate-100">
@@ -121,7 +121,7 @@ const game = computed(() => {
       </div>
     </div>
 
-    <p class="mt-2 mb-1 text-xs font-semibold text-slate-500">🔍 분포 돋보기 — 문맥 "{{ ctx === ' ' ? '␣(공백)' : ctx }}" 다음 글자의 확률분포 (fp vs int{{ sel.bits === 16 ? '없음' : sel.bits }})</p>
+    <p class="mt-2 mb-1 text-xs font-semibold text-slate-500">🔍 분포 돋보기 · 문맥 "{{ ctx === ' ' ? '␣(공백)' : ctx }}" 다음 글자의 확률분포 (fp vs int{{ sel.bits === 16 ? '없음' : sel.bits }})</p>
     <div class="flex gap-2">
       <button
         v-for="c in CTX_OPTS"
@@ -143,17 +143,17 @@ const game = computed(() => {
         <span class="font-mono text-xs text-slate-500">{{ z.c }}</span>
       </div>
     </div>
-    <p class="text-xs text-slate-500">■ 파랑 = fp 원본 · ■ 주황 = 양자화 — int2 로 내려 보세요, 분포가 뭉개집니다.</p>
+    <p class="text-xs text-slate-500">■ 파랑 = fp 원본 · ■ 주황 = 양자화. int2 로 내려 보세요, 분포가 뭉개집니다.</p>
 
     <p class="mt-2 rounded-lg bg-indigo-50 p-3 text-xs leading-relaxed text-indigo-800">
-      👀 무릎이 보이나요 — <b>8~4비트는 거의 공짜(+0.2% 이하), 3비트부터 오르막, 2비트에서
+      👀 무릎이 보이나요. <b>8~4비트는 거의 공짜(+0.2% 이하), 3비트부터 오르막, 2비트에서
       +8% 폭등.</b> 국민 태그가 q4 인 이유가 이 무릎 위에 앉아 있습니다. 그리고 열화가 절대
       음수가 안 되는 이유: 이 측정의 정체가 <b>KL 발산(초과 비트, 5부)</b>이기 때문이에요.
     </p>
 
     <!-- ② 성적표 + RAM 게임 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 성적표 읽기: 내 RAM 의 최선은?</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · 성적표 읽기: 내 RAM 의 최선은?</p>
     <p class="mb-3 text-xs text-slate-500">
       실전 스타일 성적표(7B급, llama.cpp 커뮤니티 실측 경향을 단순화한 교육용 수치)입니다.
       RAM 을 고르면 어림 규칙(파일 + 4GB 여유 ≤ RAM)으로 최선의 태그를 추천합니다.
@@ -197,7 +197,7 @@ const game = computed(() => {
 
     <p class="mt-2 rounded-lg bg-emerald-50 p-3 text-xs leading-relaxed text-emerald-800">
       🏆 RAM {{ ram }}GB → 한도 {{ game.limit }}GB(여유 4GB 제외) → 추천 <b>{{ game.best?.tag }}</b>
-      ({{ game.best?.gb.toFixed(1) }}GB, PPL {{ game.best?.ppl.toFixed(2) }}) — 들어가는 것 중
+      ({{ game.best?.gb.toFixed(1) }}GB, PPL {{ game.best?.ppl.toFixed(2) }}), 들어가는 것 중
       성적이 가장 좋은 태그. 파일이 RAM 에 "딱 맞으면" 안 되는 이유(문맥·OS 몫)와 정밀 정산은
       11장 캡스톤에서.
     </p>

@@ -10,7 +10,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 도달점은 **10장(캡스톤 — 사내 FAQ 검색봇 조립)**. 핵심 한 줄: **"의미는 위치다 — 가까움을 계산하는 법."**
 
 > **상태: 완결 (전 11챕터 공개, 2026-07-11)** — 웹 챕터 ↔ 노트북 1:1 전부 완성.
-> 챕터 구성·회수하는 수학 매핑은 루트 `README.md` "7부 챕터 구성" 표가 정본.
+> 챕터 구성·다시 쓰는 수학 매핑은 루트 `README.md` "7부 챕터 구성" 표가 정본.
 
 ## 공용 컴포넌트 — 모노레포 `packages/ui`
 
@@ -33,7 +33,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 2. 새 용어·기호·수식은 예외 없이 즉시 설명("이름 + 읽는 법 + 뜻").
    **비유어를 만들면 같은 자리에서 실무 용어와 짝지을 것** (예: RAG = 검색 증강 생성
    Retrieval-Augmented Generation — 첫 등장에서 풀네임 필수).
-3. **"회수하는 수학" 연결 필수** — 각 장이 어느 부의 어느 개념을 회수하는지(루트 README 표)
+3. **"다시 쓰는 수학" 연결 필수** — 각 장이 어느 부의 어느 개념을 다시 쓰는지(루트 README 표)
    `ConceptCard` 로 명시: 2장=1부 2장 내적, 4장=3부 5·7장+1부 9장, 5장=1부 8장 PCA,
    7장=6부 9장 평가, 8장=6부 2~3장(RAG vs 파인튜닝), 9장=5부 4장 −log·6부 4장 쌍 학습.
 4. 문제 표준: 본문 미니체크 2~3개 + 챕터 끝 10문제 `QuizSet`(완료 시 진도 처리). 계산형은 `StepQuiz`.

@@ -11,13 +11,13 @@ const sampleReady = availableChapters.some((c) => c.slug === 'sample')
 
 <template>
   <div>
-    <p class="mb-2 text-sm font-medium text-indigo-600">수포자를 위한 수치 계산 — 시리즈 9부 (실용 확장)</p>
+    <p class="mb-2 text-sm font-medium text-indigo-600">수포자를 위한 수치 계산 · 시리즈 9부 (실용 확장)</p>
     <h1 class="mb-3 text-3xl font-bold">7B 모델은 왜 4GB 파일이 될까</h1>
     <p class="mb-4 leading-relaxed text-slate-600">
-      시리즈에서 만난 모든 수 — 임베딩, 가중치, 확률 — 는 결국 컴퓨터의 <b>유한한 칸</b>에 담깁니다.
+      시리즈에서 만난 모든 수(임베딩, 가중치, 확률)는 결국 컴퓨터의 <b>유한한 칸</b>에 담깁니다.
       이 과정은 그 칸의 정체(비트·부동소수점)에서 출발해 반올림 오차, 오버플로, fp16·bf16,
-      그리고 <b>양자화·GGUF</b>까지 — "AI를 내 PC에서 돌린다"의 수학을 완성합니다.
-      핵심 한 줄: <b>"숫자를 담는 자에는 눈금이 있다 — 눈금의 촘촘함이 품질과 몸무게를 정한다."</b>
+      그리고 <b>양자화·GGUF</b>까지, "AI를 내 PC에서 돌린다"의 수학을 완성합니다.
+      핵심 한 줄: <b>"숫자를 담는 자에는 눈금이 있다. 눈금의 촘촘함이 품질과 몸무게를 정한다."</b>
     </p>
 
     <!-- 제작 중 안내 (본 챕터 공개 시 진도 박스로 교체됨) -->
@@ -32,7 +32,7 @@ const sampleReady = availableChapters.some((c) => c.slug === 'sample')
         to="/ch/sample"
         class="mt-4 block rounded-lg bg-indigo-600 px-4 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-indigo-500"
       >
-        🚀 워밍업은 공개됐어요 — 0.1 + 0.2는 0.3이 아니다 체험하기 →
+        🚀 워밍업은 공개됐어요. 0.1 + 0.2는 0.3이 아니다 체험하기 →
       </RouterLink>
     </div>
     <div v-else class="mb-8 rounded-xl border border-indigo-100 bg-indigo-50 p-5">
@@ -55,7 +55,7 @@ const sampleReady = availableChapters.some((c) => c.slug === 'sample')
           🚀 처음이신가요? 워밍업(0.1 + 0.2는 0.3이 아니다)부터 시작하세요 →
         </RouterLink>
         <p class="mt-2 text-center text-xs text-indigo-600">
-          이진법부터 자체 포함 — 2부 7장(지수·로그)을 봤다면 준비 완료입니다.
+          이진법부터 이 과정 안에서 다룹니다. 2부 7장(지수·로그)을 봤다면 준비 완료입니다.
         </p>
       </template>
     </div>

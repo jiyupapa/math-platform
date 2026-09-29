@@ -54,10 +54,10 @@ const yPos = (t: number) => H - PAD.b - t * (H - PAD.b - PAD.t)
 
 const verdict = computed(() => {
   if (metric.value === 'exact')
-    return { cls: 'bg-rose-50 text-rose-800', text: '계단처럼 보입니다 — 10⁹까지 15%도 안 되다가 10¹⁰에서 40%로 "능력이 갑자기 튀어나온" 것 같죠. 그런데 안경을 바꿔 보세요.' }
+    return { cls: 'bg-rose-50 text-rose-800', text: '계단처럼 보입니다. 10⁹까지 15%도 안 되다가 10¹⁰에서 40%로 "능력이 갑자기 튀어나온" 것 같죠. 그런데 안경을 바꿔 보세요.' }
   if (metric.value === 'perdigit')
-    return { cls: 'bg-emerald-50 text-emerald-800', text: '완만합니다 — 같은 모델, 같은 개선인데 자리당 정답률로 보면 15% → 97%로 꾸준히 좋아지고 있었어요. 계단은 어디로 갔을까요?' }
-  return { cls: 'bg-indigo-50 text-indigo-800', text: '직선입니다 — 밑바탕(자리당 오차)은 3장의 스케일링 법칙 그대로 매끈한 멱법칙(기울기 −0.3)이었습니다. 계단을 만든 건 모델이 아니라 지표(p⁸)였어요.' }
+    return { cls: 'bg-emerald-50 text-emerald-800', text: '완만합니다. 같은 모델, 같은 개선인데 자리당 정답률로 보면 15% → 97%로 꾸준히 좋아지고 있었어요. 계단은 어디로 갔을까요?' }
+  return { cls: 'bg-indigo-50 text-indigo-800', text: '직선입니다. 밑바탕(자리당 오차)은 3장의 스케일링 법칙 그대로 매끈한 멱법칙(기울기 −0.3)이었습니다. 계단을 만든 건 모델이 아니라 지표(p⁸)였어요.' }
 })
 
 const fmtN = (n: number) => (n >= 1e12 ? '1T' : n >= 1e9 ? `${n / 1e9}B` : `${n / 1e6}M`)
@@ -66,7 +66,7 @@ const fmtN = (n: number) => (n >= 1e12 ? '1T' : n >= 1e9 ? `${n / 1e9}B` : `${n 
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 과제와 밑바탕 -->
-    <p class="mb-1 text-sm font-semibold text-slate-500">① 과제: 8자리 덧셈 — 밑바탕 실력은 매끈하게 좋아진다 (신의 시점 규칙)</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">① 과제: 8자리 덧셈: 밑바탕 실력은 매끈하게 좋아진다 (신의 시점 규칙)</p>
     <div class="mb-2 flex flex-wrap items-center gap-1.5">
       <span class="text-xs text-slate-500">모델 크기 N:</span>
       <button
@@ -96,13 +96,13 @@ const fmtN = (n: number) => (n >= 1e12 ? '1T' : n >= 1e9 ? `${n / 1e9}B` : `${n 
         :key="i"
         class="flex h-7 w-7 items-center justify-center rounded font-mono text-xs font-bold text-white"
         :style="{ backgroundColor: `rgba(16,185,129,${0.15 + p * 0.85})` }"
-        :title="`자리 ${i} — 맞힐 확률 ${(p * 100).toFixed(0)}%`"
+        :title="`자리 ${i}: 맞힐 확률 ${(p * 100).toFixed(0)}%`"
       >{{ i <= Math.round(p * K) ? '✓' : '?' }}</span>
-      <span class="ml-2 text-xs text-slate-500">— 8자리가 <b>전부</b> 맞아야 "정답"인 게 함정</span>
+      <span class="ml-2 text-xs text-slate-500">8자리가 <b>전부</b> 맞아야 "정답"인 게 함정</span>
     </div>
 
     <!-- ② 안경 갈아 끼우기 -->
-    <p class="mb-1 text-sm font-semibold text-slate-500">② 같은 모델, 세 개의 안경 — 지표를 바꿔 보세요</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">② 같은 모델, 세 개의 안경: 지표를 바꿔 보세요</p>
     <div class="mb-2 flex flex-wrap gap-1.5">
       <button
         v-for="m in METRICS"
@@ -130,7 +130,7 @@ const fmtN = (n: number) => (n >= 1e12 ? '1T' : n >= 1e9 ? `${n / 1e9}B` : `${n 
         <p class="rounded-md px-3 py-2 text-sm leading-relaxed" :class="verdict.cls">{{ verdict.text }}</p>
         <p class="rounded-md bg-slate-100 px-3 py-2 text-xs leading-relaxed text-slate-600">
           판정 습관: <b>"능력이 갑자기 생겼다"는 그래프를 보면</b> ① y축 지표가 전부-정답형인지
-          확인하고 ② 자리당(부분 점수) 지표와 ③ 로그-로그 오차로 다시 그려 봅니다 —
+          확인하고 ② 자리당(부분 점수) 지표와 ③ 로그-로그 오차로 다시 그려 봅니다.
           셋 다 꺾여 있어야 진짜 급변입니다.
         </p>
       </div>

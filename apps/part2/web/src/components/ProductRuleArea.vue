@@ -115,7 +115,7 @@ const exactRate = computed(() => props.duf(x0.value) * v.value + u.value * props
     <p class="mt-2 px-1 text-xs leading-relaxed text-slate-500">
       증가분 <b class="text-rose-700">Δ</b> 를 줄여보세요. <b class="text-rose-700">빨간 모서리</b>(Δu·Δv)가
       급격히 작아져 무시할 수 있게 되고, 남는 두 띠 <b>Δu·v + u·Δv</b> 가 넓이 변화의 전부가 됩니다.
-      이걸 Δ 로 나누면 <b>u'v + u v'</b> — 곱의 법칙이에요.
+      이걸 Δ 로 나누면 <b>u'v + u v'</b>, 곧 곱의 법칙이에요.
     </p>
   </div>
 </template>

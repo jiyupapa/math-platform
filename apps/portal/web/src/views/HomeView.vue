@@ -42,7 +42,7 @@ const statusStyle: Record<StepStatus, { label: string; badge: string; dim: boole
 const progress = readAllProgress() // 2층 — 각 부 진도(같은 origin 배포본에서 통합)
 // 단계별 진도 — 부를 쪼갠 단계·여러 부에 걸친 심화 단계를 실제 챕터 슬러그로 계산(부 전체 진도 아님)
 const stepProg = new Map(pathSteps.map((s) => [s.order, readStepProgress(s.segments)]))
-const insights = readInsights() // 2층 고도화 — 복습 먼저 · 심화 해금
+const insights = readInsights() // 2층 고도화 — 복습 먼저 · 심화 과정 열림
 const diagnosis = ref(loadDiagnosis())
 const rec = computed(() => {
   const d = diagnosis.value
@@ -153,7 +153,7 @@ function reset() {
       </h1>
       <p class="mx-auto mb-6 max-w-xl break-keep text-slate-600">
         1→2→3→4→5 순서로 가지 않습니다. 트랜스포머(4부)를 가장 빨리 만나도록 짠
-        <strong>비선형 학습 경로</strong>를 따라, 필요한 것만 배웁니다.
+        <strong>지름길</strong>을 따라, 필요한 것만 배웁니다.
       </p>
 
       <!-- 진단 전: 전체 요약 + CTA -->
@@ -169,14 +169,14 @@ function reset() {
         >
           내게 맞는 경로 찾기 →
         </RouterLink>
-        <p class="mt-2 break-keep text-xs text-slate-500">5분 진단 후, 아래 지도에서 당신에게 필요한 단계만 남습니다.</p>
+        <p class="mt-2 break-keep text-xs text-slate-500">5분 진단을 마치면 아래 지도에 내게 필요한 단계만 남습니다.</p>
       </template>
 
       <!-- 진단 후: 개인화 요약 + 강사 설명 -->
       <template v-else>
         <div class="mx-auto mb-4 max-w-lg rounded-2xl bg-indigo-600 p-5 text-left text-white shadow-sm">
           <!-- indigo-100 은 다크에서 배경(indigo-400)과 3.67:1 이 된다 — 아래 줄과 같은 50 을 쓴다 -->
-          <p class="text-sm font-medium text-indigo-50">AI 강사가 당신에게 맞춘 경로</p>
+          <p class="text-sm font-medium text-indigo-50">AI 강사가 짜 준 내 경로</p>
           <p class="mt-1 text-2xl font-bold">{{ rec.activeChapters }}챕터 · 예상 {{ hours(rec.activeMinutes) }}시간</p>
           <p class="mt-2 text-sm text-indigo-50">{{ explanation }}</p>
           <div class="mt-1">
@@ -203,10 +203,10 @@ function reset() {
           data-diag-concepts
           class="mx-auto mt-4 max-w-lg rounded-xl bg-white p-4 text-left shadow-sm ring-1 ring-slate-200"
         >
-          <p class="text-sm font-semibold text-slate-800">진단을 개념으로 보면</p>
+          <p class="text-sm font-semibold text-slate-800">진단 결과를 개념별로 보면</p>
           <p v-if="diagConcepts.missed.length" class="mt-2 text-sm leading-relaxed text-slate-700">
             <span class="font-medium text-amber-700">다시 볼 개념</span>
-            <span class="text-slate-500"> — </span>
+            <span class="text-slate-500">: </span>
             <template v-for="(c, i) in diagConcepts.missed" :key="c.id">
               <span v-if="i" class="text-slate-500"> · </span>
               <a
@@ -219,7 +219,7 @@ function reset() {
           </p>
           <p v-if="diagConcepts.correct.length" class="mt-1 text-sm leading-relaxed text-slate-600">
             <span class="font-medium text-emerald-700">아는 개념</span>
-            <span class="text-slate-500"> — </span>{{ diagConcepts.correct.map((c) => c.label).join(' · ') }}
+            <span class="text-slate-500">: </span>{{ diagConcepts.correct.map((c) => c.label).join(' · ') }}
           </p>
           <RouterLink to="/concepts" class="mt-2 inline-block text-xs font-medium text-indigo-600 hover:underline">
             🧠 개념 지도에서 표시 보기 →
@@ -264,11 +264,11 @@ function reset() {
             <p class="font-semibold text-slate-900">{{ ins.partLabel }}에 복습 표시 {{ ins.count }}개가 남아 있어요</p>
             <p class="text-xs text-slate-500">
               {{ ins.preview.join(' · ') }}<template v-if="ins.count > ins.preview.length"> 외 {{ ins.count - ins.preview.length }}개</template>
-              — 다음 챕터 전에 짚고 가면 좋아요
+              (다음 챕터 전에 짚고 가면 좋아요)
             </p>
           </template>
           <template v-else>
-            <p class="text-xs font-semibold text-violet-700">심화 해금 🔓</p>
+            <p class="text-xs font-semibold text-violet-700">심화 과정 열림 🔓</p>
             <p class="font-semibold text-slate-900">{{ ins.partLabel }} 필수 트랙 완주! 심화 {{ ins.remaining }}챕터가 열렸어요</p>
             <p class="text-xs text-slate-500">필수는 아니지만, 지금 가장 잘 이해할 수 있는 상태예요</p>
           </template>
@@ -289,7 +289,7 @@ function reset() {
       <p class="text-xs font-semibold text-amber-700">복습 경로</p>
       <p class="mt-0.5 break-keep text-sm text-slate-700">
         복습 표시 {{ reviewPath.bookmarkCount }}곳은 개념 {{ reviewPath.flagged.length }}개예요. 선수 개념까지 이으면
-        {{ reviewPath.steps.length }}단계 — 화살표 순서대로 보면 막힌 곳의 뿌리부터 풀립니다.
+        {{ reviewPath.steps.length }}단계예요. 화살표 순서대로 보면 막힌 곳의 뿌리부터 풀립니다.
       </p>
       <ol class="mt-2 flex flex-wrap items-center gap-x-1 gap-y-1.5 text-sm">
         <li v-for="(s, i) in reviewSteps" :key="s.concept.id" class="flex items-center gap-1">
@@ -343,21 +343,21 @@ function reset() {
             핵심 경로 · {{ coreRows.length }}단계로 완주
           </h3>
           <p class="mt-1 break-keep text-sm text-slate-600">
-            번호 순서대로 밟으면 트랜스포머까지 닿습니다 — {{ totalChapters }}챕터 · 약 {{ totalHours }}시간.
+            번호 순서대로 밟으면 트랜스포머까지 닿습니다({{ totalChapters }}챕터 · 약 {{ totalHours }}시간).
           </p>
         </div>
 
         <!-- 선택 구획 머리말 — 번호가 끝나고 성격이 바뀌는 지점을 말로도 못박는다 -->
         <template v-if="sec.key === 'optional'">
           <p class="mt-4 mb-5 rounded-xl bg-emerald-50 px-4 py-3 text-center text-sm font-semibold text-emerald-800 ring-1 ring-emerald-200">
-            ✓ 여기까지가 핵심 경로 — {{ totalChapters }}챕터 · 약 {{ totalHours }}시간
+            ✓ 여기까지가 핵심 경로 ({{ totalChapters }}챕터 · 약 {{ totalHours }}시간)
           </p>
           <div class="mt-8 mb-4">
             <h3 class="text-base font-bold text-slate-800">
               선택 트랙 · 필요할 때 골라 담기 ({{ optionalRows.length }}개)
             </h3>
             <p class="mt-1 break-keep text-sm text-slate-600">
-              <strong>순서가 아니라 선택입니다</strong> — 그래서 번호를 붙이지 않았습니다.
+              <strong>순서가 아니라 선택입니다.</strong> 그래서 번호를 붙이지 않았습니다.
               각 카드의 진입 조건만 맞으면 언제든 들어갈 수 있어요.
               <span class="whitespace-nowrap">(전부 담으면 {{ optionalChapters }}챕터 · 약 {{ optionalHours }}시간)</span>
             </p>

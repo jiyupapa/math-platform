@@ -9,7 +9,7 @@ import { computed, ref } from 'vue'
 const Q = { x: 1, y: 1, label: '질문 "연차 신청 어떻게 하나요?"' }
 const VDOCS = [
   { id: 'A', x: 2, y: 2, name: '연차 신청 안내 (짧은 판)', topic: true },
-  { id: 'B', x: 6, y: 6, name: '연차 신청 안내 (자세한 판 — A의 3배 분량)', topic: true },
+  { id: 'B', x: 6, y: 6, name: '연차 신청 안내 (자세한 판, A의 3배 분량)', topic: true },
   { id: 'C', x: 0, y: 3, name: '각종 신청 양식 모음 (연차 아님)', topic: false },
 ]
 const dot = (a: { x: number; y: number }, b: { x: number; y: number }) => a.x * b.x + a.y * b.y
@@ -55,7 +55,7 @@ const bTip = computed(() => {
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 길이 오염 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 길이 오염: 자세히 쓴 죄</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · 길이 오염: 자세히 쓴 죄</p>
     <p class="mb-3 text-xs text-slate-500">
       문서 B는 A와 <b>내용이 같고 3배 자세할 뿐</b>입니다(단어 빈도가 3배). 두 가지 자로 순위를 재 보세요.
     </p>
@@ -124,21 +124,21 @@ const bTip = computed(() => {
         </div>
 
         <p v-if="metric === 'dist'" class="mt-2 rounded-lg bg-rose-50 p-3 text-sm text-rose-700">
-          ⚠️ B는 A와 <b>내용이 같은데</b> 자세히 썼다는 이유만으로 딴 주제인 C보다도 뒤(꼴찌)입니다 —
+          ⚠️ B는 A와 <b>내용이 같은데</b> 자세히 썼다는 이유만으로 딴 주제인 C보다도 뒤(꼴찌)입니다.
           벡터가 같은 방향으로 <b>길어졌을 뿐</b>인데, 거리는 그걸 "멀다"로 채점해요. 이게 <b>길이 오염</b>입니다.
         </p>
         <p v-else class="mt-2 rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">
           ✅ B가 A와 <b>동점 1.00으로 복귀</b>했습니다. 코사인은 화살표의 <b>방향(주제 비율)</b>만 보고
-          길이는 완전히 무시하거든요 — 그림에서 질문·A·B가 같은 방향인 걸 확인하세요.
+          길이는 완전히 무시하거든요. 그림에서 질문·A·B가 같은 방향인 걸 확인하세요.
         </p>
       </div>
     </div>
 
     <!-- ② 각도 놀이터 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 각도 놀이터: 코사인의 눈금 익히기</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · 각도 놀이터: 코사인의 눈금 익히기</p>
     <p class="mb-3 text-xs text-slate-500">
-      사잇각과 <b>b</b>의 길이를 바꿔 보세요 — 코사인이 무엇에 반응하고 무엇을 무시하는지 드러납니다.
+      사잇각과 <b>b</b>의 길이를 바꿔 보세요. 코사인이 무엇에 반응하고 무엇을 무시하는지 드러납니다.
     </p>
 
     <div class="flex flex-col gap-4 sm:flex-row">
@@ -179,7 +179,7 @@ const bTip = computed(() => {
         </div>
 
         <p class="rounded-lg bg-indigo-50 p-3 text-xs leading-relaxed text-indigo-800">
-          눈금 세 개만 기억하세요 — <b>0°(같은 방향) = 1</b> · <b>90°(직교) = 0, 무관</b> ·
+          눈금 세 개만 기억하세요. <b>0°(같은 방향) = 1</b> · <b>90°(직교) = 0, 무관</b> ·
           <b>180°(반대) = −1</b>. 그리고 b를 아무리 늘려도 cos θ가 꿈쩍 않는 것,
           그게 실험 ①에서 B를 구해 준 성질입니다.
         </p>

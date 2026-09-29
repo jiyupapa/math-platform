@@ -19,12 +19,12 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 7 · 멀티헤드 어텐션</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">7장 · 멀티헤드 어텐션</p>
     <h1 class="mb-4 text-3xl font-bold">멀티헤드 어텐션 — 여러 관점으로 동시에</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       어텐션 하나(<b>헤드 하나</b>)는 보통 <b>한 종류의 관계</b>에 집중합니다. 그런데 언어에는
       "누가–무엇을", "무엇을–꾸미는", "언제" 같은 <b>여러 관계가 동시에</b> 있죠. 그래서 어텐션을
-      <b>여러 개 나란히</b> 돌립니다 — 이게 멀티헤드 어텐션입니다.
+      <b>여러 개 나란히</b> 돌립니다. 이게 멀티헤드 어텐션입니다.
     </p>
 
     <ConceptCard tone="goal" title="이 챕터의 목표">
@@ -47,9 +47,9 @@ function onSetComplete() {
 
     <ConceptCard tone="note" title="새 용어: 헤드 · 멀티헤드 어텐션">
       <ul class="list-disc space-y-1 pl-5 text-sm">
-        <li><b>헤드(head)</b> — 어텐션 <b>계산 한 벌</b>. 각 헤드는 <b>자기만의 Q·K·V</b>(가중치)를 가져
+        <li><b>헤드(head)</b>: 어텐션 <b>계산 한 벌</b>. 각 헤드는 <b>자기만의 Q·K·V</b>(가중치)를 가져
           서로 다른 관계에 집중합니다.</li>
-        <li><b>멀티헤드 어텐션(multi-head attention)</b> — 이런 헤드를 <b>여러 개 동시에</b> 돌리고,
+        <li><b>멀티헤드 어텐션(multi-head attention)</b>: 이런 헤드를 <b>여러 개 동시에</b> 돌리고,
           결과를 합치는 방식.</li>
       </ul>
     </ConceptCard>
@@ -94,7 +94,7 @@ function onSetComplete() {
     />
 
     <!-- ===== 심화 ===== -->
-    <DetailsCard title="➕ 더 깊이 알아보기 — 헤드가 많아도 계산량이 폭증하지 않는 이유">
+    <DetailsCard title="➕ 더 깊이 알아보기: 헤드가 많아도 계산량이 폭증하지 않는 이유">
       <p class="mb-2">
         헤드를 8개 쓴다고 계산량이 8배가 되진 않습니다. 비결은 <b>차원을 나눠 갖기</b>예요.
         전체 벡터 차원 <MathBlock inline expr="d" /> 를 헤드 수 <MathBlock inline expr="h" /> 로 나눠,
@@ -105,7 +105,7 @@ function onSetComplete() {
         <li>작은 어텐션 8개의 총합 ≈ 큰 어텐션 1개 수준의 계산량. 대신 <b>관점은 8배 다양</b>해집니다.</li>
       </ul>
       <div class="rounded-lg bg-white px-4 py-3 text-sm text-slate-600">
-        🎯 <b>핵심</b>: "하나를 크게"보다 "<b>여러 개를 작게</b>"가 더 똑똑합니다 —
+        🎯 <b>핵심</b>: "하나를 크게"보다 "<b>여러 개를 작게</b>"가 더 똑똑합니다.
         같은 예산으로 <b>다양한 관계</b>를 동시에 보니까요.
       </div>
     </DetailsCard>
@@ -140,7 +140,7 @@ function onSetComplete() {
       <b>10문제를 모두 맞히면</b> 이 챕터가 완료됩니다.
     </p>
 
-    <QuizSet title="멀티헤드 어텐션 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="멀티헤드 어텐션: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -250,7 +250,7 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 7 완료 — 여러 관점을 한 번에</p>
+      <p class="font-semibold text-emerald-800">7장 완료! 여러 관점을 한 번에</p>
       <p class="mt-1 text-sm text-emerald-700">
         어텐션 조각은 이제 다 모였어요. 다음 챕터(ch8)에서 <b>잔차연결·층정규화·피드포워드</b>와 묶어
         하나의 <b>트랜스포머 블록</b>을 완성합니다. 노트북 <code>notebooks/ch07_multihead.ipynb</code> 도 함께!

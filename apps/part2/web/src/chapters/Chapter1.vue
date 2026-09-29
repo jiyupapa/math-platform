@@ -46,7 +46,7 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 1</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">1장</p>
     <h1 class="mb-4 text-3xl font-bold">함수와 그래프, 기울기 직관 📐</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       미분은 결국 <b>"기울기"</b> 이야기입니다. 그 기울기를 이해하려면 먼저 <b>함수</b>가 뭔지,
@@ -95,7 +95,7 @@ function onSetComplete() {
       </label>
     </div>
 
-    <ConceptCard tone="note" title="새 기호 — f(x) (에프 엑스)">
+    <ConceptCard tone="note" title="새 기호: f(x) (에프 엑스)">
       <p>
         <MathBlock inline expr="f(x)" /> 는 <b>"입력 x 를 함수 f 에 넣었을 때 나오는 출력"</b>을 뜻합니다.
         f 는 함수(function)의 f 이고, 괄호 안 <MathBlock inline expr="x" /> 가 입력이에요.
@@ -116,8 +116,8 @@ function onSetComplete() {
     />
 
     <!-- 2. 그래프 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">2. 그래프 — 함수를 그림으로 보기</h2>
-    <ReviewFlag id="ch1-s2" chapter="ch1" label="2. 그래프 — 함수를 그림으로 보기" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">2. 그래프: 함수를 그림으로 보기</h2>
+    <ReviewFlag id="ch1-s2" chapter="ch1" label="2. 그래프: 함수를 그림으로 보기" />
     <p class="leading-relaxed text-slate-700">
       함수의 <b>그래프</b>는 입력마다 나온 결과를 좌표평면에 점으로 찍어 이은 것입니다.
       즉 <b>점 <MathBlock inline expr="(x,\ f(x))" /> 들의 모음</b>이에요.
@@ -126,7 +126,7 @@ function onSetComplete() {
 
     <ChartView type="line" :data="graphData" :options="graphOptions" :height="300" />
 
-    <ConceptCard tone="note" title="새 용어 — 그래프 / 좌표평면">
+    <ConceptCard tone="note" title="새 용어: 그래프 / 좌표평면">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li><b>좌표평면</b>: 가로축(x)과 세로축(y)이 직각으로 만난 평면. 위치를 <MathBlock inline expr="(x, y)" /> 로 표시해요.</li>
         <li><b>그래프</b>: 함수가 만드는 점들을 이은 선. <MathBlock inline expr="x" /> 를 정하면 높이 <MathBlock inline expr="f(x)" /> 가 정해지죠.</li>
@@ -154,7 +154,7 @@ function onSetComplete() {
 
     <LineExplorer :init-a="1" :init-b="1" />
 
-    <ConceptCard tone="note" title="새 용어 — 일차함수 y = ax + b">
+    <ConceptCard tone="note" title="새 용어: 일차함수 y = ax + b">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <b>기울기 <MathBlock inline expr="a" /></b>: 가로로 1칸 갈 때 세로로 <MathBlock inline expr="a" /> 칸 오르내림.
@@ -188,7 +188,7 @@ function onSetComplete() {
     </p>
     <MathBlock expr="\text{기울기} = \dfrac{\Delta y}{\Delta x} = \dfrac{\text{세로 변화}}{\text{가로 변화}}" />
 
-    <ConceptCard tone="note" title="기호 복습 — Δ (델타)">
+    <ConceptCard tone="note" title="기호 복습: Δ (델타)">
       <MathBlock inline expr="\Delta" /> 는 "변화량". <MathBlock inline expr="\Delta y" /> 는 세로가 변한 양,
       <MathBlock inline expr="\Delta x" /> 는 가로가 변한 양입니다. 둘을 나누면 "가로 1칸당 세로 변화" = 기울기가 나와요.
     </ConceptCard>
@@ -216,12 +216,12 @@ function onSetComplete() {
     <p class="leading-relaxed text-slate-700">
       방금 배운 "기울기"가 사실 <b>AI가 학습하는 방식의 핵심</b>이에요. AI 모델은 얼마나 틀렸는지를
       <b>손실(loss)</b> 이라는 숫자로 재고, 그 손실을 <b>곡선</b>으로 그립니다. 목표는 이 곡선의
-      <b>가장 낮은 골짜기</b>로 내려가는 것 — 그때 오차가 가장 작으니까요.
+      <b>가장 낮은 골짜기</b>로 내려가는 것. 그때 오차가 가장 작으니까요.
       수학에서는 이 "가장 낮은 지점"을 <b>최솟값(minimum, 미니멈)</b>이라 불러요.
       앞으로 이 과정에서 "골짜기"라고 하면 곧 <b>손실의 최솟값</b>을 찾는 이야기입니다(9장에서 본격적으로).
     </p>
 
-    <ConceptCard tone="ai" title="경사하강법 미리보기 — 기울기를 보고 내려간다">
+    <ConceptCard tone="ai" title="경사하강법 미리보기: 기울기를 보고 내려간다">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <b>손실곡선(loss curve)</b>: 가로축은 모델의 설정값, 세로축은 오차(손실). 골짜기가 정답에 가까운 곳.
@@ -229,7 +229,7 @@ function onSetComplete() {
         <li>
           <b>기울기 = 내려갈 방향</b>: 지금 서 있는 지점의 기울기가 양수면 왼쪽으로,
           음수면 오른쪽으로 한 걸음. 이렇게 <b>기울기의 반대 방향</b>으로 조금씩 내려가는 게
-          <b>경사하강법(gradient descent)</b> 입니다. (Phase 9 에서 본격적으로!)
+          <b>경사하강법(gradient descent)</b> 입니다. (9장에서 본격적으로!)
         </li>
         <li>
           <b>그래서 미분이 필요하다</b>: "지금 지점의 기울기"를 구하는 도구가 바로 미분이에요.
@@ -252,14 +252,14 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 · 단계별 계산 10문제입니다. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="함수와 기울기 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="함수와 기울기: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
         question="함수 f(x) 는 x 를 넣으면 정해진 값 하나가 나오는 규칙이다."
         type="truefalse"
         :answer="0"
-        explanation="참입니다. 입력 하나에 출력 하나 — 그게 함수예요."
+        explanation="참입니다. 입력 하나에 출력 하나, 그게 함수예요."
       />
       <Quiz
         difficulty="easy"
@@ -343,7 +343,7 @@ function onSetComplete() {
     <ConceptCard tone="tip" title="🐍 Python으로도 해보기">
       같은 내용을 <code>notebooks/ch01_functions_slope.ipynb</code> 에서 NumPy·Matplotlib·SymPy로
       직접 그려보고 계산할 수 있어요. 특히 SymPy로 일차함수를 미분하면 기울기 <MathBlock inline expr="a" /> 가
-      그대로 나온다는 걸 확인해 보세요 — 다음 챕터의 예고편입니다.
+      그대로 나온다는 걸 확인해 보세요. 다음 챕터의 예고편입니다.
     </ConceptCard>
 
     <div
@@ -351,15 +351,15 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 1 완료. 기울기의 감각을 잡았습니다.</p>
+      <p class="font-semibold text-emerald-800">1장 완료. 기울기의 감각을 잡았습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
-        다음은 "직선의 기울기"를 "곡선의 순간 기울기"로 넓히는 열쇠 — 변화율과 극한입니다.
+        다음은 "직선의 기울기"를 "곡선의 순간 기울기"로 넓히는 열쇠, 변화율과 극한입니다.
       </p>
       <RouterLink
         to="/ch/ch2"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        다음 챕터 — 변화율과 극한 →
+        다음 챕터: 변화율과 극한 →
       </RouterLink>
     </div>
   </article>

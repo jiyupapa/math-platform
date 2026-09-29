@@ -55,10 +55,10 @@ const COLORS = ['var(--c-indigo-500)', 'var(--c-indigo-400)', 'var(--c-indigo-30
 <template>
   <div class="my-4 rounded-xl border border-slate-200 bg-white p-4">
     <p class="mb-1 text-sm font-semibold text-slate-700">
-      🌡️ 온도 다이얼 — "오늘 날씨가 참 ___" 의 다음 토큰
+      🌡️ 온도 다이얼: "오늘 날씨가 참 ___" 의 다음 토큰
     </p>
     <p class="mb-3 text-xs text-slate-500">
-      모델의 점수(로짓)는 고정입니다 — 다이얼은 확률의 배분만 바꿔요.
+      모델의 점수(로짓)는 고정입니다. 다이얼은 확률의 배분만 바꿔요.
     </p>
 
     <!-- T 슬라이더 -->
@@ -144,7 +144,7 @@ const COLORS = ['var(--c-indigo-500)', 'var(--c-indigo-400)', 'var(--c-indigo-30
       </div>
     </div>
     <p v-if="samples.length" class="mt-1.5 text-xs text-slate-500">
-      🧊 낮은 T 에서는 같은 단어만, 🔥 높은 T 에서는 "감자같다"까지 —
+      🧊 낮은 T 에서는 같은 단어만, 🔥 높은 T 에서는 "감자같다"까지 나와요.
       다이얼을 바꿔 다시 뽑아 보세요.
     </p>
   </div>

@@ -19,7 +19,7 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 4</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">4장</p>
     <h1 class="mb-4 text-3xl font-bold">연립방정식과 가우스 소거법</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       여러 조건을 <b>동시에</b> 만족하는 값을 찾는 게 연립방정식입니다. 그림으로는
@@ -38,14 +38,14 @@ function onSetComplete() {
     <!-- 1. 연립방정식이란 -->
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 연립방정식 = 직선들의 교점</h2>
     <ReviewFlag id="ch4-s1" chapter="ch4" label="1. 연립방정식 = 직선들의 교점" />
-    <ConceptCard tone="note" title="새 용어 — 방정식 · 연립방정식 · 해">
+    <ConceptCard tone="note" title="새 용어: 방정식 · 연립방정식 · 해">
       <ul class="list-disc space-y-1 pl-5">
         <li>
           <b>방정식(equation)</b>: 아직 모르는 값(<b>미지수</b>, 보통 x, y)이 들어간 등식.
           그 미지수가 <b>어떤 값일 때 등호가 성립하는지</b>를 묻는 식입니다.
           예: <MathBlock inline expr="x + y = 3" /> 은 "x와 y를 더해 3이 되게 하는 값"을 찾는 식.
         </li>
-        <li><b>미지수(unknown)</b>: 값을 아직 모르는, 우리가 구하려는 글자 (여기선 x, y).</li>
+        <li><b>미지수(unknown)</b>: 값을 아직 모르는, 구하려는 글자 (여기선 x, y).</li>
         <li><b>연립방정식</b>: 두 개 이상의 방정식을 <b>한 묶음</b>으로 함께 푸는 것.</li>
         <li><b>해(solution)</b>: 묶음 안의 <b>모든</b> 식을 동시에 만족하는 값.</li>
       </ul>
@@ -117,16 +117,16 @@ function onSetComplete() {
         <li><b>① 간결함</b>: 미지수가 수천~수백만 개면 글자로 못 적어요. 숫자만 표로 모으면 깔끔.</li>
         <li><b>② 기계적 풀이</b>: 글자를 떼고 숫자만 다루면 <b>컴퓨터가 규칙대로 자동</b>으로 풉니다.</li>
         <li><b>③ 한 형태로 통일</b>: 미지수가 2개든 100만 개든 전부 <MathBlock inline expr="A\vec{x}=\vec{b}" /> 한 줄 → 푸는 방법도 하나.</li>
-        <li><b>④ 도구 재사용</b>: 행렬곱·역행렬·행렬식을 그대로 활용. 예) <MathBlock inline expr="\vec{x} = A^{-1}\vec{b}" /> 로 한 방에. (위첨자 −1이 붙은 <MathBlock inline expr="A^{-1}" /> 는 "에이 인버스" — A를 <b>되돌리는 행렬</b>인데, 다음 챕터에서 제대로 배워요.)</li>
+        <li><b>④ 도구 재사용</b>: 행렬곱·역행렬·행렬식을 그대로 활용. 예) <MathBlock inline expr="\vec{x} = A^{-1}\vec{b}" /> 로 한 방에. (위첨자 −1이 붙은 <MathBlock inline expr="A^{-1}" /> 는 "에이 인버스"라고 읽어요. A를 <b>되돌리는 행렬</b>인데, 다음 챕터에서 제대로 배워요.)</li>
       </ul>
       <p class="mt-2 text-sm">
-        🤖 <b>그리고 이게 AI의 핵심 이유</b> — 실제 AI는 파라미터가 수백만~수십억 개라, 행렬·벡터로 묶어야
+        🤖 <b>그리고 이게 AI의 핵심 이유</b>: 실제 AI는 파라미터가 수백만~수십억 개라, 행렬·벡터로 묶어야
         <b>GPU가 한꺼번에 병렬로</b> 계산할 수 있어요. "연립방정식을 행렬로"가 곧 AI 계산의 토대입니다.
       </p>
     </ConceptCard>
 
     <details class="mt-2 rounded-lg border border-slate-200 bg-slate-50 p-3">
-      <summary class="cursor-pointer font-medium text-slate-700">▸ 더 자세히 — 왜 이게 그렇게 중요할까? (AI의 언어가 된 이유)</summary>
+      <summary class="cursor-pointer font-medium text-slate-700">▸ 더 자세히: 왜 이게 그렇게 중요할까? (AI의 언어가 된 이유)</summary>
       <div class="mt-3 space-y-4 text-sm leading-relaxed text-slate-700">
         <div>
           <p class="font-semibold text-slate-800">① 글자 반복을 빼서 깔끔하게</p>
@@ -172,7 +172,7 @@ function onSetComplete() {
           <p class="font-semibold text-slate-800">🤖 그래서 AI랑 무슨 상관?</p>
           <ul class="mt-1 list-disc space-y-1 pl-5">
             <li>AI가 하는 계산을 들여다보면 대부분이 이 <b>'표(행렬) 곱하기'</b>예요. 정보가 AI 안을 한 단계 지날 때마다 행렬 계산이 한 번씩 일어나요.</li>
-            <li>그래픽카드(GPU)는 이 표 계산을 <b>한꺼번에 수천 개 동시에</b> 하도록 만든 부품이에요. 그래서 데이터를 표로 묶어야 빨라요 — 하나씩 줄 세워 계산하면 너무 느리거든요.</li>
+            <li>그래픽카드(GPU)는 이 표 계산을 <b>한꺼번에 수천 개 동시에</b> 하도록 만든 부품이에요. 그래서 데이터를 표로 묶어야 빨라요. 하나씩 줄 세워 계산하면 너무 느리거든요.</li>
             <li>AI가 <b>"학습한다"</b>는 것도 결국, 데이터에 가장 잘 맞는 숫자들을 찾는 <b>거대한 연립방정식 풀기</b>예요.</li>
           </ul>
         </div>
@@ -186,7 +186,7 @@ function onSetComplete() {
         <li>
           <b>x, y</b> = 자리(슬롯), 구할 값 → 둘을 세로로 쌓아 해 벡터
           <MathBlock inline expr="\vec{x} = \begin{bmatrix} x \\ y \end{bmatrix}" /> 로 묶음.
-          <span class="text-slate-500">(낱개 글자 <MathBlock inline expr="x" /> 와 벡터 <MathBlock inline expr="\vec{x}" /> 는 이름만 같고 다른 것 — <MathBlock inline expr="\vec{x}" /> 는 x, y를 담은 상자!)</span>
+          <span class="text-slate-500">(낱개 글자 <MathBlock inline expr="x" /> 와 벡터 <MathBlock inline expr="\vec{x}" /> 는 이름만 같고 다른 것이에요. <MathBlock inline expr="\vec{x}" /> 는 x, y를 담은 상자!)</span>
         </li>
         <li><b>등호 오른쪽 숫자(상수)</b> = 목표값 → 벡터 <MathBlock inline expr="\vec{b}" /> 로</li>
       </ul>
@@ -199,10 +199,10 @@ function onSetComplete() {
     />
     <p class="text-sm text-slate-500">
       (가운데 화살표 <MathBlock inline expr="\Longleftrightarrow" /> 는 "서로 같은 표현"이라는
-      기호예요 — 같은 문제를 왼쪽·오른쪽 두 방식으로 쓴 것.)
+      기호예요. 같은 문제를 왼쪽·오른쪽 두 방식으로 쓴 것.)
     </p>
 
-    <ConceptCard tone="tip" title="왜 이게 같은 식일까? — 행렬×벡터를 펼쳐보자">
+    <ConceptCard tone="tip" title="왜 이게 같은 식일까? 행렬×벡터를 펼쳐보자">
       <p class="mb-2">
         앞 챕터에서 <b>행렬×벡터</b>는 "각 행과 벡터를 짝지어 곱하고 더한다"였죠. 왼쪽을 실제로 곱해봅시다:
       </p>
@@ -216,7 +216,7 @@ function onSetComplete() {
       <p class="font-semibold text-emerald-700">원래 두 식이 그대로 복원! <MathBlock inline expr="A\vec{x}=\vec{b}" /> 는 두 식을 한 덩어리로 접어 쓴 것뿐이에요.</p>
     </ConceptCard>
 
-    <ConceptCard tone="note" title="새 용어 — 계수, 첨가행렬">
+    <ConceptCard tone="note" title="새 용어: 계수, 첨가행렬">
       <ul class="list-disc space-y-1 pl-5">
         <li><b>계수(coefficient)</b>: 미지수 앞에 곱해진 숫자 (x+y의 계수는 1, 1).</li>
         <li>
@@ -226,8 +226,8 @@ function onSetComplete() {
         </li>
         <li>
           <b>첨가행렬(augmented matrix)</b>: 계수행렬 A 와 상수 벡터 b 를 <b>세로줄(|)로 붙여 쓴 표</b>.
-          <MathBlock inline expr="\left[\begin{array}{cc|c} 1 & 1 & 3 \\ 1 & -1 & 1 \end{array}\right]" />
-          — 세로줄 왼쪽이 계수, 오른쪽이 상수. ('첨가'는 b를 <b>덧붙였다</b>는 뜻.)
+          <MathBlock inline expr="\left[\begin{array}{cc|c} 1 & 1 & 3 \\ 1 & -1 & 1 \end{array}\right]" />.
+          세로줄 왼쪽이 계수, 오른쪽이 상수. ('첨가'는 b를 <b>덧붙였다</b>는 뜻.)
         </li>
         <li>
           <b>왜 이렇게 쓰나?</b> x, y 글자는 자리만 정해지면 매번 쓸 필요가 없어요.
@@ -238,7 +238,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <!-- 3. 가우스 소거법 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">3. 가우스 소거법 — 두 식을 빼서 글자 하나 없애기</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">3. 가우스 소거법: 두 식을 빼서 글자 하나 없애기</h2>
     <ReviewFlag id="ch4-s3" chapter="ch4" label="3. 가우스 소거법" />
     <p class="leading-relaxed text-slate-700">
       한마디로 <b>두 식을 빼서 글자(미지수) 하나를 없애고, 하나씩 푸는</b> 방법이에요. 딱 3단계입니다.
@@ -262,7 +262,7 @@ function onSetComplete() {
 
     <!-- 접이식 상세 -->
     <details class="mt-3 rounded-lg border border-slate-200 bg-slate-50 p-3">
-      <summary class="cursor-pointer font-medium text-slate-700">▸ 더 자세히 — 두 식을 빼면 왜 x가 사라질까?</summary>
+      <summary class="cursor-pointer font-medium text-slate-700">▸ 더 자세히: 두 식을 빼면 왜 x가 사라질까?</summary>
       <div class="mt-3">
         <p class="mb-1 text-sm">아래 식에서 위 식을 <b>같은 자리(칸)끼리</b> 빼봅니다 (x는 x끼리, y는 y끼리, 숫자는 숫자끼리):</p>
         <div class="mb-2 overflow-x-auto">
@@ -292,7 +292,7 @@ function onSetComplete() {
     </details>
 
     <details class="mt-2 rounded-lg border border-slate-200 bg-slate-50 p-3">
-      <summary class="cursor-pointer font-medium text-slate-700">▸ 더 자세히 — 왜 빼도 답이 안 변할까? (저울)</summary>
+      <summary class="cursor-pointer font-medium text-slate-700">▸ 더 자세히: 왜 빼도 답이 안 변할까? (저울)</summary>
       <div class="mt-3">
         <p class="text-sm text-slate-600">
           위 식이 <MathBlock inline expr="x+y = 3" /> 이라 했으니 <MathBlock inline expr="x+y" /> 와 <MathBlock inline expr="3" /> 은 같은 값이에요.
@@ -303,12 +303,12 @@ function onSetComplete() {
     </details>
 
     <details class="mt-2 rounded-lg border border-slate-200 bg-slate-50 p-3">
-      <summary class="cursor-pointer font-medium text-slate-700">▸ 용어 정리 — 행 연산 · 전진소거 · 후진대입</summary>
+      <summary class="cursor-pointer font-medium text-slate-700">▸ 용어 정리: 행 연산 · 전진소거 · 후진대입</summary>
       <div class="mt-3 text-sm">
         <p class="mb-3"><b>행 연산</b>(해를 안 바꾸는 3가지): ① 두 행 순서 바꾸기 ② 한 행에 0 아닌 수 곱하기 ③ 한 행에 다른 행의 몇 배 더하기/빼기(← 소거의 핵심).</p>
 
         <p class="mb-2">
-          🧭 <b>이름부터 풀어보면</b> — 가우스 소거법은 <b>방향이 정반대인 두 단계</b>로 되어 있어요.
+          🧭 <b>이름부터 풀어보면</b>: 가우스 소거법은 <b>방향이 정반대인 두 단계</b>로 되어 있어요.
           이름이 곧 그 <b>진행 방향</b>이에요.
         </p>
         <div class="mb-3 grid gap-2 sm:grid-cols-2">
@@ -328,7 +328,7 @@ function onSetComplete() {
           </div>
         </div>
 
-        <p class="mb-1 text-slate-600"><b>① 전진소거 ↓</b> — 아래 행에서 위 행을 빼 x를 지웁니다(왼쪽 아래가 0 = <b>계단</b>):</p>
+        <p class="mb-1 text-slate-600"><b>① 전진소거 ↓</b>: 아래 행에서 위 행을 빼 x를 지웁니다(왼쪽 아래가 0 = <b>계단</b>):</p>
         <MathBlock expr="\left[\begin{array}{cc|c} 1 & 1 & 3 \\ 1 & -1 & 1 \end{array}\right] \;\xrightarrow{\;R2 - R1\;}\; \left[\begin{array}{cc|c} 1 & 1 & 3 \\ 0 & -2 & -2 \end{array}\right]" />
         <p class="mb-3 text-slate-500">
           왼쪽 아래 칸이 <b>0</b> 이 되며 <b>위는 글자 2개 · 아래는 글자 1개(y만)</b> 인 <b>계단 모양</b>이 됐어요.
@@ -337,7 +337,7 @@ function onSetComplete() {
 
         <div class="mb-3 rounded-lg border border-slate-200 bg-white p-3">
           <p class="mb-2">
-            🪜 <b>그런데 "계단"이 뭐가 계단이지?</b> — 식이 2개면 0이 하나뿐이라 잘 안 보여요.
+            🪜 <b>그런데 "계단"이 뭐가 계단이지?</b> 식이 2개면 0이 하나뿐이라 잘 안 보여요.
             <b>식 3개</b>로 보면 확실합니다. 각 줄에서 <b>0이 아닌 숫자가 처음 나오는 칸</b>(아래 초록)을 보세요:
           </p>
           <div class="overflow-x-auto">
@@ -369,17 +369,17 @@ function onSetComplete() {
             그래서 <b>왼쪽 아래 0들(회색)과 숫자의 경계선이 내려가는 계단</b>처럼 생겼습니다.
           </p>
           <p class="mt-2 text-slate-600">
-            이 계단 모양에는 정식 이름이 있어요 — 수학책에서는 <b>행사다리꼴(row echelon form)</b>,
+            이 계단 모양에는 정식 이름이 있어요. 수학책에서는 <b>행사다리꼴(row echelon form)</b>,
             읽는 법은 "로우 에셜론 폼"입니다. "행(가로줄)들이 사다리처럼 층층이 배열된 꼴"이라는 뜻이에요.
             다른 교재·강의·검색에서 이 모양을 만나면 <b>이 이름으로</b> 나오니, "계단 = 행사다리꼴"로
             기억해 두세요.
           </p>
           <p class="mt-1 text-slate-500">
-            우리 2개짜리 <MathBlock inline expr="\begin{bmatrix} 1 & 1 \\ 0 & -2 \end{bmatrix}" /> 는 이 계단의 <b>가장 작은 형태(딱 한 칸)</b> 예요 — 왼쪽 아래 0 하나가 첫 계단.
+            앞의 식 2개짜리 <MathBlock inline expr="\begin{bmatrix} 1 & 1 \\ 0 & -2 \end{bmatrix}" /> 는 이 계단의 <b>가장 작은 형태(딱 한 칸)</b> 예요. 왼쪽 아래 0 하나가 첫 계단.
           </p>
         </div>
 
-        <p class="mb-1 text-slate-600"><b>② 후진대입 ↑</b> — 글자 1개인 맨 아래 식부터 풀고, 그 값을 위로 올려 넣습니다:</p>
+        <p class="mb-1 text-slate-600"><b>② 후진대입 ↑</b>: 글자 1개인 맨 아래 식부터 풀고, 그 값을 위로 올려 넣습니다:</p>
         <div class="mb-2 rounded-lg bg-white p-3">
           <p class="mb-1">아래 식 (글자 1개): <MathBlock inline expr="-2y = -2 \;\Rightarrow\; y = 1" /></p>
           <p>위 식에 <MathBlock inline expr="y=1" /> 을 <b>도로 넣기</b>: <MathBlock inline expr="x + 1 = 3 \;\Rightarrow\; x = 2" /></p>
@@ -404,17 +404,17 @@ function onSetComplete() {
     <ReviewFlag id="ch4-s4" chapter="ch4" label="4. 해는 세 종류" />
     <p class="mb-3 leading-relaxed text-slate-700">
       연립방정식이 항상 "딱 한 답"인 건 아니에요. 두 직선의 <b>관계</b>에 따라 답의 개수가 셋 중 하나로 갈립니다.
-      아래에서 계속 나오는 <b>기울기</b>는 "직선이 얼마나 가파른가" — <b>오른쪽으로 1칸 갈 때
+      아래에서 계속 나오는 <b>기울기</b>는 "직선이 얼마나 가파른가", 즉 <b>오른쪽으로 1칸 갈 때
       위아래로 몇 칸 움직이는지</b>를 뜻해요. 기울기가 같은 두 직선은 평행합니다(나란히 감).
     </p>
 
-    <ConceptCard tone="tip" title="① 유일한 해 — 두 직선이 한 점에서 만남 (교차)">
+    <ConceptCard tone="tip" title="① 유일한 해: 두 직선이 한 점에서 만남 (교차)">
       <p class="mb-2">기울기가 <b>서로 달라서</b> 딱 한 군데서 만나요. 가장 흔한 경우.</p>
       <MathBlock expr="\begin{cases} x + y = 3 \\ x - y = 1 \end{cases} \;\Rightarrow\; \text{해 } (2,\, 1) \text{ 하나}" />
       <p class="text-sm text-slate-500">풀어보면: 계단이 깔끔히 완성되어 x, y 값이 <b>각각 하나로</b> 정해집니다.</p>
     </ConceptCard>
 
-    <ConceptCard tone="warn" title="② 해 없음 — 평행한 두 직선 (안 만남)">
+    <ConceptCard tone="warn" title="② 해 없음: 평행한 두 직선 (안 만남)">
       <p class="mb-2">기울기는 같은데 <b>위치가 달라</b> 영원히 안 만나요. 두 조건이 <b>서로 모순</b>.</p>
       <MathBlock expr="\begin{cases} x + y = 2 \\ x + y = 5 \end{cases}" />
       <p class="mb-2 text-sm">같은 <MathBlock inline expr="x+y" /> 가 2이면서 동시에 5일 수는 없죠. 그래서 답이 <b>없음</b>.</p>
@@ -423,7 +423,7 @@ function onSetComplete() {
       </p>
     </ConceptCard>
 
-    <ConceptCard tone="note" title="③ 무수히 많은 해 — 사실 같은 직선 (일치)">
+    <ConceptCard tone="note" title="③ 무수히 많은 해: 사실 같은 직선 (일치)">
       <p class="mb-2">두 식이 <b>실은 똑같은 직선</b>이에요(한 식이 다른 식의 배수). 직선 위 <b>모든 점</b>이 답.</p>
       <MathBlock expr="\begin{cases} x + y = 2 \\ 2x + 2y = 4 \end{cases} \quad(\text{둘째 = 첫째} \times 2)" />
       <p class="text-sm text-slate-500">
@@ -460,7 +460,7 @@ function onSetComplete() {
         <li>
           <b>선형회귀</b>: 데이터에 가장 잘 맞는 직선/평면을 찾는 일은
           <MathBlock inline expr="A\vec{x} = \vec{b}" /> 형태를 푸는 것입니다
-          <span class="text-slate-500">(이 식의 이름이 '정규방정식' — 아래 '더 자세히'에서 쉽게 풀어요)</span>.
+          <span class="text-slate-500">(이 식의 이름이 '정규방정식'이에요. 아래 '더 자세히'에서 쉽게 풀어요)</span>.
           <MathBlock inline expr="\vec{x}" /> 가 바로 <b>찾고 싶은 모델 파라미터</b>예요.
         </li>
         <li>
@@ -469,13 +469,13 @@ function onSetComplete() {
         </li>
         <li>
           <b>해가 없을 때</b>: 데이터가 딱 안 맞으면 정확한 해 대신 <b>가장 가까운 답</b>(최소제곱)을
-          찾습니다 — 이것도 결국 <MathBlock inline expr="A\vec{x}=\vec{b}" /> 풀이의 응용.
+          찾습니다. 이것도 결국 <MathBlock inline expr="A\vec{x}=\vec{b}" /> 풀이의 응용.
         </li>
       </ul>
     </ConceptCard>
 
     <details class="mt-2 rounded-lg border border-slate-200 bg-slate-50 p-3">
-      <summary class="cursor-pointer font-medium text-slate-700">▸ 더 자세히 — 쉽게 풀어보기 (선형회귀·최소제곱이 뭐죠?)</summary>
+      <summary class="cursor-pointer font-medium text-slate-700">▸ 더 자세히: 쉽게 풀어보기 (선형회귀·최소제곱이 뭐죠?)</summary>
       <div class="mt-3 space-y-4 text-sm leading-relaxed text-slate-700">
         <div>
           <p class="font-semibold text-slate-800">선형회귀 = 흩어진 점들 사이로 '가장 잘 맞는 직선' 긋기</p>
@@ -512,7 +512,7 @@ function onSetComplete() {
             그래서 "정확히 맞는 답" 대신 <b>점들에서 벗어난 정도가 가장 작은</b>(= 전체적으로 제일 가까운) 직선을 찾아요. 이게 <b>최소제곱</b>이에요.
           </p>
           <p class="mt-1 text-slate-500">
-            '제곱'이 붙은 건 벗어난 거리를 제곱해서 더해 비교하기 때문 — 부호 상관없이 '얼마나 멀었나'만 보려는 거예요. 이것도 결국 <MathBlock inline expr="A\vec{x}=\vec{b}" /> 풀이의 응용입니다.
+            '제곱'이 붙은 건 벗어난 거리를 제곱해서 더해 비교하기 때문이에요. 부호 상관없이 '얼마나 멀었나'만 보려는 거예요. 이것도 결국 <MathBlock inline expr="A\vec{x}=\vec{b}" /> 풀이의 응용입니다.
           </p>
         </div>
       </div>
@@ -532,14 +532,14 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 · 단계별 계산 10문제. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="연립방정식 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="연립방정식: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
         question="연립방정식의 '해'는 모든 식을 동시에 만족하는 값이다."
         type="truefalse"
         :answer="0"
-        :hints="['연립(聯立) = 여러 식이 함께 서 있다 — 핵심 단어는 \'동시에\'.']"
+        :hints="['연립(聯立) = 여러 식이 함께 서 있다. 핵심 단어는 \'동시에\'.']"
         explanation="참. 일부만 만족하면 해가 아닙니다."
       />
       <Quiz
@@ -547,7 +547,7 @@ function onSetComplete() {
         question="x + y = 3, x − y = 1 의 해는 (2, 1) 이다. x 값은?"
         type="numeric"
         :answer="2"
-        :hints="['해가 (2, 1) 로 이미 주어져 있어요 — 순서쌍의 첫 번째가 x.']"
+        :hints="['해가 (2, 1) 로 이미 주어져 있어요. 순서쌍의 첫 번째가 x.']"
         explanation="두 식을 더하면 2x=4 → x=2, y=1."
       />
       <Quiz
@@ -563,7 +563,7 @@ function onSetComplete() {
         question="x + y = 5 에서 x의 계수는 1이다."
         type="truefalse"
         :answer="0"
-        :hints="['x = 1x — 1은 생략하고 쓰는 약속이에요.']"
+        :hints="['x = 1x. 1은 생략하고 쓰는 약속이에요.']"
         explanation="참. 쓰여있지 않아도 1x 이므로 계수 1."
       />
       <!-- 보통 -->
@@ -583,7 +583,7 @@ function onSetComplete() {
         question="두 식이 사실 똑같은 직선이면 해는?"
         :choices="['유일한 해', '해 없음', '무수히 많은 해']"
         :answer="2"
-        :hints="['두 직선이 완전히 겹쳐 있어요 — 겹친 위의 점은 전부 두 식을 만족하죠.']"
+        :hints="['두 직선이 완전히 겹쳐 있어요. 겹친 위의 점은 전부 두 식을 만족하죠.']"
         explanation="완전히 겹치므로 직선 위 모든 점이 해 → 무수히 많음."
       />
       <Quiz
@@ -637,13 +637,13 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 4 완료. 연립방정식을 풀 수 있습니다.</p>
+      <p class="font-semibold text-emerald-800">4장 완료. 연립방정식을 풀 수 있습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">다음은 행렬을 '공간을 바꾸는 함수'로 보는 선형변환입니다.</p>
       <RouterLink
         to="/ch/ch5"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        다음 챕터 — 선형변환 →
+        다음 챕터: 선형변환 →
       </RouterLink>
     </div>
   </article>

@@ -36,9 +36,9 @@ interface Strat {
 const strats = computed<Strat[]>(() => {
   const B = budget.value
   const rows = [
-    { key: 'long', label: '① 길게 하나 — 풀이 1개에 전부', n: 1 },
-    { key: 'maj3', label: '② 셋이 투표 — 풀이 3개 다수결', n: 3 },
-    { key: 'maj9', label: '③ 아홉이 투표 — 풀이 9개 다수결', n: 9 },
+    { key: 'long', label: '① 길게 하나: 풀이 1개에 전부', n: 1 },
+    { key: 'maj3', label: '② 셋이 투표: 풀이 3개 다수결', n: 3 },
+    { key: 'maj9', label: '③ 아홉이 투표: 풀이 9개 다수결', n: 9 },
   ]
   return rows.map((r) => {
     const p = acc(mode.value, B / r.n)
@@ -65,7 +65,7 @@ const pct = (v: number) => (v * 100).toFixed(1)
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 문제 난이도 -->
-    <p class="mb-1 text-sm font-semibold text-slate-500">① 문제 난이도 — 생각이 빨리 익는 문제인가, 오래 걸리는 문제인가</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">① 문제 난이도: 생각이 빨리 익는 문제인가, 오래 걸리는 문제인가</p>
     <div class="mb-4 flex flex-wrap items-center gap-1.5">
       <button
         type="button"
@@ -86,7 +86,7 @@ const pct = (v: number) => (v * 100).toFixed(1)
     </div>
 
     <!-- ② 예산 -->
-    <p class="mb-1 text-sm font-semibold text-slate-500">② 토큰 예산 — 이 문제 하나에 얼마나 쓸까 (전략과 무관하게 같은 돈)</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">② 토큰 예산: 이 문제 하나에 얼마나 쓸까 (전략과 무관하게 같은 돈)</p>
     <div class="mb-2 flex flex-wrap items-center gap-1.5">
       <button
         v-for="B in BUDGETS"
@@ -118,14 +118,14 @@ const pct = (v: number) => (v * 100).toFixed(1)
         <span class="w-16 shrink-0 text-right font-mono text-sm font-bold text-slate-800">{{ pct(s.acc) }}%</span>
       </div>
       <p class="text-xs text-slate-500">
-        투표 전략의 풀이 하나당 길이 = 예산 ÷ 표 수 — 표가 많을수록 풀이 하나는 짧아집니다(정확도
+        투표 전략의 풀이 하나당 길이 = 예산 ÷ 표 수라서 표가 많을수록 풀이 하나는 짧아집니다(정확도
         {{ pct(strats[1].p) }}% / {{ pct(strats[2].p) }}%).
       </p>
       <p
         v-if="strats[2].p < 0.5"
         class="rounded-md bg-rose-50 px-3 py-2 text-sm font-medium text-rose-800"
       >
-        ⚠️ 아홉으로 쪼개면 풀이 하나의 정답률이 {{ pct(strats[2].p) }}% — 과반 미만입니다.
+        ⚠️ 아홉으로 쪼개면 풀이 하나의 정답률이 {{ pct(strats[2].p) }}%로 과반 미만입니다.
         5장의 경고 그대로, 이 다수결은 <b>틀린 답으로 수렴</b>해요.
       </p>
     </div>
@@ -133,7 +133,7 @@ const pct = (v: number) => (v * 100).toFixed(1)
     <!-- ④ 예산 스윕 표 -->
     <label class="mt-4 flex cursor-pointer items-center gap-2 text-sm text-slate-700">
       <input v-model="showTable" type="checkbox" class="h-4 w-4 accent-indigo-600" />
-      <span><b>예산별 승자 한눈에 보기</b> — 어디서 전략이 뒤집히나</span>
+      <span><b>예산별 승자 한눈에 보기</b>: 어디서 전략이 뒤집히나</span>
     </label>
     <div v-if="showTable" class="mt-2 overflow-x-auto rounded-md bg-amber-50 px-3 py-2">
       <table class="w-full text-sm text-amber-900">

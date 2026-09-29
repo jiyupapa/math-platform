@@ -118,7 +118,7 @@ const paths = computed(() => Math.pow(bf.value, depth.value))
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 전략 고르기 -->
-    <p class="mb-1 text-sm font-semibold text-slate-500">① 길찾기 전략 — 3단계 갈림길(가지 3개씩, 총 3³=27 경로)에서 최고 총점을 찾아라</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">① 길찾기 전략: 3단계 갈림길(가지 3개씩, 총 3³=27 경로)에서 최고 총점을 찾아라</p>
     <div class="mb-3 flex flex-wrap gap-1.5">
       <button
         v-for="s in STRATS"
@@ -193,22 +193,22 @@ const paths = computed(() => Math.pow(bf.value, depth.value))
       :class="result.total === optimum ? 'bg-emerald-50 text-emerald-800' : 'bg-rose-50 text-rose-800'"
     >
       <template v-if="active === 'greedy'">
-        😱 탐욕은 첫 갈림의 최고점 A(10)만 보고 따라갔다가 총점 15에 갇힙니다 — 정작 보물은 최저점 C(6) 아래 숨어 있었죠.
+        😱 탐욕은 첫 갈림의 최고점 A(10)만 보고 따라갔다가 총점 15에 갇힙니다. 정작 보물은 최저점 C(6) 아래 숨어 있었죠.
       </template>
       <template v-else-if="active === 'beam2'">
-        빔 k=2는 길 2개를 들고 가 18점 — 탐욕보다 낫지만 아직 B의 큰 잎(15)도, C의 보물도 못 봤습니다.
+        빔 k=2는 길 2개를 들고 가 18점. 탐욕보다 낫지만 아직 B의 큰 잎(15)도, C의 보물도 못 봤습니다.
       </template>
       <template v-else-if="active === 'beam3'">
-        빔 k=3은 27점 — B의 큰 잎(15)을 찾았지만, C 아래 최적(37)은 부분합이 낮아 레벨2에서 가지치기됐습니다.
+        빔 k=3은 27점. B의 큰 잎(15)을 찾았지만, C 아래 최적(37)은 부분합이 낮아 레벨2에서 가지치기됐습니다.
       </template>
       <template v-else>
-        🏆 전수 탐색만 진짜 최적 37점을 찾습니다 — 대신 노드를 39개 전부 봐야 했죠. 품질의 값은 방문 수입니다.
+        🏆 전수 탐색만 진짜 최적 37점을 찾습니다. 대신 노드를 39개 전부 봐야 했죠. 품질의 값은 방문 수입니다.
       </template>
     </p>
 
     <!-- ④ 지수 폭발 -->
     <div class="mt-4 rounded-lg border border-slate-200 p-3">
-      <p class="mb-2 text-sm font-semibold text-slate-500">④ 왜 전수 탐색은 대개 불가능한가 — 경우의 수 = 분기^깊이</p>
+      <p class="mb-2 text-sm font-semibold text-slate-500">④ 왜 전수 탐색은 대개 불가능한가: 경우의 수 = 분기^깊이</p>
       <div class="flex flex-wrap items-center gap-4 text-sm">
         <label class="flex items-center gap-2">
           분기 <input v-model.number="bf" type="range" min="2" max="8" class="w-24 accent-indigo-600" /> <b>{{ bf }}</b>
@@ -219,8 +219,8 @@ const paths = computed(() => Math.pow(bf.value, depth.value))
       </div>
       <p class="mt-2 text-sm text-slate-700">
         경로 수 = <b class="font-mono">{{ bf }}<sup>{{ depth }}</sup> = {{ paths.toLocaleString() }}</b>
-        <template v-if="paths > 1e9"> — 10억을 넘겨 전수 탐색은 사실상 불가능합니다.</template>
-        <template v-else-if="paths > 1e5"> — 벌써 십만 단위. 깊이를 몇 칸만 늘려도 폭발합니다.</template>
+        <template v-if="paths > 1e9"> (10억을 넘겨 전수 탐색은 사실상 불가능합니다)</template>
+        <template v-else-if="paths > 1e5"> (벌써 십만 단위. 깊이를 몇 칸만 늘려도 폭발합니다)</template>
       </p>
     </div>
   </div>

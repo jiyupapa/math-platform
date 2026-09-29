@@ -11,13 +11,14 @@ const sampleReady = availableChapters.some((c) => c.slug === 'sample')
 
 <template>
   <div>
-    <p class="mb-2 text-sm font-medium text-indigo-600">수포자를 위한 LLM 조련 — 시리즈 6부 (피날레)</p>
+    <p class="mb-2 text-sm font-medium text-indigo-600">수포자를 위한 LLM 조련 · 시리즈 6부 (본편 1~6부의 마지막)</p>
     <h1 class="mb-3 text-3xl font-bold">GPT는 어떻게 ChatGPT가 되었나</h1>
     <p class="mb-4 leading-relaxed text-slate-600">
       5부까지 배웠다면 "다음 단어 예측 기계"는 이해한 것입니다. 그런데 그 기계가 왜 질문에
-      <b>공손히 대답하는 비서</b>가 될까요? 이 과정은 그 마지막 퍼즐 —
-      <b>SFT → 보상 모델 → RLHF·DPO</b> 조련 파이프라인 — 을 맞춥니다.
+      <b>공손히 대답하는 비서</b>가 될까요? 이 과정은 그 마지막 퍼즐인
+      <b>SFT → 보상 모델 → RLHF·DPO</b> 조련 파이프라인을 맞춥니다.
       여기서 1부의 저차원 행렬(LoRA), 3부의 확률(보상 모델), 5부의 KL 발산(목줄)이 전부 되돌아옵니다.
+      6부까지가 시리즈 본편이고, 7~11부는 그 위에 얹는 실무·심화 확장 트랙입니다.
     </p>
 
     <!-- 제작 중 안내 (본 챕터 공개 시 진도 박스로 교체됨) -->
@@ -32,7 +33,7 @@ const sampleReady = availableChapters.some((c) => c.slug === 'sample')
         to="/ch/sample"
         class="mt-4 block rounded-lg bg-indigo-600 px-4 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-indigo-500"
       >
-        🚀 워밍업은 공개됐어요 — 같은 모델, 다른 대답 체험하기 →
+        🚀 워밍업은 공개됐어요. 같은 모델, 다른 대답 체험하기 →
       </RouterLink>
     </div>
     <div v-else class="mb-8 rounded-xl border border-indigo-100 bg-indigo-50 p-5">

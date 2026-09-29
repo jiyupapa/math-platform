@@ -169,7 +169,7 @@ const diffBadge: Record<Difficulty, { label: string; cls: string }> = {
       class="mt-3 rounded-lg bg-sky-50 px-4 py-3 text-sm text-sky-800"
     >
       📖 해설: {{ explanation }}
-      <p class="mt-1 text-xs text-sky-700">해설을 읽었다면 다시 계산해서 정답을 맞혀 보세요 — 그래야 완료로 기록돼요.</p>
+      <p class="mt-1 text-xs text-sky-700">해설을 읽었다면 다시 계산해서 정답을 맞혀 보세요. 그래야 완료로 기록돼요.</p>
     </div>
 
     <!-- 버튼 -->
@@ -205,7 +205,7 @@ const diffBadge: Record<Difficulty, { label: string; cls: string }> = {
         class="rounded-lg bg-sky-100 px-4 py-2 text-sm font-medium text-sky-800 hover:bg-sky-200"
         @click="explanationShown = true"
       >
-        📖 막혔어요 — 해설 보기
+        📖 막혔어요, 해설 보기
       </button>
     </div>
   </div>

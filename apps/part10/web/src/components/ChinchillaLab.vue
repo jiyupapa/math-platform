@@ -36,8 +36,8 @@ const Lstar = computed(() => lossOf(opt.value.n, opt.value.d))
 const atOptimum = computed(() => Math.abs(offset.value) < 0.03)
 
 const CASES = [
-  { label: '겅호 스타일 — 280B 크게', c: 5.88e23, n: 280e9 },
-  { label: '친칠라 스타일 — 70B 알맞게', c: 5.88e23, n: 70e9 },
+  { label: '고퍼 스타일: 280B 크게', c: 5.88e23, n: 280e9 },
+  { label: '친칠라 스타일: 70B 알맞게', c: 5.88e23, n: 70e9 },
 ]
 function applyCase(cs: (typeof CASES)[number]) {
   budget.value = cs.c
@@ -90,7 +90,7 @@ const fmtD = (v: number) => (v >= 1e12 ? `${(v / 1e12).toFixed(2)}T` : `${(v / 1
     </div>
 
     <!-- ② 배분 다이얼 -->
-    <p class="mb-1 text-sm font-semibold text-slate-500">② 같은 예산, 배분만 바꾸기 — 몸집 N을 키우면 밥 D가 줄어듭니다</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">② 같은 예산, 배분만 바꾸기: 몸집 N을 키우면 밥 D가 줄어듭니다</p>
     <div class="flex flex-wrap items-start gap-4">
       <svg :viewBox="`0 0 ${W} ${H}`" class="h-56 w-full max-w-md rounded-lg bg-slate-50 ring-1 ring-slate-200">
         <line v-for="i in 5" :key="'g' + i" :x1="gx(i - 3)" :x2="gx(i - 3)" :y1="PAD.t" :y2="H - PAD.b" stroke="var(--c-slate-200)" />
@@ -106,7 +106,7 @@ const fmtD = (v: number) => (v >= 1e12 ? `${(v / 1e12).toFixed(2)}T` : `${(v / 1
         <circle :cx="gx(offset)" :cy="gy(L)" r="6" fill="var(--c-indigo-600)" stroke="var(--c-white)" stroke-width="1.5" />
         <!-- 좌우 안내 -->
         <text :x="gx(-1.7)" :y="PAD.t + 12" class="fill-slate-400" font-size="9">← 몸집 부족 (밥만 많음)</text>
-        <text :x="gx(0.35)" :y="PAD.t + 12" class="fill-slate-400" font-size="9">과체격 — 밥 부족 →</text>
+        <text :x="gx(0.35)" :y="PAD.t + 12" class="fill-slate-400" font-size="9">과체격: 밥 부족 →</text>
       </svg>
 
       <div class="min-w-52 flex-1 space-y-2">
@@ -136,11 +136,11 @@ const fmtD = (v: number) => (v >= 1e12 ? `${(v / 1e12).toFixed(2)}T` : `${(v / 1
           :class="atOptimum ? 'bg-emerald-50 text-emerald-800' : 'bg-slate-100 text-slate-600'"
         >
           <template v-if="atOptimum">
-            🏆 <b>황금비!</b> D ≈ 20·N — 몸집 배고픔(A/√N)과 데이터 배고픔(B/√D)이 정확히
+            🏆 <b>황금비!</b> D ≈ 20·N. 몸집 배고픔(A/√N)과 데이터 배고픔(B/√D)이 정확히
             같아지는 지점입니다. 이 예산의 최저 손실 {{ Lstar.toFixed(3) }}.
           </template>
           <template v-else>
-            최적 대비 <b>+{{ (L - Lstar).toFixed(3) }}</b> 손해 — 같은 돈으로 더 잘할 수
+            최적 대비 <b>+{{ (L - Lstar).toFixed(3) }}</b> 손해예요. 같은 돈으로 더 잘할 수
             있습니다 (최적: N* = {{ fmtN(opt.n) }}, D* = {{ fmtD(opt.d) }}).
           </template>
         </p>
@@ -148,7 +148,7 @@ const fmtD = (v: number) => (v >= 1e12 ? `${(v / 1e12).toFixed(2)}T` : `${(v / 1
     </div>
 
     <!-- ③ 역사의 두 배분 -->
-    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">③ 같은 예산(5.9×10²³), 역사의 두 배분 — 눌러서 비교해 보세요</p>
+    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">③ 같은 예산(5.9×10²³), 역사의 두 배분: 눌러서 비교해 보세요</p>
     <div class="flex flex-wrap gap-1.5">
       <button
         v-for="cs in CASES"
@@ -161,8 +161,8 @@ const fmtD = (v: number) => (v >= 1e12 ? `${(v / 1e12).toFixed(2)}T` : `${(v / 1
         {{ cs.label }}
       </button>
       <p class="w-full text-xs text-slate-500">
-        280B 배분은 토큰 350B(비율 1.25 — 과체격)로 손실 1.992, 70B 배분은 1.4T(비율 20)로
-        1.932 — <b>4배 작은 모델이 같은 예산으로 이깁니다.</b>
+        280B 배분은 토큰 350B(비율 1.25, 과체격)로 손실 1.992, 70B 배분은 1.4T(비율 20)로
+        1.932. <b>4배 작은 모델이 같은 예산으로 이깁니다.</b>
       </p>
     </div>
   </div>

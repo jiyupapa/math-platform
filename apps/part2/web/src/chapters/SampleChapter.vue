@@ -1,6 +1,6 @@
 <script setup lang="ts">
-// Phase 0 샘플 챕터 — 공통 컴포넌트 + 미분 전용 시각화(TangentExplorer)를 모두 사용해
-// "한 챕터의 완성형"을 보여준다. 실제 Phase 1~10 챕터도 이 구조를 그대로 따른다.
+// 워밍업 — 공통 컴포넌트 + 미분 전용 시각화(TangentExplorer)를 모두 사용해
+// "한 챕터의 완성형"을 보여준다. 실제 1~10장 챕터도 이 구조를 그대로 따른다.
 import { computed } from 'vue'
 import { ConceptCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
@@ -42,10 +42,10 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 0 · 샘플 챕터</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">워밍업 · 5분 몸풀기</p>
     <h1 class="mb-4 text-3xl font-bold">접선 맛보기 📈</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
-      이 페이지는 학습 프로그램의 "한 챕터"가 어떻게 생겼는지 보여주는 견본입니다.
+      앞으로 공부할 챕터가 어떻게 생겼는지 미리 둘러보는 워밍업이에요.
       설명 카드, 수식, 차트, 드래그(슬라이더) 시각화, 자동채점 문제가 모두 들어 있습니다.
     </p>
 
@@ -67,8 +67,8 @@ function onSetComplete() {
         <MathBlock inline expr="\Delta" /> 는 그리스 문자 <b>델타</b>이고, "변화량(얼마나 달라졌나)"을 뜻합니다.
       </p>
       <ul class="mt-2 list-disc pl-5 text-sm">
-        <li><MathBlock inline expr="\Delta x" /> — "델타 엑스", x가 변한 양 (가로 변화)</li>
-        <li><MathBlock inline expr="\Delta y" /> — "델타 와이", y가 변한 양 (세로 변화)</li>
+        <li><MathBlock inline expr="\Delta x" />: "델타 엑스", x가 변한 양 (가로 변화)</li>
+        <li><MathBlock inline expr="\Delta y" />: "델타 와이", y가 변한 양 (세로 변화)</li>
       </ul>
     </ConceptCard>
 
@@ -77,7 +77,7 @@ function onSetComplete() {
     <p class="leading-relaxed text-slate-700">
       직선은 어디서나 기울기가 같지만, <b>곡선</b>은 위치마다 가파른 정도가 다릅니다.
       그래서 곡선에서는 <b>"그 점에 살짝 닿는 직선"</b>, 즉 <b>접선</b>의 기울기로 "그 지점의 기울기"를 정합니다.
-      아래 곡선은 <MathBlock inline expr="f(x)=x^2" /> (<MathBlock inline expr="x" /> 를 두 번 곱한 것 — 예:
+      아래 곡선은 <MathBlock inline expr="f(x)=x^2" /> (<MathBlock inline expr="x" /> 를 두 번 곱한 것. 예:
       <MathBlock inline expr="3^2 = 3\times 3 = 9" />)이에요. 빨간 점을 슬라이더로 움직여 보세요. 빨간 접선과 그 기울기 값이 실시간으로 바뀝니다.
     </p>
 
@@ -114,8 +114,8 @@ function onSetComplete() {
       explanation="맞아요. 그래서 '그 점에서의 기울기'를 접선으로 정의합니다. (0번 '참'이 정답)"
     />
 
-    <h2 class="mt-8 mb-2 text-xl font-bold">3. 할선이 접선으로 — 평균에서 순간으로</h2>
-    <ReviewFlag id="sample-s3" chapter="sample" label="3. 할선이 접선으로 — 평균에서 순간으로" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">3. 할선이 접선으로: 평균에서 순간으로</h2>
+    <ReviewFlag id="sample-s3" chapter="sample" label="3. 할선이 접선으로: 평균에서 순간으로" />
     <p class="leading-relaxed text-slate-700">
       두 점을 잇는 직선을 <b>할선</b>이라 하고, 그 기울기는 두 점 사이의 <b>평균변화율</b>입니다.
       위 그림에서 간격 <MathBlock inline expr="h" /> 를 점점 줄이면 노란 할선이 빨간 접선에 딱 붙습니다.
@@ -159,7 +159,7 @@ function onSetComplete() {
     </p>
     <MathBlock expr="f'(x) = \lim_{h \to 0} \dfrac{f(x+h) - f(x)}{h}" />
 
-    <ConceptCard tone="note" title="새 기호 풀이 — 처음 보는 기호 두 개">
+    <ConceptCard tone="note" title="새 기호 풀이: 처음 보는 기호 두 개">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <MathBlock inline expr="\lim" /> &nbsp;
@@ -186,7 +186,7 @@ function onSetComplete() {
       <b>10문제를 모두 맞히면</b> 이 챕터가 완료됩니다.
     </p>
 
-    <QuizSet title="접선 맛보기 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="접선 맛보기: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -279,9 +279,9 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-2xl">🎉</div>
-      <p class="font-semibold text-emerald-800">샘플 챕터 완료!</p>
+      <p class="font-semibold text-emerald-800">워밍업 완료!</p>
       <p class="mt-1 text-sm text-emerald-700">
-        왼쪽 진도 표시줄이 채워졌습니다. 실제 챕터(Phase 1~10)도 이렇게 진행됩니다.
+        왼쪽 진도 표시줄이 채워졌습니다. 실제 챕터(1~10장)도 이렇게 진행됩니다.
       </p>
     </div>
   </article>

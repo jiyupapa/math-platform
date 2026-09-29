@@ -56,10 +56,10 @@ const partCount = computed(() => new Set(rows.value.map((r) => r.part)).size)
   <main class="mx-auto max-w-4xl px-5 py-8">
     <div class="mb-1 flex flex-wrap items-end justify-between gap-3">
       <div>
-        <h1 class="text-2xl font-bold text-slate-900">비유어 사전</h1>
+        <h1 class="text-2xl font-bold text-slate-900">용어 대조표</h1>
         <p class="mt-1 break-keep text-sm text-slate-500">
-          이 시리즈의 비유어는 학습용 발판이고, 동료·문서·논문 앞에서는 실무 용어로 바꿔 말합니다.
-          각 부 캡스톤에 흩어져 있던 치환표를 한 곳에 모았어요. 실무 용어를 누르면
+          이 시리즈의 비유는 학습을 돕는 발판이고, 동료·문서·논문 앞에서는 실무 용어로 바꿔 말합니다.
+          각 부 캡스톤에 흩어져 있던 용어 대조표를 한 곳에 모았어요. 실무 용어를 누르면
           <RouterLink to="/concepts" class="text-indigo-600 hover:underline">개념 지도</RouterLink>에서 그 개념이 열립니다.
         </p>
       </div>
@@ -68,19 +68,19 @@ const partCount = computed(() => new Set(rows.value.map((r) => r.part)).size)
         <input
           v-model="q"
           type="search"
-          placeholder="비유어 · 실무어 (예: 목줄, 보폭, KL)"
+          placeholder="비유 · 실무 용어 (예: 목줄, 보폭, KL)"
           class="w-56 bg-transparent text-slate-800 placeholder:text-slate-500 focus:outline-none"
-          aria-label="비유어 찾기"
+          aria-label="비유 찾기"
         />
         <span v-if="q" class="text-xs text-slate-500">{{ visible.length }}개</span>
       </label>
     </div>
 
     <div v-if="graph" class="mb-5 flex flex-wrap gap-x-5 gap-y-1 text-sm text-slate-600">
-      <span>비유어 <b class="text-slate-900">{{ rows.length }}</b></span>
+      <span>비유 <b class="text-slate-900">{{ rows.length }}</b></span>
       <span>실무 개념 <b class="text-slate-900">{{ conceptCount }}</b></span>
       <span><b class="text-slate-900">{{ partCount }}</b>개 부</span>
-      <span class="text-slate-500">"이름 + 읽는 법 + 뜻"은 각 장의 새 용어 카드에 — 여기는 짝만 모은 표입니다.</span>
+      <span class="text-slate-500">"이름 + 읽는 법 + 뜻"은 각 장의 새 용어 카드에 있고, 여기는 짝만 모은 표입니다.</span>
     </div>
 
     <p v-if="loadError" class="rounded-xl border border-slate-200 bg-white p-6 text-center text-sm text-slate-600">
@@ -88,7 +88,7 @@ const partCount = computed(() => new Set(rows.value.map((r) => r.part)).size)
     </p>
     <p v-else-if="!graph" class="py-10 text-center text-sm text-slate-500">개념 그래프를 불러오는 중…</p>
     <p v-else-if="!byPart.length" class="rounded-xl border border-slate-200 bg-white p-6 text-center text-sm text-slate-600">
-      ‘{{ q }}’ 에 맞는 비유어가 없어요.
+      ‘{{ q }}’ 에 맞는 비유가 없어요.
     </p>
 
     <section v-for="g in byPart" :key="g.part" class="mb-6">
@@ -132,8 +132,8 @@ const partCount = computed(() => new Set(rows.value.map((r) => r.part)).size)
     </section>
 
     <p v-if="graph" class="mt-2 break-keep text-center text-xs text-slate-500">
-      이 표는 기준 파일 <code>scripts/ontology/concepts.json</code> 의 <code>metaphors</code> 에서 자동으로 만들어져 늘 최신이에요 —
-      짝지을 실무 용어가 없는 비유(회색 지대)는 일부러 싣지 않았어요.
+      이 표는 기준 파일 <code>scripts/ontology/concepts.json</code> 의 <code>metaphors</code> 에서 자동으로 만들어져 늘 최신이에요.
+      실무 용어로 옮기기 어려운 비유는 일부러 싣지 않았어요.
     </p>
   </main>
 </template>

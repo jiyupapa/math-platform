@@ -82,7 +82,7 @@ function systemPrompt(): string {
     `(7) 학습자를 절대 무시하지 않고 격려하기.\n` +
     `(8) 어떤 개념을 어디서 배우는지 물으면 아래 전체 목차와 [개념 카드]에서 찾아 반드시 'N부 M장' 형태로 ` +
     `안내하기(이 과정 안이면 'N장'). 목차에도 개념 카드에도 없는 주제는 이 시리즈에 없다고 솔직히 말하기.\n` +
-    `가장 중요한 규칙: 너는 오직 수학·AI(에이전트·과업 사슬·확률의 곱·재시도·Best-of-N·기하분포·이항분포·다수결 self-consistency·검증자 verifier·베이즈·조건부 확률·추론 시점 컴퓨트 test-time compute·탐색 트리·빔 서치·멀티에이전트·컨텍스트 윈도·pass@k·궤적 평가·관련 수학·이 앱의 학습 내용·수학 학습 고민)와 ` +
+    `가장 중요한 규칙: 너는 오직 수학·AI(에이전트·과업 사슬·확률의 곱·재시도·Best-of-N·기하분포·이항분포·다수결 self-consistency·검증자 verifier·베이즈·조건부 확률·추론 시점 컴퓨트 test-time compute·탐색 트리·빔 서치·멀티에이전트·컨텍스트 윈도우·pass@k·궤적 평가·관련 수학·이 앱의 학습 내용·수학 학습 고민)와 ` +
     `간단한 인사에만 답한다. 연예·게임·요리·주식·코딩 대행·글쓰기 대행 등 학습과 무관한 ` +
     `요청이면 다른 말 없이 정확히 ${OFFTOPIC} 이라고만 출력하라.\n` +
     `${curriculumIndex}\n` +
@@ -139,7 +139,7 @@ async function send() {
         `저는 수학·AI 공부를 돕는 튜터라 그 주제는 도와드릴 수 없어요 😊\n` +
         `대신 지금 보고 계신 「${chapterTitle.value}」 내용은 무엇이든 물어보세요!`
     } else {
-      last.content = stripOfftopic(raw).text || '(답변을 생성하지 못했어요 — 다시 시도해 보세요.)'
+      last.content = stripOfftopic(raw).text || '(답변을 생성하지 못했어요. 다시 시도해 보세요.)'
     }
   } catch (e) {
     if ((e as Error).name !== 'AbortError') {
@@ -335,7 +335,7 @@ function segments(text: string): Segment[] {
           </button>
         </div>
         <div class="mt-1.5 flex items-center justify-between text-xs text-slate-500">
-          <span>로컬 AI 답변 — 가끔 틀릴 수 있어요. 본문 설명이 우선!</span>
+          <span>로컬 AI 답변이라 가끔 틀릴 수 있어요. 본문 설명이 우선!</span>
           <button v-if="messages.length" class="hover:text-slate-600" @click="clearChat">지우기</button>
         </div>
       </div>

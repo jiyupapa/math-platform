@@ -11,12 +11,12 @@ const sampleReady = availableChapters.some((c) => c.slug === 'sample')
 
 <template>
   <div>
-    <p class="mb-2 text-sm font-medium text-indigo-600">수포자를 위한 스케일링 법칙과 평가의 통계 — 시리즈 10부 (평가·전략)</p>
+    <p class="mb-2 text-sm font-medium text-indigo-600">수포자를 위한 스케일링 법칙과 평가의 통계 · 시리즈 10부 (평가·전략)</p>
     <h1 class="mb-3 text-3xl font-bold">신모델이 2점 앞섰다는데, 진짜일까</h1>
     <p class="mb-4 leading-relaxed text-slate-600">
       "모델을 키우면 왜 좋아지나"에는 <b>법칙</b>이 있고(멱법칙·Chinchilla),
       "벤치마크 점수 차이"에는 <b>오차범위</b>가 있습니다. 이 과정은 로그-로그 위의 직선으로
-      성장을 읽고, 신뢰구간·검정으로 점수를 판별해 — AI 뉴스·리더보드·모델 카드를
+      성장을 읽고, 신뢰구간·검정으로 점수를 판별해 AI 뉴스·리더보드·모델 카드를
       <b>숫자로 읽는 눈</b>을 완성합니다.
       핵심 한 줄: <b>"성장은 로그-로그 위의 직선이고, 점수 차이는 오차범위 안에선 소음이다."</b>
     </p>
@@ -33,7 +33,7 @@ const sampleReady = availableChapters.some((c) => c.slug === 'sample')
         to="/ch/sample"
         class="mt-4 block rounded-lg bg-indigo-600 px-4 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-indigo-500"
       >
-        🚀 워밍업은 공개됐어요 — 2점 차이의 진실 체험하기 →
+        🚀 워밍업은 공개됐어요. 2점 차이의 진실 체험하기 →
       </RouterLink>
     </div>
     <div v-else class="mb-8 rounded-xl border border-indigo-100 bg-indigo-50 p-5">
@@ -56,7 +56,7 @@ const sampleReady = availableChapters.some((c) => c.slug === 'sample')
           🚀 처음이신가요? 워밍업(2점 차이의 진실)부터 시작하세요 →
         </RouterLink>
         <p class="mt-2 text-center text-xs text-indigo-600">
-          신뢰구간·p값도 자체 포함 — 3부 전반(확률 기초)과 2부 7장(로그 감각)을 봤다면 준비 완료입니다.
+          신뢰구간·p값도 이 과정 안에서 다룹니다. 3부 전반(확률 기초)과 2부 7장(로그 감각)을 봤다면 준비 완료입니다.
         </p>
       </template>
     </div>

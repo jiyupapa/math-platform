@@ -23,7 +23,7 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 8</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">8장</p>
     <h1 class="mb-4 text-3xl font-bold">다변수 함수와 편미분 🧭</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       지금까지는 입력이 하나(<MathBlock inline expr="x" />)인 함수였죠. 그런데 AI 모델은 입력(가중치)이
@@ -44,11 +44,11 @@ function onSetComplete() {
     <ReviewFlag id="ch8-s1" chapter="ch8" label="1. 입력이 여러 개인 함수" />
     <p class="leading-relaxed text-slate-700">
       <MathBlock inline expr="f(x,y) = x^2 + y^2" /> 처럼 입력이 둘이면, 출력은 두 값에 함께 달려 있어요.
-      입력이 하나면 그래프가 <b>곡선</b>이지만, 입력이 둘이면 그래프는 <b>곡면(surface)</b> — 언덕이나
+      입력이 하나면 그래프가 <b>곡선</b>이지만, 입력이 둘이면 그래프는 <b>곡면(surface)</b>, 곧 언덕이나
       골짜기 같은 3D 지형이 됩니다.
     </p>
 
-    <ConceptCard tone="note" title="새 용어 — 다변수 함수 / 곡면">
+    <ConceptCard tone="note" title="새 용어: 다변수 함수 / 곡면">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li><b>다변수 함수</b>: 입력이 2개 이상인 함수. <MathBlock inline expr="f(x,y)" />, <MathBlock inline expr="f(x,y,z)" /> …</li>
         <li>입력 2개의 그래프 = <b>곡면</b>. <MathBlock inline expr="x^2+y^2" /> 은 밥그릇처럼 생긴 골짜기예요.</li>
@@ -58,8 +58,8 @@ function onSetComplete() {
     </ConceptCard>
 
     <!-- 2. 편미분 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">2. 편미분 — 한 변수만, 나머지는 상수</h2>
-    <ReviewFlag id="ch8-s2" chapter="ch8" label="2. 편미분 — 한 변수만" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">2. 편미분: 한 변수만, 나머지는 상수</h2>
+    <ReviewFlag id="ch8-s2" chapter="ch8" label="2. 편미분: 한 변수만" />
     <p class="leading-relaxed text-slate-700">
       <b>편미분</b>은 "관심 있는 한 변수만 미분하고, 나머지는 그냥 <b>숫자(상수)</b>로 본다"는 뜻입니다.
       <MathBlock inline expr="f(x,y)=x^2+y^2" /> 를 예로:
@@ -67,11 +67,11 @@ function onSetComplete() {
     <MathBlock expr="\dfrac{\partial f}{\partial x} = 2x \quad(y\text{ 는 상수}\to y^2\text{ 의 미분 }0)" />
     <MathBlock expr="\dfrac{\partial f}{\partial y} = 2y \quad(x\text{ 는 상수}\to x^2\text{ 의 미분 }0)" />
 
-    <ConceptCard tone="note" title="새 기호 — ∂ (편미분 기호)">
+    <ConceptCard tone="note" title="새 기호: ∂ (편미분 기호)">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li><MathBlock inline expr="\partial" /> 는 "라운드 디" 또는 "파셜"이라고 읽어요. 보통 <MathBlock inline expr="d" /> 대신 씁니다(변수가 여럿일 때).</li>
         <li><MathBlock inline expr="\dfrac{\partial f}{\partial x}" /> = "x 에 대한 f 의 편미분" = <b>x 만 변할 때</b> f 의 변화율.</li>
-        <li>계산법은 이미 아는 미분 그대로 — 단지 <b>다른 변수는 숫자처럼</b> 취급합니다.</li>
+        <li>계산법은 이미 아는 미분 그대로예요. 단지 <b>다른 변수는 숫자처럼</b> 취급합니다.</li>
       </ul>
     </ConceptCard>
 
@@ -98,7 +98,7 @@ function onSetComplete() {
     <ConceptCard tone="tip" title="한 번에 한 방향">
       <MathBlock inline expr="\partial f/\partial x" /> 를 구할 땐 <MathBlock inline expr="y" /> 를 <b>고정</b>(가로 절단선),
       <MathBlock inline expr="\partial f/\partial y" /> 를 구할 땐 <MathBlock inline expr="x" /> 를 고정(세로 절단선).
-      다변수라도 <b>결국 한 방향씩</b> 보므로, 우리가 배운 1변수 미분이 그대로 쓰입니다.
+      다변수라도 <b>결국 한 방향씩</b> 보므로, 앞에서 배운 1변수 미분이 그대로 쓰입니다.
     </ConceptCard>
 
     <StepQuiz
@@ -117,7 +117,7 @@ function onSetComplete() {
     <ReviewFlag id="ch8-ai" chapter="ch8" label="🤖 편미분 = 가중치별 영향" />
     <p class="leading-relaxed text-slate-700">
       신경망 학습은 "손실 <MathBlock inline expr="L" /> 을 줄이려면 각 가중치 <MathBlock inline expr="w_i" /> 를
-      어느 쪽으로 바꿔야 하나?"를 묻습니다. 그 답이 바로 <b>편미분</b> <MathBlock inline expr="\partial L/\partial w_i" /> —
+      어느 쪽으로 바꿔야 하나?"를 묻습니다. 그 답이 바로 <b>편미분</b> <MathBlock inline expr="\partial L/\partial w_i" />,
       "<MathBlock inline expr="w_i" /> 하나만 조금 바꿀 때 손실이 얼마나 변하나"예요.
     </p>
 
@@ -143,7 +143,7 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 · 단계별 계산 10문제입니다. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="다변수 함수와 편미분 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="다변수 함수와 편미분: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -240,7 +240,7 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 8 완료. 여러 변수도 한 방향씩 미분!</p>
+      <p class="font-semibold text-emerald-800">8장 완료. 여러 변수도 한 방향씩 미분!</p>
       <p class="mt-1 text-sm text-emerald-700">
         다음은 편미분들을 모은 <b>그래디언트</b>로 골짜기를 내려가는 <b>경사하강법</b>입니다.
       </p>
@@ -248,7 +248,7 @@ function onSetComplete() {
         to="/ch/ch9"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        다음 챕터 — 그래디언트와 경사하강법 →
+        다음 챕터: 그래디언트와 경사하강법 →
       </RouterLink>
     </div>
   </article>

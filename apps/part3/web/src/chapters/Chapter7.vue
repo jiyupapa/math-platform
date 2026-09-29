@@ -18,25 +18,25 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 7</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">7장</p>
     <h1 class="mb-4 text-3xl font-bold">큰 수의 법칙과 중심극한정리 🔔</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       워밍업 챕터에서 동전을 던질수록 앞면 비율이 0.5 에 다가가는 걸 봤죠. 이번 챕터는 그 현상의
-      <b>정식 이름</b>과, 통계학에서 가장 신기한 정리 — <b>"무엇이든 많이 모아 평균 내면 종 모양이
-      된다"</b> — 를 배웁니다. 6장에서 "정규분포가 왜 어디에나 나타나나?"라고 했던 질문의 답이
+      <b>정식 이름</b>과, 통계학에서 가장 신기한 정리인 <b>"무엇이든 많이 모아 평균 내면 종 모양이
+      된다"</b>를 배웁니다. 6장에서 "정규분포가 왜 어디에나 나타나나?"라고 했던 질문의 답이
       여기 있어요.
     </p>
 
     <ConceptCard tone="goal" title="이 챕터의 목표">
       <ul class="list-disc space-y-1 pl-5">
-        <li><b>큰 수의 법칙</b> — 시행이 많아질수록 표본평균이 참 평균에 다가감을 이해한다</li>
-        <li><b>중심극한정리</b> — 원래 분포가 무엇이든 <b>표본평균의 분포</b>는 종 모양이 됨을 눈으로 확인한다</li>
-        <li><b>표준오차</b> <MathBlock inline expr="\sigma/\sqrt{n}" /> — 표본평균이 흔들리는 정도를 계산한다</li>
+        <li><b>큰 수의 법칙</b>: 시행이 많아질수록 표본평균이 참 평균에 다가감을 이해한다</li>
+        <li><b>중심극한정리</b>: 원래 분포가 무엇이든 <b>표본평균의 분포</b>는 종 모양이 됨을 눈으로 확인한다</li>
+        <li><b>표준오차</b> <MathBlock inline expr="\sigma/\sqrt{n}" />: 표본평균이 흔들리는 정도를 계산한다</li>
       </ul>
     </ConceptCard>
 
     <!-- 1. 큰 수의 법칙 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">1. 그때 그 현상의 이름 — 큰 수의 법칙</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">1. 그때 그 현상의 이름: 큰 수의 법칙</h2>
     <ReviewFlag id="ch7-s1" chapter="ch7" label="1. 큰 수의 법칙" />
     <p class="leading-relaxed text-slate-700">
       동전을 10번 던지면 앞면이 3번(30%)이 나오기도, 7번(70%)이 나오기도 합니다. 하지만 1,000번,
@@ -44,9 +44,9 @@ function onSetComplete() {
       많아지면 우연들이 서로 상쇄되면서 <b>참 확률</b>이 드러나는 거예요.
     </p>
 
-    <ConceptCard tone="note" title="새 용어 — 큰 수의 법칙 (Law of Large Numbers)">
+    <ConceptCard tone="note" title="새 용어: 큰 수의 법칙 (Law of Large Numbers)">
       <b>시행 횟수를 늘릴수록, 결과의 평균(표본평균)은 참 평균(기댓값)에 한없이 가까워진다.</b>
-      워밍업에서 동전(비율 → 0.5)으로 이미 본 그 현상입니다. 주사위도 마찬가지 —
+      워밍업에서 동전(비율 → 0.5)으로 이미 본 그 현상입니다. 주사위도 마찬가지로,
       많이 굴릴수록 눈의 평균은 5장에서 배운 기댓값 3.5 에 다가갑니다.
       "결국은 실력(참 확률)대로 간다"는 수학의 약속이에요.
     </ConceptCard>
@@ -54,7 +54,7 @@ function onSetComplete() {
     <p class="leading-relaxed text-slate-700">
       이 법칙으로 먹고사는 산업이 있습니다. <b>카지노</b>는 손님 한 명에게는 질 수 있지만, 십만 판이
       쌓이면 수익률이 기댓값(카지노가 조금 유리하게 설계된 값)대로 수렴하니 <b>반드시</b> 돈을 법니다.
-      <b>보험사</b>도 마찬가지 — 개인의 사고는 예측 불가지만, 가입자 백만 명의 사고율은 거의 정확히
+      <b>보험사</b>도 마찬가지예요. 개인의 사고는 예측 불가지만, 가입자 백만 명의 사고율은 거의 정확히
       예측됩니다. <b>한 판은 우연, 십만 판은 필연.</b>
     </p>
 
@@ -68,7 +68,7 @@ function onSetComplete() {
     />
 
     <!-- 2. 표본평균 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">2. 표본평균 — 몇 개 뽑아서 평균 내기</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">2. 표본평균: 몇 개 뽑아서 평균 내기</h2>
     <ReviewFlag id="ch7-s2" chapter="ch7" label="2. 표본평균" />
     <p class="leading-relaxed text-slate-700">
       이제 다음 챕터(추정·신뢰구간)까지 이어질 핵심 도구를 정의합니다. 전체 데이터(모집단)에서
@@ -76,7 +76,7 @@ function onSetComplete() {
     </p>
     <MathBlock expr="\bar{x} = \dfrac{x_1 + x_2 + \cdots + x_n}{n}" />
 
-    <ConceptCard tone="note" title="새 기호 — 표본평균 x̄">
+    <ConceptCard tone="note" title="새 기호: 표본평균 x̄">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li>
           <MathBlock inline expr="\bar{x}" /> &nbsp;<b>읽는 법</b>: "엑스 바(x-bar)" ·
@@ -90,7 +90,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <p class="leading-relaxed text-slate-700">
-      "표본평균이 흔들린다"는 걸 받아들이면 자연스러운 질문이 나옵니다 —
+      "표본평균이 흔들린다"는 걸 받아들이면 자연스러운 질문이 나옵니다.
       <b>그럼 표본평균은 어떤 모양으로 흔들리나?</b> 표본평균을 수천 번 뽑아 히스토그램으로 쌓으면
       그 답이 보입니다. 그리고 그 답이 통계학을 지탱하는 기둥이에요.
     </p>
@@ -101,21 +101,21 @@ function onSetComplete() {
       type="numeric"
       :answer="5"
       :hints="['(2 + 4 + 6 + 8) ÷ 4.']"
-      explanation="20 ÷ 4 = 5. 계산은 1장의 평균과 똑같아요 — '뽑은 일부'로 계산했다는 점만 다릅니다."
+      explanation="20 ÷ 4 = 5. 계산은 1장의 평균과 똑같아요. '뽑은 일부'로 계산했다는 점만 다릅니다."
     />
 
     <!-- 3. 중심극한정리 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">3. 중심극한정리 — 무엇이든 종 모양으로</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">3. 중심극한정리: 무엇이든 종 모양으로</h2>
     <ReviewFlag id="ch7-s3" chapter="ch7" label="3. 중심극한정리" />
     <p class="leading-relaxed text-slate-700">
       6장의 갈톤 보드를 기억하세요? 공이 핀에 부딪히는 <b>작은 우연들이 여러 번 쌓이니</b> 종 모양이
-      나왔죠. 표본평균도 똑같습니다 — 표본 <MathBlock inline expr="n" /> 개를 더해 평균 내는 것 자체가
+      나왔죠. 표본평균도 똑같습니다. 표본 <MathBlock inline expr="n" /> 개를 더해 평균 내는 것 자체가
       "우연을 <MathBlock inline expr="n" /> 번 쌓는 일"이거든요. 그래서 놀라운 일이 벌어집니다:
     </p>
 
-    <ConceptCard tone="note" title="새 용어 — 중심극한정리 (Central Limit Theorem, CLT)">
-      원래 데이터의 분포가 <b>무슨 모양이든</b> — 주사위처럼 평평하든, 한쪽으로 찌그러졌든, 봉우리가
-      둘이든 — <b>표본평균 <MathBlock inline expr="\bar{x}" /> 의 분포</b>는 표본 크기
+    <ConceptCard tone="note" title="새 용어: 중심극한정리 (Central Limit Theorem, CLT)">
+      원래 데이터의 분포가 <b>무슨 모양이든</b>(주사위처럼 평평하든, 한쪽으로 찌그러졌든, 봉우리가
+      둘이든) <b>표본평균 <MathBlock inline expr="\bar{x}" /> 의 분포</b>는 표본 크기
       <MathBlock inline expr="n" /> 이 커질수록 <b>정규분포(종 모양)</b>에 가까워진다.
       <p class="mt-2">
         키·측정오차처럼 "작은 우연이 많이 합쳐진 값"이 죄다 종 모양인 이유,
@@ -135,7 +135,7 @@ function onSetComplete() {
       <ul class="list-disc space-y-1 pl-5">
         <li><b>n = 1</b>: 표본평균 = 데이터 하나. 히스토그램이 모집단 모양을 그대로 닮습니다.</li>
         <li><b>n 을 키우면</b>: 봉우리 둘이던 분포조차 <b>하나의 종 모양</b>으로 모입니다 (빨간 이론 곡선과 비교).</li>
-        <li><b>폭</b>: n 이 클수록 히스토그램이 <b>좁아집니다</b> — 표본평균이 덜 흔들린다는 뜻. 다음 절에서 정확히 계산해요.</li>
+        <li><b>폭</b>: n 이 클수록 히스토그램이 <b>좁아집니다</b>. 표본평균이 덜 흔들린다는 뜻. 다음 절에서 정확히 계산해요.</li>
       </ul>
     </ConceptCard>
 
@@ -154,15 +154,15 @@ function onSetComplete() {
     />
 
     <!-- 4. 표준오차 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">4. 표준오차 — 표본평균은 얼마나 흔들리나</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">4. 표준오차: 표본평균은 얼마나 흔들리나</h2>
     <ReviewFlag id="ch7-s4" chapter="ch7" label="4. 표준오차 σ/√n" />
     <p class="leading-relaxed text-slate-700">
-      시뮬레이터에서 <MathBlock inline expr="n" /> 이 클수록 히스토그램 폭이 좁아졌죠. 그 폭 —
-      표본평균의 표준편차 — 에는 따로 이름이 있고, 공식도 아주 짧습니다:
+      시뮬레이터에서 <MathBlock inline expr="n" /> 이 클수록 히스토그램 폭이 좁아졌죠. 그 폭,
+      곧 표본평균의 표준편차에는 따로 이름이 있고, 공식도 아주 짧습니다:
     </p>
     <MathBlock expr="SE = \dfrac{\sigma}{\sqrt{n}}" />
 
-    <ConceptCard tone="note" title="새 용어 — 표준오차 (Standard Error, SE)">
+    <ConceptCard tone="note" title="새 용어: 표준오차 (Standard Error, SE)">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li>
           <b>이름</b>: 표준오차 · <b>읽는 법</b>: "시그마 나누기 루트 엔" ·
@@ -170,7 +170,7 @@ function onSetComplete() {
           (데이터 하나하나의 표준편차 <MathBlock inline expr="\sigma" /> 와 구분!).
         </li>
         <li>
-          분모가 <MathBlock inline expr="\sqrt{n}" /> 인 게 포인트 —
+          분모가 <MathBlock inline expr="\sqrt{n}" /> 인 게 포인트예요.
           <b>n 을 4배</b>로 늘리면 <MathBlock inline expr="\sqrt{4}=2" /> 라서 오차는 <b>절반</b>,
           n 을 100배로 늘려도 오차는 1/10 밖에 안 줄어요. "데이터를 늘릴수록 정확해지지만,
           효과는 점점 완만해진다"는 뜻입니다.
@@ -188,7 +188,7 @@ function onSetComplete() {
         { lhs: '10 \\div 10', answer: 1 },
       ]"
       :hints="['SE = σ ÷ √n. 먼저 √n 부터 구하세요.', 'n 이 25 → 100 으로 4배가 되면 SE 는 절반이 됩니다.']"
-      explanation="n=25 이면 SE=2, n=100 이면 SE=1. 표본을 4배로 늘렸더니 흔들림이 딱 절반이 됐죠 — √n 의 효과입니다."
+      explanation="n=25 이면 SE=2, n=100 이면 SE=1. 표본을 4배로 늘렸더니 흔들림이 딱 절반이 됐죠. √n 의 효과입니다."
     />
 
     <!-- 5. 혼동 주의 -->
@@ -218,11 +218,11 @@ function onSetComplete() {
     />
 
     <!-- AI 연결 -->
-    <h2 class="mt-10 mb-2 text-xl font-bold">🤖 미니배치 — AI 학습이 '일부만 보고도' 되는 이유</h2>
+    <h2 class="mt-10 mb-2 text-xl font-bold">🤖 미니배치: AI 학습이 '일부만 보고도' 되는 이유</h2>
     <ReviewFlag id="ch7-ai" chapter="ch7" label="🤖 미니배치 SGD 와 큰 수의 법칙" />
     <p class="leading-relaxed text-slate-700">
       2부(미분)의 경사하강법은 <b>손실의 기울기</b>를 따라 내려가는 학습법입니다(추천 경로상 2부는
-      3부 뒤에 읽어요 — 아직이라면 "기울기 따라 조금씩 내려가는 방법" 정도로만 알아도 충분).
+      3부 뒤에 읽어요. 아직이라면 "기울기 따라 조금씩 내려가는 방법" 정도로만 알아도 충분).
       그런데 정확한
       기울기를 구하려면 <b>전체 데이터</b>(수억 장의 이미지, 수조 개의 문장)의 평균 기울기가 필요해요.
       매 걸음마다 그걸 다 계산하는 건 불가능합니다. 실제 AI 는 어떻게 할까요?
@@ -231,7 +231,7 @@ function onSetComplete() {
     <ConceptCard tone="ai" title="확률적 경사하강법(SGD) = 표본평균으로 대신하기">
       <ul class="list-disc space-y-2 pl-5">
         <li>
-          전체 대신 <b>미니배치</b>(예: 무작위 32개)만 뽑아 기울기의 <b>표본평균</b>을 계산합니다 —
+          전체 대신 <b>미니배치</b>(예: 무작위 32개)만 뽑아 기울기의 <b>표본평균</b>을 계산합니다.
           미니배치가 곧 이 챕터의 <b>표본</b>이에요.
         </li>
         <li>
@@ -240,7 +240,7 @@ function onSetComplete() {
           <MathBlock inline expr="\sigma/\sqrt{n}" /> 이라 <b>배치를 키우면 더 안정</b>됩니다.
         </li>
         <li>
-          "데이터가 많을수록 AI 가 좋아진다"의 통계적 근거도 같은 원리 — 표본이 클수록
+          "데이터가 많을수록 AI 가 좋아진다"의 통계적 근거도 같은 원리예요. 표본이 클수록
           추정(학습)의 오차가 <MathBlock inline expr="1/\sqrt{n}" /> 꼴로 줄어듭니다.
         </li>
       </ul>
@@ -261,7 +261,7 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 · 단계별 계산 10문제입니다. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="큰 수의 법칙과 중심극한정리 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="큰 수의 법칙과 중심극한정리: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -331,7 +331,7 @@ function onSetComplete() {
       />
       <Quiz
         difficulty="medium"
-        question="'원래 분포가 무엇이든, 표본평균의 분포는 n 이 커지면 종 모양에 가까워진다' — 이 정리의 이름은?"
+        question="'원래 분포가 무엇이든, 표본평균의 분포는 n 이 커지면 종 모양에 가까워진다'는 정리의 이름은?"
         :choices="['큰 수의 법칙', '중심극한정리', '베이즈 정리', '최소제곱법']"
         :answer="1"
         :hints="['Central Limit Theorem, 줄여서 CLT.']"
@@ -369,16 +369,16 @@ function onSetComplete() {
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">
-        Phase 7 완료. '왜 일부만 보고도 전체를 알 수 있는지'의 수학적 근거를 손에 넣었습니다.
+        7장 완료. '왜 일부만 보고도 전체를 알 수 있는지'의 수학적 근거를 손에 넣었습니다.
       </p>
       <p class="mt-1 text-sm text-emerald-700">
-        다음은 이 도구로 실제 추측을 하는 <b>추정과 신뢰구간</b>입니다 — 여론조사의 ±3.1%p 가 여기서 나와요.
+        다음은 이 도구로 실제 추측을 하는 <b>추정과 신뢰구간</b>입니다. 여론조사의 ±3.1%p 가 여기서 나와요.
       </p>
       <RouterLink
         to="/ch/ch8"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        다음 챕터 — 표본으로 전체 알기: 추정과 신뢰구간 →
+        다음 챕터: 표본으로 전체 알기: 추정과 신뢰구간 →
       </RouterLink>
     </div>
   </article>

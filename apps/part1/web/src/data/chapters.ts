@@ -41,8 +41,8 @@ export const chapters: ChapterMeta[] = [
   { slug: 'ch8', phase: 8, title: '응용 (PCA 등)', summary: '데이터 구름에서 주성분 찾기', minutes: 35, notebook: 'ch08_pca.ipynb', advanced: true },
   { slug: 'ch9', phase: 9, title: '기저·차원·계수(rank)', summary: '벡터가 진짜 몇 차원어치 정보인가', minutes: 45, notebook: 'ch09_basis_rank.ipynb', advanced: true },
   { slug: 'ch10', phase: 10, title: '직교성과 투영', summary: '가장 가까운 답 = 투영 (최소제곱의 원리)', minutes: 40, notebook: 'ch10_projection.ipynb', advanced: true },
-  { slug: 'ch11', phase: 11, title: '특이값분해 (SVD)', summary: 'ML에서 가장 중요한 분해 — 추천·차원축소', minutes: 45, notebook: 'ch11_svd.ipynb', advanced: true },
-  { slug: 'ch12', phase: 12, title: '그래디언트와 행렬미분', summary: 'AI 학습의 심장 — 경사하강·역전파', minutes: 45, notebook: 'ch12_gradient.ipynb', advanced: true },
+  { slug: 'ch11', phase: 11, title: '특이값분해 (SVD)', summary: '추천과 차원 축소에 쓰는 ML의 핵심 분해', minutes: 45, notebook: 'ch11_svd.ipynb', advanced: true },
+  { slug: 'ch12', phase: 12, title: '그래디언트와 행렬미분', summary: 'AI가 배우는 원리, 경사하강과 역전파', minutes: 45, notebook: 'ch12_gradient.ipynb', advanced: true },
 ]
 
 export const availableChapters = chapters.filter((c) => !c.comingSoon)

@@ -155,18 +155,18 @@ const fmt = (v: number, digits = 4) => v.toFixed(digits)
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 고양이 세계 -->
-    <p class="mb-1 text-sm font-semibold text-slate-500">① 실험용 미니 언어 — "고양이 세계" (신의 시점: 진짜 규칙을 알고 있음)</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">① 실험용 미니 언어 · "고양이 세계" (신의 시점: 진짜 규칙을 알고 있음)</p>
     <div class="mb-2 flex flex-wrap items-center gap-2 text-sm">
       <span class="rounded-lg bg-slate-100 px-2.5 py-1 font-mono text-xs text-slate-600">
         고양이→는 · 는→(밥을 50% | 물을 30% | 잔다 20%) · 밥을→(먹는다 90% | 마신다 10%) · 물을→(마신다 90% | 먹는다 10%) · 동사→. · .→고양이
       </span>
       <span class="rounded-lg bg-indigo-50 px-2.5 py-1 text-xs font-semibold text-indigo-800">
-        바닥(진짜 불확실성) H = {{ fmt(H) }} nat — 완벽히 배워도 여기까지
+        바닥(진짜 불확실성) H = {{ fmt(H) }} nat, 완벽히 배워도 여기까지
       </span>
     </div>
 
     <!-- ② 데이터 스윕 -->
-    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">② 데이터 D를 늘려 먹이며 손실 실측 — 그리고 종이를 바꿔 보세요</p>
+    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">② 데이터 D를 늘려 먹이며 손실 실측, 그리고 종이를 바꿔 보세요</p>
     <div class="mb-2 flex flex-wrap items-center gap-1.5">
       <button
         v-for="(r, i) in ROWS"
@@ -242,16 +242,16 @@ const fmt = (v: number, digits = 4) => v.toFixed(digits)
           <p class="font-mono text-xs text-slate-500">초과 손실 L − H = {{ ROWS[sel].ex.toExponential(2) }}</p>
         </div>
         <p v-if="mode === 'total'" class="rounded-md bg-slate-100 px-3 py-2 text-xs leading-relaxed text-slate-600">
-          로그 x축인데도 곡선이 <b>휘면서 주황 점선(바닥)에 달라붙습니다</b> — 아무리 먹여도
+          로그 x축인데도 곡선이 <b>휘면서 주황 점선(바닥)에 달라붙습니다</b>. 아무리 먹여도
           H 아래로는 못 내려가요. "초과 손실" 버튼으로 바닥을 빼 보세요.
         </p>
         <p v-else-if="!predict" class="rounded-md bg-emerald-50 px-3 py-2 text-xs leading-relaxed text-emerald-800">
-          📏 <b>직선!</b> 바닥을 빼니 로그-로그에서 펴졌습니다 — 기울기
+          📏 <b>직선!</b> 바닥을 빼니 로그-로그에서 펴졌습니다. 기울기
           <b>{{ FIT_ALL.b.toFixed(2) }}</b> (R² = {{ FIT_ALL.r2.toFixed(3) }}).
-          데이터 10배마다 남은 배울 것이 약 1/10로 — 이것이 <b>스케일링 법칙</b>입니다.
+          데이터 10배마다 남은 배울 것이 약 1/10로 줄어요. 이것이 <b>스케일링 법칙</b>입니다.
         </p>
         <p v-else class="rounded-md bg-rose-50 px-3 py-2 text-xs leading-relaxed text-rose-800">
-          🔮 <b>앞 5점(싼 실험)만으로</b> 그은 빨간 점선을 D=100,000까지 연장 —
+          🔮 <b>앞 5점(싼 실험)만으로</b> 그은 빨간 점선을 D=100,000까지 연장하면
           예측 손실 <b>{{ fmt(PRED_L) }}</b> vs 실측 <b>{{ fmt(REAL_L) }}</b>
           (오차 {{ ((Math.abs(PRED_L - REAL_L) / REAL_L) * 100).toFixed(3) }}%).
           작은 실험이 10배 큰 훈련을 맞혔습니다.
@@ -262,7 +262,7 @@ const fmt = (v: number, digits = 4) => v.toFixed(digits)
           :class="predict ? 'bg-rose-600 text-white hover:bg-rose-500' : 'bg-indigo-600 text-white hover:bg-indigo-500'"
           @click="togglePredict"
         >
-          {{ predict ? '예측 게임 끄기' : '🔮 예측 게임 — 앞 5점만으로 큰 훈련 맞히기' }}
+          {{ predict ? '예측 게임 끄기' : '🔮 예측 게임: 앞 5점만으로 큰 훈련 맞히기' }}
         </button>
       </div>
     </div>

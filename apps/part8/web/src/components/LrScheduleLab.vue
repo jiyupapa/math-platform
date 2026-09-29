@@ -74,9 +74,9 @@ const wander = computed(() => {
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 일정표 경주 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 일정표 경주: 같은 지형, 같은 노이즈, 다른 일정</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · 일정표 경주: 같은 지형, 같은 노이즈, 다른 일정</p>
     <p class="mb-3 text-xs text-slate-500">
-      흔들리는 나침반(3장)의 골짜기를 120스텝 걷습니다. 셋은 <b>완전히 같은 노이즈</b>를 겪어요 —
+      흔들리는 나침반(3장)의 골짜기를 120스텝 걷습니다. 셋은 <b>완전히 같은 노이즈</b>를 겪어요.
       다른 것은 보폭의 일정표뿐.
     </p>
 
@@ -112,16 +112,16 @@ const wander = computed(() => {
         못 하고</b>(마지막 {{ results[0].tail.toFixed(2) }}), <b class="text-sky-700">고정 0.02</b>는
         안전하지만 하세월(30스텝에 아직 {{ results[1].early.toFixed(1) }}).
         <b class="text-emerald-700">코사인</b>은 초반엔 0.3처럼 성큼, 후반엔 잔걸음으로
-        <b>가장 깊이 정착</b>({{ results[2].tail.toFixed(3) }} — 고정 0.3의 {{ Math.round(results[0].tail / results[2].tail) }}분의 1).
+        <b>가장 깊이 정착</b>({{ results[2].tail.toFixed(3) }}, 고정 0.3의 {{ Math.round(results[0].tail / results[2].tail) }}분의 1).
         보폭 하나로는 못 얻는 것을 <b>일정표</b>가 얻어 줍니다.
       </p>
     </template>
 
     <!-- ② 서성임 확대경 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 서성임 확대경: 왜 후반엔 보폭을 줄여야 하나</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · 서성임 확대경: 왜 후반엔 보폭을 줄여야 하나</p>
     <p class="mb-3 text-xs text-slate-500">
-      이미 골짜기 바닥(w = 0)에 도착한 상태에서 노이즈 낀 걸음을 계속 걷습니다 — 보폭을 바꿔 보세요.
+      이미 골짜기 바닥(w = 0)에 도착한 상태에서 노이즈 낀 걸음을 계속 걷습니다. 보폭을 바꿔 보세요.
     </p>
 
     <label class="block text-xs text-slate-500">
@@ -146,7 +146,7 @@ const wander = computed(() => {
         <p class="font-mono text-xl font-bold" :class="wander.std > 0.25 ? 'text-rose-700' : 'text-emerald-700'">{{ wander.std.toFixed(3) }}</p>
       </div>
       <p class="flex-1 text-xs leading-relaxed text-slate-600">
-        바닥에 도착해도 노이즈 × 보폭만큼 계속 <b>밀려납니다</b> — 보폭을 줄이면 반경이 줄어요
+        바닥에 도착해도 노이즈 × 보폭만큼 계속 <b>밀려납니다</b>. 보폭을 줄이면 반경이 줄어요
         (√보폭에 비례). 고정 큰 보폭이 끝까지 정착 못 하던 이유이자, <b>감쇠가 존재하는 이유</b>입니다.
       </p>
     </div>

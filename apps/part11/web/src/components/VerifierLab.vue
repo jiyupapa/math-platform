@@ -53,7 +53,7 @@ const pct = (v: number) => (v * 100).toFixed(1)
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 다이얼 -->
-    <p class="mb-1 text-sm font-semibold text-slate-500">① 세 개의 다이얼 — 바탕과 검수자의 실력</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">① 세 개의 다이얼: 바탕과 검수자의 실력</p>
     <div class="mb-3 space-y-2 rounded-lg bg-slate-50 p-4 text-sm">
       <label class="flex items-center gap-3">
         <span class="w-44 shrink-0 text-slate-700"><b>기저율</b> (답이 애초에 맞을 확률)</span>
@@ -103,7 +103,7 @@ const pct = (v: number) => (v * 100).toFixed(1)
     </div>
 
     <!-- ③ 통과 더미만 모아 보기 -->
-    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">③ 검수 통과 더미만 모아 보면 — 여기서 정답 비율이 사후확률</p>
+    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">③ 검수 통과 더미만 모아 보면: 여기서 정답 비율이 사후확률</p>
     <div class="rounded-lg bg-slate-50 p-4">
       <div class="mb-2 flex flex-wrap gap-0.5">
         <span v-for="(c, i) in passCells" :key="i" class="h-4 w-4 rounded-[3px]" :class="CELL_CLASS[c]" />
@@ -116,7 +116,7 @@ const pct = (v: number) => (v * 100).toFixed(1)
         <span class="w-24 shrink-0 text-right font-mono text-lg font-bold text-indigo-700">{{ pct(shown) }}%</span>
       </div>
       <p class="text-sm text-slate-700">
-        검수 <b>{{ doublePass ? '2회' : '1회' }}</b> 통과한 답이 진짜 맞을 확률 —
+        검수 <b>{{ doublePass ? '2회' : '1회' }}</b> 통과한 답이 진짜 맞을 확률은
         검수 전 {{ Math.round(p * 100) }}%에서
         <b class="text-indigo-700">{{ pct(shown) }}%</b>로.
       </p>
@@ -124,7 +124,7 @@ const pct = (v: number) => (v * 100).toFixed(1)
         v-if="shown < 0.5"
         class="mt-2 rounded-md bg-rose-50 px-3 py-2 text-sm font-medium text-rose-800"
       >
-        ⚠️ 기저율의 역설 — 검수를 통과했는데도 절반이 못 됩니다. 오답이 워낙 많아
+        ⚠️ 기저율의 역설: 검수를 통과했는데도 절반이 못 됩니다. 오답이 워낙 많아
         “새는 오답”({{ counts.wp }}개)이 “통과한 정답”({{ counts.cp }}개)에 비해 무시할 수 없어요.
         바탕(기저율)이 나쁘면 좋은 검수자도 확신을 못 줍니다.
       </p>
@@ -133,11 +133,11 @@ const pct = (v: number) => (v * 100).toFixed(1)
     <!-- ④ 반복 검수 -->
     <label class="mt-4 flex cursor-pointer items-center gap-2 text-sm text-slate-700">
       <input v-model="doublePass" type="checkbox" class="h-4 w-4 accent-indigo-600" />
-      <span><b>독립 검수 2회 통과 보기</b> — 첫 검수의 사후확률이 두 번째 검수의 기저율이 됩니다 (베이즈 갱신의 연쇄)</span>
+      <span><b>독립 검수 2회 통과 보기</b>: 첫 검수의 사후확률이 두 번째 검수의 기저율이 됩니다 (베이즈 갱신의 연쇄)</span>
     </label>
     <p v-if="doublePass" class="mt-2 rounded-md bg-amber-50 px-3 py-2 text-sm text-amber-800">
       {{ Math.round(p * 100) }}% → 1회 통과 {{ pct(post1) }}% → 2회 통과 <b>{{ pct(post2) }}%</b>.
-      단, <b>서로 독립인</b> 검수자여야 합니다 — 같은 검수자에게 두 번 물으면 같은 맹점이 두 번 통과돼요.
+      단, <b>서로 독립인</b> 검수자여야 합니다. 같은 검수자에게 두 번 물으면 같은 맹점이 두 번 통과돼요.
     </p>
   </div>
 </template>

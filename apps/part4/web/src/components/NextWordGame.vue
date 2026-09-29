@@ -2,7 +2,7 @@
 // 인터랙티브 "다음 단어 맞히기" 게임.
 // 아주 작은 목업 모델(단어 → 다음 후보 표)로, LLM의 자기회귀(autoregressive) 생성을 체험한다.
 // 후보 단어를 클릭하면 문장 끝에 붙고, 그 단어를 기준으로 다음 후보가 갱신된다 → 한 단어씩 문장이 자란다.
-// 확률은 Phase 0의 softmax 유틸을 그대로 재사용.
+// 확률은 워밍업의 softmax 유틸을 그대로 재사용.
 //
 // v-model 로 현재 문장(단어 배열)을 주고받는다 → 챕터가 "지금까지 만든 문장"을 함께 읽어 쓸 수 있다.
 import { computed } from 'vue'
@@ -96,7 +96,7 @@ function label(w: string) {
     <!-- 후보 단어 (확률과 함께) -->
     <template v-if="!done">
       <p class="mb-2 text-sm font-semibold text-slate-500">
-        다음에 올 단어 후보 — 아무거나 눌러 이어보세요
+        다음에 올 단어 후보: 아무거나 눌러 이어 보세요
       </p>
       <div class="space-y-2">
         <button

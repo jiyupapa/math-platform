@@ -14,12 +14,10 @@ const chapter = computed(() => chapters.find((c) => c.slug === route.params.slug
       {{ chapter ? chapter.title : '준비 중인 챕터' }}
     </h1>
     <p class="mb-6 text-slate-500">
-      {{ chapter ? `Phase ${chapter.phase} · ${chapter.summary}` : '곧 만나요!' }}
+      {{ chapter ? `${chapter.phase}장 · ${chapter.summary}` : '곧 만나요!' }}
     </p>
     <p class="mb-8 text-sm text-slate-500">
-      이 챕터는 아직 준비 중입니다. Phase 0(기반 구축)에서는
-      <RouterLink to="/ch/sample" class="text-indigo-600 underline">샘플 챕터</RouterLink>
-      로 전체 학습 패턴을 먼저 확인해 보세요.
+      1부의 모든 챕터가 공개돼 있어요. 이 주소에 맞는 챕터를 찾지 못했으니 목차에서 골라 주세요.
     </p>
     <RouterLink
       to="/"

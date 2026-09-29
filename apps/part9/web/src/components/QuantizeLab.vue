@@ -59,9 +59,9 @@ const duel = computed(() => {
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 눈금 갈아타기 기계 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 눈금 갈아타기 기계: 실수 자 → 정수 자 + 축척 스티커</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · 눈금 갈아타기 기계: 실수 자 → 정수 자 + 축척 스티커</p>
     <p class="mb-3 text-xs text-slate-500">
-      toy 가중치 8개를 b비트 정수 자로 옮깁니다 — 축척 s = max|w| ÷ 눈금 수, 저장은 정수
+      toy 가중치 8개를 b비트 정수 자로 옮깁니다. 축척 s = max|w| ÷ 눈금 수, 저장은 정수
       q = round(w/s), 복원은 q×s. 비트를 줄이며 점들이 눈금에 강제로 붙는 걸 보세요.
     </p>
 
@@ -106,16 +106,16 @@ const duel = computed(() => {
 
     <p class="mt-2 rounded-lg bg-indigo-50 p-3 text-xs leading-relaxed text-indigo-800">
       👀 저장되는 건 <b>1바이트짜리 정수 q 와, 행 전체가 공유하는 축척 s 하나</b>뿐입니다.
-      오차는 언제나 <b>눈금 간격의 절반(s/2 = {{ (machine.s / 2).toExponential(1) }}) 이하</b> —
+      오차는 언제나 <b>눈금 간격의 절반(s/2 = {{ (machine.s / 2).toExponential(1) }}) 이하</b>입니다.
       워밍업부터 본 "가장 가까운 눈금으로"가 여기서도 법칙이에요. 비트를 줄이면 눈금이
       성겨지고(b−1 제곱으로 절반씩), 오차 한도가 그만큼 커집니다.
     </p>
 
     <!-- ② 다음 토큰 대결 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 다음 토큰 대결: 박빙의 순위는 몇 비트까지 버틸까</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · 다음 토큰 대결: 박빙의 순위는 몇 비트까지 버틸까</p>
     <p class="mb-3 text-xs text-slate-500">
-      미니 출력층(어휘 4개 × 차원 8)의 로짓 — fp 로는 <b>고양이 0.295 vs 강아지 0.290</b>,
+      미니 출력층(어휘 4개 × 차원 8)의 로짓은 fp 로 <b>고양이 0.295 vs 강아지 0.290</b>,
       마진 겨우 0.005 인 박빙 승부입니다. 가중치를 양자화해도 1등이 지켜질까요?
     </p>
 
@@ -145,14 +145,14 @@ const duel = computed(() => {
     </div>
 
     <p class="mt-2 text-sm font-medium" :class="duel.same ? 'text-emerald-700' : 'text-rose-700'">
-      {{ duel.same ? `✅ 순위 유지 — 1등은 여전히 ${VOCAB[fpRank]} (로짓 오차 최대 ${duel.maxErr.toFixed(4)} — 마진 0.005 안쪽)` : `❗ 순위 역전 — 1등이 ${VOCAB[duel.qRank]} 로 바뀌었다! (로짓 오차 ${duel.maxErr.toFixed(3)} ≫ 마진 0.005)` }}
+      {{ duel.same ? `✅ 순위 유지: 1등은 여전히 ${VOCAB[fpRank]} (로짓 오차 최대 ${duel.maxErr.toFixed(4)}, 마진 0.005 안쪽)` : `❗ 순위 역전: 1등이 ${VOCAB[duel.qRank]} 로 바뀌었다! (로짓 오차 ${duel.maxErr.toFixed(3)} ≫ 마진 0.005)` }}
     </p>
 
     <p class="mt-2 rounded-lg bg-amber-50 p-3 text-xs leading-relaxed text-amber-800">
-      💡 <b>int8(오차 0.001)·int4(0.004)는 박빙 승부도 지켰고, int3(0.03)부터 뒤집혔습니다</b> —
+      💡 <b>int8(오차 0.001)·int4(0.004)는 박빙 승부도 지켰고, int3(0.03)부터 뒤집혔습니다</b>. 여기서 배울 점은
       결정(argmax)은 로짓 오차가 마진보다 작은 한 무사하다는 것, 그리고 실전의 마진은 대부분
       이보다 훨씬 크다는 것(확신에 찬 예측일수록 둔감). 개별 가중치 오차가 내적에서 ±로
-      상쇄되는 것(4장의 √n!)도 한몫합니다 — 차원이 8이 아니라 4,096이면 상쇄는 더 유리해져요.
+      상쇄되는 것(4장의 √n!)도 한몫합니다. 차원이 8이 아니라 4,096이면 상쇄는 더 유리해져요.
     </p>
   </div>
 </template>

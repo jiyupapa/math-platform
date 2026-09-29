@@ -41,9 +41,9 @@ const fmt = (n: number) => (n >= 0 ? '+' : '') + (Math.round(n * 100) / 100).toF
 
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험: 미니 DPO 훈련기 — 심판 없이 선호 쌍 하나 새기기</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험: 미니 DPO 훈련기: 보상 모델 없이 선호 쌍 하나 새기기</p>
     <p class="mb-3 text-xs text-slate-500">
-      숨은 점수 r̂ = log(π ÷ π_ref) — "원본보다 얼마나 자주 내는가". 참조(π_ref)는 회색으로 고정.
+      숨은 점수 r̂ = log(π ÷ π_ref), 곧 "원본보다 얼마나 자주 내는가". 참조(π_ref)는 회색으로 고정.
     </p>
 
     <div class="space-y-2">
@@ -99,14 +99,14 @@ const fmt = (n: number) => (n >= 0 ? '+' : '') + (Math.round(n * 100) / 100).toF
 
     <p v-if="steps === 0" class="mt-2 rounded-lg bg-amber-50 p-3 text-sm text-amber-800">
       👀 시작점: 정책 = 참조 모델(숨은 점수 0/0, 마진 0, σ(0)=50%). 아직 아무 선호도 새겨지지 않았어요.
-      "한 스텝 훈련"을 눌러 보세요 — <b>답변을 생성하지도, 채점하지도 않고</b> 확률만 움직입니다.
+      "한 스텝 훈련"을 눌러 보세요. <b>답변을 생성하지도, 채점하지도 않고</b> 확률만 움직입니다.
     </p>
     <p v-else-if="!done" class="mt-2 rounded-lg bg-sky-50 p-3 text-sm text-sky-800">
-      ⚙️ W는 원본보다 자주(숨은 점수 +), L은 덜 자주(−) — 격차(마진)가 벌어지며 손실이 내려갑니다.
+      ⚙️ W는 원본보다 자주(숨은 점수 +), L은 덜 자주(−). 격차(마진)가 벌어지며 손실이 내려갑니다.
       기타 답변들은 거의 건드리지 않는 것도 보세요(원본다움 보존).
     </p>
     <p v-else class="mt-2 rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">
-      ✅ <b>선호가 새겨졌어요 — RL 루프도, 보상 모델도 없이.</b> 쓴 것은 선호 쌍 하나와
+      ✅ <b>선호가 새겨졌어요. RL 루프도, 보상 모델도 없이.</b> 쓴 것은 선호 쌍 하나와
       참조 모델(기준점)뿐. 이게 DPO입니다.
     </p>
   </div>

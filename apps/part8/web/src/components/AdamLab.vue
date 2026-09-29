@@ -6,8 +6,8 @@ import { computed, ref } from 'vue'
 
 // ── ① 두 지형 3파전 ────────────────────────────────────────────
 const TERRAINS = [
-  { key: 'A', label: '지형 A — 온화한 골짜기 (벽 곡률 8)', cy: 8 },
-  { key: 'B', label: '지형 B — 극단 골짜기 (벽 곡률 800, 100배!)', cy: 800 },
+  { key: 'A', label: '지형 A: 온화한 골짜기 (벽 곡률 8)', cy: 8 },
+  { key: 'B', label: '지형 B: 극단 골짜기 (벽 곡률 800, 100배!)', cy: 800 },
 ]
 const CXT = 0.1
 const tIdx = ref(0)
@@ -78,7 +78,7 @@ const rows = computed(() => {
   return [
     { name: '🔵 GD (lr 0.2)', val: fmt(gd), dead: gd.dead },
     { name: '🟢 모멘텀 (lr 0.2, β 0.9)', val: fmt(mom), dead: mom.dead },
-    { name: '🟠 Adam (lr 0.3 — 두 지형 동일 설정)', val: fmt(adam), dead: adam.dead },
+    { name: '🟠 Adam (lr 0.3, 두 지형 동일 설정)', val: fmt(adam), dead: adam.dead },
   ]
 })
 // Adam 축별 유효 보폭
@@ -112,7 +112,7 @@ const norm2 = computed(() => rmsNormalized(amp2.value))
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 두 지형 3파전 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 두 지형 3파전: 지형이 100배 가파라지면</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · 두 지형 3파전: 지형이 100배 가파라지면</p>
     <p class="mb-3 text-xs text-slate-500">
       세 여행자의 설정은 <b>지형이 바뀌어도 그대로</b>입니다. 지형 A에서 먼저 경주하고,
       지형 B(벽 곡률 100배)로 바꿔 다시 경주해 보세요.
@@ -153,52 +153,52 @@ const norm2 = computed(() => rmsNormalized(amp2.value))
 
     <div v-if="effSteps" class="mt-2 grid grid-cols-2 gap-2 text-center">
       <div class="rounded-lg bg-amber-50 p-2">
-        <p class="text-xs text-amber-700">Adam의 유효 보폭 — 완만한 x축</p>
+        <p class="text-xs text-amber-700">Adam의 유효 보폭 (완만한 x축)</p>
         <p class="font-mono text-sm font-bold text-amber-700">{{ effSteps.x.toFixed(3) }}</p>
       </div>
       <div class="rounded-lg bg-amber-50 p-2">
-        <p class="text-xs text-amber-700">Adam의 유효 보폭 — 가파른 y축</p>
+        <p class="text-xs text-amber-700">Adam의 유효 보폭 (가파른 y축)</p>
         <p class="font-mono text-sm font-bold text-amber-700">{{ effSteps.y.toFixed(4) }}</p>
       </div>
     </div>
 
     <p v-if="tIdx === 1 && steps >= 60 && !racers.adam.dead" class="mt-3 rounded-lg bg-emerald-50 p-3 text-sm leading-relaxed text-emerald-800">
       ✅ 지형이 100배 가파라지자 🔵 GD 와 🟢 모멘텀은 <b>같은 설정 그대로 폭발</b>했습니다
-      (경계 2/c 가 100분의 1로 내려왔으니까요 — 2장). 🟠 Adam 만 살아남았죠 — 축마다 기울기의
+      (경계 2/c 가 100분의 1로 내려왔으니까요. 2장). 🟠 Adam 만 살아남았죠. 축마다 기울기의
       <b>평소 크기로 나눠서 걷기 때문에</b>, 지형의 스케일이 변해도 걸음은 lr 근처로 일정합니다.
       위의 유효 보폭을 보세요: 가파른 y축은 자동으로 미세 보폭, 완만한 x축은 성큼성큼.
     </p>
     <p v-else-if="tIdx === 0 && steps >= 60" class="mt-3 rounded-lg bg-slate-50 p-3 text-sm text-slate-600">
-      지형 A에서는 셋 다 무난합니다 (모멘텀·Adam 우세). 이제 <b>지형 B</b>로 바꿔 같은 설정으로 다시 경주해 보세요 — 반전이 있습니다.
+      지형 A에서는 셋 다 무난합니다 (모멘텀·Adam 우세). 이제 <b>지형 B</b>로 바꿔 같은 설정으로 다시 경주해 보세요. 반전이 있습니다.
     </p>
 
     <!-- ② 스케일 지우개 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 스케일 지우개: √(g²의 평균)으로 나누면</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · 스케일 지우개: √(g²의 평균)으로 나누면</p>
     <p class="mb-3 text-xs text-slate-500">
-      축1의 기울기는 크기 5로 고정, 축2의 크기는 슬라이더로 — RMS(g²의 EMA의 제곱근)로 나눈
+      축1의 기울기는 크기 5로 고정, 축2의 크기는 슬라이더로 정합니다. RMS(g²의 EMA의 제곱근)로 나눈
       뒤의 값을 비교하세요.
     </p>
 
     <label class="block text-xs text-slate-500">
-      축2의 기울기 크기 = <b class="text-slate-700">{{ amp2.toFixed(2) }}</b> (축1은 5.0 고정 — 최대 500배 차이)
+      축2의 기울기 크기 = <b class="text-slate-700">{{ amp2.toFixed(2) }}</b> (축1은 5.0 고정, 최대 500배 차이)
       <input v-model.number="amp2" type="range" min="0.01" max="10" step="0.01" class="mt-1 w-full accent-indigo-600" />
     </label>
 
     <div class="mt-3 grid grid-cols-2 gap-2 text-center">
       <div class="rounded-lg bg-slate-50 p-3">
-        <p class="text-xs text-slate-500">축1 — 나누기 후 (원래 크기 5)</p>
+        <p class="text-xs text-slate-500">축1: 나누기 후 (원래 크기 5)</p>
         <p class="font-mono text-xl font-bold text-emerald-700">{{ norm1.toFixed(2) }}</p>
       </div>
       <div class="rounded-lg bg-slate-50 p-3">
-        <p class="text-xs text-slate-500">축2 — 나누기 후 (원래 크기 {{ amp2.toFixed(2) }})</p>
+        <p class="text-xs text-slate-500">축2: 나누기 후 (원래 크기 {{ amp2.toFixed(2) }})</p>
         <p class="font-mono text-xl font-bold text-emerald-700">{{ norm2.toFixed(2) }}</p>
       </div>
     </div>
 
     <p class="mt-3 rounded-lg bg-indigo-50 p-3 text-xs leading-relaxed text-indigo-800">
-      💡 슬라이더를 어디에 놓아도 나누기 후에는 <b>둘 다 1 근처</b> — 크기가 지워지고 남는 건
-      사실상 <b>방향(부호)</b>뿐입니다. 각 축이 자기 자(평소 크기)로 정규화되는 것 — 이것이
+      💡 슬라이더를 어디에 놓아도 나누기 후에는 <b>둘 다 1 근처</b>예요. 크기가 지워지고 남는 건
+      사실상 <b>방향(부호)</b>뿐입니다. 각 축이 자기 자(평소 크기)로 정규화되는 것, 이것이
       "축마다 다른 보폭"의 정체이고, 7부 2장의 정규화(길이로 나누기)와 같은 사상이
       축 단위로 적용된 셈이에요.
     </p>

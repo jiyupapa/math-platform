@@ -83,10 +83,10 @@ const ridge = computed(() => {
 const verdict = computed(() => {
   const { norm, valErr } = ridge.value
   if (li.value === 0)
-    return { tone: 'text-rose-700', text: `목줄 없음 — 7장의 그 암기 곡선입니다. 계수가 ${norm.toFixed(0)}까지 폭주하며 훈련 오차 0, 검증 ${valErr.toFixed(2)} 폭발.` }
+    return { tone: 'text-rose-700', text: `목줄 없음: 7장의 그 암기 곡선입니다. 계수가 ${norm.toFixed(0)}까지 폭주하며 훈련 오차 0, 검증 ${valErr.toFixed(2)} 폭발.` }
   if (li.value >= 5)
-    return { tone: 'text-sky-700', text: '너무 짧은 목줄 — 곡선이 짓눌려 규칙(굽이)까지 못 배웁니다(과소적합). 훈련·검증 둘 다 나쁨.' }
-  return { tone: 'text-emerald-700', text: `목줄이 계수를 ${norm.toFixed(1)}로 묶자 요동이 사라졌어요 — 노이즈는 못 외우고 규칙만 남았습니다(검증 ${valErr.toFixed(3)}).` }
+    return { tone: 'text-sky-700', text: '너무 짧은 목줄: 곡선이 짓눌려 규칙(굽이)까지 못 배웁니다(과소적합). 훈련·검증 둘 다 나쁨.' }
+  return { tone: 'text-emerald-700', text: `목줄이 계수를 ${norm.toFixed(1)}로 묶자 요동이 사라졌어요. 노이즈는 못 외우고 규칙만 남았습니다(검증 ${valErr.toFixed(3)}).` }
 })
 
 // SVG (7장과 같은 좌표계: x∈[-1,1], y 클램프 ±2)
@@ -143,9 +143,9 @@ const lossLine = (ls: number[]) =>
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 원점 목줄 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 원점 목줄: 7장의 암기 곡선에 weight decay 채우기</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · 원점 목줄: 7장의 암기 곡선에 weight decay 채우기</p>
     <p class="mb-3 text-xs text-slate-500">
-      7장의 그 점 10개, 그 차수 9 그대로 — 이번엔 손실에 <b>λ×(계수 크기)²</b> 벌점을 더합니다.
+      7장의 그 점 10개, 그 차수 9 그대로입니다. 이번엔 손실에 <b>λ×(계수 크기)²</b> 벌점을 더합니다.
       목줄의 세기 λ를 돌려 보세요.
     </p>
 
@@ -180,9 +180,9 @@ const lossLine = (ls: number[]) =>
 
     <!-- ② 목줄 경주 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 목줄 경주: 벌어짐이 사라진다</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · 목줄 경주: 벌어짐이 사라진다</p>
     <p class="mb-3 text-xs text-slate-500">
-      7장 실험 ②의 그 훈련(차수 9 × 3,000스텝)을 두 번 돌립니다 — 목줄 없이(λ=0) vs 목줄 채우고(λ=0.03).
+      7장 실험 ②의 그 훈련(차수 9 × 3,000스텝)을 두 번 돌립니다. 목줄 없이(λ=0) vs 목줄 채우고(λ=0.03).
       조기 종료 없이 <b>끝까지 완주</b>했을 때 검증 손실이 어떻게 되는지 보세요.
     </p>
 
@@ -207,24 +207,24 @@ const lossLine = (ls: number[]) =>
 
       <div class="mt-2 flex flex-wrap gap-3 rounded-lg bg-slate-50 p-3 text-center">
         <div>
-          <p class="text-xs text-slate-500">목줄 없음 — 마지막 검증</p>
+          <p class="text-xs text-slate-500">목줄 없음: 마지막 검증</p>
           <p class="font-mono text-lg font-bold text-rose-700">{{ race.free.vas[STEPS - 1]!.toFixed(3) }} <span class="text-xs font-normal text-slate-500">(최저 {{ race.free.vas[race.free.best]!.toFixed(3) }}의 {{ (race.free.vas[STEPS - 1]! / race.free.vas[race.free.best]!).toFixed(1) }}배)</span></p>
         </div>
         <div>
-          <p class="text-xs text-slate-500">목줄 λ=0.03 — 마지막 검증</p>
+          <p class="text-xs text-slate-500">목줄 λ=0.03: 마지막 검증</p>
           <p class="font-mono text-lg font-bold text-emerald-700">{{ race.leashed.vas[STEPS - 1]!.toFixed(3) }} <span class="text-xs font-normal text-slate-500">(벌어짐 없음)</span></p>
         </div>
         <div>
-          <p class="text-xs text-slate-500">목줄 값 — 마지막 훈련 오차</p>
+          <p class="text-xs text-slate-500">목줄 값: 마지막 훈련 오차</p>
           <p class="font-mono text-lg font-bold text-slate-600">{{ race.free.trs[STEPS - 1]!.toFixed(3) }} → {{ race.leashed.trs[STEPS - 1]!.toFixed(3) }}</p>
         </div>
       </div>
 
       <p class="mt-3 rounded-lg bg-emerald-50 p-3 text-sm leading-relaxed text-emerald-800">
         ✅ 목줄 없는 훈련은 검증이 최저를 찍고 <b>{{ (race.free.vas[STEPS - 1]! / race.free.vas[race.free.best]!).toFixed(1) }}배로 되올랐지만</b>,
-        목줄을 채우자 3,000스텝을 <b>완주하고도 검증이 최저 수준</b>에 머뭅니다 — 노이즈 암기에 필요한
+        목줄을 채우자 3,000스텝을 <b>완주하고도 검증이 최저 수준</b>에 머뭅니다. 노이즈 암기에 필요한
         큰 계수를 벌점이 계속 깎아내, <b>벌어짐 자체가 생기지 않아요</b>. 훈련 오차는 조금
-        손해지만(목줄 값), 검증에서 남는 장사입니다. 멈출 타이밍(조기 종료)을 몰라도 안전해지는 것 —
+        손해지만(목줄 값), 검증에서 남는 장사입니다. 멈출 타이밍(조기 종료)을 몰라도 안전해지는 것,
         이것이 정규화가 "안전장치"인 이유.
       </p>
     </template>

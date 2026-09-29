@@ -111,7 +111,7 @@ const pct = (w: number) => (w * 100).toFixed(0)
         = <b>[{{ concat.map((n) => n.toFixed(2)).join(', ') }}]</b>
       </div>
       <p class="mt-1 text-violet-700">
-        숫자 {{ concat.length }}개짜리 벡터 — 여러 관점이 <b>한 벡터에 모였습니다</b>.
+        숫자 {{ concat.length }}개짜리 벡터로, 여러 관점이 <b>한 벡터에 모였습니다</b>.
         (실제로는 이 뒤에 한 번 더 섞어 주는 선형층이 붙어요.)
       </p>
     </div>

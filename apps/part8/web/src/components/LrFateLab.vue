@@ -69,10 +69,10 @@ const result2 = computed(() => {
   for (let i = 0; i < 20; i++) w = step(w, lr2.value)
   const L = loss(w)
   let verdict: Fate
-  if (L > loss(START) + 1e-9) verdict = { label: '💥 폭발 — 스텝마다 더 높이 튕겨 나갑니다', tone: 'text-rose-700' }
-  else if (Math.abs(L - loss(START)) < 1e-9) verdict = { label: '♾️ 무한 진동 — 같은 높이의 반대편으로 영원히', tone: 'text-amber-700' }
-  else if (L < 0.01) verdict = { label: '✅ 도착 — 골짜기 바닥', tone: 'text-emerald-700' }
-  else verdict = { label: '🐢 아직 가는 중 — 20스텝으로는 부족', tone: 'text-sky-700' }
+  if (L > loss(START) + 1e-9) verdict = { label: '💥 폭발: 스텝마다 더 높이 튕겨 나갑니다', tone: 'text-rose-700' }
+  else if (Math.abs(L - loss(START)) < 1e-9) verdict = { label: '♾️ 무한 진동: 같은 높이의 반대편으로 영원히', tone: 'text-amber-700' }
+  else if (L < 0.01) verdict = { label: '✅ 도착: 골짜기 바닥', tone: 'text-emerald-700' }
+  else verdict = { label: '🐢 아직 가는 중: 20스텝으로는 부족', tone: 'text-sky-700' }
   return { w, loss: L, verdict }
 })
 </script>
@@ -80,9 +80,9 @@ const result2 = computed(() => {
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 세 개의 운명 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 세 개의 운명: 같은 산, 같은 출발점, 다른 보폭</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · 세 개의 운명: 같은 산, 같은 출발점, 다른 보폭</p>
     <p class="mb-3 text-xs text-slate-500">
-      셋 다 같은 손실 골짜기(L = (w−3)²)를 w = −5에서 출발합니다. 다른 것은 <b>보폭(학습률)</b> 하나 —
+      셋 다 같은 손실 골짜기(L = (w−3)²)를 w = −5에서 출발합니다. 다른 것은 <b>보폭(학습률)</b> 하나뿐입니다.
       스텝을 진행시켜 보세요.
     </p>
 
@@ -133,16 +133,16 @@ const result2 = computed(() => {
     </div>
 
     <p v-if="steps >= 10" class="mt-3 rounded-lg bg-indigo-50 p-3 text-sm text-indigo-800">
-      👀 수학(기울기 계산)은 셋 다 완벽히 같았습니다 — 운명을 가른 건 <b>보폭 하나</b>예요.
+      👀 수학(기울기 계산)은 셋 다 완벽히 같았습니다. 운명을 가른 건 <b>보폭 하나</b>예요.
       소심이는 언젠가 도착하지만 너무 느리고, 무모이는 골짜기를 <b>건너뛰어 반대편 더 높은 곳</b>에
       착지하기를 반복합니다(폭발). 이 다이얼의 이름이 <b>학습률</b>입니다.
     </p>
 
     <!-- ② 경계 탐색기 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 경계 탐색기: 폭발은 정확히 어디서 시작될까</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · 경계 탐색기: 폭발은 정확히 어디서 시작될까</p>
     <p class="mb-3 text-xs text-slate-500">
-      보폭을 직접 정하고 20스텝을 달리게 해 보세요. <b>도착↔폭발의 경계</b>가 어딘가에 있습니다 — 찾아보세요.
+      보폭을 직접 정하고 20스텝을 달리게 해 보세요. <b>도착↔폭발의 경계</b>가 어딘가에 있습니다. 찾아보세요.
     </p>
 
     <label class="block text-xs text-slate-500">
@@ -159,7 +159,7 @@ const result2 = computed(() => {
     </div>
 
     <p class="mt-3 rounded-lg bg-amber-50 p-3 text-xs leading-relaxed text-amber-800">
-      💡 경계를 찾으셨나요? 이 골짜기에서는 <b>정확히 1.00</b>입니다 — 그보다 작으면 언젠가 도착,
+      💡 경계를 찾으셨나요? 이 골짜기에서는 <b>정확히 1.00</b>입니다. 그보다 작으면 언젠가 도착,
       정확히 1.00이면 같은 높이를 영원히 왕복, 넘으면 폭발. 왜 하필 1.00인지, 골짜기의 <b>가파름</b>과
       경계의 관계는 2장(보폭의 과학)에서 계산으로 밝혀냅니다.
     </p>

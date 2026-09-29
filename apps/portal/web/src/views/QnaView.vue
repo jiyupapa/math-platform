@@ -55,7 +55,7 @@ async function resolve(q: Annotation) {
 
 <template>
   <section class="mx-auto max-w-3xl px-5 py-10">
-    <h1 class="text-2xl font-bold text-slate-900">🎓 미해결 질문 큐</h1>
+    <h1 class="text-2xl font-bold text-slate-900">🎓 답변 대기 질문</h1>
     <p class="mt-1 text-sm text-slate-500">
       학습자들이 챕터에 남긴 질문 중 아직 해결되지 않은 것들입니다. 질문을 열어 답변을 달면
       학습자 화면의 💬 패널에 <b>강사 답변</b>으로 표시됩니다. (질문은 익명입니다.)
@@ -65,14 +65,14 @@ async function resolve(q: Annotation) {
       백엔드(Supabase)가 설정되지 않았습니다.
     </p>
     <p v-else-if="!currentUser" class="mt-8 rounded-lg bg-slate-50 px-4 py-6 text-center text-sm text-slate-500">
-      로그인이 필요합니다 — 우측 상단 "로그인".
+      로그인이 필요합니다. 오른쪽 위의 "로그인"을 눌러 주세요.
     </p>
     <p v-else-if="!isAdmin" class="mt-8 rounded-lg bg-slate-50 px-4 py-6 text-center text-sm text-slate-500">
       관리자(강사) 전용 화면입니다.
     </p>
     <p v-else-if="loading" class="mt-8 text-center text-sm text-slate-500">불러오는 중…</p>
     <p v-else-if="questions.length === 0" class="mt-8 rounded-lg bg-emerald-50 px-4 py-6 text-center text-sm text-emerald-700">
-      🎉 미해결 질문이 없습니다 — 전부 답했어요!
+      🎉 답변 대기 질문이 없어요. 전부 답했어요!
     </p>
 
     <ul v-else class="mt-6 space-y-3">

@@ -18,12 +18,12 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 9</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">9장</p>
     <h1 class="mb-4 text-3xl font-bold">그래디언트와 경사하강법 ⛷️</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       드디어 <b>AI가 학습하는 원리</b> 그 자체입니다. 편미분들을 모은 <b>그래디언트</b>가 "가장 가파른
       방향"을 알려주면, 그 <b>반대 방향</b>으로 조금씩 내려가며 손실을 줄입니다. 이 반복이
-      <b>경사하강법</b> — 모든 딥러닝 학습의 심장이에요.
+      <b>경사하강법</b>으로, 모든 딥러닝 학습의 핵심이에요.
     </p>
 
     <ConceptCard tone="goal" title="이 챕터의 목표">
@@ -35,20 +35,20 @@ function onSetComplete() {
     </ConceptCard>
 
     <!-- 1. 그래디언트 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">1. 그래디언트 — 가장 가파른 방향</h2>
-    <ReviewFlag id="ch9-s1" chapter="ch9" label="1. 그래디언트 — 가장 가파른 방향" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">1. 그래디언트: 가장 가파른 방향</h2>
+    <ReviewFlag id="ch9-s1" chapter="ch9" label="1. 그래디언트: 가장 가파른 방향" />
     <p class="leading-relaxed text-slate-700">
-      Phase 8 의 편미분들을 <b>하나로 묶은 것</b>이 <b>그래디언트</b>입니다. 여기서 "묶는다"는 건
+      8장의 편미분들을 <b>하나로 묶은 것</b>이 <b>그래디언트</b>입니다. 여기서 "묶는다"는 건
       숫자들을 순서대로 늘어놓은 목록, 즉 <b>벡터</b>로 만든다는 뜻이에요. <MathBlock inline expr="f(x,y)" /> 라면:
     </p>
     <MathBlock expr="\nabla f = \left(\dfrac{\partial f}{\partial x},\ \dfrac{\partial f}{\partial y}\right)" />
     <p class="leading-relaxed text-slate-700">
       각 성분이 그 방향(x 방향·y 방향)으로 얼마나 가파른지를 담고 있어서, 둘을 합친 이 벡터는 함수가
-      <b>가장 빠르게 커지는(오르막) 방향</b>을 가리킵니다. 우리는 손실을 <b>줄이고</b>
+      <b>가장 빠르게 커지는(오르막) 방향</b>을 가리킵니다. 손실은 <b>줄이고</b>
       싶으니까, <b>정반대 방향</b>(가장 빠른 내리막)으로 가면 되죠.
     </p>
 
-    <ConceptCard tone="note" title="새 기호 — ∇ (나블라)">
+    <ConceptCard tone="note" title="새 기호: ∇ (나블라)">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li><MathBlock inline expr="\nabla" /> 는 "나블라" 또는 "그래드"라고 읽어요. 뒤에 함수를 붙여 <MathBlock inline expr="\nabla f" /> (그래디언트).</li>
         <li>내용물은 <b>편미분들의 목록</b>: 변수마다 하나씩. 변수가 하나면 그냥 도함수 <MathBlock inline expr="f'(w)" /> 예요.</li>
@@ -65,7 +65,7 @@ function onSetComplete() {
     />
 
     <!-- 2. 경사하강법 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">2. 경사하강법 — 골짜기로 굴러 내려가기</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">2. 경사하강법: 골짜기로 굴러 내려가기</h2>
     <ReviewFlag id="ch9-s2" chapter="ch9" label="2. 경사하강법" />
     <MathBlock expr="w \leftarrow w - \eta\,\nabla L" />
     <p class="leading-relaxed text-slate-700">
@@ -77,11 +77,11 @@ function onSetComplete() {
 
     <GradientDescent />
 
-    <ConceptCard tone="note" title="새 용어 — 경사하강법 / 학습률 η">
+    <ConceptCard tone="note" title="새 용어: 경사하강법 / 학습률 η">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li><b>경사하강법(gradient descent)</b>: 기울기 반대 방향으로 조금씩 이동하며 최소값을 찾는 방법.</li>
         <li><b>학습률 <MathBlock inline expr="\eta" /></b>(에타): 한 걸음의 <b>크기</b>. 얼마나 성큼 이동할지 정합니다.</li>
-        <li>갱신식 <MathBlock inline expr="w \leftarrow w - \eta\,f'(w)" /> — 기울기가 크면 많이, 작으면(바닥 근처) 조금 움직여요.</li>
+        <li>갱신식 <MathBlock inline expr="w \leftarrow w - \eta\,f'(w)" />: 기울기가 크면 많이, 작으면(바닥 근처) 조금 움직여요.</li>
       </ul>
     </ConceptCard>
 
@@ -113,7 +113,7 @@ function onSetComplete() {
       </ul>
     </ConceptCard>
 
-    <ConceptCard tone="note" title="새 용어 — 수렴·발산 / 지역 최소값">
+    <ConceptCard tone="note" title="새 용어: 수렴·발산 / 지역 최소값">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li><b>수렴</b>: 한 값(최소)으로 점점 다가감. <b>발산</b>: 값이 점점 커져 멀어짐.</li>
         <li>
@@ -148,8 +148,8 @@ function onSetComplete() {
     <ConceptCard tone="ai" title="학습 루프 = 경사하강의 반복">
       <ol class="list-decimal space-y-2 pl-5">
         <li><b>예측</b>하고 <b>손실 <MathBlock inline expr="L" /></b> 을 계산 (얼마나 틀렸나).</li>
-        <li><b>그래디언트 <MathBlock inline expr="\nabla L" /></b> 계산 — 각 가중치의 편미분. (다음 챕터의 <b>역전파</b>가 이걸 효율적으로!)</li>
-        <li><b>갱신</b> <MathBlock inline expr="w \leftarrow w - \eta\,\nabla L" /> — 모든 가중치를 조금씩 개선.</li>
+        <li><b>그래디언트 <MathBlock inline expr="\nabla L" /></b> 계산: 각 가중치의 편미분. (다음 챕터의 <b>역전파</b>가 이걸 효율적으로!)</li>
+        <li><b>갱신</b> <MathBlock inline expr="w \leftarrow w - \eta\,\nabla L" />: 모든 가중치를 조금씩 개선.</li>
         <li>1~3 을 <b>반복</b> → 손실이 줄며 모델이 똑똑해짐.</li>
       </ol>
     </ConceptCard>
@@ -168,7 +168,7 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 · 단계별 계산 10문제입니다. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="그래디언트와 경사하강법 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="그래디언트와 경사하강법: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -276,15 +276,15 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 9 완료 — AI 학습의 심장, 경사하강을 잡았습니다!</p>
+      <p class="font-semibold text-emerald-800">9장 완료! AI 학습의 심장, 경사하강을 잡았습니다!</p>
       <p class="mt-1 text-sm text-emerald-700">
-        마지막 챕터: 그래디언트를 효율적으로 구하는 방법 — <b>역전파</b>로 모든 걸 잇습니다.
+        마지막 챕터: 그래디언트를 효율적으로 구하는 방법인 <b>역전파</b>로 모든 걸 잇습니다.
       </p>
       <RouterLink
         to="/ch/ch10"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        마지막 챕터 — 역전파 직관 →
+        마지막 챕터: 역전파 직관 →
       </RouterLink>
     </div>
   </article>

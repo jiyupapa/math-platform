@@ -37,6 +37,10 @@ QuizSet↔StepQuiz 그룹 계약(`quizGroupKey`/`QuizGroup` — `quizGroup.ts`)�
 **`packages/ui` 한 곳에만 있다.** 앱은 `import { Quiz } from '@series/ui'` 로 소비.
 
 - **한 번 고치면 전 부에 반영** — 복제·전파·드리프트 점검 없음(옛 골든카피/`check_drift.py` 체제는 폐기).
+- **QuizSet 제목과 문항 문구(`question`)는 학습자 풀이 기록의 키다** — 저장이 `{접두사}-quizset-v1:{세트 제목}` +
+  맞힌 문항 문구 그대로라, 고치면 이미 푼 기록이 끊긴다. 고쳤다면 커밋 전에 `node scripts/quiz-aliases.mjs`
+  (HEAD 대비 바뀐 문구를 `packages/ui/src/quizAliases.ts` 에 옛 → 새로 추가 — QuizSet 이 읽을 때 이어 준다).
+  커밋 훅이 `--check` 로 빠진 것을 막는다. 문제를 넣거나 뺀 파일은 자동으로 짝짓지 않으니 표에 직접 적을 것.
 - 패키지는 **주제 중립** 유지. 앱전용 결합은 **provide/inject** 로 분리 — 각 앱 `main.ts` 가 주입:
   - `storagePrefixKey` — QuizSet 저장 접두사. part1=`la` part2=`diff` part3=`stat` part4=`tf` part5=`it` part6=`tame` part7=`emb` part8=`opt` part9=`num` part10=`scale` part11=`agent` portal=`hub`.
     **바꾸면 사용자 진도가 끊긴다.** 포털은 진단 결과 저장(`hub-diagnosis-v1`·`hub-baseline-v1`)에 쓰고,
@@ -94,14 +98,14 @@ QuizSet↔StepQuiz 그룹 계약(`quizGroupKey`/`QuizGroup` — `quizGroup.ts`)�
 
 ## 개념 온톨로지 — `scripts/ontology/concepts.json`
 
-시리즈의 개념(수학·AI 용어)과 관계(선수 `prereq` · 회수 `usedAt` · 별칭 `aliases` · 비유어 `metaphors`)의 **단일 정본**.
+시리즈의 개념(수학·AI 용어)과 관계(선수 `prereq` · 다시 쓰이는 곳 `usedAt` · 별칭 `aliases` · 비유 `metaphors`)의 **단일 정본**.
 검색 인덱스(`search-index.json`)와 개념 그래프(`concept-graph.json`)가 여기서 생성되고, 각 부 `TutorChat` 은 그래프에서
-질문에 나온 개념의 카드(정의처·회수처·선수·비유어)를 시스템 프롬프트에 덧붙여 **다른 부 개념도 'N부 M장'으로 안내**한다.
-화면 소비처: 각 장 상단 띠 `ConceptStrip`(packages/ui) · 포털 `/concepts` 개념 지도(`ConceptsView`) · `/glossary` 비유어 사전
-(`GlossaryView` — 정본 `metaphors` 의 통합 치환표) · 검색 팔레트 이웃 줄 · 포털 홈의 복습 경로(북마크 → 선수 개념)와 진단 개념 칩
+질문에 나온 개념의 카드(배우는 곳·다시 쓰이는 곳·선수·비유)를 시스템 프롬프트에 덧붙여 **다른 부 개념도 'N부 M장'으로 안내**한다.
+화면 소비처: 각 장 상단 띠 `ConceptStrip`(packages/ui) · 포털 `/concepts` 개념 지도(`ConceptsView`) · `/glossary` 용어 대조표
+(`GlossaryView` — 정본 `metaphors` 의 통합 대조표) · 검색 팔레트 이웃 줄 · 포털 홈의 복습 경로(북마크 → 선수 개념)와 진단 개념 칩
 (`diagnostic.ts` 의 `concepts` 태그) · 도입 현황의 질문 집계 · 각 부 `notebooks/tutor.py`(웹과 같은 개념 카드, 파이썬 이식) —
 **전부 산출물 JSON 을 fetch/read** 하므로 정본을 고쳤으면 `npm run ontology:graph` 를 잊지 말 것.
-비유어를 새로 만들면 정본 `metaphors` 에도 넣는다 — 그래야 사전·튜터·검색이 함께 안다(치환표만 고치면 드리프트).
+비유어를 새로 만들면 정본 `metaphors` 에도 넣는다 — 그래야 대조표·튜터·검색이 함께 안다(각 장의 대조표만 고치면 드리프트).
 주석·북마크 앵커를 개념으로 묶는 규칙은 `conceptsAtAnchor`(packages/ui) 한 곳 — 소비처마다 따로 만들지 말 것.
 설계·규칙·단계는 `docs/todo_온톨로지_260906.md`.
 

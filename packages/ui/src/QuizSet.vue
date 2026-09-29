@@ -10,6 +10,7 @@
 import { reactive, computed, provide, watch, inject } from 'vue'
 import { quizGroupKey, type QuizGroup } from './quizGroup'
 import { storagePrefixKey } from './injection'
+import { QUIZ_UID_ALIASES, QUIZSET_TITLE_ALIASES } from './quizAliases'
 
 const props = withDefaults(defineProps<{ title?: string }>(), { title: '연습 문제' })
 const emit = defineEmits<{ completed: [] }>()
@@ -22,17 +23,39 @@ const solved = reactive(new Set<string>())
 // 접두사(la/diff/stat/tf/it)는 앱이 storagePrefixKey 로 주입 — 부별 진도 격리.
 const storagePrefix = inject(storagePrefixKey, 'la')
 const storageKey = `${storagePrefix}-quizset-v1:${props.title}`
-function loadPersisted(): Set<string> {
-  try {
-    const raw = localStorage.getItem(storageKey)
-    const parsed: unknown = raw ? JSON.parse(raw) : []
-    // 손상된 저장값이 세트 집계를 깨뜨리지 않게 형태 검증
-    return new Set(
-      Array.isArray(parsed) ? parsed.filter((s): s is string => typeof s === 'string') : [],
+
+// 문항 문구·세트 제목을 고친 뒤에도 이미 푼 기록을 이어 읽는다 — 옛 문구 → 새 문구 표는
+// quizAliases.ts(scripts/quiz-aliases.mjs 가 생성, 커밋 훅이 확인). 연쇄 변경(A→B→C)도 따라간다.
+const resolveUid = (uid: string) => {
+  let cur = uid
+  for (let hop = 0; hop < 8 && QUIZ_UID_ALIASES[cur]; hop++) cur = QUIZ_UID_ALIASES[cur]
+  return cur
+}
+function legacyKeys(): string[] {
+  const olds: string[] = []
+  let frontier = [props.title]
+  while (frontier.length && olds.length < 8) {
+    const next = Object.keys(QUIZSET_TITLE_ALIASES).filter(
+      (o) => frontier.includes(QUIZSET_TITLE_ALIASES[o]) && o !== props.title && !olds.includes(o),
     )
-  } catch {
-    return new Set()
+    olds.push(...next)
+    frontier = next
   }
+  return olds.map((t) => `${storagePrefix}-quizset-v1:${t}`)
+}
+function loadPersisted(): Set<string> {
+  const out = new Set<string>()
+  for (const key of [storageKey, ...legacyKeys()]) {
+    try {
+      const raw = localStorage.getItem(key)
+      const parsed: unknown = raw ? JSON.parse(raw) : []
+      // 손상된 저장값이 세트 집계를 깨뜨리지 않게 형태 검증
+      if (Array.isArray(parsed)) for (const s of parsed) if (typeof s === 'string') out.add(resolveUid(s))
+    } catch {
+      /* 손상된 값·localStorage 사용 불가는 건너뛴다 */
+    }
+  }
+  return out
 }
 function persist() {
   try {

@@ -58,7 +58,7 @@ export const lanes: BoardLane[] = [
 ]
 
 export const nodes: BoardNode[] = [
-  { id: 'diagnose', col: 'c0', lane: 'core', title: '출발점 진단', sub: '12문항 · 5분 — 아는 만큼 경로가 짧아진다' },
+  { id: 'diagnose', col: 'c0', lane: 'core', title: '출발점 진단', sub: '12문항 · 5분, 아는 만큼 경로가 짧아진다' },
   { id: 'step1', col: 'c1', lane: 'core', stepOrder: 1 },
   { id: 'step2', col: 'c1', lane: 'core', stepOrder: 2 },
   { id: 'step3', col: 'c2', lane: 'core', stepOrder: 3 },
@@ -68,12 +68,12 @@ export const nodes: BoardNode[] = [
   { id: 'step7', col: 'c6', lane: 'core', stepOrder: 7 },
   { id: 'finish', col: 'c7', lane: 'core', title: '🎓 핵심 경로 완주', sub: 'ChatGPT의 원리를 아는 사람' },
   // 선택 모듈 — 해금되는 국면 행에 배치(진입 점선이 짧은 가로 hop 이 된다)
-  { id: 'step8', col: 'c2', lane: 'deep', stepOrder: 8, prereqText: '1단계(1부 전반) + 2단계(3부 전반)를 마치면 언제든' },
-  { id: 'step10', col: 'c4', lane: 'deep', stepOrder: 10, prereqText: '4단계(2부 미분) 직후 언제든 — 6부를 봤다면 더 잘 읽힘' },
-  { id: 'step9', col: 'c2', lane: 'prac', stepOrder: 9, prereqText: '1단계(1부 전반)만 마치면 언제든 — 진입 장벽 최저' },
-  { id: 'step11', col: 'c4', lane: 'prac', stepOrder: 11, prereqText: '4단계(2부) 이후 권장(핵심은 2부 7장 log 감각) — 6부 뒤 재방문하면 완성' },
-  { id: 'step12', col: 'c2', lane: 'eval', stepOrder: 12, prereqText: '2단계(3부 전반)만 마치면 언제든 — 통계 심화(3부 8~10장)는 자체 회수, 6부 9장 뒤 재방문 가치 최대' },
-  { id: 'step13', col: 'c4', lane: 'eval', stepOrder: 13, prereqText: '2단계(3부 전반)만 마치면 언제든 — 조건부 확률(3부 4장)은 자체 회수, 10부 6장(오차범위)을 먼저 보면 성적표·캡스톤이 더 잘 읽힘' },
+  { id: 'step8', col: 'c2', lane: 'deep', stepOrder: 8, prereqText: '1단계(1부 전반)와 2단계(3부 전반)를 마치면 언제든 들어갈 수 있어요' },
+  { id: 'step10', col: 'c4', lane: 'deep', stepOrder: 10, prereqText: '4단계(2부 미분)를 마치면 언제든. 6부를 봤다면 더 잘 읽혀요' },
+  { id: 'step9', col: 'c2', lane: 'prac', stepOrder: 9, prereqText: '1단계(1부 전반)만 마치면 언제든. 가장 쉽게 들어갈 수 있는 트랙이에요' },
+  { id: 'step11', col: 'c4', lane: 'prac', stepOrder: 11, prereqText: '4단계(2부) 이후를 권해요(핵심은 2부 7장 log 감각). 6부를 마친 뒤 다시 보면 완성돼요' },
+  { id: 'step12', col: 'c2', lane: 'eval', stepOrder: 12, prereqText: '2단계(3부 전반)만 마치면 언제든. 통계 심화(3부 8~10장)는 이 트랙에서 다시 다루고, 6부 9장을 본 뒤 다시 보면 가장 도움이 돼요' },
+  { id: 'step13', col: 'c4', lane: 'eval', stepOrder: 13, prereqText: '2단계(3부 전반)만 마치면 언제든. 조건부 확률(3부 4장)은 이 트랙에서 다시 다루고, 10부 6장(오차범위)을 먼저 보면 성적표와 캡스톤이 더 잘 읽혀요' },
 ]
 
 export const edges: BoardEdge[] = [

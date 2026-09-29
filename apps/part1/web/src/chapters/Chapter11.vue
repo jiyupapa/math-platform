@@ -74,36 +74,36 @@ function fmt(n: number) {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 11 · AI 심화 확장 🌟</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">11장 · AI 심화 확장 🌟</p>
     <h1 class="mb-4 text-3xl font-bold">특이값분해(SVD) — ML에서 가장 중요한 분해</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       지금까지 배운 도구가 전부 모이는 챕터입니다. SVD 는 <b>S</b>ingular <b>V</b>alue
-      <b>D</b>ecomposition — 우리말로 <b>특이값분해</b>, "특이값으로 분해하기"의 약자예요.
-      이 도구는 <b>어떤 행렬이든</b> —
-      정사각형이 아니어도, 어떤 데이터든 — <b>회전·확대·회전</b>이라는 세 조각으로
+      <b>D</b>ecomposition 의 약자로, 우리말로는 <b>특이값분해</b>("특이값으로 분해하기")예요.
+      이 도구는 <b>어떤 행렬이든</b>(정사각형이 아니어도, 어떤 데이터든)
+      <b>회전·확대·회전</b>이라는 세 조각으로
       분해해서 <b>중요한 정보 순서로 줄 세워</b> 줍니다. 추천 시스템·이미지 압축·차원축소가
       전부 이 하나에서 나와요.
     </p>
 
     <ConceptCard tone="goal" title="이 챕터의 목표">
       <ul class="list-disc space-y-1 pl-5">
-        <li>모든 행렬은 단위원을 <b>타원</b>으로 보낸다 — <b>특이값 = 타원의 반지름</b>임을 안다</li>
+        <li>모든 행렬은 단위원을 <b>타원</b>으로 보낸다. <b>특이값 = 타원의 반지름</b>임을 안다</li>
         <li><b>A = UΣVᵀ</b> (회전·확대·회전) 분해의 뜻을 안다</li>
-        <li>고유값(ch7)과의 차이 — SVD 는 <b>아무 행렬에나</b> 된다는 걸 안다</li>
-        <li><b>저랭크 근사</b> — 중요한 축 k 개로 행렬을 압축하는 원리를 안다</li>
+        <li>고유값(ch7)과의 차이: SVD 는 <b>아무 행렬에나</b> 된다는 걸 안다</li>
+        <li><b>저랭크 근사</b>: 중요한 축 k 개로 행렬을 압축하는 원리를 안다</li>
       </ul>
     </ConceptCard>
 
     <!-- 1. 왜 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">1. 넷플릭스 문제 — 거대한 표의 빈칸 채우기</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">1. 넷플릭스 문제: 거대한 표의 빈칸 채우기</h2>
     <ReviewFlag id="ch11-s1" chapter="ch11" label="1. 넷플릭스 문제" />
     <p class="leading-relaxed text-slate-700">
       사용자 1억 명 × 영화 1만 편의 평점 표를 상상해 보세요. 거의 다 <b>빈칸</b>입니다
       (아무도 영화를 1만 편씩 보진 않으니까). 그런데 ch9에서 봤듯 이런 표는 사실
-      <b>"취향 축" 몇 개짜리 낮은 rank</b> 예요 — 추천시스템 실무에서는 이 숨은 축을
+      <b>"취향 축" 몇 개짜리 낮은 rank</b> 예요. 추천시스템 실무에서는 이 숨은 축을
       <b>잠재 요인(latent factor, 레이턴트 팩터)</b>이라 부릅니다. 그 취향 축(잠재 요인)을
       <b>자동으로, 중요한 순서대로</b> 찾아주는 도구가 SVD 입니다. 축을 찾으면 빈칸도
-      예측할 수 있죠 — 그게 추천이에요.
+      예측할 수 있죠. 그게 추천이에요.
     </p>
 
     <!-- 2. 원 → 타원 -->
@@ -111,14 +111,14 @@ function fmt(n: number) {
     <ReviewFlag id="ch11-s2" chapter="ch11" label="2. 원을 타원으로" />
     <p class="leading-relaxed text-slate-700">
       ch5에서 행렬은 "공간을 변형하는 함수"였죠. <b>단위원</b>(반지름 1인 원) 위의 점들을 행렬에
-      넣으면 — 신기하게도 결과는 <b>항상 타원</b>입니다. 아무리 비틀어도 타원을 벗어나지 않아요.
+      넣으면 신기하게도 결과는 <b>항상 타원</b>입니다. 아무리 비틀어도 타원을 벗어나지 않아요.
       그 타원의 <b>가장 긴 반지름과 가장 짧은 반지름</b>, 그러니까 "이 행렬이 공간을
-      <b>가장 많이 늘리는 방향의 배율과 가장 적게 늘리는 방향의 배율</b>"
-      — 이 두 숫자가 <b>특이값</b>입니다.
+      <b>가장 많이 늘리는 방향의 배율과 가장 적게 늘리는 방향의 배율</b>",
+      이 두 숫자가 <b>특이값</b>입니다.
       <span class="text-slate-500">(두 번째 배율이 1보다 작으면 그 방향은 줄어드는 거고요)</span>
     </p>
 
-    <ConceptCard tone="note" title="새 용어 — 특이값">
+    <ConceptCard tone="note" title="새 용어: 특이값">
       <p>
         <b>특이값(singular value, 싱귤러 밸류)</b>: 기호는 <MathBlock inline expr="\sigma_1, \sigma_2, \dots" />
         (시그마). 행렬이 단위원을 타원으로 보낼 때 <b>타원의 반지름들</b> = 각 방향의 <b>확대 배율</b>.
@@ -171,13 +171,13 @@ function fmt(n: number) {
           &nbsp;|&nbsp; σ1×σ2 = {{ fmt(svd.s1 * svd.s2) }} = |det| = {{ fmt(Math.abs(detA)) }}
         </p>
         <p v-if="svd.s2 < 0.05" class="mt-1 text-amber-700">
-          ⚠️ σ2 ≈ 0 — 타원이 납작해져 직선이 됐어요. 이 행렬은 rank 1 (ch9의 '종속'!)
+          ⚠️ σ2 ≈ 0: 타원이 납작해져 직선이 됐어요. 이 행렬은 rank 1 (ch9의 '종속'!)
         </p>
       </div>
     </div>
     <ConceptCard tone="tip" title="ch6·ch9 와 연결">
-      특이값을 <b>전부 곱하면 |행렬식|</b> — 넓이 배율(ch6)이 축별 배율의 곱이라는 뜻이에요.
-      그리고 <b>0이 아닌 특이값의 개수가 곧 rank</b>(ch9) — σ2 가 0이 되는 순간 타원이
+      특이값을 <b>전부 곱하면 |행렬식|</b>. 넓이 배율(ch6)이 축별 배율의 곱이라는 뜻이에요.
+      그리고 <b>0이 아닌 특이값의 개수가 곧 rank</b>(ch9)예요. σ2 가 0이 되는 순간 타원이
       직선으로 납작해지는 걸 위 데모에서 직접 확인해 보세요 (예: c, d 를 a, b 의 배수로).
     </ConceptCard>
 
@@ -190,7 +190,7 @@ function fmt(n: number) {
     />
 
     <!-- 3. 분해식 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">3. A = UΣVᵀ — 회전 · 확대 · 회전</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">3. A = UΣVᵀ: 회전 · 확대 · 회전</h2>
     <ReviewFlag id="ch11-s3" chapter="ch11" label="3. A = UΣVᵀ" />
     <p class="leading-relaxed text-slate-700">
       "원이 항상 타원이 된다"는 사실을 식으로 쓴 게 SVD 입니다. 어떤 행렬 A 든 딱 세 조각으로
@@ -201,14 +201,14 @@ function fmt(n: number) {
       <ul class="list-disc space-y-1 pl-5">
         <li>
           <MathBlock inline expr="V^{\mathsf T}" /> (브이 전치): 첫 번째 <b>회전</b>.
-          V 의 열들은 서로 수직·길이 1 — ch10에서 배운 <b>정규직교기저</b>예요.
+          V 의 열들은 서로 수직이고 길이가 1인, ch10에서 배운 <b>정규직교기저</b>예요.
           입력을 "타원이 되기 좋은 각도"로 돌려놓습니다.
         </li>
         <li>
           <MathBlock inline expr="\Sigma" /> (대문자 시그마, 대각행렬): <b>축 방향 확대</b>.
           대각선에 특이값 <MathBlock inline expr="\sigma_1 \ge \sigma_2 \ge \cdots" /> 가
           큰 순서로 들어있고 나머지는 전부 0. 여기서만 모양이 변해요.
-          (같은 글자의 대소문자예요 — 소문자 <MathBlock inline expr="\sigma" /> 는 숫자 하나,
+          (같은 글자의 대소문자예요. 소문자 <MathBlock inline expr="\sigma" /> 는 숫자 하나,
           대문자 <MathBlock inline expr="\Sigma" /> 는 그 숫자들을 담은 행렬.)
         </li>
         <li>
@@ -230,7 +230,7 @@ function fmt(n: number) {
           가능해요.
         </li>
         <li>
-          <b>SVD 는 아무 행렬에나</b> 됩니다 — 100만×1만 데이터 행렬도 OK. 그래서 데이터를 다루는
+          <b>SVD 는 아무 행렬에나</b> 됩니다. 100만×1만 데이터 행렬도 OK. 그래서 데이터를 다루는
           ML 에선 SVD 가 주인공이에요.
         </li>
         <li>
@@ -251,34 +251,34 @@ function fmt(n: number) {
     />
 
     <!-- 4. 저랭크 근사 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">4. 저랭크 근사 — 중요한 축만 남기고 버리기</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">4. 저랭크 근사: 중요한 축만 남기고 버리기</h2>
     <ReviewFlag id="ch11-s4" chapter="ch11" label="4. 저랭크 근사" />
     <p class="leading-relaxed text-slate-700">
       SVD 의 진짜 위력은 여기입니다. 분해식을 풀어 쓰면 A 는 <b>rank 1 조각들의 합</b>이 돼요:
     </p>
     <MathBlock expr="A = \sigma_1 \vec{u}_1 \vec{v}_1^{\mathsf T} + \sigma_2 \vec{u}_2 \vec{v}_2^{\mathsf T} + \cdots \quad (\sigma_1 \ge \sigma_2 \ge \cdots)" />
-    <ConceptCard tone="note" title="잠깐 — 벡터 × 벡터가 행렬이 된다고?">
+    <ConceptCard tone="note" title="잠깐: 벡터 × 벡터가 행렬이 된다고?">
       <p class="mb-2">
         <MathBlock inline expr="\vec{u}\vec{v}^{\mathsf T}" /> ("유, 브이 전치")는 <b>세로 벡터 ×
-        가로 벡터</b>의 곱이에요. ch3의 곱셈 규칙 그대로 — (2×1)·(1×2) → <b>2×2 행렬</b>이
+        가로 벡터</b>의 곱이에요. ch3의 곱셈 규칙 그대로, (2×1)·(1×2) → <b>2×2 행렬</b>이
         나옵니다. 처음 보는 조합이니 숫자로 한 번만 확인해 봐요:
       </p>
       <MathBlock expr="\begin{bmatrix} 2 \\ 1 \end{bmatrix}\begin{bmatrix} 3 & 4 \end{bmatrix} = \begin{bmatrix} 2 \times 3 & 2 \times 4 \\ 1 \times 3 & 1 \times 4 \end{bmatrix} = \begin{bmatrix} 6 & 8 \\ 3 & 4 \end{bmatrix}" />
       <p class="mt-2 text-sm text-slate-600">
         결과의 모든 열이 (2,1)의 배수인 게 보이나요? 그래서
-        <MathBlock inline expr="\vec{u}\vec{v}^{\mathsf T}" /> 는 항상 <b>rank 1</b>(ch9!) —
+        <MathBlock inline expr="\vec{u}\vec{v}^{\mathsf T}" /> 는 항상 <b>rank 1</b>(ch9!). 이것이
         위 식을 "rank 1 조각들의 합"이라 부르는 이유입니다.
       </p>
     </ConceptCard>
     <p class="leading-relaxed text-slate-700">
       각 조각의 중요도가 <MathBlock inline expr="\sigma" /> 크기 순서로 <b>이미 정렬</b>되어
-      있으니 — <b>앞에서 k 개만 남기고 나머지를 버리면</b> A 와 가장 가까운 rank k 행렬이 됩니다
+      있으니 <b>앞에서 k 개만 남기고 나머지를 버리면</b> A 와 가장 가까운 rank k 행렬이 됩니다
       (이게 <b>최선</b>의 근사라는 게 수학적으로 증명돼 있어요). ch8 PCA 의 "덜 중요한 축
       버리기"의 일반판이죠.
     </p>
     <ConceptCard tone="tip" title="숫자로 보는 압축 효과">
       <p class="mb-2">
-        100×100 이미지(숫자 <b>10,000개</b>)를 rank 5 로 근사하면 — 조각 하나당
+        100×100 이미지(숫자 <b>10,000개</b>)를 rank 5 로 근사하면, 조각 하나당
         <MathBlock inline expr="\sigma" /> 1개 + <MathBlock inline expr="\vec{u}" /> 100개 +
         <MathBlock inline expr="\vec{v}" /> 100개 = 201개, 5조각이면 <b>1,005개</b>.
         <b>10분의 1 크기</b>로 줄었는데 눈으로는 비슷해 보여요 (노트북에서 직접 확인!).
@@ -300,7 +300,7 @@ function fmt(n: number) {
     <!-- 5. AI 연결 -->
     <h2 class="mt-10 mb-2 text-xl font-bold">🤖 SVD 가 AI에서 쓰이는 곳</h2>
     <ReviewFlag id="ch11-ai" chapter="ch11" label="🤖 AI에서 쓰이는 곳" />
-    <ConceptCard tone="ai" title="실제 활용 — 'ML에서 가장 중요한 분해'인 이유">
+    <ConceptCard tone="ai" title="실제 활용: 'ML에서 가장 중요한 분해'인 이유">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <b>추천 시스템</b>: 평점 행렬을 SVD 로 저랭크 분해하면 <MathBlock inline expr="\vec{u}" />
@@ -331,19 +331,19 @@ function fmt(n: number) {
       객관식 · 참/거짓 · 숫자입력 · 단계별 계산 10문제. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="SVD — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="SVD: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
         question="SVD 는 정사각형이 아닌 행렬에도 쓸 수 있다."
         type="truefalse"
         :answer="0"
-        explanation="참. 아무 모양의 행렬이든 분해됩니다 — 고유분해와의 결정적 차이예요."
+        explanation="참. 아무 모양의 행렬이든 분해됩니다. 고유분해와의 결정적 차이예요."
       />
       <Quiz
         difficulty="easy"
         question="Σ(시그마) 행렬 안에 들어있는 것은?"
-        :choices="['특이값들 — 대각선에 큰 순서로', '회전 각도들', '행렬 원소의 평균값']"
+        :choices="['특이값들(대각선에 큰 순서로)', '회전 각도들', '행렬 원소의 평균값']"
         :answer="0"
         explanation="Σ 는 대각행렬이고, 대각선에 σ1 ≥ σ2 ≥ … 가 큰 순서로 들어있습니다."
       />
@@ -352,7 +352,7 @@ function fmt(n: number) {
         question="특이값은 음수가 될 수 있다."
         type="truefalse"
         :answer="1"
-        explanation="거짓. 특이값은 '확대 배율'이라 항상 0 이상입니다. (고유값은 음수 가능 — 차이점!)"
+        explanation="거짓. 특이값은 '확대 배율'이라 항상 0 이상입니다. (고유값은 음수 가능, 이게 차이점!)"
       />
       <Quiz
         difficulty="easy"
@@ -367,7 +367,7 @@ function fmt(n: number) {
         question="0이 아닌 특이값의 개수는 그 행렬의 rank(ch9)와 같다."
         type="truefalse"
         :answer="0"
-        :hints="['σ2 = 0 이 되는 순간 타원이 직선으로 납작해졌죠 — 그때 rank 는?']"
+        :hints="['σ2 = 0 이 되는 순간 타원이 직선으로 납작해졌죠. 그때 rank 는?']"
         explanation="참. 특이값이 0이 되는 만큼 차원이 납작해집니다. rank = 0 아닌 σ 의 개수."
       />
       <Quiz
@@ -391,7 +391,7 @@ function fmt(n: number) {
         :choices="['PCA 는 실제로 대부분 SVD 로 계산된다 (수치적으로 안정적)', '둘은 전혀 무관하다', 'PCA 가 SVD 보다 더 일반적인 분해다']"
         :answer="0"
         :hints="['AᵀA 의 고유값의 제곱근 = 특이값.']"
-        explanation="공분산행렬의 고유분해(PCA)는 데이터 행렬의 SVD 와 같은 계산 — 라이브러리도 SVD 를 씁니다."
+        explanation="공분산행렬의 고유분해(PCA)는 데이터 행렬의 SVD 와 같은 계산이라 라이브러리도 SVD 를 씁니다."
       />
       <!-- 어려움 -->
       <StepQuiz
@@ -402,7 +402,7 @@ function fmt(n: number) {
           { lhs: '\\sigma_2', answer: 2 },
           { lhs: '|\\det| = \\sigma_1 \\times \\sigma_2', answer: 6 },
         ]"
-        :hints="['이 행렬은 x 방향 3배, y 방향 2배로 늘리기만 해요 — 회전이 필요 없죠.', '큰 것이 σ1 입니다.']"
+        :hints="['이 행렬은 x 방향 3배, y 방향 2배로 늘리기만 해요. 회전이 필요 없죠.', '큰 것이 σ1 입니다.']"
         explanation="σ1=3, σ2=2, |det|=6. 대각행렬은 이미 '확대만 하는' 꼴이라 Σ 그 자체입니다."
       />
       <Quiz
@@ -411,7 +411,7 @@ function fmt(n: number) {
         type="numeric"
         :answer="1005"
         :hints="['조각 하나 = 1 + 100 + 100 = 201개.', '201 × 5 = ?']"
-        explanation="5 × (1+100+100) = 1,005개 — 원본의 약 1/10. 이게 SVD 압축의 힘입니다."
+        explanation="5 × (1+100+100) = 1,005개로 원본의 약 1/10. 이게 SVD 압축의 힘입니다."
       />
     </QuizSet>
 
@@ -420,7 +420,7 @@ function fmt(n: number) {
     <ConceptCard tone="tip" title="🐍 Python으로도 해보기">
       <code>notebooks/ch11_svd.ipynb</code> 에서 <code>np.linalg.svd</code> 로 분해를 확인하고,
       100×100 이미지를 rank 1 / 5 / 20 으로 복원해 압축 효과를 눈으로 봅니다. 특이값 크기
-      분포(누적 정보 비율 — '에너지'라고도 불러요)도 그려봐요.
+      분포(누적 정보 비율, '에너지'라고도 불러요)도 그려봐요.
     </ConceptCard>
 
     <div
@@ -428,15 +428,15 @@ function fmt(n: number) {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 11 완료 — ML에서 가장 중요한 분해를 손에 넣었습니다.</p>
+      <p class="font-semibold text-emerald-800">11장 완료! ML에서 가장 중요한 분해를 손에 넣었습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
-        마지막은 그래디언트(ch12) — AI 가 실제로 '학습'하는 원리로 여정을 마무리합니다.
+        마지막은 그래디언트(ch12). AI 가 실제로 '학습'하는 원리로 여정을 마무리합니다.
       </p>
       <RouterLink
         to="/ch/ch12"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        마지막 챕터 — 그래디언트와 경사하강 →
+        마지막 챕터: 그래디언트와 경사하강 →
       </RouterLink>
     </div>
   </article>

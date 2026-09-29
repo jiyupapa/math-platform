@@ -13,7 +13,7 @@ defineEmits<{ save: [] }>()
     class="mb-2 flex items-center justify-between gap-2 rounded-lg border border-indigo-100 bg-indigo-50 px-2.5 py-1.5 text-xs"
   >
     <span class="text-indigo-700">
-      {{ offer.saved ? '메모에 저장했어요 — 동료도 볼 수 있어요.' : '이 답변을 메모에 남길까요?' }}
+      {{ offer.saved ? '메모에 저장했어요. 동료도 볼 수 있어요.' : '이 답변을 메모에 남길까요?' }}
     </span>
     <button
       v-if="!offer.saved"

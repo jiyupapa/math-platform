@@ -102,7 +102,7 @@ function applyPreset(pr: { p: number[]; q: number[] }) {
 <template>
   <div class="my-4 rounded-xl border border-slate-200 bg-white p-4">
     <p class="mb-3 text-sm font-semibold text-slate-700">
-      ⚖️ KL 비대칭 저울 — 두 분포를 모두 드래그할 수 있어요 (왼쪽 막대 = p, 오른쪽 = q)
+      ⚖️ KL 비대칭 저울: 두 분포를 모두 드래그할 수 있어요 (왼쪽 막대 = p, 오른쪽 = q)
     </p>
 
     <!-- 프리셋 -->
@@ -213,14 +213,14 @@ function applyPreset(pr: { p: number[]; q: number[] }) {
 
     <p class="mt-2 text-xs" :class="same ? 'font-semibold text-emerald-700' : 'text-slate-500'">
       <template v-if="same">
-        🎉 p = q — 두 방향 모두 0. 완벽히 같은 분포만 KL 을 0으로 만듭니다.
+        🎉 p = q, 두 방향 모두 0. 완벽히 같은 분포만 KL 을 0으로 만듭니다.
       </template>
       <template v-else-if="!Number.isFinite(dPQ) && Number.isFinite(dQP)">
         비대칭의 극단! p 가 가능하다는 일(D 칸)을 q 가 불가능 취급 → D(p‖q) = ∞.
-        반대 방향은 멀쩡한 유한값 — 방향이 이렇게 중요합니다.
+        반대 방향은 멀쩡한 유한값이에요. 방향이 이렇게 중요합니다.
       </template>
       <template v-else>
-        두 게이지의 길이가 다르죠? D(p‖q) ≠ D(q‖p) — KL 은 "거리"처럼 쓰이지만
+        두 게이지의 길이가 다르죠? D(p‖q) ≠ D(q‖p). KL 은 "거리"처럼 쓰이지만
         대칭이 아니라서 진짜 거리는 아닙니다.
       </template>
     </p>

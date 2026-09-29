@@ -19,7 +19,7 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 7</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">7장</p>
     <h1 class="mb-4 text-3xl font-bold">고유값과 고유벡터</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       변환을 하면 대부분의 벡터는 방향이 바뀝니다. 그런데 <b>방향이 바뀌지 않고 크기만 변하는</b>
@@ -41,12 +41,12 @@ function onSetComplete() {
     <p class="leading-relaxed text-slate-700">
       어떤 변환을 걸면 화살표들이 이리저리 방향을 틀어요. 그런데 <b>몇몇 방향</b>은 변환해도
       <b>같은 직선 위에 그대로</b> 머뭅니다(길이만 늘거나 줄어듦). 그 방향이 고유벡터예요.
-      아래 데모의 벡터 v (우리가 돌려볼 화살표의 이름)를 돌리며 직접 찾아보세요.
+      아래 데모의 벡터 v (돌려볼 화살표의 이름)를 돌리며 직접 찾아보세요.
     </p>
 
     <EigenDemo />
 
-    <ConceptCard tone="note" title="새 용어·기호 — 고유벡터, 고유값 λ">
+    <ConceptCard tone="note" title="새 용어·기호: 고유벡터, 고유값 λ">
       <ul class="list-disc space-y-1 pl-5">
         <li>
           <b>고유벡터(eigenvector)</b>: 변환 후에도 <b>방향이 바뀌지 않는</b> 벡터(같은 직선에 머묾).
@@ -56,7 +56,7 @@ function onSetComplete() {
           <b>고유값(eigenvalue) <MathBlock inline expr="\lambda" /></b>: 그리스 문자 <b>람다</b>.
           고유벡터가 <b>몇 배로</b> 늘어나는지(줄어드는지)를 나타내는 숫자.
           λ=2면 2배, λ=1이면 그대로, λ가 음수면 방향이 뒤집혀요.
-          (뒤집혀도 <b>같은 직선 위</b>니까 고유벡터 맞습니다 — "방향 유지"는 "같은 직선에 머묾"이라는 뜻으로 써요.)
+          (뒤집혀도 <b>같은 직선 위</b>니까 고유벡터 맞습니다. "방향 유지"는 "같은 직선에 머묾"이라는 뜻으로 써요.)
         </li>
       </ul>
     </ConceptCard>
@@ -70,14 +70,14 @@ function onSetComplete() {
     />
 
     <!-- 2. 식 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">2. 식으로 — Av = λv</h2>
-    <ReviewFlag id="ch7-s2" chapter="ch7" label="2. 식으로 — Av = λv" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">2. 식으로: Av = λv</h2>
+    <ReviewFlag id="ch7-s2" chapter="ch7" label="2. 식으로: Av = λv" />
     <p class="leading-relaxed text-slate-700">
       "변환 <MathBlock inline expr="A" /> 를 걸어도(<MathBlock inline expr="A\vec{v}" />) 방향은 그대로고 길이만 λ배"
       라는 말을 식으로 쓰면 이렇게 돼요:
     </p>
     <MathBlock expr="A\vec{v} = \lambda\vec{v}" />
-    <ConceptCard tone="tip" title="읽는 법 — 양쪽이 같은 벡터">
+    <ConceptCard tone="tip" title="읽는 법: 양쪽이 같은 벡터">
       <p class="mb-2">
         <b>왼쪽</b> <MathBlock inline expr="A\vec{v}" /> = "v를 변환한 결과".
         <b>오른쪽</b> <MathBlock inline expr="\lambda\vec{v}" /> = "v를 그냥 λ배 한 것".
@@ -91,7 +91,7 @@ function onSetComplete() {
     </ConceptCard>
 
     <details class="mt-3 rounded-lg border border-slate-200 bg-slate-50 p-3">
-      <summary class="cursor-pointer font-medium text-slate-700">▸ 더 자세히 — 고유값은 어떻게 구할까? (선택)</summary>
+      <summary class="cursor-pointer font-medium text-slate-700">▸ 더 자세히: 고유값은 어떻게 구할까? (선택)</summary>
       <div class="mt-3 space-y-2 text-sm text-slate-700">
         <p>
           <MathBlock inline expr="A\vec{v} = \lambda\vec{v}" /> 를 옮기면
@@ -105,7 +105,7 @@ function onSetComplete() {
         <p>
           예) <MathBlock inline expr="A = \begin{bmatrix} 2 & 1 \\ 1 & 2 \end{bmatrix}" /> 이면
           <MathBlock inline expr="\det(A - \lambda I) = (2-\lambda)(2-\lambda) - 1 \times 1" /> 이라
-          <MathBlock inline expr="(2-\lambda)^2 - 1 = 0" />. 차근차근 풀면 —
+          <MathBlock inline expr="(2-\lambda)^2 - 1 = 0" />. 차근차근 풀면:
           <MathBlock inline expr="(2-\lambda)^2 = 1" /> → 제곱해서 1이 되는 수는 1과 −1이므로
           <MathBlock inline expr="2-\lambda = 1" /> 또는 <MathBlock inline expr="2-\lambda = -1" />
           → <MathBlock inline expr="\lambda = 1,\ 3" />.
@@ -115,12 +115,12 @@ function onSetComplete() {
 
     <p class="mt-4 leading-relaxed text-slate-700">
       위 계산법은 몰라도 됩니다. 다만 <b>모양이 좋은 행렬은 계산 없이 고유값을 그냥 읽을 수
-      있다</b>는 것 하나는 기억해 두세요 — 문제에도 자주 나옵니다:
+      있다</b>는 것 하나는 기억해 두세요. 문제에도 자주 나옵니다:
     </p>
-    <ConceptCard tone="note" title="꼭 기억 — 대각·삼각 행렬은 대각 성분이 곧 고유값">
+    <ConceptCard tone="note" title="꼭 기억: 대각·삼각 행렬은 대각 성분이 곧 고유값">
       <p class="mb-2">
         <b>대각행렬</b>(ch6에서 본, 대각선 밖이 전부 0)과 <b>삼각행렬</b>(대각선 <b>아래쪽 또는
-        위쪽</b>이 전부 0 — 숫자가 삼각형 모양으로 남음)은 <b>대각선의 숫자가 그대로 고유값</b>이에요.
+        위쪽</b>이 전부 0이라 숫자가 삼각형 모양으로 남음)은 <b>대각선의 숫자가 그대로 고유값</b>이에요.
       </p>
       <MathBlock expr="\begin{bmatrix} 5 & 0 \\ 0 & 9 \end{bmatrix} \Rightarrow \lambda = 5,\ 9 \qquad \begin{bmatrix} 4 & 2 \\ 0 & 7 \end{bmatrix} \Rightarrow \lambda = 4,\ 7" />
     </ConceptCard>
@@ -141,7 +141,7 @@ function onSetComplete() {
         <li>
           <b>PCA(주성분 분석)·차원축소</b>: 데이터가 <b>가장 넓게 퍼진 방향</b>을 찾는 게 핵심인데,
           그 방향이 바로 <b>공분산행렬의 고유벡터</b>예요. 고유값이 클수록 "그 방향에 정보가 많다"는 뜻.
-          <span class="text-slate-500">(공분산행렬 = 데이터가 어느 방향으로 얼마나 퍼졌는지를 담은 행렬 —
+          <span class="text-slate-500">(공분산행렬 = 데이터가 어느 방향으로 얼마나 퍼졌는지를 담은 행렬.
           다음 챕터에서 직접 만들어 봅니다. 지금은 "그런 행렬이 있다"만 알아두면 충분해요)</span>
         </li>
         <li>
@@ -149,7 +149,7 @@ function onSetComplete() {
         </li>
         <li>
           <b>안정성·반복</b>: 같은 변환을 여러 번 반복하면 결과가 <b>가장 큰 고유값의 고유벡터 방향</b>으로
-          쏠립니다 — 추천·검색의 반복 계산에서 자주 나타나요.
+          쏠립니다. 추천·검색의 반복 계산에서 자주 나타나요.
         </li>
       </ul>
     </ConceptCard>
@@ -168,14 +168,14 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 · 단계별 계산 10문제. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="고유값·고유벡터 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="고유값·고유벡터: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
         question="고유벡터는 변환 후에도 방향이 그대로다 (크기만 변함)."
         type="truefalse"
         :answer="0"
-        :hints="['\'변환에도 안 꺾이는 축\' — 이 챕터의 부제 그 자체예요.']"
+        :hints="['\'변환에도 안 꺾이는 축\'은 이 챕터의 부제 그 자체예요.']"
         explanation="참. 방향 유지가 고유벡터의 정의예요."
       />
       <Quiz
@@ -191,7 +191,7 @@ function onSetComplete() {
         question="Av = λv 에서 λ(고유값)는 숫자(스칼라)다."
         type="truefalse"
         :answer="0"
-        :hints="['λv 는 벡터 v 를 λ배 \'늘리기\' — 스칼라배(ch2)였죠.']"
+        :hints="['λv 는 벡터 v 를 λ배 \'늘리기\'. 스칼라배(ch2)였죠.']"
         explanation="참. λ는 배율을 나타내는 하나의 숫자입니다."
       />
       <Quiz
@@ -226,7 +226,7 @@ function onSetComplete() {
         question="고유벡터를 그 행렬로 변환하면?"
         :choices="['같은 직선 위에 머문다 (방향 유지)', '항상 수직으로 꺾인다', '원점에서 멀어져 사라진다']"
         :answer="0"
-        :hints="['고유벡터의 정의를 떠올려 보세요 — 변환해도 방향이?']"
+        :hints="['고유벡터의 정의를 떠올려 보세요. 변환해도 방향이?']"
         explanation="고유벡터는 변환 후에도 같은 직선 위(방향 유지)에 있습니다."
       />
       <Quiz
@@ -272,13 +272,13 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 7 완료. 변환에도 안 꺾이는 축을 찾을 수 있습니다.</p>
-      <p class="mt-1 text-sm text-emerald-700">다음은 이 고유벡터로 데이터를 요약하는 PCA — 마지막 응용 챕터입니다.</p>
+      <p class="font-semibold text-emerald-800">7장 완료. 변환에도 안 꺾이는 축을 찾을 수 있습니다.</p>
+      <p class="mt-1 text-sm text-emerald-700">다음은 이 고유벡터로 데이터를 요약하는 PCA, 마지막 응용 챕터입니다.</p>
       <RouterLink
         to="/ch/ch8"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        다음 챕터 — 응용 (PCA) →
+        다음 챕터: 응용 (PCA) →
       </RouterLink>
     </div>
   </article>

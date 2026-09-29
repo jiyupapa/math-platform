@@ -18,11 +18,11 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 9</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">9장</p>
     <h1 class="mb-4 text-3xl font-bold">가설검정과 p값 ⚖️</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       쇼핑몰의 구매 버튼 A 를 쓰던 1,000명 중 100명이 구매했고(10%), 새 디자인 B 를 본
-      1,000명 중에는 120명이 구매했습니다(12%). B 가 2%p 높네요 — 그런데 이거,
+      1,000명 중에는 120명이 구매했습니다(12%). B 가 2%p 높네요. 그런데 이거,
       <b>B 가 진짜 더 좋은 걸까요, 아니면 그냥 운이 좋았던 걸까요?</b>
       "우연인지 진짜인지"를 숫자로 판별하는 도구가 이번 챕터의 <b>가설검정</b>입니다.
     </p>
@@ -72,21 +72,21 @@ function onSetComplete() {
     </div>
     <p class="leading-relaxed text-slate-700">
       <b>"만약 두 버튼이 사실 똑같다면, 우연만으로 이 정도 차이가 나올 확률은 얼마나 될까?"</b>
-      — 이 확률이 아주 작다면 "우연이라기엔 너무 이상하다 → 진짜 차이가 있나 보다"라고
+      이 확률이 아주 작다면 "우연이라기엔 너무 이상하다 → 진짜 차이가 있나 보다"라고
       결론 내릴 수 있습니다. 이게 가설검정의 전부예요.
     </p>
 
     <!-- 2. 가설검정의 논리 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">2. 가설검정의 논리 — 일단 "차이 없다"고 치자</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">2. 가설검정의 논리: 일단 "차이 없다"고 치자</h2>
     <ReviewFlag id="ch9-s2" chapter="ch9" label="2. 가설검정의 논리" />
     <p class="leading-relaxed text-slate-700">
-      가설검정은 재판과 비슷합니다. 재판은 <b>무죄 추정</b>에서 시작하죠 — 일단 무죄라고
+      가설검정은 재판과 비슷합니다. 재판은 <b>무죄 추정</b>에서 시작하죠. 일단 무죄라고
       가정하고, 그 가정으로는 도저히 설명이 안 되는 강력한 증거가 나올 때만 유죄를 선고합니다.
-      통계도 똑같이 <b>"차이가 없다"는 가정에서 시작</b>해서, 그 가정 아래에서는 우리 데이터가
+      통계도 똑같이 <b>"차이가 없다"는 가정에서 시작</b>해서, 그 가정 아래에서는 관측한 데이터가
       너무나 나오기 힘든 것일 때만 "차이가 있다"고 선언합니다.
     </p>
 
-    <ConceptCard tone="note" title="새 용어 — 귀무가설 H₀ 와 대립가설 H₁">
+    <ConceptCard tone="note" title="새 용어: 귀무가설 H₀ 와 대립가설 H₁">
       <ul class="list-disc space-y-2 pl-5 text-sm">
         <li>
           <b>귀무가설</b> <MathBlock inline expr="H_0" /> &nbsp;<b>읽는 법</b>: "에이치 제로(H-zero)" ·
@@ -95,7 +95,7 @@ function onSetComplete() {
         </li>
         <li>
           <b>대립가설</b> <MathBlock inline expr="H_1" /> &nbsp;<b>읽는 법</b>: "에이치 원" ·
-          <b>뜻</b>: "차이가 있다 · 효과가 있다"라는, 우리가 <b>보여주고 싶은 주장</b>.
+          <b>뜻</b>: "차이가 있다 · 효과가 있다"라는, <b>보여주고 싶은 주장</b>.
         </li>
         <li>
           버튼 예시라면: <MathBlock inline expr="H_0" />: "A 와 B 의 구매율은 같다" vs
@@ -114,7 +114,7 @@ function onSetComplete() {
     />
 
     <!-- 3. p값 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">3. p값 — "우연이라기엔 얼마나 드문 일인가"</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">3. p값: "우연이라기엔 얼마나 드문 일인가"</h2>
     <ReviewFlag id="ch9-s3" chapter="ch9" label="3. p값이란" />
     <p class="leading-relaxed text-slate-700">
       버튼보다 더 간단한 동전으로 감을 잡아봅시다. 어떤 동전을 100번 던졌더니 앞면이
@@ -122,17 +122,17 @@ function onSetComplete() {
       귀무가설 <MathBlock inline expr="H_0" /> 은 "공정한 동전이다(앞면 확률 0.5)"입니다.
       공정한 동전을 100번 던지는 실험을 컴퓨터로 <b>10만 번</b> 반복해 보면
       (직접 해보는 코드가 짝 노트북에 있어요), 60번 이상 <b>또는</b> 40번 이하로
-      치우치는 경우가 약 <b>5,700번 — 즉 약 5.7%</b> 나옵니다.
+      치우치는 경우가 약 <b>5,700번, 즉 약 5.7%</b> 나옵니다.
     </p>
     <MathBlock expr="p \approx 0.057" />
 
-    <ConceptCard tone="note" title="새 용어 — p값 (p-value)">
+    <ConceptCard tone="note" title="새 용어: p값 (p-value)">
       <b>p값</b> = <b>귀무가설이 참이라고 가정했을 때</b>, 실제로 관측된 것만큼
       (또는 그보다 더 극단적인) 결과가 나올 확률.
       <ul class="mt-2 list-disc space-y-1 pl-5 text-sm">
         <li>p값이 <b>작다</b> = "우연으로는 설명하기 힘든 데이터" → 귀무가설이 의심스럽다.</li>
         <li>p값이 <b>크다</b> = "우연으로도 얼마든지 나올 데이터" → 귀무가설을 버릴 이유가 없다.</li>
-        <li>동전 예시: p ≈ 0.057 — 공정한 동전이라도 100번 중 약 6번꼴로는 이만큼 치우칩니다.</li>
+        <li>동전 예시: p ≈ 0.057. 공정한 동전이라도 100번 중 약 6번꼴로는 이만큼 치우칩니다.</li>
       </ul>
     </ConceptCard>
 
@@ -144,7 +144,7 @@ function onSetComplete() {
         { lhs: 'p\\text{값} = 5700 \\div 100000', answer: 0.057, tolerance: 0.0001 },
       ]"
       :hints="['관측 비율은 앞면 횟수 ÷ 전체 횟수.', 'p값은 (극단적 결과가 나온 시뮬레이션 횟수) ÷ (전체 시뮬레이션 횟수).']"
-      explanation="p ≈ 0.057 — 공정한 동전에서도 100번 중 5.7번꼴로 나오는 치우침이라는 뜻입니다. 이걸 '드물다'고 볼지가 다음 절의 유의수준 이야기예요."
+      explanation="p ≈ 0.057은 공정한 동전에서도 100번 중 5.7번꼴로 나오는 치우침이라는 뜻입니다. 이걸 '드물다'고 볼지가 다음 절의 유의수준 이야기예요."
     />
 
     <p class="mt-6 mb-1 text-sm font-semibold text-slate-500">🔎 잠깐 확인!</p>
@@ -158,11 +158,11 @@ function onSetComplete() {
       ]"
       :answer="0"
       :hints="['p값의 가정은 항상 「귀무가설이 참이라면」입니다.', '「동전이 치우쳤을 확률」은 p값이 알려주지 않아요.']"
-      explanation="p값은 '귀무가설(공정한 동전)이 참일 때 이런 데이터가 나올 확률'입니다. '동전이 공정할 확률'이 아니에요 — 방향이 반대입니다."
+      explanation="p값은 '귀무가설(공정한 동전)이 참일 때 이런 데이터가 나올 확률'입니다. '동전이 공정할 확률'이 아니에요. 방향이 반대입니다."
     />
 
     <!-- 4. 유의수준 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">4. 유의수준 — 어디까지를 "드물다"고 볼까</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">4. 유의수준: 어디까지를 "드물다"고 볼까</h2>
     <ReviewFlag id="ch9-s4" chapter="ch9" label="4. 유의수준 0.05" />
     <p class="leading-relaxed text-slate-700">
       p값이 얼마나 작아야 귀무가설을 버릴까요? 그 기준선이 <b>유의수준</b>입니다.
@@ -170,7 +170,7 @@ function onSetComplete() {
       p &lt; 0.05 면 "<b>통계적으로 유의하다</b>"며 귀무가설을 <b>기각</b>(reject)하고,
       p ≥ 0.05 면 기각하지 못합니다.
     </p>
-    <ConceptCard tone="note" title="새 용어 — 유의수준 α 와 기각">
+    <ConceptCard tone="note" title="새 용어: 유의수준 α 와 기각">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li>
           <b>유의수준</b> <MathBlock inline expr="\alpha" /> &nbsp;<b>읽는 법</b>: "알파" ·
@@ -182,7 +182,7 @@ function onSetComplete() {
           잘못 기각하는 실수</b>를 100번 중 5번까지는 감수하겠다는 약속이기도 합니다.
         </li>
         <li>
-          동전 예시: p ≈ 0.057 은 0.05 보다 <b>아슬아슬하게 크므로</b> 기각하지 못합니다 —
+          동전 예시: p ≈ 0.057 은 0.05 보다 <b>아슬아슬하게 크므로</b> 기각하지 못합니다.
           "치우쳤다고 말하기엔 증거가 조금 부족하다".
         </li>
       </ul>
@@ -199,7 +199,7 @@ function onSetComplete() {
     <p class="leading-relaxed text-slate-700">
       이제 버튼 문제로 돌아옵시다. 아래 시뮬레이터는 <b>"두 버튼이 사실 똑같다"는 세상</b>(귀무가설)
       을 통째로 시뮬레이션합니다. 파란 히스토그램이 우연만으로 생기는 차이들의 분포이고,
-      빨간 선이 우리가 관측한 차이예요. 빨간 선보다 극단적인 영역의 비율이 곧 <b>p값</b>입니다.
+      빨간 선이 관측한 차이예요. 빨간 선보다 극단적인 영역의 비율이 곧 <b>p값</b>입니다.
     </p>
     <p class="leading-relaxed text-slate-700">
       꼭 해볼 것: ① 기본 설정(10% vs 12%, n=1,000)으로 돌려 p값 확인 →
@@ -210,12 +210,12 @@ function onSetComplete() {
     <ABTestSimulator />
 
     <!-- 6. 계산으로 확인 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">6. 같은 차이, 다른 결론 — 표본 크기의 힘</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">6. 같은 차이, 다른 결론: 표본 크기의 힘</h2>
     <ReviewFlag id="ch9-s6" chapter="ch9" label="6. 표본 크기의 힘" />
     <p class="leading-relaxed text-slate-700">
-      10% vs 12%, 그룹당 1,000명일 때 p값은 약 <b>0.15</b> 입니다 — 두 버튼이 똑같아도
+      10% vs 12%, 그룹당 1,000명일 때 p값은 약 <b>0.15</b> 입니다. 두 버튼이 똑같아도
       100번 중 15번은 이만한 차이가 우연히 나온다는 뜻이라, 증거 부족.
-      그런데 <b>같은 10% vs 12%</b> 라도 그룹당 5,000명이면 p ≈ <b>0.001</b> — 강력한 증거가 됩니다.
+      그런데 <b>같은 10% vs 12%</b> 라도 그룹당 5,000명이면 p ≈ <b>0.001</b>로 강력한 증거가 됩니다.
       7장에서 배운 것처럼 표본이 커지면 우연한 출렁임(표준오차)이 <MathBlock inline expr="\sqrt{n}" /> 에
       비례해 줄어들기 때문에, 같은 크기의 차이도 "우연으로 설명하기 힘든 차이"가 되는 거예요.
     </p>
@@ -230,19 +230,19 @@ function onSetComplete() {
         { lhs: '\\text{관측 차이} = 0.12 - 0.10', answer: 0.02, tolerance: 0.0001 },
       ]"
       :hints="[
-        '귀무가설 세상에서는 두 그룹이 같은 비율을 공유합니다 — 그래서 둘을 합쳐 하나의 비율을 만듭니다.',
+        '귀무가설 세상에서는 두 그룹이 같은 비율을 공유합니다. 그래서 둘을 합쳐 하나의 비율을 만듭니다.',
         '합동 비율 = (두 그룹 구매 합계) ÷ (두 그룹 인원 합계).',
       ]"
       explanation="'차이가 없다'는 세상에서는 모두가 같은 구매율 0.11 을 공유합니다. 시뮬레이터는 이 0.11 세상에서 0.02 차이가 얼마나 흔한지(p ≈ 0.15)를 세어본 것이에요."
     />
 
     <!-- 7. 3대 오해 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">7. p값의 3대 오해 — 여기서 다들 틀립니다</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">7. p값의 3대 오해: 여기서 다들 틀립니다</h2>
     <ReviewFlag id="ch9-s7" chapter="ch9" label="7. p값의 3대 오해" />
 
     <ConceptCard tone="warn" title="오해 ① p값은 '귀무가설이 참일 확률'이 아니다">
       p값은 <b>P(이런 데이터 | H₀ 참)</b> 이지, <b>P(H₀ 참 | 이런 데이터)</b> 가 아닙니다.
-      4장에서 봤죠 — <MathBlock inline expr="P(A|B) \ne P(B|A)" />. "검사가 양성일 때 병일 확률"과
+      4장에서 봤죠. <MathBlock inline expr="P(A|B) \ne P(B|A)" />. "검사가 양성일 때 병일 확률"과
       "병일 때 양성일 확률"이 다르듯, p=0.03 은 "귀무가설이 참일 확률 3%"가 <b>아닙니다</b>.
     </ConceptCard>
 
@@ -262,13 +262,13 @@ function onSetComplete() {
     <h2 class="mt-10 mb-2 text-xl font-bold">🤖 AI 모델 비교도 결국 가설검정</h2>
     <ReviewFlag id="ch9-ai" chapter="ch9" label="🤖 AI 모델 비교도 가설검정" />
     <p class="leading-relaxed text-slate-700">
-      "새 모델이 벤치마크에서 1%p 더 높다"는 발표를 봤다면 이제 이렇게 물을 수 있어야 합니다 —
+      "새 모델이 벤치마크에서 1%p 더 높다"는 발표를 봤다면 이제 이렇게 물을 수 있어야 합니다.
       <b>"그 차이, 문제 몇 개짜리 벤치마크에서 나온 건가요?"</b> 문제가 500개뿐이라면 1%p 는
       고작 5문제 차이라 우연일 가능성이 큽니다(8장의 오차범위!). 실제로 AI 연구·서비스 현장에서는:
     </p>
     <ConceptCard tone="ai" title="가설검정이 AI 현장에서 쓰이는 곳">
       <ul class="list-disc space-y-2 pl-5">
-        <li><b>모델 비교</b>: 모델 A vs B 의 벤치마크 점수 차이가 유의한지 검정 — 유의하지 않다면 "동급".</li>
+        <li><b>모델 비교</b>: 모델 A vs B 의 벤치마크 점수 차이가 유의한지 검정. 유의하지 않다면 "동급".</li>
         <li><b>배포 결정</b>: 새 추천 모델·새 프롬프트를 일부 사용자에게만 적용하는 <b>A/B 테스트</b>로
           클릭률·구매율 차이를 검정한 뒤 전체 배포.</li>
         <li><b>실험 문화</b>: "그럴듯해 보인다"가 아니라 "p값과 효과 크기를 확인했다"가 의사결정의 언어.</li>
@@ -281,7 +281,7 @@ function onSetComplete() {
       type="truefalse"
       :answer="1"
       :hints="['벤치마크 점수도 「표본」에서 잰 추정치입니다.']"
-      explanation="거짓입니다. 점수 차이가 문제 표본의 우연한 출렁임 범위 안일 수 있어요 — 차이가 유의한지(그리고 실질적으로 의미 있는 크기인지) 확인해야 합니다."
+      explanation="거짓입니다. 점수 차이가 문제 표본의 우연한 출렁임 범위 안일 수 있어요. 차이가 유의한지(그리고 실질적으로 의미 있는 크기인지) 확인해야 합니다."
     />
 
     <!-- 9. 연습 -->
@@ -290,14 +290,14 @@ function onSetComplete() {
       객관식 · 참/거짓 · 숫자입력 · 단계별 계산 10문제입니다. <b>모두 맞히면 챕터 완료!</b>
     </p>
 
-    <QuizSet title="가설검정과 p값 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="가설검정과 p값: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
         question="귀무가설 H₀ 은 보통 '차이가 없다 · 효과가 없다'는 주장이다."
         type="truefalse"
         :answer="0"
-        explanation="참입니다. 검정은 '차이 없음'을 기본 가정으로 놓고 시작합니다 — 재판의 무죄 추정처럼요."
+        explanation="참입니다. 검정은 '차이 없음'을 기본 가정으로 놓고 시작합니다. 재판의 무죄 추정처럼요."
       />
       <Quiz
         difficulty="easy"
@@ -335,12 +335,12 @@ function onSetComplete() {
         :choices="[
           '동전이 공정하다는 것이 증명됐다',
           '동전이 치우쳤다고 결론 내린다',
-          '기각하지 못한다 — 치우쳤다는 증거가 아직 부족하다',
+          '기각하지 못한다. 치우쳤다는 증거가 아직 부족하다',
           '실험 자체가 잘못됐다',
         ]"
         :answer="2"
         :hints="['0.057 과 0.05 중 어느 쪽이 큰가요?', '기각 실패 = 증거 부족이지, 공정함의 증명이 아닙니다.']"
-        explanation="p = 0.057 ≥ 0.05 이므로 기각하지 못합니다. 다만 이는 '공정함의 증명'이 아니라 '증거 부족'이에요 — 더 던져보면 결론이 날 수 있습니다."
+        explanation="p = 0.057 ≥ 0.05 이므로 기각하지 못합니다. 다만 이는 '공정함의 증명'이 아니라 '증거 부족'이에요. 더 던져보면 결론이 날 수 있습니다."
       />
       <Quiz
         difficulty="medium"
@@ -389,7 +389,7 @@ function onSetComplete() {
         question="유의수준 0.05 로 검정하면, 귀무가설이 참이어도 100번의 검정 중 약 5번은 잘못 기각하게 된다."
         type="truefalse"
         :answer="0"
-        :hints="['유의수준의 뜻을 다시 떠올려 보세요 — 「우연히 p < 0.05 가 나올 확률」은?']"
+        :hints="['유의수준의 뜻을 다시 떠올려 보세요. 「우연히 p < 0.05 가 나올 확률」은?']"
         explanation="참입니다. 유의수준 0.05 는 '귀무가설이 참인데도 우연히 기각해 버릴 확률'을 5%까지 허용한다는 약속입니다. 그래서 검정을 수십 번 반복하면 가짜 유의가 섞여 나와요."
       />
     </QuizSet>
@@ -406,15 +406,15 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">Phase 9 완료. "우연인가 진짜인가"를 숫자로 판별할 수 있게 됐습니다.</p>
+      <p class="font-semibold text-emerald-800">9장 완료. "우연인가 진짜인가"를 숫자로 판별할 수 있게 됐습니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
-        마지막 챕터는 데이터에서 관계를 찾아 예측하는 <b>상관관계와 회귀</b> — 그리고 그것이 곧 머신러닝입니다.
+        마지막 챕터는 데이터에서 관계를 찾아 예측하는 <b>상관관계와 회귀</b>입니다. 머신러닝이 바로 여기서 시작돼요.
       </p>
       <RouterLink
         to="/ch/ch10"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        다음 챕터 — 상관관계와 회귀 (머신러닝의 시작) →
+        다음 챕터: 상관관계와 회귀 (머신러닝의 시작) →
       </RouterLink>
     </div>
   </article>

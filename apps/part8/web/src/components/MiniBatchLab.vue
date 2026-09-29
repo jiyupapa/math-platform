@@ -99,10 +99,10 @@ const CURVE = Array.from({ length: 69 }, (_, i) => {
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 나침반의 흔들림 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 나침반의 흔들림: 몇 개를 물어보고 방향을 정할까</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · 나침반의 흔들림: 몇 개를 물어보고 방향을 정할까</p>
     <p class="mb-3 text-xs text-slate-500">
       진짜 기울기(빨간 화살표)는 전체 데이터 256개의 평균입니다. 미니배치 B개만 뽑아 평균 낸
-      "추정 나침반" 12개를 회색으로 겹쳐 그렸어요 — 배치 크기를 바꿔 보세요.
+      "추정 나침반" 12개를 회색으로 겹쳐 그렸어요. 배치 크기를 바꿔 보세요.
     </p>
 
     <div class="mb-2 flex flex-wrap gap-2">
@@ -154,16 +154,16 @@ const CURVE = Array.from({ length: 69 }, (_, i) => {
     </div>
 
     <p class="mt-3 rounded-lg bg-indigo-50 p-3 text-xs leading-relaxed text-indigo-800">
-      💡 B를 4배 키울 때마다 산포가 <b>절반</b>으로 줍니다(√4 = 2) — 3부 7장의 그 1/√n이
+      💡 B를 4배 키울 때마다 산포가 <b>절반</b>으로 줍니다(√4 = 2). 3부 7장의 그 1/√n이
       네 번째로 등장했어요. 그리고 수확 체감도 그대로: 1→4는 극적이지만 64→256은 밋밋하죠.
-      <b>정확도는 √B로만 늘는데 계산 비용은 B에 정비례</b> — 이 불균형이 미니배치가 존재하는 이유입니다.
+      <b>정확도는 √B로만 늘는데 계산 비용은 B에 정비례</b>. 이 불균형이 미니배치가 존재하는 이유입니다.
     </p>
 
     <!-- ② GD vs SGD 경주 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 노이즈의 순기능: 완벽한 나침반이 함정에 빠진다</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · 노이즈의 순기능: 완벽한 나침반이 함정에 빠진다</p>
     <p class="mb-3 text-xs text-slate-500">
-      오른쪽의 <b>얕은 웅덩이</b> 위에서 두 여행자가 출발합니다 — 🔵 정확한 나침반(GD) vs
+      오른쪽의 <b>얕은 웅덩이</b> 위에서 두 여행자가 출발합니다. 🔵 정확한 나침반(GD) vs
       🟠 흔들리는 나침반(SGD, 미니배치 노이즈). 왼쪽에 더 깊은 골짜기가 있어요.
     </p>
 
@@ -201,13 +201,13 @@ const CURVE = Array.from({ length: 69 }, (_, i) => {
     </div>
 
     <p v-if="raceDone && sgdW < -1.5" class="mt-3 rounded-lg bg-emerald-50 p-3 text-sm leading-relaxed text-emerald-800">
-      ✅ 반전 — 🔵 완벽한 나침반은 얕은 웅덩이(L ≈ 0.76)에 <b>영원히 갇혔고</b>, 🟠 흔들리는
+      ✅ 반전: 🔵 완벽한 나침반은 얕은 웅덩이(L ≈ 0.76)에 <b>영원히 갇혔고</b>, 🟠 흔들리는
       나침반은 그 흔들림 덕에 언덕을 넘어 <b>더 깊은 골짜기(L ≈ −0.8)</b>에 도착했습니다.
-      노이즈는 공짜 담금질 — 얕은 함정을 못 본 척 지나가게 해 줍니다. (같은 시드라 몇 번을
+      노이즈는 공짜 담금질이라, 얕은 함정을 못 본 척 지나가게 해 줍니다. (같은 시드라 몇 번을
       다시 돌려도 같은 결과예요.)
     </p>
     <p v-else-if="raceSteps > 0" class="mt-3 rounded-lg bg-slate-50 p-3 text-sm text-slate-600">
-      경주 중… 150스텝까지 진행해 보세요. 🔵는 일찍 자리를 잡고, 🟠는 계속 들썩입니다 — 그 들썩임이 무엇을 가능하게 하는지.
+      경주 중… 150스텝까지 진행해 보세요. 🔵는 일찍 자리를 잡고, 🟠는 계속 들썩입니다. 그 들썩임이 무엇을 가능하게 하는지.
     </p>
   </div>
 </template>

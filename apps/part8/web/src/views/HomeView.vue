@@ -11,10 +11,10 @@ const sampleReady = availableChapters.some((c) => c.slug === 'sample')
 
 <template>
   <div>
-    <p class="mb-2 text-sm font-medium text-indigo-600">수포자를 위한 최적화 — 시리즈 8부 (이론 심화)</p>
+    <p class="mb-2 text-sm font-medium text-indigo-600">수포자를 위한 최적화 · 시리즈 8부 (이론 심화)</p>
     <h1 class="mb-3 text-3xl font-bold">모델은 어떻게 "잘" 배우게 되는 걸까</h1>
     <p class="mb-4 leading-relaxed text-slate-600">
-      2부에서 경사하강의 원리를 배웠지만, 실제 학습의 성패는 그 위의 <b>다이얼들</b>이 가릅니다 —
+      2부에서 경사하강의 원리를 배웠지만, 실제 학습의 성패는 그 위의 <b>다이얼들</b>이 가릅니다.
       학습률, 배치 크기, 모멘텀, Adam, 스케줄, 정규화. 이 과정은 손실 지형 위의 여행이라는
       그림 하나로 그 다이얼 전부를 꿰고, <b>파인튜닝 설정 파일 완독</b>까지 갑니다.
       핵심 한 줄: <b>"보폭·관성·일정표가 도착지를 정한다."</b>
@@ -25,14 +25,14 @@ const sampleReady = availableChapters.some((c) => c.slug === 'sample')
       <p class="font-medium text-amber-900">🚧 8부는 지금 만드는 중입니다</p>
       <p class="mt-1 text-sm text-amber-700">
         아래 목차는 확정된 로드맵입니다. 챕터가 공개되면 (예정) 표시가 사라지고 바로 학습할 수 있어요.
-        선수 지식은 <b>2부(미분 — 특히 9장 경사하강)</b>이고, 6부(조련)를 봤다면 동기가 확실해집니다.
+        선수 지식은 <b>2부(미분, 특히 9장 경사하강)</b>이고, 6부(조련)를 봤다면 동기가 확실해집니다.
       </p>
       <RouterLink
         v-if="sampleReady && !progress.isDone('sample')"
         to="/ch/sample"
         class="mt-4 block rounded-lg bg-indigo-600 px-4 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-indigo-500"
       >
-        🚀 워밍업은 공개됐어요 — 같은 모델, 세 개의 운명 체험하기 →
+        🚀 워밍업은 공개됐어요. 같은 모델, 세 개의 운명 체험하기 →
       </RouterLink>
     </div>
     <div v-else class="mb-8 rounded-xl border border-indigo-100 bg-indigo-50 p-5">
@@ -55,7 +55,7 @@ const sampleReady = availableChapters.some((c) => c.slug === 'sample')
           🚀 처음이신가요? 워밍업(같은 모델, 세 개의 운명)부터 시작하세요 →
         </RouterLink>
         <p class="mt-2 text-center text-xs text-indigo-600">
-          2부(미분·경사하강)를 마쳤다면 준비 완료 — 6부를 봤다면 더 재미있게 읽힙니다.
+          2부(미분·경사하강)를 마쳤다면 준비 완료입니다. 6부를 봤다면 더 재미있게 읽힙니다.
         </p>
       </template>
     </div>

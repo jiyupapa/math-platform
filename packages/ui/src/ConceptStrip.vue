@@ -97,8 +97,8 @@ function linkOf(loc: ConceptLocation): { kind: 'router' | 'anchor' | 'text'; to:
   return isDev ? { kind: 'text', to: '' } : { kind: 'anchor', to: chapterHref(loc.part, loc.slug, loc.anchor) }
 }
 
-/** 회수 설명의 첫 구절 — "RLHF 의 KL 페널티 — 원본에서 멀어지지 않게" → "RLHF 의 KL 페널티" */
-const shortHow = (how: string) => how.split(/\s+[—–-]\s+/)[0]
+/** 다시 쓰는 곳 설명(how)의 짧은 이름 — 정본 형식 "짧은 이름: 설명" → "짧은 이름" (옛 줄표 형식도 받는다) */
+const shortHow = (how: string) => how.split(/: |\s+[—–]\s+/)[0]
 
 // 포털 개념 지도 딥링크 (조립 배포본에서 포털은 루트) — 첫 정의 개념을 선택 상태로 연다
 const mapHref = computed(() =>
@@ -116,7 +116,7 @@ const mapHref = computed(() =>
     <!-- ① 처음 배우는 개념 — 같은 장 안의 섹션 앵커로 점프 -->
     <p v-if="defined.length">
       <span class="font-semibold text-slate-800">🔑 이 장에서 처음 배우는 개념</span>
-      <span class="text-slate-500"> — </span>
+      <span class="text-slate-500">: </span>
       <template v-for="(c, i) in defined" :key="c.id">
         <span v-if="i" class="text-slate-500"> · </span>
         <RouterLink
@@ -133,7 +133,7 @@ const mapHref = computed(() =>
     <!-- ② 먼저 알아 두면 — 선수 개념과 그 정의처 -->
     <p v-if="prereqs.length">
       <span class="font-semibold text-slate-800">먼저 알아 두면</span>
-      <span class="text-slate-500"> — </span>
+      <span class="text-slate-500">: </span>
       <template v-for="(c, i) in prereqs" :key="c.id">
         <span v-if="i" class="text-slate-500"> · </span>
         <span :title="c.note">{{ c.label }}</span>
@@ -160,7 +160,7 @@ const mapHref = computed(() =>
     <!-- ③ 이 장이 다시 쓰는 수학 — 정의처 링크 + 어떻게 -->
     <p v-if="reusedHere.length">
       <span class="font-semibold text-slate-800">이 장이 다시 쓰는 수학</span>
-      <span class="text-slate-500"> — </span>
+      <span class="text-slate-500">: </span>
       <template v-for="(r, i) in reusedHere" :key="r.concept.id">
         <span v-if="i" class="text-slate-500"> · </span>
         <span :title="r.use.how ?? r.concept.note">{{ r.concept.label }}</span>
@@ -187,7 +187,7 @@ const mapHref = computed(() =>
     <!-- ④ 다음에 다시 만나는 곳 -->
     <p v-if="later.length">
       <span class="font-semibold text-slate-800">다음에 다시 만나는 곳</span>
-      <span class="text-slate-500"> — </span>
+      <span class="text-slate-500">: </span>
       <template v-for="(l, i) in later" :key="l.concept.id + l.use.part + l.use.slug">
         <span v-if="i" class="text-slate-500"> · </span>
         <RouterLink

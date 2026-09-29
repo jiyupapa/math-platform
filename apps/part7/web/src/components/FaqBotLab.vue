@@ -41,11 +41,11 @@ interface Query {
 }
 const QUERIES: Query[] = [
   { text: '결혼 축하금은 얼마인가요?', vec: embed({ 0: 0.95, 8: 0.15 }), expect: 1 },
-  { text: '쉬는 날 미리 쓰려면 어디서 해요?', vec: embed({ 3: 0.85, 8: 0.3 }), expect: 4, badge: '문서와 겹치는 단어 0개 — 워밍업의 그 질문' },
+  { text: '쉬는 날 미리 쓰려면 어디서 해요?', vec: embed({ 3: 0.85, 8: 0.3 }), expect: 4, badge: '문서와 겹치는 단어 0개 (워밍업의 그 질문)' },
   { text: '법인카드 정산 마감이 언제죠?', vec: embed({ 2: 0.9, 8: 0.25 }), expect: 3 },
   { text: '재택은 일주일에 며칠까지 되나요?', vec: embed({ 4: 0.9, 3: 0.1 }), expect: 5 },
   { text: '외부 강의 수강하면 지원 되나요?', vec: embed({ 7: 0.88, 8: 0.2 }), expect: 8 },
-  { text: '올해 겨울 워크숍은 언제인가요?', vec: embed({ 9: 1, 8: 0.15 }), expect: null, badge: '문서에 없는 질문 — 정직성 테스트' },
+  { text: '올해 겨울 워크숍은 언제인가요?', vec: embed({ 9: 1, 8: 0.15 }), expect: null, badge: '문서에 없는 질문: 정직성 테스트' },
 ]
 
 const FLOOR = 0.5
@@ -96,10 +96,10 @@ const scorecard = computed(() => {
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 시운전 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 시운전: 질문을 고르면 봇이 전 과정을 공개하며 답합니다</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · 시운전: 질문을 고르면 봇이 전 과정을 공개하며 답합니다</p>
     <p class="mb-3 text-xs text-slate-500">
       사내 FAQ 조각 {{ DB.length }}건이 인덱싱되어 있습니다(조항 청킹 + 제목 붙이기 + 정규화 임베딩 완료).
-      질문은 프리셋 — 자유 입력엔 진짜 임베딩 모델이 필요해요(노트북에서).
+      질문은 프리셋이에요. 자유 입력엔 진짜 임베딩 모델이 필요해요(노트북에서).
     </p>
 
     <div class="mb-3 flex flex-wrap gap-2">
@@ -120,13 +120,13 @@ const scorecard = computed(() => {
 
       <!-- 단계 1: 임베딩 -->
       <div class="rounded-lg bg-slate-50 p-3">
-        <p class="mb-1 text-xs font-bold text-slate-500">① 질문 임베딩 (워밍업·9장) — 뜻을 좌표로, 정규화 완료</p>
+        <p class="mb-1 text-xs font-bold text-slate-500">① 질문 임베딩 (워밍업·9장): 뜻을 좌표로, 정규화 완료</p>
         <p class="font-mono text-xs text-slate-600">[{{ query.vec.map((v) => v.toFixed(2)).join(', ') }}]</p>
       </div>
 
       <!-- 단계 2: 검색 -->
       <div class="rounded-lg bg-slate-50 p-3">
-        <p class="mb-2 text-xs font-bold text-slate-500">② 검색 — 코사인(=내적, 2장) top-{{ K }} (6장: 8건이라 전수조사면 충분)</p>
+        <p class="mb-2 text-xs font-bold text-slate-500">② 검색 · 코사인(=내적, 2장) top-{{ K }} (6장: 8건이라 전수조사면 충분)</p>
         <div v-for="(t, i) in result.top" :key="t.doc.id" class="mb-1 flex items-center gap-2 text-xs">
           <span class="w-7 shrink-0 font-bold" :class="i === 0 ? 'text-amber-700' : 'text-slate-500'">{{ i + 1 }}위</span>
           <span class="w-44 shrink-0 truncate text-slate-600">{{ t.doc.title }}</span>
@@ -142,13 +142,13 @@ const scorecard = computed(() => {
         <p class="mb-1 text-xs font-bold text-slate-500">③ 그라운딩 프롬프트 조립 (8장)</p>
         <pre v-if="result.grounded" class="max-h-36 overflow-auto rounded-lg bg-white p-2.5 text-xs leading-relaxed whitespace-pre-wrap text-slate-600 ring-1 ring-slate-200">{{ promptText }}</pre>
         <p v-else class="text-xs text-rose-700">
-          1위 점수({{ result.top[0].score.toFixed(2) }})가 바닥(4장의 그 바닥) 수준 — 재료가 없으므로 조립을 건너뛰고 정직하게 답합니다.
+          1위 점수({{ result.top[0].score.toFixed(2) }})가 바닥(4장의 그 바닥) 수준이에요. 재료가 없으므로 조립을 건너뛰고 정직하게 답합니다.
         </p>
       </div>
 
       <!-- 단계 4: 답변 -->
       <div class="rounded-lg p-3" :class="result.grounded ? 'bg-emerald-50' : 'bg-amber-50'">
-        <p class="mb-1 text-xs font-bold" :class="result.grounded ? 'text-emerald-700' : 'text-amber-700'">④ 답변 (생성은 6부의 조련된 LLM — 여기선 1위 조각 기반 흉내)</p>
+        <p class="mb-1 text-xs font-bold" :class="result.grounded ? 'text-emerald-700' : 'text-amber-700'">④ 답변 (생성은 6부의 조련된 LLM: 여기선 1위 조각 기반 흉내)</p>
         <p class="text-sm font-medium" :class="result.grounded ? 'text-emerald-800' : 'text-amber-800'">🤖 {{ result.answer }}</p>
       </div>
     </div>
@@ -156,7 +156,7 @@ const scorecard = computed(() => {
 
     <!-- ② 성적표 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 만들었으면 채점한다 (7장의 정신)</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ②: 만들었으면 채점한다 (7장의 정신)</p>
     <p class="mb-3 text-xs text-slate-500">평가 세트(정답 문서가 있는 질문 5개 + 부재 질문 1개)로 봇을 자동 채점합니다.</p>
 
     <button
@@ -191,7 +191,7 @@ const scorecard = computed(() => {
           <p class="font-mono text-xl font-bold text-emerald-700">{{ Math.round(scorecard.r3 * 100) }}%</p>
         </div>
         <p class="flex-1 text-xs leading-relaxed text-slate-500">
-          toy 지도라 만점에 가깝습니다 — 실전에서는 이 성적표를 <b>수십~수백 문항</b>(7장)으로 만들고,
+          toy 지도라 만점에 가깝습니다. 실전에서는 이 성적표를 <b>수십~수백 문항</b>(7장)으로 만들고,
           점수가 떨어지는 문항을 따라 청킹·임베딩·k를 다듬는 <b>반복</b>이 곧 RAG 개발입니다.
         </p>
       </div>

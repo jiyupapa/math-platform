@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// Phase 0 · 샘플 챕터 — 동전 던지기 맛보기 (학습 패턴 검증용)
+// 워밍업 — 동전 던지기 맛보기 (학습 패턴 검증용)
 import { ConceptCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
 import CoinFlipSim from '@/components/CoinFlipSim.vue'
@@ -18,11 +18,11 @@ function onSetComplete() {
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">Phase 0 · 워밍업</p>
-    <h1 class="mb-4 text-3xl font-bold">샘플 챕터 — 동전 던지기 맛보기 🪙</h1>
+    <p class="mb-1 text-sm font-medium text-indigo-600">워밍업 · 5분 몸풀기</p>
+    <h1 class="mb-4 text-3xl font-bold">워밍업 — 동전 던지기 맛보기 🪙</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       3부 <b>확률과 통계</b>에 오신 걸 환영합니다! 이 챕터는 본 학습 전에 "이 앱은 이렇게
-      공부하는구나"를 체험하는 워밍업이에요. 수학 얘기는 딱 하나만 합니다 —
+      공부하는구나"를 체험하는 워밍업이에요. 수학 얘기는 딱 하나만 합니다.
       <b>"확률이란 대체 뭘까?"</b> 동전 하나면 충분해요.
     </p>
 
@@ -38,18 +38,18 @@ function onSetComplete() {
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 확률은 0과 1 사이의 숫자</h2>
     <ReviewFlag id="sample-s1" chapter="sample" label="1. 확률은 0과 1 사이의 숫자" />
     <p class="leading-relaxed text-slate-700">
-      "내일 비 올 확률 30%", "동전 앞면이 나올 확률 2분의 1" — 일상에서 늘 쓰는 말이죠.
+      "내일 비 올 확률 30%", "동전 앞면이 나올 확률 2분의 1". 일상에서 늘 쓰는 말이죠.
       수학에서는 이걸 <b>0과 1 사이의 숫자</b>로 씁니다. 0 이면 "절대 안 일어남",
       1 이면 "반드시 일어남", 0.5 면 "반반"이에요. 동전이라면:
     </p>
     <MathBlock expr="P(\text{앞면}) = \dfrac{1}{2} = 0.5" />
 
-    <ConceptCard tone="note" title="새 기호 — P( )">
+    <ConceptCard tone="note" title="새 기호: P( )">
       <ul class="list-disc space-y-1 pl-5 text-sm">
         <li>
           <MathBlock inline expr="P(A)" /> &nbsp;<b>읽는 법</b>: "피 에이" ·
           <b>뜻</b>: 사건 <MathBlock inline expr="A" /> 가 일어날 <b>확률(Probability)</b>.
-          괄호 안에 궁금한 사건을 넣습니다 — <MathBlock inline expr="P(\text{앞면})" />,
+          괄호 안에 궁금한 사건을 넣습니다. <MathBlock inline expr="P(\text{앞면})" />,
           <MathBlock inline expr="P(\text{비})" /> 처럼요.
         </li>
         <li>확률은 항상 <b>0 ≤ P(A) ≤ 1</b>. 퍼센트(%)는 이 숫자에 100을 곱해 읽는 것뿐이에요 (0.3 = 30%).</li>
@@ -62,24 +62,24 @@ function onSetComplete() {
       type="truefalse"
       :answer="1"
       :hints="['확률은 0(절대 안 일어남)부터 1(반드시 일어남) 사이입니다.']"
-      explanation="거짓입니다. 확률은 반드시 0과 1 사이 — 1을 넘는 확률은 없어요."
+      explanation="거짓입니다. 확률은 반드시 0과 1 사이예요. 1을 넘는 확률은 없어요."
     />
 
     <!-- 2. 던져보기 -->
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 그런데 0.5 라는 게 무슨 뜻일까? (직접 던져보기)</h2>
-    <ReviewFlag id="sample-s2" chapter="sample" label="2. 직접 던져보기 — 0.5의 뜻" />
+    <ReviewFlag id="sample-s2" chapter="sample" label="2. 직접 던져보기: 0.5의 뜻" />
     <p class="leading-relaxed text-slate-700">
       "앞면 확률이 0.5"라고 해서 <b>두 번 던지면 꼭 한 번 앞면</b>이 나오는 건 아니에요.
       10번 던져 앞면이 3번, 7번 나오는 일도 흔합니다. 확률 0.5 의 진짜 뜻은
       <b>"던지는 횟수를 늘릴수록 앞면의 비율이 0.5 에 다가간다"</b>는 것.
-      아래 시뮬레이터로 직접 확인해 보세요 — 10번일 때와 1000번일 때 비율이 어떻게 다른가요?
+      아래 시뮬레이터로 직접 확인해 보세요. 10번일 때와 1000번일 때 비율이 어떻게 다른가요?
     </p>
 
     <CoinFlipSim />
 
-    <ConceptCard tone="tip" title="방금 본 것의 이름 — 큰 수의 법칙 (7장 예고)">
+    <ConceptCard tone="tip" title="방금 본 것의 이름: 큰 수의 법칙 (7장 예고)">
       던질수록 비율이 이론값(0.5)에 다가가는 현상을 <b>큰 수의 법칙</b>이라고 부릅니다.
-      카지노와 보험회사가 돈을 버는 원리이자, AI 가 "데이터가 많을수록 좋다"고 말하는 이유 —
+      카지노와 보험회사가 돈을 버는 원리이자, AI 가 "데이터가 많을수록 좋다"고 말하는 이유예요.
       7장에서 제대로 다룹니다. 지금은 "오래 반복하면 비율이 안정된다" 감만 가져가면 충분해요.
     </ConceptCard>
 
@@ -93,8 +93,8 @@ function onSetComplete() {
     />
 
     <!-- 3. 계산 맛보기 -->
-    <h2 class="mt-8 mb-2 text-xl font-bold">3. 계산도 해보기 — 주사위 확률</h2>
-    <ReviewFlag id="sample-s3" chapter="sample" label="3. 계산 맛보기 — 주사위 확률" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">3. 계산도 해보기: 주사위 확률</h2>
+    <ReviewFlag id="sample-s3" chapter="sample" label="3. 계산 맛보기: 주사위 확률" />
     <p class="leading-relaxed text-slate-700">
       동전처럼 <b>모든 결과가 똑같이 나올 법한</b> 경우, 확률은 "경우의 수 세기"로 계산합니다
       (자세한 건 3장에서). 주사위 눈은 1~6 의 <b>6가지</b>이고 모두 공평하죠. 그중
@@ -103,7 +103,7 @@ function onSetComplete() {
     <MathBlock expr="P(\text{3의 배수}) = \dfrac{\text{3의 배수인 경우의 수}}{\text{전체 경우의 수}} = \dfrac{2}{6} = \dfrac{1}{3}" />
     <p class="leading-relaxed text-slate-700">
       이런 계산 문제는 아래처럼 <b>중간 단계를 하나씩 직접 입력</b>하며 풉니다.
-      한 칸씩 채우고 "채점하기"를 눌러 보세요 — 이 앱의 계산 문제는 전부 이 방식이에요.
+      한 칸씩 채우고 "채점하기"를 눌러 보세요. 이 앱의 계산 문제는 전부 이 방식이에요.
     </p>
 
     <StepQuiz
@@ -123,15 +123,15 @@ function onSetComplete() {
     <ReviewFlag id="sample-s4" chapter="sample" label="4. 이 앱의 학습 방식" />
     <ConceptCard tone="note" title="학습 패턴 한눈에">
       <ul class="list-disc space-y-1 pl-5 text-sm">
-        <li><b>📘 설명 카드</b> — 새 용어·기호가 나오면 즉시 "이름 + 읽는 법 + 뜻"으로 풀어드려요.</li>
-        <li><b>🎛️ 인터랙티브</b> — 공식보다 먼저, 직접 만지며 "감"을 잡습니다.</li>
-        <li><b>🔎 미니체크</b> — 본문 중간중간 가볍게 확인. 틀려도 부담 없어요.</li>
-        <li><b>💡 힌트 · 해설</b> — 문제마다 단계별 힌트가 있고, 맞히면 해설이 나옵니다.</li>
-        <li><b>🧮 계산기 OK</b> — 복잡한 나눗셈·소수 계산은 계산기를 써도 됩니다. 중요한 건 계산 속도가 아니라 <b>개념</b>이에요.</li>
-        <li><b>📝 10문제 세트</b> — 챕터 끝 난이도별 문제를 모두 맞히면 <b>진도 완료</b>(왼쪽 사이드바에 ✓).</li>
-        <li><b>☆ 복습에 추가</b> — 섹션 제목 옆 버튼을 누르면 '복습 목록'에 모여요.</li>
-        <li><b>🤖 AI 튜터</b> — 오른쪽 아래 버튼. 막히면 무엇이든 질문하세요 (로컬 AI, 선택 사항).</li>
-        <li><b>🐍 노트북</b> — 챕터마다 짝 Python 노트북이 있어요 (이것도 선택 사항).</li>
+        <li><b>📘 설명 카드</b>: 새 용어·기호가 나오면 즉시 "이름 + 읽는 법 + 뜻"으로 풀어드려요.</li>
+        <li><b>🎛️ 인터랙티브</b>: 공식보다 먼저, 직접 만지며 "감"을 잡습니다.</li>
+        <li><b>🔎 미니체크</b>: 본문 중간중간 가볍게 확인. 틀려도 부담 없어요.</li>
+        <li><b>💡 힌트 · 해설</b>: 문제마다 단계별 힌트가 있고, 맞히면 해설이 나옵니다.</li>
+        <li><b>🧮 계산기 OK</b>: 복잡한 나눗셈·소수 계산은 계산기를 써도 됩니다. 중요한 건 계산 속도가 아니라 <b>개념</b>이에요.</li>
+        <li><b>📝 10문제 세트</b>: 챕터 끝 난이도별 문제를 모두 맞히면 <b>진도 완료</b>(왼쪽 사이드바에 ✓).</li>
+        <li><b>☆ 복습에 추가</b>: 섹션 제목 옆 버튼을 누르면 '복습 목록'에 모여요.</li>
+        <li><b>🤖 AI 튜터</b>: 오른쪽 아래 버튼. 막히면 무엇이든 질문하세요 (로컬 AI, 선택 사항).</li>
+        <li><b>🐍 노트북</b>: 챕터마다 짝 Python 노트북이 있어요 (이것도 선택 사항).</li>
       </ul>
     </ConceptCard>
 
@@ -154,7 +154,7 @@ function onSetComplete() {
     <ReviewFlag id="sample-ai" chapter="sample" label="🤖 AI 는 확률로 말한다" />
     <p class="leading-relaxed text-slate-700">
       ChatGPT 같은 AI 가 문장을 만드는 방법이 바로 <b>확률</b>입니다. "오늘 날씨가" 다음에 올
-      단어를 AI 는 이렇게 봅니다 — <b>좋다 45%</b>, 흐리다 20%, 춥다 12%, 이상하다 3%, …
+      단어를 AI 는 이렇게 봅니다. <b>좋다 45%</b>, 흐리다 20%, 춥다 12%, 이상하다 3%, …
       모든 후보 단어에 확률을 매기고 그중에서 골라요. 즉 <b>AI 의 출력은 확률분포</b>이고,
       확률을 모르면 AI 가 무슨 말을 하는지 절반은 놓치는 셈이에요.
     </p>
@@ -174,7 +174,7 @@ function onSetComplete() {
       막히면 힌트부터 눌러 보세요.
     </p>
 
-    <QuizSet title="동전 던지기 맛보기 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="동전 던지기 맛보기: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -210,7 +210,7 @@ function onSetComplete() {
         type="truefalse"
         :answer="0"
         :hints="['시뮬레이터에서 1000번 던지기를 눌렀을 때를 떠올려 보세요.']"
-        explanation="참입니다. 던질수록 비율이 0.5 에 다가갑니다 — 큰 수의 법칙(7장)이에요."
+        explanation="참입니다. 던질수록 비율이 0.5 에 다가갑니다. 큰 수의 법칙(7장)이에요."
       />
       <!-- 보통 -->
       <Quiz
@@ -230,7 +230,7 @@ function onSetComplete() {
           { lhs: '\\text{확률} = 2 \\div 6 \\;\\text{(소수 셋째 자리 반올림)}', answer: 0.333, tolerance: 0.001 },
         ]"
         :hints="['5 이상인 눈은 5와 6 뿐입니다.', '2 ÷ 6 = 0.3333… → 셋째 자리에서 반올림하면 0.333.']"
-        explanation="2 ÷ 6 = 1/3 ≈ 0.333. 경우의 수만 세면 확률이 나옵니다 — 3장에서 본격적으로!"
+        explanation="2 ÷ 6 = 1/3 ≈ 0.333. 경우의 수만 세면 확률이 나옵니다. 3장에서 본격적으로!"
       />
       <Quiz
         difficulty="medium"
@@ -243,7 +243,7 @@ function onSetComplete() {
         ]"
         :answer="1"
         :hints="['확률 0.5 는 「오래 반복했을 때」의 약속이었죠.']"
-        explanation="10번 정도로는 7:3 도 흔합니다. 그리고 동전은 지난 결과를 기억하지 못해요 — 다음 판도 여전히 반반입니다."
+        explanation="10번 정도로는 7:3 도 흔합니다. 그리고 동전은 지난 결과를 기억하지 못해요. 다음 판도 여전히 반반입니다."
       />
       <Quiz
         difficulty="medium"
@@ -290,13 +290,13 @@ function onSetComplete() {
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
       <p class="font-semibold text-emerald-800">워밍업 완료! 이 패턴 그대로 끝까지 갑니다.</p>
       <p class="mt-1 text-sm text-emerald-700">
-        다음은 확률보다 먼저, 눈앞의 데이터를 요약하는 법 — <b>평균·중앙값·최빈값</b>입니다.
+        다음은 확률보다 먼저, 눈앞의 데이터를 요약하는 법, <b>평균·중앙값·최빈값</b>입니다.
       </p>
       <RouterLink
         to="/ch/ch1"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        다음 챕터 — 데이터를 한눈에 →
+        다음 챕터: 데이터를 한눈에 →
       </RouterLink>
     </div>
   </article>

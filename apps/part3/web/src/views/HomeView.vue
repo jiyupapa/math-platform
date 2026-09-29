@@ -19,7 +19,7 @@ const progress = useProgressStore()
     <div class="mb-8 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm leading-relaxed text-emerald-900">
       🧭 <b>처음이신가요?</b> 목차 맨 위의
       <RouterLink to="/ch/sample" class="font-semibold text-emerald-700 underline underline-offset-2"
-        >샘플 챕터 — 동전 던지기 맛보기</RouterLink
+        >워밍업 — 동전 던지기 맛보기</RouterLink
       >부터 시작하세요. 5분 만에 이 앱의 학습 방식(설명 카드 → 직접 조작 → 문제 풀이)을 체험할 수 있어요.
       그다음 1장부터 순서대로 진행하면 됩니다.
     </div>

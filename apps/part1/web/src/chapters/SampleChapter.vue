@@ -1,6 +1,6 @@
 <script setup lang="ts">
-// Phase 0 샘플 챕터 — 5종 공통 컴포넌트를 모두 사용해 "한 챕터의 완성형"을 보여준다.
-// 실제 Phase 1~8 챕터도 이 구조를 그대로 따른다.
+// 워밍업 챕터 — 5종 공통 컴포넌트를 모두 사용해 "한 챕터의 완성형"을 보여준다.
+// 실제 1~8장 챕터도 이 구조를 그대로 따른다.
 import { ref, computed } from 'vue'
 import { ConceptCard } from '@series/ui'
 import { MathBlock } from '@series/ui'
@@ -43,7 +43,7 @@ function onSetComplete() {
     <p class="mb-1 text-sm font-medium text-indigo-600">워밍업 · 5분 몸풀기</p>
     <h1 class="mb-4 text-3xl font-bold">벡터 맛보기</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
-      본격적인 학습 전 몸풀기입니다. 앞으로 모든 챕터가 이 페이지처럼 진행돼요 —
+      본격적인 학습 전 몸풀기입니다. 앞으로 모든 챕터가 이 페이지처럼 진행돼요.
       설명 카드를 읽고, 그림을 직접 만져 보고, 문제를 풀면 진도가 채워집니다.
       막히면 <b>힌트</b>가 있고, 두 번 틀리면 <b>해설</b>도 열 수 있으니 부담 없이 시작하세요.
     </p>
@@ -107,23 +107,23 @@ function onSetComplete() {
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 드디어 공식</h2>
-    <ReviewFlag id="sample-s3" chapter="sample" label="3. 드디어 공식 — 벡터의 길이" />
+    <ReviewFlag id="sample-s3" chapter="sample" label="3. 드디어 공식: 벡터의 길이" />
     <p class="leading-relaxed text-slate-700">
       벡터의 길이는 <b>피타고라스 정리</b>로 구합니다. 직각삼각형에서
-      <b>빗변² = 가로² + 세로²</b> 였죠 — 벡터의 길이가 바로 그 빗변이에요.
+      <b>빗변² = 가로² + 세로²</b> 였죠. 벡터의 길이가 바로 그 빗변이에요.
     </p>
     <MathBlock expr="\lVert \vec{a} \rVert = \sqrt{x^2 + y^2}" />
     <p class="mt-1 text-sm text-slate-500">
       <b>제곱(²)</b> = 같은 수를 두 번 곱하기 (예: <MathBlock inline expr="3^2 = 3\times3 = 9" />).
     </p>
 
-    <ConceptCard tone="note" title="새 기호 풀이 — 처음 보는 기호 두 개">
+    <ConceptCard tone="note" title="새 기호 풀이: 처음 보는 기호 두 개">
       <ul class="list-disc space-y-2 pl-5">
         <li>
           <MathBlock inline expr="\lVert \vec{a} \rVert" /> &nbsp;
           <b>이름</b>: 노름(norm) 기호 · <b>읽는 법</b>: "벡터 에이의 노름" 또는 "에이의 길이" ·
           <b>뜻</b>: 벡터의 <b>길이(크기)</b>. 양쪽 <b>이중 막대</b>로 감쌉니다.
-          (절댓값 <MathBlock inline expr="|x|" /> — 부호 떼고 크기만, 예: |−3|=3 — 과 비슷한데, 막대가 <b>두 줄</b>이면 "벡터의 길이"라는 뜻)
+          (비슷한 기호로 절댓값 <MathBlock inline expr="|x|" />이 있어요. 부호를 떼고 크기만 보는 것으로, 예를 들어 |−3|=3. 막대가 <b>두 줄</b>이면 "벡터의 길이"라는 뜻)
         </li>
         <li>
           <MathBlock inline expr="\sqrt{\;}" /> &nbsp;
@@ -146,7 +146,7 @@ function onSetComplete() {
       <b>10문제를 모두 맞히면</b> 이 챕터가 완료됩니다.
     </p>
 
-    <QuizSet title="벡터 맛보기 — 연습 10문제" @completed="onSetComplete">
+    <QuizSet title="벡터 맛보기: 연습 10문제" @completed="onSetComplete">
       <!-- 쉬움 -->
       <Quiz
         difficulty="easy"
@@ -241,7 +241,7 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">워밍업 완료 — 준비 끝!</p>
+      <p class="font-semibold text-emerald-800">워밍업 완료! 준비 끝!</p>
       <p class="mt-1 text-sm text-emerald-700">
         본 학습도 정확히 이렇게 진행됩니다. 이제 1챕터(좌표와 벡터)부터 시작하세요.
       </p>
@@ -249,7 +249,7 @@ function onSetComplete() {
         to="/ch/ch1"
         class="mt-3 inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
       >
-        1챕터 시작 — 좌표와 벡터 →
+        1챕터 시작: 좌표와 벡터 →
       </RouterLink>
     </div>
   </article>

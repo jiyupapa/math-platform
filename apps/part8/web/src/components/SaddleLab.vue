@@ -95,9 +95,9 @@ const drawCount = computed(() => {
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 말안장 위의 여행자 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 말안장 위의 여행자: 완벽한 나침반의 저주</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · 말안장 위의 여행자: 완벽한 나침반의 저주</p>
     <p class="mb-3 text-xs text-slate-500">
-      가운데 ✕가 안장점(높이 0.25) — 세로로는 골짜기 바닥이지만 <b>가로로는 능선 꼭대기</b>입니다.
+      가운데 ✕가 안장점(높이 0.25)이에요. 세로로는 골짜기 바닥이지만 <b>가로로는 능선 꼭대기</b>입니다.
       진짜 바닥(★, 높이 0)은 양옆에. 위쪽 기슭에서 두 여행자를 출발시켜 보세요.
     </p>
 
@@ -107,7 +107,7 @@ const drawCount = computed(() => {
       class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo-500"
       @click="raced = true"
     >
-      🏁 경주 시작 — GD vs SGD (150스텝)
+      🏁 경주 시작: GD vs SGD (150스텝)
     </button>
 
     <template v-if="race">
@@ -134,34 +134,34 @@ const drawCount = computed(() => {
 
       <div class="mt-2 flex flex-wrap gap-3 rounded-lg bg-slate-50 p-3 text-center">
         <div>
-          <p class="text-xs text-slate-500">GD — 150스텝째 손실</p>
+          <p class="text-xs text-slate-500">GD: 150스텝째 손실</p>
           <p class="font-mono text-lg font-bold text-rose-700">{{ race.gd.losses[149]!.toFixed(3) }} <span class="text-xs font-normal text-slate-500">(안장 높이 그대로)</span></p>
         </div>
         <div>
-          <p class="text-xs text-slate-500">SGD — 탈출 스텝</p>
+          <p class="text-xs text-slate-500">SGD: 탈출 스텝</p>
           <p class="font-mono text-lg font-bold text-emerald-700">{{ race.escape }}</p>
         </div>
         <div>
-          <p class="text-xs text-slate-500">SGD — 최종 손실</p>
+          <p class="text-xs text-slate-500">SGD: 최종 손실</p>
           <p class="font-mono text-lg font-bold text-emerald-700">{{ race.sgd.losses[149]!.toFixed(4) }}</p>
         </div>
       </div>
 
       <p class="mt-3 rounded-lg bg-emerald-50 p-3 text-sm leading-relaxed text-emerald-800">
-        ✅ 완벽한 나침반(GD)은 능선 <b>정중앙</b>을 걸어 내려와 안장점에서 멈췄습니다 — 발밑 기울기가
+        ✅ 완벽한 나침반(GD)은 능선 <b>정중앙</b>을 걸어 내려와 안장점에서 멈췄습니다. 발밑 기울기가
         정확히 0이라, 옆에 내리막이 있어도 <b>영원히 모릅니다</b>. 흔들리는 나침반(SGD)은 노이즈가
-        능선 옆으로 밀어내 준 덕에 스텝 {{ race.escape }}에 탈출해 진짜 바닥까지 —
-        <b>3장 노이즈의 순기능, 두 번째 재회</b>입니다. 그리고 GD의 손실 곡선을 보세요:
+        능선 옆으로 밀어내 준 덕에 스텝 {{ race.escape }}에 탈출해 진짜 바닥까지 갔습니다.
+        <b>3장에서 본 노이즈의 순기능이 두 번째로 등장</b>한 거예요. 그리고 GD의 손실 곡선을 보세요:
         내려오다 평평… 9장에서 본 <b>평원 무늬의 정체 하나가 바로 안장점 통과</b>예요.
       </p>
     </template>
 
     <!-- ② 동전 세기 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 동전 세기: 고차원 임계점은 왜 거의 다 안장점인가</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · 동전 세기: 고차원 임계점은 왜 거의 다 안장점인가</p>
     <p class="mb-3 text-xs text-slate-500">
       임계점(기울기 0)이 <b>국소최소가 되려면 모든 방향이 위로(+) 굽어야</b> 합니다. 방향별 곡률
-      부호를 반반 동전이라 치고 — 방향 수 W를 올려 보세요.
+      부호를 반반 동전이라 치고 방향 수 W를 올려 보세요.
     </p>
 
     <label class="block text-xs text-slate-500">
@@ -178,7 +178,7 @@ const drawCount = computed(() => {
         :class="s ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'"
       >{{ s ? '+' : '−' }}</span>
       <span class="ml-2 text-xs font-semibold" :class="signs.every((s) => s) ? 'text-emerald-700' : 'text-rose-700'">
-        {{ signs.every((s) => s) ? '전부 + — 국소최소!' : '− 가 섞임 — 안장점 (탈출구 있음)' }}
+        {{ signs.every((s) => s) ? '전부 + → 국소최소!' : '− 가 섞임 → 안장점 (탈출구 있음)' }}
       </span>
     </div>
 
@@ -197,8 +197,8 @@ const drawCount = computed(() => {
       <p v-if="drawCount !== null" class="min-w-0 flex-1 text-xs leading-relaxed text-slate-600">
         100개 중 <b class="text-emerald-700">국소최소 {{ drawCount }}개</b> /
         <b class="text-rose-700">안장점 {{ 100 - drawCount }}개</b>
-        <template v-if="W >= 15"> — W가 조금만 커져도 국소최소는 <b>씨가 마릅니다</b>. 수십억 차원의 임계점은 사실상 전부 안장점.</template>
-        <template v-else-if="W <= 3"> — W가 작을 땐 국소최소도 꽤 나옵니다(이론 {{ (100 / 2 ** W).toFixed(0) }}개). W를 올려 보세요.</template>
+        <template v-if="W >= 15"><br />W가 조금만 커져도 국소최소는 <b>씨가 마릅니다</b>. 수십억 차원의 임계점은 사실상 전부 안장점.</template>
+        <template v-else-if="W <= 3"><br />W가 작을 땐 국소최소도 꽤 나옵니다(이론 {{ (100 / 2 ** W).toFixed(0) }}개). W를 올려 보세요.</template>
       </p>
     </div>
   </div>

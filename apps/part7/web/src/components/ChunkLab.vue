@@ -18,10 +18,10 @@ const MODES: { key: string; label: string; note: string; tone: 'bad' | 'good' | 
     label: '통문서 (1조각)',
     tone: 'bad',
     note:
-      '문서 전체가 한 벡터로 뭉개져 — 결혼·장례·출산·절차가 평균된 방향이라 어떤 질문과도 뜨뜻미지근합니다(점수 희석). 게다가 검색되면 문서 전체가 프롬프트에 들어가 토큰도 낭비돼요.',
+      '문서 전체가 한 벡터로 뭉개져, 결혼·장례·출산·절차가 평균된 방향이라 어떤 질문과도 뜨뜻미지근합니다(점수 희석). 게다가 검색되면 문서 전체가 프롬프트에 들어가 토큰도 낭비돼요.',
     chunks: [
       {
-        text: '경조사 지원 규정 (전체) — 결혼 축하금 50만 원(근속 1년 이상), 장례 지원 100만 원과 상조 서비스, 출산 축하금 30만 원, 신청은 인사 포털에서 증빙 첨부, 지급은 급여일 합산…',
+        text: '경조사 지원 규정 (전체): 결혼 축하금 50만 원(근속 1년 이상), 장례 지원 100만 원과 상조 서비스, 출산 축하금 30만 원, 신청은 인사 포털에서 증빙 첨부, 지급은 급여일 합산…',
         score: 0.44,
         best: true,
       },
@@ -32,7 +32,7 @@ const MODES: { key: string; label: string; note: string; tone: 'bad' | 'good' | 
     label: '조항별 (4조각)',
     tone: 'good',
     note:
-      '결혼 조항 조각이 0.84로 뚜렷한 1등 — 질문에 딱 맞는 크기의 조각이 뽑히고, 조건("근속 1년 이상")까지 한 조각에 붙어 있어 답변이 완전합니다.',
+      '결혼 조항 조각이 0.84로 뚜렷한 1등이에요. 질문에 딱 맞는 크기의 조각이 뽑히고, 조건("근속 1년 이상")까지 한 조각에 붙어 있어 답변이 완전합니다.',
     chunks: [
       { text: '제1조(결혼) 결혼 축하금 50만 원을 지급한다. 단, 근속 1년 이상인 직원에 한한다.', score: 0.84, best: true },
       { text: '제2조(장례) 장례 지원금 100만 원과 상조 서비스를 지원한다.', score: 0.18 },
@@ -45,7 +45,7 @@ const MODES: { key: string; label: string; note: string; tone: 'bad' | 'good' | 
     label: '문장별 (6조각)',
     tone: 'warn',
     note:
-      '1등 조각(0.87)만 보면 "50만 원"이라 답하겠지만 — "단, 근속 1년 이상" 조건이 다른 조각으로 찢어졌습니다(0.31이라 top에 못 듦). 너무 잘게 자르면 문맥이 끊겨 반쪽짜리 답이 나올 수 있어요.',
+      '1등 조각(0.87)만 보면 "50만 원"이라 답하겠지만, "단, 근속 1년 이상" 조건이 다른 조각으로 찢어졌습니다(0.31이라 top에 못 듦). 너무 잘게 자르면 문맥이 끊겨 반쪽짜리 답이 나올 수 있어요.',
     chunks: [
       { text: '결혼 축하금 50만 원을 지급한다.', score: 0.87, best: true },
       { text: '단, 근속 1년 이상인 직원에 한한다.', score: 0.31, warn: true },
@@ -78,9 +78,9 @@ const recall = computed(() => hits.value / EVALSET.length)
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 청킹 크기 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 같은 문서, 세 가지 칼질: 조각 크기가 검색을 바꾼다</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · 같은 문서, 세 가지 칼질: 조각 크기가 검색을 바꾼다</p>
     <p class="mb-3 text-xs text-slate-500">
-      경조사 지원 규정 한 문서를 세 가지 크기로 잘라 임베딩했습니다. 질문은 같아요 —
+      경조사 지원 규정 한 문서를 세 가지 크기로 잘라 임베딩했습니다. 질문은 같아요.
       <b>"{{ QUESTION }}"</b>
     </p>
 
@@ -125,7 +125,7 @@ const recall = computed(() => hits.value / EVALSET.length)
 
     <!-- ② recall@k -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 검색 성적표: recall@k</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · 검색 성적표: recall@k</p>
     <p class="mb-3 text-xs text-slate-500">
       평가 세트: (질문, 정답 문서) 5쌍. 각 질문을 검색했을 때 <b>정답 문서가 몇 위</b>였는지 기록해 뒀습니다.
       k(꺼내는 개수)를 바꿔 보세요.
@@ -165,14 +165,14 @@ const recall = computed(() => hits.value / EVALSET.length)
       </div>
       <p class="flex-1 text-xs leading-relaxed text-slate-500">
         <template v-if="k === 1">
-          1개만 꺼내면 5문항 중 {{ hits }}개 — 아깝게 2·3위인 정답들이 다 새 나갑니다.
+          1개만 꺼내면 5문항 중 {{ hits }}개만 찾아요. 아깝게 2·3위인 정답들이 다 새 나갑니다.
         </template>
         <template v-else-if="k === 3">
-          3개를 꺼내니 {{ Math.round(recall * 100) }}%로 껑충 — 대신 프롬프트가 3배로 길어졌죠(토큰 비용).
-          여전히 실패하는 "경조 휴가" 문항(6위)은 k로는 못 구합니다 — 청킹이나 임베딩을 고쳐야 할 신호.
+          3개를 꺼내니 {{ Math.round(recall * 100) }}%로 껑충 뛰었어요. 대신 프롬프트가 3배로 길어졌죠(토큰 비용).
+          여전히 실패하는 "경조 휴가" 문항(6위)은 k로는 못 구합니다. 청킹이나 임베딩을 고쳐야 할 신호.
         </template>
         <template v-else>
-          5개를 꺼내도 {{ Math.round(recall * 100) }}% — k를 늘리는 데엔 한계가 있고 비용만 늘어요.
+          5개를 꺼내도 {{ Math.round(recall * 100) }}%예요. k를 늘리는 데엔 한계가 있고 비용만 늘어요.
           남은 실패는 검색 앞단(청킹·임베딩)의 몫입니다.
         </template>
       </p>

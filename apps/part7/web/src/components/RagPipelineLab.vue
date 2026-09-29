@@ -29,9 +29,9 @@ const CASES: SearchCase[] = [
     keyword: { A: 0, B: 0, C: 0, D: 0, E: 0 },
     semantic: { A: 0.86, B: 0.12, C: 0.31, D: 0.27, E: 0.15 },
     kwNote:
-      '겹치는 단어가 하나도 없어 전부 0점 동점 — 정답(연차 안내)이 버젓이 있는데도 키워드 검색은 못 찾습니다. 워밍업 실험 ①의 맹점 그대로죠.',
+      '겹치는 단어가 하나도 없어 전부 0점 동점이에요. 정답(연차 안내)이 버젓이 있는데도 키워드 검색은 못 찾습니다. 워밍업 실험 ①의 맹점 그대로죠.',
     semNote:
-      '"쉬는 날을 미리 쓴다"는 뜻이 연차 문서와 가깝다고 계산돼 A가 1등 — 뜻을 좌표로 바꿔 가까움을 재는 의미 검색의 힘입니다.',
+      '"쉬는 날을 미리 쓴다"는 뜻이 연차 문서와 가깝다고 계산돼 A가 1등이에요. 뜻을 좌표로 바꿔 가까움을 재는 의미 검색의 힘입니다.',
     kwGood: false,
     semGood: true,
   },
@@ -41,9 +41,9 @@ const CASES: SearchCase[] = [
     keyword: { A: 0, B: 2, C: 0, D: 0, E: 0 },
     semantic: { A: 0.08, B: 0.74, C: 0.11, D: 0.09, E: 0.62 },
     kwNote:
-      '"VPN"과 "403"이 정확히 꽂혀 B가 압도적 1등 — 고유명사·코드·정확한 용어에는 키워드 검색이 빠르고 확실합니다.',
+      '"VPN"과 "403"이 정확히 꽂혀 B가 압도적 1등이에요. 고유명사·코드·정확한 용어에는 키워드 검색이 빠르고 확실합니다.',
     semNote:
-      'B가 1등이긴 한데 E(프린터 오류)가 바짝 따라붙습니다 — "오류 상황"이라는 뜻이 비슷해서요. 정밀 타격은 키워드가 낫습니다. 그래서 실무는 둘을 함께 씁니다(하이브리드).',
+      'B가 1등이긴 한데 E(프린터 오류)가 바짝 따라붙습니다. "오류 상황"이라는 뜻이 비슷해서요. 정밀 타격은 키워드가 낫습니다. 그래서 실무는 둘을 함께 씁니다(하이브리드).',
     kwGood: true,
     semGood: false,
   },
@@ -70,14 +70,14 @@ const STEPS = [
   {
     name: '질문',
     badge: '사용자',
-    desc: '직원이 챗봇에게 묻습니다. LLM 훈련 데이터에 우리 회사 경비 규정은 없어요 — 이대로면 모르거나 지어냅니다.',
+    desc: '직원이 챗봇에게 묻습니다. LLM 훈련 데이터에 우리 회사 경비 규정은 없어요. 이대로면 모르거나 지어냅니다.',
     artifact: '"법인카드 언제까지 정산해야 하나요?"',
   },
   {
     name: '임베딩',
     badge: '2·4·9장',
-    desc: '질문의 뜻을 좌표(벡터)로 바꿉니다 — 워밍업에서 여러분이 손으로 한 그 일을 모델이 합니다.',
-    artifact: '질문 → [0.72, −0.41, 0.13, 0.55]  (toy 4차원 — 실제는 수백 차원)',
+    desc: '질문의 뜻을 좌표(벡터)로 바꿉니다. 워밍업에서 여러분이 손으로 한 그 일을 모델이 합니다.',
+    artifact: '질문 → [0.72, −0.41, 0.13, 0.55]  (예시용 4차원, 실제는 수백 차원)',
   },
   {
     name: '검색',
@@ -88,7 +88,7 @@ const STEPS = [
   {
     name: '프롬프트 조립',
     badge: '8장',
-    desc: '찾은 문서를 질문 앞에 붙여 LLM에게 건넵니다 — 문맥 창에 지식이 실리는 순간(6부 2장의 그 관찰).',
+    desc: '찾은 문서를 질문 앞에 붙여 LLM에게 건넵니다. 컨텍스트 윈도우에 지식이 실리는 순간(6부 2장의 그 관찰).',
     artifact:
       '아래 사내 문서를 참고해 답하세요.\n[문서] 법인카드 정산 안내 — 매월 5일까지 경비 시스템에 등록\n[질문] 법인카드 언제까지 정산해야 하나요?',
   },
@@ -106,7 +106,7 @@ const doneAll = computed(() => stepIdx.value === STEPS.length - 1)
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 검색 방식 비교 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 같은 질문, 두 검색기: 키워드 vs 의미</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · 같은 질문, 두 검색기: 키워드 vs 의미</p>
     <p class="mb-3 text-xs text-slate-500">
       사내 문서 5건이 검색 대상입니다. 질문과 검색 방식을 바꿔 가며 순위가 어떻게 달라지는지 보세요.
     </p>
@@ -173,7 +173,7 @@ const doneAll = computed(() => stepIdx.value === STEPS.length - 1)
 
     <!-- ② RAG 파이프라인 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — RAG 파이프라인: 검색이 프롬프트가 되기까지</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · RAG 파이프라인: 검색이 프롬프트가 되기까지</p>
     <p class="mb-3 text-xs text-slate-500">"다음 단계"를 눌러 질문 하나가 답이 되는 5단계를 통과해 보세요.</p>
 
     <div class="mb-3 flex flex-wrap gap-1.5">
@@ -189,7 +189,7 @@ const doneAll = computed(() => stepIdx.value === STEPS.length - 1)
 
     <div class="rounded-lg bg-slate-50 p-4">
       <p class="mb-1 text-sm font-semibold text-slate-700">
-        {{ stepIdx + 1 }}단계 — {{ STEPS[stepIdx].name }}
+        {{ stepIdx + 1 }}단계: {{ STEPS[stepIdx].name }}
         <span class="ml-1 rounded-full bg-white px-2 py-0.5 text-xs font-medium text-slate-500 ring-1 ring-slate-200">{{ STEPS[stepIdx].badge }}</span>
       </p>
       <p class="mb-3 text-sm leading-relaxed text-slate-600">{{ STEPS[stepIdx].desc }}</p>
@@ -216,7 +216,7 @@ const doneAll = computed(() => stepIdx.value === STEPS.length - 1)
     </div>
 
     <p v-if="doneAll" class="mt-3 rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">
-      ✅ 모델은 그대로인데 회사 지식이 답에 들어왔습니다 — <b>재훈련(조련) 없이, 검색으로.</b>
+      ✅ 모델은 그대로인데 회사 지식이 답에 들어왔습니다. <b>재훈련(조련) 없이, 검색으로.</b>
       경비 규정이 바뀌면? 문서만 고치면 다음 질문부터 바로 새 답이 나옵니다. 이게 RAG의 전부예요.
     </p>
   </div>

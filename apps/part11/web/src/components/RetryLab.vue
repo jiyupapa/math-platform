@@ -31,13 +31,13 @@ const fmt = (v: number) => v.toFixed(1)
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 다이얼 -->
-    <p class="mb-1 text-sm font-semibold text-slate-500">① 한 번 시켰을 때의 성공률 p — 워밍업의 35%짜리 일부터</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">① 한 번 시켰을 때의 성공률 p: 워밍업의 35%짜리 일부터</p>
     <div class="mb-3 flex items-center gap-3">
       <input v-model.number="pPct" type="range" min="5" max="95" step="5" class="flex-1 accent-indigo-600" />
       <span class="w-14 shrink-0 text-right font-mono text-sm font-bold text-indigo-700">{{ pPct }}%</span>
     </div>
 
-    <p class="mb-1 text-sm font-semibold text-slate-500">② 몇 번까지 다시 시켜 볼까 — N 을 고르세요</p>
+    <p class="mb-1 text-sm font-semibold text-slate-500">② 몇 번까지 다시 시켜 볼까? N 을 고르세요</p>
     <div class="mb-3 flex flex-wrap items-center gap-1.5">
       <button
         v-for="v in NS"
@@ -70,7 +70,7 @@ const fmt = (v: number) => v.toFixed(1)
     </div>
 
     <!-- ③ 수확 체감 곡선 -->
-    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">③ N 을 늘리면 — 가파르게 오르다 평평해진다 (수확 체감)</p>
+    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">③ N 을 늘리면: 가파르게 오르다 평평해진다 (수확 체감)</p>
     <div class="rounded-lg bg-slate-50 p-4">
       <div class="flex h-28 items-end gap-[3px]">
         <div
@@ -84,7 +84,7 @@ const fmt = (v: number) => v.toFixed(1)
       </div>
       <div class="mt-1 flex justify-between text-xs text-slate-500"><span>N=1</span><span>N=10</span><span>N=20</span></div>
       <p class="mt-2 text-sm text-slate-700">
-        처음 몇 번이 이득의 대부분을 가져갑니다 — 뒤로 갈수록 한 번 더 뽑는 값어치가 줄어요.
+        처음 몇 번이 이득의 대부분을 가져갑니다. 뒤로 갈수록 한 번 더 뽑는 값어치가 줄어요.
       </p>
     </div>
 
@@ -98,8 +98,8 @@ const fmt = (v: number) => v.toFixed(1)
       </div>
     </div>
     <p class="mt-3 rounded-md bg-rose-50 px-3 py-2 text-xs text-rose-700">
-      ⚠️ 대전제 — 이 마법은 <b>성공을 알아볼 수 있을 때만</b> 작동합니다. N개 중 어느 게 성공인지
-      판별할 수 없다면 다시 뽑기는 무용지물 — 판별의 수학은 6장(검수자)에서.
+      ⚠️ 대전제: 이 방법은 <b>성공을 알아볼 수 있을 때만</b> 작동합니다. N개 중 어느 게 성공인지
+      판별할 수 없다면 다시 뽑기는 무용지물이에요. 판별의 수학은 6장(검수자)에서.
     </p>
   </div>
 </template>

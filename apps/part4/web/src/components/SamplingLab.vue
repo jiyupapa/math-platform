@@ -59,10 +59,10 @@ const palette = ['var(--c-indigo-500)', 'var(--c-emerald-500)', 'var(--c-amber-5
 const pct = (p: number) => (p * 100).toFixed(0)
 const flavor = computed(() =>
   temp.value <= 0.5
-    ? '뾰족함 — 거의 항상 1등만 (안전하지만 뻔함)'
+    ? '뾰족함: 거의 항상 1등만 (안전하지만 뻔함)'
     : temp.value >= 1.5
-      ? '평평함 — 이것저것 다양하게 (창의적이지만 위험)'
-      : '보통 — 적당히 다양',
+      ? '평평함: 이것저것 다양하게 (창의적이지만 위험)'
+      : '보통: 적당히 다양',
 )
 </script>
 
@@ -112,7 +112,7 @@ const flavor = computed(() =>
     <div class="mt-4 flex flex-wrap items-center gap-2">
       <button type="button" class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700" @click="draw">🎲 다음 단어 뽑기</button>
       <button type="button" class="rounded-lg bg-slate-100 px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-200" @click="clearPicks">지우기</button>
-      <span class="text-xs text-slate-500">여러 번 눌러 보세요 — temperature가 높을수록 뽑히는 단어가 다양해집니다.</span>
+      <span class="text-xs text-slate-500">여러 번 눌러 보세요. temperature가 높을수록 뽑히는 단어가 다양해집니다.</span>
     </div>
     <div v-if="picks.length" class="mt-3 flex flex-wrap gap-1.5">
       <span v-for="(w, i) in picks" :key="i" class="rounded bg-slate-100 px-2 py-0.5 text-xs text-slate-600">{{ w }}</span>

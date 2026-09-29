@@ -67,7 +67,7 @@ check('복습 경로 — 완료한 장의 개념 ✓', /✓ 확률분포/.test(r
 const dc = await page.locator('[data-diag-concepts]').innerText().catch(() => '')
 check('진단 개념 칩 — 다시 볼 개념 4', /벡터의 길이/.test(dc) && /조건부 확률/.test(dc) && /연쇄법칙/.test(dc) && /지수와 로그/.test(dc), dc ? '' : '칩 없음')
 check('진단 개념 칩 — 아는 개념', /아는 개념/.test(dc) && /내적/.test(dc))
-check('설명 문장에 헷갈린 개념', /진단에서 헷갈린 개념은/.test(await page.locator('main').innerText()))
+check('설명 문장에 헷갈린 개념', /진단에서 헷갈린 개념:/.test(await page.locator('main').innerText()))
 
 // ③ 개념 지도
 await page.goto(`${BASE}/concepts?c=chain-rule`, { waitUntil: 'networkidle', timeout: 20000 })
@@ -75,7 +75,7 @@ await page.waitForSelector('[data-concept-node]', { timeout: 10000 })
 const amber = await page.locator('[data-concept-node].ring-amber-600').count()
 check('지도 — 헷갈린 개념 ring 4개', amber === 4, `실제 ${amber}`)
 const mapText = await page.locator('main').innerText()
-check('지도 — 상세 배지 + 아는 개념 ✓', /진단에서 헷갈린 개념 — 다시 볼 것/.test(mapText) && /✓ 확률분포/.test(mapText))
+check('지도 — 상세 배지 + 아는 개념 ✓', /진단에서 헷갈린 개념 · 다시 볼 것/.test(mapText) && /✓ 확률분포/.test(mapText))
 
 await browser.close()
 const errs = errors.filter((e) => !/favicon/i.test(e))

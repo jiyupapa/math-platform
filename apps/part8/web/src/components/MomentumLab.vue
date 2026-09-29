@@ -59,9 +59,9 @@ const amp = computed(() => 1 / (1 - beta2.value))
 <template>
   <div class="my-5 rounded-xl border border-slate-200 bg-white p-5">
     <!-- ① 지그재그 vs 관성 -->
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① — 좁고 긴 골짜기: 지그재그 vs 관성</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ① · 좁고 긴 골짜기: 지그재그 vs 관성</p>
     <p class="mb-3 text-xs text-slate-500">
-      벽 방향(세로)은 가파르고(c=8) 전진 방향(가로)은 완만한(c=0.1) 골짜기 — 2장의 축별 곡률
+      벽 방향(세로)은 가파르고(c=8) 전진 방향(가로)은 완만한(c=0.1) 골짜기, 곧 2장의 축별 곡률
       딜레마 그 지형입니다. 🔵 GD 와 🟠 모멘텀이 같은 보폭(lr 0.2)으로 경주합니다.
     </p>
 
@@ -115,10 +115,10 @@ const amp = computed(() => 1 / (1 - beta2.value))
     <p v-if="steps >= 60 && beta >= 0.85 && beta <= 0.95 && momLoss < gdLoss / 5" class="mt-3 rounded-lg bg-emerald-50 p-3 text-sm leading-relaxed text-emerald-800">
       ✅ 🔵는 벽 사이를 <b>잘게 튕기며</b> 전진이 굼뜨지만(60스텝에도 L ≈ {{ gdLoss.toFixed(2) }}),
       🟠는 벽 방향 진동이 <b>상쇄</b>되고 전진 방향 속도가 <b>누적</b>되어 훌쩍 앞서갑니다
-      (L ≈ {{ momLoss.toFixed(3) }}). 같은 보폭, 같은 기울기 — 더한 것은 <b>기억(관성)</b>뿐이에요.
+      (L ≈ {{ momLoss.toFixed(3) }}). 같은 보폭, 같은 기울기에 더한 것은 <b>기억(관성)</b>뿐이에요.
     </p>
     <p v-else-if="steps >= 30 && beta > 0.97" class="mt-3 rounded-lg bg-rose-50 p-3 text-sm leading-relaxed text-rose-700">
-      ⚠️ β = {{ beta.toFixed(2) }} — 기억이 너무 길어(약 {{ Math.round(1 / (1 - beta)) }}걸음)
+      ⚠️ β = {{ beta.toFixed(2) }}: 기억이 너무 길어(약 {{ Math.round(1 / (1 - beta)) }}걸음)
       골짜기 바닥을 <b>지나쳐 되돌아오기</b>를 반복합니다(오버슈트). 관성도 과하면 진자가 돼요.
     </p>
     <p v-else-if="steps > 0" class="mt-3 rounded-lg bg-slate-50 p-3 text-sm text-slate-600">
@@ -127,7 +127,7 @@ const amp = computed(() => 1 / (1 - beta2.value))
 
     <!-- ② EMA 기계 -->
     <hr class="my-5 border-slate-100" />
-    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② — 관성의 정체: 상쇄와 증폭의 기계 (EMA)</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🧪 실험 ② · 관성의 정체: 상쇄와 증폭의 기계 (EMA)</p>
     <p class="mb-3 text-xs text-slate-500">
       속도 v ← β·v + 기울기. 두 종류의 기울기 흐름을 넣어 40스텝 뒤의 속도를 비교합니다.
     </p>
@@ -155,7 +155,7 @@ const amp = computed(() => 1 / (1 - beta2.value))
     </div>
 
     <p class="mt-3 rounded-lg bg-indigo-50 p-3 text-xs leading-relaxed text-indigo-800">
-      💡 같은 크기의 입력인데 — 지그재그(벽에 튕기는 성분)는 부호가 교대라 <b>서로 지워지고</b>,
+      💡 같은 크기의 입력인데, 지그재그(벽에 튕기는 성분)는 부호가 교대라 <b>서로 지워지고</b>,
       일관된 방향(골짜기를 따라가는 성분)은 <b>1/(1−β) ≈ {{ amp.toFixed(0) }}배</b>까지 쌓입니다.
       모멘텀 = <b>지그재그 필터 + 전진 부스터</b>. β를 키우면 두 효과 모두 강해지지만,
       실험 ①에서 봤듯 기억이 너무 길면 진자가 됩니다.

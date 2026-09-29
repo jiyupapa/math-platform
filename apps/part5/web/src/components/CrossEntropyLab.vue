@@ -98,7 +98,7 @@ function applyPreset(w: number[]) {
 <template>
   <div class="my-4 rounded-xl border border-slate-200 bg-white p-4">
     <p class="mb-3 text-sm font-semibold text-slate-700">
-      🗺️ 크로스 엔트로피 실험실 — 보라 막대(내 지도 q)를 드래그해 회색(세상 p)에 맞춰 보세요
+      🗺️ 크로스 엔트로피 실험실: 보라 막대(내 지도 q)를 드래그해 회색(세상 p)에 맞춰 보세요
     </p>
 
     <!-- 프리셋 -->
@@ -188,10 +188,10 @@ function applyPreset(w: number[]) {
     </div>
     <p class="mt-1 text-xs" :class="atMin ? 'font-semibold text-emerald-700' : 'text-slate-500'" style="padding-left: 7.75rem">
       <template v-if="!Number.isFinite(cost)">
-        일어날 수 있는 일(눈 12.5%)에 확률 0을 준 지도 — 그 날이 오면 부호화 불가, 비용 무한대!
+        일어날 수 있는 일(눈 12.5%)에 확률 0을 준 지도예요. 그 날이 오면 부호화 불가, 비용 무한대!
       </template>
       <template v-else-if="atMin">
-        🎉 최소 도달! q = p 일 때 비용 = H(p) = 1.75비트 — 이보다 싼 지도는 없습니다.
+        🎉 최소 도달! q = p 일 때 비용 = H(p) = 1.75비트. 이보다 싼 지도는 없습니다.
       </template>
       <template v-else>
         세로 눈금 = 바닥 H(p) = 1.75비트 · 초과분
