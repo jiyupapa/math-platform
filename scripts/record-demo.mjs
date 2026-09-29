@@ -112,21 +112,21 @@ async function wheel(dy, times = 1, pause = 420) {
 // ═══ S1 (0:00~) 문제 제기 — 포털 홈 + 지도 스크롤 ═══════════════════════════
 console.log('▶ 녹화 시작 — S1 문제 제기')
 await page.goto(`${BASE}/`, { waitUntil: 'networkidle' })
-await cap('전 직원이 매일 AI를 씁니다 — 그런데 원리를 아는 사람은? 원인은 수학입니다')
+await cap('전 직원이 매일 AI를 씁니다. 그런데 원리를 아는 사람은? 원인은 수학입니다')
 await sleep(6000)
-await cap('수포자 사관학교 — 진단하고, 경로를 짜고, 옆에서 가르치는 "AI 강사"')
+await cap('수포자 사관학교: 진단하고, 경로를 짜고, 옆에서 가르치는 "AI 강사"')
 await wheel(420, 3, 600)
 await sleep(2200)
 
 // ═══ S2 진단 몽타주 → 경로 재구성 ═══════════════════════════════════════════
 console.log('▶ S2 진단')
 await page.goto(`${BASE}/diagnose`, { waitUntil: 'networkidle' })
-await cap('5분 진단 — 시험이 아니라, 나에게 맞는 경로를 짜기 위한 12문항')
+await cap('5분 진단: 시험이 아니라, 나에게 맞는 경로를 짜기 위한 12문항')
 // 프로필: 벡터·확률 관문 통과, 미분·log 미통과 (발표 덱 스크린샷과 동일 → "55챕터 · 31.9시간")
 const picks = [1, 1, 2, 2, 1, 1, 0, 0, 2, 3, 0, 0]
 const items = page.locator('main ol > li')
 for (let i = 0; i < picks.length; i++) {
-  if (i === 6) await cap('모르는 건 편하게 찍어도 됩니다 — 관문 단위로 채점되니까요')
+  if (i === 6) await cap('모르는 건 편하게 골라도 됩니다. 관문 단위로 채점되니까요')
   await click(items.nth(i).locator('button').nth(picks[i]), 130)
 }
 // 누락 방어 — 선택 표시(border-indigo-500)가 없는 문항은 다시 클릭
@@ -139,21 +139,21 @@ await page.waitForSelector('text=답변 12 / 12', { timeout: 5000 })
 const confCards = page.locator('main section .space-y-4 > div')
 await click(confCards.nth(0).locator('button').nth(2), 130) // 자신감 3
 await click(confCards.nth(1).locator('button').nth(1), 130) // 기호 2
-await cap('제출하면 — 규칙 엔진이 이 사람의 경로를 다시 짭니다')
-await click(page.locator('button', { hasText: '결과 보기' }), 200)
-await page.waitForSelector('text=AI 강사가 당신에게 맞춘 경로', { timeout: 15000 })
+await cap('제출하면 규칙 엔진이 이 사람의 경로를 다시 짭니다')
+await click(page.locator('button', { hasText: '내 경로 짜기' }), 200)
+await page.waitForSelector('text=AI 강사가 짜 준 내 경로', { timeout: 15000 })
 await sleep(800)
-await cap('118챕터 중 이 사람에겐 55챕터 · 31.9시간 — 아는 단계는 접고, 이유까지 말해 줍니다')
+await cap('118챕터 중 이 사람에겐 55챕터 · 31.9시간. 아는 단계는 접고, 이유까지 말해 줍니다')
 await sleep(8000)
 // 개념 단위 결과(온톨로지 3단계) — 틀린 문항이 개념 이름으로: 도함수·기본 미분 공식·지수와 로그·놀람과 정보량
 const diagConcepts = page.locator('[data-diag-concepts]')
 if (await diagConcepts.count()) {
   await move(diagConcepts)
-  await cap('틀린 문항은 점수가 아니라 개념 이름으로 — "다시 볼 개념: 도함수(2부 3장) · 지수와 로그(2부 7장)…"')
+  await cap('틀린 문항은 점수가 아니라 개념 이름으로 돌아옵니다. "다시 볼 개념: 도함수(2부 3장) · 지수와 로그(2부 7장)…"')
   await sleep(6000)
 }
 await wheel(430, 3, 550)
-await cap('결정은 전부 규칙 기반 — 같은 답이면 언제나 같은 경로, 근거가 화면에 있습니다')
+await cap('결정은 전부 규칙 기반입니다. 같은 답이면 언제나 같은 경로, 근거가 화면에 있습니다')
 await wheel(430, 2, 550)
 await sleep(3500)
 
@@ -161,31 +161,31 @@ await sleep(3500)
 console.log('▶ S3 라이브 투어')
 // ① ch2 토큰화
 await page.goto(`${BASE}/part4/ch/ch2`, { waitUntil: 'networkidle' })
-await cap('여기서부터는 당신의 문장입니다 — ① 문장이 "조각(토큰)"으로')
+await cap('여기서부터는 내 문장으로. ① 문장이 "조각(토큰)"으로')
 const sent = page.locator('main input[type=text]').first()
 await move(sent); await click(sent, 120)
 await sent.fill('')
 await page.keyboard.type('우리 회사 최고의 복지는 동료다', { delay: 70 })
 await sleep(2600)
-await cap('진짜 LLM 방식(서브워드)로 바꾸면 — 아는 말은 통째로, 모르는 말은 조각으로')
+await cap('진짜 LLM 방식(서브워드)로 바꾸면 아는 말은 통째로, 모르는 말은 조각으로')
 await click(page.locator('button', { hasText: '서브워드' }).first(), 250)
 await sleep(3800)
 
 // ② ch6 어텐션
 await page.goto(`${BASE}/part4/ch/ch6`, { waitUntil: 'networkidle' })
-await cap('② 어텐션 — 단어끼리 서로를 "쳐다보는" 정도를 내적으로 계산합니다')
+await cap('② 어텐션: 단어끼리 서로를 "쳐다보는" 정도를 내적으로 계산합니다')
 const qkv = page.locator('main div.my-5.rounded-xl.border.border-slate-200.bg-white').filter({ hasText: 'Query(질문) 벡터' }).first()
 await qkv.scrollIntoViewIfNeeded()
 await sleep(900)
 for (const w of ['공', '물었다', '강아지']) {
   await click(qkv.locator('button', { hasText: w }).first(), 1400)
 }
-await cap('그 유명한 트랜스포머의 심장 — Q·K·V 가 이 표 한 장입니다')
+await cap('그 유명한 트랜스포머의 핵심, Q·K·V 가 이 표 한 장입니다')
 await sleep(4200)
 
 // ③ ch9 다음 단어 확률
 await page.goto(`${BASE}/part4/ch/ch9`, { waitUntil: 'networkidle' })
-await cap('③ 출력층 — 문맥이 "다음 단어 후보의 확률"이 되는 순간')
+await cap('③ 출력층: 문맥이 "다음 단어 후보의 확률"이 되는 순간')
 const outLab = page.locator('main div.my-5.rounded-xl.border.border-slate-200.bg-white').filter({ hasText: '마지막 문맥 벡터' }).first()
 await outLab.scrollIntoViewIfNeeded()
 await sleep(900)
@@ -203,7 +203,7 @@ await page.evaluate(async () => {
     await new Promise((r) => setTimeout(r, 1500))
   }
 })
-await cap('LLM = 다음 단어를 확률로 고르는 기계 — 방금 그 수학이 1·3·5부 커리큘럼입니다')
+await cap('LLM = 다음 단어를 확률로 고르는 기계. 방금 그 수학이 1·3·5부 커리큘럼입니다')
 await sleep(4800)
 
 // ═══ S3b 개념 지도 — 방금 본 어텐션이 시리즈 개념 114개 중 어디인가 (온톨로지) ═══
@@ -211,18 +211,18 @@ console.log('▶ S3b 개념 지도')
 await page.goto(`${BASE}/concepts?c=self-attention-qkv`, { waitUntil: 'networkidle' })
 await page.waitForSelector('[data-concept-node]', { timeout: 10000 })
 await sleep(700)
-await cap('방금 본 어텐션은 시리즈 개념 114개의 지도에서 여기 — 실선은 먼저 알아야 할 것, 점선은 다음 개념')
+await cap('방금 본 어텐션은 시리즈 개념 114개의 지도에서 여기입니다. 실선은 먼저 알아야 할 것, 점선은 다음 개념')
 const selNode = page.locator('[data-concept-node]', { hasText: 'Q·K·V 셀프 어텐션' }).first()
 await move(selNode)
 await sleep(5200)
-await cap('같은 수학이 어디서 다시 나오는지 — 강사도, 튜터도, 각 장의 상단 띠도 이 한 파일을 읽습니다')
+await cap('같은 수학이 어디서 다시 나오는지, 강사도 튜터도 각 장의 상단 띠도 이 한 파일을 읽습니다')
 await click(page.locator('[data-concept-node]', { hasText: 'KL 발산' }).first(), 800)
 await sleep(4800)
 
 // ═══ S4 AI 튜터 — 다른 부 개념 "N부 M장" 안내 + 주제이탈 차단 (로컬 Ollama) ═══
 console.log('▶ S4 튜터')
 await page.goto(`${BASE}/part4/ch/ch11`, { waitUntil: 'networkidle' })
-await cap('막히면 🤖 AI 튜터 — 지금 보는 챕터를 알고, 다른 부에서 배우는 개념은 "N부 M장"까지 답합니다')
+await cap('막히면 🤖 AI 튜터에게. 지금 보는 챕터를 알고, 다른 부에서 배우는 개념은 "N부 M장"까지 답합니다')
 await click(page.locator('button[aria-label="AI 튜터 열기"]'), 900)
 const tutorInput = page.locator('input[placeholder="질문을 입력하세요…"]')
 await click(tutorInput, 100)
@@ -233,7 +233,7 @@ await page.waitForSelector('button:has-text("중지")', { state: 'detached', tim
 const said5_4 = (await page.locator('div.fixed.bottom-24').getByText('5부 4장').count()) > 0
 console.log(`  튜터 답변에 "5부 4장" ${said5_4 ? '포함 ✓' : '없음 — 자막은 그대로 진행'}`)
 await sleep(4500) // 답변 읽을 시간
-await cap('개념 그래프에서 꺼낸 카드 한 장으로 "5부 4장"을 안내합니다 — 벡터 DB 없이, 4B 로컬 모델로')
+await cap('개념 그래프에서 꺼낸 카드 한 장으로 "5부 4장"을 안내합니다. 벡터 DB 없이, 경량 로컬 모델로')
 await sleep(4200)
 await cap('학습과 무관한 질문은 어떻게 될까요?')
 await click(tutorInput, 100)
@@ -241,18 +241,18 @@ await page.keyboard.type('저녁 메뉴 추천해줘', { delay: 45 })
 await page.keyboard.press('Enter')
 await page.waitForSelector('text=도와드릴 수 없어요', { timeout: 25000 }).catch(() => {})
 await sleep(3500)
-await cap('정중히 거절 — 그리고 이 모든 답변은 완전 로컬(내 PC의 Ollama)입니다')
+await cap('정중히 거절합니다. 그리고 이 모든 답변은 완전 로컬(내 PC의 Ollama)입니다')
 await sleep(4200)
-await cap('서버 0 · API 비용 ₩0 · 질문이 PC 밖으로 나간 횟수 0 — 시연장에선 Wi-Fi를 끄고 반복합니다')
+await cap('서버 0 · API 비용 ₩0 · 질문이 PC 밖으로 나간 횟수 0. 시연장에선 Wi-Fi를 끄고 반복합니다')
 await sleep(5200)
 
 // ═══ S5 클로징 — 숫자 한 장 ═════════════════════════════════════════════════
 console.log('▶ S5 클로징')
 await page.goto(`${BASE}/`, { waitUntil: 'networkidle' })
-await cap('118 챕터 · 1,600+ 자동채점 문항 · 131 실습 노트북 · 개념 114개가 이어진 지도 — 운영비 ₩0')
+await cap('118 챕터 · 1,600+ 자동채점 문항 · 131 실습 노트북 · 개념 114개가 이어진 지도, 운영비 ₩0')
 await page.locator('text=자동채점 문항').first().scrollIntoViewIfNeeded()
 await sleep(5500)
-await cap('신입 온보딩부터 전사 AI 리터러시까지 — 오늘 바로 도입할 수 있습니다')
+await cap('신입 온보딩부터 전사 AI 리터러시까지, 오늘 바로 도입할 수 있습니다')
 await sleep(5000)
 
 // ── 마무리: 비디오 저장 → mp4 변환 → SRT ────────────────────────────────────
