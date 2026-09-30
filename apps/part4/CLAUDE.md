@@ -23,7 +23,7 @@ LLM이 *"다음 단어를 확률로 고르는 기계"*이며 그 핵심 부품�
 2. `web/src/chapters/ChapterN.vue` — **`SampleChapter.vue` 구조를 본보기로** 작성.
 3. `web/src/router/index.ts` — 동적 import 라우트 추가 (`:slug` catch-all 위에).
 4. `notebooks/chNN_*.ipynb` — 대응 노트북 (웹과 같은 예제).
-5. `npm run build` 로 검증 → `docs/99_history.md` 에 이력 한 줄.
+5. 루트에서 `npm run build -w apps/part4/web` 로 검증 → `docs/99_history.md` 에 이력 한 줄.
 
 ## 재사용 컴포넌트 (재발명 금지 — 먼저 이걸 쓴다)
 **공용 컴포넌트는 모노레포 `packages/ui`(@series/ui) 에 있다** — `import { Quiz } from '@series/ui'`. 수정은 거기서(옛 "1부 복제·전파" 폐기 — 루트 `CLAUDE.md` 참조). 트랜스포머 전용 랩(`SoftmaxLab` 등)만 `web/src/components/` 에.

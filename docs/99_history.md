@@ -6,6 +6,29 @@
 
 ---
 
+## 2026-09-30
+
+### 📝 9/28 점검 문서·위생 3건 (+ 같은 성격 1건)
+- 루트 CLAUDE.md 가 없는 루트 `npm run build` 를 검증 수단으로 적고 있었다 → 12앱 `npm run build --workspaces --if-present`(CI 와 같은 명령)·
+  한 앱 `-w apps/partN/web`·조립본 `deploy:build` 로. 4부 CLAUDE.md 새 챕터 절차 5단계도 `-w apps/part4/web`.
+- CI 에 `npm run check:ontology` 단계 추가(커밋 훅은 `--no-verify` 로 건너뛸 수 있어 서버에서도 세운다). 워크플로 머리 주석의
+  "커밋 훅은 대비만"도 현행(온톨로지·대비·이관 표)으로.
+- README 통합검색 색인 수 448(장 129 + 개념 위치 319) → 504(장 129 + 개념 위치 375), '비유어↔실무어' → '비유↔실무 용어'.
+- 같이 찾은 것: `docs/TESTING.md` 부별 빌드 반복문(cmd·PowerShell)에 10·11부가 빠져 있었다 → 추가.
+- 검증: check:ontology(exit 0)·check:mermaid 통과, 워크플로 YAML 파싱 확인(단계 8개).
+
+### 🧹 사소한 위생 3건 — 노트북 커널 통일·10부 셀 id·튜터 주소 빈 값
+- **노트북 커널**: 1~4부 `python3` 50권, 5부 `infotheory-venv` 11권 → 공용 `math-platform`("Python (MATH_PLATFORM)")으로(130권 통일).
+  1부 해커톤 데모(Colab 전용, `metadata.colab`)만 `python3` 유지. 옛 커널로는 Jupyter 가 "커널 없음"을 묻거나 시스템 Python 으로 열렸다.
+  JSON 을 다시 쓰면 89권의 서식이 바뀌어서 kernelspec 두 줄만 바꿨다(1·3·5부도 셀은 건드리지 않음 — NotebookEdit 로는 메타데이터를 못 고친다).
+- **1~5부 노트북 README**: 부 폴더마다 venv 를 만들던 옛 안내 → 루트 공용 venv + `math-platform` 커널 등록(정본 docs/TESTING.md 3절),
+  '다음에 다시 열 때'도 루트에서, 5부의 옛 커널 이름 안내도 교체. (커널을 통일했으니 옛 안내대로면 커널 없음이 뜬다.)
+- **10부 노트북 11권**: `nbformat_minor` 5 인데 셀 id 가 없었다(스키마 위반) → 셀마다 `"id": "chNN-MM"` 한 줄(109셀).
+- **튜터 서버 주소**: `VITE_OLLAMA_URL=` 처럼 빈 값이면 `??` 가 빈 문자열을 통과시켜 요청이 현재 사이트 상대 경로로 갔다 →
+  `trim() ||` 로 기본값, 끝의 `/` 제거(packages/tutor/src/ollama.ts).
+- 검증: 노트북 131권 nbformat 엄격 검증 0 실패(셀 id 포함), 커널 지정 없이 자체 kernelspec 으로 1·2·3·4·5·10부 표본 6권 실행 무오류,
+  12앱 빌드, 스모크 160/160·2층 16/16·개인화 8/8, 대비(356)·온톨로지·진단 테스트, 튜터 localhost 연결·LAN 주소 안내 재확인.
+
 ## 2026-09-29
 
 ### 🐞 9/28 전반 점검 결함 #2~#5 해결

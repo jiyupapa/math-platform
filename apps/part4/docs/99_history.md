@@ -4,6 +4,12 @@
 
 ---
 
+## 2026-09-30
+
+### 🧹 노트북 커널을 공용 `math-platform` 으로, 노트북 README 설치 안내를 루트 공용 venv 로
+- 노트북 kernelspec `python3` → `math-platform`("Python (MATH_PLATFORM)", 루트 공용 venv). kernelspec 두 줄만 바꿈(셀 불변).
+- `notebooks/README.md`: 부 폴더마다 venv 를 만들던 옛 안내 → 저장소 맨 위에서 공용 venv + 커널 등록(정본 docs/TESTING.md 3절), 다시 열 때도 루트에서.
+
 ## 2026-09-29
 
 ### 🐞 튜터 '연결 안 됨' 안내에 사내 호스트용 OLLAMA_ORIGINS 설정법 (9/28 점검 #2)

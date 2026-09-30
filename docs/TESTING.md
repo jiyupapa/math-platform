@@ -177,13 +177,13 @@ npm run build --workspaces --if-present
 🪟 **cmd** (한 줄 붙여넣기 — `call` 필수: npm 은 `npm.cmd` 라 안 붙이면 첫 앱에서 멈춘다):
 
 ```cmd
-for %a in (part1 part2 part3 part4 part5 part6 part7 part8 part9 portal) do @echo [%a] & call npm run build -w apps/%a/web
+for %a in (part1 part2 part3 part4 part5 part6 part7 part8 part9 part10 part11 portal) do @echo [%a] & call npm run build -w apps/%a/web
 ```
 
 **PowerShell**:
 
 ```powershell
-foreach ($a in 'part1','part2','part3','part4','part5','part6','part7','part8','part9','portal') {
+foreach ($a in 'part1','part2','part3','part4','part5','part6','part7','part8','part9','part10','part11','portal') {
   Write-Host "=== $a ===" -ForegroundColor Cyan
   npm run build -w "apps/$a/web"
 }
