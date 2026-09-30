@@ -18,29 +18,33 @@
    - 오류가 나면 → https://www.python.org/downloads/ 에서 다운로드해 설치하세요.
      **설치 첫 화면에서 "Add python.exe to PATH" 체크박스를 꼭 체크**하고 Install을 누르면 됩니다.
 
-## 실행: 명령 4줄 붙여넣기
+## 실행: 명령 5줄 붙여넣기
 
-터미널에서 아래를 **한 줄씩** 붙여넣고 Enter (첫 줄의 경로는 이 폴더 위치에 맞게):
+시리즈 전체(1~11부) 노트북이 **저장소 맨 위 폴더의 작업 공간 하나**를 같이 씁니다. 한 번 만들어 두면 다른 부 노트북도 그대로 열려요.
+터미널(PowerShell)에서 아래를 **한 줄씩** 붙여넣고 Enter (첫 줄의 경로는 저장소 위치에 맞게):
 
 ```powershell
-cd C:\STUDY\MATH_PLATFORM\apps\part3\notebooks    # ① 노트북 폴더로 이동
-python -m venv .venv                        # ② 전용 작업 공간 만들기 (최초 1회만)
+cd C:\STUDY\MATH_PLATFORM                   # ① 저장소 맨 위 폴더로 이동
+python -m venv .venv                        # ② 공용 작업 공간 만들기 (최초 1회만)
 .venv\Scripts\Activate.ps1                  # ③ 작업 공간 켜기 (줄 앞에 (.venv)가 붙으면 성공)
 pip install -r requirements.txt             # ④ 필요한 도구 설치 (최초 1회만, 몇 분 걸려요)
+python -m ipykernel install --user --name math-platform --display-name "Python (MATH_PLATFORM)"   # ⑤ 커널 등록 (최초 1회만)
 ```
 
-> 몰라도 되는 용어: ②의 `venv`는 "이 프로젝트만의 독립된 Python 방"입니다.
-> 컴퓨터의 다른 프로그램과 섞이지 않게 해주는 안전장치 — 만들어 두기만 하면 됩니다.
+> 몰라도 되는 용어: ②의 `venv`는 "이 프로젝트만의 독립된 Python 방"입니다. 컴퓨터의 다른 프로그램과 섞이지 않게
+> 해 주는 안전장치라, 만들어 두기만 하면 됩니다. ⑤는 이 방을 노트북(Jupyter)에게 소개하는 절차예요.
+> 노트북들은 이 커널(**Python (MATH_PLATFORM)**)로 열리도록 맞춰져 있습니다.
 > ③에서 "스크립트를 실행할 수 없습니다" 오류가 나면, 같은 창에
 > `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` 를 입력하고 Y를 누른 뒤 ③을 다시 하세요.
 
-마지막으로:
+마지막으로(다음부터는 ①·③과 이 줄만):
 
 ```powershell
 jupyter lab
 ```
 
 브라우저가 자동으로 열립니다 (안 열리면 터미널에 표시된 `http://localhost:8888/...` 주소를 브라우저에 붙여넣기).
+왼쪽 파일 목록에서 `apps/part3/notebooks` 폴더로 들어가면 이 부의 노트북이 있습니다.
 
 ## 노트북 사용법: 버튼 하나면 됩니다
 
@@ -66,14 +70,14 @@ jupyter lab
 - 답변은 로컬 AI 라 가끔 틀릴 수 있어요 — 본문 설명이 우선!
 - 채팅창 대신 "ipywidgets 가 … 없어요" 메시지가 나오면: 노트북 커널이 venv 가 아닌 다른 Python 을
   쓰고 있는 경우입니다. 새 셀에서 `%pip install ipywidgets` 실행 후 커널 재시작(Restart Kernel)이
-  가장 쉽고, 메뉴 `Kernel → Change Kernel` 에서 venv 커널을 골라도 됩니다.
+  가장 쉽고, 메뉴 `Kernel → Change Kernel` 에서 **Python (MATH_PLATFORM)** 커널을 골라도 됩니다.
 
 ## 다음에 다시 열 때
 
-②④는 최초 1회용이므로, 다음부터는 세 줄이면 됩니다:
+②④⑤는 최초 1회용이므로, 다음부터는 세 줄이면 됩니다(브라우저가 열리면 `apps/part3/notebooks` 폴더로):
 
 ```powershell
-cd C:\STUDY\MATH_PLATFORM\apps\part3\notebooks
+cd C:\STUDY\MATH_PLATFORM
 .venv\Scripts\Activate.ps1
 jupyter lab
 ```

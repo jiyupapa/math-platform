@@ -27,7 +27,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 명령어 (npm workspaces — 루트에서 실행)
 
-- 검증 수단은 `npm run build`(vue-tsc 타입체크 포함). `noUnusedLocals`/`noUnusedParameters` 가 켜져 있어 미사용 변수도 에러.
+- 검증 수단은 빌드(vue-tsc 타입체크 포함). **루트에는 `build` 스크립트가 없다** — 12앱 전부는
+  `npm run build --workspaces --if-present`(CI 와 같은 명령), 한 앱만은 `npm run build -w apps/partN/web`, 조립본은 `npm run deploy:build`.
+  `noUnusedLocals`/`noUnusedParameters` 가 켜져 있어 미사용 변수도 에러.
 - 노트북: **루트 공용 venv 하나**(`.venv`, 커널 `math-platform`). 설치·실행·검증은 `docs/TESTING.md` 3절.
 
 ## 공용 컴포넌트 — `packages/ui` (@series/ui)

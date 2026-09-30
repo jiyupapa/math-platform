@@ -1,5 +1,6 @@
-# 빌드 게이트 — push·PR 마다 타입체크·빌드·대비·병합 단위테스트를 돌린다.
-# 커밋 훅(githooks/pre-commit)은 대비만, 그것도 로컬에서만 돈다 → 서버에서도 세운다.
+# 빌드 게이트 — push·PR 마다 타입체크·빌드·대비·온톨로지·단위테스트를 돌린다.
+# 커밋 훅(githooks/pre-commit)도 온톨로지·대비·풀이 기록 이관 표를 검사하지만 로컬에서만 돌고 --no-verify 로 건너뛸 수 있다
+# → 서버에서도 세운다. (이관 표 --check 는 HEAD 대비 작업 트리를 보는 검사라 CI 에선 늘 통과 — 넣지 않는다.)
 # 백엔드 env 없이도 앱은 빌드된다(Supabase/Ollama 미설정 시 no-op) → 시크릿 불필요.
 name: CI
 
@@ -23,6 +24,8 @@ jobs:
         run: npm run build --workspaces --if-present
       - name: 글자 대비 검사 (라이트·다크)
         run: npm run check:contrast
+      - name: 개념 온톨로지 검사 (위치·앵커 실재 · 선수 순환 · 본문 PartLink 대상)
+        run: npm run check:ontology
       - name: 동기화 병합 단위 테스트
         run: node packages/store/src/syncMerge.test.mjs
       - name: 입장 진단 회귀 테스트 (정답 위치 분산 · 옛 답 변환표 · 진단 동기화 판정)

@@ -8,9 +8,11 @@
 // → local↔remote 전환이 코드 수정 없이 설정 변경으로 끝난다. (원격 시 Ollama 서버의 CORS 허용 필요)
 
 // Vite 가 빌드 시 import.meta.env 를 치환. vite/client 타입 의존 없이 안전하게 접근.
-const OLLAMA_URL: string =
-  (import.meta as { env?: Record<string, string | undefined> }).env?.VITE_OLLAMA_URL ??
-  'http://localhost:11434'
+// `||`(`??` 아님): .env 에 `VITE_OLLAMA_URL=` 처럼 값 없이 적으면 빈 문자열이 오는데, 그러면 요청이 현재 사이트의
+// 상대 경로(/api/tags)로 가 버린다 → 비었으면 기본값. 끝의 / 는 떼어 `${OLLAMA_URL}/api/...` 가 // 가 되지 않게.
+const OLLAMA_URL: string = (
+  (import.meta as { env?: Record<string, string | undefined> }).env?.VITE_OLLAMA_URL?.trim() || 'http://localhost:11434'
+).replace(/\/+$/, '')
 
 export const DEFAULT_MODEL = 'gemma4:e2b'
 
