@@ -44,6 +44,8 @@ def kfont(run, name=FONT):
     """라틴·한글(ea)·복합(cs) 모두 같은 글꼴로 — 한글이 테마 기본체로 빠지는 것 방지."""
     run.font.name = name
     rPr = run._r.get_or_add_rPr()
+    rPr.set('lang', 'ko-KR')  # 한국어로 지정해야 PowerPoint 가 한글을 단어 단위로 줄바꿈한다(아래 para 의 eaLnBrk 와 짝)
+    rPr.set('altLang', 'en-US')
     for tag in ('a:latin', 'a:ea', 'a:cs'):
         e = rPr.find(qn(tag))
         if e is None:
@@ -56,6 +58,8 @@ def para(tf, runs, size=13, color=BODY, bold=False, align=PP_ALIGN.LEFT,
          space_before=0, space_after=0, line=None, first=False):
     """단락 추가. runs 는 문자열 하나 또는 [(텍스트, {size,color,bold}) ...]."""
     p = tf.paragraphs[0] if first and not tf.paragraphs[0].runs else tf.add_paragraph()
+    # 한글을 글자가 아니라 단어(띄어쓰기) 단위로 줄바꿈 — 기본값은 "구 / 현돼"처럼 단어 중간에서 끊는다.
+    p._p.get_or_add_pPr().set('eaLnBrk', '0')
     p.alignment = align
     if space_before:
         p.space_before = Pt(space_before)
@@ -344,11 +348,11 @@ notes(s, '시리즈의 핵심 주장("같은 수학이 재등장한다")을 화�
 
 # ═════════════════════════════ ⑦ 완전 로컬 ═════════════════════════════
 s = new_slide()
-chrome(s, 7, '인프라', '완전 로컬: 서버 0 · 비용 ₩0 · 데이터 유출 0')
+chrome(s, 7, '인프라', '기본은 완전 로컬: 서버 0 · 비용 ₩0 · 유출 0')
 trio = [
-    ('서버 0', '정적 웹', '서버 없이 URL 하나로 배포합니다. 사내 파일 서버·정적 호스트면 충분합니다.'),
+    ('서버 0', '정적 웹', '배포는 URL 하나. 학습·진단·튜터 모두 로그인 없이 브라우저에서 돌아갑니다.'),
     ('₩0', '로컬 LLM 튜터', 'AI 튜터가 각자 PC 의 Ollama 로 동작해, 질문이 무제한이어도 비용이 없습니다.'),
-    ('유출 0건', '질문이 밖으로 안 나감', '학습 데이터도 질문도 PC 를 떠나지 않습니다. 보안 검토가 짧아집니다.'),
+    ('유출 0건', '튜터 대화는 밖으로 안 나감', '튜터 대화는 PC 를 떠나지 않습니다. 로그인하지 않으면 학습 기록도 이 브라우저에만 남습니다.'),
 ]
 for i, (n, t, d) in enumerate(trio):
     cx = Inches(0.9 + i * 4.03)
@@ -369,9 +373,14 @@ para(tf, '"KL 발산은 어디서 배워요?" → "5부 5장, 먼저 크로스 �
      size=12.5, color=RGBColor.from_string('E0E7FF'), space_before=8, line=1.3)
 para(tf, '덤: 9부(수치 계산)가 이 인프라 자체를 가르칩니다. "7B 모델이 왜 4GB 로 내 PC 에서 도는가".',
      size=11.5, color=RGBColor.from_string('94A3B8'), space_before=6)
+tf = box(s, Inches(0.9), Inches(6.58), Inches(11.55), Inches(0.4))
+para(tf, [('선택 로그인  ', {'color': INDIGO, 'bold': True}),
+          ('사내 이메일 계정으로 로그인하면 기기 간 진도 동기화와 협업 메모를 씁니다. 서버로 가는 건 완료한 챕터·복습 표시·진단 결과·직접 쓴 메모뿐입니다.', {})],
+     size=11, color=MUTED, first=True)
 notes(s, '오프라인 시연이 곧 보안 답변: 질문·데이터가 외부로 나가지 않음을 눈앞에서 증명. '
          '부 간 안내는 온톨로지 1단계의 결과. 카드 없이는 "N부 2장" 자리표시자를 그대로 출력하던 결함(실측). '
-         '기술 스택 질문 대비: 정적 웹(브라우저 저장) + 로컬 Ollama, 서버·계정 없음.')
+         '기술 스택 질문 대비: 기본은 정적 웹(브라우저 저장) + 로컬 Ollama. 로그인은 선택이고(사내 이메일 도메인만 가입), '
+         '켜면 Supabase 로 진도·복습·진단·협업 메모만 동기화한다. 튜터 대화는 보내지 않고, 원하면 Supabase 를 사내 서버에 직접 설치(self-host)할 수 있다.')
 
 # ═════════════════════════════ ⑦ 숫자 한 장 ═════════════════════════════
 s = new_slide()
@@ -454,8 +463,9 @@ tf.margin_left = tf.margin_right = Inches(0.2)
 tf.margin_top = Inches(0.15)
 para(tf, '온보딩 마찰 0', size=15, color=INDIGO, bold=True, first=True)
 para(tf, '·  URL / QR 로 즉시 접속', size=12.5, color=BODY, space_before=8)
-para(tf, '·  로그인 · 설치 없음', size=12.5, color=BODY, space_before=4)
+para(tf, '·  설치 없이 바로 학습 (로그인은 선택)', size=12.5, color=BODY, space_before=4)
 para(tf, '·  진도 자동 저장 (브라우저)', size=12.5, color=BODY, space_before=4)
+para(tf, '·  사내 계정으로 로그인하면 기기 간 이어짐', size=12.5, color=BODY, space_before=4)
 para(tf, '·  개념 지도 · 용어 대조표로 실무 용어까지', size=12.5, color=BODY, space_before=4)
 qr = card(s, Inches(8.5), Inches(4.7), Inches(3.95), Inches(1.55), fill=WHITE, line_c=MUTED)
 qr.line.dash_style = 2  # 점선 (배포 URL 확정 대기)
@@ -472,7 +482,7 @@ chrome(s, 11, '로드맵', '다음 단계: 파일럿에서 전사로')
 road = [
     ('1  파일럿', '동료 5~10명, 완주율·이탈 지점·진단 체감을 측정'),
     ('2  도입 지점 확정', '온보딩 과정 · 사내 교육 커리큘럼 편입 결정'),
-    ('3  확장', '계정·서버 진도(백엔드), 기기를 넘어 이어지는 학습'),
+    ('3  전사 확장', '사내 호스트에 올려 계정으로 운영. 기기 간 동기화·도입 현황 대시보드는 이미 구현돼 있습니다.'),
 ]
 for i, (t, d) in enumerate(road):
     cx = Inches(0.9 + i * 4.03)
