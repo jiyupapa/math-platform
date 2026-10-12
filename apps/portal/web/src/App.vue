@@ -21,7 +21,7 @@ function openSearch() {
            절대 쪼개지지 않게 한다. 로그인·관리자면 항목이 6개까지 늘어나므로 nav 자체도 wrap. -->
       <div class="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-5 py-3">
         <!-- inline-flex — 인라인 <a> 는 min-height 가 안 먹어 터치 타깃 규칙(base.css)이 무력해진다 -->
-        <RouterLink to="/" class="inline-flex items-center py-1 font-bold whitespace-nowrap text-indigo-700">수포자 사관학교</RouterLink>
+        <RouterLink to="/" class="inline-flex items-center py-1 font-bold whitespace-nowrap text-indigo-700">수포자 아카데미</RouterLink>
         <nav class="flex flex-wrap items-center gap-x-4 gap-y-1">
           <button
             type="button"

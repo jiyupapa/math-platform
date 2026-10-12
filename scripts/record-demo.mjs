@@ -114,7 +114,7 @@ console.log('▶ 녹화 시작 — S1 문제 제기')
 await page.goto(`${BASE}/`, { waitUntil: 'networkidle' })
 await cap('전 직원이 매일 AI를 씁니다. 그런데 원리를 아는 사람은? 원인은 수학입니다')
 await sleep(6000)
-await cap('수포자 사관학교: 진단하고, 경로를 짜고, 옆에서 가르치는 "AI 강사"')
+await cap('수포자 아카데미: 진단하고, 경로를 짜고, 옆에서 가르치는 "AI 강사"')
 await wheel(420, 3, 600)
 await sleep(2200)
 
