@@ -14,7 +14,7 @@ const show = /^\/part\d+\/?$/.test(base)
       data-portal-link
       class="inline-flex items-center gap-1 text-xs font-medium text-slate-500 hover:text-indigo-600 hover:underline"
     >
-      <span aria-hidden="true">←</span> 시리즈 홈 · 수포자 사관학교
+      <span aria-hidden="true">←</span> 시리즈 홈 · 수포자 아카데미
     </a>
   </div>
 </template>

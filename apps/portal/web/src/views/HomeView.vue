@@ -147,7 +147,7 @@ function reset() {
   <main class="mx-auto max-w-3xl px-5 py-10">
     <!-- Hero -->
     <section class="mb-8 text-center">
-      <p class="mb-2 text-sm font-semibold tracking-wide text-indigo-600">수포자 사관학교</p>
+      <p class="mb-2 text-sm font-semibold tracking-wide text-indigo-600">수포자 아카데미</p>
       <h1 class="mb-3 text-3xl font-bold text-slate-900 sm:text-4xl">
         수학을 포기했어도, <span class="text-indigo-600">AI의 원리</span>까지 간다
       </h1>
