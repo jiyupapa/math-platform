@@ -4,76 +4,83 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 개념 온톨로지 한 장 설명 페이지 (심사위원·동료용). 이 파일이 유일본(옛 claude.ai 공유본은 내용이 낡아 2026-09-30 삭제).
-     내용의 정본은 docs/todo_온톨로지_260906.md — 수치를 갱신하면 이 페이지도 같이 고칠 것 (2026-09-06 조립본 기준). -->
+     내용의 정본은 docs/todo_온톨로지_260906.md — 수치를 갱신하면 이 페이지도 같이 고칠 것 (2026-09-06 조립본 기준).
+     디자인은 발표 덱(scripts/build-pitch-deck.py, 2026-10-12 개편)과 맞춘다: 어두운 그라데이션 머리, 밝은 바탕 그림자 카드,
+     인디고→보라 그라데이션, Lucide 선 아이콘(ISC — 아래 <symbol> 로 인라인). -->
 <title>개념 온톨로지 한 장</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
   :root {
-    --ground: #f5f6fa;
+    --ground: #f4f6fb;
     --surface: #ffffff;
-    --surface-2: #eef0f6;
-    --ink: #111827;
-    --ink-2: #3f4658;
-    --ink-3: #6b7285;
-    --line: #d9dce6;
-    --line-2: #c3c8d6;
-    --accent: #4338ca;
-    --accent-ink: #ffffff;
-    --accent-soft: #e6e7fb;
+    --surface-2: #f8fafc;
+    --soft: #eef2ff;
+    --ink: #0f172a;
+    --ink-2: #334155;
+    --ink-3: #5b6478;
+    --line: #e2e8f0;
+    --line-2: #cbd5e1;
+    --accent: #4f46e5;
+    --accent-ink: #312e81;
+    --grad-a: #4f46e5;
+    --grad-b: #7c3aed;
     --teal: #0f766e;
-    --teal-soft: #d9f2ee;
-    --amber: #b45309;
-    --amber-soft: #fdf0d8;
-    --bad-soft: #fde8e8;
-    --bad: #b91c1c;
+    --teal-soft: #ccfbf1;
+    --amber: #92400e;
+    --amber-soft: #fef3c7;
+    --rose: #be123c;
+    --rose-soft: #ffe4e6;
+    --shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 10px 28px rgba(15, 23, 42, 0.08);
     --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
-    --sans: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
-    --serif: "Noto Serif KR", "Apple Myungjo", "Batang", Georgia, serif;
+    --sans: "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", system-ui, sans-serif;
     color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       --ground: #0b1020;
       --surface: #141a2e;
-      --surface-2: #1c2340;
+      --surface-2: #1a2138;
+      --soft: #232b55;
       --ink: #eef0f7;
       --ink-2: #c3c8d8;
-      --ink-3: #9098ad;
+      --ink-3: #9aa2b8;
       --line: #2a3352;
       --line-2: #3a4468;
-      --accent: #a5b0ff;
-      --accent-ink: #0b1020;
-      --accent-soft: #232b55;
+      --accent: #a5b4fc;
+      --accent-ink: #c7d2fe;
       --teal: #5fd4c4;
       --teal-soft: #123b39;
       --amber: #f2b45c;
       --amber-soft: #3b2a10;
-      --bad-soft: #3d1a1a;
-      --bad: #f28b8b;
+      --rose: #fda4af;
+      --rose-soft: #3d1a24;
+      --shadow: 0 0 0 1px #2a3352;
       color-scheme: dark;
     }
   }
   :root[data-theme="dark"] {
     --ground: #0b1020;
     --surface: #141a2e;
-    --surface-2: #1c2340;
+    --surface-2: #1a2138;
+    --soft: #232b55;
     --ink: #eef0f7;
     --ink-2: #c3c8d8;
-    --ink-3: #9098ad;
+    --ink-3: #9aa2b8;
     --line: #2a3352;
     --line-2: #3a4468;
-    --accent: #a5b0ff;
-    --accent-ink: #0b1020;
-    --accent-soft: #232b55;
+    --accent: #a5b4fc;
+    --accent-ink: #c7d2fe;
     --teal: #5fd4c4;
     --teal-soft: #123b39;
     --amber: #f2b45c;
     --amber-soft: #3b2a10;
-    --bad-soft: #3d1a1a;
-    --bad: #f28b8b;
+    --rose: #fda4af;
+    --rose-soft: #3d1a24;
+    --shadow: 0 0 0 1px #2a3352;
     color-scheme: dark;
   }
 
+  * { box-sizing: border-box; }
   body {
     margin: 0;
     background: var(--ground);
@@ -88,125 +95,242 @@
   a:hover { text-decoration: underline; }
   a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
   code, .mono { font-family: var(--mono); font-size: 0.86em; }
-  code { background: var(--surface-2); padding: 0.1em 0.4em; border-radius: 4px; }
-
-  .page { max-width: 64rem; margin: 0 auto; padding: 3.5rem 1.5rem 5rem; }
-  .prose { max-width: 46rem; }
-  h1, h2, h3 { font-family: var(--serif); text-wrap: balance; margin: 0; }
-  h1 { font-size: clamp(2rem, 4vw, 2.75rem); line-height: 1.25; font-weight: 700; }
-  h2 { font-size: 1.5rem; line-height: 1.35; font-weight: 700; }
-  h3 { font-size: 1.05rem; font-weight: 600; font-family: var(--sans); }
   p { margin: 0; }
-  .eyebrow {
-    font-size: 0.78rem; letter-spacing: 0.12em; font-weight: 700; color: var(--ink-3);
-    text-transform: uppercase; margin-bottom: 0.6rem;
+  h1, h2, h3 { margin: 0; text-wrap: balance; }
+
+  /* 아이콘 */
+  .i { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+  .chip {
+    width: 2.6rem; height: 2.6rem; border-radius: 0.75rem; flex: none;
+    display: grid; place-items: center; background: var(--soft); color: var(--accent);
   }
-  .dek { font-size: 1.15rem; color: var(--ink-2); margin-top: 1rem; }
-  .dek strong { color: var(--ink); }
+  .chip.grad { background: linear-gradient(135deg, var(--grad-a), var(--grad-b)); color: #fff; }
+  .chip.teal { background: var(--teal-soft); color: var(--teal); }
+  .chip.amber { background: var(--amber-soft); color: var(--amber); }
 
-  section { margin-top: 3.5rem; }
-  .lead { color: var(--ink-2); margin-top: 0.75rem; }
-  .stack > * + * { margin-top: 1rem; }
+  /* 머리: 덱 표지와 같은 어두운 그라데이션(두 테마 공통) */
+  .hero {
+    color: #fff;
+    background:
+      radial-gradient(52rem 30rem at 92% -18%, rgba(79, 70, 229, 0.5), transparent 62%),
+      radial-gradient(36rem 22rem at -8% 118%, rgba(124, 58, 237, 0.38), transparent 62%),
+      linear-gradient(135deg, #0b1026, #1e1b4b);
+  }
+  .hero-inner { max-width: 64rem; margin: 0 auto; padding: 4.5rem 1.5rem 3.75rem; }
+  .glass-pill {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.3rem 0.9rem; border-radius: 999px; font-size: 0.82rem; font-weight: 700;
+    color: #c7d2fe; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .hero h1 { margin-top: 1.1rem; font-size: clamp(2.3rem, 6vw, 3.6rem); line-height: 1.15; font-weight: 800; letter-spacing: -0.02em; }
+  .grad-text { background: linear-gradient(90deg, #a5b4fc, #d8b4fe); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero .sub { margin-top: 0.5rem; font-size: clamp(1.2rem, 2.6vw, 1.5rem); font-weight: 700; }
+  .hero .dek { margin-top: 1.25rem; max-width: 44rem; font-size: 1.08rem; color: #e2e8f0; }
+  .hero .dek strong { color: #fff; }
+  .hero-stats { display: flex; flex-wrap: wrap; gap: 0; margin-top: 2.25rem; }
+  .hero-stats div { padding: 0 1.75rem; border-left: 1px solid rgba(255, 255, 255, 0.18); }
+  .hero-stats div:first-child { padding-left: 0; border-left: 0; }
+  .hero-stats b { display: block; font-size: 2rem; line-height: 1.2; font-weight: 800; }
+  .hero-stats span { font-size: 0.85rem; font-weight: 700; color: #a5b4fc; }
+  @media (max-width: 34rem) {
+    .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 0; }
+    .hero-stats div { padding: 0 1rem; }
+    .hero-stats div:nth-child(odd) { padding-left: 0; border-left: 0; }
+  }
 
-  /* 반쪽 4벌 */
-  .halves { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; margin-top: 1.25rem; }
-  @media (max-width: 30rem) { .halves { grid-template-columns: 1fr; } }
-  .half { padding: 0.9rem 1rem; border: 1px solid var(--line); background: var(--surface); border-radius: 6px; }
-  .half b { display: block; font-size: 0.95rem; }
-  .half span { color: var(--ink-3); font-size: 0.88rem; }
+  .page { max-width: 64rem; margin: 0 auto; padding: 0.5rem 1.5rem 4rem; }
+  .prose { max-width: 46rem; }
+  section { margin-top: 4rem; }
+  .kicker {
+    display: inline-flex; align-items: center; gap: 0.65rem;
+    padding: 0.28rem 0.9rem; border-radius: 999px; background: var(--soft); color: var(--accent);
+    font-size: 0.82rem; font-weight: 700;
+  }
+  .kicker b { font-family: var(--mono); font-weight: 500; }
+  h2 { margin-top: 0.85rem; font-size: clamp(1.45rem, 3vw, 1.9rem); line-height: 1.3; font-weight: 800; letter-spacing: -0.01em; }
+  .lead { color: var(--ink-2); margin-top: 0.85rem; }
+  .card { background: var(--surface); border-radius: 14px; box-shadow: var(--shadow); }
+
+  /* 네 원천 */
+  .sources { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem; margin-top: 1.5rem; }
+  @media (max-width: 34rem) { .sources { grid-template-columns: 1fr; } }
+  .source { display: flex; gap: 0.9rem; align-items: center; padding: 1rem 1.1rem; }
+  .source b { display: block; font-size: 0.98rem; line-height: 1.4; }
+  .source span { color: var(--ink-3); font-size: 0.88rem; line-height: 1.5; }
 
   /* 전후 */
-  .beforeafter { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 1rem; margin-top: 1.25rem; }
-  .quote { border-radius: 8px; padding: 1rem 1.1rem 1rem; border: 1px solid var(--line); background: var(--surface); position: relative; }
-  .quote .tag { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; padding: 0.15rem 0.5rem; border-radius: 999px; margin-bottom: 0.6rem; }
-  .quote.bad .tag { background: var(--bad-soft); color: var(--bad); }
+  .beforeafter { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+  .quote { padding: 1.15rem 1.25rem 1.1rem; position: relative; overflow: hidden; }
+  .quote::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 4px; }
+  .quote.bad::before { background: var(--rose); }
+  .quote.good::before { background: var(--teal); }
+  .quote .tag {
+    display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; font-weight: 700;
+    padding: 0.18rem 0.65rem 0.18rem 0.5rem; border-radius: 999px; margin-bottom: 0.7rem;
+  }
+  .quote .tag .i { width: 1rem; height: 1rem; }
+  .quote.bad .tag { background: var(--rose-soft); color: var(--rose); }
   .quote.good .tag { background: var(--teal-soft); color: var(--teal); }
-  .quote q { display: block; font-size: 0.95rem; color: var(--ink); quotes: "“" "”"; }
+  .quote q { display: block; font-size: 0.96rem; color: var(--ink); quotes: "“" "”"; }
   .quote q mark { background: none; color: inherit; font-weight: 700; padding: 0; }
-  .quote.bad q mark { color: var(--bad); }
+  .quote.bad q mark { color: var(--rose); }
   .quote.good q mark { color: var(--teal); }
-  .quote .src { display: block; margin-top: 0.6rem; font-size: 0.8rem; color: var(--ink-3); }
+  .quote .src { display: block; margin-top: 0.7rem; font-size: 0.8rem; color: var(--ink-3); }
 
   /* 다이어그램 */
   figure { margin: 1.5rem 0 0; }
-  figure svg { display: block; width: 100%; height: auto; max-width: 100%; }
-  figcaption { font-size: 0.85rem; color: var(--ink-3); margin-top: 0.6rem; }
-  .figwrap { overflow-x: auto; border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 1rem; }
-  .figwrap svg { min-width: 40rem; }
+  .figwrap { overflow-x: auto; padding: 1.25rem; }
+  .figwrap svg { display: block; width: 100%; height: auto; min-width: 40rem; }
+  figcaption { font-size: 0.85rem; color: var(--ink-3); margin-top: 0.75rem; }
 
-  /* 소비처 */
-  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; margin-top: 1.25rem; }
+  /* 읽는 곳 아홉 */
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.85rem; margin-top: 1.5rem; }
   @media (max-width: 52rem) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 34rem) { .grid { grid-template-columns: 1fr; } }
-  .cell { padding: 0.9rem 1rem; border-top: 3px solid var(--line-2); background: var(--surface); }
-  .cell b { display: block; }
-  .cell .where { display: block; margin-top: 0.35rem; color: var(--ink-3); font-size: 0.82rem; }
-  .cell.t1 { border-top-color: var(--accent); }
-  .cell.t2 { border-top-color: var(--teal); }
-  .cell.t3 { border-top-color: var(--amber); }
-  .legend { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.75rem; font-size: 0.82rem; color: var(--ink-3); }
-  .legend i { display: inline-block; width: 1.4rem; height: 3px; vertical-align: middle; margin-right: 0.4rem; background: var(--line-2); }
-  .legend .l1 i { background: var(--accent); } .legend .l2 i { background: var(--teal); } .legend .l3 i { background: var(--amber); }
+  .cell { padding: 1.1rem 1.15rem 1rem; font-size: 0.93rem; color: var(--ink-2); line-height: 1.65; }
+  .cell .chip { width: 2.3rem; height: 2.3rem; border-radius: 0.65rem; margin-bottom: 0.75rem; }
+  .cell .chip .i { width: 1.15rem; height: 1.15rem; }
+  .cell b { display: block; color: var(--ink); font-size: 1rem; margin-bottom: 0.2rem; }
+  .cell .where { display: flex; align-items: center; gap: 0.35rem; margin-top: 0.6rem; color: var(--ink-3); font-size: 0.8rem; }
+  .cell .where .i { width: 0.9rem; height: 0.9rem; }
+  .legend { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; font-size: 0.82rem; }
+  .legend span { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.2rem 0.75rem; border-radius: 999px; font-weight: 700; }
+  .legend .l1 { background: var(--soft); color: var(--accent); }
+  .legend .l2 { background: var(--teal-soft); color: var(--teal); }
+  .legend .l3 { background: var(--amber-soft); color: var(--amber); }
+
+  /* 숫자 */
+  .feature { margin-top: 1.5rem; padding: 1.4rem 1.5rem; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+  @media (max-width: 40rem) { .feature { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .feature .big, .stat .big {
+    display: block; font-size: 2.2rem; line-height: 1.15; font-weight: 800; letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    background: linear-gradient(90deg, var(--grad-a), var(--grad-b)); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .feature span { font-size: 0.88rem; font-weight: 700; color: var(--ink-2); }
+  .feature-note { grid-column: 1 / -1; font-size: 0.85rem; color: var(--ink-3); border-top: 1px solid var(--line); padding-top: 0.8rem; }
+  .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.85rem; margin-top: 0.85rem; }
+  @media (max-width: 52rem) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 34rem) { .stats { grid-template-columns: 1fr; } }
+  .stat { padding: 1.1rem 1.2rem; }
+  .stat .big { font-size: 1.6rem; }
+  .stat b { display: block; margin-top: 0.35rem; font-size: 0.95rem; line-height: 1.45; }
+  .stat span { display: block; margin-top: 0.3rem; font-size: 0.85rem; color: var(--ink-3); line-height: 1.55; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .feature .big, :root:not([data-theme="light"]) .stat .big {
+      background: linear-gradient(90deg, #a5b4fc, #d8b4fe); -webkit-background-clip: text; background-clip: text;
+    }
+  }
+  :root[data-theme="dark"] .feature .big, :root[data-theme="dark"] .stat .big {
+    background: linear-gradient(90deg, #a5b4fc, #d8b4fe); -webkit-background-clip: text; background-clip: text;
+  }
 
   /* 표 */
-  table { border-collapse: collapse; width: 100%; font-size: 0.93rem; margin-top: 1.25rem; }
-  th, td { text-align: left; padding: 0.55rem 0.75rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .tablecard { margin-top: 1.5rem; overflow-x: auto; padding: 0.4rem 1.2rem; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.93rem; }
+  th, td { text-align: left; padding: 0.75rem 0.6rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: 0; }
   th { font-size: 0.78rem; letter-spacing: 0.06em; color: var(--ink-3); font-weight: 700; }
-  td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
-  th.num { text-align: right; }
-  .tablewrap { overflow-x: auto; }
-  .yes { color: var(--teal); font-weight: 700; } .no { color: var(--bad); font-weight: 700; }
+  .badge { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.12rem 0.6rem 0.12rem 0.45rem; border-radius: 999px; font-size: 0.8rem; font-weight: 700; white-space: nowrap; }
+  .badge .i { width: 0.95rem; height: 0.95rem; }
+  .badge.yes { background: var(--teal-soft); color: var(--teal); }
+  .badge.no { background: var(--rose-soft); color: var(--rose); }
 
-  /* Q&A · 순서 */
-  dl { margin: 1.25rem 0 0; }
-  dt { font-weight: 700; margin-top: 1rem; }
-  dd { margin: 0.25rem 0 0; color: var(--ink-2); }
-  ol.steps { margin: 1.25rem 0 0; padding-left: 1.4rem; }
-  ol.steps li { margin-top: 0.5rem; }
-  ol.steps li::marker { font-family: var(--mono); color: var(--ink-3); }
+  /* Q&A */
+  .qa { display: grid; gap: 0.85rem; margin: 1.5rem 0 0; }
+  .qa > div { display: flex; gap: 1rem; padding: 1.15rem 1.25rem; }
+  .qa .q { font-size: 1rem; font-weight: 700; line-height: 1.5; }
+  .qa .a { margin-top: 0.35rem; color: var(--ink-2); }
 
-  footer { margin-top: 4rem; padding-top: 1.25rem; border-top: 1px solid var(--line); font-size: 0.85rem; color: var(--ink-3); }
+  /* 직접 보는 순서: 번호 타임라인 */
+  ol.steps { list-style: none; margin: 1.5rem 0 0; padding: 0; position: relative; }
+  ol.steps::before { content: ""; position: absolute; left: 1.05rem; top: 1.2rem; bottom: 1.2rem; width: 2px; background: linear-gradient(var(--grad-a), var(--grad-b)); opacity: 0.35; }
+  ol.steps li { position: relative; display: flex; gap: 1rem; align-items: center; margin-top: 0.75rem; }
+  ol.steps li:first-child { margin-top: 0; }
+  ol.steps .n {
+    width: 2.1rem; height: 2.1rem; border-radius: 999px; flex: none; display: grid; place-items: center;
+    background: linear-gradient(135deg, var(--grad-a), var(--grad-b)); color: #fff; font-weight: 700; font-size: 0.9rem;
+    box-shadow: 0 0 0 4px var(--ground);
+  }
+  ol.steps .t { padding: 0.8rem 1.1rem; flex: 1; }
+  .note { display: flex; gap: 0.75rem; align-items: flex-start; margin-top: 1.25rem; padding: 0.9rem 1.1rem; border-radius: 12px; background: var(--soft); color: var(--accent-ink); font-size: 0.93rem; }
+  .note .i { margin-top: 0.2rem; color: var(--accent); }
+
+  footer { margin-top: 4.5rem; padding-top: 1.25rem; border-top: 1px solid var(--line); font-size: 0.85rem; color: var(--ink-3); display: flex; gap: 0.75rem; align-items: flex-start; }
+  footer .mark { width: 1.1rem; height: 1.1rem; border-radius: 0.3rem; flex: none; margin-top: 0.25rem; background: linear-gradient(135deg, var(--grad-a), var(--grad-b)); }
   footer .mono { color: var(--ink-2); }
+  footer strong { color: var(--ink-2); }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/> <path d="m21 21-4.3-4.3"/></symbol>
+    <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/> <path d="M14 2v4a2 2 0 0 0 2 2h4"/> <path d="M10 9H8"/> <path d="M16 13H8"/> <path d="M16 17H8"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/> <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/> <circle cx="18" cy="5" r="3"/></symbol>
+    <symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 8V4H8"/> <rect width="16" height="12" x="4" y="8" rx="2"/> <path d="M2 14h2"/> <path d="M20 14h2"/> <path d="M15 13v2"/> <path d="M9 13v2"/></symbol>
+    <symbol id="i-panel-top" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/> <path d="M3 9h18"/></symbol>
+    <symbol id="i-network" viewBox="0 0 24 24"><rect x="16" y="16" width="6" height="6" rx="1"/> <rect x="2" y="16" width="6" height="6" rx="1"/> <rect x="9" y="2" width="6" height="6" rx="1"/> <path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/> <path d="M12 12V8"/></symbol>
+    <symbol id="i-languages" viewBox="0 0 24 24"><path d="m5 8 6 6"/> <path d="m4 14 6-6 2-3"/> <path d="M2 5h12"/> <path d="M7 2h1"/> <path d="m22 22-5-10-5 10"/> <path d="M14 18h6"/></symbol>
+    <symbol id="i-graduation-cap" viewBox="0 0 24 24"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/> <path d="M22 10v6"/> <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></symbol>
+    <symbol id="i-refresh-ccw" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/> <path d="M3 3v5h5"/> <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/> <path d="M16 16h5v5"/></symbol>
+    <symbol id="i-stethoscope" viewBox="0 0 24 24"><path d="M11 2v2"/> <path d="M5 2v2"/> <path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/> <path d="M8 15a6 6 0 0 0 12 0v-3"/> <circle cx="20" cy="10" r="2"/></symbol>
+    <symbol id="i-chart-column" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16"/> <path d="M18 17V9"/> <path d="M13 17V5"/> <path d="M8 17v-3"/></symbol>
+    <symbol id="i-circle-x" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/> <path d="m15 9-6 6"/> <path d="m9 9 6 6"/></symbol>
+    <symbol id="i-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/> <path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/> <path d="M12 16v-4"/> <path d="M12 8h.01"/></symbol>
+    <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/> <circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-message-circle-question" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/> <path d="M12 17h.01"/></symbol>
+  </defs>
+</svg>
 
-<div class="page">
-  <header class="prose">
-    <p class="eyebrow">수포자를 위한 AI 수학 시리즈 · 2026-09-06</p>
+<header class="hero">
+  <div class="hero-inner">
+    <span class="glass-pill">수포자 아카데미 · 개념 온톨로지 · 2026-09-06</span>
     <h1>개념 온톨로지 한 장</h1>
+    <p class="sub"><span class="grad-text">같은 수학이 여러 부에 다시 나온다, 그 지도를 한 파일로</span></p>
     <p class="dek">
       열한 개 부에 흩어져 있던 <strong>같은 수학의 재등장</strong>을 개념 그래프 한 파일로 적고, 검색·튜터·챕터·지도·개인화 아홉 곳이
       그 파일을 읽게 했습니다. 서버도 추론기도 없이, 챕터 본문은 거의 손대지 않고요.
     </p>
-  </header>
-
-  <section class="prose">
-    <p class="eyebrow">왜 필요했나</p>
-    <h2>지식은 이미 있었는데, 네 곳에 따로 있었다</h2>
-    <p class="lead">
-      이 시리즈의 핵심 주장은 "KL 발산은 5부에서 배우고 6부·8부에서 다시 쓴다"처럼 같은 개념이 부를 넘어 되돌아온다는 것입니다.
-      그 관계를 적어 둔 곳이 네 벌이었고, 서로 몰랐습니다.
-    </p>
-    <div class="halves">
-      <div class="half"><b>검색 개념 사전</b><span>개념 65개 · 위치 97곳 · 관계 없음</span></div>
-      <div class="half"><b>README 연결표</b><span>35행 산문 · 본문 78개 파일의 수기 링크와 중복</span></div>
-      <div class="half"><b>포털 학습 경로</b><span>13단계 · 관문 4개 · 개념 단위 아님</span></div>
-      <div class="half"><b>튜터 맥락 11벌</b><span>부마다 손으로 쓴 산문 · 낡음</span></div>
+    <div class="hero-stats">
+      <div><b>114</b><span>개념</span></div>
+      <div><b>446</b><span>관계</span></div>
+      <div><b>9</b><span>읽는 곳</span></div>
+      <div><b>0</b><span>서버 · 추론기</span></div>
     </div>
-    <p class="lead">
+  </div>
+</header>
+
+<main class="page">
+  <section>
+    <div class="prose">
+      <span class="kicker"><b>01</b>왜 필요했나</span>
+      <h2>지식은 이미 있었는데, 네 곳에 따로 있었다</h2>
+      <p class="lead">
+        이 시리즈의 핵심 주장은 "KL 발산은 5부에서 배우고 6부·8부에서 다시 쓴다"처럼 같은 개념이 부를 넘어 되돌아온다는 것입니다.
+        그 관계를 적어 둔 곳이 네 벌이었고, 서로 몰랐습니다.
+      </p>
+    </div>
+    <div class="sources">
+      <div class="card source"><span class="chip"><svg class="i"><use href="#i-search"/></svg></span><div><b>검색 개념 사전</b><span>개념 65개 · 위치 97곳 · 관계 없음</span></div></div>
+      <div class="card source"><span class="chip"><svg class="i"><use href="#i-file-text"/></svg></span><div><b>README 연결표</b><span>35행 산문 · 본문 78개 파일의 수기 링크와 중복</span></div></div>
+      <div class="card source"><span class="chip"><svg class="i"><use href="#i-route"/></svg></span><div><b>포털 학습 경로</b><span>13단계 · 관문 4개 · 개념 단위 아님</span></div></div>
+      <div class="card source"><span class="chip"><svg class="i"><use href="#i-bot"/></svg></span><div><b>튜터 맥락 11벌</b><span>부마다 손으로 쓴 산문 · 낡음</span></div></div>
+    </div>
+    <p class="lead prose" style="margin-top: 1.5rem;">
       증상은 튜터에서 가장 또렷했습니다. 규칙에 "목차에 없는 주제는 이 과정에 없다고 답하라"고 적혀 있는데 목차가 자기 부뿐이라,
       1부 튜터는 2부 개념을 물으면 이렇게 답했습니다.
     </p>
     <div class="beforeafter">
-      <div class="quote bad">
-        <span class="tag">개념 카드 없이</span>
+      <div class="card quote bad">
+        <span class="tag"><svg class="i"><use href="#i-circle-x"/></svg>개념 카드 없이</span>
         <q>연쇄법칙은 여러 변수가 함께 작용할 때 … 이 개념은 <mark>N부 2장 (N부 2장)</mark> 에서 다루고 있습니다.</q>
         <span class="src">gemma3:4b · 1부 튜터 · 2026-09-06 실측 — 자리표시자를 그대로 출력</span>
       </div>
-      <div class="quote good">
-        <span class="tag">개념 카드 붙이면</span>
+      <div class="card quote good">
+        <span class="tag"><svg class="i"><use href="#i-circle-check"/></svg>개념 카드 붙이면</span>
         <q>연쇄법칙은 <mark>2부 6장</mark>에서 처음 배우게 됩니다. 특히 도함수라는 개념을 먼저 이해해야 합니다. <mark>2부 3장</mark>부터 시작해서 2부 6장으로 넘어가시면 …</q>
         <span class="src">같은 모델 · 같은 질문 — 카드 한 장(약 100토큰)만 덧붙임</span>
       </div>
@@ -215,7 +339,7 @@
 
   <section>
     <div class="prose">
-      <p class="eyebrow">무엇을 만들었나</p>
+      <span class="kicker"><b>02</b>무엇을 만들었나</span>
       <h2>정본 하나, 검사기 하나, 읽는 곳 아홉</h2>
       <p class="lead">
         개념마다 <em>처음 배우는 곳</em>, <em>다시 쓰이는 곳과 어떻게</em>, <em>먼저 알아야 하는 개념</em>, <em>별칭</em>, <em>이 과정의 비유</em>를 적습니다.
@@ -223,76 +347,84 @@
       </p>
     </div>
     <figure>
-      <div class="figwrap">
+      <div class="card figwrap">
         <svg viewBox="0 0 960 330" role="img" aria-label="흩어진 네 원천이 정본 concepts.json 하나로 합쳐지고, 검사기를 거쳐 산출물 두 개가 생성되며, 아홉 소비처가 그 산출물을 읽는 흐름" style="color: var(--ink);">
           <defs>
-            <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-              <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"></path>
+            <linearGradient id="g-main" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#4f46e5"></stop>
+              <stop offset="1" stop-color="#7c3aed"></stop>
+            </linearGradient>
+            <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent)"></path>
             </marker>
           </defs>
           <!-- 원천 4 -->
-          <g font-family="Noto Sans KR, sans-serif" font-size="12">
-            <rect x="20" y="30" width="170" height="40" rx="4" fill="none" stroke="currentColor" stroke-opacity="0.35"></rect>
+          <g font-family="Noto Sans KR, Malgun Gothic, sans-serif" font-size="12">
+            <rect x="20" y="30" width="170" height="40" rx="10" fill="var(--surface-2)" stroke="var(--line-2)"></rect>
             <text x="105" y="55" text-anchor="middle" fill="currentColor">검색 개념 사전 65</text>
-            <rect x="20" y="95" width="170" height="40" rx="4" fill="none" stroke="currentColor" stroke-opacity="0.35"></rect>
+            <rect x="20" y="95" width="170" height="40" rx="10" fill="var(--surface-2)" stroke="var(--line-2)"></rect>
             <text x="105" y="120" text-anchor="middle" fill="currentColor">README 연결표 35행</text>
-            <rect x="20" y="160" width="170" height="40" rx="4" fill="none" stroke="currentColor" stroke-opacity="0.35"></rect>
+            <rect x="20" y="160" width="170" height="40" rx="10" fill="var(--surface-2)" stroke="var(--line-2)"></rect>
             <text x="105" y="185" text-anchor="middle" fill="currentColor">캡스톤 용어 대조표 3표</text>
-            <rect x="20" y="225" width="170" height="40" rx="4" fill="none" stroke="currentColor" stroke-opacity="0.35"></rect>
+            <rect x="20" y="225" width="170" height="40" rx="10" fill="var(--surface-2)" stroke="var(--line-2)"></rect>
             <text x="105" y="250" text-anchor="middle" fill="currentColor">본문 상호 링크 151</text>
-            <text x="105" y="295" text-anchor="middle" fill="currentColor" fill-opacity="0.6">전부 손으로 적힌 산문</text>
+            <text x="105" y="295" text-anchor="middle" fill="var(--ink-3)">전부 손으로 적힌 산문</text>
           </g>
           <!-- 합침 화살표 -->
-          <g stroke="currentColor" stroke-width="1.5" fill="none" marker-end="url(#arrow)">
+          <g stroke="var(--accent)" stroke-opacity="0.6" stroke-width="1.5" fill="none" marker-end="url(#arrow)">
             <path d="M 190 50 C 240 50, 250 150, 300 150"></path>
             <path d="M 190 115 C 240 115, 250 150, 300 150"></path>
             <path d="M 190 180 C 240 180, 250 150, 300 150"></path>
             <path d="M 190 245 C 240 245, 250 150, 300 150"></path>
           </g>
-          <text x="245" y="140" font-family="Noto Sans KR, sans-serif" font-size="11" fill="currentColor" fill-opacity="0.7" text-anchor="middle">합침</text>
+          <text x="245" y="140" font-family="Noto Sans KR, Malgun Gothic, sans-serif" font-size="11" font-weight="700" fill="var(--accent)" text-anchor="middle">합침</text>
           <!-- 정본 -->
-          <g font-family="Noto Sans KR, sans-serif">
-            <rect x="302" y="105" width="190" height="90" rx="6" fill="var(--accent)"></rect>
-            <text x="397" y="135" text-anchor="middle" font-size="13" font-weight="700" fill="var(--accent-ink)">정본 concepts.json</text>
-            <text x="397" y="156" text-anchor="middle" font-size="12" fill="var(--accent-ink)">개념 114 · 선수 185 · 다시 쓰임 261</text>
-            <text x="397" y="176" text-anchor="middle" font-size="12" fill="var(--accent-ink)">비유 65 · 앵커 114/114</text>
-            <rect x="302" y="215" width="190" height="52" rx="6" fill="none" stroke="currentColor" stroke-dasharray="4 3"></rect>
-            <text x="397" y="237" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">검사기 · 규칙 9개</text>
-            <text x="397" y="255" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.75">커밋마다 위치·앵커·순환·링크 검사</text>
-            <line x1="397" y1="195" x2="397" y2="215" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)"></line>
+          <g font-family="Noto Sans KR, Malgun Gothic, sans-serif">
+            <rect x="302" y="105" width="190" height="90" rx="14" fill="url(#g-main)"></rect>
+            <text x="397" y="135" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">정본 concepts.json</text>
+            <text x="397" y="156" text-anchor="middle" font-size="11" fill="#e0e7ff">개념 114 · 선수 185 · 다시 쓰임 261</text>
+            <text x="397" y="176" text-anchor="middle" font-size="11" fill="#e0e7ff">비유 65 · 앵커 114/114</text>
+            <rect x="302" y="215" width="190" height="52" rx="12" fill="var(--soft)" stroke="var(--accent)" stroke-dasharray="4 3"></rect>
+            <text x="397" y="237" text-anchor="middle" font-size="12" font-weight="700" fill="var(--accent-ink)">검사기 · 규칙 9개</text>
+            <text x="397" y="255" text-anchor="middle" font-size="11" fill="var(--accent-ink)">커밋마다 위치·앵커·순환·링크 검사</text>
+            <line x1="397" y1="195" x2="397" y2="213" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arrow)"></line>
           </g>
           <!-- 생성 화살표 -->
-          <g stroke="currentColor" stroke-width="1.5" fill="none" marker-end="url(#arrow)">
+          <g stroke="var(--accent)" stroke-opacity="0.6" stroke-width="1.5" fill="none" marker-end="url(#arrow)">
             <path d="M 492 135 C 530 135, 540 95, 580 95"></path>
             <path d="M 492 165 C 530 165, 540 205, 580 205"></path>
           </g>
-          <text x="536" y="150" font-family="Noto Sans KR, sans-serif" font-size="11" fill="currentColor" fill-opacity="0.7" text-anchor="middle">생성</text>
+          <text x="536" y="150" font-family="Noto Sans KR, Malgun Gothic, sans-serif" font-size="11" font-weight="700" fill="var(--accent)" text-anchor="middle">생성</text>
           <!-- 산출물 -->
-          <g font-family="Noto Sans KR, sans-serif" font-size="12">
-            <rect x="582" y="72" width="160" height="46" rx="4" fill="none" stroke="currentColor"></rect>
+          <g font-family="Noto Sans KR, Malgun Gothic, sans-serif" font-size="12">
+            <rect x="582" y="72" width="160" height="46" rx="10" fill="var(--surface)" stroke="var(--accent)" stroke-opacity="0.55"></rect>
             <text x="662" y="91" text-anchor="middle" fill="currentColor" font-weight="700">search-index.json</text>
-            <text x="662" y="108" text-anchor="middle" fill="currentColor" fill-opacity="0.75">색인 504항목</text>
-            <rect x="582" y="182" width="160" height="46" rx="4" fill="none" stroke="currentColor"></rect>
+            <text x="662" y="108" text-anchor="middle" fill="var(--ink-3)">색인 504항목</text>
+            <rect x="582" y="182" width="160" height="46" rx="10" fill="var(--surface)" stroke="var(--accent)" stroke-opacity="0.55"></rect>
             <text x="662" y="201" text-anchor="middle" fill="currentColor" font-weight="700">concept-graph.json</text>
-            <text x="662" y="218" text-anchor="middle" fill="currentColor" fill-opacity="0.75">12개 앱 public 에 63KB</text>
+            <text x="662" y="218" text-anchor="middle" fill="var(--ink-3)">12개 앱 public 에 63KB</text>
           </g>
           <!-- fetch 화살표 -->
-          <g stroke="currentColor" stroke-width="1.5" fill="none" marker-end="url(#arrow)">
-            <path d="M 742 95 C 780 95, 790 60, 830 60"></path>
-            <path d="M 742 205 C 780 205, 785 130, 830 130"></path>
-            <path d="M 742 210 C 790 210, 795 200, 830 200"></path>
-            <path d="M 742 215 C 790 215, 795 270, 830 270"></path>
+          <g stroke="var(--accent)" stroke-opacity="0.6" stroke-width="1.5" fill="none" marker-end="url(#arrow)">
+            <path d="M 742 95 C 780 95, 790 60, 826 60"></path>
+            <path d="M 742 205 C 780 205, 785 130, 826 130"></path>
+            <path d="M 742 210 C 790 210, 795 200, 826 200"></path>
+            <path d="M 742 215 C 790 215, 795 270, 826 270"></path>
           </g>
-          <text x="786" y="160" font-family="Noto Sans KR, sans-serif" font-size="11" fill="currentColor" fill-opacity="0.7" text-anchor="middle">fetch</text>
+          <text x="786" y="160" font-family="Noto Sans KR, Malgun Gothic, sans-serif" font-size="11" font-weight="700" fill="var(--accent)" text-anchor="middle">fetch</text>
           <!-- 소비처 -->
-          <g font-family="Noto Sans KR, sans-serif" font-size="12" fill="currentColor">
-            <text x="832" y="64">검색 팔레트</text>
-            <text x="832" y="120">튜터 (웹 · 노트북)</text>
-            <text x="832" y="138" fill-opacity="0.75" font-size="11">질문 → 개념 카드</text>
-            <text x="832" y="190">챕터 띠 · 개념 지도</text>
-            <text x="832" y="208" fill-opacity="0.75" font-size="11">용어 대조표</text>
-            <text x="832" y="260">복습 경로 · 진단</text>
-            <text x="832" y="278" fill-opacity="0.75" font-size="11">질문 집계</text>
+          <g font-family="Noto Sans KR, Malgun Gothic, sans-serif" font-size="12" fill="currentColor">
+            <circle cx="836" cy="60" r="3.5" fill="var(--accent)"></circle>
+            <text x="846" y="64" font-weight="700">검색 팔레트</text>
+            <circle cx="836" cy="116" r="3.5" fill="var(--accent)"></circle>
+            <text x="846" y="120" font-weight="700">튜터 (웹 · 노트북)</text>
+            <text x="846" y="138" fill="var(--ink-3)" font-size="11">질문 → 개념 카드</text>
+            <circle cx="836" cy="186" r="3.5" fill="var(--teal)"></circle>
+            <text x="846" y="190" font-weight="700">챕터 띠 · 개념 지도</text>
+            <text x="846" y="208" fill="var(--ink-3)" font-size="11">용어 대조표</text>
+            <circle cx="836" cy="256" r="3.5" fill="var(--amber)"></circle>
+            <text x="846" y="260" font-weight="700">복습 경로 · 진단</text>
+            <text x="846" y="278" fill="var(--ink-3)" font-size="11">질문 집계</text>
           </g>
         </svg>
       </div>
@@ -302,88 +434,102 @@
 
   <section>
     <div class="prose">
-      <p class="eyebrow">읽는 곳 아홉</p>
+      <span class="kicker"><b>03</b>읽는 곳 아홉</span>
       <h2>같은 파일이 화면마다 다른 일을 한다</h2>
     </div>
     <div class="grid">
-      <div class="cell t1"><b>AI 튜터, 웹과 노트북</b>질문에 나온 개념 카드를 붙여 다른 부 개념도 "N부 M장"으로 안내<span class="where">각 부 오른쪽 아래 · notebooks/tutor.py</span></div>
-      <div class="cell t1"><b>검색 팔레트</b>결과 아래 "먼저 볼 것 · 다시 만나는 곳 · 이 과정에서는 '목줄'"<span class="where">어디서든 Ctrl+K</span></div>
-      <div class="cell t1"><b>챕터 띠</b>129개 장 상단에 처음 배우는 개념 · 먼저 알아 둘 것 · 다시 만나는 곳<span class="where">각 부 챕터 페이지 상단</span></div>
-      <div class="cell t2"><b>개념 지도</b>부별 행에 펼친 114개 개념, 누르면 선수 사슬과 다음 개념이 선으로<span class="where">포털 /concepts</span></div>
-      <div class="cell t2"><b>용어 대조표</b>65개 비유와 실무 용어의 짝, 세 부의 대조표를 한 곳에<span class="where">포털 /glossary</span></div>
-      <div class="cell t2"><b>7부 8장 4절</b>이 사이트가 쓰는 기법 자체를 가르친다. 지식 그래프와 GraphRAG<span class="where">7부 8장 "벡터로 부족할 때"</span></div>
-      <div class="cell t3"><b>복습 경로</b>복습 표시한 개념에서 선수 개념까지 먼 것부터 한 줄로<span class="where">포털 홈, 표시가 있을 때</span></div>
-      <div class="cell t3"><b>진단 결과</b>틀린 문항을 "다시 볼 개념"으로 이름 붙이고 지도에 표시<span class="where">포털 홈 · 개념 지도</span></div>
-      <div class="cell t3"><b>질문 집계</b>여러 부의 질문을 개념으로 묶어 어디가 막히는지 본다<span class="where">포털 도입 현황, 로그인</span></div>
+      <div class="card cell"><span class="chip"><svg class="i"><use href="#i-bot"/></svg></span><b>AI 튜터, 웹과 노트북</b>질문에 나온 개념 카드를 붙여 다른 부 개념도 "N부 M장"으로 안내<span class="where"><svg class="i"><use href="#i-map-pin"/></svg>각 부 오른쪽 아래 · notebooks/tutor.py</span></div>
+      <div class="card cell"><span class="chip"><svg class="i"><use href="#i-search"/></svg></span><b>검색 팔레트</b>결과 아래 "먼저 볼 것 · 다시 만나는 곳 · 이 과정에서는 '목줄'"<span class="where"><svg class="i"><use href="#i-map-pin"/></svg>어디서든 Ctrl+K</span></div>
+      <div class="card cell"><span class="chip"><svg class="i"><use href="#i-panel-top"/></svg></span><b>챕터 띠</b>129개 장 상단에 처음 배우는 개념 · 먼저 알아 둘 것 · 다시 만나는 곳<span class="where"><svg class="i"><use href="#i-map-pin"/></svg>각 부 챕터 페이지 상단</span></div>
+      <div class="card cell"><span class="chip teal"><svg class="i"><use href="#i-network"/></svg></span><b>개념 지도</b>부별 행에 펼친 114개 개념, 누르면 선수 사슬과 다음 개념이 선으로<span class="where"><svg class="i"><use href="#i-map-pin"/></svg>포털 /concepts</span></div>
+      <div class="card cell"><span class="chip teal"><svg class="i"><use href="#i-languages"/></svg></span><b>용어 대조표</b>65개 비유와 실무 용어의 짝, 세 부의 대조표를 한 곳에<span class="where"><svg class="i"><use href="#i-map-pin"/></svg>포털 /glossary</span></div>
+      <div class="card cell"><span class="chip teal"><svg class="i"><use href="#i-graduation-cap"/></svg></span><b>7부 8장 4절</b>이 사이트가 쓰는 기법 자체를 가르친다. 지식 그래프와 GraphRAG<span class="where"><svg class="i"><use href="#i-map-pin"/></svg>7부 8장 "벡터로 부족할 때"</span></div>
+      <div class="card cell"><span class="chip amber"><svg class="i"><use href="#i-refresh-ccw"/></svg></span><b>복습 경로</b>복습 표시한 개념에서 선수 개념까지 먼 것부터 한 줄로<span class="where"><svg class="i"><use href="#i-map-pin"/></svg>포털 홈, 표시가 있을 때</span></div>
+      <div class="card cell"><span class="chip amber"><svg class="i"><use href="#i-stethoscope"/></svg></span><b>진단 결과</b>틀린 문항을 "다시 볼 개념"으로 이름 붙이고 지도에 표시<span class="where"><svg class="i"><use href="#i-map-pin"/></svg>포털 홈 · 개념 지도</span></div>
+      <div class="card cell"><span class="chip amber"><svg class="i"><use href="#i-chart-column"/></svg></span><b>질문 집계</b>여러 부의 질문을 개념으로 묶어 어디가 막히는지 본다<span class="where"><svg class="i"><use href="#i-map-pin"/></svg>포털 도입 현황, 로그인</span></div>
     </div>
     <div class="legend">
-      <span class="l1"><i></i>학습 중에 만난다</span>
-      <span class="l2"><i></i>시리즈 전체를 본다</span>
-      <span class="l3"><i></i>내 데이터에 반응한다</span>
+      <span class="l1">학습 중에 만난다</span>
+      <span class="l2">시리즈 전체를 본다</span>
+      <span class="l3">내 데이터에 반응한다</span>
     </div>
   </section>
 
-  <section class="prose">
-    <p class="eyebrow">숫자</p>
-    <h2>커밋마다 다시 세어지는 값</h2>
-    <div class="tablewrap">
-      <table>
-        <thead><tr><th>항목</th><th class="num">값</th><th>뜻</th></tr></thead>
-        <tbody>
-          <tr><td>개념 / 선수 관계 / 다시 쓰임 관계 / 비유</td><td class="num">114 / 185 / 261 / 65</td><td>정본 한 파일의 내용</td></tr>
-          <tr><td>처음 배우는 곳 섹션 앵커 · 장 커버리지</td><td class="num">114/114 · 129/129</td><td>모든 개념이 실제 섹션에, 모든 장에 개념이 있다</td></tr>
-          <tr><td>본문 상호 링크 실재 확인</td><td class="num">151</td><td>검사기가 커밋마다 대상 장의 존재를 확인</td></tr>
-          <tr><td>검사기가 찾아낸 누락 연결 후보 · 채운 것</td><td class="num">58 · 50</td><td>남은 경고 6건은 "더 가고 싶다면" 식 안내 링크라 의도적으로 둠</td></tr>
-          <tr><td>검색 색인 항목</td><td class="num">226 → 504</td><td>다시 쓰이는 곳까지 항목이 되어 검색 결과가 늘었다</td></tr>
-          <tr><td>조립본 스모크 · 개인화 검증</td><td class="num">160/160 · 8/8</td><td>129개 장과 포털 화면 렌더, 시드한 진도·표시·진단 반응</td></tr>
-          <tr><td>튜터 카드 한 장의 크기</td><td class="num">약 100토큰</td><td>경량 로컬 모델에 부담이 없다 · 비용 0원</td></tr>
-        </tbody>
-      </table>
+  <section>
+    <div class="prose">
+      <span class="kicker"><b>04</b>숫자</span>
+      <h2>커밋마다 다시 세어지는 값</h2>
+    </div>
+    <div class="card feature">
+      <div><b class="big">114</b><span>개념</span></div>
+      <div><b class="big">185</b><span>선수 관계</span></div>
+      <div><b class="big">261</b><span>다시 쓰임 관계</span></div>
+      <div><b class="big">65</b><span>비유</span></div>
+      <p class="feature-note">정본 한 파일의 내용</p>
+    </div>
+    <div class="stats">
+      <div class="card stat"><span class="big">114/114 · 129/129</span><b>처음 배우는 곳 섹션 앵커 · 장 커버리지</b><span>모든 개념이 실제 섹션에, 모든 장에 개념이 있다</span></div>
+      <div class="card stat"><span class="big">151</span><b>본문 상호 링크 실재 확인</b><span>검사기가 커밋마다 대상 장의 존재를 확인</span></div>
+      <div class="card stat"><span class="big">58 · 50</span><b>검사기가 찾아낸 누락 연결 후보 · 채운 것</b><span>남은 경고 6건은 "더 가고 싶다면" 식 안내 링크라 의도적으로 둠</span></div>
+      <div class="card stat"><span class="big">226 → 504</span><b>검색 색인 항목</b><span>다시 쓰이는 곳까지 항목이 되어 검색 결과가 늘었다</span></div>
+      <div class="card stat"><span class="big">160/160 · 8/8</span><b>조립본 스모크 · 개인화 검증</b><span>129개 장과 포털 화면 렌더, 시드한 진도·표시·진단 반응</span></div>
+      <div class="card stat"><span class="big">약 100토큰</span><b>튜터 카드 한 장의 크기</b><span>경량 로컬 모델에 부담이 없다 · 비용 0원</span></div>
     </div>
   </section>
 
-  <section class="prose">
-    <p class="eyebrow">온톨로지라 부를 수 있나</p>
-    <h2>채택한 것과 일부러 뺀 것</h2>
-    <div class="tablewrap">
+  <section>
+    <div class="prose">
+      <span class="kicker"><b>05</b>온톨로지라 부를 수 있나</span>
+      <h2>채택한 것과 일부러 뺀 것</h2>
+    </div>
+    <div class="card tablecard">
       <table>
         <thead><tr><th>뜻</th><th>채택</th><th>이유</th></tr></thead>
         <tbody>
-          <tr><td>개념 어휘 + 관계의 타입 + 콘텐츠 위치를 기계가 읽는 형식으로</td><td class="yes">채택</td><td>규모 114개에 맞고 소비처가 전부 이미 있었다</td></tr>
-          <tr><td>SKOS 수준의 어휘 체계 (별칭·관련·선수)</td><td class="yes">채택</td><td>검색·튜터·화면 문장이 필요로 하는 수준</td></tr>
-          <tr><td>OWL 추론 · 트리플스토어 · SPARQL · 서버</td><td class="no">제외</td><td>정적 배포·비용 0·결정적 동작 원칙에 어긋난다</td></tr>
-          <tr><td>운영 데이터용 객체·링크·액션 온톨로지</td><td class="no">제외</td><td>우리 객체는 학습 콘텐츠지 업무 데이터가 아니다</td></tr>
+          <tr><td>개념 어휘 + 관계의 타입 + 콘텐츠 위치를 기계가 읽는 형식으로</td><td><span class="badge yes"><svg class="i"><use href="#i-circle-check"/></svg>채택</span></td><td>규모 114개에 맞고 소비처가 전부 이미 있었다</td></tr>
+          <tr><td>SKOS 수준의 어휘 체계 (별칭·관련·선수)</td><td><span class="badge yes"><svg class="i"><use href="#i-circle-check"/></svg>채택</span></td><td>검색·튜터·화면 문장이 필요로 하는 수준</td></tr>
+          <tr><td>OWL 추론 · 트리플스토어 · SPARQL · 서버</td><td><span class="badge no"><svg class="i"><use href="#i-circle-x"/></svg>제외</span></td><td>정적 배포·비용 0·결정적 동작 원칙에 어긋난다</td></tr>
+          <tr><td>운영 데이터용 객체·링크·액션 온톨로지</td><td><span class="badge no"><svg class="i"><use href="#i-circle-x"/></svg>제외</span></td><td>우리 객체는 학습 콘텐츠지 업무 데이터가 아니다</td></tr>
         </tbody>
       </table>
     </div>
-    <dl>
-      <dt>그냥 JSON 파일 아닌가요?</dt>
-      <dd>파일 형식은 JSON입니다. 온톨로지인 이유는 관계에 타입이 있고, 검사기가 규칙을 지키며, 아홉 곳이 같은 파일을 읽어 같은 답을 하기 때문입니다. 형식이 아니라 계약이 온톨로지입니다.</dd>
-      <dt>왜 벡터 DB와 RAG로 튜터를 접지하지 않았나요?</dt>
-      <dd>129개 장 규모에서는 손으로 큐레이션한 그래프가 더 정확하고, 같은 질문에 같은 카드를 내며, 오프라인에서 돕니다. 7부 8장은 벡터 검색이 관계를 모를 때 그래프가 필요한 이유를 학습자에게 가르치는데, 이 사이트가 그 사례입니다.</dd>
-      <dt>유지 비용은?</dt>
-      <dd>정본 한 파일만 고치면 아홉 곳이 따라옵니다. 개념 id는 앵커처럼 배포 후 바꾸지 않고, 커밋 훅이 위치·앵커·순환·링크를 잡아 줍니다.</dd>
-    </dl>
+    <div class="qa">
+      <div class="card"><span class="chip grad"><svg class="i"><use href="#i-message-circle-question"/></svg></span><div>
+        <h3 class="q">그냥 JSON 파일 아닌가요?</h3>
+        <p class="a">파일 형식은 JSON입니다. 온톨로지인 이유는 관계에 타입이 있고, 검사기가 규칙을 지키며, 아홉 곳이 같은 파일을 읽어 같은 답을 하기 때문입니다. 형식이 아니라 계약이 온톨로지입니다.</p>
+      </div></div>
+      <div class="card"><span class="chip grad"><svg class="i"><use href="#i-message-circle-question"/></svg></span><div>
+        <h3 class="q">왜 벡터 DB와 RAG로 튜터를 접지하지 않았나요?</h3>
+        <p class="a">129개 장 규모에서는 손으로 큐레이션한 그래프가 더 정확하고, 같은 질문에 같은 카드를 내며, 오프라인에서 돕니다. 7부 8장은 벡터 검색이 관계를 모를 때 그래프가 필요한 이유를 학습자에게 가르치는데, 이 사이트가 그 사례입니다.</p>
+      </div></div>
+      <div class="card"><span class="chip grad"><svg class="i"><use href="#i-message-circle-question"/></svg></span><div>
+        <h3 class="q">유지 비용은?</h3>
+        <p class="a">정본 한 파일만 고치면 아홉 곳이 따라옵니다. 개념 id는 앵커처럼 배포 후 바꾸지 않고, 커밋 훅이 위치·앵커·순환·링크를 잡아 줍니다.</p>
+      </div></div>
+    </div>
   </section>
 
-  <section class="prose">
-    <p class="eyebrow">직접 보는 순서</p>
-    <h2>3분이면 다 만난다</h2>
-    <ol class="steps">
-      <li>어느 부에서든 Ctrl+K를 누르고 <b>조련</b>을 칩니다. 6부와 함께 "밖에서는 post-training"이 뜹니다.</li>
-      <li>1부 튜터에게 <b>"KL 발산은 어디서 배워요?"</b>를 묻습니다. 5부 5장과 먼저 볼 개념을 답합니다.</li>
-      <li>포털 <b>개념 지도</b>에서 KL 발산을 누릅니다. 선수 사슬과 다음 개념이 선으로 이어집니다.</li>
-      <li>진단을 한 뒤 홈으로 옵니다. 틀린 문항이 <b>"다시 볼 개념"</b>으로 이름 붙어 있습니다.</li>
-      <li>7부 8장 4절을 엽니다. 방금 본 튜터가 왜 그렇게 답하는지를 <b>학습자에게 가르치는 절</b>입니다.</li>
+  <section>
+    <div class="prose">
+      <span class="kicker"><b>06</b>직접 보는 순서</span>
+      <h2>3분이면 다 만난다</h2>
+    </div>
+    <ol class="steps prose">
+      <li><span class="n">1</span><div class="card t">어느 부에서든 Ctrl+K를 누르고 <b>조련</b>을 칩니다. 6부와 함께 "밖에서는 post-training"이 뜹니다.</div></li>
+      <li><span class="n">2</span><div class="card t">1부 튜터에게 <b>"KL 발산은 어디서 배워요?"</b>를 묻습니다. 5부 5장과 먼저 볼 개념을 답합니다.</div></li>
+      <li><span class="n">3</span><div class="card t">포털 <b>개념 지도</b>에서 KL 발산을 누릅니다. 선수 사슬과 다음 개념이 선으로 이어집니다.</div></li>
+      <li><span class="n">4</span><div class="card t">진단을 한 뒤 홈으로 옵니다. 틀린 문항이 <b>"다시 볼 개념"</b>으로 이름 붙어 있습니다.</div></li>
+      <li><span class="n">5</span><div class="card t">7부 8장 4절을 엽니다. 방금 본 튜터가 왜 그렇게 답하는지를 <b>학습자에게 가르치는 절</b>입니다.</div></li>
     </ol>
-    <p class="lead">조립본에서 열어야 합니다. 진도 겹치기와 부 간 링크는 열두 앱이 한 주소 아래 있을 때만 동작합니다.</p>
+    <p class="note prose"><svg class="i"><use href="#i-info"/></svg><span>조립본에서 열어야 합니다. 진도 겹치기와 부 간 링크는 열두 앱이 한 주소 아래 있을 때만 동작합니다.</span></p>
   </section>
 
-  <footer class="prose">
-    정본 <span class="mono">scripts/ontology/concepts.json</span> · 설계와 결과 <span class="mono">docs/todo_온톨로지_260906.md</span> ·
-    커밋 <span class="mono">a4e1273</span>, <span class="mono">fcacca8</span> · 검증 수치는 2026-09-06 조립본 기준
+  <footer>
+    <span class="mark" aria-hidden="true"></span>
+    <p><strong>수포자 아카데미</strong> · 정본 <span class="mono">scripts/ontology/concepts.json</span> · 설계와 결과 <span class="mono">docs/todo_온톨로지_260906.md</span> ·
+    커밋 <span class="mono">a4e1273</span>, <span class="mono">fcacca8</span> · 검증 수치는 2026-09-06 조립본 기준</p>
   </footer>
-</div>
+</main>
 
 </body>
 </html>
