@@ -24,6 +24,7 @@ export const PARTS = [
   { n: 9, title: '수치 계산' },
   { n: 10, title: '스케일링과 평가' },
   { n: 11, title: '에이전트와 추론' },
+  { n: 12, title: '시스템 다이내믹스' },
 ]
 
 export const partTitle = (n) => PARTS.find((p) => p.n === n)?.title ?? `${n}부`

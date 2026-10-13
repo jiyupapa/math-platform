@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 항목 옆 협업 주석 마커 — 개수 배지 + 클릭 시 NotePanel 토글.
-// **partNumberKey 를 주입한 부에서만 렌더된다** — 미주입 부(현재 part2~11)에선 아무것도 안 그린다.
+// **partNumberKey 를 주입한 부에서만 렌더된다** — 미주입 부에선 아무것도 안 그린다(현재 전 12부 주입).
 // 지금은 ReviewFlag 가 섹션마다 이 마커를 얹어 준다(섹션 앵커 chN-sM 재사용, 콘텐츠 수정 0).
 // 임의 항목(개념카드·문제)으로 넓힐 땐 이 컴포넌트를 그 자리에 직접 두면 된다(설계노트 §6 2차).
 import { computed, inject, onUnmounted, ref, watch } from 'vue'

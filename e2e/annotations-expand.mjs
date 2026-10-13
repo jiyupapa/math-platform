@@ -1,4 +1,4 @@
-// 부 확대 — 전 11부에 💬 가 켜졌는가 + **부 격리**.
+// 부 확대 — 전 12부에 💬 가 켜졌는가 + **부 격리**.
 // 핵심 리스크: 여러 부가 같은 챕터 슬러그(ch1)·같은 앵커 id(ch1-s1)를 쓰고 part 컬럼만이 구분자다.
 // 부 번호를 잘못 주입하면 남의 부 메모가 조용히 섞인다 → 양방향으로 확인한다.
 import {
@@ -21,15 +21,15 @@ const ctx = await browser.newContext()
 const page = await loginPage(ctx, CONFIG.userA)
 r.check('로그인', (await page.locator(`text=${CONFIG.userA}`).count()) > 0)
 
-r.section('확대 — 전 11부에서 마커가 뜨는가')
+r.section('확대 — 전 12부에서 마커가 뜨는가')
 const counts = {}
-for (const p of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]) {
+for (const p of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]) {
   await page.goto(`${CONFIG.base}/part${p}/ch/ch1`, { waitUntil: 'domcontentloaded' })
   await sleep(1800)
   counts[p] = await page.locator('.nm-btn').count()
 }
 const zero = Object.entries(counts).filter(([, n]) => n === 0).map(([p]) => `part${p}`)
-r.check('전 11부에 💬 마커 렌더', zero.length === 0, `→ ${JSON.stringify(counts)}`)
+r.check('전 12부에 💬 마커 렌더', zero.length === 0, `→ ${JSON.stringify(counts)}`)
 
 r.section('격리 — 같은 앵커라도 부가 다르면 안 섞인다')
 await page.goto(`${CONFIG.base}/part2/ch/ch1`, { waitUntil: 'domcontentloaded' })

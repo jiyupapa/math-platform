@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 이 저장소의 정체
 
-"수포자를 위한 AI 수학 시리즈"를 하나로 묶은 **모노레포**(npm workspaces). 11개 부의 웹 앱 + 통합 포털 +
+"수포자를 위한 AI 수학 시리즈"를 하나로 묶은 **모노레포**(npm workspaces). 12개 부의 웹 앱 + 통합 포털 +
 공용 컴포넌트 패키지가 한 git 저장소 안에 있다.
 
 기원: 원래 1부(선형대수)만 회사 해커톤 출품 목적이었고, 5부작으로 확장된 뒤 이 모노레포로 통합됐다.
@@ -27,7 +27,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 명령어 (npm workspaces — 루트에서 실행)
 
-- 검증 수단은 빌드(vue-tsc 타입체크 포함). **루트에는 `build` 스크립트가 없다** — 12앱 전부는
+- 검증 수단은 빌드(vue-tsc 타입체크 포함). **루트에는 `build` 스크립트가 없다** — 13앱 전부는
   `npm run build --workspaces --if-present`(CI 와 같은 명령), 한 앱만은 `npm run build -w apps/partN/web`, 조립본은 `npm run deploy:build`.
   `noUnusedLocals`/`noUnusedParameters` 가 켜져 있어 미사용 변수도 에러.
 - 노트북: **루트 공용 venv 하나**(`.venv`, 커널 `math-platform`). 설치·실행·검증은 `docs/TESTING.md` 3절.
@@ -44,26 +44,26 @@ QuizSet↔StepQuiz 그룹 계약(`quizGroupKey`/`QuizGroup` — `quizGroup.ts`)�
   (HEAD 대비 바뀐 문구를 `packages/ui/src/quizAliases.ts` 에 옛 → 새로 추가 — QuizSet 이 읽을 때 이어 준다).
   커밋 훅이 `--check` 로 빠진 것을 막는다. 문제를 넣거나 뺀 파일은 자동으로 짝짓지 않으니 표에 직접 적을 것.
 - 패키지는 **주제 중립** 유지. 앱전용 결합은 **provide/inject** 로 분리 — 각 앱 `main.ts` 가 주입:
-  - `storagePrefixKey` — QuizSet 저장 접두사. part1=`la` part2=`diff` part3=`stat` part4=`tf` part5=`it` part6=`tame` part7=`emb` part8=`opt` part9=`num` part10=`scale` part11=`agent` portal=`hub`.
+  - `storagePrefixKey` — QuizSet 저장 접두사. part1=`la` part2=`diff` part3=`stat` part4=`tf` part5=`it` part6=`tame` part7=`emb` part8=`opt` part9=`num` part10=`scale` part11=`agent` part12=`sd` portal=`hub`.
     **바꾸면 사용자 진도가 끊긴다.** 포털은 진단 결과 저장(`hub-diagnosis-v1`·`hub-baseline-v1`)에 쓰고,
     각 부 진도(`{prefix}-progress-v1`)를 읽어 지도에 표시하므로 부 접두사 변경은 포털 연동도 깨뜨린다.
   - `reviewApiKey` — ReviewFlag ↔ 각 앱 `review` 스토어.
-  - `notebookResolverKey` — NotebookCard ↔ 각 앱 `chapters`(part1·4·5·6·7·8·9·10·11).
+  - `notebookResolverKey` — NotebookCard ↔ 각 앱 `chapters`(part1·4·5·6·7·8·9·10·11·12).
   - `conceptGraphKey` — `ConceptStrip`(장 상단 개념 띠)이 읽는 `concept-graph.json` URL. **미주입이면 `<base>concept-graph.json`**
-    이라 12앱 main.ts 가 안 건드린다. 띠는 각 부 `App.vue` 의 `<RouterView>` 위 한 줄로 마운트되고 챕터 라우트에서만 렌더된다.
+    이라 13앱 main.ts 가 안 건드린다. 띠는 각 부 `App.vue` 의 `<RouterView>` 위 한 줄로 마운트되고 챕터 라우트에서만 렌더된다.
   - `partNumberKey` — **협업 주석(NoteMarker/NotePanel) 게이트**: 부 번호를 주입한 부에서만 💬 마커가
-    렌더된다(**전 11부 주입 완료**). 값이 곧 Supabase `annotations.part` 라 **부 번호가 틀리면 남의 부
+    렌더된다(**전 12부 주입 완료**). 값이 곧 Supabase `annotations.part` 라 **부 번호가 틀리면 남의 부
     메모가 섞인다** — 같은 챕터 슬러그(`ch1`)·앵커 id(`ch1-s1`)를 여러 부가 공유하므로 part 가 유일한
     구분자다. 임의 항목 앵커는 `ConceptCard`·`Quiz`·`StepQuiz`·`MathBlock` 의 `anchorId`
     prop — 네이밍 정본 `{chapter}-{type}-{slug}` 와 금지사항(자동 인덱스·배포 후 변경 금지)은
     `packages/ui/src/anchor.ts` 참조. 설계: `docs/todo_협업주석_260716.md`.
-- 소스 `.vue` 패키지라 각 앱 설정에: `vite.config.ts` 의 `optimizeDeps.exclude`(전 12앱 = `['@series/ui', '@series/tutor', '@series/store']`),
+- 소스 `.vue` 패키지라 각 앱 설정에: `vite.config.ts` 의 `optimizeDeps.exclude`(전 13앱 = `['@series/ui', '@series/tutor', '@series/store']`),
   `style.css` 의 `@source '../../../../packages/ui/src'`(Tailwind 가 패키지 클래스 스캔 — 빠지면 스타일이 조용히 누락),
   `style.css` 의 `@import '../../../../packages/ui/src/base.css'`(아래 공용 CSS).
-- **공용 CSS 2벌도 `packages/ui` 에 있다** — 12개 앱의 `style.css` 가 `base.css` 하나만 import 하면 딸려온다:
+- **공용 CSS 2벌도 `packages/ui` 에 있다** — 13개 앱의 `style.css` 가 `base.css` 하나만 import 하면 딸려온다:
   - `base.css` — 읽기 열(`article > *` 46rem 가운데 정렬)·제목 위계·`focus-visible` 링·터치 타깃·`prefers-reduced-motion`.
     **레이어 밖(unlayered) 평범한 CSS 로 쓴다** — Tailwind v4 가 유틸리티를 `@layer` 에 넣으므로 레이어 밖 규칙이
-    마크업에 박힌 `text-xl`·`focus:outline-none` 을 이긴다. 덕분에 129개 챕터를 안 건드리고 본문 리듬을 바꾼다.
+    마크업에 박힌 `text-xl`·`focus:outline-none` 을 이긴다. 덕분에 142개 챕터를 안 건드리고 본문 리듬을 바꾼다.
   - `tokens.css` — **데모 색 토큰 `--c-*`.** SVG 데모·차트에서 **hex 를 직접 쓰지 말고 토큰을 쓴다**
     (`stroke="var(--c-slate-200)"`, `{ color: 'var(--c-indigo-500)' }`). SVG 표현 속성의 `var()` 는 정상 동작하고,
     Chart.js 는 canvas 라 못 읽으므로 `ChartView` 가 실제 색으로 풀어준다. 새 hex 를 박으면 다크 모드에서 그 데모만 깨진다.

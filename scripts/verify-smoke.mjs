@@ -1,5 +1,5 @@
 // scripts/verify-smoke.mjs
-// 전 부 스모크 E2E — 포털(홈·진단·구조도) + 11개 부의 모든 공개 챕터 라우트가 렌더되고 콘솔 에러가 없는지,
+// 전 부 스모크 E2E — 포털(홈·진단·구조도) + 12개 부의 모든 공개 챕터 라우트가 렌더되고 콘솔 에러가 없는지,
 // 그리고 부마다 협업 주석 → AI 튜터 연동이 살아 있는지(백엔드·Ollama 불필요).
 // 콘텐츠 정정 후 회귀 안전망 (각 부 chapters.ts 에서 슬러그를 동적으로 읽는다).
 //
@@ -109,7 +109,7 @@ await visit('/glossary', '포털 용어 대조표')
 
 // 각 부 — 홈 + 전 공개 챕터 (comingSoon 챕터는 자동 제외 — 제작 중인 부는 홈+공개분만 검사)
 let totalChapters = 0
-for (let p = 1; p <= 11; p++) {
+for (let p = 1; p <= 12; p++) {
   const slugs = slugsOf(p)
   totalChapters += slugs.length
   await visit(`/part${p}/`, `part${p} 홈 (${slugs.length}챕터)`)
@@ -119,5 +119,5 @@ for (let p = 1; p <= 11; p++) {
 }
 
 await browser.close()
-console.log(`\n결과: ${pass} 통과 / ${fails.length} 실패 — 검사 ${pass + fails.length}건 (챕터 ${totalChapters} + 홈 12 + 포털 진단·구조도·개념 지도·용어 대조표 4 + 온톨로지 렌더 4 + 주석→튜터 연동 11)`)
+console.log(`\n결과: ${pass} 통과 / ${fails.length} 실패 — 검사 ${pass + fails.length}건 (챕터 ${totalChapters} + 홈 13 + 포털 진단·구조도·개념 지도·용어 대조표 4 + 온톨로지 렌더 4 + 주석→튜터 연동 12)`)
 process.exit(fails.length === 0 ? 0 : 1)

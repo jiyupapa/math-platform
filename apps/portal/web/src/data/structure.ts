@@ -1,8 +1,8 @@
 // 학습 구조도(피봇 보드) 배치 데이터 — /map (StructureView) 전용.
 // 배치: 행(위→아래) = 학습 국면, 열(왼→오) = 트랙(레인), 셀 = 단계 노드,
-// 실선 = 필수 흐름(세로 진행), 점선 = 선택 분기 진입(가로→세로). 노드 = curriculum.ts pathSteps(13단계) + 특수 노드(진단·완주).
-// 선택 모듈(8~13)은 "해금되는 국면 행"에 배치 — 진입 조건 정본: 루트 README "추천 학습 경로" + 각 노드 prereqText.
-//   S8·S9·S12 = 1·2단계(토대 I) 직후 → 조립 I(c2) 행 · S10·S11·S13 = 4단계 또는 2단계 직후 → 조립 II(c4) 행.
+// 실선 = 필수 흐름(세로 진행), 점선 = 선택 분기 진입(가로→세로). 노드 = curriculum.ts pathSteps(14단계) + 특수 노드(진단·완주).
+// 선택 모듈(8~14)은 "해금되는 국면 행"에 배치 — 진입 조건 정본: 루트 README "추천 학습 경로" + 각 노드 prereqText.
+//   S8·S9·S12 = 1·2단계(토대 I) 직후 → 조립 I(c2) 행 · S10·S11·S13·S14 = 4단계 또는 2단계 직후 → 조립 II(c4) 행(S13·S14 는 한 칸에 함께).
 
 export interface BoardColumn {
   id: string
@@ -74,6 +74,7 @@ export const nodes: BoardNode[] = [
   { id: 'step11', col: 'c4', lane: 'prac', stepOrder: 11, prereqText: '4단계(2부) 이후를 권해요(핵심은 2부 7장 log 감각). 6부를 마친 뒤 다시 보면 완성돼요' },
   { id: 'step12', col: 'c2', lane: 'eval', stepOrder: 12, prereqText: '2단계(3부 전반)만 마치면 언제든. 통계 심화(3부 8~10장)는 이 트랙에서 다시 다루고, 6부 9장을 본 뒤 다시 보면 가장 도움이 돼요' },
   { id: 'step13', col: 'c4', lane: 'eval', stepOrder: 13, prereqText: '2단계(3부 전반)만 마치면 언제든. 조건부 확률(3부 4장)은 이 트랙에서 다시 다루고, 10부 6장(오차범위)을 먼저 보면 성적표와 캡스톤이 더 잘 읽혀요' },
+  { id: 'step14', col: 'c4', lane: 'eval', stepOrder: 14, prereqText: '4단계(2부) 이후를 권해요. 핵심은 2부 2장(변화율)과 7장(지수·시그모이드)이고, 8부를 본 뒤 다시 보면 5·6장(학습률·EMA와의 연결)이 완성돼요' },
 ]
 
 export const edges: BoardEdge[] = [
@@ -94,4 +95,5 @@ export const edges: BoardEdge[] = [
   { from: 'step4', to: 'step11', kind: 'entry' },
   { from: 'step2', to: 'step12', kind: 'entry' },
   { from: 'step2', to: 'step13', kind: 'entry' },
+  { from: 'step4', to: 'step14', kind: 'entry' },
 ]

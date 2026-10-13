@@ -1,7 +1,7 @@
 // scripts/build-search-index.mjs
 // 통합검색 인덱스 생성기.
 //   입력: 전 부 apps/partN/web/src/data/chapters.ts (챕터 메타) + scripts/ontology/concepts.json (개념 온톨로지 정본)
-//   출력: 각 앱 web/public/search-index.json (포털 + part1..11)
+//   출력: 각 앱 web/public/search-index.json (포털 + part1..12)
 //
 // 왜 각 앱 public 마다 심는가: 팔레트는 인덱스를 BASE_URL 기준(=자기 앱 public)에서 fetch 한다.
 //   그래야 dev 단독 서버·per-app 빌드·조립 배포본(deploy/partN/) 모두에서 동일하게 로드된다.

@@ -4,7 +4,7 @@
 //   ③ 이 장이 다시 쓰는 수학 ④ 다음에 다시 만나는 곳 을 뽑아 보여 준다.
 //   수기 PartLink 와 달리 정본에서 생성되므로 드리프트가 없다. 챕터 파일 수정 0 —
 //   각 부 App.vue 가 <RouterView> 위에 한 번 놓고, 챕터 라우트(/ch/<slug>)에서만 렌더된다.
-//   부 번호는 partNumberKey(전 11부 주입), 그래프 URL 은 conceptGraphKey(기본 <base>concept-graph.json).
+//   부 번호는 partNumberKey(전 12부 주입), 그래프 URL 은 conceptGraphKey(기본 <base>concept-graph.json).
 //   같은 부 링크는 RouterLink(SPA), 다른 부는 조립 배포본 경로(/partN/…) — dev 단독 실행에선 PartLink 처럼 평문.
 import { computed, inject, onMounted, shallowRef } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'

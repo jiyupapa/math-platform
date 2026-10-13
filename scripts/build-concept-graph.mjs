@@ -1,6 +1,6 @@
 // scripts/build-concept-graph.mjs — 개념 그래프 산출물 생성기. 설계: docs/todo_온톨로지_260906.md §4·§7
 //   입력: scripts/ontology/concepts.json (정본) + 각 부 chapters.ts (장 제목 조회표)
-//   출력: 각 앱 web/public/concept-graph.json (포털 + part1..11)
+//   출력: 각 앱 web/public/concept-graph.json (포털 + part1..12)
 //
 //   소비처: TutorChat(각 부) 이 질문에 나온 개념의 카드를 시스템 프롬프트에 덧붙일 때 fetch 한다(1단계).
 //           2단계의 ConceptStrip·SearchPalette 확장·포털 개념 지도도 같은 파일을 읽는다.

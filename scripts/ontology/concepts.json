@@ -154,7 +154,10 @@
     "kind": "math",
     "note": "변환에도 방향이 안 꺾이는 축",
     "definedAt": { "part": 1, "slug": "ch7", "anchor": "ch7-s1" },
-    "usedAt": [{ "part": 1, "slug": "ch8", "anchor": "ch8-s1", "how": "PCA = 공분산의 고유벡터" }],
+    "usedAt": [
+      { "part": 1, "slug": "ch8", "anchor": "ch8-s1", "how": "PCA = 공분산의 고유벡터" },
+      { "part": 12, "slug": "ch8", "anchor": "ch8-s3", "how": "고유값이 복소수면 나선, 크기가 1보다 작으면 수렴" }
+    ],
     "prereq": ["linear-transformation"],
     "related": ["svd"],
     "metaphors": []
@@ -230,7 +233,9 @@
     "kind": "math",
     "note": "한없이 가까이 가면 할선이 접선이 된다",
     "definedAt": { "part": 2, "slug": "ch2", "anchor": "ch2-s3" },
-    "usedAt": [],
+    "usedAt": [
+      { "part": 12, "slug": "sample", "anchor": "sample-ai", "how": "저량 곡선의 기울기 = 순유량: 순간 변화율을 거꾸로 읽기" }
+    ],
     "prereq": ["slope"],
     "related": ["derivative"],
     "metaphors": []
@@ -245,7 +250,8 @@
     "usedAt": [
       { "part": 1, "slug": "ch12", "anchor": "ch12-s2", "how": "행렬미분: 기울기의 다변수 확장" },
       { "part": 2, "slug": "sample", "anchor": "sample-s3", "how": "접선 맛보기: 할선이 접선으로" },
-      { "part": 8, "slug": "ch2", "anchor": "ch2-ai", "how": "곡률: 기울기가 얼마나 빨리 변하는가" }
+      { "part": 8, "slug": "ch2", "anchor": "ch2-ai", "how": "곡률: 기울기가 얼마나 빨리 변하는가" },
+      { "part": 12, "slug": "ch2", "anchor": "ch2-s2", "how": "저량의 순간 변화율 = 순유량, 미분을 거꾸로 읽으면 적분" }
     ],
     "prereq": ["limit"],
     "related": ["gradient"],
@@ -294,7 +300,8 @@
       { "part": 10, "slug": "ch2", "anchor": "ch2-s2", "how": "로그-로그 종이: 곱의 세계를 직선으로 펴는 종이" },
       { "part": 5, "slug": "ch8", "anchor": "ch8-ai", "how": "소프트맥스의 e 거듭제곱: 온도로 나눈 지수" },
       { "part": 11, "slug": "ch2", "anchor": "ch2-ai", "how": "곱을 합으로 펴는 로그: 사슬 성공률 계산" },
-      { "part": 11, "slug": "ch8", "anchor": "ch8-s3", "how": "지수 폭발: 갈래 수와 깊이의 거듭제곱" }
+      { "part": 11, "slug": "ch8", "anchor": "ch8-s3", "how": "지수 폭발: 갈래 수와 깊이의 거듭제곱" },
+      { "part": 12, "slug": "ch3", "anchor": "ch3-s2", "how": "두 배 시간 = log 2 / log(1 + r), 70의 법칙" }
     ],
     "prereq": [],
     "related": ["sigmoid", "bit"],
@@ -309,7 +316,9 @@
     "definedAt": { "part": 2, "slug": "ch7", "anchor": "ch7-s3" },
     "usedAt": [
       { "part": 6, "slug": "ch4", "anchor": "ch4-s3", "how": "Bradley-Terry: 점수 차를 선호 확률로" },
-      { "part": 6, "slug": "ch7", "anchor": "ch7-s1", "how": "DPO 손실 안의 시그모이드" }
+      { "part": 6, "slug": "ch7", "anchor": "ch7-s1", "how": "DPO 손실 안의 시그모이드" },
+      { "part": 12, "slug": "ch7", "anchor": "ch7-s2", "how": "로지스틱 성장 곡선 = K·σ(r(t − t*))" },
+      { "part": 12, "slug": "ch12", "anchor": "ch12-ai", "how": "도입 속도의 정점이 절반 근처인 이유(변곡점)" }
     ],
     "prereq": ["exp-log"],
     "related": ["softmax", "reward-model"],
@@ -358,7 +367,10 @@
       { "part": 6, "slug": "ch5", "anchor": "ch5-s3", "how": "강화학습 갱신: 방향만 반대(경사상승)" },
       { "part": 7, "slug": "ch9", "anchor": "ch9-s2", "how": "대조 학습도 같은 내리막" },
       { "part": 8, "slug": "sample", "anchor": "sample-s1", "how": "무대: 2부에서 배운 그 골짜기" },
-      { "part": 10, "slug": "ch4", "anchor": "ch4-ai", "how": "두 항의 줄다리기에서 최저점 찾기" }
+      { "part": 10, "slug": "ch4", "anchor": "ch4-ai", "how": "두 항의 줄다리기에서 최저점 찾기" },
+      { "part": 12, "slug": "ch1", "anchor": "ch1-ai", "how": "학습은 손실 → 기울기 → 가중치로 도는 고리" },
+      { "part": 12, "slug": "ch4", "anchor": "ch4-ai", "how": "최저점을 쫓는 균형 루프: 매 걸음 격차 × (1 − ηλ)" },
+      { "part": 12, "slug": "ch5", "anchor": "ch5-s3", "how": "경사 흐름을 오일러법으로 계산한 것이 경사하강" }
     ],
     "prereq": ["gradient"],
     "related": ["learning-rate", "backpropagation", "minibatch-sgd"],
@@ -373,7 +385,9 @@
     "definedAt": { "part": 2, "slug": "ch9", "anchor": "ch9-s3" },
     "usedAt": [
       { "part": 8, "slug": "ch2", "anchor": "ch2-s2", "how": "보폭의 과학: 곡률과 lr의 관계" },
-      { "part": 8, "slug": "ch6", "anchor": "ch6-s1", "how": "학습률 스케줄: 구간마다 다른 보폭" }
+      { "part": 8, "slug": "ch6", "anchor": "ch6-s1", "how": "학습률 스케줄: 구간마다 다른 보폭" },
+      { "part": 12, "slug": "ch4", "anchor": "ch4-ai", "how": "학습률 × 곡률 = 균형 루프의 1/조정 시간" },
+      { "part": 12, "slug": "ch5", "anchor": "ch5-ai", "how": "학습률 = 시뮬레이션의 시간 간격 DT, 발산 경계 DT < 2τ" }
     ],
     "prereq": ["gradient-descent"],
     "related": ["lr-schedule", "adam"],
@@ -536,7 +550,8 @@
     "definedAt": { "part": 3, "slug": "ch6", "anchor": "ch6-s3" },
     "usedAt": [
       { "part": 3, "slug": "ch7", "anchor": "ch7-s3", "how": "중심극한정리: 표본평균이 종 모양이 되는 이유" },
-      { "part": 9, "slug": "ch8", "anchor": "ch8-s2", "how": "가중치 분포는 대개 종 모양: 분포의 축복" }
+      { "part": 9, "slug": "ch8", "anchor": "ch8-s2", "how": "가중치 분포는 대개 종 모양: 분포의 축복" },
+      { "part": 12, "slug": "ch11", "anchor": "ch11-s2", "how": "±2σ 를 자른 정규분포의 분산 비율 0.774" }
     ],
     "prereq": ["probability-distribution", "variance"],
     "related": ["law-of-large-numbers"],
@@ -573,7 +588,8 @@
       { "part": 7, "slug": "ch7", "anchor": "ch7-s3", "how": "recall@k 도 표본 추정치" },
       { "part": 6, "slug": "ch9", "anchor": "ch9-s2", "how": "성적표 읽기: 점수의 ±" },
       { "part": 10, "slug": "sample", "anchor": "sample-ai", "how": "점수는 표본 위의 측정값: 신뢰구간을 다시 쓸 예고" },
-      { "part": 11, "slug": "ch4", "anchor": "ch4-ai", "how": "10부 6장의 반복 측정과 비교: 거기선 평균으로 소음을, 여기선 반복으로 실패를 줄인다" }
+      { "part": 11, "slug": "ch4", "anchor": "ch4-ai", "how": "10부 6장의 반복 측정과 비교: 거기선 평균으로 소음을, 여기선 반복으로 실패를 줄인다" },
+      { "part": 12, "slug": "ch12", "anchor": "ch12-ai", "how": "초기 숫자로 추정한 p·q 에 오차범위 붙이기" }
     ],
     "prereq": ["law-of-large-numbers"],
     "related": ["hypothesis-test"],
@@ -604,7 +620,8 @@
     "usedAt": [
       { "part": 10, "slug": "ch9", "anchor": "ch9-s2", "how": "심판 채점과 사람 채점의 일치도" },
       { "part": 6, "slug": "ch9", "anchor": "ch9-s2", "how": "벤치마크 점수 ↔ 실사용 만족의 관계" },
-      { "part": 11, "slug": "ch9", "anchor": "ch9-ai", "how": "상관: 닮은 표가 함께 틀리는 수학" }
+      { "part": 11, "slug": "ch9", "anchor": "ch9-ai", "how": "상관: 닮은 표가 함께 틀리는 수학" },
+      { "part": 12, "slug": "ch9", "anchor": "ch9-s3", "how": "상관을 인과지도의 화살표로 그리는 실수" }
     ],
     "prereq": ["variance"],
     "related": ["projection"],
@@ -792,7 +809,8 @@
       { "part": 5, "slug": "ch8", "anchor": "ch8-s5", "how": "top-k·top-p 재해석" },
       { "part": 11, "slug": "ch7", "anchor": "ch7-s2", "how": "한 문장의 다이얼이 과업의 전략으로" },
       { "part": 11, "slug": "ch8", "anchor": "ch8-ai", "how": "LLM 은 매 단어에서 갈림길을 만난다" },
-      { "part": 11, "slug": "ch1", "anchor": "ch1-ai", "how": "생성 루프가 에이전트 루프의 원형" }
+      { "part": 11, "slug": "ch1", "anchor": "ch1-ai", "how": "생성 루프가 에이전트 루프의 원형" },
+      { "part": 12, "slug": "ch11", "anchor": "ch11-s1", "how": "드문 쪽을 잘라 내는 샘플링 → 모델 붕괴의 꼬리 자르기" }
     ],
     "prereq": ["next-token-prediction"],
     "related": ["temperature", "best-of-n"],
@@ -1037,9 +1055,30 @@
     "kind": "ai",
     "note": "행동·보상·정책, 보상이 커지는 쪽으로 조금씩 움직인다",
     "definedAt": { "part": 6, "slug": "ch5", "anchor": "ch5-s2" },
-    "usedAt": [{ "part": 11, "slug": "ch1", "anchor": "ch1-ai", "how": "루프의 원형과 훈련" }],
+    "usedAt": [
+      { "part": 11, "slug": "ch1", "anchor": "ch1-ai", "how": "루프의 원형과 훈련" },
+      { "part": 12, "slug": "ch11", "anchor": "ch11-s3", "how": "보상 점수를 쫓는 최적화 고리" }
+    ],
     "prereq": ["expectation", "gradient-descent"],
     "related": ["rlhf"],
+    "metaphors": []
+  },
+  {
+    "id": "reward-hacking",
+    "label": "보상 해킹",
+    "aliases": ["reward hacking", "리워드 해킹", "굿하트의 법칙", "Goodhart's law", "대리 지표", "proxy", "보상 모델 과최적화", "reward model overoptimization", "specification gaming"],
+    "kind": "ai",
+    "note": "점수(대리 지표)만 쫓다 진짜 목표를 놓치는 것, KL 목줄이 붙잡는다",
+    "definedAt": { "part": 6, "slug": "ch5", "anchor": "ch5-s4" },
+    "usedAt": [
+      { "part": 6, "slug": "ch6", "anchor": "ch6-s1", "how": "KL 목줄이 막는 것: 보상 모델의 채점 버릇을 역이용하는 답" },
+      { "part": 5, "slug": "ch5", "anchor": "ch5-ai", "how": "KL 페널티가 막는 보상만 좇는 폭주" },
+      { "part": 11, "slug": "ch6", "anchor": "ch6-s2", "how": "굿하트의 법칙: 검수 점수만 통과하는 답이 진화한다" },
+      { "part": 12, "slug": "ch10", "anchor": "ch10-ai", "how": "목표 침식의 사촌, 지표가 목표가 되면" },
+      { "part": 12, "slug": "ch11", "anchor": "ch11-s3", "how": "대리 지표를 쫓는 고리와 KL 목줄이라는 두 번째 균형 루프" }
+    ],
+    "prereq": ["reward-model", "reinforcement-learning"],
+    "related": ["rlhf", "llm-evaluation"],
     "metaphors": []
   },
   {
@@ -1051,7 +1090,8 @@
     "definedAt": { "part": 6, "slug": "ch6", "anchor": "ch6-s1" },
     "usedAt": [
       { "part": 8, "slug": "ch8", "anchor": "ch8-s2", "how": "원본 목줄 vs 원점 목줄" },
-      { "part": 6, "slug": "ch10", "anchor": "ch10-s2", "how": "졸업 실험: 파이프라인 전체 조립" }
+      { "part": 6, "slug": "ch10", "anchor": "ch10-s2", "how": "졸업 실험: 파이프라인 전체 조립" },
+      { "part": 12, "slug": "ch11", "anchor": "ch11-ai", "how": "KL 목줄 = 보상만 쫓는 고리를 붙잡는 두 번째 균형 루프" }
     ],
     "prereq": ["reward-model", "reinforcement-learning", "kl-divergence"],
     "related": ["dpo"],
@@ -1100,7 +1140,8 @@
       { "part": 9, "slug": "ch10", "anchor": "ch10-s2", "how": "양자화 품질 성적표" },
       { "part": 8, "slug": "ch9", "anchor": "ch9-ai", "how": "eval_loss 곡선: eval 점수의 시간축 버전" },
       { "part": 10, "slug": "ch10", "anchor": "ch10-ai", "how": "평가의 기본기" },
-      { "part": 10, "slug": "sample", "anchor": "sample-ai", "how": "\"조련이 잘 됐는지\" → 그 성적표를 얼마나 믿을 수 있는지" }
+      { "part": 10, "slug": "sample", "anchor": "sample-ai", "how": "\"조련이 잘 됐는지\" → 그 성적표를 얼마나 믿을 수 있는지" },
+      { "part": 12, "slug": "ch11", "anchor": "ch11-ai", "how": "아첨 = 좋아요라는 대리 지표를 쫓는 고리" }
     ],
     "prereq": ["perplexity", "confidence-interval"],
     "related": ["llm-as-judge", "contamination"],
@@ -1197,7 +1238,10 @@
     "kind": "ai",
     "note": "벡터로 부족할 때, 점과 화살표로 적은 관계를 따라 걷는 검색",
     "definedAt": { "part": 7, "slug": "ch8", "anchor": "ch8-s4" },
-    "usedAt": [{ "part": 11, "slug": "ch3", "anchor": "ch3-concept-tool-schema", "how": "도구 스키마는 작은 온톨로지" }],
+    "usedAt": [
+      { "part": 11, "slug": "ch3", "anchor": "ch3-concept-tool-schema", "how": "도구 스키마는 작은 온톨로지" },
+      { "part": 12, "slug": "ch9", "anchor": "ch9-ai", "how": "관계의 이름(지식 그래프) vs 영향의 방향과 부호(인과지도)" }
+    ],
     "prereq": ["rag", "vector-db"],
     "related": ["context-budget", "tool-calling"],
     "metaphors": [{ "term": "관계 지도", "part": 7, "note": "지식 그래프(knowledge graph)" }]
@@ -1257,7 +1301,12 @@
     "kind": "ai",
     "note": "속도를 기억하는 걸음, 밑의 기계는 지수이동평균",
     "definedAt": { "part": 8, "slug": "ch4", "anchor": "ch4-s1" },
-    "usedAt": [{ "part": 8, "slug": "ch5", "anchor": "ch5-s2", "how": "Adam의 부품: EMA × 2" }],
+    "usedAt": [
+      { "part": 8, "slug": "ch5", "anchor": "ch5-s2", "how": "Adam의 부품: EMA × 2" },
+      { "part": 12, "slug": "ch2", "anchor": "ch2-ai", "how": "속도는 기울기를 쌓되 조금씩 새는 욕조(저량)" },
+      { "part": 12, "slug": "ch6", "anchor": "ch6-ai", "how": "EMA = 1차 정보 지연, 늦게 보는 대신 덜 흔들림" },
+      { "part": 12, "slug": "ch8", "anchor": "ch8-s3", "how": "위치·속도 두 저량이 만드는 나선" }
+    ],
     "prereq": ["minibatch-sgd"],
     "related": ["adam"],
     "metaphors": [{ "term": "관성", "part": 8 }]
@@ -1269,7 +1318,10 @@
     "kind": "ai",
     "note": "축마다 다른 보폭, 평소 크기로 나누기",
     "definedAt": { "part": 8, "slug": "ch5", "anchor": "ch5-s2" },
-    "usedAt": [{ "part": 8, "slug": "ch11", "anchor": "ch11-s2", "how": "설정 파일의 optimizer" }],
+    "usedAt": [
+      { "part": 8, "slug": "ch11", "anchor": "ch11-s2", "how": "설정 파일의 optimizer" },
+      { "part": 12, "slug": "ch6", "anchor": "ch6-ai", "how": "β₁ = 0.9 는 약 10걸음, β₂ = 0.999 는 약 1,000걸음 지연" }
+    ],
     "prereq": ["momentum"],
     "related": ["learning-rate"],
     "metaphors": [
@@ -1338,7 +1390,9 @@
     "kind": "math",
     "note": "기울기 0의 세 얼굴, 고차원엔 안장점 천지",
     "definedAt": { "part": 8, "slug": "ch10", "anchor": "ch10-s1" },
-    "usedAt": [],
+    "usedAt": [
+      { "part": 12, "slug": "ch8", "anchor": "ch8-ai", "how": "어떤 방향은 안정, 다른 방향은 불안정한 반쪽짜리 평형" }
+    ],
     "prereq": ["loss-landscape", "curse-of-dimensionality"],
     "related": ["momentum"],
     "metaphors": [{ "term": "지형의 함정", "part": 8 }]
@@ -1384,7 +1438,9 @@
     "kind": "math",
     "note": "눈금 사이의 오차가 쌓이면 같은 모델도 미세하게 다른 답을 낸다",
     "definedAt": { "part": 9, "slug": "ch4", "anchor": "ch4-s1" },
-    "usedAt": [],
+    "usedAt": [
+      { "part": 12, "slug": "ch5", "anchor": "ch5-ai", "how": "칸을 썰어 생기는 절단 오차와 구별되는 반올림 오차" }
+    ],
     "prereq": ["floating-point"],
     "related": ["overflow-nan"],
     "metaphors": [
@@ -1484,7 +1540,9 @@
     "definedAt": { "part": 10, "slug": "ch2", "anchor": "ch2-s2" },
     "usedAt": [
       { "part": 10, "slug": "ch3", "anchor": "ch3-s2", "how": "법칙의 꼴: 한 줄로 쓰기" },
-      { "part": 11, "slug": "ch7", "anchor": "ch7-ai", "how": "훈련 컴퓨트 성장의 로그-로그 직선이 비싸질수록 추론 다이얼이 매력적" }
+      { "part": 11, "slug": "ch7", "anchor": "ch7-ai", "how": "훈련 컴퓨트 성장의 로그-로그 직선이 비싸질수록 추론 다이얼이 매력적" },
+      { "part": 12, "slug": "ch3", "anchor": "ch3-ai", "how": "세로만 로그면 지수 성장, 가로·세로 둘 다 로그면 멱법칙" },
+      { "part": 12, "slug": "ch7", "anchor": "ch7-ai", "how": "멈추는 S자와 멈추지 않는 멱법칙의 구별" }
     ],
     "prereq": ["exp-log"],
     "related": ["scaling-law"],
@@ -1554,7 +1612,10 @@
     "kind": "ai",
     "note": "시험 문제가 교과서에 실려 있었다면? 점수 급등의 의심 목록",
     "definedAt": { "part": 10, "slug": "ch8", "anchor": "ch8-s2" },
-    "usedAt": [{ "part": 10, "slug": "ch10", "anchor": "ch10-s1", "how": "검산대: 점수 급등 의심" }],
+    "usedAt": [
+      { "part": 10, "slug": "ch10", "anchor": "ch10-s1", "how": "검산대: 점수 급등 의심" },
+      { "part": 12, "slug": "ch10", "anchor": "ch10-ai", "how": "벤치마크의 수명: 측정치를 쫓는 고리" }
+    ],
     "prereq": ["llm-evaluation", "overfitting"],
     "related": [],
     "metaphors": [{ "term": "기출 유출", "part": 10 }]
@@ -1567,7 +1628,11 @@
     "kind": "ai",
     "note": "챗봇에서 에이전트로, 글을 쓰는 AI에서 일을 맡는 AI로",
     "definedAt": { "part": 11, "slug": "ch1", "anchor": "ch1-s2" },
-    "usedAt": [{ "part": 11, "slug": "ch12", "anchor": "ch12-s1", "how": "검산대: 이 에이전트, 도입해도 되나" }],
+    "usedAt": [
+      { "part": 11, "slug": "ch12", "anchor": "ch12-s1", "how": "검산대: 이 에이전트, 도입해도 되나" },
+      { "part": 12, "slug": "ch1", "anchor": "ch1-ai", "how": "에이전트 = 관찰 → 행동 → 결과로 도는 고리" },
+      { "part": 12, "slug": "ch12", "anchor": "ch12-ai", "how": "에이전트 한 대의 도입 판정 vs 조직 전체의 도입 동역학" }
+    ],
     "prereq": ["next-token-prediction", "context-window"],
     "related": ["task-chain", "tool-calling"],
     "metaphors": [{ "term": "AI 일꾼", "part": 11 }]
@@ -1641,7 +1706,9 @@
     "definedAt": { "part": 11, "slug": "ch6", "anchor": "ch6-s2" },
     "usedAt": [
       { "part": 11, "slug": "ch9", "anchor": "ch9-s2", "how": "역할 분리: 검토자" },
-      { "part": 11, "slug": "ch11", "anchor": "ch11-s1", "how": "성적표의 검수" }
+      { "part": 11, "slug": "ch11", "anchor": "ch11-s1", "how": "성적표의 검수" },
+      { "part": 12, "slug": "ch9", "anchor": "ch9-ai", "how": "LLM이 그린 인과지도의 극성 검수" },
+      { "part": 12, "slug": "ch10", "anchor": "ch10-ai", "how": "검수 점수만 통과하는 답: 지표가 목표가 될 때" }
     ],
     "prereq": ["bayes-theorem", "tool-calling"],
     "related": ["multi-agent"],
@@ -1712,5 +1779,174 @@
     "prereq": ["best-of-n", "confidence-interval", "llm-as-judge", "model-comparison-test"],
     "related": ["llm-evaluation"],
     "metaphors": [{ "term": "에이전트의 성적표", "part": 11 }]
+  },
+  {
+    "id": "feedback-loop",
+    "label": "피드백 루프",
+    "aliases": ["feedback loop", "피드백", "되먹임", "되먹임 고리", "루프", "고리", "시스템 다이내믹스", "system dynamics", "SD", "구조가 행동을 만든다"],
+    "kind": "math",
+    "note": "원인이 결과를 낳고 그 결과가 돌아와 다시 원인을 바꾸는 고리, 시간의 모양을 만드는 부품",
+    "definedAt": { "part": 12, "slug": "ch1", "anchor": "ch1-s3" },
+    "usedAt": [
+      { "part": 12, "slug": "ch9", "anchor": "ch9-s2", "how": "루프 극성: − 의 개수가 짝수면 강화, 홀수면 균형" },
+      { "part": 12, "slug": "ch10", "anchor": "ch10-s1", "how": "되풀이되는 고리 조합 = 시스템 원형" }
+    ],
+    "prereq": [],
+    "related": ["agent"],
+    "metaphors": []
+  },
+  {
+    "id": "stock-flow",
+    "label": "저량과 유량",
+    "aliases": ["stock", "flow", "저량", "유량", "유입", "유출", "순유량", "inflow", "outflow", "net flow", "스톡", "플로", "적분", "integral", "누적", "저량-유량도", "SFD", "stock and flow diagram", "미적분의 기본 정리"],
+    "kind": "math",
+    "note": "쌓인 것(저량)은 흐름(유량)으로만 바뀌고, 흐름을 쌓으면(적분) 저량이 된다",
+    "definedAt": { "part": 12, "slug": "ch2", "anchor": "ch2-s2" },
+    "usedAt": [
+      { "part": 12, "slug": "sample", "anchor": "sample-s2", "how": "욕조 문제로 처음 만나는 저량·유량" },
+      { "part": 12, "slug": "ch12", "anchor": "ch12-s1", "how": "잠재 사용자와 사용자, 두 저량 사이의 도입·이탈 유량" }
+    ],
+    "prereq": ["derivative"],
+    "related": ["momentum"],
+    "metaphors": [{ "term": "욕조", "part": 12 }]
+  },
+  {
+    "id": "reinforcing-loop",
+    "label": "강화 루프",
+    "aliases": ["reinforcing loop", "R 루프", "양의 피드백", "positive feedback", "지수 성장", "exponential growth", "두 배 시간", "doubling time", "70의 법칙", "rule of 70", "데이터 플라이휠", "data flywheel", "선순환", "악순환", "복리"],
+    "kind": "math",
+    "note": "커질수록 더 빨리 커지는(줄수록 더 빨리 주는) 고리, 같은 배수로 크는 지수 성장",
+    "definedAt": { "part": 12, "slug": "ch3", "anchor": "ch3-s2" },
+    "usedAt": [
+      { "part": 12, "slug": "ch7", "anchor": "ch7-s1", "how": "입소문 강화 루프에 포화 균형 루프가 붙으면 S자" },
+      { "part": 12, "slug": "ch11", "anchor": "ch11-s1", "how": "데이터 플라이휠: 사용자 → 데이터 → 품질 → 사용자" }
+    ],
+    "prereq": ["feedback-loop", "exp-log"],
+    "related": ["power-law"],
+    "metaphors": [{ "term": "눈덩이", "part": 12 }]
+  },
+  {
+    "id": "balancing-loop",
+    "label": "균형 루프",
+    "aliases": ["balancing loop", "B 루프", "음의 피드백", "negative feedback", "목표 추구", "goal seeking", "지수 감쇠", "exponential decay", "시간 상수", "time constant", "반감기", "half-life", "조정 시간", "격차"],
+    "kind": "math",
+    "note": "목표·한계와의 격차를 줄이는 고리, 격차 ÷ 조정 시간으로 다가가며 τ 뒤 63%",
+    "definedAt": { "part": 12, "slug": "ch4", "anchor": "ch4-s2" },
+    "usedAt": [
+      { "part": 12, "slug": "ch6", "anchor": "ch6-s2", "how": "1차 정보 지연도 보이는 값이 실제 값을 쫓는 균형 루프" },
+      { "part": 12, "slug": "ch8", "anchor": "ch8-s2", "how": "안정 평형 근처에서는 균형 루프처럼 돌아온다" }
+    ],
+    "prereq": ["feedback-loop"],
+    "related": ["gradient-descent"],
+    "metaphors": [{ "term": "온도 조절기", "part": 12 }]
+  },
+  {
+    "id": "euler-method",
+    "label": "오일러법과 시간 간격",
+    "aliases": ["Euler's method", "Euler method", "오일러법", "오일러 방법", "시간 간격", "DT", "time step", "Δt", "수치 적분", "numerical integration", "미분방정식", "differential equation", "수치 불안정", "numerical instability", "RK4", "룽게-쿠타", "경사 흐름", "gradient flow"],
+    "kind": "math",
+    "note": "지금의 변화율로 DT만큼 나아가기를 반복하는 계산, DT가 시간 상수의 두 배를 넘으면 발산",
+    "definedAt": { "part": 12, "slug": "ch5", "anchor": "ch5-s2" },
+    "usedAt": [
+      { "part": 12, "slug": "ch12", "anchor": "ch12-s2", "how": "캡스톤 모형도 오일러법(DT = 1/64)으로 계산해 이론값과 맞춤" }
+    ],
+    "prereq": ["stock-flow"],
+    "related": ["learning-rate", "gradient-descent"],
+    "metaphors": [{ "term": "시간을 잘게 썰기", "part": 12 }]
+  },
+  {
+    "id": "delay",
+    "label": "지연과 출렁임",
+    "aliases": ["delay", "지연", "시간 지연", "물질 지연", "정보 지연", "material delay", "information delay", "1차 지연", "first-order delay", "지수 평활", "exponential smoothing", "SMOOTH", "과잉 교정", "overshoot", "출렁임", "oscillation", "채찍 효과", "bullwhip effect", "맥주 게임"],
+    "kind": "math",
+    "note": "원인과 결과 사이의 시간 차, 균형 루프에 끼면 과잉 교정과 출렁임을 만든다",
+    "definedAt": { "part": 12, "slug": "ch6", "anchor": "ch6-s2" },
+    "usedAt": [
+      { "part": 12, "slug": "ch1", "anchor": "ch1-s2", "how": "균형 루프에 지연을 끼우면 목표를 지나쳐 출렁인다" },
+      { "part": 12, "slug": "ch10", "anchor": "ch10-s1", "how": "원형의 공통점: 좋은 결과가 먼저, 나쁜 결과가 늦게" }
+    ],
+    "prereq": ["balancing-loop"],
+    "related": ["momentum", "adam"],
+    "metaphors": [{ "term": "샤워기 온도 맞추기", "part": 12 }]
+  },
+  {
+    "id": "logistic-growth",
+    "label": "S자 성장과 지배 루프",
+    "aliases": ["logistic growth", "로지스틱 성장", "S자 곡선", "S-curve", "S자 성장", "수용 한계", "carrying capacity", "환경 수용력", "변곡점", "inflection point", "지배 루프", "dominant loop", "loop dominance"],
+    "kind": "math",
+    "note": "강화 루프와 포화하는 균형 루프가 만나 빨라지다 멈추는 곡선, 변곡점 K/2에서 지배 루프가 바뀐다",
+    "definedAt": { "part": 12, "slug": "ch7", "anchor": "ch7-s2" },
+    "usedAt": [
+      { "part": 12, "slug": "ch11", "anchor": "ch11-s1", "how": "플라이휠도 결국 S자" },
+      { "part": 12, "slug": "ch12", "anchor": "ch12-s1", "how": "Bass 모형의 포화와 도입 속도의 정점" }
+    ],
+    "prereq": ["reinforcing-loop", "balancing-loop", "sigmoid"],
+    "related": ["power-law"],
+    "metaphors": []
+  },
+  {
+    "id": "equilibrium-stability",
+    "label": "평형과 안정성",
+    "aliases": ["equilibrium", "평형", "평형점", "정상 상태", "steady state", "안정 평형", "불안정 평형", "stability", "안정성", "위상선", "phase line", "위상 평면", "phase plane", "임계 질량", "critical mass", "티핑 포인트", "tipping point", "선형화", "linearization"],
+    "kind": "math",
+    "note": "순유량이 0인 곳이 평형, 근처의 기울기가 음수면 안정·양수면 불안정",
+    "definedAt": { "part": 12, "slug": "ch8", "anchor": "ch8-s2" },
+    "usedAt": [
+      { "part": 12, "slug": "ch11", "anchor": "ch11-s2", "how": "실제 데이터를 섞으면 분포의 폭이 평형 v* 에서 멈춘다" },
+      { "part": 12, "slug": "ch12", "anchor": "ch12-s1", "how": "이탈이 있을 때 활성 사용자가 멈추는 자리(75.8%)" }
+    ],
+    "prereq": ["stock-flow", "derivative"],
+    "related": ["saddle-point", "eigen"],
+    "metaphors": []
+  },
+  {
+    "id": "causal-loop-diagram",
+    "label": "인과지도",
+    "aliases": ["causal loop diagram", "CLD", "인과순환지도", "링크 극성", "link polarity", "루프 극성", "loop polarity", "다른 조건이 같다면", "ceteris paribus", "극성"],
+    "kind": "tool",
+    "note": "변수를 +/− 화살표로 이어 피드백 루프를 찾는 스케치, 행동은 시뮬레이션으로 확인한다",
+    "definedAt": { "part": 12, "slug": "ch9", "anchor": "ch9-s2" },
+    "usedAt": [
+      { "part": 12, "slug": "ch10", "anchor": "ch10-s1", "how": "원형마다 인과지도로 구조를 그린다" }
+    ],
+    "prereq": ["feedback-loop"],
+    "related": ["knowledge-graph", "correlation"],
+    "metaphors": []
+  },
+  {
+    "id": "system-archetype",
+    "label": "시스템 원형",
+    "aliases": ["system archetype", "원형", "성장의 한계", "limits to growth", "문제 전가", "shifting the burden", "실패하는 처방", "fixes that fail", "목표 침식", "eroding goals", "공유지의 비극", "tragedy of the commons", "부익부", "success to the successful", "레버리지 포인트", "leverage point", "지렛점"],
+    "kind": "tool",
+    "note": "조직과 사회에서 되풀이되는 판박이 고리 구조, 알아보면 어디를 건드릴지 빨리 찾는다",
+    "definedAt": { "part": 12, "slug": "ch10", "anchor": "ch10-s2" },
+    "usedAt": [],
+    "prereq": ["causal-loop-diagram"],
+    "related": ["delay"],
+    "metaphors": []
+  },
+  {
+    "id": "model-collapse",
+    "label": "모델 붕괴",
+    "aliases": ["model collapse", "합성 데이터", "synthetic data", "재귀적 학습", "꼬리 소실", "다양성 감소"],
+    "kind": "ai",
+    "note": "모델이 만든 데이터로 거듭 배우면 드문 사례부터 사라진다, 실제 데이터가 브레이크",
+    "definedAt": { "part": 12, "slug": "ch11", "anchor": "ch11-s2" },
+    "usedAt": [],
+    "prereq": ["balancing-loop", "normal-distribution"],
+    "related": ["sampling", "reward-hacking"],
+    "metaphors": []
+  },
+  {
+    "id": "bass-diffusion",
+    "label": "Bass 확산 모형",
+    "aliases": ["Bass diffusion model", "Bass 모형", "배스 모형", "혁신계수", "coefficient of innovation", "모방계수", "coefficient of imitation", "잠재시장규모", "market potential", "도입 확산", "adoption", "입소문", "word of mouth", "도입 전략"],
+    "kind": "math",
+    "note": "홍보(p)와 입소문(q)으로 퍼지는 도입의 표준 모형, 이탈을 더하면 최종 수준이 정해진다",
+    "definedAt": { "part": 12, "slug": "ch12", "anchor": "ch12-s2" },
+    "usedAt": [],
+    "prereq": ["logistic-growth"],
+    "related": ["equilibrium-stability"],
+    "metaphors": []
   }
 ]

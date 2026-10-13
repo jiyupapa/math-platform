@@ -1,9 +1,9 @@
 // scripts/build-deploy.mjs
-// 11개 부 + 포털을 "하나의 origin 하위 경로"로 조립한다.
+// 12개 부 + 포털을 "하나의 origin 하위 경로"로 조립한다.
 //   포털 = 루트(/) · 각 부 = /partN/   → 결과: deploy/ (정적 폴더 하나)
 //
 // 왜 필요한가: localStorage 는 origin(주소+포트) 단위로 격리된다(경로 무관).
-//   진도는 la-*, tf-* 등으로 브라우저에 저장되므로, 11개 부 + 포털을 같은 origin 의
+//   진도는 la-*, tf-* 등으로 브라우저에 저장되므로, 12개 부 + 포털을 같은 origin 의
 //   하위 경로로 묶어야 포털이 각 부의 진도를 직접 읽는 "개인화 2층"이 성립한다.
 //   (npm run dev 는 부마다 포트가 달라 서로 다른 origin → 2층 검증 불가. 이 조립본만이 검증 수단.)
 import { execSync } from 'node:child_process'
@@ -29,6 +29,7 @@ const APPS = [
   { name: 'part9',  base: '/part9/', dest: 'part9' },
   { name: 'part10', base: '/part10/', dest: 'part10' },
   { name: 'part11', base: '/part11/', dest: 'part11' },
+  { name: 'part12', base: '/part12/', dest: 'part12' },
 ]
 
 console.log('▶ 개념 온톨로지 검사 (scripts/ontology/concepts.json — 위치·앵커·순환·PartLink)')
@@ -138,7 +139,7 @@ console.log(
 console.log(`
 ✅ 조립 완료 → deploy/
    로컬 확인:  npm run deploy:serve
-   → http://localhost:4173 에서 포털(/) + 각 부(/part1 … /part11)가 한 origin 으로 뜬다.
+   → http://localhost:4173 에서 포털(/) + 각 부(/part1 … /part12)가 한 origin 으로 뜬다.
      이 상태에서만 "포털이 다른 부 진도를 읽는" 개인화 2층을 실검증할 수 있다.
 
    실제 배포: deploy/ 폴더를 그대로 정적 호스트에 올리면 된다(_redirects·_headers 포함).

@@ -19,8 +19,8 @@ fi
 resolve() {
   case "$1" in
     0|portal) echo portal ;;
-    [1-9]|1[01]) echo "part$1" ;;
-    part[1-9]|part1[01]) echo "$1" ;;
+    [1-9]|1[012]) echo "part$1" ;;
+    part[1-9]|part1[012]) echo "$1" ;;
     *) echo "" ;;
   esac
 }
@@ -32,10 +32,10 @@ dev() {
   npm run dev -w "apps/$1/web"
 }
 
-# 전체(12개 앱) 빌드 후 http://localhost:4173 한 origin 으로 서빙
+# 전체(13개 앱) 빌드 후 http://localhost:4173 한 origin 으로 서빙
 serve_all() {
   echo
-  echo "[전체] 12개 앱 전부 빌드 후 http://localhost:4173 한 origin 으로 서빙합니다 ..."
+  echo "[전체] 13개 앱 전부 빌드 후 http://localhost:4173 한 origin 으로 서빙합니다 ..."
   echo "       (프로덕션 빌드 — HMR 없음. Ctrl+C 로 종료.)"
   echo
   npm run deploy:build && npm run deploy:serve
@@ -70,6 +70,7 @@ while true; do
    9)  9부 수치 계산         part9
   10)  10부 스케일링·평가     part10
   11)  11부 에이전트          part11
+  12)  12부 시스템 다이내믹스  part12
 ------------------------------------------------------------
    A)  전체 빌드 후 통합 서빙 → localhost:4173   [인자: all]
    I)  의존성 재설치          (npm install)

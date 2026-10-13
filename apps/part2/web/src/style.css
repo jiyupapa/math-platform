@@ -4,7 +4,7 @@
 @source '../../../../packages/ui/src';
 @import 'katex/dist/katex.min.css';
 /* 시리즈 공용 디자인 기반 — 본문 글줄·제목 위계·포커스·터치 타깃·모션.
-   한 곳에서 고치면 12개 앱에 반영된다(패키지 컴포넌트와 같은 원칙). */
+   한 곳에서 고치면 13개 앱에 반영된다(패키지 컴포넌트와 같은 원칙). */
 @import '../../../../packages/ui/src/base.css';
 
 :root {
