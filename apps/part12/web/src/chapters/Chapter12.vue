@@ -45,7 +45,7 @@ function onSetComplete() {
     <p class="mb-2 text-sm leading-relaxed text-slate-500">
       <b>A</b>는 사용자 수, <b>M</b>은 전체 직원(잠재시장규모), <b>M − A</b>는 잠재 사용자입니다. <b>p</b>(혁신계수)는 잠재 사용자 한 명이 한 달에
       홍보·교육만 보고 시작할 확률, <b>q</b>(모방계수)는 입소문의 세기로, 동료 중 사용자 비율 A/M을 곱해 그만큼 시작할 확률이 커져요. q·A/M 덕분에
-      3장의 강화 루프가, (M − A) 덕분에 7장의 포화하는 균형 루프가 생깁니다. <b>L</b>은 평균 사용 기간이라 이탈은 사용자의 1/L씩(4장의 지수 감쇠)입니다.
+      3장의 강화 루프가, (M − A) 덕분에 7장의 포화하는 균형 루프가 생깁니다. <b>L</b>은 평균 사용 기간이라 이탈은 매달 사용자의 1/L씩(4장의 지수 감쇠)이고, 이 1/L을 월 <b>이탈률</b>(churn rate)이라고 합니다.
     </p>
 
     <AdoptionLab />
@@ -69,12 +69,13 @@ function onSetComplete() {
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 이름표와 계산</h2>
     <ReviewFlag id="ch12-s2" chapter="ch12" label="2. 이름표와 계산" />
-    <ConceptCard tone="note" title="새 용어: Bass 확산 모형 / 혁신계수 / 모방계수 / 잠재시장규모">
+    <ConceptCard tone="note" title="새 용어: Bass 확산 모형 / 혁신계수 / 모방계수 / 잠재시장규모 / 이탈률">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
         <li><b>Bass 확산 모형</b> (Bass diffusion model). 뜻: 새 제품·기술이 '바깥 영향(혁신)'과 '사용자 사이의 영향(모방)'으로 퍼지는 과정을 그린 모형(Bass, 1969). 마케팅에서 신제품 수요 예측의 표준이에요. 정식 모형에는 이탈이 없고, 이 장의 이탈(L)은 사내 도구에 맞춘 확장입니다.</li>
         <li><b>혁신계수</b> (coefficient of innovation, p). 뜻: 남과 상관없이 바깥 정보(홍보·교육·공지)만 보고 시작하는 정도.</li>
         <li><b>모방계수</b> (coefficient of imitation, q). 뜻: 이미 쓰는 사람을 보고 따라 시작하는 정도. 입소문의 세기. 여러 연구를 모은 분석에서는 대개 q가 p보다 열 배쯤 큽니다(예: Sultan·Farley·Lehmann 1990의 평균 p ≈ 0.03, q ≈ 0.38, 연 단위). 확산은 보통 입소문이 끈다는 뜻이에요.</li>
         <li><b>잠재시장규모</b> (market potential, M). 뜻: 결국 쓸 수 있는 최대 인원. 사내 도입이라면 대상 직원 수로, 7장의 수용 한계 K에 해당합니다.</li>
+        <li><b>이탈률</b> (churn rate). 뜻: 한 달에 사용자 중 그만두는 비율, 이 모형에서는 1/L. 평균 사용 기간 L = 10개월이면 월 이탈률 10%로, 4장의 '매달 10%가 이탈한다'와 같은 지수 감쇠예요.</li>
       </ul>
     </ConceptCard>
 
@@ -135,6 +136,35 @@ function onSetComplete() {
       절반쯤 왔다는 신호다" 같은 구조적 결론은 숫자가 조금 달라도 유지돼요. 그게 시스템 다이내믹스 모형의 쓸모입니다.
     </DetailsCard>
 
+    <h2 class="mt-8 mb-2 text-xl font-bold">4. 밖에서 말할 때: 용어 대조표</h2>
+    <ReviewFlag id="ch12-s4" chapter="ch12" label="4. 밖에서 말할 때: 용어 대조표" />
+    <p class="leading-relaxed text-slate-700">
+      욕조·눈덩이·온도 조절기·샤워기는 이해를 돕기 위해 이 과정에서 쓴 <b>비유</b>였습니다. 동료와 이야기하거나 시스템 다이내믹스
+      교재·도구(Vensim·Stella)를 볼 때는 실무 용어로 바꿔 말하세요. 캡스톤의 다이얼에도 마케팅·데이터 분석에서 쓰는 이름이 따로 있습니다.
+    </p>
+    <div class="my-4 overflow-x-auto">
+      <table class="w-full text-sm break-keep">
+        <thead>
+          <tr class="border-b border-slate-200 text-left text-slate-500">
+            <th class="py-2 pr-3">이 과정에서 쓴 말</th>
+            <th class="py-2">밖에서 쓰는 말</th>
+          </tr>
+        </thead>
+        <tbody class="text-slate-700">
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">욕조의 물 높이</td><td class="py-2"><b>저량</b>(stock)</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">수도꼭지·배수구</td><td class="py-2"><b>유입·유출</b>(inflow·outflow), 둘을 합쳐 <b>유량</b>(flow)</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">눈덩이</td><td class="py-2"><b>강화 루프</b>(reinforcing loop, R) · 양의 피드백</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">온도 조절기</td><td class="py-2"><b>균형 루프</b>(balancing loop, B) · 음의 피드백 · 목표 추구</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">샤워기 온도 맞추기</td><td class="py-2"><b>지연</b>(delay)이 만드는 <b>과잉 교정</b>(overshoot)과 <b>출렁임</b>(oscillation)</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">시간을 잘게 썰기</td><td class="py-2"><b>오일러법</b>(Euler's method)과 <b>시간 간격</b>(DT, time step)</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">홍보·교육 다이얼 p</td><td class="py-2"><b>혁신계수</b>(coefficient of innovation)</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">입소문 다이얼 q</td><td class="py-2"><b>모방계수</b>(coefficient of imitation)</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">평균 사용 기간 L</td><td class="py-2">1/L = <b>이탈률</b>(churn rate)</td></tr>
+          <tr><td class="py-2 pr-3">전체 직원 수 M</td><td class="py-2"><b>잠재시장규모</b>(market potential)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
     <ReviewFlag id="ch12-ai" chapter="ch12" label="🤖 AI 연결: 12부 전체가 이 한 장에 모였다" />
     <ConceptCard tone="ai" title="🤖 AI 연결: 12부 전체가 이 한 장에 모였다">
       이 캡스톤에는 12부가 다 들어 있습니다. 사용자와 잠재 사용자는 2장의 저량, 도입과 이탈은 유량, 입소문은 3장의 강화 루프, 포화는 7장의
@@ -142,11 +172,11 @@ function onSetComplete() {
       변곡점, 곧 <b><PartLink :part="2" ch="ch7">2부 7장</PartLink></b> 시그모이드의 성질입니다. 같은 '도입 판정'을 11부에서는 에이전트 한 대의
       성공률로 했다면(<b><PartLink :part="11" ch="ch12">11부 12장</PartLink></b>), 여기서는 조직 전체의 시간에 따른 움직임으로 했어요. 실제 숫자로
       p·q를 추정할 때는 <b><PartLink :part="10" ch="ch6">10부 6장</PartLink></b>의 오차범위를 잊지 마세요. 그리고 지금 보고 있는 이 학습 사이트의
-      포털에도 '도입 현황' 화면이 있습니다. 거기 나오는 숫자들을 오늘 배운 저량과 유량으로 읽어 보면, 이 시리즈가 사내에서 어떤 S자를
+      포털에도 로그인하면 보이는 '도입 현황' 화면이 있습니다. 거기 나오는 숫자들을 오늘 배운 저량과 유량으로 읽어 보면, 이 시리즈가 사내에서 어떤 S자를
       그리고 있는지 직접 판정할 수 있어요.
     </ConceptCard>
 
-    <h2 class="mt-8 mb-2 text-xl font-bold">4. 직접 풀어보기</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">5. 직접 풀어보기</h2>
     <p class="mb-2 leading-relaxed text-slate-700">
       <b>10문제를 모두 맞히면</b> 12부를 완주합니다. 난이도 순이니 편하게 시작하세요.
     </p>

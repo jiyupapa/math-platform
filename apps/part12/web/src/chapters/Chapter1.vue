@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 1장 — 큰 그림: 시간의 모양을 만드는 네 부품. 저량·유량·피드백 루프·지연과
-// 네 가지 행동 패턴(지수 성장·목표 추구·S자·출렁임)을 짝짓고 12부 여정표를 그린다.
+// 네 가지 행동 패턴(지수 성장·목표 추구·S자·출렁임)을 짝짓고 12부 지도를 그린다.
 // 다시 쓰는 수학: 11부 1장(에이전트 루프), 2부 9장(경사하강 = 고리).
 import { ConceptCard, PartLink, ReviewFlag } from '@series/ui'
 import { DetailsCard } from '@series/ui'
@@ -49,7 +49,7 @@ function onSetComplete() {
     <p class="mt-3 leading-relaxed text-slate-700">
       아래 그림은 이 부품들을 시스템 다이내믹스의 표준 표기로 그린 것입니다. 상자가 저량, 두 줄 파이프와
       밸브(나비 모양)가 유량, 구름은 "이 모형이 신경 쓰지 않는 바깥", 가는 화살표는 정보의 흐름이에요.
-      사용자 수에서 두 밸브로 가는 가는 화살표가 바로 <b>피드백</b>입니다. 쌓인 양을 보고 흐름이 정해지니까요.
+      사용자 수에서 두 밸브로 이어진 가는 화살표가 바로 <b>피드백</b>입니다. 쌓인 양을 보고 흐름이 정해지니까요.
     </p>
     <div class="my-4 rounded-xl border border-slate-200 bg-white p-3">
       <SfdDiagram
@@ -128,15 +128,15 @@ function onSetComplete() {
       type="truefalse"
       :answer="1"
       :hints="['사용자가 줄어서 입소문이 줄고, 그래서 더 줄어드는 경우를 떠올려 보세요.']"
-      explanation="거짓입니다. 강화 루프는 방향과 상관없이 변화를 키웁니다. 좋은 쪽이면 선순환, 나쁜 쪽이면 악순환이에요. '양(+)의 피드백'이라는 옛 이름에 속지 마세요."
+      explanation="거짓입니다. 강화 루프는 방향과 상관없이 변화를 키웁니다. 좋은 쪽이면 선순환, 나쁜 쪽이면 악순환이에요. '양(+)의 피드백'이라는 다른 이름에 속지 마세요. '양'은 좋다는 뜻이 아니라 같은 방향으로 키운다는 뜻이에요."
     />
 
-    <h2 class="mt-8 mb-2 text-xl font-bold">4. 12부 여정표</h2>
-    <ReviewFlag id="ch1-s4" chapter="ch1" label="4. 12부 여정표" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">4. 12부 지도</h2>
+    <ReviewFlag id="ch1-s4" chapter="ch1" label="4. 12부 지도" />
     <p class="leading-relaxed text-slate-700">
       시스템 다이내믹스는 늘 같은 순서로 일합니다. <b>그림</b>(인과지도로 고리 찾기) → <b>구조</b>(저량-유량도로
       쌓이는 것과 흐르는 것 나누기) → <b>시뮬레이션</b>(컴퓨터로 미래 계산) → <b>식</b>(미분방정식으로 정확히 쓰기).
-      이 시리즈의 설계 철학 "그림 → 조작 → 수식"과 같은 순서예요. 12부는 이렇게 걷습니다.
+      이 시리즈의 설계 철학 "그림 → 조작 → 수식"과 같은 순서예요. 12부도 이 순서로 갑니다.
     </p>
     <div class="mt-3 overflow-x-auto">
       <table class="w-full min-w-[30rem] text-left text-sm">
@@ -149,7 +149,7 @@ function onSetComplete() {
         </thead>
         <tbody class="text-slate-700">
           <tr class="border-b border-slate-100"><td class="py-2 pr-3">부품</td><td class="py-2 pr-3">2~4장</td><td class="py-2">저량과 유량(욕조의 수학), 강화 루프(눈덩이), 균형 루프(온도 조절기)</td></tr>
-          <tr class="border-b border-slate-100"><td class="py-2 pr-3">계산</td><td class="py-2 pr-3">5장</td><td class="py-2">시간을 잘게 썰어 미래를 계산하는 법(오일러법), 경사하강과의 만남</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">계산</td><td class="py-2 pr-3">5장</td><td class="py-2">시간을 잘게 썰어 미래를 계산하는 법(오일러법), 그리고 경사하강이 같은 식이라는 것</td></tr>
           <tr class="border-b border-slate-100"><td class="py-2 pr-3">모양</td><td class="py-2 pr-3">6~8장</td><td class="py-2">지연과 출렁임, S자 성장, 평형과 안정성</td></tr>
           <tr class="border-b border-slate-100"><td class="py-2 pr-3">그림</td><td class="py-2 pr-3">9~10장</td><td class="py-2">인과지도의 규칙과 함정, 되풀이되는 구조(시스템 원형)</td></tr>
           <tr><td class="py-2 pr-3">AI·실전</td><td class="py-2 pr-3">11~12장</td><td class="py-2">AI가 만드는 고리(모델 붕괴·보상 해킹), 캡스톤: 사내 AI 도입 모형</td></tr>

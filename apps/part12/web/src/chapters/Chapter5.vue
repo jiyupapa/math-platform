@@ -24,7 +24,7 @@ function onSetComplete() {
     <p class="mb-1 text-sm font-medium text-indigo-600">5장 · 약 45분 · ⭐ 핵심</p>
     <h1 class="mb-4 text-3xl font-bold">시간을 잘게 썰기 — 오일러법과 시간 간격</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
-      1~4장의 곡선은 모두 컴퓨터가 계산했습니다. 어떻게 했을까요? 비밀은 2장의 "한 칸씩 쌓기"를 아주 잘게 반복하는 것뿐이에요.
+      1~4장의 곡선은 모두 컴퓨터가 계산했습니다. 어떻게 했을까요? 답은 2장의 "한 칸씩 쌓기"를 아주 잘게 반복하는 것뿐이에요.
       이 장에서는 그 계산법(오일러법)을 직접 돌려 보고, 칸의 폭을 잘못 잡으면 진짜 시스템에는 없는 출렁임과 폭발이
       생긴다는 것을 봅니다. 그리고 놀랍게도 이것이 8부에서 배운 <b>학습률</b> 이야기와 같은 식이라는 것까지요.
     </p>
@@ -38,7 +38,7 @@ function onSetComplete() {
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 무대: 컴퓨터는 미래를 어떻게 계산하나</h2>
     <ReviewFlag id="ch5-s1" chapter="ch5" label="1. 무대: 컴퓨터는 미래를 어떻게 계산하나" />
     <p class="leading-relaxed text-slate-700">
-      컴퓨터는 곡선을 한 번에 알지 못합니다. 아는 것은 "지금 저량"과 "지금 저량에서의 변화율(순유량)"뿐이에요.
+      컴퓨터는 곡선을 한 번에 알지 못합니다. 아는 것은 "지금 저량"과 "지금 저량일 때의 변화율(순유량)"뿐이에요.
       그래서 이렇게 걷습니다. <b>앞으로 DT 동안은 지금 속도 그대로 간다고 치고 한 칸 나아간다. 도착하면 거기서 속도를 다시 잰다.</b>
       2장에서 한 달씩 막대를 쌓던 것과 똑같고, 칸의 폭 DT만 자유롭게 고를 수 있어요.
     </p>
@@ -77,7 +77,7 @@ function onSetComplete() {
 
     <ConceptCard tone="note" title="새 용어: 미분방정식 / 오일러법 / 시간 간격(DT) / 수치 불안정 / 1차 정확도">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
-        <li><b>미분방정식</b> (differential equation). 뜻: 저량의 변화율을 저량으로 적은 식. 예: dS/dt = −S/τ. 시스템 다이내믹스 모형은 결국 미분방정식 묶음이고, 저량-유량도는 그것을 그림으로 그린 것입니다.</li>
+        <li><b>미분방정식</b> (differential equation). 뜻: 저량의 변화율을 저량으로 적은 식. 예: dS/dt = −S/τ. 시스템 다이내믹스 모형은 미분방정식 묶음이고, 저량-유량도는 이 식 묶음을 그림으로 그린 것입니다.</li>
         <li><b>오일러법</b> (Euler's method). 뜻: 지금의 변화율로 DT만큼 나아가기를 반복해 미분방정식을 푸는 가장 단순한 방법. 비유로는 <b>시간을 잘게 썰기</b>.</li>
         <li><b>시간 간격</b> (time step, DT, Δt). 뜻: 한 걸음의 시간 폭. 작을수록 정확하지만 계산이 많아집니다.</li>
         <li><b>수치 불안정</b> (numerical instability). 뜻: 진짜 시스템은 멀쩡한데 계산 방법 때문에 출렁이거나 발산하는 것. 오일러법에서는 DT &gt; 2τ일 때.</li>
@@ -100,7 +100,7 @@ function onSetComplete() {
     <ReviewFlag id="ch5-s3" chapter="ch5" label="3. 학습률은 시간 간격이다" />
     <p class="leading-relaxed text-slate-700">
       4장에서 경사하강이 균형 루프라는 것을 봤습니다. 한 걸음 더 들어가 봅시다. 가중치가 매 순간 기울기의 반대 방향으로
-      미끄러져 내려가는 매끄러운 움직임을 상상하면, 그것은 미분방정식입니다. 이 미끄러짐을 <b>경사 흐름</b>(gradient flow)이라고 해요.
+      미끄러져 내려가는 매끄러운 움직임을 상상하면, 이 움직임을 미분방정식으로 쓸 수 있습니다. 이 미끄러짐을 <b>경사 흐름</b>(gradient flow)이라고 해요.
     </p>
     <MathBlock expr="\frac{d\theta}{dt} = -\nabla L(\theta) \quad\xrightarrow{\ \text{오일러법, }\Delta t = \eta\ }\quad \theta_{k+1} = \theta_k - \eta\, \nabla L(\theta_k)" />
     <p class="mb-2 text-sm leading-relaxed text-slate-500">
@@ -120,7 +120,7 @@ function onSetComplete() {
     <ReviewFlag id="ch5-ai" chapter="ch5" label="🤖 AI 연결: 학습률은 시간 간격, 발산 경계는 같은 식" />
     <ConceptCard tone="ai" title="🤖 AI 연결: 학습률은 시간 간격, 발산 경계는 같은 식">
       <b><PartLink :part="8" ch="ch2">8부 2장</PartLink></b>에서 곡률 2인 골짜기의 학습률을 1.0보다 크게 잡자 손실이 폭발했습니다.
-      오늘 실험의 DT를 2τ보다 크게 잡자 계산이 발산한 것과 <b>한 자리도 다르지 않은</b> 현상이에요. 경사하강은
+      오늘 실험의 DT를 2τ보다 크게 잡자 계산이 발산한 것과 <b>똑같은</b> 현상이에요. 경사하강은
       <b><PartLink :part="2" ch="ch9">2부 9장</PartLink></b>의 그래디언트가 만드는 미끄러짐(경사 흐름)을 오일러법으로 계산한 것이고,
       학습률은 시간 간격, 곡률은 1/시간 상수이기 때문입니다. 학습률이 조금만 커도 손실 곡선이 지그재그로 흔들리는 것(8부 9장)은
       오늘 본 '가짜 출렁임'이고요. 한 가지 구별: 여기서 말하는 오차는 칸을 썰어 생기는 <b>절단 오차</b>(truncation error)로,
