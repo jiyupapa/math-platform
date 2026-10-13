@@ -44,20 +44,22 @@ async function ask() {
     <button
       v-if="state === 'idle' || state === 'offline' || state === 'error'"
       type="button"
-      class="text-sm font-medium text-indigo-600 hover:underline"
+      class="rounded-lg bg-white px-3 py-1.5 text-sm font-semibold text-indigo-700 shadow-sm transition hover:bg-indigo-50"
       @click="ask"
     >
       🤖 AI 강사에게 더 듣기
     </button>
-    <span v-else-if="state === 'checking'" class="text-sm text-slate-500">튜터를 부르는 중…</span>
+    <!-- 이 부품은 포털 홈의 인디고 요약 카드 안에 놓인다. 글자만 두면 카드색과 같아져 안 보였다(2026-10-13) →
+         버튼·안내문이 자기 바탕을 갖게 해서, 대비 검사기(컴포넌트 경계 밖 배경은 못 봄)도 판정할 수 있게 했다. -->
+    <span v-else-if="state === 'checking'" class="inline-block rounded-lg bg-white px-3 py-1.5 text-sm text-indigo-700">튜터를 부르는 중…</span>
 
     <p v-if="output" class="mt-2 rounded-lg bg-indigo-50 p-3 text-sm text-slate-700">{{ output }}</p>
 
-    <p v-if="state === 'offline'" class="mt-2 text-xs text-slate-500">
+    <p v-if="state === 'offline'" class="mt-2 rounded-lg bg-indigo-50 px-3 py-2 text-xs text-slate-700">
       로컬 튜터(Ollama)가 꺼져 있어요. 대신 위 안내를 참고해 주세요. (켜면 더 자세히 설명해 드려요)
     </p>
     <OllamaOriginHint v-if="state === 'offline'" />
-    <p v-else-if="state === 'error'" class="mt-2 text-xs text-slate-500">
+    <p v-else-if="state === 'error'" class="mt-2 rounded-lg bg-indigo-50 px-3 py-2 text-xs text-slate-700">
       튜터 응답에 문제가 있었어요. 위 안내를 참고하세요.
     </p>
   </div>
