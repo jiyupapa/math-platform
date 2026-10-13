@@ -75,7 +75,7 @@ function onSetComplete() {
     <ConceptCard tone="note" title="새 용어: 목표 / 격차 / 조정 시간·시간 상수 / 지수 감쇠 / 반감기">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
         <li><b>목표</b> (goal)와 <b>격차</b> (gap, discrepancy). 균형 루프가 쫓는 값과, 지금 저량과의 차이. 비유로는 온도 조절기의 설정 온도와 남은 온도 차.</li>
-        <li><b>조정 시간</b> (adjustment time, τ 타우). 격차를 얼마나 느긋하게 메울지 정하는 시간. 교정 유량 = 격차 ÷ τ. 같은 τ를 <b>시간 상수</b>(time constant)라고도 부르는데, τ만큼 지나면 격차의 63%가 메워지기 때문입니다.</li>
+        <li><b>조정 시간</b> (adjustment time, τ 타우). 격차를 얼마나 느긋하게 메울지 정하는 시간. 교정 유량 = 격차 ÷ τ. 같은 τ를 <b>시간 상수</b>(time constant)라고도 부릅니다. 이 고리의 시간 척도라는 뜻이고, τ만큼 지날 때마다 남은 격차의 63%가 메워집니다.</li>
         <li><b>지수 감쇠</b> (exponential decay). 같은 시간마다 같은 비율로 줄어드는 움직임. 3장 지수 성장의 거울상이에요.</li>
         <li><b>반감기</b> (half-life). 격차가 절반이 되는 시간 = τ × ln 2 ≈ 0.69τ. τ = 10분이면 약 6.9분마다 절반.</li>
       </ul>
@@ -184,7 +184,7 @@ function onSetComplete() {
       />
       <Quiz
         difficulty="medium"
-        question="다른 유입 없이 '매달 사용자의 10%가 이탈한다'. 이 고리의 정체는?"
+        question="다른 유입 없이 '매달 사용자의 10%가 이탈한다'. 이것은 어떤 고리인가?"
         :choices="['0을 목표로 하는 균형 루프(지수 감쇠)', '강화 루프(악순환)', '지연', '고리가 없다']"
         :answer="0"
         :hints="['사용자 수 →(+) 이탈 →(−) 사용자 수. − 가 몇 개인가요?']"

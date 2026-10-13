@@ -1857,7 +1857,7 @@
   {
     "id": "delay",
     "label": "지연과 출렁임",
-    "aliases": ["delay", "지연", "시간 지연", "물질 지연", "정보 지연", "material delay", "information delay", "1차 지연", "first-order delay", "지수 평활", "exponential smoothing", "SMOOTH", "과잉 교정", "overshoot", "출렁임", "oscillation", "채찍 효과", "bullwhip effect", "맥주 게임"],
+    "aliases": ["delay", "지연", "시간 지연", "물질 지연", "정보 지연", "material delay", "information delay", "1차 지연", "first-order delay", "지수 평활", "exponential smoothing", "SMOOTH", "과잉 교정", "overshoot", "오버슈트", "출렁임", "oscillation", "채찍 효과", "bullwhip effect", "맥주 게임"],
     "kind": "math",
     "note": "원인과 결과 사이의 시간 차, 균형 루프에 끼면 과잉 교정과 출렁임을 만든다",
     "definedAt": { "part": 12, "slug": "ch6", "anchor": "ch6-s2" },
@@ -1872,7 +1872,7 @@
   {
     "id": "logistic-growth",
     "label": "S자 성장과 지배 루프",
-    "aliases": ["logistic growth", "로지스틱 성장", "S자 곡선", "S-curve", "S자 성장", "수용 한계", "carrying capacity", "환경 수용력", "변곡점", "inflection point", "지배 루프", "dominant loop", "loop dominance"],
+    "aliases": ["logistic growth", "로지스틱 성장", "S자 곡선", "S-curve", "S자 성장", "수용 한계", "carrying capacity", "환경 수용력", "변곡점", "inflection point", "지배 루프", "dominant loop", "loop dominance", "overshoot and collapse"],
     "kind": "math",
     "note": "강화 루프와 포화하는 균형 루프가 만나 빨라지다 멈추는 곡선, 변곡점 K/2에서 지배 루프가 바뀐다",
     "definedAt": { "part": 12, "slug": "ch7", "anchor": "ch7-s2" },
@@ -1940,7 +1940,7 @@
   {
     "id": "bass-diffusion",
     "label": "Bass 확산 모형",
-    "aliases": ["Bass diffusion model", "Bass 모형", "배스 모형", "혁신계수", "coefficient of innovation", "모방계수", "coefficient of imitation", "잠재시장규모", "market potential", "도입 확산", "adoption", "입소문", "word of mouth", "도입 전략"],
+    "aliases": ["Bass diffusion model", "Bass 모형", "배스 모형", "혁신계수", "coefficient of innovation", "모방계수", "coefficient of imitation", "잠재시장규모", "market potential", "도입 확산", "adoption", "입소문", "word of mouth", "도입 전략", "이탈률", "churn rate", "평균 사용 기간"],
     "kind": "math",
     "note": "홍보(p)와 입소문(q)으로 퍼지는 도입의 표준 모형, 이탈을 더하면 최종 수준이 정해진다",
     "definedAt": { "part": 12, "slug": "ch12", "anchor": "ch12-s2" },

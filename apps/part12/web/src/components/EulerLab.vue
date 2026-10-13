@@ -84,8 +84,8 @@ const etaEq = computed(() => ratio.value / LAMBDA)
     />
     <p class="mt-2 rounded-lg bg-slate-50 p-3 text-sm font-medium" :class="verdict.tone">{{ verdict.text }}</p>
     <p class="mt-2 rounded-lg bg-indigo-50 p-3 text-xs leading-relaxed text-indigo-800">
-      💡 같은 식, 다른 이름: 이 계산은 곡률 λ = 2인 골짜기에서 <b>학습률 η = {{ etaEq.toFixed(2) }}</b>로 경사하강하는 것과 한 자리도
-      다르지 않습니다(DT/τ = 학습률 × 곡률 = {{ ratio.toFixed(2) }}). 8부 2장에서 학습률 1.0을 넘기면 폭발하던 그 경계가 여기선 DT = 2τ예요.
+      💡 같은 식, 다른 이름: 이 계산은 곡률 λ = 2인 골짜기에서 <b>학습률 η = {{ etaEq.toFixed(2) }}</b>로 경사하강하는 것과
+      똑같습니다(DT/τ = 학습률 × 곡률 = {{ ratio.toFixed(2) }}). 8부 2장에서 학습률 1.0을 넘기면 폭발하던 그 경계가 여기선 DT = 2τ예요.
     </p>
 
     <hr class="my-5 border-slate-100" />

@@ -45,11 +45,11 @@ function onSetComplete() {
 
     <DelayLab />
 
-    <ConceptCard tone="tip" title="핵심 관찰: 지연이 조정 시간을 넘보면 과잉 교정이 시작된다">
+    <ConceptCard tone="tip" title="핵심 관찰: 지연이 조정 시간에 비해 길어지면 과잉 교정이 시작된다">
       배관 지연 2초, 조정 시간 2초(D ÷ τ = 1)이면 목표 38°C인데 머리에 닿는 물이 최고 <b>약 47°C</b>까지 올라갑니다.
       사람이 서툴러서가 아니라 <b>늦게 오는 소식</b>을 보고 고치기 때문이에요. D ÷ τ가 0.25면 넘치지 않고, 0.5면 살짝 넘치고,
       1.5면 60초가 지나도 크게 출렁이며, 약 1.6을 넘으면 출렁임이 커져 손잡이를 끝에서 끝으로 돌리게 됩니다.
-      처방은 둘입니다. <b>덜 조급하게</b>(τ를 늘려 천천히 돌리기) 하거나, <b>지연을 줄이기</b>(정보를 빨리 보기)예요.
+      처방은 둘입니다. <b>덜 조급하게</b> 돌리거나(τ 늘리기), <b>지연을 줄이는</b> 것(정보를 빨리 보기)이에요.
     </ConceptCard>
 
     <p class="mt-6 mb-1 text-sm font-semibold text-slate-500">🔎 잠깐 확인!</p>
@@ -80,7 +80,7 @@ function onSetComplete() {
         <li><b>물질 지연</b> (material delay). 물건·사람이 이동하거나 처리되는 데 걸리는 시간. 배관 속 물, 배송 중인 주문, 채용 후 적응 기간.</li>
         <li><b>정보 지연</b> (information delay). 상황이 바뀐 것을 알아채는 데 걸리는 시간. 늦게 집계되는 지표, 평균 내서 보는 숫자.</li>
         <li><b>1차 지연·지수 평활</b> (first-order delay, exponential smoothing). 보이는 값이 실제 값과의 차이를 τ에 걸쳐 메우는 가장 단순한 지연. 걸음 단위로 쓰면 EMA.</li>
-        <li><b>과잉 교정</b> (overshoot). 늦게 온 정보를 보고 계속 고치다 목표를 지나치는 것. 비유로는 <b>샤워기 온도 맞추기</b>.</li>
+        <li><b>과잉 교정</b> (overshoot, 공학에서는 오버슈트). 늦게 온 정보를 보고 계속 고치다 목표를 지나치는 것. 비유로는 <b>샤워기 온도 맞추기</b>.</li>
         <li><b>출렁임</b> (oscillation). 목표를 넘었다 모자랐다를 되풀이하는 움직임. 균형 루프에 지연이 끼면 생깁니다.</li>
       </ul>
     </ConceptCard>
@@ -217,7 +217,7 @@ function onSetComplete() {
       class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center"
     >
       <div class="mb-1 text-xl font-bold text-emerald-700">✓</div>
-      <p class="font-semibold text-emerald-800">6장 완료! 출렁임의 정체를 알았습니다!</p>
+      <p class="font-semibold text-emerald-800">6장 완료! 출렁임이 왜 생기는지 알았습니다!</p>
       <p class="mt-1 text-sm text-emerald-700">
         균형 루프 + 지연 = 과잉 교정, EMA = 1차 정보 지연. 다음은 7장입니다.
         강화 루프와 균형 루프가 만나 S자 곡선이 되는 순간, 지배 루프가 바뀌는 지점을 계산합니다.
