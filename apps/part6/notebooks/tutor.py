@@ -156,7 +156,7 @@ def concept_cards(concepts: list[dict], question: str = '') -> str:
         lines.append(line)
     here = (f" 현재 과정은 {_PART_NO}부 — '다른 부' 개념은 내용을 길게 지어내지 말고 배우는 곳을 안내한다."
             if _PART_NO else '')
-    return ("[개념 카드 — 시리즈 정본에서 자동 첨부. 'N부'는 이 시리즈의 권(1~11부, 각각 별도 과정), "
+    return ("[개념 카드 — 시리즈 정본에서 자동 첨부. 'N부'는 이 시리즈의 권(1~12부, 각각 별도 과정), "
             f"'M장'은 그 안의 장.{here} 질문한 개념을 배우는 곳·선수 개념]\n" + '\n'.join(lines))
 
 

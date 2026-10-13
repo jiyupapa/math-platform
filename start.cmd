@@ -45,6 +45,7 @@ echo    8)  Part 8  - Optimization          part8
 echo    9)  Part 9  - Numerical Computing   part9
 echo   10)  Part 10 - Scaling ^& Evaluation  part10
 echo   11)  Part 11 - Agents ^& Reasoning    part11
+echo   12)  Part 12 - System Dynamics      part12
 echo ------------------------------------------------------------
 echo    A)  Build all + serve as one origin  (deploy)   [arg: all]
 echo    I)  Reinstall deps                   (npm install)
@@ -68,7 +69,7 @@ set "app="
 set "in=%~1"
 if /i "%in%"=="0"      set "app=portal"
 if /i "%in%"=="portal" set "app=portal"
-for /l %%n in (1,1,11) do (
+for /l %%n in (1,1,12) do (
   if "%in%"=="%%n"        set "app=part%%n"
   if /i "%in%"=="part%%n" set "app=part%%n"
 )
@@ -82,10 +83,10 @@ echo.
 call npm run dev -w apps/%~1/web
 exit /b 0
 
-REM -- subroutine: build all 12 apps + serve one origin at http://localhost:4173 --
+REM -- subroutine: build all 13 apps + serve one origin at http://localhost:4173 --
 :serveall
 echo.
-echo [all] building all 12 apps, then serving one origin at http://localhost:4173 ...
+echo [all] building all 13 apps, then serving one origin at http://localhost:4173 ...
 echo       (production build - no HMR. Press Ctrl+C to stop.)
 echo.
 call npm run deploy:build && call npm run deploy:serve

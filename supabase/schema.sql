@@ -321,7 +321,7 @@ grant execute on function public.set_resolved(uuid, boolean) to authenticated;
 -- ─────────────────────────────────────────────────────────────
 alter table public.annotations drop constraint if exists annotations_part_chk;
 alter table public.annotations add constraint annotations_part_chk
-  check (part between 1 and 32);                      -- 현재 1~11부 + 확장 여유
+  check (part between 1 and 32);                      -- 현재 1~12부 + 확장 여유
 alter table public.annotations drop constraint if exists annotations_chapter_chk;
 alter table public.annotations add constraint annotations_chapter_chk
   check (char_length(chapter) between 1 and 32);      -- 예: 'ch6' · 'warmup'

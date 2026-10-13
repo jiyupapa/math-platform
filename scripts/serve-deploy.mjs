@@ -73,6 +73,6 @@ createServer((req, res) => {
 }).listen(PORT, () => {
   console.log(
     `\n  deploy/ 서빙 중 →  http://localhost:${PORT}\n` +
-      `  포털(/) · 1부(/part1) … 11부(/part11) 가 한 origin.  Ctrl+C 로 종료.\n`,
+      `  포털(/) · 1부(/part1) … 12부(/part12) 가 한 origin.  Ctrl+C 로 종료.\n`,
   )
 })

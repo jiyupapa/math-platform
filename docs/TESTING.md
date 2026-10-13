@@ -1,6 +1,6 @@
 # 전체 테스트 수행 방법 — MATH_PLATFORM 모노레포
 
-> 대상: `C:\STUDY\MATH_PLATFORM` (npm workspaces 모노레포). 11개 부(`apps/part1..11`) + 포털(`apps/portal`) + 공용 패키지(`packages/ui`·`packages/tutor`·`packages/store`).
+> 대상: `C:\STUDY\MATH_PLATFORM` (npm workspaces 모노레포). 12개 부(`apps/part1..12`) + 포털(`apps/portal`) + 공용 패키지(`packages/ui`·`packages/tutor`·`packages/store`).
 > 원본 `C:\STUDY\MATH` 는 손대지 않은 백업. 문제가 생기면 이 폴더를 지우고 원본에서 다시 시작해도 무손실.
 >
 > **이 테스트로 확인하려는 것**: 모노레포 전환(공용 컴포넌트를 `@series/ui` 패키지로 분리, provide/inject 결합해제) 후에도
@@ -28,7 +28,7 @@ cd /d C:\STUDY\MATH_PLATFORM
 npm install
 ```
 
-> 워크스페이스라 루트에서 한 번 설치하면 12개 앱 + 패키지가 모두 링크된다. `@series/ui` 는 `node_modules/@series/ui` 심링크로 연결됨.
+> 워크스페이스라 루트에서 한 번 설치하면 13개 앱 + 패키지가 모두 링크된다. `@series/ui` 는 `node_modules/@series/ui` 심링크로 연결됨.
 
 ---
 
@@ -43,7 +43,7 @@ npm install
 npm run build --workspaces --if-present
 ```
 
-- 12개 앱 전부 `built in ...` 이 뜨면 통과. (`packages/ui`·`packages/tutor`·`packages/store` 는 build 스크립트가 없어 자동 건너뜀.)
+- 13개 앱 전부 `built in ...` 이 뜨면 통과. (`packages/ui`·`packages/tutor`·`packages/store` 는 build 스크립트가 없어 자동 건너뜀.)
 - 하나라도 `error TS...` 또는 `Cannot find module` 이 뜨면 실패 → 6절 참고.
 
 ### 개별 앱만
@@ -98,7 +98,7 @@ npm run dev -w apps/part1/web
 
 ## 3. 노트북 테스트 (선택)
 
-**부별 venv 는 필요 없다.** 11개 부의 의존성은 거의 동일(공통 6개 + part2 `sympy` + part3 `scipy` + part7 `scikit-learn`)하고 서로 충돌이 없으므로,
+**부별 venv 는 필요 없다.** 12개 부의 의존성은 거의 동일(공통 6개 + part2 `sympy` + part3 `scipy` + part7 `scikit-learn`)하고 서로 충돌이 없으므로,
 모노레포답게 **루트에 공용 venv 하나**를 만들어 모든 부의 노트북을 실행한다. 합집합 명세는 루트 `requirements.txt`.
 (부별 `apps/part*/notebooks/requirements.txt` 는 "그 부가 무엇을 쓰는지" 명세로 남겨둔다 — 참고용.)
 
@@ -125,7 +125,7 @@ python -m venv .venv
 🪟 **cmd** (한 줄 붙여넣기):
 
 ```cmd
-for %p in (part1 part2 part3 part4 part5 part6 part7 part8 part9) do @for %f in (apps\%p\notebooks\*.ipynb) do @echo [%f] & .venv\Scripts\python.exe -m jupyter nbconvert --to notebook --execute --stdout --ExecutePreprocessor.kernel_name=math-platform "%f" >nul && echo   OK || echo   FAIL
+for %p in (part1 part2 part3 part4 part5 part6 part7 part8 part9 part10 part11 part12) do @for %f in (apps\%p\notebooks\*.ipynb) do @echo [%f] & .venv\Scripts\python.exe -m jupyter nbconvert --to notebook --execute --stdout --ExecutePreprocessor.kernel_name=math-platform "%f" >nul && echo   OK || echo   FAIL
 ```
 
 > `.bat` 파일로 저장해 쓰려면 `%p`·`%f` 를 `%%p`·`%%f` 로 바꾼다.
@@ -153,9 +153,9 @@ Get-ChildItem apps\part*\notebooks\*.ipynb | ForEach-Object {
   .venv\Scripts\python.exe -m pip install sentence-transformers
   ```
 
-- 그 외 ch* 시리즈 노트북(2026-07-13 현재 130개)은 루트 `requirements.txt` 만으로 전부 무에러 실행됨 —
-  6~11부 노트북은 챕터 제작 시점마다 nbconvert 로 검증했다(각 부 `docs/99_history.md` 참조).
-  10부 11권은 완결 이튿날, 11부 13권은 완결일 정합성 감사에서 일괄 재검증(2026-07-13).
+- 그 외 ch* 시리즈 노트북(2026-10-13 현재 143개)은 루트 `requirements.txt` 만으로 전부 무에러 실행됨 —
+  6~12부 노트북은 챕터 제작 시점마다 nbconvert 로 검증했다(각 부 `docs/99_history.md` 참조).
+  10부 11권은 완결 이튿날, 11부 13권은 완결일 정합성 감사에서 일괄 재검증(2026-07-13). 12부 13권은 완결일(2026-10-13)에 일괄 검증.
 
 ### 검증 이력 (2026-07-09)
 
@@ -166,7 +166,7 @@ Get-ChildItem apps\part*\notebooks\*.ipynb | ForEach-Object {
 
 ## 4. 빠른 전체 점검 스크립트
 
-**반복문 필요 없음** — 1절의 이 한 줄이 이미 12앱을 전부 빌드한다(cmd·PowerShell·Git Bash 공통):
+**반복문 필요 없음** — 1절의 이 한 줄이 이미 13앱을 전부 빌드한다(cmd·PowerShell·Git Bash 공통):
 
 ```cmd
 npm run build --workspaces --if-present
@@ -177,13 +177,13 @@ npm run build --workspaces --if-present
 🪟 **cmd** (한 줄 붙여넣기 — `call` 필수: npm 은 `npm.cmd` 라 안 붙이면 첫 앱에서 멈춘다):
 
 ```cmd
-for %a in (part1 part2 part3 part4 part5 part6 part7 part8 part9 part10 part11 portal) do @echo [%a] & call npm run build -w apps/%a/web
+for %a in (part1 part2 part3 part4 part5 part6 part7 part8 part9 part10 part11 part12 portal) do @echo [%a] & call npm run build -w apps/%a/web
 ```
 
 **PowerShell**:
 
 ```powershell
-foreach ($a in 'part1','part2','part3','part4','part5','part6','part7','part8','part9','part10','part11','portal') {
+foreach ($a in 'part1','part2','part3','part4','part5','part6','part7','part8','part9','part10','part11','part12','portal') {
   Write-Host "=== $a ===" -ForegroundColor Cyan
   npm run build -w "apps/$a/web"
 }
@@ -205,6 +205,10 @@ npm run check:contrast -- --fix # 통과하는 가장 가까운 단계로 자동
 전 `*.vue` 를 태그 스택으로 훑어 **조상 배경**과 글자색을 짝지어 **라이트·다크 양쪽**에서 4.5:1 을
 검사한다. 색 값은 Tailwind 정본(`node_modules/tailwindcss/theme.css`)과 생성물
 `packages/ui/src/dark.css` 에서 읽으므로 팔레트가 바뀌면 자동으로 따라온다.
+
+검사 대상은 **git 이 추적하는** `*.vue`(`git ls-files`)다. 아직 `git add` 하지 않은 새 파일은 빠진 채로 "미달 없음"이 나온다.
+커밋 훅은 스테이징된 파일까지 보므로 커밋 때는 잡힌다. 새 부처럼 파일을 한꺼번에 만드는 중이면
+`git add -N apps/partN` 으로 추적만 걸어 두고 미리 돌린다.
 
 **눈으로는 못 잡는 것들을 잡는다** — ① 배경이 부모에 있는 경우, ② 배경이 `:class` 삼항 안에 있는 경우,
 ③ 계열마다 밝기가 달라("emerald-600 은 3.49:1 미달 / indigo-600 은 6.18:1 통과") 규칙으로 외울 수 없는 경우,
@@ -233,7 +237,7 @@ git config core.hooksPath githooks
 그건 실제 렌더에서만 보이므로, 배포 전에는 조립본으로 확인한다.
 
 ```bash
-npm run deploy:build && npm run deploy:serve   # http://localhost:4173 — 12앱이 한 origin
+npm run deploy:build && npm run deploy:serve   # http://localhost:4173 — 13앱이 한 origin
 ```
 
 한 origin 이라 **숨은 iframe** 에 각 앱을 띄워 `contentDocument` 를 직접 측정할 수 있다(앱마다
@@ -323,18 +327,22 @@ npm run search:index && npm run ontology:graph   # 정본을 고쳤으면 산출
   `@source '../../../../packages/ui/src';` 줄이 있어야 한다. **이 실패는 `npm run build` 가 못 잡는다**(타입은 통과, 스타일만 누락) → 반드시 눈으로 확인.
 - **`Cannot find module '@series/ui'`** — 루트에서 `npm install` 을 다시 실행(워크스페이스 링크 재생성).
 - **`Failed to resolve ... .vue`** 또는 패키지 컴포넌트가 안 뜸 — 해당 앱 `vite.config.ts` 에
-  `optimizeDeps: { exclude: [...] }` 가 있는지 확인 (전 11부 + 포털 = `['@series/ui', '@series/tutor', '@series/store']`).
+  `optimizeDeps: { exclude: [...] }` 가 있는지 확인 (전 12부 + 포털 = `['@series/ui', '@series/tutor', '@series/store']`).
 - **진도/복습이 새로고침 후 사라진다** — 각 부 `web/src/main.ts` 의 `app.provide(storagePrefixKey, '...')`
   와 `reviewApiKey` 주입이 있는지 확인. 접두사는 부마다 고정: part1=`la`, part2=`diff`, part3=`stat`, part4=`tf`, part5=`it`,
-  part6=`tame`, part7=`emb`, part8=`opt`, part9=`num`, part10=`scale`, part11=`agent`, portal=`hub`. **바꾸면 기존 진도가 끊긴다(포털 연동 포함).**
+  part6=`tame`, part7=`emb`, part8=`opt`, part9=`num`, part10=`scale`, part11=`agent`, part12=`sd`, portal=`hub`. **바꾸면 기존 진도가 끊긴다(포털 연동 포함).**
 - **타입 에러 `... is declared but never used`** — `noUnusedLocals` 규칙. 미사용 import/변수 제거.
+- **조립본에서 한 부만 하얗게 뜨고 콘솔에 `Expected a JavaScript-or-Wasm module script ... "text/html"`** — 그 부를 Git Bash 에서
+  `npm run build -w apps/partN/web -- --base=/partN/` 로 따로 빌드해 `deploy/partN` 에 넣었다면, MSYS 경로 변환이 `/partN/` 앞에
+  Git 설치 경로를 붙여 base 가 망가진 것이다(`index.html` 의 `src` 가 `/partN/assets/…` 로 시작하지 않는다).
+  `MSYS_NO_PATHCONV=1` 을 앞에 붙여 다시 빌드하거나 `npm run deploy:build` 로 다시 조립한다.
 
 ---
 
 ## 부록: 현재 상태
 
-- 구조: `apps/part1..11` + `apps/portal` + `packages/ui`(공용 컴포넌트 14종: MathBlock·ConceptCard·DetailsCard·ChartView·NotebookCard·ReviewFlag·PartLink·Quiz·StepQuiz·QuizSet·SearchPalette·ThemeToggle·NoteMarker·NotePanel + quizGroup 그룹계약 + injection·theme·anchor) + `packages/tutor`(AI 튜터 Ollama 클라이언트) + `packages/store`(Supabase 인증·동기화·협업 주석 — env 미설정 시 no-op).
+- 구조: `apps/part1..12` + `apps/portal` + `packages/ui`(공용 컴포넌트 14종: MathBlock·ConceptCard·DetailsCard·ChartView·NotebookCard·ReviewFlag·PartLink·Quiz·StepQuiz·QuizSet·SearchPalette·ThemeToggle·NoteMarker·NotePanel + quizGroup 그룹계약 + injection·theme·anchor) + `packages/tutor`(AI 튜터 Ollama 클라이언트) + `packages/store`(Supabase 인증·동기화·협업 주석 — env 미설정 시 no-op).
 - 결합해제 주입 계약: `storagePrefixKey`(QuizSet 접두사) · `reviewApiKey`(ReviewFlag) · `notebookResolverKey`(NotebookCard) · `partNumberKey`(협업 주석 게이트 — 부 번호가 틀리면 남의 부 메모가 섞인다) · `searchIndexKey`(통합검색).
-- 검증됨(빌드): 전 11부 + 포털 `vue-tsc + vite` 통과, Tailwind `@source` 로 패키지 클래스 생성 전 부 확인.
+- 검증됨(빌드): 전 12부 + 포털 `vue-tsc + vite` 통과, Tailwind `@source` 로 패키지 클래스 생성 전 부 확인.
 - 미검증(이 문서의 2절이 그 확인 절차): 런타임 동작(퀴즈·진도·복습·튜터).
 - 커밋 되돌림 지점: `b3e3a00`(baseline) → `71c1aff`(trial) → `deaed16`(패키지 완성) → `b0ee776`(2~5부 전파).

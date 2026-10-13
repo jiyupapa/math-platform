@@ -24,6 +24,7 @@ export const PART_STYLE: Record<number, PartStyle> = {
   9: { name: '수치 계산', chip: 'bg-orange-100 text-orange-800', node: 'border-orange-200 bg-orange-50 text-orange-900', done: 'border-orange-700 bg-orange-700 text-white', ring: 'ring-orange-600' },
   10: { name: '스케일링과 평가', chip: 'bg-pink-100 text-pink-800', node: 'border-pink-200 bg-pink-50 text-pink-900', done: 'border-pink-700 bg-pink-700 text-white', ring: 'ring-pink-600' },
   11: { name: '에이전트와 추론', chip: 'bg-fuchsia-100 text-fuchsia-800', node: 'border-fuchsia-200 bg-fuchsia-50 text-fuchsia-900', done: 'border-fuchsia-700 bg-fuchsia-700 text-white', ring: 'ring-fuchsia-600' },
+  12: { name: '시스템 다이내믹스', chip: 'bg-green-100 text-green-800', node: 'border-green-200 bg-green-50 text-green-900', done: 'border-green-700 bg-green-700 text-white', ring: 'ring-green-600' },
 }
 
-export const PARTS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+export const PARTS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]

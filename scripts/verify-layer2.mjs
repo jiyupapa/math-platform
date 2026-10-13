@@ -7,7 +7,7 @@
 //   1) npm run deploy:build                          — 전 앱을 단일 origin 으로 조립
 //   2) npm i --no-save playwright-core               — 브라우저 구동 라이브러리(저장 안 함)
 //   3) PORT=4199 node scripts/serve-deploy.mjs &     — 조립본 서빙
-//   4) PORT=4199 node scripts/verify-layer2.mjs      — 16항목 검증 (전부 ✓ 면 성공)
+//   4) PORT=4199 node scripts/verify-layer2.mjs      — 17항목 검증 (전부 ✓ 면 성공)
 // 브라우저는 시스템 Edge 를 쓴다 — 경로가 다르면 EDGE_PATH 환경변수로 지정.
 import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
@@ -50,13 +50,15 @@ await page.evaluate(() => {
   localStorage.setItem('tf-progress-v1', JSON.stringify(['ch1', 'ch2', 'ch11']))
   // 9부: 2챕터 — 이번에 신설된 부의 2층 편입 확인
   localStorage.setItem('num-progress-v1', JSON.stringify(['ch1', 'ch2']))
+  // 12부: 2챕터 — 나중에 들어온 부(접두사 sd)도 같은 길로 읽히는지
+  localStorage.setItem('sd-progress-v1', JSON.stringify(['ch1', 'ch2']))
   // 3부: 복습 북마크 2건 → "복습 먼저" 카드
   localStorage.setItem('stat-review-v1', JSON.stringify([
     { id: 'ch4-s2', chapter: 'ch4', label: '조건부 확률 — 베이즈 직관' },
     { id: 'ch5-s1', chapter: 'ch5', label: '확률분포 읽기' },
   ]))
 })
-check('키 기록 완료 (la·tf·num·stat)', true)
+check('키 기록 완료 (la·tf·num·sd·stat)', true)
 
 console.log('▶ 포털(/) — 2층 읽기 검증')
 await page.goto(`${BASE}/`, { waitUntil: 'networkidle' })
@@ -71,6 +73,8 @@ const step5 = await page.locator('li', { hasText: '4부 학습편' }).first().in
 check('단계5 (4부 학습편 ch11) — 진도 1/1 (쪼갠 단계 정확)', step5.includes('진도 1/1'))
 const step11 = await page.locator('li', { hasText: '9부: 수치 계산' }).first().innerText()
 check('단계11 (9부) — 진도 2/11 (신설 부 편입)', step11.includes('진도 2/11'))
+const step14 = await page.locator('li', { hasText: '12부: 시스템 다이내믹스' }).first().innerText()
+check('단계14 (12부) — 진도 2/12 (12부 편입)', step14.includes('진도 2/12'))
 const step8 = await page.locator('li', { hasText: '후반 심화' }).first().innerText()
 check('단계8 (후반 심화 ch7~12·ch8~10) — 진도 배지 없음 (필수만 완료했으므로)', !step8.includes('진도 '))
 

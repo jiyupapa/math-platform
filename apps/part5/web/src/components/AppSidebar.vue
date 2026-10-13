@@ -25,7 +25,7 @@ const review = useReviewStore()
     class="fixed inset-y-0 left-0 z-30 flex w-72 flex-col border-r border-slate-200 bg-white transition-transform lg:static lg:translate-x-0"
     :class="open ? 'translate-x-0' : '-translate-x-full'"
   >
-    <!-- 부 고유색 띠 — 11개 앱을 오갈 때 위치를 색으로 먼저 알린다 -->
+    <!-- 부 고유색 띠 — 12개 부를 오갈 때 위치를 색으로 먼저 알린다 -->
     <div class="h-1 shrink-0 bg-violet-600" aria-hidden="true" />
     <div class="border-b border-slate-200 px-5 py-5">
       <!-- 포털(시리즈 홈)로 — 조립 배포본에서만 렌더(단독 dev 서버에는 포털이 없다). packages/ui PortalLink -->

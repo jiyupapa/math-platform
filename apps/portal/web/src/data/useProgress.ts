@@ -1,8 +1,8 @@
 // 2층 — 포털이 각 부의 학습 데이터를 읽는다.
-// 각 부의 localStorage 키 (접두사: la/diff/stat/tf/it/tame/emb/opt/num/scale/agent):
+// 각 부의 localStorage 키 (접두사: la/diff/stat/tf/it/tame/emb/opt/num/scale/agent/sd):
 //   {prefix}-progress-v1 : 완료 챕터 슬러그 배열
 //   {prefix}-review-v1   : 복습 북마크 배열 [{id, chapter, label}]
-// ⚠️ localStorage 는 origin 단위라, 이 읽기는 11개 부 + 포털이 "같은 origin 하위 경로"로
+// ⚠️ localStorage 는 origin 단위라, 이 읽기는 12개 부 + 포털이 "같은 origin 하위 경로"로
 //    배포됐을 때만 실제로 동작한다(npm run deploy:build → deploy:serve). dev 단독 실행 시엔 빈 값.
 
 import { ref, watch } from 'vue'
@@ -36,6 +36,7 @@ export const PART_META: PartMeta[] = [
   { part: 9, prefix: 'num', label: '9부 수치 계산', essential: range(1, 11), advanced: [] },
   { part: 10, prefix: 'scale', label: '10부 스케일링·평가', essential: range(1, 10), advanced: [] },
   { part: 11, prefix: 'agent', label: '11부 에이전트·추론', essential: range(1, 12), advanced: [] },
+  { part: 12, prefix: 'sd', label: '12부 시스템 다이내믹스', essential: range(1, 12), advanced: [] },
 ]
 
 export interface PartProgress {

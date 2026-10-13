@@ -20,7 +20,7 @@ jobs:
           node-version: '24' # .ts 타입 스트리핑(syncMerge 테스트) 기본 지원
           cache: 'npm'
       - run: npm ci
-      - name: 전 12앱 빌드 (vue-tsc 타입체크 + vite)
+      - name: 전 13앱 빌드 (vue-tsc 타입체크 + vite)
         run: npm run build --workspaces --if-present
       - name: 글자 대비 검사 (라이트·다크)
         run: npm run check:contrast
