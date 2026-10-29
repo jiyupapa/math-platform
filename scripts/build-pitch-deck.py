@@ -1,10 +1,18 @@
 # scripts/build-pitch-deck.py
-# 해커톤 발표 덱 생성 — docs/hackathon/11_pitch_deck.pptx (14장, 16:9)
+# 해커톤 발표 덱 생성 — docs/hackathon/11_pitch_deck.pptx (15장 + 번호 없는 영상 장, 16:9)
+#   ⑮ = 부록 · 만든 도구와 AI 를 쓴 곳(2026-10-21 사용자 요청 — 참고: 다른 팀 덱의 "Built with" 장)
 # 구성 정본: docs/hackathon/11_pitch_deck.md · 임베드 자산: docs/hackathon/assets/*.png
 #   (스크린샷 재생성은 scripts/shoot-deck-assets.mjs, 선 아이콘(assets/icons)은 scripts/render-deck-icons.mjs)
 #
 # 구성(2026-10-13): 세 기둥 LLM · 개념 온톨로지 · 시스템 다이내믹스(SD)를 뼈대로 — ③에 세 기둥, ⑥ LLM 튜터, ⑦ 온톨로지,
 #   ⑧ SD(인과지도·저량-유량도), ⑨ SD 로 짠 도입 전략(12부 캡스톤 모형 시나리오 막대그래프).
+# 발표(2026-10-21): 온라인 회의 화면 공유 · 15분 · 슬라이드 + 시연 영상(라이브 시연 없음).
+#   영상은 2026-10-24 부터 AI 음성 내레이션이 들어가 약 3분 43초 — 그만큼 ④~⑧ 대본을 줄여 15분을 맞췄다.
+#   ③ 다음에 번호 없는 영상 장 — 시연 영상을 덱 안에 넣어 → 한 번에 재생(영상을 다시 만들면 이 덱도 다시 생성).
+#   2026-10-29 부터 덱 안 영상은 HyperFrames 판 demo_3min_hyperframes.mp4(같은 내레이션 27문장, 3:43 — 원본 프로젝트는
+#   저장소 밖 C:\STUDY\videos\demo-3min, 고치는 법은 그 안 REVIEW.md). 옛 record-demo 녹화본 demo_3min.mp4 는 그대로 둔다.
+#   포스터 바탕 assets/demo_frame.png 는 자막 전 프레임: ffmpeg -ss 0.3 -i docs/hackathon/demo_3min_hyperframes.mp4 -frames:v 1 <그 경로>
+#   발표자 노트 = 장마다 시간·대본·질문 대비(script()). 같은 내용을 docs/hackathon/15_발표대본.md 로도 내보낸다.
 # 디자인(2026-10-12 개편): 표지·⑩ 로컬·⑭ 클로징은 어두운 그라데이션, 나머지는 밝은 바탕 + 그림자 카드.
 #   카드마다 선 아이콘(Lucide — 검정 PNG 를 알파 마스크로 받아 여기서 색을 입힌다), 스크린샷은 브라우저 창 틀에 넣는다.
 #   색은 제품 UI 의 인디고에 보라를 더한 그라데이션.
@@ -14,10 +22,12 @@
 #   1) python-pptx 설치 (공용 venv 오염 방지 — 임시 폴더에 --target 설치 권장)
 #      .venv\Scripts\python.exe -m pip install --target <임시폴더> python-pptx
 #   2) PYTHONPATH=<임시폴더> .venv\Scripts\python.exe scripts/build-pitch-deck.py
+import os
+import re
 from io import BytesIO
 from pathlib import Path
 
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 from pptx import Presentation
 from pptx.dml.color import RGBColor
 from pptx.enum.shapes import MSO_SHAPE
@@ -30,7 +40,11 @@ ROOT = Path(__file__).resolve().parents[1]
 ASSETS = ROOT / 'docs' / 'hackathon' / 'assets'
 ICONS = ASSETS / 'icons'
 QR = ASSETS / 'qr.png'
+VIDEO = ROOT / 'docs' / 'hackathon' / 'demo_3min_hyperframes.mp4'   # HyperFrames 렌더본(AI 음성 내레이션 + 화면에 박힌 자막, 3:43)
+VIDEO_FRAME = ASSETS / 'demo_frame.png'
+FONTS = Path(os.environ.get('WINDIR', r'C:\Windows')) / 'Fonts'
 OUT = ROOT / 'docs' / 'hackathon' / '11_pitch_deck.pptx'
+SCRIPT_MD = ROOT / 'docs' / 'hackathon' / '15_발표대본.md'
 
 
 def C(h):
@@ -408,12 +422,103 @@ def notes(slide, text):
     slide.notes_slide.notes_text_frame.text = text
 
 
+HEADS = {}   # 장 id → 대본 사본(15_발표대본.md)의 소제목
+PACE = 4.8   # 대본 시간 추정: 말하기 속도(음절/초), 문장 끝마다 0.4초 쉼 — 장 전환 여유를 남겨 15분 안에 끝나게
+CLOCK = [0.0]
+
+
+def speech_sec(paras):
+    txt = ' '.join(paras)
+    return len(re.findall(r'[가-힣0-9A-Za-z]', txt)) / PACE + len(re.findall(r'[.?!]', txt)) * 0.4
+
+
+def mmss(sec):
+    sec = int(round(sec))
+    return f'{sec // 60}:{sec % 60:02d}'
+
+
+def stamp(sec, label=None):
+    """대본 머리말 '[0:00–0:35 · 약 35초]' — 누적 시계를 sec 만큼 진행한다(장 순서대로 부를 것)."""
+    a = CLOCK[0]
+    CLOCK[0] += sec
+    return f'[{mmss(a)}–{mmss(CLOCK[0])} · {label or f"약 {int(round(sec / 5) * 5)}초"}]'
+
+
+def script(slide, body, qa=(), qa_title='[질문이 나오면]'):
+    """발표자 노트 = 15분 온라인 발표 대본. body 는 단락 목록(그대로 읽는 말), qa 는 아래에 붙는 준비 항목.
+    맨 위 시간은 대본 길이로 계산한다."""
+    lines = [stamp(speech_sec(body)), '']
+    for b in body:
+        lines += [b, '']
+    if qa:
+        lines += [qa_title] + [f'· {q}' for q in qa]
+    notes(slide, '\n'.join(lines).rstrip())
+
+
+# ── 영상 ────────────────────────────────────────────────────────────────────
+def video_poster():
+    """영상 장의 포스터(재생 전 화면): 자막 전 첫 프레임을 흐리고 어둡게 깔아(글자끼리 겹쳐 읽히지 않게) 재생 단추와 제목을 얹는다."""
+    W, H = 1920, 1080
+    im = Image.open(VIDEO_FRAME).convert('RGB').resize((W, H), Image.LANCZOS).filter(ImageFilter.GaussianBlur(7))
+    im = Image.alpha_composite(im.convert('RGBA'), Image.new('RGBA', (W, H), (11, 16, 38, 205)))
+    R, k = 80, 4                                  # 단추는 4배로 그려 줄여 가장자리를 매끄럽게
+    btn = Image.new('RGBA', (2 * R * k, 2 * R * k), (0, 0, 0, 0))
+    d = ImageDraw.Draw(btn)
+    d.ellipse((0, 0, 2 * R * k - 1, 2 * R * k - 1), fill=(255, 255, 255, 245))
+    c, r = R * k, R * k * 0.42                    # 삼각형 무게중심을 원 중심에
+    d.polygon([(c + r, c), (c - r / 2, c - r * 0.866), (c - r / 2, c + r * 0.866)], fill=(79, 70, 229, 255))
+    im.alpha_composite(btn.resize((2 * R, 2 * R), Image.LANCZOS), (W // 2 - R, 410 - R))
+    d = ImageDraw.Draw(im)
+    d.text((W // 2, 575), '실제 화면으로 보는 수포자 아카데미', font=ImageFont.truetype(str(FONTS / 'malgunbd.ttf'), 62),
+           fill=(255, 255, 255), anchor='mm')
+    d.text((W // 2, 655), '약 4분 · 내레이션과 자막으로 설명합니다', font=ImageFont.truetype(str(FONTS / 'malgun.ttf'), 36),
+           fill=(224, 231, 255), anchor='mm')
+    buf = BytesIO()
+    im.convert('RGB').save(buf, 'JPEG', quality=90)
+    buf.seek(0)
+    return buf
+
+
+def video_ms(path):
+    """mp4 길이(ms) — moov/mvhd 의 timescale·duration (record-demo 녹화본·HyperFrames 렌더본 모두 moov 가 앞에 있다)."""
+    data = Path(path).read_bytes()
+    i = data.find(b'mvhd')
+    if data[i + 4] == 1:
+        ts, dur = int.from_bytes(data[i + 24:i + 28], 'big'), int.from_bytes(data[i + 28:i + 36], 'big')
+    else:
+        ts, dur = int.from_bytes(data[i + 16:i + 20], 'big'), int.from_bytes(data[i + 20:i + 24], 'big')
+    return round(dur * 1000 / ts)
+
+
+def play_on_click(slide, spid, ms):
+    """영상을 클릭 순서 1번으로: 이 장에서 → (또는 클릭) 한 번에 재생. python-pptx 기본값은 재생 단추만 띄운다.
+    XML 은 PowerPoint 에서 '클릭할 때 재생' 효과를 넣고 저장한 모양 그대로다(도형 id·길이만 바꿈)."""
+    sld = slide._element
+    old = sld.find(qn('p:timing'))
+    tgt = f'<p:tgtEl><p:spTgt spid="{spid}"/></p:tgtEl>'
+    new = parse_xml(
+        f'<p:timing {nsdecls("p")}><p:tnLst><p:par><p:cTn id="1" dur="indefinite" restart="never" nodeType="tmRoot">'
+        '<p:childTnLst><p:seq concurrent="1" nextAc="seek"><p:cTn id="2" dur="indefinite" nodeType="mainSeq"><p:childTnLst>'
+        '<p:par><p:cTn id="3" fill="hold"><p:stCondLst><p:cond delay="indefinite"/></p:stCondLst><p:childTnLst>'
+        '<p:par><p:cTn id="4" fill="hold"><p:stCondLst><p:cond delay="0"/></p:stCondLst><p:childTnLst>'
+        '<p:par><p:cTn id="5" presetID="1" presetClass="mediacall" presetSubtype="0" fill="hold" nodeType="clickEffect">'
+        '<p:stCondLst><p:cond delay="0"/></p:stCondLst><p:childTnLst>'
+        f'<p:cmd type="call" cmd="playFrom(0.0)"><p:cBhvr><p:cTn id="6" dur="{ms}" fill="hold"/>{tgt}</p:cBhvr></p:cmd>'
+        '</p:childTnLst></p:cTn></p:par></p:childTnLst></p:cTn></p:par></p:childTnLst></p:cTn></p:par></p:childTnLst></p:cTn>'
+        '<p:prevCondLst><p:cond evt="onPrev" delay="0"><p:tgtEl><p:sldTgt/></p:tgtEl></p:cond></p:prevCondLst>'
+        '<p:nextCondLst><p:cond evt="onNext" delay="0"><p:tgtEl><p:sldTgt/></p:tgtEl></p:cond></p:nextCondLst></p:seq>'
+        '<p:video><p:cMediaNode vol="100000"><p:cTn id="7" fill="hold" display="0"><p:stCondLst><p:cond delay="indefinite"/>'
+        f'</p:stCondLst></p:cTn>{tgt}</p:cMediaNode></p:video></p:childTnLst></p:cTn></p:par></p:tnLst></p:timing>')
+    old.addprevious(new)
+    sld.remove(old)
+
+
 # ── 슬라이드 틀 ──────────────────────────────────────────────────────────────
 prs = Presentation()
 prs.slide_width = I(SW)
 prs.slide_height = I(SH)
 BLANK = prs.slide_layouts[6]
-TOTAL = 14
+TOTAL = 15
 
 
 def new_slide():
@@ -457,6 +562,7 @@ def chrome(slide, no, kicker, title, dark=False):
     tf = box(slide, X0, 0.92, CW, 0.7)
     para(tf, title, size=28, color=WHITE if dark else INK, bold=True, first=True)
     footer(slide, no, dark)
+    HEADS[slide.slide_id] = f'{no:02d} {kicker} · {title}'
 
 
 # ═════════════════════════════ ① 타이틀 ═════════════════════════════
@@ -490,10 +596,18 @@ for i, (n, t) in enumerate([('12부', '130챕터 완결'), ('₩0', '완전 로�
 fh = browser(s, ASSETS / 'home_hero.png', 6.85, 1.55, 5.75, dark=True, glow=True)
 tf = box(s, 6.85, 1.55 + fh + 0.18, 5.75, 0.3)
 para(tf, '실제 화면: 진단 후 개인화된 포털 홈', size=10.5, color=FAINT, align=PP_ALIGN.CENTER, first=True)
-notes(s, '발표 운영: 전체 5분이면 슬라이드 ④·⑤는 슬라이드 대신 실물 시연으로 대체하고 나머지를 빠르게 넘긴다. '
-         '세 기둥(⑥ LLM · ⑦ 온톨로지 · ⑧⑨ SD)은 넘기지 말 것. '
-         '오프닝 한 문장: "AI 를 매일 쓰는 회사에서, 원리를 아는 사람을 길러내는 AI 강사를 만들었습니다. '
-         'LLM 튜터와 개념 온톨로지, 그리고 시스템 다이내믹스가 이 강사를 움직입니다."')
+HEADS[s.slide_id] = '01 표지 · 수포자 아카데미'
+script(s, [
+    '혹시 수학 시간에 "여기서부터는 모르겠다" 하고 손을 놓았던 순간, 기억나시나요?',
+    '그런 분들이 지금 매일 ChatGPT 를 씁니다. 답이 어떻게 나오는지는 모른 채로요.',
+    '수포자 아카데미는 그분들 곁에서 AI 의 속을 가르치는 AI 강사입니다. 12부, 130개 챕터가 완성돼 있고, 운영비는 들지 않습니다.',
+], [
+    '화면 전체가 아니라 슬라이드 쇼 창만 공유한다. 그래야 발표자 보기의 이 노트가 청중에게 보이지 않는다. '
+    '다른 기기로 회의에 들어가 노트가 안 보이는지, 영상이 끊기지 않고 소리가 들리는지 미리 확인한다.',
+    '영상에 내레이션(AI 음성)이 있다. 화면 공유를 시작할 때 컴퓨터 소리 공유(소리 포함)를 켜고, 동영상 최적화 옵션이 있으면 함께 켠다.',
+    '영상은 ③ 다음 장(번호 없음). 그 장에서 → 를 한 번 누르면 재생되고, 끝나면 → 로 넘어간다.',
+    '목표 15분. 장마다 맨 위의 시간은 대본 길이로 잰 예상치(초당 4.8음절)다. 남는 시간은 질의응답(질문 카드는 ⑮ 노트).',
+], qa_title='[발표 전 점검]')
 
 # ═════════════════════════════ ② 문제 ═════════════════════════════
 s = new_slide()
@@ -557,9 +671,15 @@ chevrons(s, [('1부', '전반'), ('3부', '전반'), ('4부', '트랜스포머')
 tf = box(s, IX, 5.92, IW, 0.6)
 para(tf, '트랜스포머(4부)를 가장 빨리 만나도록 경로를 재배열하고, 필요한 수학만 그 직전에 배웁니다.',
      size=12, color=BODY, first=True, line=1.3)
-notes(s, '말 노트: "프롬프트를 잘 쓰는 것과 도구를 이해하는 것은 다릅니다. 이해가 있어야 한계·보안·활용을 판단합니다." '
-         '기존 강의의 실패: 1→2→3 순서로 수학만 하다 AI 를 만나기 전에 지친다. '
-         '이 플랫폼은 1→2→3→4→5 가 아니라 1전반 → 3전반 → 4부 → … 로 간다.')
+script(s, [
+    'AI 를 잘 쓰는 것과 AI 를 아는 것은 다릅니다. 원리를 알아야 이 답을 어디까지 믿을지, 어떤 자료는 넣으면 안 되는지 스스로 판단할 수 있습니다.',
+    '그런데 원리로 가는 길목마다 수학이 서 있습니다. 마음먹고 수학 강의를 들어도, 오른쪽 위처럼 선형대수, 미분, 확률을 차례로 넘다가 정작 AI 는 만나 보지도 못하고 지칩니다.',
+    '저희는 순서를 뒤집었습니다. ChatGPT 의 몸체인 트랜스포머에 가장 빨리 닿도록 길을 짜고, 수학은 꼭 필요한 순간에 배웁니다.',
+    '사람마다 출발점이 다르니, 필요한 건 모두에게 같은 강의가 아니라 한 사람 한 사람의 길을 짜 주는 강사라고 생각했습니다.',
+], [
+    '"왜 4부가 먼저인가요?" → 직원이 쓰는 ChatGPT 의 몸체가 트랜스포머(4부)다. 거기 닿기 전에 지치지 않게 1부 전반·3부 전반만 먼저 하고, '
+    '나머지 수학은 쓰이는 자리에서 배운다(1→2→3→4→5 순서가 아니다).',
+])
 
 # ═════════════════════════════ ③ 해법 + 세 기둥 ═════════════════════════════
 s = new_slide()
@@ -595,7 +715,7 @@ para(tf, [('이 강사를 움직이는 세 기둥', {'color': WHITE, 'size': 16}
           ('   (6~9장에서 하나씩)', {'color': FAINT, 'size': 11, 'bold': False})], bold=True, first=True)
 pillars = [
     ('brain-circuit', 'LLM 튜터', '강사의 입', '지금 보는 장을 알고, 다른 부의 개념은 "N부 M장"으로 안내합니다. 내 PC 에서 돌아 비용이 없습니다.'),
-    ('network', '개념 온톨로지', '강사의 머릿속 지도', '개념 127개와 관계 517개를 한 파일에. 진단·경로·튜터·검색이 모두 이 지도를 읽습니다.'),
+    ('network', '개념 온톨로지', '강사의 머릿속 지도', '개념 127개와 관계 520개를 한 파일에. 진단·경로·튜터·검색이 모두 이 지도를 읽습니다.'),
     ('repeat', '시스템 다이내믹스', '시간을 미리 돌려 보는 눈', '12부 인과지도·저량-유량도. 이 플랫폼을 사내에 퍼뜨리는 전략도 이 모형으로 짰습니다.'),
 ]
 PG = 0.25
@@ -611,9 +731,44 @@ for i, (ic, name, role, d) in enumerate(pillars):
     para(tf, role, size=10.5, color=INDIGO_300, bold=True)
     tf = box(s, px + 0.22, PIY + 0.88, PW - 0.44, PIH - 0.95)
     para(tf, d, size=11, color=SLATE_200, first=True, line=1.3)
-notes(s, '키 카피: "강의가 아니라 강사입니다". 3층 구조 = 진단(규칙) → 경로(규칙 엔진) → 학습(교실)+튜터(로컬 LLM). '
-         '아래 세 기둥이 이 강사를 움직인다: LLM(강사의 입) · 개념 온톨로지(머릿속 지도) · 시스템 다이내믹스(시간을 미리 돌려 보는 눈). '
-         '6~9장에서 하나씩 보여 준다.')
+script(s, [
+    '그래서 좋은 강사가 하는 일을 그대로 옮겼습니다. 좋은 강사는 먼저 학생을 봅니다. 5분, 12문항으로 어디까지 기억하는지 확인합니다. 시험이 아니라 길을 짜기 위한 질문입니다.',
+    '그다음 길을 짭니다. 이미 아는 단계는 접고, 모자란 수학은 쓰이기 바로 앞에 넣습니다. 왜 이렇게 짰는지도 화면에 그대로 보여 줍니다.',
+    '그리고 옆에서 가르칩니다. 손으로 움직여 보는 실험실, 바로 채점되는 문제, 막힐 때 물어볼 수 있는 AI 튜터가 있습니다.',
+    '아래 띠는 이 강사를 움직이는 세 가지입니다. 말하는 입인 LLM 튜터, 머릿속 지도인 개념 온톨로지, 앞날을 미리 돌려 보는 눈인 시스템 다이내믹스. 설명보다 화면이 빠르니, 먼저 보시겠습니다.',
+], [
+    '"진단이 틀리면 경로도 틀리지 않나요?" → 진단은 출발점만 정한다. 학습 중 퀴즈 결과와 복습 표시를 포털이 읽어 다음 목적지를 다시 권하고, '
+    '"다시 진단하기"로 언제든 경로를 새로 짤 수 있다.',
+    '"경로는 누가 정하나요?" → 규칙 엔진(관문 4개 통과·미통과). 같은 답이면 언제나 같은 경로이고 근거가 화면에 나온다. AI 는 그 결정을 풀어 말할 뿐이다.',
+])
+
+# ═════════════════════════════ 영상 (번호 없는 장) ═════════════════════════════
+# 온라인 회의에서 슬라이드 쇼 창만 공유한 채 창을 바꾸지 않고 튼다. 장 가득(16:9) — 화면 공유로 작아져도 자막이 읽히게.
+# 바닥글·번호를 달지 않아 ①~⑭ 번호와 렌더 파일 이름(slideNN.png)이 그대로다(이 장은 slide03_video.png).
+s = new_slide()
+mv = s.shapes.add_movie(str(VIDEO), 0, 0, I(SW), I(SH), poster_frame_image=video_poster(), mime_type='video/mp4')
+play_on_click(s, mv.shape_id, video_ms(VIDEO))
+HEADS[s.slide_id] = '영상 (번호 없음) · 실제 화면으로 보는 수포자 아카데미'
+intro = '실제 화면을 4분 정도 영상으로 보시겠습니다. 처음 들어온 사람이 만나는 순서 그대로입니다.'
+outro = '보신 장면 가운데 몇 가지만 짚겠습니다.'
+vs = round(video_ms(VIDEO) / 1000)
+notes(s, '\n'.join([
+    stamp(vs + speech_sec([intro, outro]), f'영상 {vs // 60}분 {vs % 60}초 + 앞뒤 말'),
+    '',
+    '[진행]',
+    '· 이 장에서 → 를 한 번 누르면 재생된다. 끝나면 마지막 화면에 멈추니 → 로 다음 장. 재생 중에 → 를 누르면 영상이 끊기고 넘어간다.',
+    '· AI 음성 내레이션과 자막이 함께 설명한다. 영상 중에는 말하지 않는다. 소리가 안 들린다는 반응이 오면 컴퓨터 소리 공유를 확인.',
+    '',
+    '[재생 전]',
+    intro,
+    '',
+    '[재생 중 · 장면 순서(내레이션이 설명하니 말하지 않는다)]',
+    '0:16 진단 · 0:41 기둥 1 LLM 튜터 · 0:49 LLM 해부 · 1:18 튜터 · 1:50 기둥 2 개념 온톨로지(개념 지도) · '
+    '2:18 기둥 3 시스템 다이내믹스 · 2:53 캡스톤 · 3:23 숫자 한 장',   # demo_3min_hyperframes 장면 시작 시각(영상을 다시 만들면 고칠 것 — 원본의 tools/build-root.mjs SCENES)
+    '',
+    '[끝나면]',
+    outro,
+]))
 
 # ═════════════════════════════ ④ 데모 1 — 진단 ═════════════════════════════
 s = new_slide()
@@ -639,9 +794,13 @@ para(tf, '실측 예시(벡터·확률은 기억하고 미분·log 는 잊은 �
      size=11.5, color=BODY, space_before=5, line=1.3)
 _, w = pill(s, '130챕터 → 55챕터 · 31.9시간', RX + 0.5, 5.98, size=10, fill=TEAL_SOFT, color=TEAL_INK, padx=0.12)
 pill(s, '결정은 규칙: 근거가 화면에', RX + 0.5 + w + 0.08, 5.98, size=10, padx=0.12)
-notes(s, '시연에서 임원이 직접 진단하면 그 자리에서 "그 사람의 지도"가 되는 순간이 와우 포인트 1. '
-         '"왜 이 경로냐"는 질문에 화면의 근거(관문 통과/미통과)로 답한다. 결정은 규칙이므로 같은 답이 항상 재현된다. '
-         '틀린 문항은 점수가 아니라 개념 이름("다시 볼 개념: 도함수 2부 3장")으로 돌아온다. 개념 이름은 온톨로지에서 온다.')
+script(s, [
+    '진단을 마치면 지도가 그 사람에게 맞게 다시 그려집니다. 벡터와 확률은 기억하는데 미분과 로그는 잊은 분이라면, 130개 챕터 가운데 55개, 약 32시간이면 됩니다.',
+    '틀린 문제는 점수로 남지 않습니다. "도함수, 2부 3장"처럼 다시 볼 자리로 안내합니다.',
+], [
+    '"왜 이 경로인가요?" → 화면의 근거(관문 통과·미통과)로 답한다. 결정은 규칙이라 같은 답이면 언제나 같은 경로가 나온다(재현 가능).',
+    '"LLM 이 경로를 정하나요?" → 아니다. 결정은 규칙, LLM 은 그 결정을 풀어 말하기만 한다(⑥ "결정은 규칙, 말은 LLM").',
+])
 
 # ═════════════════════════════ ⑤ 데모 2 — 라이브 투어 ═════════════════════════════
 s = new_slide()
@@ -671,11 +830,16 @@ c = card(s, x, y, GW, GH)
 grad(c, INDIGO, VIOLET, 45)
 chip(s, 'presentation', x + 0.3, y + 0.3, 0.6, 'glass')
 tf = box(s, x + 0.3, y + 1.08, GW - 0.6, 1.2)
-para(tf, '여러분의 문장으로 라이브 시연', size=16, color=WHITE, bold=True, first=True)
+para(tf, '내 문장을 넣는 실험실', size=16, color=WHITE, bold=True, first=True)   # 발표는 영상으로 보여 준다(라이브 시연 없음)
 para(tf, '다섯 화면이 1·3·5부 수학과 1:1입니다.', size=12, color=INDIGO_100, space_before=8, line=1.3)
 para(tf, '커리큘럼이 곧 LLM 해부도입니다.', size=12, color=WHITE, bold=True, space_before=2, line=1.3)
-notes(s, '말 노트: "본부장님 문장으로 라이브 시연"이 와우 포인트 2. 토큰화(ch2) → 임베딩(ch3) → 어텐션(ch6) → 확률(ch9) → temperature(ch12). '
-         '각 컷이 1·3·5부 수학과 1:1. 이 플랫폼은 LLM 을 쓰기도 하지만(튜터), 무엇보다 LLM 의 속을 가르친다. 5분 발표에선 이 슬라이드 대신 실물 시연.')
+script(s, [
+    '이 장면은 이 플랫폼이 가장 공들인 부분입니다. 내가 쓴 문장이 ChatGPT 안에서 조각나고, 서로를 살피고, 다음 단어를 고르는 과정을 손으로 움직이며 봅니다.',
+    '그 하나하나가 수학 시간에 배우는 내용입니다. 커리큘럼이 곧 LLM 해부도인 셈입니다.',
+], [
+    '다섯 화면은 4부의 실험실이다: 토큰화(2장) → 임베딩(3장) → 어텐션(6장) → 다음 단어 확률(9장) → 샘플링·temperature(12장). '
+    '학습자는 자기 문장을 넣어 직접 움직여 본다.',
+])
 
 # ═════════════════════════════ ⑥ 기둥 1 · LLM ═════════════════════════════
 s = new_slide()
@@ -731,15 +895,22 @@ grad(c, INK, NAVY2, 0)
 tf = box(s, RX + 0.3, 5.97, RW - 0.5, 0.77, anchor=MSO_ANCHOR.MIDDLE)
 para(tf, [('"결정은 규칙, 말은 LLM"', {'color': WHITE, 'size': 15}),
           ('    가드레일 10/10 · 추가 지연 0초 · 완답 5~6초 · ₩0', {'color': INDIGO_300, 'size': 11})], bold=True, first=True)
-notes(s, '세 기둥 중 LLM. 튜터는 각자 PC 의 Ollama(gemma4:e2b, 경량 로컬 모델)로 돈다. '
-         '질문에 나온 개념을 온톨로지에서 찾아 카드(배우는 곳·선수·다시 쓰이는 곳, 약 100토큰)를 시스템 프롬프트에 붙인다. 그래서 '
-         '"2부 9장, 먼저 그래디언트"처럼 다른 부의 장까지 정확히 안내한다(실측: 3회 반복 동일). 카드 없이는 "N부 2장" 자리표시자를 그대로 냈다. '
-         'LLM 은 네 곳에서 일한다: 각 부 튜터, 포털 추천 설명(규칙이 정한 경로를 강사 말투로), 협업 메모의 "AI에게 묻기"(답은 누를 때만 메모로 저장), 노트북 튜터. '
-         '설계 원칙은 "결정은 규칙, 말은 LLM": 경로 결정은 재현 가능한 규칙이 하고, LLM 은 설명만 한다.')
+script(s, [
+    '이제 세 기둥을 하나씩 보겠습니다. 첫째, 말하는 입인 LLM 튜터입니다.',
+    '영상에서 12부를 공부하던 사람이 "경사하강은 어디서 배워요?" 하고 물었죠. 좋은 선생님이라면 "2부 9장이에요, 그 전에 그래디언트부터 보세요"라고 답할 겁니다. 튜터도 그렇게 답했습니다.',
+    '비결은 답하기 전에 개념 지도에서 메모 한 장을 꺼내 본다는 것입니다. 그래서 세 번 물어도 세 번 같은 답이 나옵니다.',
+    '원칙도 하나 있습니다. 무엇을 배울지는 정해진 규칙이 결정하고, AI 는 설명만 맡습니다. 아래 한 줄, 결정은 규칙, 말은 LLM 입니다.',
+], [
+    '"어떤 모델인가요?" → 각자 PC 의 Ollama 로 도는 경량 로컬 모델(gemma4:e2b). 카드는 시스템 프롬프트에 붙인다. 카드 없이는 "N부 2장" 빈칸을 그대로 냈다(실측).',
+    '"틀린 답을 하면요?" → 튜터 창에 "로컬 AI 답변이라 가끔 틀릴 수 있어요. 본문 설명이 우선!"을 늘 띄운다. 경로 결정에는 LLM 이 끼지 않는다.',
+    '메모에서 AI에게 묻기: 협업 메모의 질문을 튜터에게 바로 보내고, 답은 누를 때만 메모로 저장된다.',
+    '"메모 한 장"의 실제: 개념 지도(온톨로지)에서 꺼낸 개념 카드(배우는 곳 · 먼저 알아야 할 것 · 다시 쓰이는 곳, 약 100토큰)를 질문과 함께 로컬 모델에 넘긴다. 벡터 DB 는 쓰지 않는다.',
+    'LLM 이 일하는 네 곳: 챕터 튜터 · 추천 설명 · 메모에서 AI에게 묻기 · 노트북 튜터. 주제 이탈 질문 차단 10/10, 그 때문에 늦어지는 시간 0초.',
+])
 
 # ═════════════════════════════ ⑦ 기둥 2 · 개념 온톨로지 ═════════════════════════════
 s = new_slide()
-chrome(s, 7, '기둥 2 · 개념 온톨로지', '강사의 머릿속 지도: 개념 127 · 관계 517')
+chrome(s, 7, '기둥 2 · 개념 온톨로지', '강사의 머릿속 지도: 개념 127 · 관계 520')
 LW = 7.4
 card(s, X0, 1.85, LW, 4.45)
 pic_fit(s, ASSETS / 'concept_map.png', X0 + 0.16, 2.0, LW - 0.32, 4.15)
@@ -749,7 +920,7 @@ para(tf, '개념 지도: 12부 "S자 성장"을 누르면 먼저 알아야 할 �
 RX = X0 + LW + 0.28
 RW = SW - X0 - RX
 facts = [
-    ('network', '개념 127 · 관계 517', '정본 파일 하나에 "먼저 알아야 · 다시 쓰인다 · 비유"를 부·장·섹션 앵커까지. 12부 SD 개념 13개도 같은 지도에.'),
+    ('network', '개념 127 · 관계 520', '정본 파일 하나에 "먼저 알아야 · 다시 쓰인다 · 비유"를 부·장·섹션 앵커까지. 12부 SD 개념 13개도 같은 지도에.'),
     ('book-open', '읽는 곳 9', '검색 · 튜터(웹·노트북) · 챕터 띠 · 개념 지도 · 용어 대조표 · 복습 경로 · 진단 · 질문 집계'),
     ('shield-check', '커밋마다 검사', '위치·앵커 실재, 선수 순환, 본문 링크 185개를 검사기가 확인합니다. 콘텐츠에도 린터가 있습니다.'),
 ]
@@ -772,10 +943,18 @@ for j, (ic, col, label, quote) in enumerate([
     icon(s, ic, RX + 0.22, ry + 0.02, 0.24, col)
     tf = box(s, RX + 0.56, ry, RW - 0.7, 0.3, anchor=MSO_ANCHOR.MIDDLE)
     para(tf, [(label + '  ', {'color': MUTED}), (quote, {'color': INK, 'bold': True})], size=10.5, first=True)
-notes(s, '세 기둥 중 온톨로지. 시리즈의 핵심 주장("같은 수학이 재등장한다")을 화면 하나로. 12부 SD 개념(S자 성장·오일러법 등)도 '
-         '2부 시그모이드·8부 경사하강과 같은 지도로 이어진다. '
-         '예상 질문 "그냥 JSON 아닌가요?": 관계에 타입이 있고 검사기가 규칙을 지키며 아홉 곳이 같은 파일을 읽어 같은 답을 한다. 형식이 아니라 계약이 온톨로지. '
-         '"왜 벡터 DB·RAG 로 안 했나?": 142개 장 규모에선 손으로 큐레이션한 그래프가 더 정확하고 결정적이며 오프라인. 7부 8장이 이 기법(GraphRAG) 자체를 가르친다.')
+script(s, [
+    '둘째, 머릿속 지도인 개념 온톨로지입니다. 이름은 어렵지만 뜻은 단순합니다. "이걸 알려면 무엇부터 알아야 하는지", "이건 나중에 어디서 다시 쓰이는지"를 적어 둔 지도입니다. 개념 127개를 520개의 선으로 이었습니다.',
+    '수학이 막막한 이유 중 하나는 지금 배우는 것이 어디에 쓰이는지 모른다는 것이죠. 이 지도에서는 12부의 "S자 성장"이 2부의 시그모이드와 이어져 있는 것이 한눈에 보입니다.',
+    '검색도, 튜터도, 복습 안내도 모두 이 지도 한 장을 읽습니다. 그래서 지도를 한 번 고치면 아홉 곳이 함께 바뀝니다.',
+    '효과는 오른쪽 아래입니다. 지도를 보여 주기 전의 튜터는 "N부 2장"처럼 얼버무렸지만, 보여 준 뒤에는 정확한 자리를 짚었습니다.',
+], [
+    '"그냥 JSON 아닌가요?" → 관계에 종류(먼저 알아야 · 다시 쓰인다 · 비유)가 있고, 검사기가 규칙을 지키며, 아홉 곳이 같은 파일을 읽어 같은 답을 한다. '
+    '형식이 아니라 이 약속이 온톨로지다.',
+    '"왜 벡터 DB·RAG 로 안 했나요?" → 140여 개 장 규모에서는 손으로 다듬은 그래프가 더 정확하고, 같은 질문에 같은 카드를 내며, 인터넷 없이 돈다. '
+    '7부 8장이 바로 이 기법(GraphRAG)을 가르친다.',
+    '아홉 곳: 검색 · 튜터(웹·노트북) · 챕터 위 개념 띠 · 개념 지도 · 용어 대조표 · 복습 경로 · 진단 · 질문 집계. 고칠 때마다 검사기가 위치 · 앵커 · 선수 순환 · 본문 링크 185개를 확인한다.',
+])
 
 # ═════════════════════════════ ⑧ 기둥 3 · 시스템 다이내믹스 ═════════════════════════════
 s = new_slide()
@@ -812,10 +991,16 @@ for i, (ic, t, d) in enumerate(bottom):
     tf = box(s, bx + 0.24, BY + 0.78, BW3 - 0.45, BH - 0.85)
     for k, line_txt in enumerate(d if isinstance(d, list) else [d]):
         para(tf, line_txt, size=10.5, color=BODY, first=(k == 0), line=1.28)
-notes(s, '세 기둥 중 시스템 다이내믹스(SD, 12부). LLM 이 "무엇을 말하나"라면 SD 는 "들이고 나면 시간이 지나며 무슨 일이 벌어지나"를 묻는다. '
-         '인과지도(CLD)로 원인과 결과의 고리를 그리고, 저량-유량도(SFD)로 바꿔 다이얼을 돌리며 시뮬레이션한다(오일러법). '
-         '이 부는 시리즈의 AI 수학과 같은 수학이다: 경사하강은 오일러법이고 학습률이 시간 간격, EMA 는 1차 지연, 로지스틱 성장은 시그모이드. '
-         'AI 가 만드는 고리(모델 붕괴·보상 해킹·데이터 플라이휠)도 루프로 읽는다. 캡스톤은 사내 AI 도입 모형(Bass 확산 + 이탈).')
+script(s, [
+    '셋째, 앞날을 미리 돌려 보는 눈인 시스템 다이내믹스입니다. 무언가를 새로 시작하면, 시간이 지나며 어떤 일이 벌어질까요?',
+    '왼쪽 그림은 원인과 결과를 화살표로 이은 것입니다. 입소문처럼 스스로 커지는 고리가 있고, 사람이 다 차면 스스로 멈추는 고리가 있습니다. 오른쪽처럼 숫자를 넣으면 몇 달 뒤, 몇 년 뒤를 미리 돌려 볼 수 있습니다.',
+    '재미있는 점은 이것도 AI 와 같은 수학이라는 것입니다. 미래를 한 걸음씩 계산하는 방법이, AI 가 한 걸음씩 배우는 방법과 똑같습니다.',
+], [
+    '같은 수학 더: 1차 지연 = EMA(모멘텀·Adam), S자 성장 = 시그모이드. AI 가 만드는 고리(모델 붕괴·보상 해킹·데이터 플라이휠)도 루프로 읽는다.',
+    '12부 13챕터: 실험실 13개 · 노트북 13권. 도착점은 사내 AI 도입 모형(Bass 확산 + 이탈)인 캡스톤, 다음 장에서 보여 준다.',
+    '"같은 수학"의 실제: 오일러법(다음 값 = 지금 값 + 변화율 × 시간 간격)과 경사하강(다음 가중치 = 지금 가중치 − 학습률 × 기울기)은 같은 꼴이고, 학습률이 시간 간격 자리에 온다.',
+    '그림 용어: 스스로 커지는 고리 = 강화 루프 R, 스스로 멈추는 고리 = 균형 루프 B, 오른쪽 그림 = 저량(쌓이는 양) · 유량(흐르는 양)으로 바꾼 저량-유량도.',
+])
 
 # ═════════════════════════════ ⑨ SD 로 짠 도입 전략 ═════════════════════════════
 s = new_slide()
@@ -824,7 +1009,7 @@ LW9 = 6.6
 card(s, X0, 1.85, LW9, 4.89)
 tf = box(s, X0 + 0.3, 2.02, LW9 - 0.6, 0.62)
 para(tf, '3년 뒤에도 쓰는 사람 비율', size=15, color=INK, bold=True, first=True)
-para(tf, '직원 3,000명 가상 회사, 평균 10개월 쓰면 그만두는 현실을 넣은 12부 캡스톤 모형', size=10.5, color=MUTED, space_before=2)
+para(tf, '우리 회사 규모(직원 300명), 평균 10개월 쓰면 그만두는 현실을 넣은 12부 캡스톤 모형', size=10.5, color=MUTED, space_before=2)
 bars = [
     ('그대로: 홍보 p 0.01 · 입소문 q 0.4', 75.8, False),
     ('홍보 3배 (p 0.03)', 77.2, False),
@@ -874,12 +1059,19 @@ tf = box(s, RX + 0.54, ny + 0.12, RW - 0.72, 6.74 - ny - 0.2)
 para(tf, '가정한 계수로 돌린 모형 시나리오입니다. 예측이 아니라 어떤 손잡이가 무엇을 바꾸는지 비교하는 용도이고, 파일럿 실측으로 계수를 바꿉니다.',
      size=10, color=MUTED, first=True, line=1.25)
 para(tf, '12부 12장 실험실·노트북으로 누구나 다시 돌려 볼 수 있습니다.', size=10, color=MUTED, space_before=3, line=1.25)
-notes(s, 'SD 를 콘텐츠로만 넣은 게 아니라, 이 플랫폼의 도입 계획 자체를 SD 로 설계했다. 12부 캡스톤 모형 = Bass 확산 + 이탈: '
-         '도입 = (홍보 p + 입소문 q × 사용자/전체) × 잠재 사용자, 이탈 = 사용자 ÷ 평균 사용 기간 L. 강화 루프(입소문)·균형 루프(포화)·균형 루프(이탈). '
-         '평균 10개월 쓰면 그만두는 현실에서 3년 뒤 사용자 비율: 그대로 75.8% · 홍보 3배 77.2% · 입소문 1.5배 83.7% · 이탈 방지(20개월) 87.8%. '
-         '이탈이 없으면 절반 도달이 그대로 9.1개월, 홍보 3배 6.4개월, 입소문 1.5배 6.8개월. '
-         '결론: 속도는 홍보로 당길 수 있지만 최종 도달은 입소문과 이탈 방지가 정한다 → 파일럿 참가자를 입소문의 씨앗으로, 진도 동기화·복습·협업 메모를 이탈 방지 장치로. '
-         '가정한 계수의 모형 시나리오라는 점을 먼저 말할 것(예측 아님). 파일럿 실측(완주율·이탈 지점)으로 p·q·L 을 다시 넣는다.')
+script(s, [
+    '그래서 이 도구로, 이 플랫폼이 회사에 어떻게 퍼질지도 미리 돌려 봤습니다. 직원 300명, 그리고 평균 10개월 쓰면 그만둔다는 현실적인 가정을 넣었습니다.',
+    '아무것도 하지 않으면, 3년 뒤에도 쓰는 사람은 76% 에서 멈춥니다. 홍보를 세 배로 늘리면 어떨까요? 77%. 거의 그대로입니다.',
+    '그런데 쓰는 동료가 옆 동료를 부르는 입소문을 키우면 84%, 사람들이 오래 쓰게 만들면 88% 까지 올라갑니다.',
+    '홍보는 빨리 퍼지게 할 뿐이고, 끝까지 남는 사람 수는 입소문과 오래 쓰게 하는 장치가 정한다는 뜻입니다. 그래서 파일럿 참가자를 입소문의 씨앗으로 삼고, 진도 이어 보기와 복습 표시, 함께 쓰는 메모를 먼저 만들었습니다.',
+    '물론 가정을 넣어 돌린 시나리오이지, 예측은 아닙니다. 파일럿에서 실제 숫자를 재서 고쳐 가겠습니다.',
+], [
+    '"예측인가요?" → 아니다. 어떤 손잡이가 무엇을 바꾸는지 비교하는 모형 시나리오다. 파일럿에서 완주율·이탈 지점을 재서 입소문 q·사용 기간 L 을 실측값으로 바꾼다.',
+    '모형: Bass 확산 + 이탈. 도입 = (홍보 p + 입소문 q × 사용자/전체) × 잠재 사용자, 이탈 = 사용자 ÷ 평균 사용 기간 L. '
+    '강화 루프(입소문) · 균형 루프(포화) · 균형 루프(이탈).',
+    '정확한 값: 그대로 75.8% · 홍보 3배 77.2% · 입소문 1.5배 83.7% · 이탈 방지(20개월) 87.8%. 절반 도달(이탈 없음) 9.1 · 6.4 · 6.8개월. '
+    '12부 12장 실험실·노트북으로 누구나 다시 돌려 볼 수 있다.',
+])
 
 # ═════════════════════════════ ⑩ 완전 로컬 ═════════════════════════════
 s = new_slide()
@@ -902,11 +1094,13 @@ for i, (ic, n, t, d) in enumerate(trio):
 c = rrect(s, X0, 4.95, CW, 1.38, radius=0.16)
 grad(c, INDIGO, VIOLET, 0)
 shadow(c, blur=30, dist=0, alpha=45, color=str(INDIGO))
-chip(s, 'wifi-off', X0 + 0.32, 4.95 + (1.38 - 0.74) / 2, 0.74, 'glass')
+# 발표는 온라인 회의 화면 공유 + 영상이라 라이브 시연이 없다. Wi-Fi 를 끄는 시연도 할 수 없다(끄면 회의가 끊긴다) — 띠는 예시로
+chip(s, 'cpu', X0 + 0.32, 4.95 + (1.38 - 0.74) / 2, 0.74, 'glass')
 tf = box(s, X0 + 1.32, 5.0, CW - 1.6, 1.28, anchor=MSO_ANCHOR.MIDDLE)
-para(tf, [('시연  ', {'color': INDIGO_200, 'size': 13}),
-          ('Wi-Fi 를 끄고, 튜터에게 다른 부의 개념을 묻습니다.', {'color': WHITE, 'size': 18})], bold=True, first=True)
-para(tf, '"경사하강은 어디서 배워요?" → "2부 9장, 먼저 그래디언트". 개념 지도의 카드 한 장(약 100토큰)으로 답합니다. 벡터 DB 없이, 경량 로컬 모델로.',
+para(tf, [('예시  ', {'color': INDIGO_200, 'size': 13}),
+          ('튜터에게 다른 부의 개념을 물으면, 답은 내 PC 안에서 만들어집니다.', {'color': WHITE, 'size': 18})], bold=True, first=True)
+para(tf, '"경사하강은 어디서 배워요?" → "2부 9장, 먼저 그래디언트". 경량 로컬 모델이 개념 지도의 카드 한 장(약 100토큰)을 읽고 답합니다. '
+         '벡터 DB 도, 인터넷도 필요 없습니다.',
      size=12, color=INDIGO_100, space_before=6, line=1.25)
 para(tf, '덤: 9부(수치 계산)가 이 인프라 자체를 가르칩니다. "7B 모델이 왜 4GB 로 내 PC 에서 도는가".',
      size=11, color=INDIGO_200, space_before=4)
@@ -914,10 +1108,18 @@ pill(s, '선택 로그인', X0, 6.48, size=10.5, fill=WHITE, alpha=10, color=IND
 tf = box(s, X0 + 1.25, 6.44, CW - 1.25, 0.45)
 para(tf, '사내 이메일 계정으로 로그인하면 기기 간 진도 동기화와 협업 메모를 씁니다. 서버로 가는 건 완료한 챕터·복습 표시·진단 결과·직접 쓴 메모뿐입니다.',
      size=10.5, color=FAINT, first=True, line=1.25)
-notes(s, '오프라인 시연이 곧 보안 답변: 질문·데이터가 외부로 나가지 않음을 눈앞에서 증명. '
-         '부 간 안내는 온톨로지의 결과. 카드 없이는 "N부 2장" 자리표시자를 그대로 출력하던 결함(실측). '
-         '기술 스택 질문 대비: 기본은 정적 웹(브라우저 저장) + 로컬 Ollama. 로그인은 선택이고(사내 이메일 도메인만 가입), '
-         '켜면 Supabase 로 진도·복습·진단·협업 메모만 동기화한다. 튜터 대화는 보내지 않고, 원하면 Supabase 를 사내 서버에 직접 설치(self-host)할 수 있다.')
+script(s, [
+    '보안과 비용도 궁금하실 겁니다. 기본은 모두 각자의 PC 안에서 돕니다.',
+    '따로 서버가 없어 주소 하나만 나눠 주면 되고, AI 튜터도 각자 PC 에서 돌기 때문에 질문을 아무리 많이 해도 돈이 들지 않습니다. 질문 내용이 회사 밖으로 나가지도 않고, 인터넷이 끊겨도 답합니다.',
+    '로그인은 원하는 사람만 합니다. 로그인하면 다른 기기에서도 진도가 이어지는데, 이때 저장되는 건 끝낸 챕터와 복습 표시, 진단 결과, 직접 쓴 메모뿐입니다.',
+], [
+    '"직원 PC 마다 무엇을 설치하나요?" → 학습·진단은 브라우저만으로 된다. 튜터만 Ollama 와 모델이 필요하다. 각자 설치하거나, '
+    '사내 서버 한 대에 올리고 빌드 설정(VITE_OLLAMA_URL) 하나로 주소만 바꾼다(코드 수정 없음). 그러면 대화는 그 사내 서버로 가고 회사 밖으로는 나가지 않는다.',
+    '"정말 인터넷 없이 되나요?" → 튜터 질문은 이 PC 의 Ollama(localhost:11434)로만 간다. 보여 달라고 하면 공유 화면을 브라우저로 바꿔 '
+    'F12 → 네트워크 탭을 연 채 질문하고, 새로 생긴 chat 요청의 주소가 localhost:11434(이 PC 자신)임을 짚는다. Wi-Fi 는 끄지 않는다(회의가 끊긴다).',
+    '기술 스택 → 기본은 정적 웹(브라우저 저장) + 로컬 Ollama. 로그인은 선택(사내 이메일 도메인만 가입)이고, 켜면 Supabase 로 진도·복습·진단·협업 메모만 '
+    '동기화한다. 튜터 대화는 보내지 않는다. Supabase 는 사내 서버에 직접 설치(self-host)할 수도 있다.',
+])
 
 # ═════════════════════════════ ⑪ 숫자 한 장 ═════════════════════════════
 s = new_slide()
@@ -945,7 +1147,7 @@ row2 = [
     ('route', '핵심 경로 55챕터·37시간', '진단으로 개인별 단축(실측 예시 31.9시간)'),
     ('timer', '튜터 완답 5~6초', '경량 로컬 모델, 1부에서 실측(전 부 공통 인프라)'),
     ('shield-check', '가드레일 10/10 · +0초', '주제 이탈 전부 차단, 스트리밍 보류 감지로 추가 지연 없음'),
-    ('network', '개념 127 · 관계 517', '온톨로지 정본, 스모크 175/175 · 개인화 8/8 자동 검증'),
+    ('network', '개념 127 · 관계 520', '온톨로지 정본, 스모크 175/175 · 개인화 8/8 자동 검증'),
 ]
 for i, (ic, t, d) in enumerate(row2):
     cx = X0 + i * (W4 + G4)
@@ -958,8 +1160,14 @@ for i, (ic, t, d) in enumerate(row2):
 icon(s, 'info', X0, 6.38, 0.22, MUTED)
 tf = box(s, X0 + 0.32, 6.35, 8, 0.28, anchor=MSO_ANCHOR.MIDDLE)
 para(tf, '산출 근거·측정 방법은 12_metrics.md (전 항목 재측정 가능)', size=11, color=MUTED, first=True)
-notes(s, '전 항목 전수 실측(규모 수치 2026-10-13, 12부 완결 반영). 130챕터·1,800+ 문항(전수 1,820)·144 노트북은 코드에서 직접 집계, '
-         '튜터 성능은 1부에서 실측(전 부 동일 인프라). 핵심 경로는 선택 부를 빼고 센 값이라 12부가 들어와도 그대로다.')
+script(s, [
+    '숫자로 한 번만 정리하겠습니다. 130개 챕터, 바로 채점되는 문제 1,800개 이상, 직접 돌려 보는 실습 노트북 144권, 그리고 운영비 0원입니다.',
+    '꼭 필요한 길만 가면 약 37시간이고, 진단을 받으면 더 짧아집니다.',
+], [
+    '규모 수치는 2026-10-13(12부 완결) 기준 전수 실측: 130챕터 · 1,800+ 문항(전수 1,820) · 144 노트북은 코드에서 직접 센 값. '
+    '튜터 성능은 1부에서 잰 값(전 부가 같은 인프라). 핵심 경로는 선택 부를 빼고 센 값이라 12부가 들어와도 그대로다. 근거는 12_metrics.md.',
+    '실측 성능: 튜터 완답 5~6초(1부 실측, 전 부 같은 인프라), 주제 이탈 차단 10/10 · 추가 지연 0초, 개념 127 · 관계 520.',
+])
 
 # ═════════════════════════════ ⑫ 품질 ═════════════════════════════
 s = new_slide()
@@ -1015,8 +1223,16 @@ icon(s, 'quote', X0 + 0.3, 6.08, 0.38, INDIGO_300)
 tf = box(s, X0, 5.9, CW, 0.75, anchor=MSO_ANCHOR.MIDDLE)
 para(tf, '"콘텐츠도 소프트웨어처럼 회귀 테스트를 돕니다."', size=15, color=INDIGO_INKY, bold=True,
      align=PP_ALIGN.CENTER, first=True)
-notes(s, '품질 질문("정확도는?") 대비: 가드레일 실측 10/10 + 본문 우선 고지 + 페르소나 검수. '
-         '유지보수 질문 대비: 모노레포 공용 패키지, 한 번 고치면 전 부 반영. 12부도 같은 검증(스모크 175·2층 17·개인화 8·휴대폰·다크)을 통과하고 들어왔다.')
+script(s, [
+    '교육 자료는 한 번 틀리면 믿음을 잃습니다. 그래서 두 번 확인합니다.',
+    '한 번은 사람의 눈입니다. 중학교 수학까지만 기억하는 어른의 눈으로 전 챕터를 읽으며, 여기서 막히겠다 싶은 곳 40여 군데를 모두 고쳤습니다.',
+    '또 한 번은 기계입니다. 내용을 고칠 때마다 전체를 자동으로 다시 시험합니다. 소프트웨어를 다루듯 콘텐츠를 다룹니다.',
+], [
+    '"정확도는?" → 주제 이탈 차단 실측 10/10, 튜터 창의 "본문 설명이 우선!" 안내, 수포자 관점 통독 검수.',
+    '"유지보수는?" → 공용 부품을 한 곳(모노레포 공용 패키지)에 둬서 한 번 고치면 전 부에 반영된다. 개념 정본도 한 파일이라 고치면 아홉 곳이 따라온다.',
+    '12부도 같은 검증(스모크 175 · 2층 17 · 개인화 8 · 휴대폰 · 다크 모드)을 통과하고 들어왔다. 협업 메모는 실제 백엔드로 e2e 65건.',
+    '자동 검증 4종: 13개 앱 타입체크 · 빌드 / 노트북 144권 무에러 실행 / 브라우저 E2E(스모크 175 · 개인화 통합 17 · 온톨로지 개인화 8) / 커밋마다 온톨로지 검사(본문 링크 185).',
+])
 
 # ═════════════════════════════ ⑬ 도입 ═════════════════════════════
 s = new_slide()
@@ -1058,9 +1274,14 @@ if QR.exists():
 else:
     tf = box(s, RX + 0.32, 5.68, RW - 0.6, 0.7, anchor=MSO_ANCHOR.MIDDLE)
 para(tf, '접속 후 첫 화면이 곧 진단 입구라, 안내 비용이 없습니다.', size=11, color=INDIGO_200, first=True, line=1.3)
-notes(s, '도입 시나리오 3종: 온보딩·전사 교육·실무 트랙. 12부는 "도입 효과를 모형으로 미리 돌려 보기"로 실무 트랙에 들어간다. '
-         'QR 은 사내 호스트 확정 후 docs/hackathon/assets/qr.png 로 넣고 덱을 다시 생성하면 오른쪽 카드 아래에 들어간다. '
-         '접속 후 첫 화면이 곧 진단 입구라 안내 비용이 없다.')
+script(s, [
+    '그래서 바로 쓸 수 있습니다. 신입 사원은 각자 출발점에서 시작해도 같은 목적지에 닿고, 전 직원 교육으로는 완주 기준이 분명한 과정이 됩니다.',
+    '실무에 바로 닿는 과정도 있습니다. 사내 챗봇은 어떻게 회사 문서를 아는지, 새 모델은 무엇을 보고 고르는지, AI 에게 일을 어디까지 맡겨도 되는지를 다룹니다.',
+    '첫 화면이 곧 진단이라, 따로 안내할 것도 없습니다.',
+], [
+    'QR 은 사내 호스트가 정해지면 docs/hackathon/assets/qr.png 로 넣고 덱을 다시 생성한다(오른쪽 카드 아래에 들어간다).',
+    '실무 트랙의 부: 사내 챗봇(RAG) 7부 · 로컬 모델 고르기 9부 · 모델 평가 통계 10부 · 에이전트 11부 · 도입 효과 시뮬레이션 12부.',
+])
 
 # ═════════════════════════════ ⑭ 로드맵 + 클로징 ═════════════════════════════
 s = new_slide()
@@ -1095,10 +1316,109 @@ shadow(c, blur=36, dist=0, alpha=50, color=str(INDIGO))
 tf = box(s, X0, 5.35, CW, 1.35, anchor=MSO_ANCHOR.MIDDLE)
 para(tf, '전 직원의 AI 리터러시,', size=18, color=INDIGO_100, bold=True, align=PP_ALIGN.CENTER, first=True)
 para(tf, '비용 0원으로, 오늘부터.', size=30, color=WHITE, bold=True, align=PP_ALIGN.CENTER, space_before=2)
-notes(s, '로드맵도 9장의 모형을 따른다: 파일럿은 입소문의 씨앗이자 계수(q·L)를 재는 실험, 전사 확장 땐 이탈 방지 장치가 이미 있다. '
-         '클로징: "저장소를 사내 호스트에 올리는 순간 전 직원의 AI 강사가 생깁니다. 파일럿 대상 추천을 부탁드립니다."')
+script(s, [
+    '다음 걸음도 앞서 본 그 모형을 따릅니다. 먼저 동료 5명에서 10명과 파일럿을 하며, 어디까지 따라오고 어디서 멈추는지 재겠습니다. 그 숫자로 모형을 다시 돌려 사내 교육에 넣을 때를 정하고, 회사 서버에 올리면 됩니다.',
+    '마무리하겠습니다. 처음에 드린 질문, 기억하시나요? 수학 시간에 손을 놓았던 분들도 이제 AI 가 어떻게 답하는지 이해할 수 있습니다. 비용 없이, 오늘부터입니다.',
+    '파일럿에 함께할 분을 추천해 주시면 감사하겠습니다.',
+])
+
+# ═════════════════════════════ ⑮ 부록 · 만든 도구와 AI 를 쓴 곳 ═════════════════════════════
+# 무엇으로 만들었고 AI 를 어디에 썼는지 한 장(카드 8: 도구 6 + AI 2). 버전은 package-lock·.venv·CI 에서 확인한 값,
+# 숫자는 덱 다른 장과 같은 실측(13앱 · 노트북 144 · 개념 127 · e2e 65 · 스모크 175). 177/178 = Claude 공동 작성 커밋(git log, 2026-10-21).
+s = new_slide()
+chrome(s, 15, '부록 · 만든 도구', '검증된 오픈소스 위에, AI 와 함께 직접 만들었습니다')
+tf = box(s, X0, 1.62, CW, 0.5)
+para(tf, '제품은 공개 오픈소스와 내 PC 의 로컬 모델로만 돌아, 사내망에서도 같은 구성으로 돕니다.', size=12, color=MUTED, first=True, line=1.3)
+para(tf, [('AI 는 두 곳에 썼습니다: ', {'color': INK}),
+          ('제품 안의 로컬 LLM(G), 만드는 과정의 Claude Code(H).', {'color': INDIGO})], size=12, bold=True, line=1.3)
+tools = [   # (아이콘, 구역, 이름, 설명 두 줄, 숫자, 단위, 강조)
+    ('monitor-smartphone', 'A · 화면', 'Vue 3.5 · Vite 6', 'TypeScript 5.7 · Tailwind CSS 4', '차트 Chart.js 4 · 수식 KaTeX',
+     '13', '웹 앱', None),
+    ('notebook-pen', 'B · 실습', 'Python 3.13 · Jupyter', 'NumPy · Matplotlib · SciPy', '웹 챕터와 1:1, 전수 무에러 실행',
+     '144', '노트북', None),
+    ('network', 'C · 개념 지도', '개념 온톨로지', 'JSON 정본 하나 + 직접 만든 검사기', '검색 Fuse.js 7 · 커밋마다 검사',
+     '127', '개념', None),
+    ('layers', 'D · 선택 백엔드', 'Supabase', 'Postgres · 로그인 · 행 단위 보안', '켜면 진도 동기화 · 사내 설치 가능',
+     '65', 'e2e 검증', None),
+    ('shield-check', 'E · 검증 자동화', 'Playwright 1.61', '브라우저 E2E · 스크린샷 · 영상 녹화', 'GitHub Actions(Node 24) · 커밋 훅',
+     '175', '스모크', None),
+    ('presentation', 'F · 발표 산출물', 'python-pptx · FFmpeg', '이 덱과 시연 영상을 코드로 생성', '아이콘 Lucide · 렌더 PowerPoint',
+     '3', '종', None),
+    ('bot', 'G · 제품 속 AI', 'Ollama · gemma4:e2b', '각자 PC 에서 도는 로컬 LLM', '튜터 · 추천 설명 · 메모 질문 · 노트북',
+     '4', '곳', 'dark'),
+    ('sparkles', 'H · 만드는 AI', 'Claude Code', 'Anthropic Claude 와 페어 개발', '콘텐츠 · 코드 · 검수 · 발표 산출물',
+     '177', '/ 178 커밋', 'grad'),
+]
+TG = 0.22
+TW = (CW - 3 * TG) / 4
+TY = 2.25
+TH = (6.74 - TY - TG) / 2
+for i, (ic, kick, name, d1, d2, n, unit, hi) in enumerate(tools):
+    r, k = divmod(i, 4)
+    x = X0 + k * (TW + TG)
+    y = TY + r * (TH + TG)
+    c = card(s, x, y, TW, TH)
+    if hi == 'dark':
+        grad(c, INK, NAVY2, 45)
+    elif hi == 'grad':
+        grad(c, INDIGO, VIOLET, 45)
+    sub = {None: BODY, 'dark': SLATE_300, 'grad': INDIGO_100}[hi]
+    chip(s, ic, x + TW - 0.7, y + 0.2, 0.46, 'glass' if hi else 'soft')
+    tf = box(s, x + 0.25, y + 0.24, TW - 1.0, 0.28)
+    para(tf, kick, size=9.5, color={None: INDIGO, 'dark': INDIGO_300, 'grad': INDIGO_100}[hi], bold=True, first=True)
+    tf = box(s, x + 0.25, y + 0.56, TW - 0.4, 0.42, anchor=MSO_ANCHOR.MIDDLE)
+    para(tf, name, size=19 if hi == 'grad' else 14, color=WHITE if hi else INK, bold=True, first=True)
+    tf = box(s, x + 0.25, y + 1.02, TW - 0.4, 0.6)
+    para(tf, d1, size=9.5, color=sub, first=True, line=1.25)
+    para(tf, d2, size=9.5, color=sub, line=1.25)
+    tf = box(s, x + 0.25, y + TH - 0.74, TW - 0.5, 0.6, anchor=MSO_ANCHOR.BOTTOM)
+    para(tf, [(n, {'size': 30, 'color': WHITE if hi else INDIGO}),
+              ('  ' + unit, {'size': 10.5, 'color': {None: MUTED, 'dark': FAINT, 'grad': INDIGO_100}[hi], 'bold': False})],
+         bold=True, align=PP_ALIGN.RIGHT, first=True)
+script(s, [
+    '끝으로, 무엇으로 만들었는지 한 장에 담았습니다. 모두 누구나 쓸 수 있는 공개된 도구라, 회사 안에서도 그대로 돌릴 수 있습니다.',
+    'AI 는 두 곳에 썼습니다. 제품 안에서는 각자 PC 의 AI 가 학습자를 돕고, 만드는 과정에서는 Claude 라는 AI 와 함께 일했습니다. 작업 기록 178건 가운데 177건을 함께 썼습니다.',
+    '수학을 가르치는 일도, 그 도구를 만드는 일도 사람과 AI 가 함께했다는 것을 보여 드리고 싶었습니다. 들어 주셔서 감사합니다.',
+], [
+    '질문을 받으면 그 장으로 돌아가 화면을 보며 답한다. 발표자 보기의 "모든 슬라이드 보기"로 골라 들어간다. '
+    '번호 + Enter 로 가면 영상 장 때문에 ④부터 하나씩 밀린다(⑩ 은 11 Enter).',
+    '"정확도는?" "유지보수는?" → ⑫ 노트 · "직원 PC 마다 설치?" "인터넷 없이?" "기술 스택?" → ⑩ 노트 · "온톨로지가 뭔가요? 그냥 JSON?" → ⑦ 노트 · '
+    '"도입 숫자는 예측인가요?" → ⑨ 노트',
+    '"AI 가 쓴 콘텐츠를 믿을 수 있나요?" → AI 와 함께 쓴 것도 같은 관문을 통과해야 들어간다: 수포자 페르소나 통독 검수(이탈 위험 40여 곳 수정), '
+    '자동 검증 4종, 커밋 훅(글자 대비 · 온톨로지 검사). 방향과 판단은 사람이, 작성은 AI 와 함께.',
+    '"Claude 로 사내 데이터가 가나요?" → 아니다. Claude Code 는 만드는 도구일 뿐, 제품은 실행 중에 Claude 를 부르지 않는다(제품 코드에 호출 0). '
+    '학습자의 질문은 각자 PC 의 로컬 모델로만 간다(로그인을 켜면 진도·메모만 Supabase 로).',
+    '"확장은?" → 백엔드 없이 시작해도 되고, 사내 계정 로그인 · 기기 간 진도 · 도입 현황 대시보드는 이미 구현돼 켜기만 하면 된다.',
+    '도구(카드 순): 화면 Vue 3.5 · Vite 6 / 실습 Python 3.13 · Jupyter / 개념 지도 JSON 정본 + 검사기 / 선택 백엔드 Supabase / 검증 Playwright 1.61 / 발표 산출물 python-pptx · FFmpeg / 제품 속 AI Ollama · gemma4:e2b / 만드는 AI Claude Code(작업 기록 = git 커밋 178개 중 177개 공동 작성).',
+], qa_title='[질의응답]')
 
 prs.core_properties.title = '수포자 아카데미 · AI 를 가르치는 AI 강사'
 prs.core_properties.author = 'jiyupapa'
 prs.save(OUT)
 print('저장 →', OUT)
+
+
+# ── 대본 사본: 발표자 노트를 그대로 md 로(리허설·인쇄용, 손으로 고치지 않는다) ─────────────
+def md_block(text):
+    out, prev = [], False
+    for ln in text.split('\n'):
+        bullet = ln.startswith('· ')
+        if bullet:
+            out += ([] if prev else ['']) + ['- ' + ln[2:]]
+        elif ln.startswith('[') and ln.endswith(']'):
+            out += ['', f'**{ln[1:-1]}**']
+        elif ln:
+            out += ['', ln]
+        prev = bullet
+    return '\n'.join(out).strip()
+
+
+md = ['# 15분 발표 대본 — 수포자 아카데미', '',
+      '> 자동 생성 — `scripts/build-pitch-deck.py` 가 덱(`11_pitch_deck.pptx`)의 발표자 노트를 그대로 옮긴 사본이다.',
+      '> 고치려면 그 스크립트의 `script()` 호출을 고치고 다시 실행한다(이 파일을 직접 고치면 다음 생성 때 사라진다).',
+      '> 형식: 온라인 회의 화면 공유(슬라이드 쇼 창만 공유) · 목표 15분 · ③ 다음 시연 영상(약 3분 43초, AI 음성 내레이션 — 덱 안에 들어 있다) · 남는 시간은 질의응답.',
+      '> 5분 시상식 라이브 시연 대본은 [`13_demo_script.md`](13_demo_script.md).', '']
+for sl in prs.slides:
+    md += [f'## {HEADS[sl.slide_id]}', '', md_block(sl.notes_slide.notes_text_frame.text), '']
+SCRIPT_MD.write_text('\n'.join(md), encoding='utf-8')
+print('저장 →', SCRIPT_MD, f'(대본 예상 {mmss(CLOCK[0])}, 초당 {PACE}음절 기준)')
