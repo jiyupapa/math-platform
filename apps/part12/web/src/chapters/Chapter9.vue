@@ -22,7 +22,7 @@ function onSetComplete() {
     <p class="mb-1 text-sm font-medium text-indigo-600">9장 · 약 40분</p>
     <h1 class="mb-4 text-3xl font-bold">그림만 보면 틀린다 — 인과지도의 규칙과 함정</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
-      3장부터 인과지도를 계속 그려 왔습니다. 이제 규칙을 정식으로 세울 차례예요. 화살표의 +와 −가 정확히 무슨 뜻인지,
+      1장 3절에서 인과지도 읽는 법을 익히고, 3장부터 계속 그려 왔습니다. 이제 규칙을 정식으로 세울 차례예요. 화살표의 +와 −가 정확히 무슨 뜻인지,
       고리가 강화인지 균형인지 어떻게 판별하는지, 그리고 인과지도<b>만</b> 보고 결론을 내릴 때 어떤 함정에 빠지는지 봅니다.
       인과지도는 생각을 정리하는 훌륭한 스케치지만, 계산은 아니라는 것이 이 장의 핵심입니다.
     </p>
@@ -60,9 +60,9 @@ function onSetComplete() {
 
     <h2 class="mt-8 mb-2 text-xl font-bold">2. 오늘의 발견에 이름표 달기</h2>
     <ReviewFlag id="ch9-s2" chapter="ch9" label="2. 오늘의 발견에 이름표 달기" />
-    <ConceptCard tone="note" title="새 용어: 인과지도 / 링크 극성 / 루프 극성 / 다른 조건이 같다면">
+    <ConceptCard tone="note" title="새 용어: 링크 극성 / 루프 극성 / 다른 조건이 같다면">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
-        <li><b>인과지도</b> (causal loop diagram, CLD, 인과순환지도라고도 함). 뜻: 변수를 화살표로 이어 피드백 루프를 찾는 그림. 쌓이는 것과 흐르는 것을 구별하지 않는 '스케치'입니다.</li>
+        <li><b>인과지도</b> 다시 보기 (causal loop diagram, CLD, 인과순환지도라고도 함, 1장 3절). 변수를 화살표로 이어 피드백 루프를 찾는 그림. 쌓이는 것과 흐르는 것을 구별하지 않는 '스케치'입니다.</li>
         <li><b>링크 극성</b> (link polarity). 뜻: 화살표의 +/−. <b>+</b>: 원인이 늘면 결과가 (다른 조건이 같을 때) 원래보다 커짐. <b>−</b>: 원래보다 작아짐.</li>
         <li><b>루프 극성</b> (loop polarity). 뜻: 루프가 강화(R)인지 균형(B)인지. 루프 안 − 의 개수가 짝수면 R, 홀수면 B.</li>
         <li><b>다른 조건이 같다면</b> (ceteris paribus, 케테리스 파리부스). 뜻: 화살표 하나를 읽을 때는 그 원인 하나만 바뀌고 나머지는 그대로라고 생각한다는 약속. 실제로는 여러 원인이 동시에 바뀌므로 결과는 계산해 봐야 압니다.</li>

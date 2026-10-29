@@ -9,6 +9,7 @@ import { QuizSet } from '@series/ui'
 import { StepQuiz } from '@series/ui'
 import { NotebookCard } from '@series/ui'
 import StockFlowLab from '@/components/StockFlowLab.vue'
+import SfdDiagram from '@/components/SfdDiagram.vue'
 import { useProgressStore } from '@/stores/progress'
 
 const progress = useProgressStore()
@@ -82,8 +83,25 @@ function onSetComplete() {
       <b>d저량/dt</b>(디 저량 디 티)는 2부 3장에서 배운 도함수, 곧 "아주 짧은 순간의 변화율"입니다. 2부에서는 곡선이 주어지면
       기울기를 구했죠(미분). 여기서는 기울기(유량)가 주어지고 곡선(저량)을 쌓아 만듭니다(적분). 같은 길을 반대 방향으로 걷는 거예요.
     </p>
+    <p class="leading-relaxed text-slate-700">
+      두 식을 1장 2절의 저량-유량도에 겹쳐 보면 그림의 뜻이 또렷해집니다. <b>상자 안의 값</b>은 처음 값에 파이프로 들어오고 나간 양을
+      쌓은 것(∫)이고, <b>두 파이프의 세기 차이</b>는 상자 값이 지금 변하는 속도(d저량/dt)예요. 저량-유량도의 셋째 약속
+      '상자가 변하는 속도 = 들어오는 파이프 − 나가는 파이프'를 식으로 쓴 것이 바로 위의 두 번째 식입니다.
+    </p>
+    <div class="my-4 rounded-xl border border-slate-200 bg-white p-3">
+      <SfdDiagram
+        :width="360"
+        :height="118"
+        :stocks="[{ id: 's', label: '저량', x: 180, y: 66, w: 104, h: 50, value: 'S(t)', level: 0.45 }]"
+        :flows="[
+          { id: 'in', label: '유입', path: [[18, 66], [127, 66]], fromCloud: true },
+          { id: 'out', label: '유출', path: [[233, 66], [342, 66]], toCloud: true },
+        ]"
+        aria-label="저량 상자 하나에 유입 파이프와 유출 파이프가 붙은 가장 단순한 저량-유량도"
+      />
+    </div>
 
-    <ConceptCard tone="note" title="새 용어: 적분 / 순간 변화율 / 미적분의 기본 정리 / 저량-유량도">
+    <ConceptCard tone="note" title="새 용어: 적분 / 순간 변화율 / 미적분의 기본 정리">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
         <li>
           <b>적분</b> (integral). 뜻: 변화율을 시간에 따라 <b>쌓는 것</b>, 그래프로는 곡선 아래 <b>면적</b>.
@@ -98,8 +116,8 @@ function onSetComplete() {
           순유량을 쌓으면 저량이 되고, 저량의 기울기를 읽으면 순유량이 돼요.
         </li>
         <li>
-          <b>저량-유량도</b> (stock and flow diagram, SFD). 뜻: 저량은 상자, 유량은 밸브 달린 파이프로 그리는 그림(1장에서 본 표기).
-          인과지도(9장)와 달리 쌓이는 것과 흐르는 것을 구별해 그려서, 그대로 계산할 수 있습니다.
+          <b>저량-유량도</b> 다시 보기 (stock and flow diagram, SFD, 1장 2절). 저량은 상자, 유량은 밸브 달린 두 줄 파이프로 그리는 그림.
+          인과지도와 달리 쌓이는 것과 흐르는 것을 구별해 그려서, 위의 두 식으로 그대로 옮겨 계산할 수 있습니다.
         </li>
       </ul>
     </ConceptCard>

@@ -211,6 +211,28 @@ const loopLabels = computed(() => {
       </marker>
     </defs>
 
+    <!-- 그림 읽기 단계의 '이번에 새로 그린 것'(mark) — 맨 아래에 호박색 바탕을 깔아 둘러 보이게 -->
+    <g>
+      <template v-for="(g, i) in geos" :key="'m' + i">
+        <path v-if="g.link.mark" :d="g.d" fill="none" stroke="var(--c-amber-200)" stroke-width="10" stroke-linecap="round" />
+        <circle v-if="g.link.mark" :cx="g.sign.x" :cy="g.sign.y" r="13" fill="var(--c-amber-200)" />
+      </template>
+      <template v-for="n in nodes" :key="'mn' + n.id">
+        <rect
+          v-if="n.mark"
+          :x="n.x - (boxes.get(n.id)?.hw ?? 30) - 6"
+          :y="n.y - 20"
+          :width="((boxes.get(n.id)?.hw ?? 30) + 6) * 2"
+          height="40"
+          rx="9"
+          fill="var(--c-amber-200)"
+        />
+      </template>
+      <template v-for="(l, i) in loops" :key="'ml' + i">
+        <circle v-if="l.mark" :cx="l.x" :cy="l.y" r="24" fill="var(--c-amber-200)" />
+      </template>
+    </g>
+
     <!-- 화살표 -->
     <g fill="none">
       <template v-for="(g, i) in geos" :key="'l' + i">

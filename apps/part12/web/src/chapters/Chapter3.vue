@@ -9,6 +9,8 @@ import { QuizSet } from '@series/ui'
 import { StepQuiz } from '@series/ui'
 import { NotebookCard } from '@series/ui'
 import ReinforcingLab from '@/components/ReinforcingLab.vue'
+import SfdDiagram from '@/components/SfdDiagram.vue'
+import DiagramLegend from '@/components/DiagramLegend.vue'
 import { useProgressStore } from '@/stores/progress'
 
 const progress = useProgressStore()
@@ -38,9 +40,39 @@ function onSetComplete() {
     <p class="leading-relaxed text-slate-700">
       사내 AI 도구를 쓰는 100명이 매달 동료 10명꼴(지금 사용자의 10%)을 새로 데려온다고 합시다. 사용자가 늘면 데려오는
       사람도 늘어요. 그래서 첫 달은 +10명이지만 둘째 달은 +11명, 셋째 달은 +12.1명… 늘어나는 양 자체가 늘어납니다.
-      인과지도로 그리면 사용자 수와 입소문 가입이 서로를 키우는 <b>강화 루프(R)</b> 하나예요. 화살표의 +는
-      "원인이 늘면 결과도 는다"는 뜻입니다.
+      아래 실험 왼쪽의 인과지도가 이 이야기를 그린 것입니다(읽는 법은 1장 3절). 화살표 두 개를 차례로 읽어 볼게요.
+      <b>사용자 수 →(+) 입소문 가입</b>: 쓰는 사람이 많을수록 입소문으로 들어오는 사람이 많다. <b>입소문 가입 →(+) 사용자 수</b>:
+      들어오는 사람이 많을수록 사용자 수가 더 많이 쌓인다. 한 바퀴 따라 읽으면 사용자 수가 늘면 → 입소문 가입이 늘고 →
+      사용자 수가 더 늘어요. 처음 변화가 더 커져서 돌아오니 <b>강화 루프(R)</b>이고, 고리 안에 −가 하나도 없습니다.
     </p>
+    <p class="mt-3 leading-relaxed text-slate-700">
+      같은 고리를 저량-유량도로 그리면 아래와 같아요. 사용자 수 상자에 입소문 가입 파이프가 하나 붙고, 가입의 세기는 지금 사용자 수와
+      성장률 r(작은 원)을 보고 정합니다. 그래서 <b>입소문 가입 = r × 사용자 수</b>. 이 한 줄이 이 장의 모든 계산의 출발점이에요.
+    </p>
+    <div class="my-4 rounded-xl border border-slate-200 bg-white p-3">
+      <SfdDiagram
+        :width="360"
+        :height="172"
+        :stocks="[{ id: 'u', label: '사용자 수', x: 240, y: 118, w: 104, h: 50, value: '100명', level: 0.35 }]"
+        :flows="[{ id: 'g', label: '입소문 가입', path: [[30, 118], [187, 118]], fromCloud: true, rate: 'r × 사용자 수' }]"
+        :aux="[{ id: 'r', label: '성장률 r = 10%/월', x: 60, y: 40 }]"
+        :links="[
+          { from: [64, 46], to: [102, 100], bend: -0.12, sign: '+' },
+          { from: [214, 92], to: [115, 101], bend: 0.35, sign: '+' },
+        ]"
+        aria-label="사용자 수 상자에 입소문 가입 파이프가 붙고, 사용자 수와 성장률 r이 가는 화살표로 입소문 가입을 정하는 저량-유량도"
+      />
+    </div>
+    <DetailsCard title="🔍 그림 기호 다시 보기">
+      <p class="text-sm">
+        기호를 처음부터 차근차근 보려면 <RouterLink to="/ch/ch1#ch1-sfd" class="font-semibold text-indigo-700 underline">1장 2절(저량-유량도)</RouterLink>과
+        <RouterLink to="/ch/ch1#ch1-cld" class="font-semibold text-indigo-700 underline">3절(인과지도)</RouterLink>로 돌아가세요.
+      </p>
+      <p class="mt-3 text-sm font-semibold text-slate-700">인과지도</p>
+      <DiagramLegend kind="cld" />
+      <p class="mt-3 text-sm font-semibold text-slate-700">저량-유량도</p>
+      <DiagramLegend kind="sfd" />
+    </DetailsCard>
 
     <ReinforcingLab />
 
@@ -223,11 +255,11 @@ function onSetComplete() {
       />
       <Quiz
         difficulty="hard"
-        question="사내 AI 도구 사용자 100명이 매달 15%씩 늘고 있다. 경영진이 '1.15²⁴이면 2년 뒤 약 2,860명, 직원 3,000명 거의 전원'이라고 보고했다. 가장 알맞은 지적은?"
-        :choices="['지수 성장이 끝까지 간다고 가정했다. 아직 안 쓰는 직원이 줄수록 입소문 가입도 줄어 S자로 휜다', '계산이 틀렸다. 1.15²⁴는 2,860이 아니다', '선형 성장으로 다시 계산해야 한다', '지적할 것이 없다']"
+        question="사내 AI 도구 사용자 10명이 매달 15%씩 늘고 있다. 경영진이 '1.15²⁴이면 2년 뒤 약 286명, 직원 300명 거의 전원'이라고 보고했다. 가장 알맞은 지적은?"
+        :choices="['지수 성장이 끝까지 간다고 가정했다. 아직 안 쓰는 직원이 줄수록 입소문 가입도 줄어 S자로 휜다', '계산이 틀렸다. 10 × 1.15²⁴는 286이 아니다', '선형 성장으로 다시 계산해야 한다', '지적할 것이 없다']"
         :answer="0"
-        :hints="['3,000명에 가까워질수록 데려올 동료가 남아 있나요?']"
-        explanation="계산(100 × 1.15²⁴ ≈ 2,863명) 자체는 맞지만, 강화 루프만 있다고 가정한 것이 문제입니다. 남은 직원이라는 한계가 균형 루프로 끼어들면 성장은 S자로 꺾여요. 7장에서 이 S자를, 캡스톤에서 사내 도입 모형 전체를 계산합니다."
+        :hints="['300명에 가까워질수록 데려올 동료가 남아 있나요?']"
+        explanation="계산(10 × 1.15²⁴ ≈ 286명) 자체는 맞지만, 강화 루프만 있다고 가정한 것이 문제입니다. 남은 직원이라는 한계가 균형 루프로 끼어들면 성장은 S자로 꺾여요. 7장에서 이 S자를, 캡스톤에서 사내 도입 모형 전체를 계산합니다."
       />
     </QuizSet>
 

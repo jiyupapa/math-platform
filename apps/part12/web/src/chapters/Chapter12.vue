@@ -10,6 +10,9 @@ import { QuizSet } from '@series/ui'
 import { StepQuiz } from '@series/ui'
 import { NotebookCard } from '@series/ui'
 import AdoptionLab from '@/components/AdoptionLab.vue'
+import DiagramSteps from '@/components/DiagramSteps.vue'
+import DiagramLegend from '@/components/DiagramLegend.vue'
+import type { SfdAux, SfdFlow, SfdLink, SfdStep, SfdStock } from '@/data/plot'
 import { useProgressStore } from '@/stores/progress'
 
 const progress = useProgressStore()
@@ -17,6 +20,34 @@ const progress = useProgressStore()
 function onSetComplete() {
   progress.markDone('ch12')
 }
+
+// 1절 그림 읽기 — 캡스톤 저량-유량도를 한 단계씩(실험실 AdoptionLab 의 좁은 화면 배치와 같은 좌표, 처음 시각의 값)
+const P0: SfdStock = { id: 'P', label: '잠재 사용자', x: 62, y: 95, w: 104, h: 58, value: '300명', level: 1 }
+const A0: SfdStock = { id: 'A', label: '사용자', x: 258, y: 95, w: 104, h: 58, value: '0명', level: 0 }
+const ADOPT_FLOW: SfdFlow = { id: 'in', label: '도입', path: [[115, 95], [205, 95]] }
+const CHURN_FLOW: SfdFlow = { id: 'out', label: '이탈', path: [[258, 125], [258, 182], [62, 182], [62, 125]], valve: [160, 182] }
+const DIALS: SfdAux[] = [
+  { id: 'p', label: '홍보·교육 p', x: 112, y: 30 },
+  { id: 'q', label: '입소문 q', x: 208, y: 30 },
+  { id: 'L', label: '사용 기간 L', x: 276, y: 222 },
+]
+const L_P: SfdLink = { from: [118, 38], to: [154, 79], bend: 0.1, sign: '+' }
+const L_Q: SfdLink = { from: [202, 38], to: [166, 79], bend: -0.1, sign: '+' }
+const L_P_IN: SfdLink = { from: [92, 66], to: [148, 84], bend: 0.35, sign: '+' }
+const L_A_IN: SfdLink = { from: [228, 66], to: [172, 84], bend: -0.35, sign: '+' }
+const L_A_OUT: SfdLink = { from: [215, 125], to: [166, 166], bend: 0.2, sign: '+' }
+const L_L: SfdLink = { from: [270, 214], to: [174, 186], bend: 0.15, sign: '−' }
+const ALL_LINKS = [L_P, L_Q, L_P_IN, L_A_IN, L_A_OUT, L_L]
+const only = (hit: SfdLink) => ALL_LINKS.map((l) => (l === hit ? { ...l, mark: true } : l))
+const adoptSteps: SfdStep[] = [
+  { title: '상자 둘', stocks: [{ ...P0, mark: true }, { ...A0, mark: true }] },
+  { title: '파이프 둘', stocks: [P0, A0], flows: [{ ...ADOPT_FLOW, mark: true }, { ...CHURN_FLOW, mark: true }] },
+  { title: '다이얼 셋', stocks: [P0, A0], flows: [ADOPT_FLOW, CHURN_FLOW], aux: DIALS.map((a) => ({ ...a, mark: true })) },
+  { title: '가는 화살표', stocks: [P0, A0], flows: [ADOPT_FLOW, CHURN_FLOW], aux: DIALS, links: ALL_LINKS.map((l) => ({ ...l, mark: true })) },
+  { title: '고리 ① 입소문', stocks: [P0, { ...A0, mark: true }], flows: [{ ...ADOPT_FLOW, mark: true }, CHURN_FLOW], aux: DIALS, links: only(L_A_IN) },
+  { title: '고리 ② 포화', stocks: [{ ...P0, mark: true }, A0], flows: [{ ...ADOPT_FLOW, mark: true }, CHURN_FLOW], aux: DIALS, links: only(L_P_IN) },
+  { title: '고리 ③ 이탈', stocks: [P0, { ...A0, mark: true }], flows: [ADOPT_FLOW, { ...CHURN_FLOW, mark: true }], aux: DIALS, links: only(L_A_OUT) },
+]
 </script>
 
 <template>
@@ -37,7 +68,7 @@ function onSetComplete() {
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 무대와 모형: 잠재 사용자에서 사용자로</h2>
     <ReviewFlag id="ch12-s1" chapter="ch12" label="1. 무대와 모형: 잠재 사용자에서 사용자로" />
     <p class="leading-relaxed text-slate-700">
-      직원 3,000명인 가상의 회사입니다. 저량은 둘, <b>잠재 사용자</b>(아직 안 쓰는 직원)와 <b>사용자</b>예요. 잠재 사용자가 사용자가 되는
+      직원 300명, 우리 회사와 비슷한 규모의 가상 회사입니다. 저량은 둘, <b>잠재 사용자</b>(아직 안 쓰는 직원)와 <b>사용자</b>예요. 잠재 사용자가 사용자가 되는
       이유는 두 가지입니다. 회사의 홍보·교육을 보고 스스로 시작하거나(바깥에서 오는 동기), 이미 쓰는 동료를 보고 따라 하거나(입소문).
       그리고 쓰던 사람 중 일부는 그만두고 다시 잠재 사용자로 돌아갑니다.
     </p>
@@ -48,10 +79,84 @@ function onSetComplete() {
       3장의 강화 루프가, (M − A) 덕분에 7장의 포화하는 균형 루프가 생깁니다. <b>L</b>은 평균 사용 기간이라 이탈은 매달 사용자의 1/L씩(4장의 지수 감쇠)이고, 이 1/L을 월 <b>이탈률</b>(churn rate)이라고 합니다.
     </p>
 
+    <p class="mt-3 leading-relaxed text-slate-700">
+      실험실에 들어가기 전에 이 모형의 저량-유량도를 한 단계씩 그려 읽어 봅시다. 실험실 안의 그림과 같은 구조이고,
+      기호는 1장 2절에서 익힌 그대로예요.
+    </p>
+
+    <DiagramSteps kind="sfd" title="한 단계씩 그려 보기: 사내 AI 도입 모형" :steps="adoptSteps" :width="320" :height="250">
+      <template #s1>
+        캡스톤의 저량은 둘입니다. 아직 안 쓰는 직원인 <b>잠재 사용자</b>와 쓰고 있는 <b>사용자</b>예요. 1장 그림에서 구름이던 자리에
+        이번엔 상자가 들어갔습니다. 직원 300명은 두 상자를 오갈 뿐 바깥으로 나가지 않으니까요(구름이 없는 닫힌 모형).
+        처음엔 300명 모두 잠재 사용자이고, 두 상자의 합은 언제나 300명입니다.
+      </template>
+      <template #s2>
+        파이프도 둘입니다. <b>도입</b>은 잠재 사용자 상자에서 빠져나가 사용자 상자로 들어가는 흐름이에요. 파이프 하나가 한쪽 상자에는
+        유출, 다른 쪽 상자에는 유입입니다. <b>이탈</b>은 거꾸로 사용자 상자에서 나와 잠재 사용자로 돌아가는 흐름이에요.
+        그만둔 사람도 언젠가 다시 시작할 수 있다고 본 것입니다.
+      </template>
+      <template #s3>
+        작은 원 세 개가 실험실의 다이얼입니다. <b>홍보·교육 p</b>(혁신계수)는 잠재 사용자 한 명이 한 달에 홍보·교육만 보고 시작할 확률,
+        <b>입소문 q</b>(모방계수)는 쓰는 동료를 보고 따라 시작하는 세기, <b>사용 기간 L</b>은 평균 몇 달 쓰고 그만두는지예요.
+        쌓이지 않고 우리가 정해 두는 값이라 작은 원으로 그립니다.
+      </template>
+      <template #s4>
+        가는 화살표는 '무엇을 보고 밸브를 정하나'입니다. 도입 밸브에는 네 개가 들어와요. 다이얼 p와 q, <b>사용자</b>(쓰는 동료가
+        많을수록 입소문이 크다), <b>잠재 사용자</b>(시작할 사람이 많이 남아 있을수록 도입이 많다). 이탈 밸브에는 둘이 들어옵니다.
+        <b>사용자</b>(쓰는 사람이 많을수록 그만두는 사람도 많다)와 <b>L</b>(오래 쓸수록 한 달에 그만두는 사람은 적다, 그래서 −)이에요.
+      </template>
+      <template #s5>
+        이제 고리를 찾아봅시다. 노란 길을 따라가면 사용자 → (보고) → 도입 → (쌓여서) → 사용자. 사용자가 늘면 입소문 도입이 늘어
+        사용자가 더 늘어요. 처음 변화를 키우니 <b>강화 루프(R), 입소문</b>입니다. 3장의 눈덩이 그대로예요.
+      </template>
+      <template #s6>
+        두 번째 고리: 잠재 사용자 → (보고) → 도입 → (빠져나가서) → 잠재 사용자. 잠재 사용자가 많으면 도입이 많고, 그만큼 잠재 사용자
+        상자에서 더 많이 빠져나가 잠재 사용자가 줄어요. 처음 상태(많다)를 거스르니 <b>균형 루프(B), 포화</b>입니다. 시작할 사람이
+        바닥나면 도입이 멈추는 고리로, 7장의 '남은 여지'가 바로 이 상자예요. 상자를 <b>빠져나가는</b> 파이프는 인과지도로 옮기면
+        −(많이 빠질수록 상자는 원래보다 작아진다)가 된다는 것도 눈여겨보세요.
+      </template>
+      <template #s7>
+        세 번째 고리: 사용자 → (보고) → 이탈 → (빠져나가서) → 사용자. 사용자가 늘면 그만두는 사람도 늘어 사용자가 덜 늘어요.
+        이것도 <b>균형 루프(B), 이탈</b>입니다. 4장의 '매달 사용자의 일정 비율이 그만둔다'는 지수 감쇠 고리예요. 이 그림에는 R 하나와
+        B 둘이 돌고, 어느 고리가 이기느냐가 S자의 모양과 최종 수준을 정합니다. 실험실에서 다이얼을 돌리는 것은 결국 이 고리들의
+        세기를 바꾸는 일이에요.
+      </template>
+    </DiagramSteps>
+
+    <p class="leading-relaxed text-slate-700">그림의 부분마다 식이 하나씩 붙습니다(5장 2절의 규칙).</p>
+    <div class="my-4 overflow-x-auto">
+      <table class="w-full break-keep text-sm">
+        <thead>
+          <tr class="border-b border-slate-200 text-left text-slate-500">
+            <th class="py-2 pr-3 font-medium">그림의 부분</th>
+            <th class="py-2 font-medium">식</th>
+          </tr>
+        </thead>
+        <tbody class="text-slate-700">
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">상자 '사용자'(들어오는 도입, 나가는 이탈)</td><td class="py-2">dA/dt = 도입 − 이탈</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">상자 '잠재 사용자'(들어오는 이탈, 나가는 도입)</td><td class="py-2">d(M − A)/dt = 이탈 − 도입</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">밸브 '도입'(p·q·사용자·잠재 사용자에서 화살표)</td><td class="py-2">도입 = (p + q·A/M)·(M − A)</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">밸브 '이탈'(사용자·L에서 화살표)</td><td class="py-2">이탈 = A ÷ L</td></tr>
+          <tr><td class="py-2 pr-3">작은 원 p·q·L</td><td class="py-2">다이얼 값(기본 p 0.01, q 0.4, 이탈 없음)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="leading-relaxed text-slate-700">
+      위의 식이 바로 이 표를 한 줄로 쓴 것이에요. 두 상자의 식을 더하면 0이라 두 상자의 합 M(300명)은 변하지 않습니다.
+    </p>
+
+    <DetailsCard title="🔍 그림 기호 다시 보기">
+      <p class="text-sm">
+        기호를 처음부터 차근차근 보려면 <RouterLink to="/ch/ch1#ch1-sfd" class="font-semibold text-indigo-700 underline">1장 2절(저량-유량도)</RouterLink>로 돌아가세요.
+      </p>
+      <p class="mt-3 text-sm font-semibold text-slate-700">저량-유량도</p>
+      <DiagramLegend kind="sfd" />
+    </DetailsCard>
+
     <AdoptionLab />
 
     <ConceptCard tone="tip" title="핵심 관찰: 세 다이얼은 서로 다른 것을 바꾼다">
-      <b>기본</b>(p 0.01, q 0.4, 이탈 없음)이면 9.1개월에 직원의 절반이 쓰고, 도입 속도는 9.0개월에 월 315명으로 가장 빠릅니다.
+      <b>기본</b>(p 0.01, q 0.4, 이탈 없음)이면 9.1개월에 직원의 절반이 쓰고, 도입 속도는 9.0개월에 월 31.5명으로 가장 빠릅니다.
       <b>홍보 집중</b>(p 0.03)은 절반 도달을 6.4개월로 2.8개월 당기지만, 이탈이 있을 때 최종 수준은 75.8% → 77.2%로 거의 그대로예요.
       <b>입소문 집중</b>(q 0.6)은 절반 도달을 6.8개월로 당기고, 이탈이 있을 때 최종 수준도 83.7%로 끌어올립니다.
       <b>이탈 방지</b>(사용 기간 10 → 20개월)는 시작 속도는 거의 그대로인데 최종 수준을 75.8% → 87.8%로 올려요.
@@ -82,12 +187,12 @@ function onSetComplete() {
     <p class="mt-6 mb-1 text-sm font-semibold text-slate-500">✏️ 계산 연습: 이론으로 정점 구하기</p>
     <StepQuiz
       difficulty="hard"
-      question="이탈이 없는 Bass 모형에서 도입 속도의 정점 시각은 t* = ln(q/p) ÷ (p + q), 그때의 도입 속도는 M(p + q)² ÷ (4q)다. p = 0.01, q = 0.4, M = 3,000일 때 구하세요. (ln 40 ≈ 3.689)"
+      question="이탈이 없는 Bass 모형에서 도입 속도의 정점 시각은 t* = ln(q/p) ÷ (p + q), 그때의 도입 속도는 M(p + q)² ÷ (4q)다. p = 0.01, q = 0.4, M = 300일 때 구하세요. (ln 40 ≈ 3.689)"
       :steps="[
         { lhs: 't^* = \\ln 40 \\div 0.41 = ?\\,\\text{개월}', answer: 9.0, tolerance: 0.05 },
-        { lhs: '3000 \\times 0.41^2 \\div 1.6 = ?\\,\\text{명/월}', answer: 315.2, tolerance: 0.2 },
+        { lhs: '300 \\times 0.41^2 \\div 1.6 = ?\\,\\text{명/월}', answer: 31.5, tolerance: 0.05 },
       ]"
-      explanation="t* = 3.689 ÷ 0.41 ≈ 9.0개월, 정점 속도 = 3,000 × 0.1681 ÷ 1.6 ≈ 315.2명/월. 실험의 9.0개월·월 315명과 같습니다(실험은 오일러법을 DT = 1/64로 잘게 썰어 이론값에 맞췄어요)."
+      explanation="t* = 3.689 ÷ 0.41 ≈ 9.0개월, 정점 속도 = 300 × 0.1681 ÷ 1.6 ≈ 31.5명/월. 실험의 9.0개월·월 31.5명과 같습니다(실험은 오일러법을 DT = 1/64로 잘게 썰어 이론값에 맞췄어요)."
     />
 
     <h2 class="mt-8 mb-2 text-xl font-bold">3. 도입 전략 판정서</h2>
@@ -230,7 +335,7 @@ function onSetComplete() {
         :answer="75.8"
         :tolerance="0.05"
         :hints="['비교표의 현실: 이탈 있음 줄을 보세요.']"
-        explanation="약 75.8%(약 2,274명). 들어오는 흐름과 나가는 흐름이 같아지는 평형이에요(8장). 이탈한 사람이 다시 잠재 사용자가 되니 0으로 무너지지는 않습니다."
+        explanation="약 75.8%(약 227명). 들어오는 흐름과 나가는 흐름이 같아지는 평형이에요(8장). 이탈한 사람이 다시 잠재 사용자가 되니 0으로 무너지지는 않습니다."
       />
       <Quiz
         difficulty="medium"

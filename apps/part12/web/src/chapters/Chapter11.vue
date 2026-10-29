@@ -10,6 +10,7 @@ import { QuizSet } from '@series/ui'
 import { StepQuiz } from '@series/ui'
 import { NotebookCard } from '@series/ui'
 import AiLoopsLab from '@/components/AiLoopsLab.vue'
+import DiagramLegend from '@/components/DiagramLegend.vue'
 import { useProgressStore } from '@/stores/progress'
 
 const progress = useProgressStore()
@@ -42,6 +43,14 @@ function onSetComplete() {
       품질의 흉내일 뿐이라 너무 세게 쫓으면 점수만 높은 답이 나옵니다. 셋째, 사용자·데이터·품질의 플라이휠은 3·7장에서 본 대로
       강화 루프지만 영원히 돌지는 않아요. 세 탭을 차례로 돌려 보세요.
     </p>
+    <DetailsCard title="🔍 그림 기호 다시 보기">
+      <p class="text-sm">
+        기호를 처음부터 차근차근 보려면 <RouterLink to="/ch/ch1#ch1-sfd" class="font-semibold text-indigo-700 underline">1장 2절(저량-유량도)</RouterLink>과
+        <RouterLink to="/ch/ch1#ch1-cld" class="font-semibold text-indigo-700 underline">3절(인과지도)</RouterLink>로 돌아가세요.
+      </p>
+      <p class="mt-3 text-sm font-semibold text-slate-700">인과지도</p>
+      <DiagramLegend kind="cld" />
+    </DetailsCard>
 
     <AiLoopsLab />
 

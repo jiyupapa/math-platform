@@ -10,6 +10,7 @@ import { QuizSet } from '@series/ui'
 import { StepQuiz } from '@series/ui'
 import { NotebookCard } from '@series/ui'
 import LogisticLab from '@/components/LogisticLab.vue'
+import DiagramLegend from '@/components/DiagramLegend.vue'
 import { useProgressStore } from '@/stores/progress'
 
 const progress = useProgressStore()
@@ -39,8 +40,19 @@ function onSetComplete() {
     <p class="leading-relaxed text-slate-700">
       3장의 입소문 식에 한 가지를 곱합니다. <b>(1 − 사용자 수 ÷ K)</b>, 곧 "아직 안 쓰는 사람의 비율"이에요. 사용자가 적을 때는
       이 값이 거의 1이라 3장의 지수 성장과 같고, 사용자가 K에 가까워질수록 0에 가까워져 가입이 멈춥니다.
-      인과지도로는 3장의 강화 루프(입소문)에 "사용자 수 →(−) 남은 여지 →(+) 신규 가입"이라는 균형 루프(포화)가 하나 더 붙은 모양이에요.
+      인과지도로는 3장의 강화 루프(입소문)에 균형 루프(포화)가 하나 더 붙은 모양이에요. 아래 실험의 그림을 고리별로 따라 읽어 봅시다
+      (방법은 1장 3절). <b>입소문(R)</b>: 사용자 수가 늘면 → (+) 신규 가입이 늘고 → (+) 사용자 수가 더 는다. −가 없으니 강화.
+      <b>포화(B)</b>: 사용자 수가 늘면 → (−) 남은 여지가 줄고 → (+) 신규 가입이 줄고 → (+) 사용자 수가 덜 는다. −가 하나라 균형.
+      두 고리는 '신규 가입'이라는 같은 변수를 서로 반대 방향으로 밀어요. 실험의 그림에서 <b>굵게 칠해지는 화살표</b>가 지금 이기고 있는 고리입니다.
     </p>
+    <DetailsCard title="🔍 그림 기호 다시 보기">
+      <p class="text-sm">
+        기호를 처음부터 차근차근 보려면 <RouterLink to="/ch/ch1#ch1-sfd" class="font-semibold text-indigo-700 underline">1장 2절(저량-유량도)</RouterLink>과
+        <RouterLink to="/ch/ch1#ch1-cld" class="font-semibold text-indigo-700 underline">3절(인과지도)</RouterLink>로 돌아가세요.
+      </p>
+      <p class="mt-3 text-sm font-semibold text-slate-700">인과지도</p>
+      <DiagramLegend kind="cld" />
+    </DetailsCard>
 
     <LogisticLab />
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// 12장 캡스톤 실험실 — 사내 AI 도입 모형(Bass 확산 + 이탈). 가상의 회사, 직원 3,000명.
+// 12장 캡스톤 실험실 — 사내 AI 도입 모형(Bass 확산 + 이탈). 가상의 회사, 직원 300명(우리 회사 규모, 숫자는 sim.ts ADOPT.M).
 // 다이얼 셋(홍보·교육 p, 입소문 q, 평균 사용 기간 L)과 시각 막대로 저량-유량도·그래프·지표·시나리오 표를 함께 본다.
 // 모형은 sim.ts adoptionRun(오일러법 DT = 1/64, 노트북 ch12_capstone.ipynb 와 동일).
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
@@ -52,6 +52,10 @@ const flowMarkers = computed(() => [
   { x: res.value.peakT, label: `도입 정점 ${res.value.peakT.toFixed(1)}개월`, color: 'var(--c-indigo-600)' },
   { x: tNow.value, color: 'var(--c-slate-500)' },
 ])
+// 그래프 세로 범위는 직원 수 M 에 비례한다 — 사용자 수는 M 의 1.1배, 유량은 정점의 1.15배를 M/60 단위로 올림(최소 M × 7/60)
+const userYMax = (M * 11) / 10
+const rateStep = M / 60
+const rateYMax = computed(() => Math.max(rateStep * 7, Math.ceil((res.value.peakRate * 1.15) / rateStep) * rateStep))
 
 const rows = computed(() => [
   ...ADOPT_SCENARIOS.map((s) => ({ ...s, r: adoptionRun(s.p, s.q, s.L), current: false })),
@@ -84,8 +88,8 @@ interface SfdLayout {
 const sfd = computed<SfdLayout>(() => {
   const P = { id: 'P', label: '잠재 사용자', value: `${fmt(M - Anow.value)}명`, level: (M - Anow.value) / M }
   const A = { id: 'A', label: '사용자', value: `${fmt(Anow.value)}명`, level: Anow.value / M }
-  const inRate = `${fmt(adoptNow.value)}명/월`
-  const outRate = L.value > 0 ? `${fmt(churnNow.value)}명/월` : '없음'
+  const inRate = `${fmt(adoptNow.value, 1)}명/월`
+  const outRate = L.value > 0 ? `${fmt(churnNow.value, 1)}명/월` : '없음'
   const life = L.value > 0 ? `${L.value}개월` : '∞'
   if (!narrow.value) {
     return {
@@ -105,10 +109,12 @@ const sfd = computed<SfdLayout>(() => {
         { id: 'L', label: '사용 기간 L', x: 400, y: 222, value: life },
       ],
       links: [
-        { from: [166, 38], to: [214, 79], bend: 0.1 },
-        { from: [274, 38], to: [226, 79], bend: -0.1 },
+        { from: [166, 38], to: [214, 79], bend: 0.1, sign: '+' },
+        { from: [274, 38], to: [226, 79], bend: -0.1, sign: '+' },
+        { from: [128, 66], to: [208, 84], bend: 0.35, sign: '+' },
         { from: [312, 66], to: [232, 84], bend: -0.35, sign: '+' },
-        { from: [394, 214], to: [234, 186], bend: 0.15 },
+        { from: [300, 125], to: [227, 166], bend: 0.2, sign: '+' },
+        { from: [394, 214], to: [234, 186], bend: 0.15, sign: '−' },
       ],
     }
   }
@@ -129,10 +135,12 @@ const sfd = computed<SfdLayout>(() => {
       { id: 'L', label: '사용 기간 L', x: 276, y: 222, value: life },
     ],
     links: [
-      { from: [118, 38], to: [154, 79], bend: 0.1 },
-      { from: [202, 38], to: [166, 79], bend: -0.1 },
+      { from: [118, 38], to: [154, 79], bend: 0.1, sign: '+' },
+      { from: [202, 38], to: [166, 79], bend: -0.1, sign: '+' },
+      { from: [92, 66], to: [148, 84], bend: 0.35, sign: '+' },
       { from: [228, 66], to: [172, 84], bend: -0.35, sign: '+' },
-      { from: [270, 214], to: [174, 186], bend: 0.15 },
+      { from: [215, 125], to: [166, 166], bend: 0.2, sign: '+' },
+      { from: [270, 214], to: [174, 186], bend: 0.15, sign: '−' },
     ],
   }
 })
@@ -142,9 +150,9 @@ const summary = computed(() => {
   if (isNaN(r.t50)) parts.push('3년 안에 직원의 절반을 넘기지 못합니다.')
   else {
     const d = base.t50 - r.t50
-    parts.push(`직원의 절반(1,500명)에 ${r.t50.toFixed(1)}개월에 닿습니다` + (Math.abs(d) >= 0.05 ? `(기본보다 ${Math.abs(d).toFixed(1)}개월 ${d > 0 ? '빠름' : '느림'}).` : '(기본과 같음).'))
+    parts.push(`직원의 절반(${fmt(M / 2)}명)에 ${r.t50.toFixed(1)}개월에 닿습니다` + (Math.abs(d) >= 0.05 ? `(기본보다 ${Math.abs(d).toFixed(1)}개월 ${d > 0 ? '빠름' : '느림'}).` : '(기본과 같음).'))
   }
-  parts.push(`도입 속도는 ${r.peakT.toFixed(1)}개월에 월 ${fmt(r.peakRate)}명으로 가장 빠르고,`)
+  parts.push(`도입 속도는 ${r.peakT.toFixed(1)}개월에 월 ${fmt(r.peakRate, 1)}명으로 가장 빠르고,`)
   parts.push(
     L.value > 0
       ? `이탈이 있어 결국 직원의 ${(r.eq * 100).toFixed(1)}%(${fmt(r.eq * M)}명)에서 평형을 이룹니다.`
@@ -156,7 +164,7 @@ const summary = computed(() => {
 
 <template>
   <div class="my-5 rounded-xl border-2 border-indigo-200 bg-white p-5">
-    <p class="mb-1 text-sm font-semibold text-slate-700">🎯 캡스톤 실험 · 가상의 회사(직원 3,000명)에 사내 AI 도구를 들인다면</p>
+    <p class="mb-1 text-sm font-semibold text-slate-700">🎯 캡스톤 실험 · 가상의 회사(직원 {{ fmt(M) }}명)에 사내 AI 도구를 들인다면</p>
     <p class="mb-3 text-xs text-slate-500">
       처음엔 아무도 쓰지 않습니다. 홍보·교육(p)이 첫 사용자를 만들고, 쓰는 동료가 많을수록 입소문(q)이 커지며, 쓰던 사람은 평균 L개월 뒤
       그만두고 다시 잠재 사용자가 됩니다. 시나리오를 고르거나 다이얼을 직접 돌려 보세요.
@@ -214,9 +222,9 @@ const summary = computed(() => {
           :series="userSeries"
           :x-max="36"
           :y-min="0"
-          :y-max="3300"
+          :y-max="userYMax"
           :x-ticks="[0, 6, 12, 18, 24, 30, 36]"
-          :hlines="[{ y: M, label: '전체 직원 3,000명', color: 'var(--c-blue-600)' }, { y: M / 2, label: '절반', color: 'var(--c-amber-600)' }]"
+          :hlines="[{ y: M, label: `전체 직원 ${fmt(M)}명`, color: 'var(--c-blue-600)' }, { y: M / 2, label: '절반', color: 'var(--c-amber-600)' }]"
           :markers="userMarkers"
           x-label="개월"
           y-label="사용자 수(명)"
@@ -230,7 +238,7 @@ const summary = computed(() => {
           :series="flowSeries"
           :x-max="36"
           :y-min="0"
-          :y-max="Math.max(350, Math.ceil((res.peakRate * 1.15) / 50) * 50)"
+          :y-max="rateYMax"
           :x-ticks="[0, 6, 12, 18, 24, 30, 36]"
           :markers="flowMarkers"
           x-label="개월"
@@ -244,7 +252,7 @@ const summary = computed(() => {
 
     <div class="mt-2 grid grid-cols-2 gap-2 text-center sm:grid-cols-4">
       <div class="rounded-lg bg-amber-50 p-2">
-        <p class="text-xs text-amber-800">절반(1,500명) 도달</p>
+        <p class="text-xs text-amber-800">절반({{ fmt(M / 2) }}명) 도달</p>
         <p class="font-mono text-lg font-bold text-amber-700">{{ isNaN(res.t50) ? '3년 안 못 함' : `${res.t50.toFixed(1)}개월` }}</p>
       </div>
       <div class="rounded-lg bg-indigo-50 p-2">

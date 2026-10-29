@@ -1804,6 +1804,8 @@
     "definedAt": { "part": 12, "slug": "ch2", "anchor": "ch2-s2" },
     "usedAt": [
       { "part": 12, "slug": "sample", "anchor": "sample-s2", "how": "욕조 문제로 처음 만나는 저량·유량" },
+      { "part": 12, "slug": "ch1", "anchor": "ch1-sfd", "how": "저량-유량도 기호 처음 읽기: 상자·두 줄 파이프·밸브·구름·작은 원·가는 화살표" },
+      { "part": 12, "slug": "ch5", "anchor": "ch5-sfd", "how": "그림에서 식으로: 상자마다·밸브마다 식 하나, 그 식을 오일러법으로 계산" },
       { "part": 12, "slug": "ch12", "anchor": "ch12-s1", "how": "잠재 사용자와 사용자, 두 저량 사이의 도입·이탈 유량" }
     ],
     "prereq": ["derivative"],
@@ -1907,6 +1909,7 @@
     "note": "변수를 +/− 화살표로 이어 피드백 루프를 찾는 스케치, 행동은 시뮬레이션으로 확인한다",
     "definedAt": { "part": 12, "slug": "ch9", "anchor": "ch9-s2" },
     "usedAt": [
+      { "part": 12, "slug": "ch1", "anchor": "ch1-cld", "how": "기호 처음 읽기: 변수·+/− 화살표·R/B·∥와 한 바퀴 따라 읽기" },
       { "part": 12, "slug": "ch10", "anchor": "ch10-s1", "how": "원형마다 인과지도로 구조를 그린다" }
     ],
     "prereq": ["feedback-loop"],

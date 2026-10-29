@@ -7,6 +7,7 @@ import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
 import { NotebookCard } from '@series/ui'
 import ArchetypeLab from '@/components/ArchetypeLab.vue'
+import DiagramLegend from '@/components/DiagramLegend.vue'
 import { useProgressStore } from '@/stores/progress'
 
 const progress = useProgressStore()
@@ -37,6 +38,14 @@ function onSetComplete() {
       원형마다 실제로 있을 법한 AI 도입 이야기, 그 구조를 그린 인과지도, 두세 가지 정책을 비교한 시뮬레이션, 그리고 처방이 붙어 있습니다.
       인과지도에서 루프의 종류(R/B)와 지연(∥)이 어디 있는지 먼저 찾고, 그래프에서 그 구조가 만드는 모양을 확인해 보세요.
     </p>
+    <DetailsCard title="🔍 그림 기호 다시 보기">
+      <p class="text-sm">
+        기호를 처음부터 차근차근 보려면 <RouterLink to="/ch/ch1#ch1-sfd" class="font-semibold text-indigo-700 underline">1장 2절(저량-유량도)</RouterLink>과
+        <RouterLink to="/ch/ch1#ch1-cld" class="font-semibold text-indigo-700 underline">3절(인과지도)</RouterLink>로 돌아가세요.
+      </p>
+      <p class="mt-3 text-sm font-semibold text-slate-700">인과지도</p>
+      <DiagramLegend kind="cld" />
+    </DetailsCard>
 
     <ArchetypeLab />
 
