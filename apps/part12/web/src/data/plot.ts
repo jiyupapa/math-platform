@@ -41,6 +41,8 @@ export interface CldNode {
   y: number
   /** 저량이면 상자로 그린다 */
   stock?: boolean
+  /** 그림 읽기 단계에서 '이번에 새로 그린 것' — 호박색으로 둘러 표시 */
+  mark?: boolean
 }
 
 /** 인과지도의 화살표. sign 은 '+' 또는 '−'(정해지지 않았으면 '?') */
@@ -54,6 +56,8 @@ export interface CldLink {
   delay?: boolean
   /** 강조 */
   hi?: boolean
+  /** 그림 읽기 단계에서 '이번에 새로 그린 것' */
+  mark?: boolean
 }
 
 /** 인과지도의 루프 표시 — R(강화) 또는 B(균형) */
@@ -62,6 +66,8 @@ export interface CldLoop {
   y: number
   type: 'R' | 'B'
   label?: string
+  /** 그림 읽기 단계에서 '이번에 새로 그린 것' */
+  mark?: boolean
 }
 
 /** 저량-유량도의 저량(상자) */
@@ -76,6 +82,8 @@ export interface SfdStock {
   value?: string
   /** 0~1 — 물 높이처럼 아래부터 칠한다 */
   level?: number
+  /** 그림 읽기 단계에서 '이번에 새로 그린 것' */
+  mark?: boolean
 }
 
 /** 저량-유량도의 유량(파이프). path 는 꺾은선 좌표, 화살표는 끝점 방향 */
@@ -93,6 +101,8 @@ export interface SfdFlow {
   rate?: string
   /** 라벨을 밸브 위에 쓸지 */
   labelAbove?: boolean
+  /** 그림 읽기 단계에서 '이번에 새로 그린 것' — true 면 파이프, 'valve' 면 밸브, 'cloud' 면 구름만 */
+  mark?: boolean | 'valve' | 'cloud'
 }
 
 /** 저량-유량도의 보조변수·상수(작은 원) */
@@ -102,6 +112,8 @@ export interface SfdAux {
   x: number
   y: number
   value?: string
+  /** 그림 읽기 단계에서 '이번에 새로 그린 것' */
+  mark?: boolean
 }
 
 /** 저량-유량도의 정보 화살표(가는 선) */
@@ -110,6 +122,26 @@ export interface SfdLink {
   to: [number, number]
   bend?: number
   sign?: '+' | '−'
+  /** 그림 읽기 단계에서 '이번에 새로 그린 것' */
+  mark?: boolean
+}
+
+/** 그림 읽기(DiagramSteps)의 한 단계 — 인과지도 */
+export interface CldStep {
+  /** 단계 버튼에 쓸 짧은 이름 */
+  title: string
+  nodes: CldNode[]
+  links: CldLink[]
+  loops?: CldLoop[]
+}
+
+/** 그림 읽기(DiagramSteps)의 한 단계 — 저량-유량도 */
+export interface SfdStep {
+  title: string
+  stocks: SfdStock[]
+  flows?: SfdFlow[]
+  aux?: SfdAux[]
+  links?: SfdLink[]
 }
 
 /** 보기 좋은 눈금 — 1·2·5 × 10^n 간격 */

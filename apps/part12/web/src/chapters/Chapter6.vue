@@ -10,6 +10,7 @@ import { QuizSet } from '@series/ui'
 import { StepQuiz } from '@series/ui'
 import { NotebookCard } from '@series/ui'
 import DelayLab from '@/components/DelayLab.vue'
+import DiagramLegend from '@/components/DiagramLegend.vue'
 import { useProgressStore } from '@/stores/progress'
 
 const progress = useProgressStore()
@@ -42,6 +43,14 @@ function onSetComplete() {
       뜨거운 물이 계속 나옵니다. 누구나 겪는 이 장면이 균형 루프(4장)에 <b>지연</b>이 낀 구조예요. 인과지도에서는 지연이 있는
       화살표에 두 줄(∥)을 긋습니다.
     </p>
+    <DetailsCard title="🔍 그림 기호 다시 보기">
+      <p class="text-sm">
+        기호를 처음부터 차근차근 보려면 <RouterLink to="/ch/ch1#ch1-sfd" class="font-semibold text-indigo-700 underline">1장 2절(저량-유량도)</RouterLink>과
+        <RouterLink to="/ch/ch1#ch1-cld" class="font-semibold text-indigo-700 underline">3절(인과지도)</RouterLink>로 돌아가세요.
+      </p>
+      <p class="mt-3 text-sm font-semibold text-slate-700">인과지도</p>
+      <DiagramLegend kind="cld" />
+    </DetailsCard>
 
     <DelayLab />
 

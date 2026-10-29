@@ -103,6 +103,35 @@ function linkSign(l: SfdLink): { x: number; y: number } {
       </marker>
     </defs>
 
+    <!-- 그림 읽기 단계의 '이번에 새로 그린 것'(mark) — 맨 아래에 호박색 바탕을 깔아 둘러 보이게 -->
+    <g>
+      <template v-for="(l, i) in links" :key="'mk' + i">
+        <path v-if="l.mark" :d="linkPath(l)" fill="none" stroke="var(--c-amber-200)" stroke-width="9" stroke-linecap="round" />
+      </template>
+      <template v-for="g in flowGeo" :key="'mf' + g.f.id">
+        <path v-if="g.f.mark === true" :d="g.d" fill="none" stroke="var(--c-amber-200)" stroke-width="24" stroke-linejoin="round" stroke-linecap="round" />
+        <circle v-if="g.f.mark === 'valve'" :cx="g.v.x" :cy="g.v.y - 5" r="21" fill="var(--c-amber-200)" />
+        <template v-if="g.f.mark === 'cloud'">
+          <circle v-if="g.f.fromCloud" :cx="g.start[0] + 1" :cy="g.start[1] + 1" r="22" fill="var(--c-amber-200)" />
+          <circle v-if="g.f.toCloud" :cx="g.end[0] + 1" :cy="g.end[1] + 1" r="22" fill="var(--c-amber-200)" />
+        </template>
+      </template>
+      <template v-for="s in stocks" :key="'ms' + s.id">
+        <rect
+          v-if="s.mark"
+          :x="s.x - (s.w ?? 120) / 2 - 7"
+          :y="s.y - (s.h ?? 56) / 2 - 7"
+          :width="(s.w ?? 120) + 14"
+          :height="(s.h ?? 56) + 14"
+          rx="10"
+          fill="var(--c-amber-200)"
+        />
+      </template>
+      <template v-for="a in aux" :key="'ma' + a.id">
+        <circle v-if="a.mark" :cx="a.x" :cy="a.y" r="13" fill="var(--c-amber-200)" />
+      </template>
+    </g>
+
     <!-- 정보 화살표 (가는 선) -->
     <g v-for="(l, i) in links" :key="'k' + i">
       <path :d="linkPath(l)" fill="none" stroke="var(--c-slate-400)" stroke-width="1.4" :marker-end="`url(#${linkArrow})`" />

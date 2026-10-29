@@ -35,7 +35,7 @@ export const chapters: ChapterMeta[] = [
     minutes: 25,
     notebook: 'ch00_sample.ipynb',
   },
-  { slug: 'ch1', phase: 1, title: '큰 그림 — 시간의 모양을 만드는 네 부품', summary: '저량·유량·피드백 루프·지연 네 부품과 행동 패턴 네 가지, 12부 안내도', minutes: 30, notebook: 'ch01_bigpicture.ipynb' },
+  { slug: 'ch1', phase: 1, title: '큰 그림 — 시간의 모양을 만드는 네 부품', summary: '저량·유량·피드백 루프·지연 네 부품, 그림 두 가지(저량-유량도·인과지도) 읽는 법, 행동 패턴 네 가지와 12부 안내도', minutes: 45, notebook: 'ch01_bigpicture.ipynb' },
   { slug: 'ch2', phase: 2, title: '욕조의 수학 — 저량과 유량 (핵심)', summary: '저량은 순유량의 누적(면적), 단위로 구별하기, 미분을 거꾸로 읽는 적분 감각', minutes: 40, notebook: 'ch02_stockflow.ipynb' },
   { slug: 'ch3', phase: 3, title: '눈덩이 — 강화 루프와 지수 성장', summary: '커질수록 더 빨리 커지는 고리, 복리와 두 배 시간(70의 법칙), 로그 눈금의 직선', minutes: 35, notebook: 'ch03_reinforcing.ipynb' },
   { slug: 'ch4', phase: 4, title: '온도 조절기 — 균형 루프와 목표 추구', summary: '격차를 메우는 고리, 조정 시간과 시간 상수, 경사하강이 바로 이 고리', minutes: 35, notebook: 'ch04_balancing.ipynb' },

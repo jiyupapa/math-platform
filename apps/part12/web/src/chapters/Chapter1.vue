@@ -8,7 +8,9 @@ import { Quiz } from '@series/ui'
 import { QuizSet } from '@series/ui'
 import { NotebookCard } from '@series/ui'
 import BehaviorLab from '@/components/BehaviorLab.vue'
-import SfdDiagram from '@/components/SfdDiagram.vue'
+import DiagramSteps from '@/components/DiagramSteps.vue'
+import DiagramLegend from '@/components/DiagramLegend.vue'
+import type { CldLink, CldLoop, CldNode, CldStep, SfdAux, SfdFlow, SfdLink, SfdStep, SfdStock } from '@/data/plot'
 import { useProgressStore } from '@/stores/progress'
 
 const progress = useProgressStore()
@@ -16,23 +18,89 @@ const progress = useProgressStore()
 function onSetComplete() {
   progress.markDone('ch1')
 }
+
+// 2절 그림 읽기 ① — 저량-유량도를 한 단계씩. 새로 그린 부분은 mark(호박색 바탕).
+// 가로 360 으로 좁게 잡아 휴대폰에서도 글자가 11px 안팎으로 읽힌다(440 이면 0.7배로 줄어 8px대).
+const STOCK: SfdStock = { id: 'u', label: '사용자 수', x: 180, y: 118, w: 104, h: 52, value: '120명', level: 0.5 }
+const IN: SfdFlow = { id: 'in', label: '신규 가입', path: [[18, 118], [127, 118]], rate: '20명/월' }
+const OUT: SfdFlow = { id: 'out', label: '이탈', path: [[233, 118], [342, 118]], rate: '5명/월' }
+const CLOUDS = { in: { ...IN, fromCloud: true }, out: { ...OUT, toCloud: true } }
+const INFO: SfdLink[] = [
+  { from: [160, 91], to: [79, 98], bend: 0.35, sign: '+' },
+  { from: [200, 91], to: [281, 98], bend: -0.35, sign: '+' },
+]
+const AUX: SfdAux[] = [
+  { id: 'k', label: '입소문 세기', x: 40, y: 40 },
+  { id: 'L', label: '평균 사용 기간', x: 316, y: 40 },
+]
+const AUX_INFO: SfdLink[] = [
+  { from: [44, 46], to: [68, 97], bend: -0.15, sign: '+' },
+  { from: [312, 46], to: [292, 97], bend: 0.15, sign: '−' },
+]
+const sfdSteps: SfdStep[] = [
+  { title: '상자', stocks: [{ ...STOCK, mark: true }] },
+  { title: '두 줄 파이프', stocks: [STOCK], flows: [{ ...IN, mark: true }, { ...OUT, mark: true }] },
+  { title: '밸브', stocks: [STOCK], flows: [{ ...IN, mark: 'valve' }, { ...OUT, mark: 'valve' }] },
+  { title: '구름', stocks: [STOCK], flows: [{ ...CLOUDS.in, mark: 'cloud' }, { ...CLOUDS.out, mark: 'cloud' }] },
+  { title: '가는 화살표', stocks: [STOCK], flows: [CLOUDS.in, CLOUDS.out], links: INFO.map((l) => ({ ...l, mark: true })) },
+  {
+    title: '작은 원',
+    stocks: [STOCK],
+    flows: [CLOUDS.in, CLOUDS.out],
+    aux: AUX.map((a) => ({ ...a, mark: true })),
+    links: [...INFO, ...AUX_INFO.map((l) => ({ ...l, mark: true }))],
+  },
+  {
+    title: '고리 찾기',
+    stocks: [{ ...STOCK, mark: true }],
+    flows: [{ ...CLOUDS.in, mark: true }, CLOUDS.out],
+    aux: AUX,
+    links: [{ ...INFO[0], mark: true }, INFO[1], ...AUX_INFO],
+  },
+]
+
+// 3절 그림 읽기 ② — 인과지도를 한 단계씩(4절 실험 BehaviorLab 과 같은 구조·이름, 좌표만 가로 360 으로 좁힘)
+const GAIN: CldNode = { id: 'gain', label: '신규 가입', x: 160, y: 36 }
+const USERS: CldNode = { id: 'users', label: '사용자 수', x: 160, y: 200, stock: true }
+const ROOM: CldNode = { id: 'room', label: '남은 여지', x: 296, y: 118 }
+const G2U: CldLink = { from: 'gain', to: 'users', sign: '+' }
+const U2G: CldLink = { from: 'users', to: 'gain', sign: '+', bend: -0.6 }
+const U2R: CldLink = { from: 'users', to: 'room', sign: '−', bend: 0.15 }
+const R2G: CldLink = { from: 'room', to: 'gain', sign: '+', bend: 0.15 }
+const LOOP_R: CldLoop = { x: 134, y: 112, type: 'R', label: '입소문' }
+const LOOP_B: CldLoop = { x: 217, y: 112, type: 'B', label: '한계' }
+const cldSteps: CldStep[] = [
+  { title: '낱말', nodes: [{ ...GAIN, mark: true }, { ...USERS, mark: true }], links: [] },
+  { title: '화살표', nodes: [GAIN, USERS], links: [{ ...G2U, sign: '?', mark: true }] },
+  { title: '+ 부호', nodes: [GAIN, USERS], links: [{ ...G2U, mark: true }] },
+  { title: '되돌아오는 화살표', nodes: [GAIN, USERS], links: [G2U, { ...U2G, mark: true }] },
+  { title: 'R 표시', nodes: [GAIN, USERS], links: [G2U, U2G], loops: [{ ...LOOP_R, mark: true }] },
+  {
+    title: '− 와 B 표시',
+    nodes: [GAIN, USERS, { ...ROOM, mark: true }],
+    links: [G2U, U2G, { ...U2R, mark: true }, { ...R2G, mark: true }],
+    loops: [LOOP_R, { ...LOOP_B, mark: true }],
+  },
+  { title: '∥ 지연', nodes: [GAIN, USERS, ROOM], links: [G2U, U2G, { ...U2R, delay: true, mark: true }, R2G], loops: [LOOP_R, LOOP_B] },
+]
 </script>
 
 <template>
   <article>
-    <p class="mb-1 text-sm font-medium text-indigo-600">1장 · 약 30분</p>
+    <p class="mb-1 text-sm font-medium text-indigo-600">1장 · 약 45분</p>
     <h1 class="mb-4 text-3xl font-bold">큰 그림 — 시간의 모양을 만드는 네 부품</h1>
     <p class="mb-2 leading-relaxed text-slate-600">
       워밍업에서는 가입과 이탈이 미리 주어진 숫자였습니다. 현실은 다르죠. 입소문 가입은 이미 쓰는 사람이
       많을수록 많고, 이탈은 지금 쓰는 사람 중 일부에서 나옵니다. <b>쌓인 양(사용자 수)이 다시 흐름(가입·이탈)을
-      정하는</b> 거예요. 이 장에서는 이런 고리가 시간에 따른 변화의 모양을 어떻게 만드는지 보고,
-      12부 전체의 지도를 그립니다.
+      정하는</b> 거예요. 이 장에서는 이 과정 내내 쓸 그림 두 가지를 읽는 법부터 익히고, 이런 고리가 시간에 따른 변화의 모양을
+      어떻게 만드는지 본 뒤 12부 전체의 지도를 그립니다.
     </p>
 
     <ConceptCard tone="goal" title="이 챕터의 목표">
       <b>"구조가 행동을 만든다."</b> 네 부품(저량·유량·피드백 루프·지연)을 켜고 끄며
       네 가지 시간의 모양(지수 성장·목표 추구·S자 성장·출렁임)이 어떤 구조에서 나오는지 짝지어 봅니다.
-      그래프 모양만 보고 숨은 구조를 짐작하는 눈이 이 장의 목표예요.
+      그래프 모양만 보고 숨은 구조를 짐작하는 눈이 이 장의 목표예요. 그 전에 구조를 그리는 두 그림,
+      <b>저량-유량도</b>와 <b>인과지도</b>를 기호 하나하나부터 읽을 수 있게 됩니다.
     </ConceptCard>
 
     <h2 class="mt-8 mb-2 text-xl font-bold">1. 네 부품</h2>
@@ -47,31 +115,233 @@ function onSetComplete() {
       <li><b>지연</b>: 원인과 결과 사이의 시간 차. 숫자가 늦게 보이거나 효과가 늦게 나타나는 것.</li>
     </ul>
     <p class="mt-3 leading-relaxed text-slate-700">
-      아래 그림은 이 부품들을 시스템 다이내믹스의 표준 표기로 그린 것입니다. 상자가 저량, 두 줄 파이프와
-      밸브(나비 모양)가 유량, 구름은 "이 모형이 신경 쓰지 않는 바깥", 가는 화살표는 정보의 흐름이에요.
-      사용자 수에서 두 밸브로 이어진 가는 화살표가 바로 <b>피드백</b>입니다. 쌓인 양을 보고 흐름이 정해지니까요.
+      네 부품을 말로만 늘어놓으면 금세 헷갈립니다. 무엇이 쌓이고 무엇이 흐르는지, 무엇이 무엇을 움직이는지 한눈에 보려면
+      그림이 필요해요. 2절과 3절에서 이 과정 내내 쓸 그림 두 가지를 기호 하나하나부터 익히고 갑니다.
     </p>
-    <div class="my-4 rounded-xl border border-slate-200 bg-white p-3">
-      <SfdDiagram
-        :width="440"
-        :height="170"
-        :stocks="[{ id: 'u', label: '사용자 수', x: 220, y: 104, w: 112, h: 52, value: '저량', level: 0.5 }]"
-        :flows="[
-          { id: 'in', label: '신규 가입', path: [[26, 104], [163, 104]], fromCloud: true, rate: '유입' },
-          { id: 'out', label: '이탈', path: [[277, 104], [414, 104]], toCloud: true, rate: '유출' },
-        ]"
-        :links="[
-          { from: [196, 77], to: [101, 84], bend: 0.35, sign: '+' },
-          { from: [244, 77], to: [339, 84], bend: -0.35, sign: '+' },
-        ]"
-        aria-label="사용자 수 저량에 신규 가입 유입과 이탈 유출이 붙고, 사용자 수가 두 흐름을 다시 정하는 저량-유량도"
-      />
-    </div>
 
-    <h2 class="mt-8 mb-2 text-xl font-bold">2. 실험: 같은 저량, 다른 구조</h2>
-    <ReviewFlag id="ch1-s2" chapter="ch1" label="2. 실험: 같은 저량, 다른 구조" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">2. 그림 읽기 ①: 저량-유량도</h2>
+    <ReviewFlag id="ch1-sfd" chapter="ch1" label="2. 그림 읽기 ①: 저량-유량도" />
     <p class="leading-relaxed text-slate-700">
-      이제 신규 가입을 무엇이 정하는지 직접 끼워 봅시다. 강화 루프(입소문), 균형 루프(한계), 지연을 켜고 끌 때마다
+      시스템 다이내믹스에는 전 세계가 같은 기호로 그리는 그림이 두 가지 있습니다. 쌓이는 것과 흐르는 것을 그리는 <b>저량-유량도</b>,
+      그리고 무엇이 무엇을 움직이는지 그리는 <b>인과지도</b>예요. 이 과정의 실험실에는 거의 언제나 둘 중 하나가 나옵니다.
+      먼저 저량-유량도입니다. 워밍업의 욕조를 그린다고 생각하면 쉬워요. 사내 AI 도구의 사용자 수를 예로 한 단계씩 그려 봅시다.
+    </p>
+
+    <DiagramSteps kind="sfd" title="한 단계씩 그려 보기: 사내 AI 도구의 사용자 수" :steps="sfdSteps" :width="360" :height="190">
+      <template #s1>
+        먼저 <b>상자</b>를 그립니다. 상자는 <b>저량</b>, 곧 '지금 쌓여 있는 양'이에요. 욕조로 치면 욕조에 담긴 물입니다.
+        상자 안에는 이름(사용자 수)과 지금 값(120명)을 씁니다. 저량인지 헷갈리면 이렇게 물어보세요.
+        <b>시간을 멈추고 사진을 찍어도 셀 수 있는가?</b> 사진 속 사용자 수는 셀 수 있으니 저량입니다. 그래서 저량의 단위(명)에는 시간이 붙지 않아요.
+      </template>
+      <template #s2>
+        상자에 <b>두 줄 파이프</b>를 붙입니다. 파이프는 <b>유량</b>, 곧 저량을 늘리거나 줄이는 흐름이에요. 욕조로 치면 수도꼭지에서
+        나오는 물줄기와 배수구로 빠지는 물줄기입니다. 화살촉 쪽으로 흐르니, 상자로 들어오는 신규 가입은 <b>유입</b>,
+        상자에서 나가는 이탈은 <b>유출</b>이에요. 유량의 단위에는 늘 시간이 붙습니다(20명/월). 사진 한 장으로는 '한 달에 몇 명'을 알 수 없죠.
+        흐름은 동영상으로 봐야 보이는 양입니다.
+      </template>
+      <template #s3>
+        파이프 가운데의 나비 모양이 <b>밸브</b>입니다. 수도꼭지 손잡이처럼, 지금 흐름이 얼마나 센지 정하는 곳이에요.
+        그래서 유량의 이름과 값(신규 가입 20명/월)은 밸브 옆에 씁니다. 상자의 양은 이 밸브를 지난 흐름으로만 바뀌어요.
+        이대로 한 달이 지나면 사용자 수는 <b>120 + 20 − 5 = 135명</b>이 됩니다.
+      </template>
+      <template #s4>
+        파이프 끝의 <b>구름</b>은 '이 모형이 신경 쓰지 않는 바깥'입니다. 새 사용자가 원래 어디 있던 사람인지, 그만둔 사람이 어디로
+        가는지는 지금 질문과 상관없으니 구름으로 비워 둬요. 수도꼭지 그림에 상수원과 하수도까지 그리지 않는 것과 같습니다.
+        바깥이 중요해지면 구름 자리에 상자를 그려요. 12장 캡스톤에서는 '아직 안 쓰는 직원'이 중요해서 구름 대신 <b>잠재 사용자</b> 상자가 들어갑니다.
+      </template>
+      <template #s5>
+        이제 <b>가는 화살표</b>를 긋습니다. 가는 화살표는 아무것도 옮기지 않아요. '이 값을 <b>보고</b> 저 밸브를 정한다'는 <b>정보</b>의 길입니다.
+        사용자 수에서 신규 가입 밸브로 가는 화살표는 '쓰는 사람이 많을수록 입소문 가입이 많다', 이탈 밸브로 가는 화살표는
+        '쓰는 사람이 많을수록 그만두는 사람도 많다'는 뜻이에요. 화살표 끝의 <b>+</b>는 '같은 방향'(이 값이 크면 저 흐름도 커진다)이라는 표시입니다.
+        사람이 실제로 옮겨 가는 길은 두 줄 파이프, 보고 정하는 길은 가는 화살표. 이 둘을 섞지 않는 것이 저량-유량도의 핵심이에요.
+      </template>
+      <template #s6>
+        <b>작은 원</b>은 쌓이지 않는 값, <b>보조변수</b>입니다. 미리 정해 두는 숫자(입소문이 얼마나 센지, 평균 몇 달 쓰는지)나
+        다른 값으로 그때그때 계산하는 값을 여기에 둬요. 실험실에서 돌리는 다이얼이 대개 이 작은 원입니다.
+        평균 사용 기간에서 이탈로 가는 화살표에는 <b>−</b>가 붙었죠. 오래 쓸수록 한 달에 그만두는 사람이 줄어드니 '반대 방향'이에요.
+      </template>
+      <template #s7>
+        완성된 그림을 소리 내어 읽어 봅시다. <b>"신규 가입이 사용자 수에 쌓이고, 이탈이 사용자 수에서 빠져나간다.
+        신규 가입의 세기는 사용자 수와 입소문 세기를 보고 정하고, 이탈의 세기는 사용자 수와 평균 사용 기간을 보고 정한다."</b>
+        노란 바탕의 길을 따라가 보세요. 사용자 수 → (보고) → 신규 가입 → (쌓여서) → 사용자 수. 쌓인 양이 다시 흐름을 정하는 이 길이
+        <b>피드백 루프</b>입니다. 이탈 쪽에도 고리가 하나 더 있어요(사용자 수 → 이탈 → 사용자 수). 이쪽은 사용자가 늘수록 더 많이
+        빠져나가 성장을 누르는 고리예요. 고리가 키우는 쪽인지 누르는 쪽인지 가려 이름을 붙이는 법은 3절 인과지도에서 배웁니다.
+      </template>
+    </DiagramSteps>
+
+    <ConceptCard tone="tip" title="저량-유량도의 약속 세 가지">
+      <ol class="list-decimal space-y-1.5 pl-5">
+        <li><b>상자의 양은 두 줄 파이프로만 바뀐다.</b> 가는 화살표는 '보고 정한다'는 정보만 전하고 아무것도 옮기지 않는다.</li>
+        <li><b>파이프의 단위 = 상자의 단위 ÷ 시간.</b> 사용자 수(명)에 붙는 파이프는 명/월이다. 단위가 안 맞으면 그림이 틀린 것이다.</li>
+        <li>
+          <b>상자가 변하는 속도 = 들어오는 파이프의 합 − 나가는 파이프의 합.</b> 이 차이가 워밍업의 <b>순유량</b>이다.
+          2장에서 이것을 식으로 정확히 쓰고, 5장에서 컴퓨터가 이 약속대로 미래를 계산하는 법을 배운다.
+        </li>
+      </ol>
+    </ConceptCard>
+
+    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">📋 기호 한눈에 보기: 저량-유량도</p>
+    <DiagramLegend kind="sfd" />
+
+    <ConceptCard tone="note" title="새 용어: 저량-유량도 / 밸브 / 구름 / 보조변수 / 정보 화살표">
+      <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
+        <li>
+          <b>저량-유량도</b> (stock and flow diagram, SFD). 뜻: 저량은 상자, 유량은 밸브 달린 두 줄 파이프로 그려 쌓이는 것과 흐르는 것을
+          구별하는 그림. 그림대로 식을 세워 계산할 수 있어서 시뮬레이션의 설계도가 됩니다.
+        </li>
+        <li><b>밸브</b> (valve). 뜻: 파이프 위 나비 모양. 그 유량이 지금 얼마나 센지 정하는 자리로, 유량의 이름과 값을 여기에 씁니다.</li>
+        <li><b>구름</b> (cloud). 뜻: 모형의 경계 밖. 흐름의 출발지나 도착지를 따지지 않겠다는 표시로, 실무에서는 source(출발)·sink(도착)라고도 부릅니다.</li>
+        <li><b>보조변수</b> (auxiliary variable). 뜻: 작은 원으로 그리는, 쌓이지 않는 값. 정해 둔 상수나 다른 값으로 계산하는 값입니다.</li>
+        <li><b>정보 화살표</b> (information link). 뜻: 가는 화살표. 값을 보고 다른 값(대개 밸브)을 정한다는 연결로, 양을 옮기지 않습니다.</li>
+      </ul>
+    </ConceptCard>
+
+    <p class="mt-6 mb-1 text-sm font-semibold text-slate-500">🔎 잠깐 확인!</p>
+    <Quiz
+      question="저량-유량도에서 사용자(사람)가 실제로 옮겨 가는 길은?"
+      :choices="['두 줄 파이프(유량)', '가는 화살표', '작은 원', '구름과 구름 사이']"
+      :answer="0"
+      :hints="['가는 화살표는 무엇을 옮기는지 떠올려 보세요.']"
+      explanation="사람·물·돈처럼 실제로 쌓이는 것은 두 줄 파이프로만 움직입니다. 가는 화살표는 '보고 정한다'는 정보의 길이라 아무것도 옮기지 않아요."
+    />
+    <Quiz
+      question="사용자 수 120명에 신규 가입 20명/월, 이탈 5명/월이 한 달 동안 그대로 이어진다. 한 달 뒤 사용자 수는? (정수)"
+      type="numeric"
+      :answer="135"
+      :hints="['상자는 들어오는 파이프만큼 늘고 나가는 파이프만큼 줍니다.']"
+      explanation="120 + 20 − 5 = 135명. 상자가 변하는 양은 들어오는 흐름에서 나가는 흐름을 뺀 순유량(+15명/월)이에요."
+    />
+
+    <h2 class="mt-8 mb-2 text-xl font-bold">3. 그림 읽기 ②: 인과지도</h2>
+    <ReviewFlag id="ch1-cld" chapter="ch1" label="3. 그림 읽기 ②: 인과지도" />
+    <p class="leading-relaxed text-slate-700">
+      저량-유량도는 계산까지 할 수 있는 정밀한 설계도입니다. 그런데 회의에서 '이 일이 왜 이렇게 흘러가지?'를 빠르게 그려 보고 싶을 때는
+      더 가벼운 그림이 편해요. 그게 <b>인과지도</b>입니다. 상자도 파이프도 없이 <b>낱말과 화살표</b>만으로 무엇이 무엇을 움직이는지 그리고,
+      그 안에서 고리를 찾아요. 4절 실험에 나오는 그림을 한 단계씩 만들어 봅시다.
+    </p>
+
+    <DiagramSteps kind="cld" title="한 단계씩 그려 보기: 입소문과 한계" :steps="cldSteps" :width="360" :height="236">
+      <template #s1>
+        인과지도의 낱말은 <b>변수</b>, 곧 늘거나 줄 수 있는 양입니다. 그래서 '신규 가입', '사용자 수', '만족도'처럼
+        <b>많아지거나 적어질 수 있는 명사</b>로 이름을 지어요. '도입하다', '교육 실시' 같은 행동이나 사건은 변수가 아닙니다.
+        '도입하다가 많아진다'는 말이 어색하죠. 사용자 수를 상자로 두른 것은 '이건 쌓이는 양(저량)'이라는 표시예요.
+        인과지도에서는 생략해도 되지만, 표시해 두면 9장에서 볼 함정을 피하기 쉽습니다.
+      </template>
+      <template #s2>
+        화살표는 <b>원인 → 결과</b>입니다. 꼬리 쪽이 원인, 화살촉 쪽이 결과예요. '신규 가입 → 사용자 수'는 '신규 가입이
+        사용자 수에 영향을 준다'로 읽습니다. 화살촉 옆 물음표 자리에는 영향의 방향을 나타내는 부호가 들어가요. 그게 다음 단계입니다.
+      </template>
+      <template #s3>
+        <b>+</b>는 '같은 방향'이라는 뜻입니다. 원인이 늘면 결과도 원래보다 커지고, 원인이 줄면 결과도 원래보다 작아져요.
+        공부 시간 →(+) 시험 점수처럼요. 여기서는 가입이 많을수록 사용자 수가 더 많이 쌓인다는 뜻입니다.
+        한 가지만 조심하세요. 사용자 수 같은 저량으로 가는 +는 '더 많이 쌓인다'는 뜻이지 '늘어난다'는 뜻이 아니에요.
+        가입이 줄어도 이탈보다 많으면 사용자 수가 계속 늘었던 워밍업을 떠올려 보세요(9장에서 정확히 다룹니다).
+      </template>
+      <template #s4>
+        이번엔 거꾸로 가는 화살표입니다. '사용자 수 →(+) 신규 가입': 쓰는 사람이 많을수록 입소문으로 들어오는 사람도 많아요.
+        이제 화살표를 따라가면 출발점으로 돌아옵니다. 원인과 결과가 꼬리를 물고 한 바퀴 도는 이 길이 <b>고리</b>, 곧
+        <b>피드백 루프</b>예요. 2절 저량-유량도의 '사용자 수 → (보고) → 신규 가입 → (쌓여서) → 사용자 수'를 낱말과 화살표만으로 그린 것입니다.
+      </template>
+      <template #s5>
+        고리 가운데의 빙 도는 화살표와 <b>R</b>은 이 고리의 성격 표시입니다. 성격은 <b>한 바퀴 따라 읽기</b>로 알아내요.
+        사용자 수가 <b>늘면</b> → (+이니 같은 쪽) 신규 가입이 <b>늘고</b> → (+이니 같은 쪽) 사용자 수가 <b>더 늘어요</b>.
+        출발점에 돌아왔을 때 처음 변화(늘었다)가 더 커졌으니 <b>R</b>, <b>강화 루프</b>(reinforcing loop)입니다.
+        이 과정의 비유로는 눈덩이예요. 기호 옆에는 고리의 이름(입소문)을 붙입니다.
+      </template>
+      <template #s6>
+        직원 수에는 한계가 있습니다. '남은 여지'(아직 안 쓰는 사람)를 더해 봐요. 사용자가 늘면 남은 여지는 줄어듭니다.
+        원인이 늘 때 결과가 원래보다 작아지는 반대 방향이라 <b>−</b>를 붙여요. 남은 여지가 클수록 새로 들어올 사람이 많으니
+        '남은 여지 →(+) 신규 가입'. 한 바퀴 따라 읽기: 사용자 수가 <b>늘면</b> → (−이니 반대쪽) 남은 여지가 <b>줄고</b> →
+        (+) 신규 가입이 <b>줄고</b> → (+) 사용자 수가 <b>덜 늘어요</b>. 처음 변화를 거슬러 누르니 <b>B</b>, <b>균형 루프</b>(balancing loop)입니다.
+        비유로는 온도 조절기예요. 한 그림에 고리가 둘이면, 두 고리가 '신규 가입'을 놓고 줄다리기를 합니다(7장).
+      </template>
+      <template #s7>
+        마지막으로 화살표 위의 <b>두 줄(∥)</b>은 <b>지연</b>입니다. 원인이 바뀌어도 결과가 늦게 따라온다는 표시예요.
+        사용자 수가 집계되어 '남은 여지'로 보이기까지 석 달이 걸린다면 이 화살표에 ∥를 긋습니다. 균형 루프에 지연이 끼면
+        목표를 지나쳤다 돌아오는 출렁임이 생겨요(6장). 이것이 4절 실험에 나오는 그림 전체입니다.
+      </template>
+    </DiagramSteps>
+
+    <ConceptCard tone="tip" title="R인지 B인지: 한 바퀴 따라 읽기">
+      <ol class="list-decimal space-y-1.5 pl-5">
+        <li>고리 위 아무 변수에서나 <b>'이게 늘면'</b>으로 시작한다.</li>
+        <li>화살표를 따라가며 <b>+면 같은 쪽</b>(늘면 늘고, 줄면 줄고), <b>−면 반대쪽</b>(늘면 줄고, 줄면 늘고)으로 바꿔 말한다.</li>
+        <li>출발점에 돌아왔을 때 처음 변화가 <b>더 커졌으면 R</b>(강화 루프), 처음 변화를 <b>거슬렀으면 B</b>(균형 루프).</li>
+      </ol>
+      <p class="mt-2">
+        지름길도 있어요. − 하나를 지날 때마다 방향이 한 번 뒤집히므로, 고리 안 <b>−가 짝수 개(0개 포함)면 R, 홀수 개면 B</b>입니다.
+        이 규칙이 왜 맞는지는 9장에서 정식으로 다룹니다.
+      </p>
+    </ConceptCard>
+
+    <p class="leading-relaxed text-slate-700">
+      +와 −가 아직 낯설다면 일상의 예로 연습해 보세요. <b>같은 방향(+)</b>: 공부 시간 → 시험 점수, 사용자 수 → 서버 부하.
+      <b>반대 방향(−)</b>: 회의 시간 → 집중해서 일하는 시간, 가격 → 판매량. 화살표 하나를 읽을 때는 그 원인 하나만 바뀌고
+      나머지는 그대로라고 생각하는 것이 약속입니다.
+    </p>
+
+    <p class="mt-4 mb-1 text-sm font-semibold text-slate-500">📋 기호 한눈에 보기: 인과지도</p>
+    <DiagramLegend kind="cld" />
+
+    <p class="mt-4 leading-relaxed text-slate-700">
+      두 그림은 같은 이야기를 다른 해상도로 그린 것입니다. 2절의 저량-유량도와 방금 그린 인과지도를 나란히 놓고 보면 이렇게 대응해요.
+    </p>
+    <div class="my-4 overflow-x-auto">
+      <table class="w-full break-keep text-sm">
+        <thead>
+          <tr class="border-b border-slate-200 text-left text-slate-500">
+            <th class="py-2 pr-3 font-medium">저량-유량도(2절)</th>
+            <th class="py-2 font-medium">인과지도(3절)</th>
+          </tr>
+        </thead>
+        <tbody class="text-slate-700">
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">상자: 사용자 수</td><td class="py-2">낱말 '사용자 수'(상자로 둘러 저량 표시)</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">밸브 달린 파이프: 신규 가입</td><td class="py-2">낱말 '신규 가입'과 화살표 '신규 가입 →(+) 사용자 수'</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">가는 화살표: 사용자 수 → 가입 밸브</td><td class="py-2">화살표 '사용자 수 →(+) 신규 가입'</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">구름(모형 밖)</td><td class="py-2">그리지 않는다</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">쌓이는 것과 흐르는 것을 구별한다</td><td class="py-2">구별하지 않는다(그래서 9장의 함정이 생긴다)</td></tr>
+          <tr><td class="py-2 pr-3">쓰임: 숫자를 넣어 계산하기</td><td class="py-2">쓰임: 생각 정리, 고리 찾기, 회의에서 함께 그리기</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="leading-relaxed text-slate-700">
+      실무에서는 인과지도로 고리를 먼저 찾고, 저량-유량도로 옮겨 숫자를 넣고 계산합니다(6절 12부 지도의 순서).
+      Vensim·Stella 같은 시스템 다이내믹스 도구도 두 그림을 다 그려요.
+    </p>
+
+    <ConceptCard tone="note" title="새 용어: 인과지도 / 변수 / 극성 / 루프 표시">
+      <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
+        <li>
+          <b>인과지도</b> (causal loop diagram, CLD, 인과순환지도라고도 함). 뜻: 변수를 +/− 화살표로 이어 피드백 루프를 찾는 그림.
+          쌓이는 것과 흐르는 것을 구별하지 않는 '스케치'라서, 계산하려면 저량-유량도로 옮겨야 합니다.
+        </li>
+        <li><b>변수</b> (variable). 뜻: 인과지도의 낱말. 늘거나 줄 수 있는 양을 명사로 씁니다.</li>
+        <li><b>극성</b> (polarity). 뜻: 화살표 끝의 +(같은 방향)·−(반대 방향) 표시. 고리 전체의 성격(R/B)도 극성이라고 부르며, 9장에서 정식 규칙을 다룹니다.</li>
+        <li><b>루프 표시</b> (loop identifier). 뜻: 고리 가운데 그리는 빙 도는 화살표와 R(강화)·B(균형) 글자, 그리고 고리의 이름.</li>
+      </ul>
+    </ConceptCard>
+
+    <p class="mt-6 mb-1 text-sm font-semibold text-slate-500">🔎 잠깐 확인!</p>
+    <Quiz
+      question="인과지도에 'A →(−) B'가 있다. 다른 조건이 같을 때 A가 줄면 B는?"
+      :choices="['원래보다 커진다', '원래보다 작아진다', '그대로다', '알 수 없다']"
+      :answer="0"
+      :hints="['−는 반대 방향입니다. A가 늘면 B는? 그럼 줄면?']"
+      explanation="−는 반대 방향이라, A가 늘면 B가 원래보다 작아지고 A가 줄면 B는 원래보다 커집니다. 회의 시간이 줄면 집중해서 일하는 시간이 늘어나는 것처럼요."
+    />
+    <Quiz
+      question="'피곤함 →(+) 마시는 커피 양 →(−) 피곤함' 고리를 한 바퀴 따라 읽으면?"
+      :choices="['B(균형 루프): 피곤할수록 커피를 더 마셔 피곤함이 줄어든다', 'R(강화 루프): 피곤할수록 더 피곤해진다', '고리가 아니다', '판별할 수 없다']"
+      :answer="0"
+      :hints="['피곤함이 늘면 → 커피는? → 그러면 피곤함은?', '고리 안 −의 개수가 짝수인가요, 홀수인가요?']"
+      explanation="피곤함이 늘면 → (+) 커피를 더 마시고 → (−) 피곤함이 줄어듭니다. 처음 변화(피곤함이 늘었다)를 거슬러 돌아오니 B, 균형 루프예요. 고리 안 −가 하나(홀수)인 것과도 맞습니다."
+    />
+
+
+    <h2 class="mt-8 mb-2 text-xl font-bold">4. 실험: 같은 저량, 다른 구조</h2>
+    <ReviewFlag id="ch1-s2" chapter="ch1" label="4. 실험: 같은 저량, 다른 구조" />
+    <p class="leading-relaxed text-slate-700">
+      3절에서 그린 인과지도의 고리를 이제 직접 끼웠다 뺐다 해 봅시다. 강화 루프(입소문), 균형 루프(한계), 지연을 켜고 끌 때마다
       컴퓨터가 36개월을 계산해 곡선을 다시 그립니다. 계산하는 방법 자체는 5장에서 배워요. 지금은 모양만 보세요.
     </p>
 
@@ -94,8 +364,8 @@ function onSetComplete() {
       explanation="사용자 수가 늦게 보이니 이미 목표를 넘었는데도 한동안 계속 받아들입니다. 최고 약 1,180명까지 넘쳤다가 되돌아오죠. 지연이 출렁임을 만드는 원리는 6장에서 자세히 다룹니다."
     />
 
-    <h2 class="mt-8 mb-2 text-xl font-bold">3. 오늘의 발견에 이름표 달기</h2>
-    <ReviewFlag id="ch1-s3" chapter="ch1" label="3. 오늘의 발견에 이름표 달기" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">5. 오늘의 발견에 이름표 달기</h2>
+    <ReviewFlag id="ch1-s3" chapter="ch1" label="5. 오늘의 발견에 이름표 달기" />
 
     <ConceptCard tone="note" title="새 용어: 피드백 루프 / 강화 루프 / 균형 루프 / 지연 / 시스템 다이내믹스">
       <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed">
@@ -131,11 +401,11 @@ function onSetComplete() {
       explanation="거짓입니다. 강화 루프는 방향과 상관없이 변화를 키웁니다. 좋은 쪽이면 선순환, 나쁜 쪽이면 악순환이에요. '양(+)의 피드백'이라는 다른 이름에 속지 마세요. '양'은 좋다는 뜻이 아니라 같은 방향으로 키운다는 뜻이에요."
     />
 
-    <h2 class="mt-8 mb-2 text-xl font-bold">4. 12부 지도</h2>
-    <ReviewFlag id="ch1-s4" chapter="ch1" label="4. 12부 지도" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">6. 12부 지도</h2>
+    <ReviewFlag id="ch1-s4" chapter="ch1" label="6. 12부 지도" />
     <p class="leading-relaxed text-slate-700">
-      시스템 다이내믹스는 늘 같은 순서로 일합니다. <b>그림</b>(인과지도로 고리 찾기) → <b>구조</b>(저량-유량도로
-      쌓이는 것과 흐르는 것 나누기) → <b>시뮬레이션</b>(컴퓨터로 미래 계산) → <b>식</b>(미분방정식으로 정확히 쓰기).
+      시스템 다이내믹스는 늘 같은 순서로 일합니다. <b>그림</b>(인과지도로 고리 찾기, 3절) → <b>구조</b>(저량-유량도로
+      쌓이는 것과 흐르는 것 나누기, 2절) → <b>시뮬레이션</b>(컴퓨터로 미래 계산) → <b>식</b>(미분방정식으로 정확히 쓰기).
       이 시리즈의 설계 철학 "그림 → 조작 → 수식"과 같은 순서예요. 12부도 이 순서로 갑니다.
     </p>
     <div class="mt-3 overflow-x-auto">
@@ -178,7 +448,7 @@ function onSetComplete() {
       강화 루프이고, 사용자가 늘수록 서버가 느려져 이탈이 느는 것은 균형 루프입니다. 11장에서 이런 AI의 고리들을 정면으로 다뤄요.
     </ConceptCard>
 
-    <h2 class="mt-8 mb-2 text-xl font-bold">5. 직접 풀어보기</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">7. 직접 풀어보기</h2>
     <p class="mb-2 leading-relaxed text-slate-700">
       <b>10문제를 모두 맞히면</b> 이 챕터가 완료됩니다. 난이도 순이니 편하게 시작하세요.
     </p>

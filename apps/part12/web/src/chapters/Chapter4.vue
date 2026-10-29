@@ -10,6 +10,8 @@ import { QuizSet } from '@series/ui'
 import { StepQuiz } from '@series/ui'
 import { NotebookCard } from '@series/ui'
 import BalancingLab from '@/components/BalancingLab.vue'
+import SfdDiagram from '@/components/SfdDiagram.vue'
+import DiagramLegend from '@/components/DiagramLegend.vue'
 import { useProgressStore } from '@/stores/progress'
 
 const progress = useProgressStore()
@@ -39,9 +41,45 @@ function onSetComplete() {
     <p class="leading-relaxed text-slate-700">
       아침 회의실이 12°C입니다. 목표는 22°C. 똑똑한 난방기는 목표와 차이가 클 때 세게, 작을 때 약하게 데웁니다.
       데우는 속도 = (목표 − 지금 온도) ÷ τ. 여기서 <b>τ</b>(타우)는 "격차를 얼마나 느긋하게 메울지" 정하는 시간이에요.
-      인과지도로 그리면 온도가 오르면 격차가 줄고(−), 격차가 크면 데우는 속도가 크고(+), 데우면 온도가 오릅니다(+).
-      − 하나가 낀 고리, <b>균형 루프(B)</b>입니다.
+      아래 실험 왼쪽의 인과지도를 화살표마다 읽어 봅시다(읽는 법은 1장 3절). <b>실내 온도 →(−) 목표와의 격차</b>: 온도가 오를수록
+      목표까지 남은 차이는 줄어요(반대 방향). <b>목표와의 격차 →(+) 데우는 속도</b>: 차이가 클수록 세게 데웁니다.
+      <b>데우는 속도 →(+) 실내 온도</b>: 세게 데울수록 온도가 더 많이 오르죠. 한 바퀴 따라 읽으면 온도가 오르면 → 격차가 줄고 →
+      데우는 속도가 줄고 → 온도가 덜 올라요. 처음 변화(올랐다)를 거슬러 누르니 <b>균형 루프(B)</b>이고, 고리 안 −가 하나(홀수)입니다.
     </p>
+    <p class="mt-3 leading-relaxed text-slate-700">
+      저량-유량도로는 이렇게 그립니다. 쌓이는 것은 <b>실내 온도</b>(상자), 흐르는 것은 <b>데우는 속도</b>(파이프)예요. 열은 난방기에서
+      오지만 그 출처는 따지지 않으니 구름으로 둡니다. 밸브로 들어오는 가는 화살표 세 개가 데우는 속도를 정하는 재료예요.
+      목표 온도(+), 조정 시간 τ(−, 느긋할수록 약하게), 그리고 지금 온도(−, 따뜻할수록 약하게). 그래서 데우는 속도 = (목표 − 지금 온도) ÷ τ.
+      인과지도의 '목표와의 격차'는 이 그림에서는 따로 그리지 않고 밸브의 식 안에 들어가 있어요.
+    </p>
+    <div class="my-4 rounded-xl border border-slate-200 bg-white p-3">
+      <SfdDiagram
+        :width="360"
+        :height="172"
+        :stocks="[{ id: 'T', label: '실내 온도', x: 250, y: 118, w: 104, h: 50, value: '12°C', level: 0.3 }]"
+        :flows="[{ id: 'h', label: '데우는 속도', path: [[30, 118], [197, 118]], fromCloud: true, rate: '(목표 − 온도) ÷ τ' }]"
+        :aux="[
+          { id: 'goal', label: '목표 온도 22°C', x: 50, y: 40 },
+          { id: 'tau', label: 'τ (조정 시간)', x: 150, y: 40 },
+        ]"
+        :links="[
+          { from: [55, 46], to: [106, 100], bend: -0.12, sign: '+' },
+          { from: [146, 46], to: [118, 100], bend: 0.12, sign: '−' },
+          { from: [224, 92], to: [121, 101], bend: 0.35, sign: '−' },
+        ]"
+        aria-label="실내 온도 상자에 데우는 속도 파이프가 붙고, 목표 온도·조정 시간 τ·실내 온도가 가는 화살표로 데우는 속도를 정하는 저량-유량도"
+      />
+    </div>
+    <DetailsCard title="🔍 그림 기호 다시 보기">
+      <p class="text-sm">
+        기호를 처음부터 차근차근 보려면 <RouterLink to="/ch/ch1#ch1-sfd" class="font-semibold text-indigo-700 underline">1장 2절(저량-유량도)</RouterLink>과
+        <RouterLink to="/ch/ch1#ch1-cld" class="font-semibold text-indigo-700 underline">3절(인과지도)</RouterLink>로 돌아가세요.
+      </p>
+      <p class="mt-3 text-sm font-semibold text-slate-700">인과지도</p>
+      <DiagramLegend kind="cld" />
+      <p class="mt-3 text-sm font-semibold text-slate-700">저량-유량도</p>
+      <DiagramLegend kind="sfd" />
+    </DetailsCard>
 
     <BalancingLab />
 

@@ -10,6 +10,7 @@ import { QuizSet } from '@series/ui'
 import { StepQuiz } from '@series/ui'
 import { NotebookCard } from '@series/ui'
 import EulerLab from '@/components/EulerLab.vue'
+import SfdDiagram from '@/components/SfdDiagram.vue'
 import { useProgressStore } from '@/stores/progress'
 
 const progress = useProgressStore()
@@ -66,8 +67,70 @@ function onSetComplete() {
       explanation="× (−0.5)라서 100 → −50 → 25 → −12.5 … 부호가 바뀌며 줄어듭니다. 진짜 격차는 음수가 된 적이 없으니 계산이 만든 가짜 출렁임이에요."
     />
 
-    <h2 class="mt-8 mb-2 text-xl font-bold">2. 오늘의 발견에 이름표 달기</h2>
-    <ReviewFlag id="ch5-s2" chapter="ch5" label="2. 오늘의 발견에 이름표 달기" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">2. 그림에서 식으로: 저량-유량도가 계산 규칙이 된다</h2>
+    <ReviewFlag id="ch5-sfd" chapter="ch5" label="2. 그림에서 식으로: 저량-유량도가 계산 규칙이 된다" />
+    <p class="leading-relaxed text-slate-700">
+      오일러법 한 줄의 <b>f(S)</b>, 곧 '저량이 S일 때의 순유량'은 어디서 올까요? 저량-유량도에서 그대로 읽어 냅니다.
+      그림을 식으로 옮기는 규칙은 세 가지예요.
+    </p>
+    <ol class="mt-2 list-decimal space-y-1.5 pl-5 leading-relaxed text-slate-700">
+      <li><b>상자마다 식이 하나</b>: 상자가 변하는 속도 = 들어오는 파이프 − 나가는 파이프(1장 2절의 셋째 약속).</li>
+      <li><b>밸브마다 식이 하나</b>: 그 밸브로 들어오는 가는 화살표의 출발점들이 식의 재료다. 화살표가 오지 않는 값은 그 식에 들어가지 않는다.</li>
+      <li><b>작은 원은 숫자 하나</b>(또는 다른 값으로 만든 식).</li>
+    </ol>
+    <p class="mt-3 leading-relaxed text-slate-700">4장의 회의실 그림을 이 규칙대로 옮겨 봅시다.</p>
+    <div class="my-4 rounded-xl border border-slate-200 bg-white p-3">
+      <SfdDiagram
+        :width="360"
+        :height="172"
+        :stocks="[{ id: 'T', label: '실내 온도', x: 250, y: 118, w: 104, h: 50, value: '12°C', level: 0.3 }]"
+        :flows="[{ id: 'h', label: '데우는 속도', path: [[30, 118], [197, 118]], fromCloud: true, rate: '(목표 − 온도) ÷ τ' }]"
+        :aux="[
+          { id: 'goal', label: '목표 온도 22°C', x: 50, y: 40 },
+          { id: 'tau', label: 'τ (조정 시간)', x: 150, y: 40 },
+        ]"
+        :links="[
+          { from: [55, 46], to: [106, 100], bend: -0.12, sign: '+' },
+          { from: [146, 46], to: [118, 100], bend: 0.12, sign: '−' },
+          { from: [224, 92], to: [121, 101], bend: 0.35, sign: '−' },
+        ]"
+        aria-label="실내 온도 상자에 데우는 속도 파이프가 붙고, 목표 온도·조정 시간 τ·실내 온도가 가는 화살표로 데우는 속도를 정하는 저량-유량도"
+      />
+    </div>
+    <div class="my-4 overflow-x-auto">
+      <table class="w-full break-keep text-sm">
+        <thead>
+          <tr class="border-b border-slate-200 text-left text-slate-500">
+            <th class="py-2 pr-3 font-medium">그림의 부분</th>
+            <th class="py-2 font-medium">식</th>
+          </tr>
+        </thead>
+        <tbody class="text-slate-700">
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">상자 '실내 온도'(들어오는 파이프 하나)</td><td class="py-2">d온도/dt = 데우는 속도</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2 pr-3">밸브 '데우는 속도'(목표 온도·τ·실내 온도에서 화살표)</td><td class="py-2">데우는 속도 = (목표 − 온도) ÷ τ</td></tr>
+          <tr><td class="py-2 pr-3">작은 원 '목표 온도'·'τ'</td><td class="py-2">22°C, 10분(4장 실험의 처음 값)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="leading-relaxed text-slate-700">
+      둘을 합치면 d온도/dt = (목표 − 온도) ÷ τ입니다. 남은 격차 G = 목표 − 온도로 바꿔 쓰면 dG/dt = −G/τ, 위 실험에서 계산한 식 그대로예요.
+      한 가지 주의할 점이 있습니다. 화살표는 <b>무엇을 재료로 쓰는지</b>만 알려 줘요. 그 재료를 어떻게 섞는지(빼고 나눌지, 곱할지)는
+      모형을 만드는 사람이 정해 밸브에 적어 두는 것이고, Vensim·Stella 같은 도구에서도 밸브를 누르면 식을 적는 칸이 나옵니다.
+      상자와 밸브의 식이 갖춰지면 도구는 상자마다 <b>다음 값 = 지금 값 + DT × (들어오는 파이프 − 나가는 파이프)</b>를 반복해요.
+      이 장의 오일러법이 바로 그 계산입니다.
+    </p>
+
+    <p class="mt-6 mb-1 text-sm font-semibold text-slate-500">🔎 잠깐 확인!</p>
+    <Quiz
+      question="상자 하나에 들어오는 파이프 두 개(20명/월, 15명/월)와 나가는 파이프 하나(10명/월)가 붙어 있다. 이 상자가 지금 변하는 속도는? (명/월, 정수)"
+      type="numeric"
+      :answer="25"
+      :hints="['들어오는 파이프는 더하고, 나가는 파이프는 뺍니다.']"
+      explanation="20 + 15 − 10 = 25명/월. 상자마다 '들어오는 파이프의 합 − 나가는 파이프의 합'이 그 상자의 변화 속도(순유량)이고, 오일러법은 여기에 DT를 곱해 다음 값을 구합니다."
+    />
+
+    <h2 class="mt-8 mb-2 text-xl font-bold">3. 오늘의 발견에 이름표 달기</h2>
+    <ReviewFlag id="ch5-s2" chapter="ch5" label="3. 오늘의 발견에 이름표 달기" />
     <p class="leading-relaxed text-slate-700">격차 계산 한 걸음을 식으로 쓰면 안정 조건이 바로 보입니다.</p>
     <MathBlock expr="S_{k+1} = S_k + \Delta t \times \left(-\frac{S_k}{\tau}\right) = \left(1 - \frac{\Delta t}{\tau}\right) S_k \qquad \left|1 - \frac{\Delta t}{\tau}\right| < 1 \iff 0 < \Delta t < 2\tau" />
     <p class="mb-2 text-sm leading-relaxed text-slate-500">
@@ -96,8 +159,8 @@ function onSetComplete() {
       explanation="100 → 50 → 25. 한 걸음마다 × (1 − 2/4) = × 0.5입니다. 정확한 답 100·e^(−t/4)는 t = 4에서 36.8인데 오일러법은 25라서, DT = 2는 꽤 거칠어요. DT를 줄이면 36.8에 다가갑니다."
     />
 
-    <h2 class="mt-8 mb-2 text-xl font-bold">3. 학습률은 시간 간격이다</h2>
-    <ReviewFlag id="ch5-s3" chapter="ch5" label="3. 학습률은 시간 간격이다" />
+    <h2 class="mt-8 mb-2 text-xl font-bold">4. 학습률은 시간 간격이다</h2>
+    <ReviewFlag id="ch5-s3" chapter="ch5" label="4. 학습률은 시간 간격이다" />
     <p class="leading-relaxed text-slate-700">
       4장에서 경사하강이 균형 루프라는 것을 봤습니다. 한 걸음 더 들어가 봅시다. 가중치가 매 순간 기울기의 반대 방향으로
       미끄러져 내려가는 매끄러운 움직임을 상상하면, 이 움직임을 미분방정식으로 쓸 수 있습니다. 이 미끄러짐을 <b>경사 흐름</b>(gradient flow)이라고 해요.
@@ -128,7 +191,7 @@ function onSetComplete() {
       앞으로 12부의 모든 실험은 이 오일러법으로 미래를 계산합니다.
     </ConceptCard>
 
-    <h2 class="mt-8 mb-2 text-xl font-bold">4. 직접 풀어보기</h2>
+    <h2 class="mt-8 mb-2 text-xl font-bold">5. 직접 풀어보기</h2>
     <p class="mb-2 leading-relaxed text-slate-700">
       <b>10문제를 모두 맞히면</b> 이 챕터가 완료됩니다. 난이도 순이니 편하게 시작하세요.
     </p>
