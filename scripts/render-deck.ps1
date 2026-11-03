@@ -1,6 +1,6 @@
 ﻿# scripts/render-deck.ps1 — 발표 덱 전 슬라이드를 PNG 로 렌더 → docs/hackathon/slides/slideNN.png
 # 리허설·검토용 스냅숏. 덱을 재생성(scripts/build-pitch-deck.py)했으면 이 스크립트로 렌더도 갱신할 것.
-# 파일 이름은 바닥글 번호(slide01~14.png). ③ 다음의 번호 없는 영상 장은 slide03_video.png(포스터 화면).
+# 파일 이름은 바닥글 번호(slide01~16.png). ④ 다음의 번호 없는 영상 장은 slide04_video.png(포스터 화면).
 # 요구: Windows + PowerPoint 설치(COM 자동화). 실행: powershell -File scripts/render-deck.ps1
 $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
