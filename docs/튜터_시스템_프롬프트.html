@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>튜터 시스템 프롬프트 구조</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* 레이아웃: 가운데 읽기 열 하나(최대 52rem). 프롬프트의 네 부분은 세로로 쌓인 띠로 보여 준다. */
+:root {
+  --bg: #fbfaf7;
+  --surface: #ffffff;
+  --fg: #1f2430;
+  --muted: #5b6270;
+  --line: #d9d6cf;
+  --accent: #1d4ed8;          /* ①②③ 미리 정해 둔 글 */
+  --accent-soft: #dbe4ff;
+  --warm: #b45309;            /* ④ 질문에 따라 만드는 글 */
+  --warm-soft: #fde68a;
+  --code-bg: #f1efe9;
+  --font-body: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'D2Coding', Consolas, 'Courier New', monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15171c; --surface: #1d2028; --fg: #e6e4de; --muted: #a2a6b0; --line: #343845;
+    --accent: #8fb0ff; --accent-soft: #223360; --warm: #fbbf24; --warm-soft: #4a3306; --code-bg: #111318;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #15171c; --surface: #1d2028; --fg: #e6e4de; --muted: #a2a6b0; --line: #343845;
+  --accent: #8fb0ff; --accent-soft: #223360; --warm: #fbbf24; --warm-soft: #4a3306; --code-bg: #111318;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.7;
+  padding-block: 2.5rem 4rem;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+main { max-width: 52rem; margin: 0 auto; }
+h1 { font-size: 2rem; line-height: 1.25; margin: 0 0 .5rem; text-wrap: balance; }
+h2 { font-size: 1.35rem; margin: 3rem 0 1rem; padding-top: 1rem; border-top: 1px solid var(--line); text-wrap: balance; }
+h3 { font-size: 1.05rem; margin: 1.75rem 0 .5rem; }
+p { margin: 0 0 1rem; max-width: 65ch; }
+.lead { color: var(--muted); font-size: 1.05rem; max-width: 60ch; }
+.meta { font-size: .85rem; color: var(--muted); margin-bottom: 2rem; }
+code { font-family: var(--font-mono); font-size: .88em; background: var(--code-bg); padding: .1em .35em; border-radius: 3px; }
+pre {
+  font-family: var(--font-mono); font-size: .82rem; line-height: 1.6;
+  background: var(--code-bg); border: 1px solid var(--line); border-radius: 6px;
+  padding: 1rem 1.1rem; overflow-x: auto; white-space: pre-wrap; word-break: break-word; margin: 0 0 1.25rem;
+}
+pre code { background: none; padding: 0; font-size: inherit; }
+.wrap { overflow-x: auto; margin-bottom: 1.25rem; }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+th, td { text-align: left; vertical-align: top; padding: .55rem .7rem; border-bottom: 1px solid var(--line); }
+th { font-weight: 700; color: var(--muted); font-size: .8rem; letter-spacing: .04em; text-transform: uppercase; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+ul, ol { padding-left: 1.3rem; margin: 0 0 1rem; max-width: 65ch; }
+li { margin-bottom: .35rem; }
+.note { border-left: 3px solid var(--accent); background: var(--surface); padding: .75rem 1rem; margin: 0 0 1.25rem; max-width: 65ch; }
+.note.warn { border-left-color: var(--warm); }
+.note p:last-child { margin-bottom: 0; }
+
+/* 프롬프트 네 부분 그림 */
+.layers { display: grid; gap: .5rem; margin: 1.25rem 0 1.5rem; }
+.layer {
+  display: grid; grid-template-columns: 2.6rem 1fr; gap: .75rem; align-items: start;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: .8rem .9rem;
+  border-left-width: 5px; border-left-color: var(--accent);
+}
+.layer > div { min-width: 0; }
+.layer.dyn { border-left-color: var(--warm); }
+.layer .n { font-family: var(--font-mono); font-weight: 600; font-size: 1.1rem; color: var(--accent); line-height: 1.4; }
+.layer.dyn .n { color: var(--warm); }
+.layer .t { font-weight: 700; margin: 0 0 .15rem; }
+.layer .src { font-size: .85rem; color: var(--muted); margin: 0 0 .35rem; }
+.layer .ex { font-size: .85rem; color: var(--fg); background: var(--code-bg); border-radius: 4px; padding: .4rem .6rem; font-family: var(--font-mono); white-space: pre-wrap; word-break: break-word; margin: 0; }
+.layer.hist { border-left-color: var(--line); }
+.layer.hist .n { color: var(--muted); }
+.legend { display: flex; flex-wrap: wrap; gap: 1rem; font-size: .85rem; color: var(--muted); margin-bottom: .5rem; }
+.legend span::before { content: ""; display: inline-block; width: .8em; height: .8em; border-radius: 2px; margin-right: .4em; vertical-align: -1px; }
+.legend .a::before { background: var(--accent); }
+.legend .d::before { background: var(--warm); }
+.legend .h::before { background: var(--line); }
+
+.tag { display: inline-block; font-size: .75rem; font-weight: 700; padding: .05em .5em; border-radius: 999px; background: var(--accent-soft); color: var(--fg); white-space: nowrap; }
+.tag.dyn { background: var(--warm-soft); }
+.toc { font-size: .92rem; columns: 2; column-gap: 2rem; margin-bottom: 1rem; }
+.toc li { break-inside: avoid; }
+a { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 560px) {
+  .toc { columns: 1; }
+  .layer { grid-template-columns: 2rem 1fr; }
+  h1 { font-size: 1.6rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<main>
+<h1>AI 튜터 시스템 프롬프트 구조</h1>
+<p class="lead">수포자 시리즈 12부는 모두 같은 방식의 AI 튜터를 쓴다. 튜터는 학습자의 질문을 각자 PC에서 도는 Ollama 모델에 보내는데, 그때마다 시스템 프롬프트(모델이 답하기 전에 먼저 읽는 지시문과 참고 자료)를 새로 만들어 함께 보낸다. 이 문서는 그 프롬프트가 어떤 네 부분으로 이루어지는지, 각 부분이 어디서 와서 실제로 어떤 글이 되는지, 고칠 때 무엇을 조심해야 하는지 정리한다.</p>
+<p class="meta">작성 2026-11-04 · 기준 코드 <code>apps/part1/web/src/components/TutorChat.vue</code>, <code>apps/part1/web/src/data/tutorContext.json</code>, <code>packages/tutor/src/concepts.ts</code>, <code>apps/part1/notebooks/tutor.py</code></p>
+
+<ol class="toc">
+  <li><a href="#overview">한눈에 보는 네 부분</a></li>
+  <li><a href="#rules">① 역할과 규칙</a></li>
+  <li><a href="#context">② 전체 목차와 ③ 챕터 맥락</a></li>
+  <li><a href="#cards">④ 개념 카드</a></li>
+  <li><a href="#assembled">완성된 프롬프트 예시</a></li>
+  <li><a href="#outside">프롬프트 바깥의 보조 장치</a></li>
+  <li><a href="#caution">고칠 때 주의할 점</a></li>
+  <li><a href="#rag">이 튜터는 RAG를 쓰는가</a></li>
+</ol>
+
+<h2 id="overview">1. 한눈에 보는 네 부분</h2>
+<p>시스템 프롬프트는 글 네 덩어리를 차례로 이어 붙여 만든다. ①②③은 <code>systemPrompt()</code> 함수가 만들고, ④는 질문을 보내는 <code>send()</code> 함수가 <code>conceptGrounding()</code>을 불러 맨 뒤에 붙인다. 네 부분 모두 질문을 보낼 때마다 새로 만들기 때문에, 학습자가 다른 장으로 옮기면 ③이 바뀌고 다른 질문을 하면 ④가 바뀐다.</p>
+<div class="legend"><span class="a">미리 정해 둔 글 (①②③)</span><span class="d">질문에 따라 새로 만드는 글 (④)</span><span class="h">시스템 프롬프트 밖</span></div>
+<div class="layers">
+  <div class="layer">
+    <div class="n">①</div>
+    <div>
+      <p class="t">역할과 규칙</p>
+      <p class="src"><code>TutorChat.vue</code>의 <code>systemPrompt()</code> 안에 직접 적혀 있다. 부마다 과목 이름, 학습자 설명, 답하는 범위가 조금씩 다르다.</p>
+      <p class="ex">너는 '수포자를 위한 선형대수학' 학습 웹앱의 AI 튜터다. … 규칙: (1)~(8) … 무관한 요청이면 정확히 [OFFTOPIC] 이라고만 출력하라.</p>
+    </div>
+  </div>
+  <div class="layer">
+    <div class="n">②</div>
+    <div>
+      <p class="t">전체 목차 <code>curriculumIndex</code></p>
+      <p class="src"><code>tutorContext.json</code>에 부마다 하나씩 있다. 1부는 466자다.</p>
+      <p class="ex">[전체 목차] 워밍업: 벡터 맛보기 / 1장 좌표와 벡터 / 2장 벡터 연산(…) / … / 12장 그래디언트와 경사하강(…) / 캡스톤 … 미분은 시리즈 2부, 확률통계는 3부에서 다룬다(… [개념 카드]로 안내).</p>
+    </div>
+  </div>
+  <div class="layer">
+    <div class="n">③</div>
+    <div>
+      <p class="t">챕터 맥락 <code>contextFor(slug)</code></p>
+      <p class="src"><code>tutorContext.json</code>에 장마다 하나씩 있다. 장 페이지가 아닌 곳에서는 과정 소개(<code>fallback</code>)를 쓴다.</p>
+      <p class="ex">현재 학습자가 보고 있는 챕터 맥락:
+[1장 좌표와 벡터] 좌표 = 위치를 숫자 순서쌍 (x, y)로 표기. … AI 연결: 데이터를 숫자 나열(벡터)로 표현하는 것이 모든 AI의 입력.</p>
+    </div>
+  </div>
+  <div class="layer dyn">
+    <div class="n">④</div>
+    <div>
+      <p class="t">개념 카드 <code>conceptGrounding(질문)</code></p>
+      <p class="src"><code>concept-graph.json</code>(개념 127개)에서 질문에 나온 개념을 최대 3개 골라 만든다. 맞는 개념이 없으면 아무것도 붙지 않는다.</p>
+      <p class="ex">[개념 카드 — 시리즈 정본에서 자동 첨부. 'N부'는 이 시리즈의 권 … 현재 과정은 1부 …]
+- 연쇄법칙 (chain rule, …) — … 배우는 곳: 2부 6장 (다른 부). 먼저 알아야: 도함수(2부 3장). …</p>
+    </div>
+  </div>
+  <div class="layer hist">
+    <div class="n">+</div>
+    <div>
+      <p class="t">대화 기록</p>
+      <p class="src">직전 질문과 답 세 쌍에 이번 질문을 더한 메시지 7개다. 시스템 프롬프트와 따로 user, assistant 메시지로 붙는다.</p>
+    </div>
+  </div>
+</div>
+<p>프롬프트를 조립하는 코드는 <code>TutorChat.vue</code> 75~90행(①②③)과 115~116행(④를 붙이는 곳)에 있다. 노트북에서 쓰는 <code>tutor.py</code>의 <code>system_prompt(slug, question)</code>도 같은 네 부분을 같은 순서로 만든다. 1부 노트북은 '웹앱'과 '앱'을 '프로그램'으로 바꾼 것 말고는 문구가 같다. ②③은 웹과 같은 JSON 파일을, ④는 같은 개념 그래프 파일(<code>web/public/concept-graph.json</code>)을 읽는다.</p>
+
+<h2 id="rules">2. ① 역할과 규칙</h2>
+<p>1부 웹 튜터에 들어 있는 글을 그대로 옮겼다. 줄을 바꾼 자리도 코드의 <code>\n</code>과 같다.</p>
+<pre><code>너는 '수포자를 위한 선형대수학' 학습 웹앱의 AI 튜터다. 학습자는 중학교 수학까지만 기억하는 성인이며 수학에 공포가 있다.
+규칙: (1) 반드시 한국어 존댓말. (2) 새 용어·기호는 즉시 풀어서 설명. (3) 수식보다 비유·직관 먼저, LaTeX 대신 쉬운 일반 텍스트로. (4) 5문장 이내로 짧게. (5) 아래 챕터 맥락과 네 지식이 다르면 챕터 맥락을 우선. (6) 모르면 모른다고 말하기. (7) 학습자를 절대 무시하지 않고 격려하기.
+(8) 어떤 개념을 어디서 배우는지 물으면 아래 전체 목차와 [개념 카드]에서 찾아 반드시 'N부 M장' 형태로 안내하기(이 과정 안이면 'N장'). 목차에도 개념 카드에도 없는 주제는 이 시리즈에 없다고 솔직히 말하기.
+가장 중요한 규칙: 너는 오직 수학(선형대수·기초 수학·이 앱의 학습 내용·수학 학습 고민)과 간단한 인사에만 답한다. 연예·게임·요리·주식·코딩 대행·글쓰기 대행 등 학습과 무관한 요청이면 다른 말 없이 정확히 [OFFTOPIC] 이라고만 출력하라.</code></pre>
+
+<h3>규칙을 넣은 이유</h3>
+<div class="wrap"><table>
+<thead><tr><th>규칙</th><th>넣은 이유</th></tr></thead>
+<tbody>
+<tr><td>(1) 한국어 존댓말</td><td>수학을 두려워하는 성인 학습자에게 맞춘 말투다.</td></tr>
+<tr><td>(2) 새 용어는 바로 풀이</td><td>시리즈 설계 원칙 2번 "새 용어·기호·수식은 예외 없이 즉시 설명"을 튜터의 답에도 적용했다.</td></tr>
+<tr><td>(3) 비유 먼저, LaTeX 대신 쉬운 글</td><td>설계 원칙 1번 "직관 먼저, 공식 나중"과 같은 방향이다. 튜터 창은 수식을 그려 주지 않아서 <code>$…$</code>가 기호 그대로 보인다. 모델이 이 규칙을 어길 때가 있어, 화면에 보여 줄 때 <code>fmt()</code>가 한 번 더 지운다.</td></tr>
+<tr><td>(4) 5문장 이내</td><td>답의 최대 길이(<code>num_predict: 600</code> 토큰)와 맞췄다. 토큰은 모델이 글을 읽고 쓰는 단위다. 작은 모델은 답이 길어질수록 품질이 떨어진다.</td></tr>
+<tr><td>(5) 챕터 맥락 우선</td><td>모델이 알고 있는 내용과 본문의 설명이 다를 때 본문을 따르게 한다. 학습자가 읽는 본문이 기준이기 때문이다.</td></tr>
+<tr><td>(6) 모르면 모른다고</td><td>모르는 내용을 그럴듯하게 지어내는 일(환각)을 줄인다. (8)의 "없다고 솔직히 말하기"와 같은 취지다.</td></tr>
+<tr><td>(7) 격려</td><td>수학을 포기했던 사람을 위한 과정이기 때문이다.</td></tr>
+<tr><td>(8) 'N부 M장'으로 안내</td><td>④ 개념 카드와 함께 동작한다. 예전 규칙은 목차에 없는 개념을 물으면 "이 과정에 없다"고 답하게 했다. 지금은 카드에서 위치를 찾아 "2부 6장에서 배운다"처럼 알려 준다.</td></tr>
+<tr><td>가장 중요한 규칙과 [OFFTOPIC]</td><td>학습과 상관없는 질문을 걸러 낸다. 모델은 [OFFTOPIC]이라는 표시만 내보내고, 화면에서는 <code>stripOfftopic()</code>이 이 표시를 찾아 안내 문구로 바꾼다. 모델이 답 중간이나 끝에 표시를 섞어 내보내도 지워 준다.</td></tr>
+</tbody></table></div>
+
+<h3>부마다 다른 곳</h3>
+<p>규칙 (1)~(8)의 문구는 12부 모두 같다. 부마다 다른 곳은 세 군데다.</p>
+<ol>
+  <li>첫 줄의 과목 이름이 다르다. 부별 이름은 아래 표에 있다.</li>
+  <li>둘째 줄의 학습자 설명이 2·3·4부에서 다르다. 대부분은 "중학교 수학까지만 기억하는 성인"이지만, 2·3부는 "성인 개발자"이고 4부는 "수학·AI 에 공포가 있는 초보자"다.</li>
+  <li>가장 중요한 규칙에 적힌 답하는 범위가 다르다. 1·2·3·5부는 "수학(…)", 4부는 "이 과정 주제(…)", 6~12부는 "수학·AI(…)"이고, 괄호 안에 그 부의 핵심 용어가 들어간다. 예를 들어 7부의 괄호 안은 "임베딩·RAG·벡터 검색·코사인 유사도·관련 수학·이 앱의 학습 내용·수학 학습 고민"이다.</li>
+</ol>
+<div class="wrap"><table>
+<thead><tr><th>부</th><th>과목 이름</th><th class="num">챕터 맥락 수</th><th class="num">전체 목차 길이(자)</th></tr></thead>
+<tbody>
+<tr><td>1부</td><td>수포자를 위한 선형대수학</td><td class="num">14</td><td class="num">466</td></tr>
+<tr><td>2부</td><td>수포자를 위한 미분</td><td class="num">11</td><td class="num">392</td></tr>
+<tr><td>3부</td><td>수포자를 위한 확률과 통계</td><td class="num">11</td><td class="num">465</td></tr>
+<tr><td>4부</td><td>수포자를 위한 트랜스포머</td><td class="num">13</td><td class="num">569</td></tr>
+<tr><td>5부</td><td>수포자를 위한 정보이론</td><td class="num">11</td><td class="num">529</td></tr>
+<tr><td>6부</td><td>수포자를 위한 LLM 조련</td><td class="num">11</td><td class="num">800</td></tr>
+<tr><td>7부</td><td>수포자를 위한 임베딩 기하학</td><td class="num">11</td><td class="num">672</td></tr>
+<tr><td>8부</td><td>수포자를 위한 최적화</td><td class="num">12</td><td class="num">914</td></tr>
+<tr><td>9부</td><td>수포자를 위한 수치 계산</td><td class="num">12</td><td class="num">1214</td></tr>
+<tr><td>10부</td><td>수포자를 위한 스케일링 법칙과 평가의 통계</td><td class="num">11</td><td class="num">1066</td></tr>
+<tr><td>11부</td><td>수포자를 위한 에이전트와 추론의 수학</td><td class="num">13</td><td class="num">1169</td></tr>
+<tr><td>12부</td><td>수포자를 위한 시스템 다이내믹스</td><td class="num">13</td><td class="num">811</td></tr>
+</tbody></table></div>
+
+<h2 id="context">3. ② 전체 목차와 ③ 챕터 맥락</h2>
+<p>두 부분은 부마다 있는 <code>tutorContext.json</code> 파일에서 나온다. 웹의 <code>tutorContext.ts</code>와 노트북의 <code>tutor.py</code>가 이 파일 하나를 함께 읽으므로, 여기만 고치면 양쪽이 같이 바뀐다. 파일에는 키가 세 개 있다.</p>
+<div class="wrap"><table>
+<thead><tr><th>키</th><th>들어 있는 내용</th><th>1부 기준</th></tr></thead>
+<tbody>
+<tr><td><code>curriculumIndex</code></td><td>모든 장의 제목과 핵심어를 한 줄로 이은 목차다. 끝에 "다른 부 개념은 [개념 카드]로 안내"라는 문장이 있어 ④와 이어진다.</td><td>466자</td></tr>
+<tr><td><code>contexts[slug]</code></td><td>장마다 핵심 정의와 용어, AI와의 연결을 짧게 적은 요약이다. 주소 <code>/ch/ch1</code>의 마지막 부분(slug, 장을 가리키는 짧은 이름)으로 고른다.</td><td>14개(sample, ch1~ch12, capstone), 111~608자</td></tr>
+<tr><td><code>fallback</code></td><td>장 페이지가 아닌 곳(홈, 목차 등)에서 대신 쓰는 과정 전체 소개다.</td><td>171자</td></tr>
+</tbody></table></div>
+
+<h3>② 1부 전체 목차</h3>
+<pre><code>[전체 목차] 워밍업: 벡터 맛보기 / 1장 좌표와 벡터 / 2장 벡터 연산(덧셈·스칼라배·내적·코사인 유사도·벡터 길이) / 3장 행렬(행렬곱·전치·신경망 층 Wx+b) / 4장 연립방정식·가우스 소거법 / 5장 선형변환(기저벡터·회전·전단) / 6장 행렬식·역행렬(항등행렬·가역성) / 7장 고유값·고유벡터(람다) / 8장 PCA(주성분·공분산·차원축소) / 9장 기저·차원·rank(선형결합·span·독립종속·LoRA) / 10장 직교성과 투영(수직·최소제곱·정규방정식·그람-슈미트) / 11장 SVD 특이값분해(저랭크 근사·추천시스템·이미지 압축) / 12장 그래디언트와 경사하강(손실함수·학습률·역전파) / 캡스톤: 미니 신경망 만들기(노트북 전용 종합 실습 — 순전파·역전파·경사하강을 NumPy 로 직접 구현). 미분은 시리즈 2부, 확률통계는 3부에서 다룬다(이 과정은 1부 — 다른 부 개념은 [개념 카드]로 안내).</code></pre>
+
+<h3>③ 1부 1장의 챕터 맥락</h3>
+<pre><code>[1장 좌표와 벡터] 좌표 = 위치를 숫자 순서쌍 (x, y)로 표기. 원점 O = 기준점 (0,0). 벡터 = 원점에서 뻗는 화살표, 성분 (x, y)로 표기(열벡터로도 씀). AI 연결: 데이터를 숫자 나열(벡터)로 표현하는 것이 모든 AI의 입력. 예: 집 = (면적, 방 수, 거리).</code></pre>
+
+<h3>③ 장 페이지 밖에서 쓰는 fallback</h3>
+<pre><code>[전체 과정 소개] 이 과정은 수포자를 위한 선형대수 12챕터 과정이다: 좌표·벡터 → 벡터 연산(내적) → 행렬 → 연립방정식 → 선형변환 → 행렬식·역행렬 → 고유값 → PCA → 기저·rank → 직교·투영 → SVD → 그래디언트. 최종 목표는 선형대수로 AI(신경망·추천·차원축소)를 이해하는 것.</code></pre>
+
+<h2 id="cards">4. ④ 개념 카드</h2>
+<p>질문에 나온 개념을 찾아 짧은 설명 카드를 만들어 붙이는 부분이다. 코드는 <code>packages/tutor/src/concepts.ts</code>에 있고, 주석에서는 이 일을 접지(grounding)라고 부른다. 접지는 모델이 기억에만 기대지 않고 믿을 만한 자료를 근거로 답하게 하는 것을 말하며, 자세한 뜻은 8절에서 설명한다.</p>
+<p>같은 질문에는 언제나 같은 카드가 붙는다. 개념 그래프 파일을 읽지 못하면 빈 문자열을 돌려주므로, 그럴 때도 튜터는 카드 없이 평소처럼 답한다. 카드는 세 단계를 거쳐 만들어진다.</p>
+<ol>
+  <li><code>loadConceptGraph</code>가 <code>concept-graph.json</code>을 처음 한 번만 받아 와 저장해 둔다. 이 파일은 정본 <code>scripts/ontology/concepts.json</code>(시리즈의 개념과 관계를 모아 둔 기준 원본으로, 개념 127개가 들어 있다)에서 <code>npm run ontology:graph</code>로 만든다. 3초 안에 받지 못하면 카드 없이 진행한다.</li>
+  <li><code>matchConcepts</code>가 질문에 나온 개념을 찾는다. 개념마다 대표 이름(<code>label</code>), 다른 이름(<code>aliases</code>), 시리즈에서 쓰는 비유어(<code>metaphors</code>)를 질문과 맞춰 본다. 한국어는 띄어쓰기를 무시하고 그 글자가 들어 있는지만 보므로 "KL발산이"처럼 조사가 붙어도 찾아낸다. "lr", "KL" 같은 짧은 영문 이름은 단어 단위로만 찾아서 "blog", "clear" 같은 단어 속 글자에 잘못 걸리지 않게 했다. 더 긴 이름으로 찾은 개념을 앞에 두고 최대 3개까지 고른다.</li>
+  <li><code>conceptCards</code>가 고른 개념으로 카드를 쓴다.
+    <ul>
+      <li>맨 위 머리말에는 "'N부'는 이 시리즈의 권"이라는 뜻풀이, 지금 튜터가 몇 부인지(<code>partNumberKey</code>로 받은 값), 다른 부 개념은 길게 지어내지 말고 배우는 곳을 안내하라는 지시가 들어간다.</li>
+      <li>그 아래에 개념마다 한 줄씩 적는다. 다른 이름 최대 3개, 한 줄 정의(<code>note</code>), 배우는 곳과 "(이 과정)" 또는 "(다른 부)" 표시, 먼저 알아야 할 개념과 그 위치, 다시 쓰이는 곳 최대 4곳과 쓰이는 방식, 시리즈의 비유어가 차례로 들어간다.</li>
+      <li>질문이 "조련" 같은 비유어로 들어오면 "'조련'은(는) 6부에서 쓰는 비유이고 실무 용어는 파인튜닝(…)이다"라는 문장으로 카드를 시작한다.</li>
+    </ul>
+  </li>
+</ol>
+
+<div class="note warn">
+<p>카드 문구는 실제 모델이 틀린 답을 보고 고친 결과다. 코드 주석에 따르면 2026-09-06에 gemma3:4b로 시험했을 때 두 가지 문제가 나왔다. 하나는 "6부 1장"을 "6번 장"으로 읽고 자기 과정의 내용으로 지어낸 것이다. 머리말에 "'N부'는 이 시리즈의 권"이라는 뜻풀이와 "(다른 부)" 표시를 넣어 고쳤다. 다른 하나는 비유어로 물었는데 카드가 실무 용어로 시작해서 모델이 둘을 잇지 못한 것이다. 비유어를 실무 용어로 바꿔 말하는 문장을 카드 맨 앞에 두어 고쳤다. 또 카드 본문에 지시문을 넣으면 모델이 그 문장을 그대로 따라 읽어서, 지시는 머리말에만 두고 카드 본문에는 표시만 남겼다.</p>
+</div>
+
+<h3>실제로 만들어진 카드 (1부 튜터)</h3>
+<p>아래는 <code>concepts.ts</code>를 직접 실행해 얻은 결과다. 현재 과정은 1부(<code>currentPart: 1</code>)로 두었고, 두 번째 질문부터는 머리말을 줄여 적었다.</p>
+<pre><code>### Q: 연쇄법칙이 뭐예요?
+[개념 카드 — 시리즈 정본에서 자동 첨부. 'N부'는 이 시리즈의 권(1~12부, 각각 별도 과정), 'M장'은 그 안의 장. 현재 과정은 1부 — '다른 부' 개념은 내용을 길게 지어내지 말고 배우는 곳을 안내한다. 질문한 개념을 배우는 곳·선수 개념]
+- 연쇄법칙 (chain rule, 합성함수 미분, 겉미분 속미분) — 겉미분 × 속미분, 역전파의 뼈대. 배우는 곳(어디서 배우나 물으면 이것으로 답): 2부 6장 (다른 부). 먼저 알아야: 도함수(2부 3장). 그 뒤 다시 쓰이는 곳(참고): 2부 10장(역전파 = 연쇄법칙의 반복 적용), 4부 11장(트랜스포머 학습: 손실의 기울기를 층마다 되돌리기), 2부 7장(시그모이드·지수함수와 함께).
+
+### Q: 조련이 뭔가요?
+[개념 카드 — … 현재 과정은 1부 — …]
+- '조련'은(는) 6부에서 쓰는 비유이고 실무 용어는 파인튜닝(fine-tuning, post-training, 사후 학습)이다. 사전학습 → SFT → 선호 학습, 다음 단어 예측 기계를 비서로. 배우는 곳(어디서 배우나 물으면 이것으로 답): 6부 1장 (다른 부). 먼저 알아야: 트랜스포머(4부 10장), 경사하강(2부 9장). 그 뒤 다시 쓰이는 곳(참고): 7부 1장(지식 주입의 두 길: 조련 vs RAG), 7부 8장(RAG vs 파인튜닝 선택 기준), 8부 6장(낯선 출발: 파인튜닝의 워밍업), 8부 11장(파인튜닝 설정 파일 완독).
+
+### Q: 내적이 몇 장에 나오는지 까먹었어요
+[개념 카드 — … 현재 과정은 1부 — …]
+- 내적 (dot product, inner product, 점곱) — 두 벡터의 닮은 정도를 숫자 하나로, 유사도·투영·어텐션의 기초. 배우는 곳(어디서 배우나 물으면 이것으로 답): 1부 2장 (이 과정). 먼저 알아야: 벡터(1부 1장). 그 뒤 다시 쓰이는 곳(참고): 7부 2장(방향으로 재기: 내적이 다시 등장), 4부 6장(Q·K 점수 = 내적), 1부 10장(직교 = 내적 0), 4부 3장(거리로 비슷함 재기: 벡터·거리·내적).
+
+### Q: 오늘 저녁 뭐 먹을까요
+(매칭 없음 → 카드 없음, 프롬프트에 아무것도 안 붙음)</code></pre>
+<div class="wrap"><table>
+<thead><tr><th>질문</th><th class="num">고른 개념</th><th class="num">길이(자)</th><th class="num">토큰 수</th><th>비고</th></tr></thead>
+<tbody>
+<tr><td>연쇄법칙이 뭐예요?</td><td class="num">1</td><td class="num">369</td><td class="num">242</td><td>다른 부(2부)의 개념이다.</td></tr>
+<tr><td>조련이 뭔가요?</td><td class="num">1</td><td class="num">454</td><td class="num">286</td><td>비유어로 물어서 바꿔 말하는 문장으로 시작한다.</td></tr>
+<tr><td>내적이 몇 장에 나오는지 까먹었어요</td><td class="num">1</td><td class="num">393</td><td class="num">241</td><td>이 과정(1부)의 개념이다.</td></tr>
+<tr><td>내적이랑 행렬곱이랑 코사인 유사도는 어떻게 달라요?</td><td class="num">3</td><td class="num">871</td><td class="num">533</td><td>카드가 가장 많이 붙는 경우다. 위 출력에는 싣지 않았다.</td></tr>
+<tr><td>오늘 저녁 뭐 먹을까요</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td>맞는 개념이 없어 카드가 붙지 않는다. 주제에서 벗어난 질문은 ①의 규칙이 따로 걸러 낸다.</td></tr>
+</tbody></table></div>
+<p>길이와 토큰 수는 머리말을 포함한 값이다. 토큰 수는 기본 모델 gemma4:e2b에 카드 글만 넣고 Ollama가 알려 주는 입력 토큰 수(<code>prompt_eval_count</code>)를 읽어 쟀다. 설계 문서(<code>docs/todo_온톨로지_260906.md</code> 7절)와 <code>concepts.ts</code> 주석은 "카드 최대 3장, 300토큰 안"을 목표로 적었다. 실제로 재 보면 카드가 한 장일 때는 240~290토큰으로 목표 안에 들지만, 세 장이 모두 붙으면 약 530토큰으로 목표를 넘는다.</p>
+
+<h2 id="assembled">5. 완성된 프롬프트 예시</h2>
+<p>1부 1장을 보던 학습자가 "연쇄법칙이 뭐예요?"라고 물었을 때 Ollama로 가는 system 메시지 전체다. 네 부분이 이 순서로 이어지고, 그 뒤에 대화 기록이 user, assistant 메시지로 따라간다.</p>
+<pre><code><span class="tag">①</span> 너는 '수포자를 위한 선형대수학' 학습 웹앱의 AI 튜터다. 학습자는 중학교 수학까지만 기억하는 성인이며 수학에 공포가 있다.
+규칙: (1) 반드시 한국어 존댓말. (2) 새 용어·기호는 즉시 풀어서 설명. (3) 수식보다 비유·직관 먼저, LaTeX 대신 쉬운 일반 텍스트로. (4) 5문장 이내로 짧게. (5) 아래 챕터 맥락과 네 지식이 다르면 챕터 맥락을 우선. (6) 모르면 모른다고 말하기. (7) 학습자를 절대 무시하지 않고 격려하기.
+(8) 어떤 개념을 어디서 배우는지 물으면 아래 전체 목차와 [개념 카드]에서 찾아 반드시 'N부 M장' 형태로 안내하기(이 과정 안이면 'N장'). 목차에도 개념 카드에도 없는 주제는 이 시리즈에 없다고 솔직히 말하기.
+가장 중요한 규칙: 너는 오직 수학(선형대수·기초 수학·이 앱의 학습 내용·수학 학습 고민)과 간단한 인사에만 답한다. 연예·게임·요리·주식·코딩 대행·글쓰기 대행 등 학습과 무관한 요청이면 다른 말 없이 정확히 [OFFTOPIC] 이라고만 출력하라.
+<span class="tag">②</span> [전체 목차] 워밍업: 벡터 맛보기 / 1장 좌표와 벡터 / 2장 벡터 연산(덧셈·스칼라배·내적·코사인 유사도·벡터 길이) / 3장 행렬(행렬곱·전치·신경망 층 Wx+b) / 4장 연립방정식·가우스 소거법 / 5장 선형변환(기저벡터·회전·전단) / 6장 행렬식·역행렬(항등행렬·가역성) / 7장 고유값·고유벡터(람다) / 8장 PCA(주성분·공분산·차원축소) / 9장 기저·차원·rank(선형결합·span·독립종속·LoRA) / 10장 직교성과 투영(수직·최소제곱·정규방정식·그람-슈미트) / 11장 SVD 특이값분해(저랭크 근사·추천시스템·이미지 압축) / 12장 그래디언트와 경사하강(손실함수·학습률·역전파) / 캡스톤: 미니 신경망 만들기(노트북 전용 종합 실습 — 순전파·역전파·경사하강을 NumPy 로 직접 구현). 미분은 시리즈 2부, 확률통계는 3부에서 다룬다(이 과정은 1부 — 다른 부 개념은 [개념 카드]로 안내).
+<span class="tag">③</span> 현재 학습자가 보고 있는 챕터 맥락:
+[1장 좌표와 벡터] 좌표 = 위치를 숫자 순서쌍 (x, y)로 표기. 원점 O = 기준점 (0,0). 벡터 = 원점에서 뻗는 화살표, 성분 (x, y)로 표기(열벡터로도 씀). AI 연결: 데이터를 숫자 나열(벡터)로 표현하는 것이 모든 AI의 입력. 예: 집 = (면적, 방 수, 거리).
+
+<span class="tag dyn">④</span> [개념 카드 — 시리즈 정본에서 자동 첨부. 'N부'는 이 시리즈의 권(1~12부, 각각 별도 과정), 'M장'은 그 안의 장. 현재 과정은 1부 — '다른 부' 개념은 내용을 길게 지어내지 말고 배우는 곳을 안내한다. 질문한 개념을 배우는 곳·선수 개념]
+- 연쇄법칙 (chain rule, 합성함수 미분, 겉미분 속미분) — 겉미분 × 속미분, 역전파의 뼈대. 배우는 곳(어디서 배우나 물으면 이것으로 답): 2부 6장 (다른 부). 먼저 알아야: 도함수(2부 3장). 그 뒤 다시 쓰이는 곳(참고): 2부 10장(역전파 = 연쇄법칙의 반복 적용), 4부 11장(트랜스포머 학습: 손실의 기울기를 층마다 되돌리기), 2부 7장(시그모이드·지수함수와 함께).</code></pre>
+<p>①~④ 표시는 읽기 쉽게 붙인 것이고 실제 글에는 없다. ③과 ④ 사이의 빈 줄은 <code>conceptGrounding</code>이 카드 앞에 붙이는 줄바꿈 두 개(<code>\n\n</code>)다.</p>
+
+<h2 id="outside">6. 프롬프트 바깥의 보조 장치</h2>
+<ul>
+  <li>대화 기록은 직전 질문과 답 세 쌍에 이번 질문을 더해 메시지 7개만 보낸다. 작은 모델이 한 번에 읽을 수 있는 분량(컨텍스트)을 아끼기 위해서다. 시스템 프롬프트는 매번 새로 만들어지므로 대화 중에 다른 장으로 옮겨도 ③이 따라 바뀐다.</li>
+  <li>생성 설정은 <code>packages/tutor/src/ollama.ts</code>의 <code>streamChat</code>에 고정돼 있다. <code>temperature 0.3</code>은 답이 무작위로 흔들리는 정도를 낮추고, <code>num_predict 600</code>은 답 길이를 600토큰으로 묶는다. <code>think: false</code>는 gemma4:e2b처럼 답하기 전에 생각 과정을 먼저 쓰는 모델(thinking 모델)이 생각만 하다가 토큰을 다 써 버리는 일을 막는다. <code>keep_alive 15m</code>은 대화 도중 모델이 메모리에서 내려갔다가 다시 올라오느라 기다리는 일을 없앤다. 기본 모델은 gemma4:e2b이고, 서버 주소는 빌드할 때 <code>VITE_OLLAMA_URL</code>로 바꾼다.</li>
+  <li>답을 화면에 보여 줄 때도 한 번 더 손을 본다. [OFFTOPIC] 표시는 어디에 있든 지우고, 표시만 있고 내용이 없으면 안내 문구로 바꾼다. 답이 조금씩 흘러 들어오는 동안(스트리밍) 끝에 "[OFFT"처럼 표시가 반쯤 걸리면 화면이 깜빡이지 않게 잠시 숨긴다. 모델이 섞어 낸 <code>$…$</code> 수식 기호와 <code>**…**</code> 굵게 표시도 지운다.</li>
+  <li>협업 메모 패널의 '🤖 AI에게 묻기' 버튼도 같은 길로 질문을 보낸다. 공용 <code>useNoteAsk</code>(<code>packages/ui</code>의 <code>noteAsk.ts</code>)가 질문을 만들어 같은 <code>send()</code>로 보내므로 프롬프트 구조가 똑같다. 답을 메모로 저장하자고 제안하는 기능도 공용이다.</li>
+  <li>튜터 창 입력란 아래에는 "로컬 AI 답변이라 가끔 틀릴 수 있어요. 본문 설명이 우선!"이라는 안내가 늘 붙어 있다. 학습 경로를 정하는 일에는 LLM을 쓰지 않는다.</li>
+</ul>
+
+<h2 id="caution">7. 고칠 때 주의할 점</h2>
+<ul>
+  <li>챕터 맥락이나 목차를 고칠 때는 그 부의 <code>tutorContext.json</code>만 고치면 웹과 노트북이 함께 바뀐다. 새 장을 만들었다면 <code>contexts</code>에 그 장의 요약을 넣고 <code>curriculumIndex</code>에도 한 줄을 더해야 한다.</li>
+  <li>개념 카드의 내용을 고칠 때는 정본 <code>scripts/ontology/concepts.json</code>을 고친 다음 <code>npm run ontology:graph</code>를 돌린다. 튜터가 읽는 <code>concept-graph.json</code>은 이 명령으로 다시 만들어진다. 개념 <code>id</code>는 한 번 배포한 뒤에는 바꾸거나 지우지 않는다.</li>
+  <li>① 규칙을 고칠 때는 24개 파일을 함께 고쳐야 한다. 같은 규칙이 12개 부의 <code>TutorChat.vue</code>와 12개 노트북 <code>tutor.py</code>에 따로 적혀 있어서, 한 곳만 고치면 부마다 규칙이 달라진다.</li>
+  <li>카드 문구를 바꿀 때는 작은 모델로 다시 시험해 봐야 한다. 지금 형식은 gemma3:4b가 실제로 틀린 답을 보고 맞춘 것이고, 카드 본문에 지시문을 넣으면 모델이 그 문장을 그대로 따라 읽는다.</li>
+  <li>부 번호가 빠지면 카드의 "(이 과정)", "(다른 부)" 표시와 "현재 과정은 N부" 문장이 사라진다. 이 값은 각 부의 <code>main.ts</code>가 <code>partNumberKey</code>로 넘겨주고, 넘겨주지 않으면 0이 된다.</li>
+</ul>
+
+<h2 id="rag">8. 이 튜터는 RAG를 쓰는가</h2>
+<p>결론부터 말하면 벡터 RAG는 쓰지 않는다. 대신 사람이 직접 만든 개념 그래프에서 질문에 나온 개념과 바로 이웃한 정보만 꺼내 프롬프트에 붙인다. GraphRAG의 생각을 아주 작은 규모로 적용한 셈이고, 4절의 ④ 개념 카드가 바로 그것이다.</p>
+<p>이 장치를 부르는 이름은 곳마다 조금씩 다르다. 코드 주석은 "개념 그래프 접지", 설계 문서(<code>docs/todo_온톨로지_260906.md</code> 7절)는 "튜터 접지"라고 부른다. 학습자에게는 7부 8장 4절이 "이 사이트의 튜터가 바로 이 방식"이라며 GraphRAG의 예로 소개한다. Microsoft GraphRAG 같은 일반적인 구현과 어떻게 다른지는 아래에서 비교한다.</p>
+
+<h3>접지(grounding)란</h3>
+<p>접지는 LLM이 학습할 때 익힌 기억에만 기대어 답하지 않도록, 믿을 수 있는 자료를 프롬프트에 함께 넣어 그 자료를 근거로 답하게 하는 것이다. 영어 grounding은 근거(ground)에 발을 딛게 한다는 뜻이다. 흔히 "그라운딩"이라고 소리 나는 대로 쓰며, 이 시리즈의 7부 8장 노트북도 그렇게 부른다. 이 프로젝트의 코드 주석과 설계 문서는 "접지"로 옮겼다.</p>
+<p>"접지"라는 번역어는 전기의 접지에 빗대면 이해하기 쉽다. 전기 회로를 땅에 연결하면 전압을 재는 기준이 생기듯, 모델의 답을 정본 자료에 연결하면 답이 따라야 할 기준이 생겨 지어낸 말(환각)이 줄어든다. 이 비유에서 땅은 정본 자료에, 전압의 기준은 답의 근거에 해당한다.</p>
+<p>접지는 목적을 가리키는 말이고, RAG는 그 목적을 이루는 대표적인 방법이다. 자료를 어떻게 고르느냐에 따라 방법이 나뉜다.</p>
+<div class="wrap"><table>
+<thead><tr><th>방법</th><th>자료를 고르는 방식</th><th>이 튜터에서는</th></tr></thead>
+<tbody>
+<tr><td>미리 정한 자료 넣기</td><td>질문과 상관없이 정해 둔 자료를 늘 넣는다.</td><td>② 전체 목차와 ③ 챕터 맥락이다. slug로 바로 꺼내므로 검색 단계가 없다.</td></tr>
+<tr><td>벡터 RAG</td><td>질문을 임베딩(글의 뜻을 숫자 벡터로 바꾼 것)으로 바꾸고, 뜻이 가까운 본문 조각을 찾는다.</td><td>쓰지 않는다.</td></tr>
+<tr><td>GraphRAG</td><td>지식 그래프에서 관련 노드와 그 이웃을 꺼낸다.</td><td>④ 개념 카드다. 글자 비교로 노드를 찾고 바로 이웃한 정보를 함께 넣는다.</td></tr>
+<tr><td>도구 호출</td><td>모델이 함수를 불러 그 결과를 받아 쓴다.</td><td>쓰지 않는다. 11부 교재에서 다룬다.</td></tr>
+</tbody></table></div>
+<p>따라서 네 부분 가운데 ②③④가 모두 접지에 속하고, 그중 질문에 따라 자료를 골라 오는 검색 단계가 있는 것은 ④뿐이다. 코드와 설계 문서가 "접지"라고 부르는 것도 이 ④다.</p>
+<p>①의 규칙 (5) "챕터 맥락과 네 지식이 다르면 챕터 맥락을 우선"과 (8) "목차에도 개념 카드에도 없는 주제는 이 시리즈에 없다고 솔직히 말하기"는 붙인 자료를 모델의 기억보다 앞에 두라는 지시다. 자료만 붙이고 이런 지시가 없으면 모델이 자료를 지나칠 수 있어서, 두 규칙은 접지와 짝을 이룬다. 7부 8장 노트북의 그라운딩 지시문도 "문서에 근거해서만 답하기"와 "문서에 없으면 찾지 못했다고 답하기"를 함께 쓴다.</p>
+<div class="note"><p>접지에도 한계가 있다. 자료를 붙여도 모델이 늘 그대로 따르지는 않는다. 4절에서 본 것처럼 카드 속 지시문을 그대로 따라 읽거나 "6부 1장"을 "6번 장"으로 읽은 일이 실제로 있었다. 그래서 카드 문구를 모델에 맞춰 다듬었고, 튜터 창에 "본문 설명이 우선!"이라는 안내를 늘 띄우며, 학습 경로를 정하는 일에는 LLM을 쓰지 않는다. 접지는 지어낸 답을 줄여 줄 뿐 완전히 막지는 못한다.</p></div>
+
+<h3>RAG의 세 단계에 맞춰 보기</h3>
+<p>RAG(Retrieval-Augmented Generation, 검색 증강 생성)는 모델이 답하기 전에 바깥 자료를 찾아 프롬프트에 끼워 넣는 기법이다. 보통 검색, 증강, 생성의 세 단계로 설명한다. ④ 개념 카드를 이 틀에 맞춰 보면 다음과 같다.</p>
+<div class="wrap"><table>
+<thead><tr><th>단계</th><th>이 튜터가 하는 일</th><th>일반적인 벡터 RAG와 다른 점</th></tr></thead>
+<tbody>
+<tr><td>검색</td><td>질문을 개념 127개의 대표 이름, 다른 이름, 비유어와 글자 단위로 비교한다(<code>matchConcepts</code>). 더 긴 이름으로 찾은 개념부터 최대 3개를 고른다.</td><td>임베딩 모델, 벡터 DB, 코사인 유사도를 쓰지 않는다. 같은 질문이면 언제나 같은 개념이 뽑힌다.</td></tr>
+<tr><td>증강</td><td>고른 개념의 카드를 시스템 프롬프트 끝에 붙인다(<code>conceptCards</code>).</td><td>본문을 잘게 나눈 조각 대신, 그래프의 노드와 노드 사이를 잇는 관계(<code>prereq</code>, <code>usedAt</code>, <code>metaphors</code>)를 문장으로 풀어 넣는다. 이 점에서 GraphRAG 계열로 볼 수 있다.</td></tr>
+<tr><td>생성</td><td>각자 PC의 Ollama가 답을 만든다. 기본 모델은 gemma4:e2b다.</td><td>다르지 않다.</td></tr>
+</tbody></table></div>
+<p>검색하는 대상은 개념 정본이고, 실제로 읽는 파일은 정본 <code>scripts/ontology/concepts.json</code>에서 만든 <code>concept-graph.json</code>이다. 장 본문은 검색하지 않는다. 설계 문서 9절은 두 방식을 견주어 "(A) 질문 매칭 → 카드 동적 주입"을 골랐다. 함께 검토한 "(B) 색인 문자열 정적 주입"은 시리즈 전체 색인을 매번 통째로 넣는 방식인데, 설계 문서 7절에 따르면 작은 로컬 모델에 매번 1.5k 토큰을 더 얹게 되어 고르지 않았다.</p>
+
+<h3>모델에 실제로 건네지는 자료</h3>
+<p>"연쇄법칙이 뭐예요?"라는 질문에 걸리는 노드는 아래와 같다. <code>concept-graph.json</code>에 들어 있는 그대로이며 줄 바꿈만 정리했다.</p>
+<pre><code>{
+  "id": "chain-rule",
+  "label": "연쇄법칙",
+  "aliases": ["chain rule", "합성함수 미분", "겉미분 속미분", "합성함수"],
+  "kind": "math",
+  "note": "겉미분 × 속미분, 역전파의 뼈대",
+  "definedAt": { "part": 2, "slug": "ch6", "anchor": "ch6-s2" },
+  "usedAt": [
+    { "part": 2, "slug": "ch10", "anchor": "ch10-s2", "how": "역전파 = 연쇄법칙의 반복 적용" },
+    { "part": 4, "slug": "ch11", "anchor": "ch11-s2", "how": "트랜스포머 학습: 손실의 기울기를 층마다 되돌리기" },
+    { "part": 2, "slug": "ch7", "anchor": "ch7-s4", "how": "시그모이드·지수함수와 함께" }
+  ],
+  "prereq": ["derivative"],
+  "related": ["backpropagation"],
+  "metaphors": []
+}</code></pre>
+<p>이 자료를 그래프라고 부르는 까닭은 필드 몇 개가 다른 노드나 다른 장을 가리키는 연결선(간선)이기 때문이다. 카드를 쓰는 <code>conceptCards</code>는 그중 세 가지를 따라가고 <code>related</code>는 읽지 않는다.</p>
+<div class="wrap"><table>
+<thead><tr><th>필드</th><th>무엇과 무엇을 잇는가</th><th>카드에 들어가는가</th></tr></thead>
+<tbody>
+<tr><td><code>prereq</code></td><td>이 개념과 먼저 알아야 할 개념(노드와 노드)</td><td>들어간다. 가리키는 노드를 찾아 이름과 배우는 곳을 꺼내 "도함수(2부 3장)"처럼 적는다.</td></tr>
+<tr><td><code>usedAt</code></td><td>이 개념과 다시 쓰이는 장(노드와 장)</td><td>들어간다. 최대 4곳까지 적고, 어떻게 쓰이는지(<code>how</code>)를 괄호에 붙인다.</td></tr>
+<tr><td><code>metaphors</code></td><td>이 개념과 시리즈에서 쓰는 비유어</td><td>들어간다. 질문이 비유어로 들어오면 바꿔 말하는 문장으로 카드를 시작한다.</td></tr>
+<tr><td><code>related</code></td><td>이 개념과 관련된 개념(노드와 노드)</td><td>들어가지 않는다. <code>concepts.ts</code>가 이 필드를 읽지 않는다.</td></tr>
+</tbody></table></div>
+<p>정리하면 모델이 받는 자료는 노드의 한 줄 정의와, 그 노드에 선 하나로 바로 이어진 이웃(먼저 알아야 할 개념, 다시 쓰이는 장, 비유어)을 문장으로 풀어 쓴 것이다. 그래프에서 선 하나만 건너는 거리를 1홉(hop)이라고 하므로, 이 튜터는 1홉 이웃까지만 본다고 말할 수 있다. 그 결과가 4절에서 본 카드다.</p>
+
+<h3>일반적인 GraphRAG와 비교</h3>
+<div class="wrap"><table>
+<thead><tr><th>항목</th><th>이 튜터</th><th>일반적인 GraphRAG (예: Microsoft GraphRAG)</th></tr></thead>
+<tbody>
+<tr><td>가져오는 것</td><td>그래프의 노드와 관계. "먼저 알아야 할 것", "다시 쓰이는 곳" 같은 관계를 함께 가져온다. <span class="tag">같은 점</span></td><td>노드와 관계에 더해, 그 근거가 된 원문 조각과 노드 묶음(커뮤니티)의 요약도 가져온다.</td></tr>
+<tr><td>여러 이름 묶기</td><td>비유어 "조련"과 실무 용어 "파인튜닝"처럼 다른 이름을 한 노드로 모은다. <span class="tag">같은 점</span></td><td>같은 대상을 가리키는 여러 이름을 하나로 합치는 작업(개체 해소, entity resolution)으로 같은 일을 한다.</td></tr>
+<tr><td>그래프를 만드는 쪽</td><td>사람이 정본 JSON을 직접 쓰고 <code>npm run check:ontology</code>로 검사한다. <span class="tag dyn">다른 점</span></td><td>LLM이 문서를 읽고 개체와 관계를 뽑아 자동으로 만든다.</td></tr>
+<tr><td>따라가는 범위</td><td>선수 개념, 다시 쓰이는 장, 비유어 세 가지 관계를 1홉까지만 본다. 선수 개념의 선수 개념은 따라가지 않는다. <span class="tag dyn">다른 점</span></td><td>연결된 이웃을 넓게 모으고, 커뮤니티 요약을 써서 문서 전체에 걸친 질문에도 답한다.</td></tr>
+<tr><td>질문에서 노드를 찾는 방법</td><td>글자 비교. 임베딩을 쓰지 않는다. <span class="tag dyn">다른 점</span></td><td>임베딩 유사도로 시작 노드를 찾는 경우가 많다.</td></tr>
+<tr><td>넣는 분량</td><td>카드 최대 3장. 재 보면 한 장에 240~290토큰, 세 장에 약 530토큰이다. <span class="tag dyn">다른 점</span></td><td>보통 수천 토큰 이상을 넣는다.</td></tr>
+</tbody></table></div>
+<div class="note warn"><p>가장 정확한 설명은 "사람이 만든 지식 그래프에서 질문에 나온 개념과 1홉 이웃을 꺼내 프롬프트에 붙이고, 같은 질문에는 늘 같은 결과를 내는 접지"다. 7부 교재가 이를 GraphRAG의 축소판으로 소개하는 것은 원리를 설명하는 데는 맞다. 다만 바깥에 "GraphRAG를 썼다"고 소개할 때는 위 표의 네 가지 차이, 즉 사람이 만든 그래프, 좁은 탐색 범위, 글자 비교, 작은 분량을 함께 밝혀야 오해가 없다.</p></div>
+
+<h3>쓰지 않는 것</h3>
+<ul>
+  <li>임베딩과 벡터 검색은 쓰지 않는다. <code>packages/tutor</code>, <code>packages/ui</code>, <code>packages/store</code>, 포털, <code>supabase</code> 어디에도 Ollama <code>/api/embed</code> 호출이나 코사인 유사도 계산, 벡터 저장소가 없다. 포털 코드에 보이는 <code>vector</code>는 진단 문항의 단원 이름(벡터)이다. 7부 노트북 튜터에 bge-m3라는 이름이 나오지만, 임베딩 전용 모델을 채팅 모델 목록에서 빼는 코드일 뿐이다.</li>
+  <li>장 본문도 검색하지 않는다. ③ 챕터 맥락은 <code>tutorContext.json</code>에서 slug로 바로 꺼내 넣는 것이라 검색 단계가 없다.</li>
+  <li>통합 검색 창(<code>SearchPalette</code>)은 RAG와 관계가 없다. <code>fuse.js</code>로 철자가 조금 달라도 찾아 주는 검색(퍼지 검색)을 해서 결과를 사람에게 보여 줄 뿐, LLM에 넘기지 않는다. 검색 색인(<code>search-index.json</code>)도 같은 개념 정본에서 만들지만 쓰임새가 다르다.</li>
+</ul>
+
+<h3>벡터 RAG 대신 이 방식을 쓴 까닭</h3>
+<p>설계 문서에는 벡터 RAG와 직접 비교한 기록이 없다. 아래는 코드와 설계 문서에서 읽어 낸 이유이고, 마지막 항목만 <code>docs/PROCESS.md</code>의 설계 결정표에 직접 적혀 있다.</p>
+<ul>
+  <li>작은 로컬 모델을 전제로 한다. gemma4:e2b 같은 작은 모델은 프롬프트가 길수록 답의 질이 떨어지기 쉽다. "카드 최대 3장, 300토큰 안"이라는 설계 목표도 이 제약에서 나왔다.</li>
+  <li>결과를 다시 만들어 볼 수 있다. 같은 질문에 같은 카드가 붙어야 "6부 1장"을 "6번 장"으로 읽는 식의 오답을 다시 일으켜 보고 문구를 고칠 수 있다. 벡터 검색은 임베딩 모델을 바꾸면 결과가 달라지고, 왜 그 조각이 뽑혔는지 사람이 따라가기도 어렵다.</li>
+  <li>정본이 이미 구조를 갖추고 있다. 개념 사이의 선수 관계, 다시 쓰이는 곳, 비유어가 정본에 직접 적혀 있으므로, 벡터로 비슷한 것을 어림할 필요 없이 그래프를 그대로 읽는 편이 정확하다.</li>
+  <li>따로 갖출 설비가 없다. 임베딩 모델이나 벡터 DB가 필요 없어서 로컬 튜터의 장점이 그대로 남는다. <code>docs/PROCESS.md</code>는 로컬 Ollama를 고른 이유로 "비용 0, 사내 반입 자료가 밖으로 안 나간다"를 적었다.</li>
+</ul>
+
+<h3>RAG를 가르치는 장</h3>
+<p>벡터 RAG는 7부에서 직접 배운다. 노트북에서는 손으로 정한 작은 임베딩으로 검색부터 답변까지 조립해 본다.</p>
+<div class="wrap"><table>
+<thead><tr><th>위치</th><th>장 제목</th><th>다루는 내용</th></tr></thead>
+<tbody>
+<tr><td>7부 1장</td><td>큰 그림 — 검색의 진화와 RAG</td><td>키워드 검색의 한계에서 의미 검색을 거쳐 RAG 파이프라인까지 큰 지도를 그린다.</td></tr>
+<tr><td>7부 2·6·7장</td><td>가까움의 수학 — 코사인 유사도<br>이웃 찾기 — kNN에서 벡터 DB까지<br>청킹과 검색 품질</td><td>벡터 RAG를 이루는 부품을 하나씩 다룬다.</td></tr>
+<tr><td>7부 8장</td><td>RAG 조립 (핵심) — 검색이 프롬프트가 되기까지</td><td>파이프라인 전체와 실패 모드, RAG와 파인튜닝 가운데 무엇을 고를지를 다룬다. 4절에서는 지식 그래프와 GraphRAG를 소개하고, "이 사이트의 튜터가 바로 이 방식"이라는 관찰 카드를 둔다.</td></tr>
+<tr><td>7부 10장</td><td>🎯 캡스톤 — 사내 FAQ 검색봇</td><td>임베딩, 코사인 유사도, top-k, 답변으로 이어지는 작은 RAG를 처음부터 끝까지 조립한다.</td></tr>
+</tbody></table></div>
+<p>정리하면 제품 안의 튜터는 GraphRAG 방식의 작은 접지만 쓰고, 벡터 RAG는 7부 교재에서 직접 만들어 보며 배운다.</p>
+</main>
+</body>
+</html>
