@@ -390,7 +390,7 @@ flowchart LR
 | 개념과 관계의 정본 | `scripts/ontology/concepts.json` — 검색 색인·개념 그래프·튜터 카드의 원천 (`npm run check:ontology`) |
 | 품질 점검 결과 | `docs/점검_*.md` |
 | 제작 비용·토큰 | `docs/제작통계_260714.md` — 07-14 스냅샷 |
-| 발표 자료 | `docs/hackathon/` — 1부 단독 출품 시절, 개정 대상 |
+| 발표 자료 | `docs/hackathon/` — 사내 해커톤 자료라 로컬 전용(저장소에 없음, `.gitignore`) |
 
 ---
 

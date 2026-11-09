@@ -25,6 +25,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 부 목록·주제·완결 상태·시리즈 커리큘럼·추천 학습 경로(1→2→3→4→5 순서가 아님)·부 간 연결은
 루트 `README.md` 가 정본.
 
+**저장소는 공개(GitHub)다.** 사내 해커톤 자료(`docs/hackathon/` 전체와 전략 문서 `docs/TODO_260708.md`)는 **로컬 전용**(`.gitignore`)이니
+`git add -f` 로 올리지 말 것. 덱·영상 생성 스크립트(`scripts/build-pitch-deck.py`·`record-demo.mjs` 등)는 저장소에 있고 출력만 그 폴더에 쓴다.
+문서·커밋 메시지에도 행사 이름·심사 일정·심사위원·전략 메모를 적지 않는다(2026-11-09 git 기록을 다시 써서 뺐다).
+
 ## 명령어 (npm workspaces — 루트에서 실행)
 
 - 검증 수단은 빌드(vue-tsc 타입체크 포함). **루트에는 `build` 스크립트가 없다** — 13앱 전부는

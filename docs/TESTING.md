@@ -345,4 +345,4 @@ npm run search:index && npm run ontology:graph   # 정본을 고쳤으면 산출
 - 결합해제 주입 계약: `storagePrefixKey`(QuizSet 접두사) · `reviewApiKey`(ReviewFlag) · `notebookResolverKey`(NotebookCard) · `partNumberKey`(협업 주석 게이트 — 부 번호가 틀리면 남의 부 메모가 섞인다) · `searchIndexKey`(통합검색).
 - 검증됨(빌드): 전 12부 + 포털 `vue-tsc + vite` 통과, Tailwind `@source` 로 패키지 클래스 생성 전 부 확인.
 - 미검증(이 문서의 2절이 그 확인 절차): 런타임 동작(퀴즈·진도·복습·튜터).
-- 커밋 되돌림 지점: `b3e3a00`(baseline) → `71c1aff`(trial) → `deaed16`(패키지 완성) → `b0ee776`(2~5부 전파).
+- 커밋 되돌림 지점: `6106d42`(baseline) → `83d74fc`(trial) → `d65baef`(패키지 완성) → `3580acf`(2~5부 전파).

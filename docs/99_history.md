@@ -2,9 +2,17 @@
 
 > **모노레포·플랫폼 레벨** 작업 이력(전략·구조·인프라). 최신이 위로.
 > **부별 콘텐츠 이력은 각 부의 `apps/partN/docs/99_history.md`** 에 따로 둔다(예: 챕터 추가는 거기).
-> 전략 상세·근거는 같은 폴더 `TODO_260708.md`.
+> 전략 상세·근거 문서 `TODO_260708.md` 는 사내 해커톤 자료라 로컬에만 둔다(저장소에 없음).
 
 ---
+
+## 2026-11-09
+
+### 🔒 사내 해커톤 자료를 공개 저장소에서 제외 (git 기록 재작성)
+- 저장소를 공개로 바꾼(11-03) 뒤 점검해 보니 사내 해커톤의 내부 정보(행사 정보·심사 일정·심사위원·전략 메모)가 함께 공개돼 있었다. 사용자 요청으로 뺐다.
+- `docs/hackathon/` 전체(덱·영상·대본·제출 문서·스크린샷)와 전략 문서 `docs/TODO_260708.md` 는 로컬 전용으로 돌리고 `.gitignore` 에 넣었다. 덱·영상·스크린샷을 만드는 스크립트(`scripts/build-pitch-deck.py`·`record-demo.mjs`·`shoot-deck-assets.mjs` 등)는 저장소에 두고 출력만 그 폴더에 쓴다. 옛 1부 저장소의 `.gitignore` 에 있다가 모노레포로 옮길 때 빠진 `해커톤일정.png` 무시 규칙도 루트에 되살렸다.
+- git 기록도 `git filter-repo` 로 다시 써서 강제 푸시했다. 위 경로(옛 1부 시절의 같은 자료 포함)를 모든 커밋에서 빼고, 남는 문서·스크립트·커밋 메시지 속 행사·심사·전략 문장을 바꿨다. 해커톤 파일만 바꾸던 커밋 2개가 비어서 빠져 커밋은 183개에서 181개가 됐고, 저장소 크기는 약 200MB에서 6MB로 줄었다.
+- 커밋 해시가 모두 바뀌어 문서 속 옛 해시(`docs/99_history.md`·`docs/fixed_260712.md`·`docs/TESTING.md`·`apps/portal/docs/99_history.md`)를 새 값으로 고쳤다. 링크가 끊긴 곳(`docs/TODO_260709.md`·`TODO_260712.md`·`PROCESS.md`·`실행_가이드.html`)도 정리하고, `CLAUDE.md` 에 "해커톤 자료는 로컬 전용" 규칙을 적었다.
 
 ## 2026-11-04
 
@@ -729,7 +737,7 @@ Supabase 로 해결. **로컬 우선 + 선택 로그인** — 비로그인은 �
   맞춤 경로 복원).
 - **검증**: 각 단계 실 Supabase E2E(headless Edge + supabase-js). 최종 **조립 배포본 전체 흐름 13/13** —
   도메인 잠금·anon 차단·비로그인 청크 미로드·로그인·진도/진단 DB push·기기 B 복원·대시보드·로그아웃.
-  전 12부 빌드(vue-tsc) 통과. 커밋 범위 `dba4354`(P0)…`69417d2`(폴리시). **콘솔 작업**(프로젝트 생성·
+  전 12부 빌드(vue-tsc) 통과. 커밋 범위 `0d785f0`(P0)…`5e08e3a`(폴리시). **콘솔 작업**(프로젝트 생성·
   Confirm OFF·`schema.sql` 실행)은 사용자 수행.
 
 ---
@@ -737,7 +745,7 @@ Supabase 로 해결. **로컬 우선 + 선택 로그인** — 비로그인은 �
 ## 2026-07-13
 
 ### 🎬 발표 산출물 11부 반영 재생성 — 106·1,400+·118·129·12단계 → 118·1,600+·131·143·13단계
-11부 편입(커밋 `751df08`) 후 소스·핵심 문서만 갱신돼 있어, **10부 기준으로 남아 있던 발표 산출물
+11부 편입(커밋 `bf32aaa`) 후 소스·핵심 문서만 갱신돼 있어, **10부 기준으로 남아 있던 발표 산출물
 전 체인을 11부 완결 수치로 재생성**(git 이력의 "발표 산출물 전면 재생성"과 같은 작업).
 - **정합성 감사**: 전 저장소 낡은 마커 스윕 — 106챕터·1,400+·118노트북·12단계·10부작·전11앱·
   스모크129 → **118·1,600+·131·13단계·11부작·전12앱·143**. ⚠️ 진단 12문항·핵심경로 55챕터 37시간·
@@ -887,16 +895,16 @@ Supabase 로 해결. **로컬 우선 + 선택 로그인** — 비로그인은 �
 ### 📁 전략 docs 일원화 — 플랫폼 레벨 `docs/` 로
 `TODO_260708.md`(해커톤 출품 전략)를 `apps/part1/docs/` → **`docs/`** 로 이동(플랫폼 전략인데 part1 하위에 묻혀 있던 것). 이 `docs/99_history.md` 신설(플랫폼 이력). 나머지 해커톤 제출물·발표자료(`10_spec`·`11_pitch_deck`·`12_metrics`·`13_demo_script`·`14_*`·`presentation_*`·데모 영상)는 아직 `apps/part1/docs/` 에 있음(전략 §5 "제출물 개정" 때 정리 예정). 원본 `C:\STUDY\MATH` 트리는 얼어붙은 백업 — 손대지 않음.
 
-### 🧹 정리 — 골든카피/드리프트 체제 폐기 (커밋 `be96deb`)
+### 🧹 정리 — 골든카피/드리프트 체제 폐기 (커밋 `4975740`)
 공유 패키지가 드리프트를 원천 제거하므로 옛 장치 정리: `check_drift.py` 제거, 루트+5부 `CLAUDE.md` 6개를 모노레포 방식으로 전면 갱신(골든카피 섹션 → `packages/ui`, `cd web` → `npm -w apps/partN/web`, 부별 venv → 루트 공용 venv).
 
-### 📓 노트북 검증 — 공용 venv (커밋 `ebd1569`)
+### 📓 노트북 검증 — 공용 venv (커밋 `d7484e9`)
 루트 공용 venv 하나(`.venv`, 커널 `math-platform`) + 루트 `requirements.txt`(5부 합집합)로 전 61개 노트북 실행 → **60 통과**. `ch08_pca.ipynb` 잠복 버그 수정(대칭행렬에 `eig`→`eigh` — 복소수가 matplotlib `plt.arrow` 에서 TypeError). `수포자를_위한_선형대수학.ipynb` 1개만 `sentence-transformers` 별도 필요(문서화). 상세 `docs/TESTING.md`.
 
 ### 🌐 웹 런타임 스모크 — headless Chrome
 시스템 Chrome을 puppeteer-core로 헤드리스 구동, part1·portal 을 `vite preview` 로 띄워 검증. 앱 부팅 OK, MathBlock(KaTeX)·ConceptCard(Tailwind `@source` 배경색) 런타임 렌더 확인, **ReviewFlag 클릭 → `la-review-v1` 기록**으로 provide/inject 결합해제가 런타임에도 동작 + 접두사 보존 확인. 콘솔 에러는 favicon 404(무해) 1건.
 
-### 🏗️ 모노레포 전환 — 독립 5부 → npm workspaces (커밋 `b3e3a00`→`71c1aff`→`deaed16`→`b0ee776`)
+### 🏗️ 모노레포 전환 — 독립 5부 → npm workspaces (커밋 `6106d42`→`83d74fc`→`d65baef`→`3580acf`)
 독립 저장소 5벌 + 골든카피 복제 구조를 **하나의 모노레포**로 통합. 원본 `C:\STUDY\MATH` 를 소스만 복사(.git·node_modules·.venv·dist 제외)해 `C:\STUDY\MATH_PLATFORM` 신설, `git init`.
 - 구조: `apps/part1..5`(재배치) + `apps/portal`(신규 스캐폴드) + `packages/ui`(@series/ui) + npm workspaces.
 - 공용 컴포넌트 11종을 `packages/ui` 로 추출, 앱전용 결합은 **provide/inject** 로 분리(`storagePrefixKey`·`reviewApiKey`·`notebookResolverKey`). 각 앱 `main.ts` 가 자기 접두사(la/diff/stat/tf/it)·스토어·chapters 주입.

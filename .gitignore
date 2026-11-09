@@ -33,6 +33,11 @@ __pycache__/
 (prompt)differentiation.txt
 mlops-pipeline-guide.html
 
+# 사내 해커톤 자료 (공개 저장소에 올리지 않는다, 2026-11-09). 덱·영상 생성 스크립트는 저장소에 있고 출력만 이 폴더에 쓴다
+docs/hackathon/
+docs/TODO_260708.md
+해커톤일정.png
+
 # 로그
 *.log
 
