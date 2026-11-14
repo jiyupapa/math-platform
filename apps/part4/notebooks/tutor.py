@@ -306,7 +306,7 @@ def _print_stream(question: str, chapter: str | None, model: str | None) -> None
         print(f'\n(⚠️ 답변 처리 중 오류: {type(e).__name__} — 다시 시도해 보세요.)')
         return
     if offtopic:
-        print(f'저는 수학 공부를 돕는 튜터라 그 주제는 도와드릴 수 없어요 😊\n'
+        print(f'저는 수학·AI 공부를 돕는 튜터라 그 주제는 도와드릴 수 없어요 😊\n'
               f'대신 「{chapter_title(chapter)}」 내용은 무엇이든 물어보세요!')
     elif not printed:
         print('(답변을 생성하지 못했어요 — 다시 시도해 보세요.)')
@@ -620,7 +620,7 @@ def chat(chapter: str | None = None, model: str | None = None, floating: bool = 
         try:
             offtopic = _stream_answer(model_dd.value or DEFAULT_MODEL, payload, on_text, stop=stop)
             if offtopic:
-                last['content'] = ('저는 수학 공부를 돕는 튜터라 그 주제는 도와드릴 수 없어요 😊\n'
+                last['content'] = ('저는 수학·AI 공부를 돕는 튜터라 그 주제는 도와드릴 수 없어요 😊\n'
                                    f'대신 지금 보고 있는 「{title}」 내용은 무엇이든 물어보세요!')
             elif not last['content']:
                 last['content'] = '(답변을 생성하지 못했어요 — 다시 시도해 보세요.)'

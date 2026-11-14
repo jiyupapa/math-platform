@@ -136,7 +136,7 @@ async function send() {
     if (offtopic) {
       aborter.abort()
       last.content =
-        `저는 수학 공부를 돕는 튜터라 그 주제는 도와드릴 수 없어요 😊\n` +
+        `저는 수학·AI 공부를 돕는 튜터라 그 주제는 도와드릴 수 없어요 😊\n` +
         `대신 지금 보고 계신 「${chapterTitle.value}」 내용은 무엇이든 물어보세요!`
     } else {
       last.content = stripOfftopic(raw).text || '(답변을 생성하지 못했어요. 다시 시도해 보세요.)'

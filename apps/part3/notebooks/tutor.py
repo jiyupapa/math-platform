@@ -185,8 +185,8 @@ def system_prompt(slug: str | None, question: str | None = None) -> str:
         '(7) 학습자를 절대 무시하지 않고 격려하기.\n'
         "(8) 어떤 개념을 어디서 배우는지 물으면 아래 전체 목차와 [개념 카드]에서 찾아 반드시 'N부 M장' 형태로 "
         "안내하기(이 과정 안이면 'N장'). 목차에도 개념 카드에도 없는 주제는 이 시리즈에 없다고 솔직히 말하기.\n"
-        '가장 중요한 규칙: 너는 오직 수학(확률·통계 기초·이 프로그램의 학습 내용·수학 학습 고민)과 '
-        '간단한 인사에만 답한다. 연예·게임·요리·주식·코딩 대행·글쓰기 대행 등 학습과 무관한 '
+        '가장 중요한 규칙: 너는 오직 수학·AI(확률·통계 기초·이 수학이 AI·LLM 에서 쓰이는 곳·이 프로그램의 학습 내용·수학 학습 고민)와 '
+        '간단한 인사에만 답한다. "이게 AI랑 무슨 상관이에요?"처럼 배우는 수학이 AI 어디에 쓰이는지 묻는 질문은 이 과정의 핵심 질문이니 반드시 답한다. 연예·게임·요리·주식·코딩 대행·글쓰기 대행 등 학습과 무관한 '
         f'요청이면 다른 말 없이 정확히 {OFFTOPIC} 이라고만 출력하라.\n'
         f"{data['curriculumIndex']}\n"
         f'현재 학습자가 보고 있는 챕터 맥락:\n{context_for(slug)}'
@@ -306,7 +306,7 @@ def _print_stream(question: str, chapter: str | None, model: str | None) -> None
         print(f'\n(⚠️ 답변 처리 중 오류: {type(e).__name__} — 다시 시도해 보세요.)')
         return
     if offtopic:
-        print(f'저는 수학 공부를 돕는 튜터라 그 주제는 도와드릴 수 없어요 😊\n'
+        print(f'저는 수학·AI 공부를 돕는 튜터라 그 주제는 도와드릴 수 없어요 😊\n'
               f'대신 「{chapter_title(chapter)}」 내용은 무엇이든 물어보세요!')
     elif not printed:
         print('(답변을 생성하지 못했어요 — 다시 시도해 보세요.)')
@@ -620,7 +620,7 @@ def chat(chapter: str | None = None, model: str | None = None, floating: bool = 
         try:
             offtopic = _stream_answer(model_dd.value or DEFAULT_MODEL, payload, on_text, stop=stop)
             if offtopic:
-                last['content'] = ('저는 수학 공부를 돕는 튜터라 그 주제는 도와드릴 수 없어요 😊\n'
+                last['content'] = ('저는 수학·AI 공부를 돕는 튜터라 그 주제는 도와드릴 수 없어요 😊\n'
                                    f'대신 지금 보고 있는 「{title}」 내용은 무엇이든 물어보세요!')
             elif not last['content']:
                 last['content'] = '(답변을 생성하지 못했어요 — 다시 시도해 보세요.)'
